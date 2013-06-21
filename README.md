@@ -7,7 +7,7 @@ it.
 
 ## Links
 * [API Docs](http://api.sierra-php.org)
-* [PHP Architect Magazine Article - June 2009](http://api.sierra-php.org/php-architect-overview-article-june-2009.pdf)
+* [PHP Architect Magazine Article - June 2009](http://doc.sierra-php.org/php-architect-overview-article-june-2009.pdf)
 
 ## Description
 *sierra-php* is a PHP 4 and 5 compatible framework. It provides a foundation of 
