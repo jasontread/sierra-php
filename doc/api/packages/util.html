@@ -1,0 +1,2922 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_file_mime_type_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_MIME_TYPE_FILE'] = "SRA_FILE_MIME_TYPE_FILE";
+  }
+  if ("sra_framework_installer_app_header".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_APP_HEADER'] = "SRA_FRAMEWORK_INSTALLER_APP_HEADER";
+  }
+  if ("sra_framework_installer_header".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_HEADER'] = "SRA_FRAMEWORK_INSTALLER_HEADER";
+  }
+  if ("sra_locale_canada".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_CANADA'] = "SRA_LOCALE_CANADA";
+  }
+  if ("sra_locale_canada_french".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_CANADA_FRENCH'] = "SRA_LOCALE_CANADA_FRENCH";
+  }
+  if ("sra_locale_france".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_FRANCE'] = "SRA_LOCALE_FRANCE";
+  }
+  if ("sra_currency_canada".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_CANADA'] = "SRA_CURRENCY_CANADA";
+  }
+  if ("sra_locale_german".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_GERMAN'] = "SRA_LOCALE_GERMAN";
+  }
+  if ("sra_locale_germany".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_GERMANY'] = "SRA_LOCALE_GERMANY";
+  }
+  if ("sra_locale_english".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_ENGLISH'] = "SRA_LOCALE_ENGLISH";
+  }
+  if ("sra_locale_spanish".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_SPANISH'] = "SRA_LOCALE_SPANISH";
+  }
+  if ("sra_locale_spain".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_SPAIN'] = "SRA_LOCALE_SPAIN";
+  }
+  if ("sra_currency_spain".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_SPAIN'] = "SRA_CURRENCY_SPAIN";
+  }
+  if ("sra_locale_french".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_FRENCH'] = "SRA_LOCALE_FRENCH";
+  }
+  if ("sra_locale_uk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_UK'] = "SRA_LOCALE_UK";
+  }
+  if ("sra_currency_uk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_UK'] = "SRA_CURRENCY_UK";
+  }
+  if ("sra_locale_us".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_US'] = "SRA_LOCALE_US";
+  }
+  if ("sra_currency_us".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_US'] = "SRA_CURRENCY_US";
+  }
+  if ("sra_currency_germany".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_GERMANY'] = "SRA_CURRENCY_GERMANY";
+  }
+  if ("sra_currency_france".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_FRANCE'] = "SRA_CURRENCY_FRANCE";
+  }
+  if ("sra_currency_euro".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_EURO'] = "SRA_CURRENCY_EURO";
+  }
+  if ("sra_util_su_password".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_PASSWORD'] = "SRA_UTIL_SU_PASSWORD";
+  }
+  if ("sra_framework_installer_app_install".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_APP_INSTALL'] = "SRA_FRAMEWORK_INSTALLER_APP_INSTALL";
+  }
+  if ("sra_framework_installer_app_release".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_APP_RELEASE'] = "SRA_FRAMEWORK_INSTALLER_APP_RELEASE";
+  }
+  if ("sra_cache_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CACHE_PREFIX'] = "SRA_CACHE_PREFIX";
+  }
+  if ("sra_cache_gc_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CACHE_GC_FILE'] = "SRA_CACHE_GC_FILE";
+  }
+  if ("sra_cache_gc_lock".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CACHE_GC_LOCK'] = "SRA_CACHE_GC_LOCK";
+  }
+  if ("sra_util_su_cmds_script".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_CMDS_SCRIPT'] = "SRA_UTIL_SU_CMDS_SCRIPT";
+  }
+  if ("sra_time_zone_zone_cache_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TIME_ZONE_ZONE_CACHE_PREFIX'] = "SRA_TIME_ZONE_ZONE_CACHE_PREFIX";
+  }
+  if ("sra_framework_installer_app_uninstall".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL'] = "SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL";
+  }
+  if ("sra_framework_installer_release_file_list".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_LIST'] = "SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_LIST";
+  }
+  if ("sra_util_ip_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_IP_REGEX'] = "SRA_UTIL_IP_REGEX";
+  }
+  if ("sra_framework_installer_apache_conf_d".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_APACHE_CONF_D'] = "SRA_FRAMEWORK_INSTALLER_APACHE_CONF_D";
+  }
+  if ("sra_resource_bundle_default_relative_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_RESOURCE_BUNDLE_DEFAULT_RELATIVE_DIR'] = "SRA_RESOURCE_BUNDLE_DEFAULT_RELATIVE_DIR";
+  }
+  if ("sra_time_zone_system".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TIME_ZONE_SYSTEM'] = "SRA_TIME_ZONE_SYSTEM";
+  }
+  if ("sra_util_services_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SERVICES_CONFIG'] = "SRA_UTIL_SERVICES_CONFIG";
+  }
+  if ("sra_time_zone_clock_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TIME_ZONE_CLOCK_CONFIG'] = "SRA_TIME_ZONE_CLOCK_CONFIG";
+  }
+  if ("sra_time_zone_zdump_path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TIME_ZONE_ZDUMP_PATH'] = "SRA_TIME_ZONE_ZDUMP_PATH";
+  }
+  if ("sra_framework_installer_release_tmp_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_RELEASE_TMP_DIR_NAME'] = "SRA_FRAMEWORK_INSTALLER_RELEASE_TMP_DIR_NAME";
+  }
+  if ("sra_time_zone_zoneinfo_path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TIME_ZONE_ZONEINFO_PATH'] = "SRA_TIME_ZONE_ZONEINFO_PATH";
+  }
+  if ("sra_scheduler_task_default_schedule".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SCHEDULER_TASK_DEFAULT_SCHEDULE'] = "SRA_SCHEDULER_TASK_DEFAULT_SCHEDULE";
+  }
+  if ("sra_params_type_delim".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_PARAMS_TYPE_DELIM'] = "SRA_PARAMS_TYPE_DELIM";
+  }
+  if ("sra_framework_installer_app_uninstall_auto".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL_AUTO'] = "SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL_AUTO";
+  }
+  if ("sra_util_data_unit_byte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_BYTE'] = "SRA_UTIL_DATA_UNIT_BYTE";
+  }
+  if ("sra_util_data_unit_byte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_BYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_BYTE_LABELS";
+  }
+  if ("sra_util_su_pswd_bad".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_PSWD_BAD'] = "SRA_UTIL_SU_PSWD_BAD";
+  }
+  if ("sra_gregorian_date_format_rfc2822".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_FORMAT_RFC2822'] = "SRA_GREGORIAN_DATE_FORMAT_RFC2822";
+  }
+  if ("sra_installer_framework_tmp_dir_error".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR'] = "SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR";
+  }
+  if ("sra_util_data_unit_gigabyte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_GIGABYTE'] = "SRA_UTIL_DATA_UNIT_GIGABYTE";
+  }
+  if ("sra_util_data_unit_gigabyte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS";
+  }
+  if ("sra_time_zone_gmt".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TIME_ZONE_GMT'] = "SRA_TIME_ZONE_GMT";
+  }
+  if ("sra_util_data_unit_gigabit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_GIGABIT'] = "SRA_UTIL_DATA_UNIT_GIGABIT";
+  }
+  if ("sra_util_data_unit_gigabit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_GIGABIT_LABELS'] = "SRA_UTIL_DATA_UNIT_GIGABIT_LABELS";
+  }
+  if ("sra_util_data_unit_kilobyte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_KILOBYTE'] = "SRA_UTIL_DATA_UNIT_KILOBYTE";
+  }
+  if ("sra_util_data_unit_kilobyte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS";
+  }
+  if ("sra_util_data_unit_kilobit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_KILOBIT'] = "SRA_UTIL_DATA_UNIT_KILOBIT";
+  }
+  if ("sra_util_data_unit_kilobit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_KILOBIT_LABELS'] = "SRA_UTIL_DATA_UNIT_KILOBIT_LABELS";
+  }
+  if ("sra_util_data_unit_megabyte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_MEGABYTE'] = "SRA_UTIL_DATA_UNIT_MEGABYTE";
+  }
+  if ("sra_util_data_unit_megabyte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS";
+  }
+  if ("sra_util_data_unit_megabit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_MEGABIT'] = "SRA_UTIL_DATA_UNIT_MEGABIT";
+  }
+  if ("sra_util_data_unit_megabit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_MEGABIT_LABELS'] = "SRA_UTIL_DATA_UNIT_MEGABIT_LABELS";
+  }
+  if ("sra_api_generator_package_readme_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_API_GENERATOR_PACKAGE_README_FILE'] = "SRA_API_GENERATOR_PACKAGE_README_FILE";
+  }
+  if ("sra_util_data_unit_terabyte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_TERABYTE'] = "SRA_UTIL_DATA_UNIT_TERABYTE";
+  }
+  if ("sra_util_data_unit_terabyte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_TERABYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_TERABYTE_LABELS";
+  }
+  if ("sra_util_data_unit_terabit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_TERABIT'] = "SRA_UTIL_DATA_UNIT_TERABIT";
+  }
+  if ("sra_util_data_unit_terabit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_TERABIT_LABELS'] = "SRA_UTIL_DATA_UNIT_TERABIT_LABELS";
+  }
+  if ("sra_country_default".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_COUNTRY_DEFAULT'] = "SRA_COUNTRY_DEFAULT";
+  }
+  if ("sra_time_zone_utc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TIME_ZONE_UTC'] = "SRA_TIME_ZONE_UTC";
+  }
+  if ("sra_gregorian_date_format_iso8601".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_FORMAT_ISO8601'] = "SRA_GREGORIAN_DATE_FORMAT_ISO8601";
+  }
+  if ("sra_installer_prompt_skip".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_PROMPT_SKIP'] = "SRA_INSTALLER_PROMPT_SKIP";
+  }
+  if ("sra_address_format_field_mapping_properties".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ADDRESS_FORMAT_FIELD_MAPPING_PROPERTIES'] = "SRA_ADDRESS_FORMAT_FIELD_MAPPING_PROPERTIES";
+  }
+  if ("sra_address_format_field_properties".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ADDRESS_FORMAT_FIELD_PROPERTIES'] = "SRA_ADDRESS_FORMAT_FIELD_PROPERTIES";
+  }
+  if ("sra_resource_bundle_default_bundle_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME'] = "SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME";
+  }
+  if ("sra_util_aspell".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_ASPELL'] = "SRA_UTIL_ASPELL";
+  }
+  if ("sra_util_data_unit_bit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_BIT'] = "SRA_UTIL_DATA_UNIT_BIT";
+  }
+  if ("sra_util_data_unit_bit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_BIT_LABELS'] = "SRA_UTIL_DATA_UNIT_BIT_LABELS";
+  }
+  if ("sra_util_measurement_centimeter".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_CENTIMETER'] = "SRA_UTIL_MEASUREMENT_CENTIMETER";
+  }
+  if ("sra_locale_default_language".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_DEFAULT_LANGUAGE'] = "SRA_LOCALE_DEFAULT_LANGUAGE";
+  }
+  if ("sra_util_su_pswd_retype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_PSWD_RETYPE'] = "SRA_UTIL_SU_PSWD_RETYPE";
+  }
+  if ("sra_util_measurement_foot".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_FOOT'] = "SRA_UTIL_MEASUREMENT_FOOT";
+  }
+  if ("sra_util_measurement_gram".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_GRAM'] = "SRA_UTIL_MEASUREMENT_GRAM";
+  }
+  if ("sra_framework_installer_apache_conf".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_APACHE_CONF'] = "SRA_FRAMEWORK_INSTALLER_APACHE_CONF";
+  }
+  if ("sra_util_measurement_inch".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_INCH'] = "SRA_UTIL_MEASUREMENT_INCH";
+  }
+  if ("sra_util_su_cmds_invalid_pswd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_CMDS_INVALID_PSWD'] = "SRA_UTIL_SU_CMDS_INVALID_PSWD";
+  }
+  if ("sra_installer_config_file_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_CONFIG_FILE_NAME'] = "SRA_INSTALLER_CONFIG_FILE_NAME";
+  }
+  if ("sra_framework_installer_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_CONFIG'] = "SRA_FRAMEWORK_INSTALLER_CONFIG";
+  }
+  if ("sra_country_properties".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_COUNTRY_PROPERTIES'] = "SRA_COUNTRY_PROPERTIES";
+  }
+  if ("sra_address_format_country_properties".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ADDRESS_FORMAT_COUNTRY_PROPERTIES'] = "SRA_ADDRESS_FORMAT_COUNTRY_PROPERTIES";
+  }
+  if ("sra_util_measurement_kilogram".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_KILOGRAM'] = "SRA_UTIL_MEASUREMENT_KILOGRAM";
+  }
+  if ("sra_util_measurement_kilometer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_KILOMETER'] = "SRA_UTIL_MEASUREMENT_KILOMETER";
+  }
+  if ("sra_util_measurement_pound".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_POUND'] = "SRA_UTIL_MEASUREMENT_POUND";
+  }
+  if ("sra_util_measurement_meter".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_METER'] = "SRA_UTIL_MEASUREMENT_METER";
+  }
+  if ("sra_util_measurement_mile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_MILE'] = "SRA_UTIL_MEASUREMENT_MILE";
+  }
+  if ("sra_params_no_type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_PARAMS_NO_TYPE'] = "SRA_PARAMS_NO_TYPE";
+  }
+  if ("sra_util_su_cmds_invalid_user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_CMDS_INVALID_USER'] = "SRA_UTIL_SU_CMDS_INVALID_USER";
+  }
+  if ("sra_util_measurement_ounce".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_OUNCE'] = "SRA_UTIL_MEASUREMENT_OUNCE";
+  }
+  if ("sra_resource_bundle_file_ext".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_RESOURCE_BUNDLE_FILE_EXT'] = "SRA_RESOURCE_BUNDLE_FILE_EXT";
+  }
+  if ("sra_country_provinces_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_COUNTRY_PROVINCES_PREFIX'] = "SRA_COUNTRY_PROVINCES_PREFIX";
+  }
+  if ("sra_installer_quick_install".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_QUICK_INSTALL'] = "SRA_INSTALLER_QUICK_INSTALL";
+  }
+  if ("sra_util_root".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_ROOT'] = "SRA_UTIL_ROOT";
+  }
+  if ("sra_framework_installer_release_file_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_NAME'] = "SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_NAME";
+  }
+  if ("sra_locale_default_country".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_DEFAULT_COUNTRY'] = "SRA_LOCALE_DEFAULT_COUNTRY";
+  }
+  if ("sra_util_measurement_yard".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_YARD'] = "SRA_UTIL_MEASUREMENT_YARD";
+  }
+  if ("sra_util_url_safe_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_URL_SAFE_REGEX'] = "SRA_UTIL_URL_SAFE_REGEX";
+  }
+  if ("sra_gregorian_date_unit_year".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_YEAR'] = "SRA_GREGORIAN_DATE_UNIT_YEAR";
+  }
+  if ("sra_util_use_sys_config_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_USE_SYS_CONFIG_DEBUG'] = "SRA_UTIL_USE_SYS_CONFIG_DEBUG";
+  }
+  if ("sra_gregorian_date_unit_month".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_MONTH'] = "SRA_GREGORIAN_DATE_UNIT_MONTH";
+  }
+  if ("sra_util_use_app_config_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_USE_APP_CONFIG_DEBUG'] = "SRA_UTIL_USE_APP_CONFIG_DEBUG";
+  }
+  if ("sra_gregorian_date_unit_second".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_SECOND'] = "SRA_GREGORIAN_DATE_UNIT_SECOND";
+  }
+  if ("sra_address_format_max_cols".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ADDRESS_FORMAT_MAX_COLS'] = "SRA_ADDRESS_FORMAT_MAX_COLS";
+  }
+  if ("sra_address_format_max_rows".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ADDRESS_FORMAT_MAX_ROWS'] = "SRA_ADDRESS_FORMAT_MAX_ROWS";
+  }
+  if ("sra_gregorian_date_relative_time_cap".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP'] = "SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP";
+  }
+  if ("sra_cache_gc_interval".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CACHE_GC_INTERVAL'] = "SRA_CACHE_GC_INTERVAL";
+  }
+  if ("sra_gregorian_date_unit_minute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_MINUTE'] = "SRA_GREGORIAN_DATE_UNIT_MINUTE";
+  }
+  if ("sra_pop3_login_default_port".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_POP3_LOGIN_DEFAULT_PORT'] = "SRA_POP3_LOGIN_DEFAULT_PORT";
+  }
+  if ("sra_cache_gc_max_lock".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CACHE_GC_MAX_LOCK'] = "SRA_CACHE_GC_MAX_LOCK";
+  }
+  if ("sra_api_generator_default_cache_ttl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_API_GENERATOR_DEFAULT_CACHE_TTL'] = "SRA_API_GENERATOR_DEFAULT_CACHE_TTL";
+  }
+  if ("sra_pop3_login_default_port_tls".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_POP3_LOGIN_DEFAULT_PORT_TLS'] = "SRA_POP3_LOGIN_DEFAULT_PORT_TLS";
+  }
+  if ("sra_scheduler_task_lock_max_mins".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SCHEDULER_TASK_LOCK_MAX_MINS'] = "SRA_SCHEDULER_TASK_LOCK_MAX_MINS";
+  }
+  if ("sra_gregorian_date_unit_hour".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_HOUR'] = "SRA_GREGORIAN_DATE_UNIT_HOUR";
+  }
+  if ("sra_gregorian_date_unit_day".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_DAY'] = "SRA_GREGORIAN_DATE_UNIT_DAY";
+  }
+  if ("sra_gregorian_date_unit_week".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_WEEK'] = "SRA_GREGORIAN_DATE_UNIT_WEEK";
+  }
+  if ("sra_currency_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_DEBUG'] = "SRA_CURRENCY_DEBUG";
+  }
+  if ("sra_resource_bundle_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_RESOURCE_BUNDLE_DEBUG'] = "SRA_RESOURCE_BUNDLE_DEBUG";
+  }
+  if ("sra_locale_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_DEBUG'] = "SRA_LOCALE_DEBUG";
+  }
+  if ("sra_resource_bundle_auto_translate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_RESOURCE_BUNDLE_AUTO_TRANSLATE'] = "SRA_RESOURCE_BUNDLE_AUTO_TRANSLATE";
+  }
+  if ("sra_cache_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CACHE_DEBUG'] = "SRA_CACHE_DEBUG";
+  }
+  if ("sra_xmlparser_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_XMLPARSER_DEBUG'] = "SRA_XMLPARSER_DEBUG";
+  }
+  if ("sra_currency_default".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_DEFAULT'] = "SRA_CURRENCY_DEFAULT";
+  }
+  if ("sra_file_cache_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_CACHE_DIR'] = "SRA_FILE_CACHE_DIR";
+  }
+  if ("sra_scheduler_task_fork_script".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SCHEDULER_TASK_FORK_SCRIPT'] = "SRA_SCHEDULER_TASK_FORK_SCRIPT";
+  }
+  if ("sra_installer_framework_installer_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG'] = "SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG";
+  }
+  if ("sra_installer_framework_tmp_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR'] = "SRA_INSTALLER_FRAMEWORK_TMP_DIR";
+  }
+  if ("sra_locale_default_locale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_DEFAULT_LOCALE'] = "SRA_LOCALE_DEFAULT_LOCALE";
+  }
+  if ("sra_time_zone_zonetab_path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TIME_ZONE_ZONETAB_PATH'] = "SRA_TIME_ZONE_ZONETAB_PATH";
+  }
+  if ("sra_installer_framework_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_FRAMEWORK_DIR'] = "SRA_INSTALLER_FRAMEWORK_DIR";
+  }
+  if ("sra_file_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_DEBUG'] = "SRA_FILE_DEBUG";
+  }
+  if ("sra_address_format_xml_data_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ADDRESS_FORMAT_XML_DATA_FILE'] = "SRA_ADDRESS_FORMAT_XML_DATA_FILE";
+  }
+  if ("sra_currency_xml_data_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_XML_DATA_FILE'] = "SRA_CURRENCY_XML_DATA_FILE";
+  }
+  if ("sra_locale_xml_data_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_XML_DATA_FILE'] = "SRA_LOCALE_XML_DATA_FILE";
+  }
+  if ("sra_resource_bundle_default_sys_bundle_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_RESOURCE_BUNDLE_DEFAULT_SYS_BUNDLE_NAME'] = "SRA_RESOURCE_BUNDLE_DEFAULT_SYS_BUNDLE_NAME";
+  }
+
+
+
+  // check classes
+  if ("sra_addressformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_AddressFormat'] = "SRA_AddressFormat";
+  }
+  if ("sra_apigenerator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ApiGenerator'] = "SRA_ApiGenerator";
+  }
+  if ("sra_arraymanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ArrayManager'] = "SRA_ArrayManager";
+  }
+  if ("sra_cache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Cache'] = "SRA_Cache";
+  }
+  if ("sra_country".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Country'] = "SRA_Country";
+  }
+  if ("sra_currency".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Currency'] = "SRA_Currency";
+  }
+  if ("sra_emailmessage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_EmailMessage'] = "SRA_EmailMessage";
+  }
+  if ("sra_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_File'] = "SRA_File";
+  }
+  if ("sra_frameworkinstaller".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_FrameworkInstaller'] = "SRA_FrameworkInstaller";
+  }
+  if ("sra_gregoriandate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_GregorianDate'] = "SRA_GregorianDate";
+  }
+  if ("sra_installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Installer'] = "SRA_Installer";
+  }
+  if ("sra_installermenu".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_InstallerMenu'] = "SRA_InstallerMenu";
+  }
+  if ("sra_installermenuitem".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_InstallerMenuItem'] = "SRA_InstallerMenuItem";
+  }
+  if ("sra_locale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Locale'] = "SRA_Locale";
+  }
+  if ("sra_logentry".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_LogEntry'] = "SRA_LogEntry";
+  }
+  if ("sra_matrix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Matrix'] = "SRA_Matrix";
+  }
+  if ("sra_params".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Params'] = "SRA_Params";
+  }
+  if ("sra_pop3login".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Pop3Login'] = "SRA_Pop3Login";
+  }
+  if ("sra_resourcebundle".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ResourceBundle'] = "SRA_ResourceBundle";
+  }
+  if ("sra_schedulertask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_SchedulerTask'] = "SRA_SchedulerTask";
+  }
+  if ("sra_timezone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_TimeZone'] = "SRA_TimeZone";
+  }
+  if ("sra_util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Util'] = "SRA_Util";
+  }
+  if ("sra_xmlparser".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_XmlParser'] = "SRA_XmlParser";
+  }
+  if ("_mxlookup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class__mxlookup'] = "_mxlookup";
+  }
+
+
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="package" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1>package util</h1>
+  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>Package Information</h2>
+  <ul>
+    <li><a href="#comments">Package Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#classes">Classes</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>This directory/package contains the utility related classes of the SIERRA PHP deployment framework. For more information, please review the class comments or the SIERRA api documentation.<br /></pre>
+  
+  <h2 id="constants">Constant Summary</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_MIME_TYPE_FILE">SRA_FILE_MIME_TYPE_FILE</a></pre>
+<pre> Specifies the mime type file to use. This must be specified in order to use the getMimeType method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_APP_HEADER">SRA_FRAMEWORK_INSTALLER_APP_HEADER</a></pre>
+<pre> the header to include when rendering the framework configuration
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_HEADER">SRA_FRAMEWORK_INSTALLER_HEADER</a></pre>
+<pre> the header to include when rendering the framework configuration
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_CANADA">SRA_LOCALE_CANADA</a></pre>
+<pre> Constant which represents the English speaking portion of Canada. This
+  symbol is broken up into 2 values separated by the &quot;&amp;&quot; symbol. The
+  first value is the country code and the second value is the language
+  code (as defined by the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_CANADA_FRENCH">SRA_LOCALE_CANADA_FRENCH</a></pre>
+<pre> Constant which represents the French speaking portion of Canada. This
+  symbol is broken up into 2 values separated by the &quot;&amp;&quot; symbol. The
+  first value is the country code and the second value is the language
+  code (as defined by the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_FRANCE">SRA_LOCALE_FRANCE</a></pre>
+<pre> Constant which represents France. This symbol is broken up into 2 values
+  separated by the &quot;&amp;&quot; symbol. The first value is the country code and
+  the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_CANADA">SRA_CURRENCY_CANADA</a></pre>
+<pre> Constant representing the Canadian currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_GERMAN">SRA_LOCALE_GERMAN</a></pre>
+<pre> Constant which represents the German language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_GERMANY">SRA_LOCALE_GERMANY</a></pre>
+<pre> Constant which represents Germany. This symbol is broken up into 2
+  values separated by the &quot;&amp;&quot; symbol. The first value is the country code
+  and the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_ENGLISH">SRA_LOCALE_ENGLISH</a></pre>
+<pre> Constant which represents the English language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_SPANISH">SRA_LOCALE_SPANISH</a></pre>
+<pre> Constant which represents the Spanish language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_SPAIN">SRA_LOCALE_SPAIN</a></pre>
+<pre> Contant which represents Spain. This symbol is broken up into 2 values
+  separated by the &quot;&amp;&quot; symbol. The first value is the country code and
+  the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_SPAIN">SRA_CURRENCY_SPAIN</a></pre>
+<pre> Constant representing the Spanish currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_FRENCH">SRA_LOCALE_FRENCH</a></pre>
+<pre> Constant which represents the French language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_UK">SRA_LOCALE_UK</a></pre>
+<pre> Constant which represents the United Kingdom. This symbol is broken up
+  into 2 values separated by the &quot;&amp;&quot; symbol. The first value is the
+  country code and the second value is the language code (as defined by
+  the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_UK">SRA_CURRENCY_UK</a></pre>
+<pre> Constant representing the English/UK currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_US">SRA_LOCALE_US</a></pre>
+<pre> String which represents the United States. This symbol is broken up into
+  2 values separated by the &quot;&amp;&quot; symbol. The first value is the country
+  code and the second value is the language code (as defined by the
+  language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_US">SRA_CURRENCY_US</a></pre>
+<pre> Constant representing the US currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_GERMANY">SRA_CURRENCY_GERMANY</a></pre>
+<pre> Constant representing the German currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_FRANCE">SRA_CURRENCY_FRANCE</a></pre>
+<pre> Constant representing the French currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_EURO">SRA_CURRENCY_EURO</a></pre>
+<pre> Constant representing the Euro currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_PASSWORD">SRA_UTIL_SU_PASSWORD</a></pre>
+<pre> string token that identifies the password prompt in SRA_Util::suCmds and
+  SRA_Util::suPswd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_APP_INSTALL">SRA_FRAMEWORK_INSTALLER_APP_INSTALL</a></pre>
+<pre> the name of the file used to store app install exec commands
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_APP_RELEASE">SRA_FRAMEWORK_INSTALLER_APP_RELEASE</a></pre>
+<pre> the name of the file used to store app release exec commands
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CACHE_PREFIX">SRA_CACHE_PREFIX</a></pre>
+<pre> the prefix to use for cache files, the application id will be added to this
+  prefix at runtime
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CACHE_GC_FILE">SRA_CACHE_GC_FILE</a></pre>
+<pre> the name of the garbage collection file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CACHE_GC_LOCK">SRA_CACHE_GC_LOCK</a></pre>
+<pre> the name of the garbage collection lock file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_CMDS_SCRIPT">SRA_UTIL_SU_CMDS_SCRIPT</a></pre>
+<pre> the name of the temporary script created by SRA_Util::suCmds
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TIME_ZONE_ZONE_CACHE_PREFIX">SRA_TIME_ZONE_ZONE_CACHE_PREFIX</a></pre>
+<pre> the prefix to use for time zone cache files
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL">SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL</a></pre>
+<pre> the name of the file used to store app uninstall exec commands
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_LIST">SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_LIST</a></pre>
+<pre> the name of the file where a release files should be listed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_IP_REGEX">SRA_UTIL_IP_REGEX</a></pre>
+<pre> regular expression used to locate an ip address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_APACHE_CONF_D">SRA_FRAMEWORK_INSTALLER_APACHE_CONF_D</a></pre>
+<pre> the name of the default apache conf.d directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_RESOURCE_BUNDLE_DEFAULT_RELATIVE_DIR">SRA_RESOURCE_BUNDLE_DEFAULT_RELATIVE_DIR</a></pre>
+<pre> the default relative directory for properties files
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TIME_ZONE_SYSTEM">SRA_TIME_ZONE_SYSTEM</a></pre>
+<pre> the timezone file used by the  operating system
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SERVICES_CONFIG">SRA_UTIL_SERVICES_CONFIG</a></pre>
+<pre> path to the services config file used by SRA_Util::getServiceName($port)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TIME_ZONE_CLOCK_CONFIG">SRA_TIME_ZONE_CLOCK_CONFIG</a></pre>
+<pre> the linux clock configuration
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TIME_ZONE_ZDUMP_PATH">SRA_TIME_ZONE_ZDUMP_PATH</a></pre>
+<pre> the path to use (in addition to the standard path) when looking for the zdump
+  utility used to determine timezone ranges
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_RELEASE_TMP_DIR_NAME">SRA_FRAMEWORK_INSTALLER_RELEASE_TMP_DIR_NAME</a></pre>
+<pre> the name of the directory to use to create a framework release
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TIME_ZONE_ZONEINFO_PATH">SRA_TIME_ZONE_ZONEINFO_PATH</a></pre>
+<pre> the path to the zoneinfo directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SCHEDULER_TASK_DEFAULT_SCHEDULE">SRA_SCHEDULER_TASK_DEFAULT_SCHEDULE</a></pre>
+<pre> the default schedule for a task
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_PARAMS_TYPE_DELIM">SRA_PARAMS_TYPE_DELIM</a></pre>
+<pre> delimeter between key and type for parameters
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL_AUTO">SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL_AUTO</a></pre>
+<pre> the prefix for commands in .uninstall that were added automatically by the
+  installer. these commands are removed when the the application is
+  unconfigured
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_BYTE">SRA_UTIL_DATA_UNIT_BYTE</a></pre>
+<pre> unit identifiers for a &#039;byte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_BYTE_LABELS">SRA_UTIL_DATA_UNIT_BYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a byte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_PSWD_BAD">SRA_UTIL_SU_PSWD_BAD</a></pre>
+<pre> string token that identifies an bad password in SRA_Util::suPswd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_FORMAT_RFC2822">SRA_GREGORIAN_DATE_FORMAT_RFC2822</a></pre>
+<pre> the format string for an RFC 2822 date string
+  (example: Thu, 21 Dec 2000 16:01:07 +0200)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR">SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR</a></pre>
+<pre> the error message to display if the temp directory cannot be created (not
+  localized because framework cannot be initialized if this directory cannot be
+  created)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_GIGABYTE">SRA_UTIL_DATA_UNIT_GIGABYTE</a></pre>
+<pre> unit identifiers for a &#039;gigabyte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS">SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a gigabyte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TIME_ZONE_GMT">SRA_TIME_ZONE_GMT</a></pre>
+<pre> the identifier for the GMT time zone
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_GIGABIT">SRA_UTIL_DATA_UNIT_GIGABIT</a></pre>
+<pre> unit identifiers for a &#039;gigabit&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_GIGABIT_LABELS">SRA_UTIL_DATA_UNIT_GIGABIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a gigabit
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_KILOBYTE">SRA_UTIL_DATA_UNIT_KILOBYTE</a></pre>
+<pre> unit identifiers for a &#039;kilobyte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS">SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a kilobyte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_KILOBIT">SRA_UTIL_DATA_UNIT_KILOBIT</a></pre>
+<pre> unit identifiers for a &#039;kilobit&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_KILOBIT_LABELS">SRA_UTIL_DATA_UNIT_KILOBIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a kilobit
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_MEGABYTE">SRA_UTIL_DATA_UNIT_MEGABYTE</a></pre>
+<pre> unit identifiers for a &#039;megabyte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS">SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a megabyte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_MEGABIT">SRA_UTIL_DATA_UNIT_MEGABIT</a></pre>
+<pre> unit identifiers for a &#039;megabit&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_MEGABIT_LABELS">SRA_UTIL_DATA_UNIT_MEGABIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a megabit
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_API_GENERATOR_PACKAGE_README_FILE">SRA_API_GENERATOR_PACKAGE_README_FILE</a></pre>
+<pre> space separated list of the names of the files that can be placed in package
+  directories to produce package-level comments
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_TERABYTE">SRA_UTIL_DATA_UNIT_TERABYTE</a></pre>
+<pre> unit identifiers for a &#039;terabyte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_TERABYTE_LABELS">SRA_UTIL_DATA_UNIT_TERABYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a terabyte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_TERABIT">SRA_UTIL_DATA_UNIT_TERABIT</a></pre>
+<pre> unit identifiers for a &#039;terabit&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_TERABIT_LABELS">SRA_UTIL_DATA_UNIT_TERABIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a terabit
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_COUNTRY_DEFAULT">SRA_COUNTRY_DEFAULT</a></pre>
+<pre> the default country
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TIME_ZONE_UTC">SRA_TIME_ZONE_UTC</a></pre>
+<pre> the identifier for the UTC time zone
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_FORMAT_ISO8601">SRA_GREGORIAN_DATE_FORMAT_ISO8601</a></pre>
+<pre> the format string for an IS0 8601 date string
+  (example: 2004-02-12T15:19:21+00:00)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_PROMPT_SKIP">SRA_INSTALLER_PROMPT_SKIP</a></pre>
+<pre> the value returned by a &quot;defaults-handler&quot; indicating that a prompt value
+  should be skipped
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ADDRESS_FORMAT_FIELD_MAPPING_PROPERTIES">SRA_ADDRESS_FORMAT_FIELD_MAPPING_PROPERTIES</a></pre>
+<pre> the name of the properties file containing the address field mappings
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ADDRESS_FORMAT_FIELD_PROPERTIES">SRA_ADDRESS_FORMAT_FIELD_PROPERTIES</a></pre>
+<pre> the name of the properties file containing the address field labels
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME">SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME</a></pre>
+<pre> The default name for a app resource bundle file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_ASPELL">SRA_UTIL_ASPELL</a></pre>
+<pre> the name of the aspell cli utility used by the getSpellCheckLanguages and
+  spellcheck methods. aspell must be installed and present in the $PATH in
+  order to use those methods
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_BIT">SRA_UTIL_DATA_UNIT_BIT</a></pre>
+<pre> unit identifiers for a &#039;bit&#039;, this is the smallest unit size. the
+  SRA_UTIL_DATA_UNIT_* constants are used by the SRA_Util::normalizeDataUnit
+  method below
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_BIT_LABELS">SRA_UTIL_DATA_UNIT_BIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a bit. if a label is
+  prefixed with : the search for it will not be case sensitive
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_CENTIMETER">SRA_UTIL_MEASUREMENT_CENTIMETER</a></pre>
+<pre> measurement identifiers for a &#039;centimeter&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_DEFAULT_LANGUAGE">SRA_LOCALE_DEFAULT_LANGUAGE</a></pre>
+<pre> the default country to use if one is not specified in the getLocale method or
+  if the country specified is not configured in the locales xml file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_PSWD_RETYPE">SRA_UTIL_SU_PSWD_RETYPE</a></pre>
+<pre> string token that identifies the retype password command in SRA_Util::suPswd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_FOOT">SRA_UTIL_MEASUREMENT_FOOT</a></pre>
+<pre> measurement identifiers for a &#039;foot&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_GRAM">SRA_UTIL_MEASUREMENT_GRAM</a></pre>
+<pre> measurement identifiers for a &#039;gram&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_APACHE_CONF">SRA_FRAMEWORK_INSTALLER_APACHE_CONF</a></pre>
+<pre> the name of the apache configuration file in the application&#039;s etc directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_INCH">SRA_UTIL_MEASUREMENT_INCH</a></pre>
+<pre> measurement identifiers for an &#039;inch&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_CMDS_INVALID_PSWD">SRA_UTIL_SU_CMDS_INVALID_PSWD</a></pre>
+<pre> string token that identifies an invalid password in SRA_Util::suCmds
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_CONFIG_FILE_NAME">SRA_INSTALLER_CONFIG_FILE_NAME</a></pre>
+<pre> the default name of the installer xml file (located in the framework or app
+  &quot;etc&quot; directory)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_CONFIG">SRA_FRAMEWORK_INSTALLER_CONFIG</a></pre>
+<pre> the name of the installer xml file stored in the framework or app etc
+  directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_COUNTRY_PROPERTIES">SRA_COUNTRY_PROPERTIES</a></pre>
+<pre> the name of the properties file containing the ISO 3166 country code/names
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ADDRESS_FORMAT_COUNTRY_PROPERTIES">SRA_ADDRESS_FORMAT_COUNTRY_PROPERTIES</a></pre>
+<pre> the name of the properties file containing the ISO 3166 country code/names
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_KILOGRAM">SRA_UTIL_MEASUREMENT_KILOGRAM</a></pre>
+<pre> measurement identifiers for a &#039;kilogram&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_KILOMETER">SRA_UTIL_MEASUREMENT_KILOMETER</a></pre>
+<pre> measurement identifiers for a &#039;kilometer&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_POUND">SRA_UTIL_MEASUREMENT_POUND</a></pre>
+<pre> measurement identifiers for a &#039;pound&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_METER">SRA_UTIL_MEASUREMENT_METER</a></pre>
+<pre> measurement identifiers for a &#039;meter&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_MILE">SRA_UTIL_MEASUREMENT_MILE</a></pre>
+<pre> measurement identifiers for a &#039;mile&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_PARAMS_NO_TYPE">SRA_PARAMS_NO_TYPE</a></pre>
+<pre> keyword used to identify params with NO type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_CMDS_INVALID_USER">SRA_UTIL_SU_CMDS_INVALID_USER</a></pre>
+<pre> string token that identifies an invalid user in SRA_Util::suCmds
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_OUNCE">SRA_UTIL_MEASUREMENT_OUNCE</a></pre>
+<pre> measurement identifiers for an &#039;ounce&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_RESOURCE_BUNDLE_FILE_EXT">SRA_RESOURCE_BUNDLE_FILE_EXT</a></pre>
+<pre> the file extension for properties files
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_COUNTRY_PROVINCES_PREFIX">SRA_COUNTRY_PROVINCES_PREFIX</a></pre>
+<pre> the prefix for the country specific provinces properties files
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_QUICK_INSTALL">SRA_INSTALLER_QUICK_INSTALL</a></pre>
+<pre> the name of the application specific quick installer script used by the
+  quickInstall method. this script is executed BEFORE the application is
+  initialized
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_ROOT">SRA_UTIL_ROOT</a></pre>
+<pre> the root username
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_NAME">SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_NAME</a></pre>
+<pre> the default name for a framework release
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_DEFAULT_COUNTRY">SRA_LOCALE_DEFAULT_COUNTRY</a></pre>
+<pre> the default country to use if one is not specified in the getLocale method or
+  if the country specified is not configured in the locales xml file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_YARD">SRA_UTIL_MEASUREMENT_YARD</a></pre>
+<pre> measurement identifiers for a &#039;yard&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_URL_SAFE_REGEX">SRA_UTIL_URL_SAFE_REGEX</a></pre>
+<pre> regular expression used to strip out non-url-safe characters
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_YEAR">SRA_GREGORIAN_DATE_UNIT_YEAR</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 year
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_USE_SYS_CONFIG_DEBUG">SRA_UTIL_USE_SYS_CONFIG_DEBUG</a></pre>
+<pre> The value to use in the printDebug method to identify that the system debug flag should be used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_MONTH">SRA_GREGORIAN_DATE_UNIT_MONTH</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 month
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_USE_APP_CONFIG_DEBUG">SRA_UTIL_USE_APP_CONFIG_DEBUG</a></pre>
+<pre> The value to use in the printDebug method to identify that the app debug flag should be used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_SECOND">SRA_GREGORIAN_DATE_UNIT_SECOND</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 second
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ADDRESS_FORMAT_MAX_COLS">SRA_ADDRESS_FORMAT_MAX_COLS</a></pre>
+<pre> the max columns for any address format
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ADDRESS_FORMAT_MAX_ROWS">SRA_ADDRESS_FORMAT_MAX_ROWS</a></pre>
+<pre> the max rows for any address format
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP">SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP</a></pre>
+<pre> the number of hours to limit relative time usage for in the &quot;format&quot; method
+  when the format string is &quot;RT&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CACHE_GC_INTERVAL">SRA_CACHE_GC_INTERVAL</a></pre>
+<pre> the interval to use for cache garbage collection (seconds)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_MINUTE">SRA_GREGORIAN_DATE_UNIT_MINUTE</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 minute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_POP3_LOGIN_DEFAULT_PORT">SRA_POP3_LOGIN_DEFAULT_PORT</a></pre>
+<pre> the default pop3 login tcp/ip port
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CACHE_GC_MAX_LOCK">SRA_CACHE_GC_MAX_LOCK</a></pre>
+<pre> the maximum amount of time that the garbage collector can be locked (seconds)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_API_GENERATOR_DEFAULT_CACHE_TTL">SRA_API_GENERATOR_DEFAULT_CACHE_TTL</a></pre>
+<pre> the default cache TTL for api metadata
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_POP3_LOGIN_DEFAULT_PORT_TLS">SRA_POP3_LOGIN_DEFAULT_PORT_TLS</a></pre>
+<pre> the default pop3 login tcp/ip port for tls connections
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SCHEDULER_TASK_LOCK_MAX_MINS">SRA_SCHEDULER_TASK_LOCK_MAX_MINS</a></pre>
+<pre> the max # of minutes to allow a task to be locked
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_HOUR">SRA_GREGORIAN_DATE_UNIT_HOUR</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 hour
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_DAY">SRA_GREGORIAN_DATE_UNIT_DAY</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 day
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_WEEK">SRA_GREGORIAN_DATE_UNIT_WEEK</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 week
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_DEBUG">SRA_CURRENCY_DEBUG</a></pre>
+<pre> SRA_Currency object debug flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_RESOURCE_BUNDLE_DEBUG">SRA_RESOURCE_BUNDLE_DEBUG</a></pre>
+<pre> SRA_ResourceBundle object debug flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_DEBUG">SRA_LOCALE_DEBUG</a></pre>
+<pre> SRA_Locale object debug flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_RESOURCE_BUNDLE_AUTO_TRANSLATE">SRA_RESOURCE_BUNDLE_AUTO_TRANSLATE</a></pre>
+<pre> Whether or not non-translated resource bundle properties files should be
+  automatically transferred and cached when requested. Be very careful with this
+  option as this may seriously slow down your system if you have large
+  non-translated properties files. If this is the case, you should convert your
+  files using the {SRA_DIR}/bin/l10n_file_translator.php utility.
+  (see SRA_ResourceBundle api for more info)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CACHE_DEBUG">SRA_CACHE_DEBUG</a></pre>
+<pre> debug flag (debug message are output to error logging)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_XMLPARSER_DEBUG">SRA_XMLPARSER_DEBUG</a></pre>
+<pre> SRA_XmlParser class debug flag
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_DEFAULT">SRA_CURRENCY_DEFAULT</a></pre>
+<pre> The system currency. All persistent values will be stored using this
+  currency. A system may only utilize 1 sys currency.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_CACHE_DIR">SRA_FILE_CACHE_DIR</a></pre>
+<pre> The location where the cache csv arrays should be stored.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SCHEDULER_TASK_FORK_SCRIPT">SRA_SCHEDULER_TASK_FORK_SCRIPT</a></pre>
+<pre> the path to the fork script
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG">SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG</a></pre>
+<pre> path to the framework installer confuration file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR">SRA_INSTALLER_FRAMEWORK_TMP_DIR</a></pre>
+<pre> the framework temp directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_DEFAULT_LOCALE">SRA_LOCALE_DEFAULT_LOCALE</a></pre>
+<pre> the default country to use if one is not specified in the getLocale method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TIME_ZONE_ZONETAB_PATH">SRA_TIME_ZONE_ZONETAB_PATH</a></pre>
+<pre> the path to the zone.tab file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_FRAMEWORK_DIR">SRA_INSTALLER_FRAMEWORK_DIR</a></pre>
+<pre> the base directory for the framework
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_DEBUG">SRA_FILE_DEBUG</a></pre>
+<pre> Specifies whether or not the SRA_File class should operate in debug mode (outputs what it is doing to
+  the active console window).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ADDRESS_FORMAT_XML_DATA_FILE">SRA_ADDRESS_FORMAT_XML_DATA_FILE</a></pre>
+<pre> the location of the SRA_AddressFormat xml definition file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_XML_DATA_FILE">SRA_CURRENCY_XML_DATA_FILE</a></pre>
+<pre> The location of the SRA_Currency xml definition file.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_XML_DATA_FILE">SRA_LOCALE_XML_DATA_FILE</a></pre>
+<pre> The location of the SRA_Locale xml definition file.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_RESOURCE_BUNDLE_DEFAULT_SYS_BUNDLE_NAME">SRA_RESOURCE_BUNDLE_DEFAULT_SYS_BUNDLE_NAME</a></pre>
+<pre> The default name for a system resource bundle file
+</pre>      </td>
+    </tr>
+  </table>
+
+  
+  <h2 id="classes">Class Summary</h2>
+  <table border="1" width="100%">
+    <tr id="class_SRA_AddressFormat">
+      <td><pre><a href="../classes/util.l10n.SRA_AddressFormat.html" target="contentFrame">SRA_AddressFormat</a></pre></td>
+      <td><pre> used to represent an country specific address format as defined in
+  &#039;sierra/etc/l10n/address-formats.xml&#039;. a single address format consists of
+  the attributes that make up the address, the labels to use for those
+  attributes, and the layout to use to display the address. for more
+  information, review the address api comments below. when imported, a default
+  instance of this class will be added to the application template using the
+  variable name &#039;SRA_AddressFormat&#039;
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ApiGenerator">
+      <td><pre><a href="../classes/util.SRA_ApiGenerator.html" target="contentFrame">SRA_ApiGenerator</a></pre></td>
+      <td><pre> utility classes that may be used to generate HTML formatted API documentation
+  for PHP classes and DTDs. API documentation should adhere to the javadoc
+  annotation style in order for this class to be able to properly extract the
+  documentation. this class should be instantiated prior to invoking the
+  &#039;render&#039; method
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ArrayManager">
+      <td><pre><a href="../classes/util.SRA_ArrayManager.html" target="contentFrame">SRA_ArrayManager</a></pre></td>
+      <td><pre> This class manages some of the more complex aspects of handling arrays.
+  Each object instantiation manages a single array.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Cache">
+      <td><pre><a href="../classes/util.SRA_Cache.html" target="contentFrame">SRA_Cache</a></pre></td>
+      <td><pre> this static class provides a means of caching both simple/scalar and
+  complex/object variables. the variables are cached as a serialized value.
+  when used in conjunction with sierra/tmp mounted as a ramdisk, the cache will
+  essentially be stored in memory and thus very quickly accessible. this class
+  also manages periodic cache garbage collection
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Country">
+      <td><pre><a href="../classes/util.l10n.SRA_Country.html" target="contentFrame">SRA_Country</a></pre></td>
+      <td><pre> used to represent data and behavior associated with a specific country. when
+  imported, a default instance of this class will be added to the application
+  template using the variable name &#039;SRA_Country&#039;
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Currency">
+      <td><pre><a href="../classes/util.l10n.SRA_Currency.html" target="contentFrame">SRA_Currency</a></pre></td>
+      <td><pre> Class used to manage currencies and currency conversion. This is part of
+  the localization classes such as SRA_Locale and SRA_ResourceBundle. The
+  currency data will be stored in the file SRA_CURRENCY_XML_DATA_FILE.
+  This file contains a root tag &quot;currencies&quot; and 1..* child &#039;currency&#039;
+  tags. Each &#039;currency&#039; tag contains the following elements:
+ 
+  &gt; attribute key = &quot;code&quot; : Used to convert to an associative
+    array based on currency code
+  &gt; code (String) : The currency code. This will be the unique
+    identifier for the currency
+  &gt; decimal_precision (int) : The decimal precision to use for when conversions
+    result in floating point values.
+  &gt; conversion (float) : The conversion factor for
+    converting this currency to the currency represented by the
+    SRA_CURRENCY_DEFAULT constant.
+  &gt; symbol (String) : The symbol for the currency
+  &gt; symbol_front (boolean : true) : Whether or not the symbol should
+    appear at the front or the rear of formatted currency values
+ 
+ 
+  Additionally, currency names are stored in resource bundles as
+  &quot;{SRA_DIR} /etc/l10n/iso4217.properties&quot;.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_EmailMessage">
+      <td><pre><a href="../classes/util.SRA_EmailMessage.html" target="contentFrame">SRA_EmailMessage</a></pre></td>
+      <td><pre> used to represent the data associated with an email message. this class
+  consists only of public attributes representing this data
+</pre></td>
+    </tr>
+    <tr id="class_SRA_File">
+      <td><pre><a href="../classes/util.SRA_File.html" target="contentFrame">SRA_File</a></pre></td>
+      <td><pre> SRA_File Class. This class encapsulates the basic file system function. It
+  wraps the functions suppressing normal PHP error reporting and insteads uses
+  SRA_Error.
+ 
+  Note: For debugging turn track_errors on in the php.ini. The error messages
+  from this class will then be clearer because $php_errormsg is passed as part
+  of the message.
+ 
+  Current Methods:
+  copy($src, $dest)
+  rename($src, $dest)
+  _mkdir($pathname, $mode)
+  mkdir($path, $mode=0777, $parents=TRUE)
+  chmod($pathname, $mode)
+  unlink($file)
+  symlink($target, $link)
+  touch($file)
+  _rmdir($dir)
+  rmdir($dir, $children=FALSE)
+  umask($mode)
+  read($file, &amp;$rBuffer)
+  _write($file, &amp;$rBuffer)
+  write($file, &amp;$rBuffer, $parents=TRUE, $mode=0777)
+  fileMTime($file)
+  compareMTimes($file1, $file2)
+  parseIniFile($pathname, $processSections=FALSE)
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_FrameworkInstaller">
+      <td><pre><a href="../classes/util.installer.SRA_FrameworkInstaller.html" target="contentFrame">SRA_FrameworkInstaller</a></pre></td>
+      <td><pre> sierra framework installer handler. this class handles all of the
+  installation actions defined in sierra/etc/installer.xml
+</pre></td>
+    </tr>
+    <tr id="class_SRA_GregorianDate">
+      <td><pre><a href="../classes/util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a></pre></td>
+      <td><pre> this class is used to manage gregorian based dates and times without the use
+  of the PHP date and time functions (allowing it to support dates prior to the
+  Unix Epoch (January 1 1970 00:00:00 GMT)). it may be used to represent both
+  a date and time or just a date (time is irrelevant). this object can be
+  stored in a database as an 8 character string (when &#039;dateOnly&#039; is TRUE) or a
+  14 character string (when &#039;dateOnly&#039; is FALSE) - for more info, see the
+  &#039;encode&#039; method below
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Installer">
+      <td><pre><a href="../classes/util.installer.SRA_Installer.html" target="contentFrame">SRA_Installer</a></pre></td>
+      <td><pre> this is the base &quot;abstract&quot; class for framework installers. installers
+  defined in an xml file based on the installer dtd (the &quot;installer&quot; element
+  &quot;src&quot; attribute) MUST extend this class. for more information, see the
+  documentation provided in the installer dtd and the API in this class and
+  SRA_FrameworkInstaller
+</pre></td>
+    </tr>
+    <tr id="class_SRA_InstallerMenu">
+      <td><pre><a href="../classes/util.installer.SRA_InstallerMenu.html" target="contentFrame">SRA_InstallerMenu</a></pre></td>
+      <td><pre> defines a single installer menu. an installer menu displays options available
+  to the user in that menu. the installer uses a hierarchical navigation model
+  and will automatically add a menu option to return to the parent menu (in a
+  nested menu) or exit the installer (from the top-level menu)
+</pre></td>
+    </tr>
+    <tr id="class_SRA_InstallerMenuItem">
+      <td><pre><a href="../classes/util.installer.SRA_InstallerMenuItem.html" target="contentFrame">SRA_InstallerMenuItem</a></pre></td>
+      <td><pre> defines an action that may be invoked through the installer. this action may
+  be either displaying another sub-menu, or collecting some data from the user
+  and using that data to make a configuration change, or some other
+  installation related action
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Locale">
+      <td><pre><a href="../classes/util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a></pre></td>
+      <td><pre> The SRA_Locale class (including api comments) was borrowed directly from
+  Java:
+ 
+  SRA_Locales represent a specific country and culture. Classes which can
+  be
+  passed a SRA_Locale object tailor their information for a given locale. For
+  instance, currency number formatting is handled differently for the USA
+  and France.
+ 
+  SRA_Locales are made up of a language code, and a country code. Language
+  codes are represented by
+  &lt;a href=&quot;http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt&quot;&gt;
+  ISO 639:1988&lt;/a&gt; w/ additions from ISO 639/RA Newsletter No. 1/1989
+  and a decision of the Advisory Committee of ISO/TC39 on August 8, 1997.
+ 
+  Country codes are represented by
+  &lt;a href=&quot;http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html&quot;&gt;
+  ISO 3166&lt;/a&gt;.
+ 
+  The default locale is determined based on the values of the system
+  etc or the app conf.
+ 
+  SRA_Locales are stored in the SRA_LOCALE_XML_DATA_FILE file. This file
+  consists of 1..* locales in the format described in the corresponding dtd.
+ 
+  Country and language display name attributes are retrieved from
+  property files located in the {SRA_DIR}/etc/l10n directory.
+  Country display names are stored as &quot;iso3166.properties&quot; and languages
+  as &quot;iso639.properties&quot;.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_LogEntry">
+      <td><pre><a href="../classes/util.SRA_LogEntry.html" target="contentFrame">SRA_LogEntry</a></pre></td>
+      <td><pre> The SRA_LogEntry class manages the creation and storage of log entries into log
+  files. It is used by other classes such as the SRA_Error class to make log entries.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Matrix">
+      <td><pre><a href="../classes/util.SRA_Matrix.html" target="contentFrame">SRA_Matrix</a></pre></td>
+      <td><pre> Used to represent a matrix: a data array of two or more dimensions
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Params">
+      <td><pre><a href="../classes/util.SRA_Params.html" target="contentFrame">SRA_Params</a></pre></td>
+      <td><pre> Generic container for parameters
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Pop3Login">
+      <td><pre><a href="../classes/util.SRA_Pop3Login.html" target="contentFrame">SRA_Pop3Login</a></pre></td>
+      <td><pre> This class is used to manage interaction with a pop3 email account. This
+  class and the SRA_EmailMessage class are basically wrapper classes for the
+  mime_parser and pop3 classes distributed open source by Manuel Lemos and
+  located in sierra/lib/ext/pop3. Use this class to log into a pop3 account,
+  query, retrieve and delete messsages.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ResourceBundle">
+      <td><pre><a href="../classes/util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a></pre></td>
+      <td><pre> The SRA_ResourceBundle class (including api comments) was borrowed directly
+  from Java:
+ 
+  Resource bundles contain locale-specific data. When your program
+  needs a locale-specific String, your program can load it from the
+  resource bundle that is appropriate for the current user&#039;s locale. In
+  this way, you can write program code that is largely independent of the
+  user&#039;s locale isolating most, if not all, of the locale-specific
+  information in resource bundles.
+ 
+  This allows you to write programs that can:
+ 
+  be easily localized, or translated, into different languages
+  handle multiple locales at once
+  be easily modified later to support even more locales
+ 
+ 
+  Resource bundles will be stored in properties files. Property files
+  consist of language/string pairs such as the following:
+  mystring=Hello world.
+ 
+  In the preceeding example, the string &quot;Hello world&quot; was assigned to
+  the key &quot;mystring&quot;. This string could be referenced in the future
+  through the SRA_ResourceBundle::getString method.
+ 
+  The resource bundle files are stored using the naming convention
+  &quot;{Bundle Name}_{2 letter ISO language code}.properties&quot;. For example:
+  MyProperties_es.properties. Alternatively, the default file will not
+  contain a language code. For example: MyProperties.properties.
+ 
+  When a new SRA_ResourceBundle object is requested through the
+  SRA_ResourceBundle::getBundle the method will first get the language code
+  from the locale parameter and then attempt to lookup the resource file
+  for that specific language code. If that resource file does not exists,
+  the default resource file will be used.
+ 
+  Resource bundle keys are not case sensitive.
+ 
+  Resource bundle keys and values may also include imbedded php code. Any
+  text imbedded between php:: and ::php will be sent through the php parser
+  and the return value added to that key or value.
+ 
+  Once initialized, SRA_ResourceBundle data is cached. It will only be refreshed
+  if/when the original properties file is modified.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_SchedulerTask">
+      <td><pre><a href="../classes/util.SRA_SchedulerTask.html" target="contentFrame">SRA_SchedulerTask</a></pre></td>
+      <td><pre> used to define tasks that should be performed on a scheduled basis. the task
+  can be either an executable file, or a php function or method (instance or
+  static). tasks can be scheduled in either the sierra-config or individual
+  app-config files. the schedule provided for each task is identical to the
+  schedule specified for cron jobs (see &#039;schedule&#039; attribute documentation
+  provided below). dates and times are evaluated according to the current
+  app (or system time-zone) as specified in sierra-config or app-config
+</pre></td>
+    </tr>
+    <tr id="class_SRA_TimeZone">
+      <td><pre><a href="../classes/util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a></pre></td>
+      <td><pre> The SRA_TimeZone class manages data and behavior pertaining to a time zone
+  including interraction with SRA_GregorianDate
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Util">
+      <td><pre><a href="../classes/util.SRA_Util.html" target="contentFrame">SRA_Util</a></pre></td>
+      <td><pre> This class is used to house random methods that do not logically belong in any other classes.
+  Generally these methods will be used for minor calculations and processes that may be useful
+  to other classes. All of the methods in this class are static.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_XmlParser">
+      <td><pre><a href="../classes/util.SRA_XmlParser.html" target="contentFrame">SRA_XmlParser</a></pre></td>
+      <td><pre> This class is used to parse xml files, maintain xml data structures,
+  cache xml data structures, and write data to xml files. It also
+  performs some xml file validation including checking for existence of
+  the required header. All xml tags are case insensitive. This parser
+  uses only lower-case xml tags.
+ 
+</pre></td>
+    </tr>
+    <tr id="class__mxlookup">
+      <td><pre><a href="../classes/util._mxlookup.html" target="contentFrame">_mxlookup</a></pre></td>
+      <td><pre> utility class uses by SRA_Util::mxlookup
+</pre></td>
+    </tr>
+  </table>
+
+
+
+  <h2 id="constant_details">Constant Details</h2>
+  <h3 id="constant_SRA_FILE_MIME_TYPE_FILE">SRA_FILE_MIME_TYPE_FILE</h3>
+  <pre>public String <b>SRA_FILE_MIME_TYPE_FILE</b> = "/etc/mime.types"</pre>
+  <pre> Specifies the mime type file to use. This must be specified in order to use the getMimeType method
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_File.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_APP_HEADER">SRA_FRAMEWORK_INSTALLER_APP_HEADER</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_APP_HEADER</b> = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<!DOCTYPE app-config PUBLIC \"-//SIERRA//DTD APP CONFIG//EN\"\n  \"http://sierra-php.googlecode.com/svn/trunk/etc/app-config.dtd\">\n"</pre>
+  <pre> the header to include when rendering the framework configuration
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_HEADER">SRA_FRAMEWORK_INSTALLER_HEADER</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_HEADER</b> = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<!DOCTYPE sierra-config PUBLIC \"-//SIERRA//DTD SIERRA CONFIG//EN\"\n  \"http://sierra-php.googlecode.com/svn/trunk/etc/sierra-config.dtd\">\n"</pre>
+  <pre> the header to include when rendering the framework configuration
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_Installer.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_CANADA">SRA_LOCALE_CANADA</h3>
+  <pre>public String <b>SRA_LOCALE_CANADA</b> = "CA&en"</pre>
+  <pre> Constant which represents the English speaking portion of Canada. This
+  symbol is broken up into 2 values separated by the &quot;&amp;&quot; symbol. The
+  first value is the country code and the second value is the language
+  code (as defined by the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_CANADA_FRENCH">SRA_LOCALE_CANADA_FRENCH</h3>
+  <pre>public String <b>SRA_LOCALE_CANADA_FRENCH</b> = "CA&fr"</pre>
+  <pre> Constant which represents the French speaking portion of Canada. This
+  symbol is broken up into 2 values separated by the &quot;&amp;&quot; symbol. The
+  first value is the country code and the second value is the language
+  code (as defined by the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_FRANCE">SRA_LOCALE_FRANCE</h3>
+  <pre>public String <b>SRA_LOCALE_FRANCE</b> = "FR&fr"</pre>
+  <pre> Constant which represents France. This symbol is broken up into 2 values
+  separated by the &quot;&amp;&quot; symbol. The first value is the country code and
+  the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_CANADA">SRA_CURRENCY_CANADA</h3>
+  <pre>public String <b>SRA_CURRENCY_CANADA</b> = "cad"</pre>
+  <pre> Constant representing the Canadian currency code.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_GERMAN">SRA_LOCALE_GERMAN</h3>
+  <pre>public String <b>SRA_LOCALE_GERMAN</b> = "de"</pre>
+  <pre> Constant which represents the German language.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_GERMANY">SRA_LOCALE_GERMANY</h3>
+  <pre>public String <b>SRA_LOCALE_GERMANY</b> = "de-de"</pre>
+  <pre> Constant which represents Germany. This symbol is broken up into 2
+  values separated by the &quot;&amp;&quot; symbol. The first value is the country code
+  and the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_ENGLISH">SRA_LOCALE_ENGLISH</h3>
+  <pre>public String <b>SRA_LOCALE_ENGLISH</b> = "en"</pre>
+  <pre> Constant which represents the English language.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_SPANISH">SRA_LOCALE_SPANISH</h3>
+  <pre>public String <b>SRA_LOCALE_SPANISH</b> = "es"</pre>
+  <pre> Constant which represents the Spanish language.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_SPAIN">SRA_LOCALE_SPAIN</h3>
+  <pre>public String <b>SRA_LOCALE_SPAIN</b> = "es-es"</pre>
+  <pre> Contant which represents Spain. This symbol is broken up into 2 values
+  separated by the &quot;&amp;&quot; symbol. The first value is the country code and
+  the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_SPAIN">SRA_CURRENCY_SPAIN</h3>
+  <pre>public String <b>SRA_CURRENCY_SPAIN</b> = "esp"</pre>
+  <pre> Constant representing the Spanish currency code.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_FRENCH">SRA_LOCALE_FRENCH</h3>
+  <pre>public String <b>SRA_LOCALE_FRENCH</b> = "fr"</pre>
+  <pre> Constant which represents the French language.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_UK">SRA_LOCALE_UK</h3>
+  <pre>public String <b>SRA_LOCALE_UK</b> = "gb-en"</pre>
+  <pre> Constant which represents the United Kingdom. This symbol is broken up
+  into 2 values separated by the &quot;&amp;&quot; symbol. The first value is the
+  country code and the second value is the language code (as defined by
+  the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_UK">SRA_CURRENCY_UK</h3>
+  <pre>public String <b>SRA_CURRENCY_UK</b> = "gbp"</pre>
+  <pre> Constant representing the English/UK currency code.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_US">SRA_LOCALE_US</h3>
+  <pre>public String <b>SRA_LOCALE_US</b> = "us-en"</pre>
+  <pre> String which represents the United States. This symbol is broken up into
+  2 values separated by the &quot;&amp;&quot; symbol. The first value is the country
+  code and the second value is the language code (as defined by the
+  language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_US">SRA_CURRENCY_US</h3>
+  <pre>public String <b>SRA_CURRENCY_US</b> = "usd"</pre>
+  <pre> Constant representing the US currency code.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_GERMANY">SRA_CURRENCY_GERMANY</h3>
+  <pre>public String <b>SRA_CURRENCY_GERMANY</b> = "xeu"</pre>
+  <pre> Constant representing the German currency code.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_FRANCE">SRA_CURRENCY_FRANCE</h3>
+  <pre>public String <b>SRA_CURRENCY_FRANCE</b> = "xeu"</pre>
+  <pre> Constant representing the French currency code.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_EURO">SRA_CURRENCY_EURO</h3>
+  <pre>public String <b>SRA_CURRENCY_EURO</b> = "xeu"</pre>
+  <pre> Constant representing the Euro currency code.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_PASSWORD">SRA_UTIL_SU_PASSWORD</h3>
+  <pre>string <b>SRA_UTIL_SU_PASSWORD</b> = '"assword:"'</pre>
+  <pre> string token that identifies the password prompt in SRA_Util::suCmds and
+  SRA_Util::suPswd
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_APP_INSTALL">SRA_FRAMEWORK_INSTALLER_APP_INSTALL</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_APP_INSTALL</b> = '.install'</pre>
+  <pre> the name of the file used to store app install exec commands
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_APP_RELEASE">SRA_FRAMEWORK_INSTALLER_APP_RELEASE</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_APP_RELEASE</b> = '.release'</pre>
+  <pre> the name of the file used to store app release exec commands
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_CACHE_PREFIX">SRA_CACHE_PREFIX</h3>
+  <pre>string <b>SRA_CACHE_PREFIX</b> = '.sracache-'</pre>
+  <pre> the prefix to use for cache files, the application id will be added to this
+  prefix at runtime
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Cache.php</p>
+ <hr />  <h3 id="constant_SRA_CACHE_GC_FILE">SRA_CACHE_GC_FILE</h3>
+  <pre>string <b>SRA_CACHE_GC_FILE</b> = '.sracachegc'</pre>
+  <pre> the name of the garbage collection file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Cache.php</p>
+ <hr />  <h3 id="constant_SRA_CACHE_GC_LOCK">SRA_CACHE_GC_LOCK</h3>
+  <pre>string <b>SRA_CACHE_GC_LOCK</b> = '.sracachegc.lck'</pre>
+  <pre> the name of the garbage collection lock file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Cache.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_CMDS_SCRIPT">SRA_UTIL_SU_CMDS_SCRIPT</h3>
+  <pre>string <b>SRA_UTIL_SU_CMDS_SCRIPT</b> = '.su-cmds'</pre>
+  <pre> the name of the temporary script created by SRA_Util::suCmds
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_TIME_ZONE_ZONE_CACHE_PREFIX">SRA_TIME_ZONE_ZONE_CACHE_PREFIX</h3>
+  <pre>string <b>SRA_TIME_ZONE_ZONE_CACHE_PREFIX</b> = '.tz-'</pre>
+  <pre> the prefix to use for time zone cache files
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_TimeZone.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL">SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL</b> = '.uninstall'</pre>
+  <pre> the name of the file used to store app uninstall exec commands
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_LIST">SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_LIST</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_LIST</b> = '.version-files'</pre>
+  <pre> the name of the file where a release files should be listed
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_IP_REGEX">SRA_UTIL_IP_REGEX</h3>
+  <pre>string <b>SRA_UTIL_IP_REGEX</b> = '/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/'</pre>
+  <pre> regular expression used to locate an ip address
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_APACHE_CONF_D">SRA_FRAMEWORK_INSTALLER_APACHE_CONF_D</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_APACHE_CONF_D</b> = '/etc/httpd/conf.d'</pre>
+  <pre> the name of the default apache conf.d directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_RESOURCE_BUNDLE_DEFAULT_RELATIVE_DIR">SRA_RESOURCE_BUNDLE_DEFAULT_RELATIVE_DIR</h3>
+  <pre>public String <b>SRA_RESOURCE_BUNDLE_DEFAULT_RELATIVE_DIR</b> = '/etc/l10n'</pre>
+  <pre> the default relative directory for properties files
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_ResourceBundle.php</p>
+ <hr />  <h3 id="constant_SRA_TIME_ZONE_SYSTEM">SRA_TIME_ZONE_SYSTEM</h3>
+  <pre>string <b>SRA_TIME_ZONE_SYSTEM</b> = '/etc/localtime'</pre>
+  <pre> the timezone file used by the  operating system
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_TimeZone.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_SERVICES_CONFIG">SRA_UTIL_SERVICES_CONFIG</h3>
+  <pre>string <b>SRA_UTIL_SERVICES_CONFIG</b> = '/etc/services'</pre>
+  <pre> path to the services config file used by SRA_Util::getServiceName($port)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_TIME_ZONE_CLOCK_CONFIG">SRA_TIME_ZONE_CLOCK_CONFIG</h3>
+  <pre>string <b>SRA_TIME_ZONE_CLOCK_CONFIG</b> = '/etc/sysconfig/clock'</pre>
+  <pre> the linux clock configuration
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_TimeZone.php</p>
+ <hr />  <h3 id="constant_SRA_TIME_ZONE_ZDUMP_PATH">SRA_TIME_ZONE_ZDUMP_PATH</h3>
+  <pre>string <b>SRA_TIME_ZONE_ZDUMP_PATH</b> = '/sbin:/usr/sbin:/usr/local/sbin'</pre>
+  <pre> the path to use (in addition to the standard path) when looking for the zdump
+  utility used to determine timezone ranges
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_TimeZone.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_RELEASE_TMP_DIR_NAME">SRA_FRAMEWORK_INSTALLER_RELEASE_TMP_DIR_NAME</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_RELEASE_TMP_DIR_NAME</b> = '/tmp/.sra-release'</pre>
+  <pre> the name of the directory to use to create a framework release
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_TIME_ZONE_ZONEINFO_PATH">SRA_TIME_ZONE_ZONEINFO_PATH</h3>
+  <pre>string <b>SRA_TIME_ZONE_ZONEINFO_PATH</b> = '/usr/share/zoneinfo'</pre>
+  <pre> the path to the zoneinfo directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_TimeZone.php</p>
+ <hr />  <h3 id="constant_SRA_SCHEDULER_TASK_DEFAULT_SCHEDULE">SRA_SCHEDULER_TASK_DEFAULT_SCHEDULE</h3>
+  <pre>string <b>SRA_SCHEDULER_TASK_DEFAULT_SCHEDULE</b> = '0 0 * * *'</pre>
+  <pre> the default schedule for a task
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_SchedulerTask.php</p>
+ <hr />  <h3 id="constant_SRA_PARAMS_TYPE_DELIM">SRA_PARAMS_TYPE_DELIM</h3>
+  <pre>string <b>SRA_PARAMS_TYPE_DELIM</b> = '::'</pre>
+  <pre> delimeter between key and type for parameters
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Params.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL_AUTO">SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL_AUTO</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_APP_UNINSTALL_AUTO</b> = '=='</pre>
+  <pre> the prefix for commands in .uninstall that were added automatically by the
+  installer. these commands are removed when the the application is
+  unconfigured
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_BYTE">SRA_UTIL_DATA_UNIT_BYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_BYTE</b> = 'B'</pre>
+  <pre> unit identifiers for a &#039;byte&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_BYTE_LABELS">SRA_UTIL_DATA_UNIT_BYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_BYTE_LABELS</b> = 'B,B/s,:byte,:byte/s,,Bs,,BS,,Bps,BpS,,,B/S,,,,,,,:bytes,:bytes/s,'</pre>
+  <pre> space separated list of unit labels used to identify a byte
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_PSWD_BAD">SRA_UTIL_SU_PSWD_BAD</h3>
+  <pre>string <b>SRA_UTIL_SU_PSWD_BAD</b> = 'BAD'</pre>
+  <pre> string token that identifies an bad password in SRA_Util::suPswd
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_FORMAT_RFC2822">SRA_GREGORIAN_DATE_FORMAT_RFC2822</h3>
+  <pre>string <b>SRA_GREGORIAN_DATE_FORMAT_RFC2822</b> = 'D, j M Y H:i:s O'</pre>
+  <pre> the format string for an RFC 2822 date string
+  (example: Thu, 21 Dec 2000 16:01:07 +0200)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR">SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR</h3>
+  <pre>string <b>SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR</b> = 'ERROR: Unable to create temp directory "' . SRA_INSTALLER_FRAMEWORK_TMP_DIR . '". Check your permissions and try to run the installer again.'</pre>
+  <pre> the error message to display if the temp directory cannot be created (not
+  localized because framework cannot be initialized if this directory cannot be
+  created)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_Installer.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_GIGABYTE">SRA_UTIL_DATA_UNIT_GIGABYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_GIGABYTE</b> = 'GB'</pre>
+  <pre> unit identifiers for a &#039;gigabyte&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS">SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS</b> = 'GB,GB/s,:gigabyte,:gigabyte/s,gB,GBs,gBs,GBS,gBS,GBps,GBpS,gBps,gBpS,GB/S,gB/s,gB/S,:gbyte,:gbytes,:gbyte/s,:giga byte,:gigabytes,:gigabytes/s,:giga bytes'</pre>
+  <pre> space separated list of unit labels used to identify a gigabyte
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_TIME_ZONE_GMT">SRA_TIME_ZONE_GMT</h3>
+  <pre>string <b>SRA_TIME_ZONE_GMT</b> = 'GMT'</pre>
+  <pre> the identifier for the GMT time zone
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_TimeZone.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_GIGABIT">SRA_UTIL_DATA_UNIT_GIGABIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_GIGABIT</b> = 'Gb'</pre>
+  <pre> unit identifiers for a &#039;gigabit&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_GIGABIT_LABELS">SRA_UTIL_DATA_UNIT_GIGABIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_GIGABIT_LABELS</b> = 'Gb,Gb/s,:gigabit,:gigabit/s,gb,Gbs,gbs,GbS,gbS,Gbps,GbpS,gbps,gbpS,Gb/S,gb/s,gb/S,:gbit,:gbits,:gbit/s,:giga bit,:gigabits,:gigabits/s,:giga bits'</pre>
+  <pre> space separated list of unit labels used to identify a gigabit
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_KILOBYTE">SRA_UTIL_DATA_UNIT_KILOBYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_KILOBYTE</b> = 'KB'</pre>
+  <pre> unit identifiers for a &#039;kilobyte&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS">SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS</b> = 'KB,KB/s,:kilobyte,:kilobyte/s,kB,KBs,kBs,KBS,kBS,KBps,KBpS,kBps,kBpS,KB/S,kB/s,kB/S,:kbyte,:kbytes,:kbyte/s,:kilo byte,:kilobytes,:kilobytes/s,:kilo bytes'</pre>
+  <pre> space separated list of unit labels used to identify a kilobyte
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_KILOBIT">SRA_UTIL_DATA_UNIT_KILOBIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_KILOBIT</b> = 'Kb'</pre>
+  <pre> unit identifiers for a &#039;kilobit&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_KILOBIT_LABELS">SRA_UTIL_DATA_UNIT_KILOBIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_KILOBIT_LABELS</b> = 'Kb,Kb/s,:kilobit,:kilobit/s,kb,Kbs,kbs,KbS,kbS,Kbps,KbpS,kbps,kbpS,Kb/S,kb/s,kb/S,:kbit,:kbits,:kbit/s,:kilo bit,:kilobits,:kilobits/s,:kilo bits'</pre>
+  <pre> space separated list of unit labels used to identify a kilobit
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_MEGABYTE">SRA_UTIL_DATA_UNIT_MEGABYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_MEGABYTE</b> = 'MB'</pre>
+  <pre> unit identifiers for a &#039;megabyte&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS">SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS</b> = 'MB,MB/s,megabyte,megabyte/s,mB,MBs,mBs,MBS,mBS,MBps,MBpS,mBps,mBpS,MB/S,mB/s,mB/S,:mbyte,:mbytes,:mbyte/s,:mega byte,megabytes,megabytes/s,:mega bytes'</pre>
+  <pre> space separated list of unit labels used to identify a megabyte
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_MEGABIT">SRA_UTIL_DATA_UNIT_MEGABIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_MEGABIT</b> = 'Mb'</pre>
+  <pre> unit identifiers for a &#039;megabit&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_MEGABIT_LABELS">SRA_UTIL_DATA_UNIT_MEGABIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_MEGABIT_LABELS</b> = 'Mb,Mb/s,:megabit,:megabit/s,mb,Mbs,mbs,MbS,mbS,Mbps,MbpS,mbps,mbpS,Mb/S,mb/s,mb/S,:mbit,:mbits,:mbit/s,:mega bit,:megabits,:megabits/s,:mega bits'</pre>
+  <pre> space separated list of unit labels used to identify a megabit
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_API_GENERATOR_PACKAGE_README_FILE">SRA_API_GENERATOR_PACKAGE_README_FILE</h3>
+  <pre>string <b>SRA_API_GENERATOR_PACKAGE_README_FILE</b> = 'README .readme'</pre>
+  <pre> space separated list of the names of the files that can be placed in package
+  directories to produce package-level comments
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_ApiGenerator.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_TERABYTE">SRA_UTIL_DATA_UNIT_TERABYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_TERABYTE</b> = 'TB'</pre>
+  <pre> unit identifiers for a &#039;terabyte&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_TERABYTE_LABELS">SRA_UTIL_DATA_UNIT_TERABYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_TERABYTE_LABELS</b> = 'TB,TB/s,:terabyte,:terabyte/s,tB,TBs,tBs,TBS,tBS,TBps,TBpS,tBps,tBpS,TB/S,tB/s,tB/S,:tbyte,:tbytes,:tbyte/s,:tera byte,:terabytes,:terabytes/s,:tera bytes'</pre>
+  <pre> space separated list of unit labels used to identify a terabyte
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_TERABIT">SRA_UTIL_DATA_UNIT_TERABIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_TERABIT</b> = 'Tb'</pre>
+  <pre> unit identifiers for a &#039;terabit&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_TERABIT_LABELS">SRA_UTIL_DATA_UNIT_TERABIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_TERABIT_LABELS</b> = 'Tb,Tb/s,:terabit,:terabit/s,tb,Tbs,tbs,TbS,tbS,Tbps,TbpS,tbps,tbpS,Tb/S,tb/s,tb/S,:tbit,:tbits,:tbit/s,:tera bit,:terabits,:terabits/s,:tera bits'</pre>
+  <pre> space separated list of unit labels used to identify a terabit
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_COUNTRY_DEFAULT">SRA_COUNTRY_DEFAULT</h3>
+  <pre>String <b>SRA_COUNTRY_DEFAULT</b> = 'US'</pre>
+  <pre> the default country
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Country.php</p>
+ <hr />  <h3 id="constant_SRA_TIME_ZONE_UTC">SRA_TIME_ZONE_UTC</h3>
+  <pre>string <b>SRA_TIME_ZONE_UTC</b> = 'UTC'</pre>
+  <pre> the identifier for the UTC time zone
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_TimeZone.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_FORMAT_ISO8601">SRA_GREGORIAN_DATE_FORMAT_ISO8601</h3>
+  <pre>string <b>SRA_GREGORIAN_DATE_FORMAT_ISO8601</b> = 'Y-m-dTH:i:sP'</pre>
+  <pre> the format string for an IS0 8601 date string
+  (example: 2004-02-12T15:19:21+00:00)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_INSTALLER_PROMPT_SKIP">SRA_INSTALLER_PROMPT_SKIP</h3>
+  <pre>string <b>SRA_INSTALLER_PROMPT_SKIP</b> = '_skip_'</pre>
+  <pre> the value returned by a &quot;defaults-handler&quot; indicating that a prompt value
+  should be skipped
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_Installer.php</p>
+ <hr />  <h3 id="constant_SRA_ADDRESS_FORMAT_FIELD_MAPPING_PROPERTIES">SRA_ADDRESS_FORMAT_FIELD_MAPPING_PROPERTIES</h3>
+  <pre>String <b>SRA_ADDRESS_FORMAT_FIELD_MAPPING_PROPERTIES</b> = 'address-field-mappings'</pre>
+  <pre> the name of the properties file containing the address field mappings
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_AddressFormat.php</p>
+ <hr />  <h3 id="constant_SRA_ADDRESS_FORMAT_FIELD_PROPERTIES">SRA_ADDRESS_FORMAT_FIELD_PROPERTIES</h3>
+  <pre>String <b>SRA_ADDRESS_FORMAT_FIELD_PROPERTIES</b> = 'address-fields'</pre>
+  <pre> the name of the properties file containing the address field labels
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_AddressFormat.php</p>
+ <hr />  <h3 id="constant_SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME">SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME</h3>
+  <pre>public String <b>SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME</b> = 'app'</pre>
+  <pre> The default name for a app resource bundle file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_ResourceBundle.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_ASPELL">SRA_UTIL_ASPELL</h3>
+  <pre>string <b>SRA_UTIL_ASPELL</b> = 'aspell'</pre>
+  <pre> the name of the aspell cli utility used by the getSpellCheckLanguages and
+  spellcheck methods. aspell must be installed and present in the $PATH in
+  order to use those methods
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_BIT">SRA_UTIL_DATA_UNIT_BIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_BIT</b> = 'b'</pre>
+  <pre> unit identifiers for a &#039;bit&#039;, this is the smallest unit size. the
+  SRA_UTIL_DATA_UNIT_* constants are used by the SRA_Util::normalizeDataUnit
+  method below
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_BIT_LABELS">SRA_UTIL_DATA_UNIT_BIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_BIT_LABELS</b> = 'b,b/s,:bit,:bit/s,,bs,,bS,,bps,bpS,,,b/S,,,,,,,:bits,:bits/s,'</pre>
+  <pre> space separated list of unit labels used to identify a bit. if a label is
+  prefixed with : the search for it will not be case sensitive
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_CENTIMETER">SRA_UTIL_MEASUREMENT_CENTIMETER</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_CENTIMETER</b> = 'cm'</pre>
+  <pre> measurement identifiers for a &#039;centimeter&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_DEFAULT_LANGUAGE">SRA_LOCALE_DEFAULT_LANGUAGE</h3>
+  <pre>public String <b>SRA_LOCALE_DEFAULT_LANGUAGE</b> = 'en'</pre>
+  <pre> the default country to use if one is not specified in the getLocale method or
+  if the country specified is not configured in the locales xml file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_PSWD_RETYPE">SRA_UTIL_SU_PSWD_RETYPE</h3>
+  <pre>string <b>SRA_UTIL_SU_PSWD_RETYPE</b> = 'etype'</pre>
+  <pre> string token that identifies the retype password command in SRA_Util::suPswd
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_FOOT">SRA_UTIL_MEASUREMENT_FOOT</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_FOOT</b> = 'ft'</pre>
+  <pre> measurement identifiers for a &#039;foot&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_GRAM">SRA_UTIL_MEASUREMENT_GRAM</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_GRAM</b> = 'gm'</pre>
+  <pre> measurement identifiers for a &#039;gram&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_APACHE_CONF">SRA_FRAMEWORK_INSTALLER_APACHE_CONF</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_APACHE_CONF</b> = 'httpd.conf'</pre>
+  <pre> the name of the apache configuration file in the application&#039;s etc directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_INCH">SRA_UTIL_MEASUREMENT_INCH</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_INCH</b> = 'in'</pre>
+  <pre> measurement identifiers for an &#039;inch&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_CMDS_INVALID_PSWD">SRA_UTIL_SU_CMDS_INVALID_PSWD</h3>
+  <pre>string <b>SRA_UTIL_SU_CMDS_INVALID_PSWD</b> = 'incorrect password'</pre>
+  <pre> string token that identifies an invalid password in SRA_Util::suCmds
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_INSTALLER_CONFIG_FILE_NAME">SRA_INSTALLER_CONFIG_FILE_NAME</h3>
+  <pre>string <b>SRA_INSTALLER_CONFIG_FILE_NAME</b> = 'installer.xml'</pre>
+  <pre> the default name of the installer xml file (located in the framework or app
+  &quot;etc&quot; directory)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_Installer.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_CONFIG">SRA_FRAMEWORK_INSTALLER_CONFIG</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_CONFIG</b> = 'installer.xml'</pre>
+  <pre> the name of the installer xml file stored in the framework or app etc
+  directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_COUNTRY_PROPERTIES">SRA_COUNTRY_PROPERTIES</h3>
+  <pre>String <b>SRA_COUNTRY_PROPERTIES</b> = 'iso3166'</pre>
+  <pre> the name of the properties file containing the ISO 3166 country code/names
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Country.php</p>
+ <hr />  <h3 id="constant_SRA_ADDRESS_FORMAT_COUNTRY_PROPERTIES">SRA_ADDRESS_FORMAT_COUNTRY_PROPERTIES</h3>
+  <pre>String <b>SRA_ADDRESS_FORMAT_COUNTRY_PROPERTIES</b> = 'iso3166'</pre>
+  <pre> the name of the properties file containing the ISO 3166 country code/names
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_AddressFormat.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_KILOGRAM">SRA_UTIL_MEASUREMENT_KILOGRAM</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_KILOGRAM</b> = 'kg'</pre>
+  <pre> measurement identifiers for a &#039;kilogram&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_KILOMETER">SRA_UTIL_MEASUREMENT_KILOMETER</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_KILOMETER</b> = 'km'</pre>
+  <pre> measurement identifiers for a &#039;kilometer&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_POUND">SRA_UTIL_MEASUREMENT_POUND</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_POUND</b> = 'lb'</pre>
+  <pre> measurement identifiers for a &#039;pound&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_METER">SRA_UTIL_MEASUREMENT_METER</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_METER</b> = 'm'</pre>
+  <pre> measurement identifiers for a &#039;meter&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_MILE">SRA_UTIL_MEASUREMENT_MILE</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_MILE</b> = 'mi'</pre>
+  <pre> measurement identifiers for a &#039;mile&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_PARAMS_NO_TYPE">SRA_PARAMS_NO_TYPE</h3>
+  <pre>string <b>SRA_PARAMS_NO_TYPE</b> = 'no-type'</pre>
+  <pre> keyword used to identify params with NO type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Params.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_CMDS_INVALID_USER">SRA_UTIL_SU_CMDS_INVALID_USER</h3>
+  <pre>string <b>SRA_UTIL_SU_CMDS_INVALID_USER</b> = 'not exist'</pre>
+  <pre> string token that identifies an invalid user in SRA_Util::suCmds
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_OUNCE">SRA_UTIL_MEASUREMENT_OUNCE</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_OUNCE</b> = 'oz'</pre>
+  <pre> measurement identifiers for an &#039;ounce&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_RESOURCE_BUNDLE_FILE_EXT">SRA_RESOURCE_BUNDLE_FILE_EXT</h3>
+  <pre>public String <b>SRA_RESOURCE_BUNDLE_FILE_EXT</b> = 'properties'</pre>
+  <pre> the file extension for properties files
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_ResourceBundle.php</p>
+ <hr />  <h3 id="constant_SRA_COUNTRY_PROVINCES_PREFIX">SRA_COUNTRY_PROVINCES_PREFIX</h3>
+  <pre>String <b>SRA_COUNTRY_PROVINCES_PREFIX</b> = 'provinces-'</pre>
+  <pre> the prefix for the country specific provinces properties files
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Country.php</p>
+ <hr />  <h3 id="constant_SRA_INSTALLER_QUICK_INSTALL">SRA_INSTALLER_QUICK_INSTALL</h3>
+  <pre>string <b>SRA_INSTALLER_QUICK_INSTALL</b> = 'quick-install.php'</pre>
+  <pre> the name of the application specific quick installer script used by the
+  quickInstall method. this script is executed BEFORE the application is
+  initialized
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_Installer.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_ROOT">SRA_UTIL_ROOT</h3>
+  <pre>string <b>SRA_UTIL_ROOT</b> = 'root'</pre>
+  <pre> the root username
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_NAME">SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_NAME</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_RELEASE_FILE_NAME</b> = 'sierra'</pre>
+  <pre> the default name for a framework release
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_FrameworkInstaller.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_DEFAULT_COUNTRY">SRA_LOCALE_DEFAULT_COUNTRY</h3>
+  <pre>public String <b>SRA_LOCALE_DEFAULT_COUNTRY</b> = 'us'</pre>
+  <pre> the default country to use if one is not specified in the getLocale method or
+  if the country specified is not configured in the locales xml file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_YARD">SRA_UTIL_MEASUREMENT_YARD</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_YARD</b> = 'yd'</pre>
+  <pre> measurement identifiers for a &#039;yard&#039;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_URL_SAFE_REGEX">SRA_UTIL_URL_SAFE_REGEX</h3>
+  <pre>string <b>SRA_UTIL_URL_SAFE_REGEX</b> = '|[^\w-_\.]|'</pre>
+  <pre> regular expression used to strip out non-url-safe characters
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_YEAR">SRA_GREGORIAN_DATE_UNIT_YEAR</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_YEAR</b> = -2</pre>
+  <pre> used by the jump method to identify a jump unit of 1 year
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_USE_SYS_CONFIG_DEBUG">SRA_UTIL_USE_SYS_CONFIG_DEBUG</h3>
+  <pre>int <b>SRA_UTIL_USE_SYS_CONFIG_DEBUG</b> = -2</pre>
+  <pre> The value to use in the printDebug method to identify that the system debug flag should be used
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_MONTH">SRA_GREGORIAN_DATE_UNIT_MONTH</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_MONTH</b> = -1</pre>
+  <pre> used by the jump method to identify a jump unit of 1 month
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_UTIL_USE_APP_CONFIG_DEBUG">SRA_UTIL_USE_APP_CONFIG_DEBUG</h3>
+  <pre>int <b>SRA_UTIL_USE_APP_CONFIG_DEBUG</b> = -1</pre>
+  <pre> The value to use in the printDebug method to identify that the app debug flag should be used
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Util.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_SECOND">SRA_GREGORIAN_DATE_UNIT_SECOND</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_SECOND</b> = 1</pre>
+  <pre> used by the jump method to identify a jump unit of 1 second
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_ADDRESS_FORMAT_MAX_COLS">SRA_ADDRESS_FORMAT_MAX_COLS</h3>
+  <pre>int <b>SRA_ADDRESS_FORMAT_MAX_COLS</b> = 3</pre>
+  <pre> the max columns for any address format
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_AddressFormat.php</p>
+ <hr />  <h3 id="constant_SRA_ADDRESS_FORMAT_MAX_ROWS">SRA_ADDRESS_FORMAT_MAX_ROWS</h3>
+  <pre>int <b>SRA_ADDRESS_FORMAT_MAX_ROWS</b> = 5</pre>
+  <pre> the max rows for any address format
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_AddressFormat.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP">SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP</b> = 6</pre>
+  <pre> the number of hours to limit relative time usage for in the &quot;format&quot; method
+  when the format string is &quot;RT&quot;
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_CACHE_GC_INTERVAL">SRA_CACHE_GC_INTERVAL</h3>
+  <pre>int <b>SRA_CACHE_GC_INTERVAL</b> = 30</pre>
+  <pre> the interval to use for cache garbage collection (seconds)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Cache.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_MINUTE">SRA_GREGORIAN_DATE_UNIT_MINUTE</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_MINUTE</b> = 60</pre>
+  <pre> used by the jump method to identify a jump unit of 1 minute
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_POP3_LOGIN_DEFAULT_PORT">SRA_POP3_LOGIN_DEFAULT_PORT</h3>
+  <pre><b>SRA_POP3_LOGIN_DEFAULT_PORT</b> = 110</pre>
+  <pre> the default pop3 login tcp/ip port
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Pop3Login.php</p>
+ <hr />  <h3 id="constant_SRA_CACHE_GC_MAX_LOCK">SRA_CACHE_GC_MAX_LOCK</h3>
+  <pre>int <b>SRA_CACHE_GC_MAX_LOCK</b> = 300</pre>
+  <pre> the maximum amount of time that the garbage collector can be locked (seconds)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Cache.php</p>
+ <hr />  <h3 id="constant_SRA_API_GENERATOR_DEFAULT_CACHE_TTL">SRA_API_GENERATOR_DEFAULT_CACHE_TTL</h3>
+  <pre>int <b>SRA_API_GENERATOR_DEFAULT_CACHE_TTL</b> = 300</pre>
+  <pre> the default cache TTL for api metadata
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_ApiGenerator.php</p>
+ <hr />  <h3 id="constant_SRA_POP3_LOGIN_DEFAULT_PORT_TLS">SRA_POP3_LOGIN_DEFAULT_PORT_TLS</h3>
+  <pre><b>SRA_POP3_LOGIN_DEFAULT_PORT_TLS</b> = 995</pre>
+  <pre> the default pop3 login tcp/ip port for tls connections
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Pop3Login.php</p>
+ <hr />  <h3 id="constant_SRA_SCHEDULER_TASK_LOCK_MAX_MINS">SRA_SCHEDULER_TASK_LOCK_MAX_MINS</h3>
+  <pre>int <b>SRA_SCHEDULER_TASK_LOCK_MAX_MINS</b> = 1440</pre>
+  <pre> the max # of minutes to allow a task to be locked
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_SchedulerTask.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_HOUR">SRA_GREGORIAN_DATE_UNIT_HOUR</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_HOUR</b> = 3600</pre>
+  <pre> used by the jump method to identify a jump unit of 1 hour
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_DAY">SRA_GREGORIAN_DATE_UNIT_DAY</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_DAY</b> = 86400</pre>
+  <pre> used by the jump method to identify a jump unit of 1 day
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_WEEK">SRA_GREGORIAN_DATE_UNIT_WEEK</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_WEEK</b> = 604800</pre>
+  <pre> used by the jump method to identify a jump unit of 1 week
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_GregorianDate.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_DEBUG">SRA_CURRENCY_DEBUG</h3>
+  <pre>public boolean <b>SRA_CURRENCY_DEBUG</b> = FALSE</pre>
+  <pre> SRA_Currency object debug flag
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_RESOURCE_BUNDLE_DEBUG">SRA_RESOURCE_BUNDLE_DEBUG</h3>
+  <pre>public boolean <b>SRA_RESOURCE_BUNDLE_DEBUG</b> = FALSE</pre>
+  <pre> SRA_ResourceBundle object debug flag
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_ResourceBundle.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_DEBUG">SRA_LOCALE_DEBUG</h3>
+  <pre>public boolean <b>SRA_LOCALE_DEBUG</b> = FALSE</pre>
+  <pre> SRA_Locale object debug flag
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_RESOURCE_BUNDLE_AUTO_TRANSLATE">SRA_RESOURCE_BUNDLE_AUTO_TRANSLATE</h3>
+  <pre>public boolean <b>SRA_RESOURCE_BUNDLE_AUTO_TRANSLATE</b> = FALSE</pre>
+  <pre> Whether or not non-translated resource bundle properties files should be
+  automatically transferred and cached when requested. Be very careful with this
+  option as this may seriously slow down your system if you have large
+  non-translated properties files. If this is the case, you should convert your
+  files using the {SRA_DIR}/bin/l10n_file_translator.php utility.
+  (see SRA_ResourceBundle api for more info)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_ResourceBundle.php</p>
+ <hr />  <h3 id="constant_SRA_CACHE_DEBUG">SRA_CACHE_DEBUG</h3>
+  <pre>boolean <b>SRA_CACHE_DEBUG</b> = FALSE</pre>
+  <pre> debug flag (debug message are output to error logging)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_Cache.php</p>
+ <hr />  <h3 id="constant_SRA_XMLPARSER_DEBUG">SRA_XMLPARSER_DEBUG</h3>
+  <pre>public String <b>SRA_XMLPARSER_DEBUG</b> = FALSE</pre>
+  <pre> SRA_XmlParser class debug flag
+ 
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_XmlParser.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_DEFAULT">SRA_CURRENCY_DEFAULT</h3>
+  <pre>public String <b>SRA_CURRENCY_DEFAULT</b> = SRA_CURRENCY_US</pre>
+  <pre> The system currency. All persistent values will be stored using this
+  currency. A system may only utilize 1 sys currency.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_FILE_CACHE_DIR">SRA_FILE_CACHE_DIR</h3>
+  <pre>public String <b>SRA_FILE_CACHE_DIR</b> = SRA_DIR . "/tmp"</pre>
+  <pre> The location where the cache csv arrays should be stored.
+ 
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_File.php</p>
+ <hr />  <h3 id="constant_SRA_SCHEDULER_TASK_FORK_SCRIPT">SRA_SCHEDULER_TASK_FORK_SCRIPT</h3>
+  <pre>string <b>SRA_SCHEDULER_TASK_FORK_SCRIPT</b> = SRA_DIR . '/bin/sra-task-fork.php'</pre>
+  <pre> the path to the fork script
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_SchedulerTask.php</p>
+ <hr />  <h3 id="constant_SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG">SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG</h3>
+  <pre>string <b>SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG</b> = SRA_INSTALLER_FRAMEWORK_DIR . '/etc/' . SRA_INSTALLER_CONFIG_FILE_NAME</pre>
+  <pre> path to the framework installer confuration file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_Installer.php</p>
+ <hr />  <h3 id="constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR">SRA_INSTALLER_FRAMEWORK_TMP_DIR</h3>
+  <pre>string <b>SRA_INSTALLER_FRAMEWORK_TMP_DIR</b> = SRA_INSTALLER_FRAMEWORK_DIR . '/tmp'</pre>
+  <pre> the framework temp directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_Installer.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_DEFAULT_LOCALE">SRA_LOCALE_DEFAULT_LOCALE</h3>
+  <pre>public String <b>SRA_LOCALE_DEFAULT_LOCALE</b> = SRA_LOCALE_US</pre>
+  <pre> the default country to use if one is not specified in the getLocale method
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_TIME_ZONE_ZONETAB_PATH">SRA_TIME_ZONE_ZONETAB_PATH</h3>
+  <pre>string <b>SRA_TIME_ZONE_ZONETAB_PATH</b> = SRA_TIME_ZONE_ZONEINFO_PATH . '/zone.tab'</pre>
+  <pre> the path to the zone.tab file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_TimeZone.php</p>
+ <hr />  <h3 id="constant_SRA_INSTALLER_FRAMEWORK_DIR">SRA_INSTALLER_FRAMEWORK_DIR</h3>
+  <pre>string <b>SRA_INSTALLER_FRAMEWORK_DIR</b> = dirname(dirname(dirname(dirname(__FILE__))))</pre>
+  <pre> the base directory for the framework
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/installer/SRA_Installer.php</p>
+ <hr />  <h3 id="constant_SRA_FILE_DEBUG">SRA_FILE_DEBUG</h3>
+  <pre>public boolean <b>SRA_FILE_DEBUG</b> = false</pre>
+  <pre> Specifies whether or not the SRA_File class should operate in debug mode (outputs what it is doing to
+  the active console window).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/SRA_File.php</p>
+ <hr />  <h3 id="constant_SRA_ADDRESS_FORMAT_XML_DATA_FILE">SRA_ADDRESS_FORMAT_XML_DATA_FILE</h3>
+  <pre>String <b>SRA_ADDRESS_FORMAT_XML_DATA_FILE</b> = file_exists(SRA_CONF_DIR . '/l10n/address-formats.xml') ? SRA_CONF_DIR . '/l10n/address-formats.xml' : SRA_CONF_DIR . '/l10n/address-formats-default.xml'</pre>
+  <pre> the location of the SRA_AddressFormat xml definition file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_AddressFormat.php</p>
+ <hr />  <h3 id="constant_SRA_CURRENCY_XML_DATA_FILE">SRA_CURRENCY_XML_DATA_FILE</h3>
+  <pre>public String <b>SRA_CURRENCY_XML_DATA_FILE</b> = file_exists(SRA_CONF_DIR . '/l10n/currencies.xml') ? SRA_CONF_DIR . '/l10n/currencies.xml' : SRA_CONF_DIR . '/l10n/currencies-default.xml'</pre>
+  <pre> The location of the SRA_Currency xml definition file.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</p>
+ <hr />  <h3 id="constant_SRA_LOCALE_XML_DATA_FILE">SRA_LOCALE_XML_DATA_FILE</h3>
+  <pre>public String <b>SRA_LOCALE_XML_DATA_FILE</b> = file_exists(SRA_CONF_DIR . '/l10n/locales.xml') ? SRA_CONF_DIR . '/l10n/locales.xml' : SRA_CONF_DIR . '/l10n/locales-default.xml'</pre>
+  <pre> The location of the SRA_Locale xml definition file.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</p>
+ <hr />  <h3 id="constant_SRA_RESOURCE_BUNDLE_DEFAULT_SYS_BUNDLE_NAME">SRA_RESOURCE_BUNDLE_DEFAULT_SYS_BUNDLE_NAME</h3>
+  <pre>public String <b>SRA_RESOURCE_BUNDLE_DEFAULT_SYS_BUNDLE_NAME</b> = file_exists(SRA_DIR . SRA_RESOURCE_BUNDLE_DEFAULT_RELATIVE_DIR . '/sierra.properties') ? 'sierra' : 'sierra-default'</pre>
+  <pre> The default name for a system resource bundle file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/util/l10n/SRA_ResourceBundle.php</p>
+  </form>
+</body>
+</html>

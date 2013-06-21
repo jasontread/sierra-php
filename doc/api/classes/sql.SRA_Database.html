@@ -1,0 +1,2575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>sql.SRA_Database - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_db_date_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_DATE_FORMAT'] = "SRA_DB_DATE_FORMAT";
+  }
+  if ("sra_db_time_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TIME_FORMAT'] = "SRA_DB_TIME_FORMAT";
+  }
+  if ("_sra_db_connection_closed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant__SRA_DB_CONNECTION_CLOSED'] = "_SRA_DB_CONNECTION_CLOSED";
+  }
+  if ("_sra_db_connection_error".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant__SRA_DB_CONNECTION_ERROR'] = "_SRA_DB_CONNECTION_ERROR";
+  }
+  if ("_sra_db_connection_open".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant__SRA_DB_CONNECTION_OPEN'] = "_SRA_DB_CONNECTION_OPEN";
+  }
+  if ("sra_db_default_host".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_DEFAULT_HOST'] = "SRA_DB_DEFAULT_HOST";
+  }
+  if ("sra_db_type_mssql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TYPE_MSSQL'] = "SRA_DB_TYPE_MSSQL";
+  }
+  if ("sra_db_type_mysql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TYPE_MYSQL'] = "SRA_DB_TYPE_MYSQL";
+  }
+  if ("sra_db_type_postgresql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TYPE_POSTGRESQL'] = "SRA_DB_TYPE_POSTGRESQL";
+  }
+  if ("sra_db_type_sqlite".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TYPE_SQLITE'] = "SRA_DB_TYPE_SQLITE";
+  }
+  if ("sra_db_bool_false_vals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_BOOL_FALSE_VALS'] = "SRA_DB_BOOL_FALSE_VALS";
+  }
+  if ("sra_db_bool_false".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_BOOL_FALSE'] = "SRA_DB_BOOL_FALSE";
+  }
+  if ("sra_db_bool_true_vals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_BOOL_TRUE_VALS'] = "SRA_DB_BOOL_TRUE_VALS";
+  }
+  if ("sra_db_bool_true".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_BOOL_TRUE'] = "SRA_DB_BOOL_TRUE";
+  }
+  if ("sra_db_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_DEBUG'] = "SRA_DB_DEBUG";
+  }
+
+  // check attributes
+  if ("_boolfalsevals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__boolFalseVals'] = "_boolFalseVals";
+  }
+  if ("_boolfalse".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__boolFalse'] = "_boolFalse";
+  }
+  if ("_booltruevals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__boolTrueVals'] = "_boolTrueVals";
+  }
+  if ("_booltrue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__boolTrue'] = "_boolTrue";
+  }
+  if ("_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__config'] = "_config";
+  }
+  if ("_dbs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dbs'] = "_dbs";
+  }
+  if ("_intransaction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__inTransaction'] = "_inTransaction";
+  }
+  if ("_fetchcache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fetchCache'] = "_fetchCache";
+  }
+  if ("_timezone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__timeZone'] = "_timeZone";
+  }
+
+  // check methods
+  if ("sra_database".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_Database'] = "SRA_Database";
+  }
+  if ("applylimitandoffset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_applyLimitAndOffset'] = "applyLimitAndOffset";
+  }
+  if ("clearcache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_clearCache'] = "clearCache";
+  }
+  if ("close".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_close'] = "close";
+  }
+  if ("commit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_commit'] = "commit";
+  }
+  if ("convert".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convert'] = "convert";
+  }
+  if ("convertblob".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertBlob'] = "convertBlob";
+  }
+  if ("convertboolean".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertBoolean'] = "convertBoolean";
+  }
+  if ("convertdate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertDate'] = "convertDate";
+  }
+  if ("converttime".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertTime'] = "convertTime";
+  }
+  if ("convertfloat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertFloat'] = "convertFloat";
+  }
+  if ("convertint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertInt'] = "convertInt";
+  }
+  if ("converttext".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertText'] = "convertText";
+  }
+  if ("execute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_execute'] = "execute";
+  }
+  if ("fetch".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_fetch'] = "fetch";
+  }
+  if ("getcolumndefinition".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getColumnDefinition'] = "getColumnDefinition";
+  }
+  if ("getqueryvalue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getQueryValue'] = "getQueryValue";
+  }
+  if ("gettabledefinition".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTableDefinition'] = "getTableDefinition";
+  }
+  if ("getrecordcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getRecordCount'] = "getRecordCount";
+  }
+  if ("_getappdbconnection".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getAppDbConnection'] = "_getAppDbConnection";
+  }
+  if ("getnextsequence".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getNextSequence'] = "getNextSequence";
+  }
+  if ("getdefaultport".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDefaultPort'] = "getDefaultPort";
+  }
+  if ("importfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_importFile'] = "importFile";
+  }
+  if ("isintransaction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isInTransaction'] = "isInTransaction";
+  }
+  if ("istype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isType'] = "isType";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("parsequery".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_parseQuery'] = "parseQuery";
+  }
+  if ("reverseparsequery".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_reverseParseQuery'] = "reverseParseQuery";
+  }
+  if ("unconvertboolean".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_unconvertBoolean'] = "unconvertBoolean";
+  }
+  if ("_openconn".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__openConn'] = "_openConn";
+  }
+  if ("processcommit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_processCommit'] = "processCommit";
+  }
+  if ("processnextsequence".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_processNextSequence'] = "processNextSequence";
+  }
+  if ("processrollback".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_processRollback'] = "processRollback";
+  }
+  if ("processupdate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_processUpdate'] = "processUpdate";
+  }
+  if ("recordcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_recordCount'] = "recordCount";
+  }
+  if ("rollback".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_rollback'] = "rollback";
+  }
+  if ("starttransaction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_startTransaction'] = "startTransaction";
+  }
+  if ("starttransactions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_startTransactions'] = "startTransactions";
+  }
+  if ("_fetchincache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__fetchInCache'] = "_fetchInCache";
+  }
+  if ("_addfetchtocache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__addFetchToCache'] = "_addFetchToCache";
+  }
+  if ("_getfetchcacheparams".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getFetchCacheParams'] = "_getFetchCacheParams";
+  }
+  if ("getbooleanarray".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getBooleanArray'] = "getBooleanArray";
+  }
+  if ("getdatabase".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDatabase'] = "getDatabase";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_Database</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/sql.html" target="contentFrame">sql</a></p>  <h2>Known Direct Subclasses</h2>
+<a href="sql.SRA_DatabaseMsSql.html" target="contentFrame">SRA_DatabaseMsSql</a>, <a href="sql.SRA_DatabaseMySql.html" target="contentFrame">SRA_DatabaseMySql</a>, <a href="sql.SRA_DatabasePostgreSql.html" target="contentFrame">SRA_DatabasePostgreSql</a>, <a href="sql.SRA_DatabaseSqLite.html" target="contentFrame">SRA_DatabaseSqLite</a>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_Database</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> This abstract class is used for DB abstraction.
+  A SRA_Database wrapper class used to encapsulate database specific
+  functions and methods. Because this is an abstract class it will never
+  be instantiated by itself, but rather child SRA_Database* objects will be
+  instantiated which contain specific functionality for one database
+  server type.
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_DATE_FORMAT">SRA_DB_DATE_FORMAT</a></pre>
+<pre> Constant that identifies the default date format that should be used
+  when inserting into date type columns. Child SRA_Database* objects may or
+  may not use this same format. If they do not, they must have and use their
+  own constant identifying this value.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TIME_FORMAT">SRA_DB_TIME_FORMAT</a></pre>
+<pre> Constant that identifies the default date/time format that should be used
+  when inserting into timestamp type columns. Child SRA_Database* objects may or
+  may not use this same format. If they do not, they must have and use their
+  own constant identifying this value.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#constant__SRA_DB_CONNECTION_CLOSED">_SRA_DB_CONNECTION_CLOSED</a></pre>
+<pre> Identifies (for internal SRA_Database class use only) that an database
+  server&#039;s connection status is currently closed.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#constant__SRA_DB_CONNECTION_ERROR">_SRA_DB_CONNECTION_ERROR</a></pre>
+<pre> Identifies (for internal SRA_Database class use only) that a database server
+  is currently in an error status (cannot be used).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#constant__SRA_DB_CONNECTION_OPEN">_SRA_DB_CONNECTION_OPEN</a></pre>
+<pre> Identifies (for internal SRA_Database class use only) that an database
+  server&#039;s connection status is currently open.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_DEFAULT_HOST">SRA_DB_DEFAULT_HOST</a></pre>
+<pre> the default db host
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TYPE_MSSQL">SRA_DB_TYPE_MSSQL</a></pre>
+<pre> Constant that identifies database objects of type mssql.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TYPE_MYSQL">SRA_DB_TYPE_MYSQL</a></pre>
+<pre> Constant that identifies database objects of type mysql.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TYPE_POSTGRESQL">SRA_DB_TYPE_POSTGRESQL</a></pre>
+<pre> Constant that identifies database objects of type postgresql.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TYPE_SQLITE">SRA_DB_TYPE_SQLITE</a></pre>
+<pre> Constant that identifies database objects of type sqlite.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_BOOL_FALSE_VALS">SRA_DB_BOOL_FALSE_VALS</a></pre>
+<pre> the default values for boolean FALSE data types (the first value is the value
+  that will be inserted into columns of that type. for more information, see
+  the &quot;db&quot; element &quot;boolean-false&quot; and &quot;boolean-true&quot; attribute definitions in
+  sierra-config*.dtd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_BOOL_FALSE">SRA_DB_BOOL_FALSE</a></pre>
+<pre> the default PHP representation for boolean FALSE values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_BOOL_TRUE_VALS">SRA_DB_BOOL_TRUE_VALS</a></pre>
+<pre> same as SRA_DB_BOOL_FALSE_VALS for TRUE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_BOOL_TRUE">SRA_DB_BOOL_TRUE</a></pre>
+<pre> the default PHP representation for boolean TRUE values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_DEBUG">SRA_DB_DEBUG</a></pre>
+<pre> Debug constant
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private array </pre></td>
+      <td>
+        <pre><a href="#attr__boolFalseVals">_boolFalseVals</a></pre>
+<pre> values for boolean FALSE
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private mixed </pre></td>
+      <td>
+        <pre><a href="#attr__boolFalse">_boolFalse</a></pre>
+<pre> PHP representation for boolean FALSE
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private array </pre></td>
+      <td>
+        <pre><a href="#attr__boolTrueVals">_boolTrueVals</a></pre>
+<pre> values for boolean TRUE
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private mixed </pre></td>
+      <td>
+        <pre><a href="#attr__boolTrue">_boolTrue</a></pre>
+<pre> PHP representation for boolean TRUE
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected string[] </pre></td>
+      <td>
+        <pre><a href="#attr__config">_config</a></pre>
+<pre> See the sierra-conf.dtd for more details
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private Object[] </pre></td>
+      <td>
+        <pre><a href="#attr__dbs">_dbs</a></pre>
+<pre> This attribute references the connections to database servers for
+  this database object. If more than 1 read-write database server is
+  provided in the _config attribute, this array will be instantiated
+  and handled based on the replication options specified in the
+  _replicationOptions attribute.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected boolean </pre></td>
+      <td>
+        <pre><a href="#attr__inTransaction">_inTransaction</a></pre>
+<pre> This attribute is used to keep track of whether or not the SRA_Database
+  object is currently in the middle of a transaction. This attribute
+  may affect the behavior of the SRA_Database*::execute method calls
+  (dependent on the SRA_Database type). For more info see the
+  startTransactin and commit method api.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected array </pre></td>
+      <td>
+        <pre><a href="#attr__fetchCache">_fetchCache</a></pre>
+<pre> Used to store fetch table cache
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> </pre></td>
+      <td>
+        <pre><a href="#attr__timeZone">_timeZone</a></pre>
+<pre> The SRA_TimeZone to use for Date* types
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_Database">SRA_Database</a>()</pre>
+<pre> do NOT instantiate this, or any of the SRA_Database* classes directly.
+  instead, use the singleton SRA_Database::getDatabase method to obtain a
+  reference
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_applyLimitAndOffset">applyLimitAndOffset</a>(string $query, int $limit, int $offset)</pre>
+<pre> Returns the query properly formatted with LIMIT and OFFSET sql
+  constraints if valid and specified
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method_clearCache">clearCache</a>()</pre>
+<pre> clears any query cache in the database instance
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_close">close</a>()</pre>
+<pre> Closes all of the db connections, release all resources. To close
+  the database connections this method calls the child closeConn
+  method for every databases connection in the _dbs
+  arrays. This method returns an SRA_Error object if any errors occur.
+  Otherwise it returns nothing.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_commit">commit</a>(object $conn=NULL)</pre>
+<pre> Abstract method that commits the database changes done during a
+  transaction that is in progress. This method MUST be implemented in
+  the child SRA_Database* classes.One important element in this method is
+  that, similiar to the SRA_Database*::execute/SRA_Database::processUpdate
+  methods, this is a pass up - pass down query. This means that the
+  SRA_Database* method will initially be called (with no conn parameter
+  specified). This method will then simply call (and return) the
+  SRA_Database::processCommit method (which in turn will call the
+  SRA_Database*::commit method with the conn parameter specified for each
+  of the replication servers).
+ 
+  This method MUST set the _inTransaction flag to FALSE
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convert">convert</a>(string $type, mixed $data)</pre>
+<pre> generic convert method. this simply makes a passthru call to the correct
+  convert* method based on the $type specified. this method does not need
+  to be overriden by subclasses
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertBlob">convertBlob</a>(string $blob)</pre>
+<pre> Convert a blob to the underlying db type. Call this method to
+  prepare blob values for insertion. Returns an SRA_Error object if the
+  blob parameter is not a blob. This is an abstract method that must
+  be implemented by the child SRA_Database* classes.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertBoolean">convertBoolean</a>(boolean $bool)</pre>
+<pre> Convert a boolean to the underlying db type. Call this method to
+  prepare boolean values for insertion. for more information, see the &quot;db&quot; element
+  &quot;boolean-false&quot; and &quot;boolean-true&quot; attribute definitions in sierra-config*.dtd
+  this method can be overriden by the corresponding db implementation
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertDate">convertDate</a>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $dateTime)</pre>
+<pre> Convert a dateOnly SRA_GregorianDate object into a database readable
+  string. This format is required for insertion into the database. this is an
+  abstract method that must be implemented by the child SRA_Database*
+  classes. This method returns an SRA_Error object if the $dateTime parameter
+  is not a valid SRA_GregorianDate object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertTime">convertTime</a>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $dateTime)</pre>
+<pre> Convert a date/time SRA_GregorianDate object into a database readable
+  string using the db timezone. This format is required for insertion into
+  the database. this is an abstract method that must be implemented by the
+  child SRA_Database* classes. This method returns an SRA_Error object if the
+  $dateTime parameter is not a valid SRA_GregorianDate object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertFloat">convertFloat</a>(float $value)</pre>
+<pre> Convert a Float to the underlying db type. Call this method to
+  prepare Float values for insertion. Returns an SRA_Error if the float
+  parameter is not a number. This is an abstract method that must be
+  implemented by the child SRA_Database* classes.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertInt">convertInt</a>(int $value)</pre>
+<pre> Added for consistency between types. No actual conversion is necessary
+  for an Integer so this method simply returns the value passed. If a
+  subclass requires any conversion, this method can be overriden.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertText">convertText</a>(string $text)</pre>
+<pre> Convert a text string to the underlying db string type. Escape any
+  characters that would crash the query. Call this method to prepare
+  text values for insertion. This is an abstract method that must be
+  implemented by the child SRA_Database* classes.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="sql.SRA_ExecuteSet.html" target="contentFrame">SRA_ExecuteSet</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_execute">execute</a>(string $query, string $incCol=FALSE, int $errorLevel=SRA_ERROR_PROBLEM, object $conn=NULL)</pre>
+<pre> Abstract method used to executes a SQL query. If an error occurs
+  during execution, this method will log a new error with the SQL
+  query as part of the error message, and return an error object.
+  Otherwise it returns an SRA_ExecuteSet object which will contain the
+  number of rows affected by the query and possibly the
+  sequenceColumn value is this is an insert query and an auto
+  incremental column is being used (see SRA_Database::execute::query api
+  for more detail). This method is used with queries that don&#039;t
+  return a result set / RecordSet object. Because this method is
+  abstract, it MUST be implemented by the child SRA_Database* object.
+  This method also will either auto commit the query, or buffer it
+  based on what is specified by the _autoCommit attribute.
+ 
+  The basic flow of a SRA_Database*::execute method is that it is called
+  by another class (db parameter is null), this method calls the
+  parent::processUpdate method, this method then runs the update
+  query (by calling the child execute method with a db connection
+  parameter specified) for each of the active replication servers. It
+  then returns either the number of records affected (as returned by
+  the first execute call), or an SRA_Error object (if returned by all
+  execute calls). If an SRA_Error occurs, the query will be written to a
+  buffer file for future processing. If a buffer file already exists
+  for any db server, the query will be written directly to that file
+  (execute will not be called at all). Buffer files are routinely
+  processed by the BGP and deleted when successful (when db server
+  accepts all queries).
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="sql.SRA_ResultSet.html" target="contentFrame">SRA_ResultSet</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_fetch">fetch</a>(string $query, array $types=NULL, int $limit=FALSE, int $offset=FALSE, boolean $getActualCount=TRUE, int $errorLevel=SRA_ERROR_PROBLEM)</pre>
+<pre> This abstract method executes a SQL query when implemented by a child
+  SRA_Database* class. If an error occurs during execution, this method will
+  log a new error with the SQL query as part of the error message, and
+  return an error object. Otherwise it returns a reference to a RecordSet
+  object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getColumnDefinition">getColumnDefinition</a>(<a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $table, <a href="model.SRA_SchemaColumn.html" target="contentFrame">SRA_SchemaColumn</a> $column, boolean $dbRefIntegrity=TRUE, boolean $addCheckConstraint=TRUE)</pre>
+<pre> provides an sql statement defining the data type, constraints, and
+  referential integrity (optional) for a given SRA_SchemaColumn. this method
+  may be implemented by each of the underlying database types if the
+  default MYSQL implementation does not suffice
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getQueryValue">getQueryValue</a>(<a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> $db, string $query, string $type=SRA_DATA_TYPE_STRING)</pre>
+<pre> used to retrieve a single query value. returns NULL if the query does not
+  return a row
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getTableDefinition">getTableDefinition</a>(<a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $table, boolean $dbRefIntegrity=TRUE)</pre>
+<pre> provides an sql statement defining the constraints for a given
+  SRA_SchemaTable. this method may be implemented by each of the underlying
+  database types if the default implementation does not suffice
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getRecordCount">getRecordCount</a>(<a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> $db, string $query)</pre>
+<pre> returns total # of records returned for a given query
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected object</pre></td>
+      <td>
+        <pre><a href="#method__getAppDbConnection">_getAppDbConnection</a>(string $query='')</pre>
+<pre> This method is called by the child SRA_Database* classes to retrieve a
+  database connection to utilize for a query. This method manages all
+  of the connections as well as replication. This method will also
+  run the additional execute queries if the application side updates
+  are enabled for replication (i.e. returns first read-write database
+  object, then opens connection to remaining read-write servers, and
+  executes the query for each of those servers by calling the child
+  SRA_Database*::execute method).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getNextSequence">getNextSequence</a>(string $sequence, int $errorLevel=SRA_ERROR_PROBLEM, object $conn=FALSE)</pre>
+<pre> Abstract method used to return the next sequence value from the database sequence specified.
+  If an error occurs during execution, this method will log a new error with the SQL query as
+  part of the error message, and return an error object. Otherwise it returns an integer value
+  representing the next sequence value. Because this method is abstract, it MUST be implemented
+  by the child SRA_Database* object. This method also will either auto commit the query, or buffer
+  it based on what is specified by the _autoCommit attribute. See the SRA_Database::execute api for
+  more details on the flow of the nextSequence methods.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getDefaultPort">getDefaultPort</a>(string $dbType)</pre>
+<pre> Static method that returns the default port for the database type
+  specified
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_importFile">importFile</a>(string $fileName, string $tableName, boolean $deleteFile=TRUE, string $delimiter=", $")</pre>
+<pre> This method is abstract and as such must be implemented by the child SRA_Database classes. Some database
+  types may not support this method. Please view the child SRA_Database object api for this method before
+  using it. This method imports a delimited file into a database table using the parameters specified.
+  This method returns an SRA_Error object if the file import is not successful.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isInTransaction">isInTransaction</a>()</pre>
+<pre> Returns a boolean value specifying if the SRA_Database object is currently in a transaction.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isType">isType</a>(int $type)</pre>
+<pre> returns TRUE if this SRA_Database instance is of the type specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(object $object)</pre>
+<pre> Static method that returns TRUE if the object parameter references a
+  valid SRA_Database object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static array</pre></td>
+      <td>
+        <pre><a href="#method_parseQuery">parseQuery</a>(string $query)</pre>
+<pre> parses a query and returns it in the following format:
+    array(&#039;select&#039; =&gt; array(&#039;column1&#039; =&gt; &#039;column1 alias&#039;, ... ,&#039;columnN&#039; =&gt; &#039;columnN alias&#039;),
+          &#039;from&#039;   =&gt; array(&#039;table1&#039;  =&gt; &#039;table1 alias&#039;, ... , &#039;tableN&#039;  =&gt; &#039;tableN alias&#039;),
+          &#039;fromConstraint&#039; =&gt; array(&#039;tableN&#039; =&gt; &#039;[if a JOIN was used, the method used for the join. this should be used in place of adding tableN to the FROM clause]&#039;),
+          &#039;constraint&#039; =&gt; &#039;[everything that is part of the WHERE clause (if applicable)]&#039;,
+          &#039;orderConstraint&#039; =&gt; [everything after the WHERE clause (i.e. ORDER BY...)])
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static string</pre></td>
+      <td>
+        <pre><a href="#method_reverseParseQuery">reverseParseQuery</a>(array $parseResults, boolean $includeOrderConstraint=TRUE)</pre>
+<pre> converts #parseQuery results into a query
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_unconvertBoolean">unconvertBoolean</a>(boolean $bool)</pre>
+<pre> Unconverts a boolean value from a database boolean data type column. if
+  the $bool value equals (===) any of the #_boolTrueVals or #_boolFalseVals
+  values for this database, the corresponding boolean value will be
+  returned, otherwise, NULL will be returned. this method can be overriden
+  by the corresponding db implementation
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected object</pre></td>
+      <td>
+        <pre><a href="#method__openConn">_openConn</a>(array $config)</pre>
+<pre> This method is used to open one connection to a database server. It
+  is called by the SRA_Database parent class in order to open needed
+  database connections. It returns either a connection object (if
+  successful) or an SRA_Error object if not.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_processCommit">processCommit</a>()</pre>
+<pre> This method is simliar in functionality to the
+  SRA_Database::processUpdate method. It is called by the
+  SRA_Database*::commit method in order to process all SRA_Database commits
+  (from the current transaction).  To accomplish this, this method
+  simply calls the SRA_Database*::commit method once for every
+  replication server.  If any of the commits fail, the entire
+  _queryBuffer is written to a buffer file for that database server
+  for future processing.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected void</pre></td>
+      <td>
+        <pre><a href="#method_processNextSequence">processNextSequence</a>(string $sequence, int $errorLevel)</pre>
+<pre> This method exists only in the SRA_Database class. It is used by the child
+  classes to distribute and process any sequence queries (queries to retrieve
+  a table sequence). The flow of this process is detailed in the
+  SRA_Database::getNextSequence api. Basically, this is the method that manages
+  these types of calls. This method is necessary in order to implement database
+  replication. This method is simply the gateway between the initial
+  SRA_Database*::getNextSequence method and the actual call to run the next sequence
+  query. SRA_Database*::getNextSequence.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected void</pre></td>
+      <td>
+        <pre><a href="#method_processRollback">processRollback</a>()</pre>
+<pre> This method is simliar in functionality to the
+  SRA_Database::processUpdate method. It is called by the
+  SRA_Database*::rollback method in order to process all SRA_Database
+  rollbacks (from the current transaction).  To accomplish this, this
+  method simply calls the SRA_Database*::rollback method once for every
+  replication server.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected <a href="sql.SRA_ExecuteSet.html" target="contentFrame">SRA_ExecuteSet</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_processUpdate">processUpdate</a>(string $query, string $incCol, int $errorLevel)</pre>
+<pre> This method exists only in the SRA_Database class. It is used by the
+  child classes to distribute and process any update queries
+  (INSERT/UPDATE/DELETE queries). The flow of this process is
+  detailed in the SRA_Database::execute api. Basically, this is the
+  method that manages any database updates. This method is necessary
+  in order to implement database replication. This method is simply
+  the gateway between the initial SRA_Database*::execute method and the
+  actual call to execute a query. SRA_Database*::execute calls
+  SRA_Database::processUpdate which calls SRA_Database*::execute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_recordCount">recordCount</a>(<a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> $db, string $table, array $vals=FALSE, string $constraint=FALSE)</pre>
+<pre> Returns the # of records that exist in a given database table for a
+  given criteria
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_rollback">rollback</a>(object $conn=NULL)</pre>
+<pre> Abstract method that cancels any database changes done during a
+  transaction that is in progress. This method must be implemented by
+  the child SRA_Database* classes. This method returns the
+  SRA_Database::processRollback method is the conn parameter is not
+  specified.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_startTransaction">startTransaction</a>(object $conn=NULL)</pre>
+<pre> This method will start a new transaction for the current database
+  connections. Since this action is database specific, this is an
+  abstract method that must be implemented by the SRA_Database* child
+  classes. One important element in this method is that, similiar to
+  the SRA_Database*::execute/SRA_Database::processUpdate methods, this is a
+  pass up - pass down query. This means that the SRA_Database* method
+  will initially be called (with no conn parameter specified). This
+  method will then simply call (and return) the
+  SRA_Database::startTransactions method (which in turn will call the
+  SRA_Database*::startTransaction method with the conn parameter
+  specified for each of the replication servers).
+ 
+  This method MUST set the _inTransaction flag to TRUE
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected void</pre></td>
+      <td>
+        <pre><a href="#method_startTransactions">startTransactions</a>()</pre>
+<pre> This method is the gateway for a child SRA_Database* object to be able
+  to start a transaction. Because the SRA_Database object manages
+  replication, all transactions (which imply update queries) must
+  pass through all of the replcation servers. Hence, it is necessary
+  to start a transaction on all of the database servers whenever a
+  transaction is needed.  This is accomplished by this method simply
+  calling the SRA_Database::startTransaction method for each of the
+  replication servers. See the SRA_Database::startTransaction api for
+  more info.  This method also rollsback any existing transaction.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected SRA_ResultSet (if cache exists) or FALSE otherwise</pre></td>
+      <td>
+        <pre>&amp;<a href="#method__fetchInCache">_fetchInCache</a>(string $query)</pre>
+<pre> This method is used to determine whether or not cache exists for a given
+  query based on the database &quot;table-cache&quot; configuration element
+  (see configuration description for more information)
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected void</pre></td>
+      <td>
+        <pre><a href="#method__addFetchToCache">_addFetchToCache</a>(string $query, <a href="sql.SRA_ResultSet.html" target="contentFrame">SRA_ResultSet</a> $results)</pre>
+<pre> This method is used to write the results of a fetch to cache (if cache
+  should be written at all)
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private mixed</pre></td>
+      <td>
+        <pre>&amp;<a href="#method__getFetchCacheParams">_getFetchCacheParams</a>(string $query)</pre>
+<pre> This method returns the cache parameters for a given query
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static array</pre></td>
+      <td>
+        <pre><a href="#method_getBooleanArray">getBooleanArray</a>(string $str)</pre>
+<pre> returns an array of possible boolean values based on the string specified
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getDatabase">getDatabase</a>($configs)</pre>
+<pre> singleton method for this class
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_DB_DATE_FORMAT">SRA_DB_DATE_FORMAT</h3>
+  <pre>public string <b>SRA_DB_DATE_FORMAT</b> = 'Y-m-d'</pre>
+  <pre> Constant that identifies the default date format that should be used
+  when inserting into date type columns. Child SRA_Database* objects may or
+  may not use this same format. If they do not, they must have and use their
+  own constant identifying this value.
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_TIME_FORMAT">SRA_DB_TIME_FORMAT</h3>
+  <pre>public string <b>SRA_DB_TIME_FORMAT</b> = 'Y-m-d H:i:s'</pre>
+  <pre> Constant that identifies the default date/time format that should be used
+  when inserting into timestamp type columns. Child SRA_Database* objects may or
+  may not use this same format. If they do not, they must have and use their
+  own constant identifying this value.
+</pre>
+ <hr />  <h3 id="constant__SRA_DB_CONNECTION_CLOSED">_SRA_DB_CONNECTION_CLOSED</h3>
+  <pre>private int <b>_SRA_DB_CONNECTION_CLOSED</b> = 1</pre>
+  <pre> Identifies (for internal SRA_Database class use only) that an database
+  server&#039;s connection status is currently closed.
+</pre>
+ <hr />  <h3 id="constant__SRA_DB_CONNECTION_ERROR">_SRA_DB_CONNECTION_ERROR</h3>
+  <pre>private int <b>_SRA_DB_CONNECTION_ERROR</b> = 2</pre>
+  <pre> Identifies (for internal SRA_Database class use only) that a database server
+  is currently in an error status (cannot be used).
+</pre>
+ <hr />  <h3 id="constant__SRA_DB_CONNECTION_OPEN">_SRA_DB_CONNECTION_OPEN</h3>
+  <pre>private int <b>_SRA_DB_CONNECTION_OPEN</b> = 4</pre>
+  <pre> Identifies (for internal SRA_Database class use only) that an database
+  server&#039;s connection status is currently open.
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_DEFAULT_HOST">SRA_DB_DEFAULT_HOST</h3>
+  <pre>string <b>SRA_DB_DEFAULT_HOST</b> = '127.0.0.1'</pre>
+  <pre> the default db host
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_TYPE_MSSQL">SRA_DB_TYPE_MSSQL</h3>
+  <pre>public string <b>SRA_DB_TYPE_MSSQL</b> = 'mssql'</pre>
+  <pre> Constant that identifies database objects of type mssql.
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_TYPE_MYSQL">SRA_DB_TYPE_MYSQL</h3>
+  <pre>public string <b>SRA_DB_TYPE_MYSQL</b> = 'mysql'</pre>
+  <pre> Constant that identifies database objects of type mysql.
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_TYPE_POSTGRESQL">SRA_DB_TYPE_POSTGRESQL</h3>
+  <pre>public string <b>SRA_DB_TYPE_POSTGRESQL</b> = 'pgsql'</pre>
+  <pre> Constant that identifies database objects of type postgresql.
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_TYPE_SQLITE">SRA_DB_TYPE_SQLITE</h3>
+  <pre>public string <b>SRA_DB_TYPE_SQLITE</b> = 'sqlite'</pre>
+  <pre> Constant that identifies database objects of type sqlite.
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_BOOL_FALSE_VALS">SRA_DB_BOOL_FALSE_VALS</h3>
+  <pre>public string <b>SRA_DB_BOOL_FALSE_VALS</b> = "'0' 0"</pre>
+  <pre> the default values for boolean FALSE data types (the first value is the value
+  that will be inserted into columns of that type. for more information, see
+  the &quot;db&quot; element &quot;boolean-false&quot; and &quot;boolean-true&quot; attribute definitions in
+  sierra-config*.dtd
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_BOOL_FALSE">SRA_DB_BOOL_FALSE</h3>
+  <pre>public mixed <b>SRA_DB_BOOL_FALSE</b> = FALSE</pre>
+  <pre> the default PHP representation for boolean FALSE values
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_BOOL_TRUE_VALS">SRA_DB_BOOL_TRUE_VALS</h3>
+  <pre>public string <b>SRA_DB_BOOL_TRUE_VALS</b> = "'1' 1"</pre>
+  <pre> same as SRA_DB_BOOL_FALSE_VALS for TRUE
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_BOOL_TRUE">SRA_DB_BOOL_TRUE</h3>
+  <pre>public mixed <b>SRA_DB_BOOL_TRUE</b> = TRUE</pre>
+  <pre> the default PHP representation for boolean TRUE values
+</pre>
+ <hr />  <h3 id="constant_SRA_DB_DEBUG">SRA_DB_DEBUG</h3>
+  <pre>public boolean <b>SRA_DB_DEBUG</b> = FALSE</pre>
+  <pre> Debug constant
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__boolFalseVals">_boolFalseVals</h3>
+  <pre>private array var <b>$_boolFalseVals</b></pre>
+  <pre> values for boolean FALSE
+ 
+</pre>
+ <hr />  <h3 id="attr__boolFalse">_boolFalse</h3>
+  <pre>private mixed var <b>$_boolFalse</b></pre>
+  <pre> PHP representation for boolean FALSE
+ 
+</pre>
+ <hr />  <h3 id="attr__boolTrueVals">_boolTrueVals</h3>
+  <pre>private array var <b>$_boolTrueVals</b></pre>
+  <pre> values for boolean TRUE
+ 
+</pre>
+ <hr />  <h3 id="attr__boolTrue">_boolTrue</h3>
+  <pre>private mixed var <b>$_boolTrue</b></pre>
+  <pre> PHP representation for boolean TRUE
+ 
+</pre>
+ <hr />  <h3 id="attr__config">_config</h3>
+  <pre>protected string[] var <b>$_config</b></pre>
+  <pre> See the sierra-conf.dtd for more details
+ 
+</pre>
+ <hr />  <h3 id="attr__dbs">_dbs</h3>
+  <pre>private Object[] var <b>$_dbs</b></pre>
+  <pre> This attribute references the connections to database servers for
+  this database object. If more than 1 read-write database server is
+  provided in the _config attribute, this array will be instantiated
+  and handled based on the replication options specified in the
+  _replicationOptions attribute.
+</pre>
+ <hr />  <h3 id="attr__inTransaction">_inTransaction</h3>
+  <pre>protected boolean var <b>$_inTransaction</b> = FALSE</pre>
+  <pre> This attribute is used to keep track of whether or not the SRA_Database
+  object is currently in the middle of a transaction. This attribute
+  may affect the behavior of the SRA_Database*::execute method calls
+  (dependent on the SRA_Database type). For more info see the
+  startTransactin and commit method api.
+</pre>
+ <hr />  <h3 id="attr__fetchCache">_fetchCache</h3>
+  <pre>protected array var <b>$_fetchCache</b> = array()</pre>
+  <pre> Used to store fetch table cache
+</pre>
+ <hr />  <h3 id="attr__timeZone">_timeZone</h3>
+  <pre>protected <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> var <b>$_timeZone</b></pre>
+  <pre> The SRA_TimeZone to use for Date* types
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_Database">SRA_Database</h3>
+  <pre>private void function <b>SRA_Database</b>()</pre>
+  <pre> do NOT instantiate this, or any of the SRA_Database* classes directly.
+  instead, use the singleton SRA_Database::getDatabase method to obtain a
+  reference
+</pre>
+ <hr />  <h3 id="method_applyLimitAndOffset">applyLimitAndOffset</h3>
+  <pre>public string function <b>applyLimitAndOffset</b>(string $query, int $limit, int $offset)</pre>
+  <pre> Returns the query properly formatted with LIMIT and OFFSET sql
+  constraints if valid and specified
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the sql query to apply the constraints to</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>limit</td>
+      <td>int</td>
+      <td><pre>the LIMIT constraint</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>offset</td>
+      <td>int</td>
+      <td><pre>the OFFSET constraint</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_clearCache">clearCache</h3>
+  <pre>void function <b>clearCache</b>()</pre>
+  <pre> clears any query cache in the database instance
+</pre>
+ <hr />  <h3 id="method_close">close</h3>
+  <pre>public void function <b>close</b>()</pre>
+  <pre> Closes all of the db connections, release all resources. To close
+  the database connections this method calls the child closeConn
+  method for every databases connection in the _dbs
+  arrays. This method returns an SRA_Error object if any errors occur.
+  Otherwise it returns nothing.
+ 
+</pre>
+ <hr />  <h3 id="method_commit">commit</h3>
+  <pre>public void function <b>commit</b>(object $conn=NULL)</pre>
+  <pre> Abstract method that commits the database changes done during a
+  transaction that is in progress. This method MUST be implemented in
+  the child SRA_Database* classes.One important element in this method is
+  that, similiar to the SRA_Database*::execute/SRA_Database::processUpdate
+  methods, this is a pass up - pass down query. This means that the
+  SRA_Database* method will initially be called (with no conn parameter
+  specified). This method will then simply call (and return) the
+  SRA_Database::processCommit method (which in turn will call the
+  SRA_Database*::commit method with the conn parameter specified for each
+  of the replication servers).
+ 
+  This method MUST set the _inTransaction flag to FALSE
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection object to commit the  transaction for. If not specified this method will simply return
+  the SRA_Database(parent)::processCommit method (which will in turn call
+  this method for all of the replication servers).</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convert">convert</h3>
+  <pre>public string function <b>convert</b>(string $type, mixed $data)</pre>
+  <pre> generic convert method. this simply makes a passthru call to the correct
+  convert* method based on the $type specified. this method does not need
+  to be overriden by subclasses
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>the data type</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>mixed</td>
+      <td><pre>the data to convert</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertBlob">convertBlob</h3>
+  <pre>public string function <b>convertBlob</b>(string $blob)</pre>
+  <pre> Convert a blob to the underlying db type. Call this method to
+  prepare blob values for insertion. Returns an SRA_Error object if the
+  blob parameter is not a blob. This is an abstract method that must
+  be implemented by the child SRA_Database* classes.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>blob</td>
+      <td>string</td>
+      <td><pre>the blob value to convert.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertBoolean">convertBoolean</h3>
+  <pre>public string function <b>convertBoolean</b>(boolean $bool)</pre>
+  <pre> Convert a boolean to the underlying db type. Call this method to
+  prepare boolean values for insertion. for more information, see the &quot;db&quot; element
+  &quot;boolean-false&quot; and &quot;boolean-true&quot; attribute definitions in sierra-config*.dtd
+  this method can be overriden by the corresponding db implementation
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>bool</td>
+      <td>boolean</td>
+      <td><pre>ean $bool boolean value to convert</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertDate">convertDate</h3>
+  <pre>public string function <b>convertDate</b>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $dateTime)</pre>
+  <pre> Convert a dateOnly SRA_GregorianDate object into a database readable
+  string. This format is required for insertion into the database. this is an
+  abstract method that must be implemented by the child SRA_Database*
+  classes. This method returns an SRA_Error object if the $dateTime parameter
+  is not a valid SRA_GregorianDate object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dateTime</td>
+      <td>SRA_GregorianDate</td>
+      <td><pre>the date to convert</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertTime">convertTime</h3>
+  <pre>public string function <b>convertTime</b>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $dateTime)</pre>
+  <pre> Convert a date/time SRA_GregorianDate object into a database readable
+  string using the db timezone. This format is required for insertion into
+  the database. this is an abstract method that must be implemented by the
+  child SRA_Database* classes. This method returns an SRA_Error object if the
+  $dateTime parameter is not a valid SRA_GregorianDate object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dateTime</td>
+      <td>SRA_GregorianDate</td>
+      <td><pre>the time to convert</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertFloat">convertFloat</h3>
+  <pre>public string function <b>convertFloat</b>(float $value)</pre>
+  <pre> Convert a Float to the underlying db type. Call this method to
+  prepare Float values for insertion. Returns an SRA_Error if the float
+  parameter is not a number. This is an abstract method that must be
+  implemented by the child SRA_Database* classes.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>float</td>
+      <td><pre>the float to prepare.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertInt">convertInt</h3>
+  <pre>public string function <b>convertInt</b>(int $value)</pre>
+  <pre> Added for consistency between types. No actual conversion is necessary
+  for an Integer so this method simply returns the value passed. If a
+  subclass requires any conversion, this method can be overriden.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>int</td>
+      <td><pre>the int to prepare.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertText">convertText</h3>
+  <pre>public string function <b>convertText</b>(string $text)</pre>
+  <pre> Convert a text string to the underlying db string type. Escape any
+  characters that would crash the query. Call this method to prepare
+  text values for insertion. This is an abstract method that must be
+  implemented by the child SRA_Database* classes.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>text</td>
+      <td>string</td>
+      <td><pre>string to convert.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_execute">execute</h3>
+  <pre>public <a href="sql.SRA_ExecuteSet.html" target="contentFrame">SRA_ExecuteSet</a> function &amp;<b>execute</b>(string $query, string $incCol=FALSE, int $errorLevel=SRA_ERROR_PROBLEM, object $conn=NULL)</pre>
+  <pre> Abstract method used to executes a SQL query. If an error occurs
+  during execution, this method will log a new error with the SQL
+  query as part of the error message, and return an error object.
+  Otherwise it returns an SRA_ExecuteSet object which will contain the
+  number of rows affected by the query and possibly the
+  sequenceColumn value is this is an insert query and an auto
+  incremental column is being used (see SRA_Database::execute::query api
+  for more detail). This method is used with queries that don&#039;t
+  return a result set / RecordSet object. Because this method is
+  abstract, it MUST be implemented by the child SRA_Database* object.
+  This method also will either auto commit the query, or buffer it
+  based on what is specified by the _autoCommit attribute.
+ 
+  The basic flow of a SRA_Database*::execute method is that it is called
+  by another class (db parameter is null), this method calls the
+  parent::processUpdate method, this method then runs the update
+  query (by calling the child execute method with a db connection
+  parameter specified) for each of the active replication servers. It
+  then returns either the number of records affected (as returned by
+  the first execute call), or an SRA_Error object (if returned by all
+  execute calls). If an SRA_Error occurs, the query will be written to a
+  buffer file for future processing. If a buffer file already exists
+  for any db server, the query will be written directly to that file
+  (execute will not be called at all). Buffer files are routinely
+  processed by the BGP and deleted when successful (when db server
+  accepts all queries).
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query to execute. This should be an  update/insert/ or delete query.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>incCol</td>
+      <td>string</td>
+      <td><pre>if the query is an insert query, and a db  managed auto-incremental column is being used by the table being
+  inserted into, and this value is needed by the Object calling the
+  method, this value will correspond with the name of the
+  auto-incremental column.
+ 
+  If this parameter is specified, and an INSERT query is being
+  performed, this method will attempt to retrieve the value of the
+  incremental column that was used by the database during the insert
+  and add this value to the resultant SRA_ExecuteSet object.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errorLevel</td>
+      <td>int</td>
+      <td><pre>this optional parameter defines the error  level of the SRA_Error object that should will be created if the db
+  query fails. The default value is SRA_ERROR_PROBLEM. This value may
+  be set to SRA_ERROR_OPERATIONAL if you do not wish for the error to
+  be logged.</pre></td>
+      <td>SRA_ERROR_PROBLEM</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>this parameter will be null when the execute  method is initially called by another object. However, when the
+  call is passed up to SRA_Database::processUpdate method, this method
+  will pass the query back down to the SRA_Database*::execute method with
+  the conn parameter specified (one call for each replication
+  server).  At this time the SRA_Database*::execute method will actually
+  attempt to process that query running the database specified
+  execute command and returning applicable # of rows that were
+  affected by the query (or an SRA_Error object). These return values
+  will then be passed back down to the original call to the execute
+  method and returned to the original calling object.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_fetch">fetch</h3>
+  <pre>public <a href="sql.SRA_ResultSet.html" target="contentFrame">SRA_ResultSet</a> function &amp;<b>fetch</b>(string $query, array $types=NULL, int $limit=FALSE, int $offset=FALSE, boolean $getActualCount=TRUE, int $errorLevel=SRA_ERROR_PROBLEM)</pre>
+  <pre> This abstract method executes a SQL query when implemented by a child
+  SRA_Database* class. If an error occurs during execution, this method will
+  log a new error with the SQL query as part of the error message, and
+  return an error object. Otherwise it returns a reference to a RecordSet
+  object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the SQL query to execute.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>types</td>
+      <td>array</td>
+      <td><pre>the data types in sequential order that will be returned  by this query. These types can be any of the SRA_DATA_TYPE_*
+  constants. if not specified, all types will be assumed to be text
+  (SRA_DATA_TYPE_STRING)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>limit</td>
+      <td>int</td>
+      <td><pre>only return a maximum of this # of rows</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>offset</td>
+      <td>int</td>
+      <td><pre>skip that many rows before beginning to return rows 					THE FIRST ROW IS AN OFFSET OF 0</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>getActualCount</td>
+      <td>boolean</td>
+      <td><pre>whether or not to set the ACTUAL # of  					rows in the resulting SRA_ResultSet instance if $limit or $offset
+  					constraints are used</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errorLevel</td>
+      <td>int</td>
+      <td><pre>this optional parameter defines the error  level of the SRA_Error object that should will be created if the db
+  query fails. The default value is SRA_ERROR_PROBLEM. This value may
+  be set to SRA_ERROR_OPERATIONAL if you do not wish for the error to
+  be logged.</pre></td>
+      <td>SRA_ERROR_PROBLEM</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getColumnDefinition">getColumnDefinition</h3>
+  <pre>public string function <b>getColumnDefinition</b>(<a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $table, <a href="model.SRA_SchemaColumn.html" target="contentFrame">SRA_SchemaColumn</a> $column, boolean $dbRefIntegrity=TRUE, boolean $addCheckConstraint=TRUE)</pre>
+  <pre> provides an sql statement defining the data type, constraints, and
+  referential integrity (optional) for a given SRA_SchemaColumn. this method
+  may be implemented by each of the underlying database types if the
+  default MYSQL implementation does not suffice
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>table</td>
+      <td>SRA_SchemaTable</td>
+      <td><pre>$table the SRA_SchemaTable that the column belongs to</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>column</td>
+      <td>SRA_SchemaColumn</td>
+      <td><pre>$column the SRA_SchemaColumn to create the definition for</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>dbRefIntegrity</td>
+      <td>boolean</td>
+      <td><pre>whether or not referential integrity should  be enforced at the database layer</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>addCheckConstraint</td>
+      <td>boolean</td>
+      <td><pre>whether or not to add a check constraint  to the column definition</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getQueryValue">getQueryValue</h3>
+  <pre>public string function <b>getQueryValue</b>(<a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> $db, string $query, string $type=SRA_DATA_TYPE_STRING)</pre>
+  <pre> used to retrieve a single query value. returns NULL if the query does not
+  return a row
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>db</td>
+      <td>SRA_Database</td>
+      <td><pre>ase $db the SRA_Database connection</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query to return the value from. this query  should only have one column. the value of the first column/first row will
+  be returned</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>the data type for the column being retrieved</pre></td>
+      <td>SRA_DATA_TYPE_STRING</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getTableDefinition">getTableDefinition</h3>
+  <pre>public string function <b>getTableDefinition</b>(<a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $table, boolean $dbRefIntegrity=TRUE)</pre>
+  <pre> provides an sql statement defining the constraints for a given
+  SRA_SchemaTable. this method may be implemented by each of the underlying
+  database types if the default implementation does not suffice
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>table</td>
+      <td>SRA_SchemaTable</td>
+      <td><pre>$table the SRA_SchemaTable to create the definition for</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>dbRefIntegrity</td>
+      <td>boolean</td>
+      <td><pre>whether or not referential integrity should  be enforced at the database layer</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getRecordCount">getRecordCount</h3>
+  <pre>public int function <b>getRecordCount</b>(<a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> $db, string $query)</pre>
+  <pre> returns total # of records returned for a given query
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>db</td>
+      <td>SRA_Database</td>
+      <td><pre>ase $db the SRA_Database connection</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getAppDbConnection">_getAppDbConnection</h3>
+  <pre>protected object function <b>_getAppDbConnection</b>(string $query='')</pre>
+  <pre> This method is called by the child SRA_Database* classes to retrieve a
+  database connection to utilize for a query. This method manages all
+  of the connections as well as replication. This method will also
+  run the additional execute queries if the application side updates
+  are enabled for replication (i.e. returns first read-write database
+  object, then opens connection to remaining read-write servers, and
+  executes the query for each of those servers by calling the child
+  SRA_Database*::execute method).
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query statement that the database  object is intended for. This query is evaluated is replication is
+  in place and an appropriate database object returned. If left
+  blank, it will be assumed that the query is an update query and
+  requires a valid read-write connection.</pre></td>
+      <td>''</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getNextSequence">getNextSequence</h3>
+  <pre>public int function <b>getNextSequence</b>(string $sequence, int $errorLevel=SRA_ERROR_PROBLEM, object $conn=FALSE)</pre>
+  <pre> Abstract method used to return the next sequence value from the database sequence specified.
+  If an error occurs during execution, this method will log a new error with the SQL query as
+  part of the error message, and return an error object. Otherwise it returns an integer value
+  representing the next sequence value. Because this method is abstract, it MUST be implemented
+  by the child SRA_Database* object. This method also will either auto commit the query, or buffer
+  it based on what is specified by the _autoCommit attribute. See the SRA_Database::execute api for
+  more details on the flow of the nextSequence methods.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>sequence</td>
+      <td>string</td>
+      <td><pre>the name of the sequence to return the next value for.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errorLevel</td>
+      <td>int</td>
+      <td><pre>this optional parameter defines the error level of the SRA_Error object  that should will be created if the db query fails. The default value is SRA_ERROR_PROBLEM. This
+  value may be set to SRA_ERROR_OPERATIONAL if you do not wish for the error to be logged.</pre></td>
+      <td>SRA_ERROR_PROBLEM</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>this parameter will be null when the getNextSequence method is initially  called by another object. However, when the call is passed up to SRA_Database::processGetNextSequence
+  method, this method will pass the query back down to the SRA_Database*::getNextSequence method with the
+  conn parameter specified (one call for each replication server).  At this time the
+  SRA_Database*::getNextSequence method will actually attempt to process that query running the database
+  specified sequence query and returning applicable sequence value. This return value will then be
+  passed back down to the original call to the getNextSequence method and returned to the original
+  calling object.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDefaultPort">getDefaultPort</h3>
+  <pre>public int function <b>getDefaultPort</b>(string $dbType)</pre>
+  <pre> Static method that returns the default port for the database type
+  specified
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dbType</td>
+      <td>string</td>
+      <td><pre>the database type. must correspond with one of the  SRA_DB_TYPE_* constants</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_importFile">importFile</h3>
+  <pre>public boolean function <b>importFile</b>(string $fileName, string $tableName, boolean $deleteFile=TRUE, string $delimiter=", $")</pre>
+  <pre> This method is abstract and as such must be implemented by the child SRA_Database classes. Some database
+  types may not support this method. Please view the child SRA_Database object api for this method before
+  using it. This method imports a delimited file into a database table using the parameters specified.
+  This method returns an SRA_Error object if the file import is not successful.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>string</td>
+      <td><pre>the name of the file to import. This file must be delimited with the same 			number of columns as are in the table.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>tableName</td>
+      <td>string</td>
+      <td><pre>the name of the table to insert the data into.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>deleteFile</td>
+      <td>boolean</td>
+      <td><pre>whether or not the file should be deleted if the import is successful.  			By default this value is TRUE.</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>delimiter</td>
+      <td>string</td>
+      <td><pre>the delimiter to use for the file import. The default value for this is a  			comma. Note: If a delimiter occurs in a data column, it should be escaped using backslash.</pre></td>
+      <td>"</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>"</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isInTransaction">isInTransaction</h3>
+  <pre>public boolean function <b>isInTransaction</b>()</pre>
+  <pre> Returns a boolean value specifying if the SRA_Database object is currently in a transaction.
+ 
+</pre>
+ <hr />  <h3 id="method_isType">isType</h3>
+  <pre>public boolean function <b>isType</b>(int $type)</pre>
+  <pre> returns TRUE if this SRA_Database instance is of the type specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>int</td>
+      <td><pre>the type to check for. one of the SRA_DB_TYPE_*  constants</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(object $object)</pre>
+  <pre> Static method that returns TRUE if the object parameter references a
+  valid SRA_Database object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>object</td>
+      <td><pre>$object the object to validate.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_parseQuery">parseQuery</h3>
+  <pre>public static array function <b>parseQuery</b>(string $query)</pre>
+  <pre> parses a query and returns it in the following format:
+    array(&#039;select&#039; =&gt; array(&#039;column1&#039; =&gt; &#039;column1 alias&#039;, ... ,&#039;columnN&#039; =&gt; &#039;columnN alias&#039;),
+          &#039;from&#039;   =&gt; array(&#039;table1&#039;  =&gt; &#039;table1 alias&#039;, ... , &#039;tableN&#039;  =&gt; &#039;tableN alias&#039;),
+          &#039;fromConstraint&#039; =&gt; array(&#039;tableN&#039; =&gt; &#039;[if a JOIN was used, the method used for the join. this should be used in place of adding tableN to the FROM clause]&#039;),
+          &#039;constraint&#039; =&gt; &#039;[everything that is part of the WHERE clause (if applicable)]&#039;,
+          &#039;orderConstraint&#039; =&gt; [everything after the WHERE clause (i.e. ORDER BY...)])
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query to parse</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_reverseParseQuery">reverseParseQuery</h3>
+  <pre>public static string function <b>reverseParseQuery</b>(array $parseResults, boolean $includeOrderConstraint=TRUE)</pre>
+  <pre> converts #parseQuery results into a query
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>parseResults</td>
+      <td>array</td>
+      <td><pre>#parseQuery array to convert back into a query</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>includeOrderConstraint</td>
+      <td>boolean</td>
+      <td><pre>whether or not to include any  order constraints in the query</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_unconvertBoolean">unconvertBoolean</h3>
+  <pre>public boolean function <b>unconvertBoolean</b>(boolean $bool)</pre>
+  <pre> Unconverts a boolean value from a database boolean data type column. if
+  the $bool value equals (===) any of the #_boolTrueVals or #_boolFalseVals
+  values for this database, the corresponding boolean value will be
+  returned, otherwise, NULL will be returned. this method can be overriden
+  by the corresponding db implementation
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>bool</td>
+      <td>boolean</td>
+      <td><pre>ean $bool boolean value to convert</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__openConn">_openConn</h3>
+  <pre>protected object function <b>_openConn</b>(array $config)</pre>
+  <pre> This method is used to open one connection to a database server. It
+  is called by the SRA_Database parent class in order to open needed
+  database connections. It returns either a connection object (if
+  successful) or an SRA_Error object if not.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>config</td>
+      <td>array</td>
+      <td><pre>the configuration parameters for the  database server to be connected to. This array will/must contain
+  the following values:
+ 
+  &#039;server&#039; =&gt; IP address or resolvable name of the server.
+  &#039;port&#039; =&gt; The database server port to use
+  &#039;name&#039; =&gt; The name of the database
+  &#039;user&#039; =&gt; The authentication user name
+  &#039;password&#039; =&gt; The authentication password
+  &#039;type&#039; =&gt; The database type</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_processCommit">processCommit</h3>
+  <pre>public void function <b>processCommit</b>()</pre>
+  <pre> This method is simliar in functionality to the
+  SRA_Database::processUpdate method. It is called by the
+  SRA_Database*::commit method in order to process all SRA_Database commits
+  (from the current transaction).  To accomplish this, this method
+  simply calls the SRA_Database*::commit method once for every
+  replication server.  If any of the commits fail, the entire
+  _queryBuffer is written to a buffer file for that database server
+  for future processing.
+ 
+</pre>
+ <hr />  <h3 id="method_processNextSequence">processNextSequence</h3>
+  <pre>protected void function <b>processNextSequence</b>(string $sequence, int $errorLevel)</pre>
+  <pre> This method exists only in the SRA_Database class. It is used by the child
+  classes to distribute and process any sequence queries (queries to retrieve
+  a table sequence). The flow of this process is detailed in the
+  SRA_Database::getNextSequence api. Basically, this is the method that manages
+  these types of calls. This method is necessary in order to implement database
+  replication. This method is simply the gateway between the initial
+  SRA_Database*::getNextSequence method and the actual call to run the next sequence
+  query. SRA_Database*::getNextSequence.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>sequence</td>
+      <td>string</td>
+      <td><pre>the name of the sequence to return the next value for.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errorLevel</td>
+      <td>int</td>
+      <td><pre>defines the error level of the SRA_Error object that should  will be created if the db query fails. This value may be set to SRA_ERROR_OPERATIONAL
+  if you do not wish for the error to be logged.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_processRollback">processRollback</h3>
+  <pre>protected void function <b>processRollback</b>()</pre>
+  <pre> This method is simliar in functionality to the
+  SRA_Database::processUpdate method. It is called by the
+  SRA_Database*::rollback method in order to process all SRA_Database
+  rollbacks (from the current transaction).  To accomplish this, this
+  method simply calls the SRA_Database*::rollback method once for every
+  replication server.
+ 
+</pre>
+ <hr />  <h3 id="method_processUpdate">processUpdate</h3>
+  <pre>protected <a href="sql.SRA_ExecuteSet.html" target="contentFrame">SRA_ExecuteSet</a> function &amp;<b>processUpdate</b>(string $query, string $incCol, int $errorLevel)</pre>
+  <pre> This method exists only in the SRA_Database class. It is used by the
+  child classes to distribute and process any update queries
+  (INSERT/UPDATE/DELETE queries). The flow of this process is
+  detailed in the SRA_Database::execute api. Basically, this is the
+  method that manages any database updates. This method is necessary
+  in order to implement database replication. This method is simply
+  the gateway between the initial SRA_Database*::execute method and the
+  actual call to execute a query. SRA_Database*::execute calls
+  SRA_Database::processUpdate which calls SRA_Database*::execute.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query to execute.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>incCol</td>
+      <td>string</td>
+      <td><pre>if the query is an insert query, and a db managed  auto-incremental column is being used by the table being inserted into,
+  and this value is needed by the Object calling the method, this value
+  will correspond with the name of the auto-incremental column.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errorLevel</td>
+      <td>int</td>
+      <td><pre>defines the error level of the SRA_Error object that should  will be created if the db query fails. This value may be set to SRA_ERROR_OPERATIONAL
+  if you do not wish for the error to be logged.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_recordCount">recordCount</h3>
+  <pre>public int function <b>recordCount</b>(<a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> $db, string $table, array $vals=FALSE, string $constraint=FALSE)</pre>
+  <pre> Returns the # of records that exist in a given database table for a
+  given criteria
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>db</td>
+      <td>SRA_Database</td>
+      <td><pre>ase $db The SRA_Database instance to query</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>table</td>
+      <td>string</td>
+      <td><pre>the name of the table</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>vals</td>
+      <td>array</td>
+      <td><pre>an associative array of column/value pairs to check.  all of the values in this array must be sql ready. if this parameter is
+  not specified then the return value will be the # of all of the records
+  in that database table</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>constraint</td>
+      <td>string</td>
+      <td><pre>an additional query constraint to apply (for  example: TYPE=&#039;1&#039;)</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_rollback">rollback</h3>
+  <pre>public void function <b>rollback</b>(object $conn=NULL)</pre>
+  <pre> Abstract method that cancels any database changes done during a
+  transaction that is in progress. This method must be implemented by
+  the child SRA_Database* classes. This method returns the
+  SRA_Database::processRollback method is the conn parameter is not
+  specified.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection object to rollback a  transaction for. If null (default) this method will simply return
+  SRA_Database::processRollback. Otherwise it will attempt to rollback
+  the transaction using the specified connection.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_startTransaction">startTransaction</h3>
+  <pre>public void function <b>startTransaction</b>(object $conn=NULL)</pre>
+  <pre> This method will start a new transaction for the current database
+  connections. Since this action is database specific, this is an
+  abstract method that must be implemented by the SRA_Database* child
+  classes. One important element in this method is that, similiar to
+  the SRA_Database*::execute/SRA_Database::processUpdate methods, this is a
+  pass up - pass down query. This means that the SRA_Database* method
+  will initially be called (with no conn parameter specified). This
+  method will then simply call (and return) the
+  SRA_Database::startTransactions method (which in turn will call the
+  SRA_Database*::startTransaction method with the conn parameter
+  specified for each of the replication servers).
+ 
+  This method MUST set the _inTransaction flag to TRUE
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection object to start the  transaction for. If not specified this method will simply return
+  the SRA_Database(parent)::startTransactions method (which will in turn
+  call this method for all of the replication servers).</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_startTransactions">startTransactions</h3>
+  <pre>protected void function <b>startTransactions</b>()</pre>
+  <pre> This method is the gateway for a child SRA_Database* object to be able
+  to start a transaction. Because the SRA_Database object manages
+  replication, all transactions (which imply update queries) must
+  pass through all of the replcation servers. Hence, it is necessary
+  to start a transaction on all of the database servers whenever a
+  transaction is needed.  This is accomplished by this method simply
+  calling the SRA_Database::startTransaction method for each of the
+  replication servers. See the SRA_Database::startTransaction api for
+  more info.  This method also rollsback any existing transaction.
+ 
+</pre>
+ <hr />  <h3 id="method__fetchInCache">_fetchInCache</h3>
+  <pre>protected SRA_ResultSet (if cache exists) or FALSE otherwise function &amp;<b>_fetchInCache</b>(string $query)</pre>
+  <pre> This method is used to determine whether or not cache exists for a given
+  query based on the database &quot;table-cache&quot; configuration element
+  (see configuration description for more information)
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__addFetchToCache">_addFetchToCache</h3>
+  <pre>protected void function <b>_addFetchToCache</b>(string $query, <a href="sql.SRA_ResultSet.html" target="contentFrame">SRA_ResultSet</a> $results)</pre>
+  <pre> This method is used to write the results of a fetch to cache (if cache
+  should be written at all)
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>results</td>
+      <td>SRA_ResultSet</td>
+      <td><pre>the results of the query</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getFetchCacheParams">_getFetchCacheParams</h3>
+  <pre>private mixed function &amp;<b>_getFetchCacheParams</b>(string $query)</pre>
+  <pre> This method returns the cache parameters for a given query
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getBooleanArray">getBooleanArray</h3>
+  <pre>public static array function <b>getBooleanArray</b>(string $str)</pre>
+  <pre> returns an array of possible boolean values based on the string specified
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDatabase">getDatabase</h3>
+  <pre>public static <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> function &amp;<b>getDatabase</b>($configs)</pre>
+  <pre> singleton method for this class
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>configs</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/sql/SRA_Database.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

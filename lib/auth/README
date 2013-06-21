@@ -1,0 +1,1 @@
+The authentication classes can be used to secure areas of your application based on the authentication configuration provided in app-config. Usage of these classes are documented thoroughly in the app-config dtd

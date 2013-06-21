@@ -1,0 +1,1 @@
+External libraries are contained in this directory. SIERRA relies heavily on the smarty template engine for display rendering and code generation. The pop3 classes were created by Manuel Lemos from phpclasses and distributed open source. These are utilized in the lib/util/SRA_Pop3Login and lib/util/SRA_EmailMessage classes.

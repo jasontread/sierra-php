@@ -1,0 +1,9 @@
+This is a maintenance update
+
+CHANGELOG
+* Added Makefile for rpm build capability
+* Added etc/sierra.spec for rpm build
+* Added bin/sra-quick-install.php used by rpm
+
+KNOWN ISSUES
+None

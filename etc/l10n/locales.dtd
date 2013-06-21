@@ -1,0 +1,112 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for SIERRA locales configuration
+
+This xml structure how unique SRA_Locale instances should be supported by the 
+SRA_Locale class
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the "xml" declaration):
+
+<!DOCTYPE locales PUBLIC "-//SIERRA//DTD LOCALES//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/etc/l10n/locales.dtd">
+-->
+
+
+<!--
+The "locales" element is the root element. It contains one or more locale 
+sub-elements. For more information, please review the util/SRA_Locale API 
+documentation. all codes should be LOWERCASE.
+
+Used in:	NA
+-->
+<!ELEMENT locales (countries, languages)>
+
+
+<!--
+The "countries" element contains zero or more country sub-elements
+
+Used in:	locales
+-->
+<!ELEMENT countries (country+)>
+
+
+<!--
+The "country" element defines the SRA_Locale specific characteristics for a single 
+country using the following attributes:
+
+key						The  two-letter ISO country abbrevation
+
+code3					The  three-letter ISO country abbrevation
+
+decimal-separator (default ".") : The separator to use between the 
+							whole and decimal portion of a number. The default is a period.
+							
+int-group-separator (default ",") : The separator to use between whole 
+							number groups (i.e. 100,000). The default is a comma.
+							
+date-time-format (default "Y-m-d h:i:s") : The date time format string 
+							(i.e. Y-m-d h:i:s > 2000-01-01 12:00:00).
+							
+date-format 	(default "Y-m-d" ) : The date format string (i.e. Y-m-d > 2000-01-01)
+
+time-format 	(default "h:i:s) : The time format string (i.e. h:i:s > 12:00:00)
+
+currency 			(default SRA-CURRENCY-SYS) : The currency code used by this
+
+
+Used in:	countries
+-->
+<!ELEMENT country EMPTY>
+<!ATTLIST country		key									CDATA			#REQUIRED>
+<!ATTLIST country		code3								CDATA			#REQUIRED>
+<!ATTLIST country		currency						CDATA			#IMPLIED>
+<!ATTLIST country		decimal-separator		CDATA			#IMPLIED>
+<!ATTLIST country		int-group-separator	CDATA			#IMPLIED>
+<!ATTLIST country		date-format					CDATA			#IMPLIED>
+<!ATTLIST country		date-time-format		CDATA			#IMPLIED>
+<!ATTLIST country		time-format					CDATA			#IMPLIED>
+
+
+<!--
+The "languages" element contains zero or more language sub-elements
+
+Used in:	locales
+-->
+<!ELEMENT languages (language+)>
+
+
+<!--
+The "language" element defines the SRA_Locale specific characteristics for a single 
+language using the following attributes:
+
+key						The  two-letter ISO language abbrevation
+
+code3					The  three-letter ISO language abbrevation
+
+
+Used in:	languages
+-->
+<!ELEMENT language EMPTY>
+<!ATTLIST language		key									CDATA			#REQUIRED>
+<!ATTLIST language		code3								CDATA			#REQUIRED>

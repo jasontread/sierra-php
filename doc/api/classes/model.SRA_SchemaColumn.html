@@ -1,0 +1,1864 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_SchemaColumn - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+
+  // check attributes
+  if ("_attributes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__attributes'] = "_attributes";
+  }
+  if ("_baseattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__baseAttribute'] = "_baseAttribute";
+  }
+  if ("_cardinality".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__cardinality'] = "_cardinality";
+  }
+  if ("_cardinalityupper".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__cardinalityUpper'] = "_cardinalityUpper";
+  }
+  if ("_cardinalitylower".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__cardinalityLower'] = "_cardinalityLower";
+  }
+  if ("_columntype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__columnType'] = "_columnType";
+  }
+  if ("_default".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__default'] = "_default";
+  }
+  if ("_lazyload".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__lazyLoad'] = "_lazyLoad";
+  }
+  if ("_lazyloadexclusive".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__lazyLoadExclusive'] = "_lazyLoadExclusive";
+  }
+  if ("_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__name'] = "_name";
+  }
+  if ("_ondeletecascade".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__onDeleteCascade'] = "_onDeleteCascade";
+  }
+  if ("_readconstraints".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__readConstraints'] = "_readConstraints";
+  }
+  if ("_readonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__readOnly'] = "_readOnly";
+  }
+  if ("_references".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__references'] = "_references";
+  }
+  if ("_retrievefunction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__retrieveFunction'] = "_retrieveFunction";
+  }
+  if ("_sequence".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__sequence'] = "_sequence";
+  }
+  if ("_setfunction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__setFunction'] = "_setFunction";
+  }
+  if ("_setonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__setOnly'] = "_setOnly";
+  }
+  if ("_type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__type'] = "_type";
+  }
+  if ("_validators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__validators'] = "_validators";
+  }
+  if ("_vars".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__vars'] = "_vars";
+  }
+
+  // check methods
+  if ("sra_schemacolumn".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_SchemaColumn'] = "SRA_SchemaColumn";
+  }
+  if ("addattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_addAttribute'] = "addAttribute";
+  }
+  if ("addreadconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_addReadConstraint'] = "addReadConstraint";
+  }
+  if ("getattributes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAttributes'] = "getAttributes";
+  }
+  if ("getbaseattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getBaseAttribute'] = "getBaseAttribute";
+  }
+  if ("getcardinalitylower".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCardinalityLower'] = "getCardinalityLower";
+  }
+  if ("getcardinalityupper".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCardinalityUpper'] = "getCardinalityUpper";
+  }
+  if ("getcolumntype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getColumnType'] = "getColumnType";
+  }
+  if ("getdefault".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDefault'] = "getDefault";
+  }
+  if ("getname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getName'] = "getName";
+  }
+  if ("getreadconstraints".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getReadConstraints'] = "getReadConstraints";
+  }
+  if ("getreferences".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getReferences'] = "getReferences";
+  }
+  if ("getretrievefunction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getRetrieveFunction'] = "getRetrieveFunction";
+  }
+  if ("getsetfunction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSetFunction'] = "getSetFunction";
+  }
+  if ("gettype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getType'] = "getType";
+  }
+  if ("getvalidators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getValidators'] = "getValidators";
+  }
+  if ("getvars".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getVars'] = "getVars";
+  }
+  if ("hasattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_hasAttribute'] = "hasAttribute";
+  }
+  if ("hasvalidator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_hasValidator'] = "hasValidator";
+  }
+  if ("iscardinality".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isCardinality'] = "isCardinality";
+  }
+  if ("islazyload".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isLazyLoad'] = "isLazyLoad";
+  }
+  if ("islazyloadexclusive".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isLazyLoadExclusive'] = "isLazyLoadExclusive";
+  }
+  if ("isondeletecascade".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isOnDeleteCascade'] = "isOnDeleteCascade";
+  }
+  if ("isreadonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isReadOnly'] = "isReadOnly";
+  }
+  if ("issequence".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isSequence'] = "isSequence";
+  }
+  if ("issetonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isSetOnly'] = "isSetOnly";
+  }
+  if ("iswritable".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isWritable'] = "isWritable";
+  }
+  if ("setattributes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setAttributes'] = "setAttributes";
+  }
+  if ("setbaseattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setBaseAttribute'] = "setBaseAttribute";
+  }
+  if ("setcardinality".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setCardinality'] = "setCardinality";
+  }
+  if ("setcardinalitylower".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setCardinalityLower'] = "setCardinalityLower";
+  }
+  if ("setcardinalityupper".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setCardinalityUpper'] = "setCardinalityUpper";
+  }
+  if ("setcolumntype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setColumnType'] = "setColumnType";
+  }
+  if ("setdefault".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setDefault'] = "setDefault";
+  }
+  if ("setlazyload".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setLazyLoad'] = "setLazyLoad";
+  }
+  if ("setlazyloadexclusive".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setLazyLoadExclusive'] = "setLazyLoadExclusive";
+  }
+  if ("setname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setName'] = "setName";
+  }
+  if ("setondeletecascade".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setOnDeleteCascade'] = "setOnDeleteCascade";
+  }
+  if ("setreadconstraints".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setReadConstraints'] = "setReadConstraints";
+  }
+  if ("setreadonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setReadOnly'] = "setReadOnly";
+  }
+  if ("setreferences".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setReferences'] = "setReferences";
+  }
+  if ("setretrievefunction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setRetrieveFunction'] = "setRetrieveFunction";
+  }
+  if ("setsequence".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setSequence'] = "setSequence";
+  }
+  if ("setsetfunction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setSetFunction'] = "setSetFunction";
+  }
+  if ("setsetonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setSetOnly'] = "setSetOnly";
+  }
+  if ("settype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setType'] = "setType";
+  }
+  if ("setvalidators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setValidators'] = "setValidators";
+  }
+  if ("setvars".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setVars'] = "setVars";
+  }
+  if ("updateattributename".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_updateAttributeName'] = "updateAttributeName";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_SchemaColumn</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_SchemaColumn</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> represents a single column in a schema table
+ 
+</pre>
+  
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__attributes">_attributes</a></pre>
+<pre> the attributes that utilize this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__baseAttribute">_baseAttribute</a></pre>
+<pre> the base attribute name for this column. this is the first value in the
+  $attributes parameter passed to the constructor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__cardinality">_cardinality</a></pre>
+<pre> whether or not this column utilizes cardinality
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed </pre></td>
+      <td>
+        <pre><a href="#attr__cardinalityUpper">_cardinalityUpper</a></pre>
+<pre> the upper bound cardinality for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed </pre></td>
+      <td>
+        <pre><a href="#attr__cardinalityLower">_cardinalityLower</a></pre>
+<pre> the lower bound cardinality for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__columnType">_columnType</a></pre>
+<pre> a user defined column data type for this table column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed </pre></td>
+      <td>
+        <pre><a href="#attr__default">_default</a></pre>
+<pre> the default value to assign to new values in this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__lazyLoad">_lazyLoad</a></pre>
+<pre> whether or not this column value should be lazy loaded
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__lazyLoadExclusive">_lazyLoadExclusive</a></pre>
+<pre> whether or not this column value should be lazy loaded exclusively, meaning
+  no other column can be simultaneously loaded
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__name">_name</a></pre>
+<pre> the name of the column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__onDeleteCascade">_onDeleteCascade</a></pre>
+<pre> if this column references another table/primary key value, then this
+  attribute defines what should happen when the record it references is
+  deleted. If FALSE, the value of this column will be set to NULL, otherwise
+  the entire row that this column belongs to will be deleted
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__readConstraints">_readConstraints</a></pre>
+<pre> an associative array of all of the read constraints for this column indexed
+  by attribute name. this value will correspond with the &quot;constraint&quot;
+  specified for that attribute in the entity model xml
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__readOnly">_readOnly</a></pre>
+<pre> whether or not this column is read-only (cannot be written to using INSERT/
+  UPDATE queries)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__references">_references</a></pre>
+<pre> the references constraint for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__retrieveFunction">_retrieveFunction</a></pre>
+<pre> the name of an optional retrieve function (will be applied to SELECT queries)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__sequence">_sequence</a></pre>
+<pre> whether or not this column is a database generated sequence
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__setFunction">_setFunction</a></pre>
+<pre> the name of an optional set function (will be applied to INSERT/UPDATE queries)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__setOnly">_setOnly</a></pre>
+<pre> whether or not this column is set-only (cannot be read using SELECT
+  queries)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__type">_type</a></pre>
+<pre> the column data type. this will correspond with one of the
+  SRA_DATA_TYPE_* constants
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string[] </pre></td>
+      <td>
+        <pre><a href="#attr__validators">_validators</a></pre>
+<pre> an array of validators associated with this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__vars">_vars</a></pre>
+<pre> an associative array of validator variables
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_SchemaColumn">SRA_SchemaColumn</a>($attributes=FALSE, $name=FALSE)</pre>
+<pre> Constructor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_addAttribute">addAttribute</a>(string $attribute)</pre>
+<pre> adds a attribute to the array representing those that this column pertains to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_addReadConstraint">addReadConstraint</a>(string $attribute, string $readConstraint)</pre>
+<pre> adds a readConstraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_getAttributes">getAttributes</a>()</pre>
+<pre> returns the attributes corresponding to this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getBaseAttribute">getBaseAttribute</a>()</pre>
+<pre> returns the baseAttribute value for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getCardinalityLower">getCardinalityLower</a>()</pre>
+<pre> returns the cardinalityLower of this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getCardinalityUpper">getCardinalityUpper</a>()</pre>
+<pre> returns the cardinalityUpper of this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getColumnType">getColumnType</a>()</pre>
+<pre> returns the columnType value for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getDefault">getDefault</a>()</pre>
+<pre> returns the default value for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getName">getName</a>()</pre>
+<pre> returns the name of this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getReadConstraints">getReadConstraints</a>(string $attribute=FALSE, boolean $exploded=FALSE)</pre>
+<pre> returns the readConstraints for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getReferences">getReferences</a>()</pre>
+<pre> returns the name of the table whose primary key this column references
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getRetrieveFunction">getRetrieveFunction</a>()</pre>
+<pre> returns the retrieveFunction used by this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSetFunction">getSetFunction</a>()</pre>
+<pre> returns the setFunction used by this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getType">getType</a>()</pre>
+<pre> returns data type for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string[]</pre></td>
+      <td>
+        <pre><a href="#method_getValidators">getValidators</a>()</pre>
+<pre> returns the column validators
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_getVars">getVars</a>(string $id=FALSE)</pre>
+<pre> returns the vars used by the validators for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_hasAttribute">hasAttribute</a>(string $attr)</pre>
+<pre> returns TRUE if the specified attribute uses this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_hasValidator">hasValidator</a>(string $validator)</pre>
+<pre> returns TRUE if the specified validator has been set for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isCardinality">isCardinality</a>()</pre>
+<pre> returns TRUE if this column utilizes cardinality
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isLazyLoad">isLazyLoad</a>()</pre>
+<pre> returns TRUE if this table should be lazy loaded
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isLazyLoadExclusive">isLazyLoadExclusive</a>()</pre>
+<pre> returns TRUE if this table should be lazy loaded exclusively
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isOnDeleteCascade">isOnDeleteCascade</a>()</pre>
+<pre> returns TRUE if deletes should be cascaded to this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isReadOnly">isReadOnly</a>()</pre>
+<pre> returns the $_readOnly flag for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isSequence">isSequence</a>()</pre>
+<pre> returns the $_sequence flag for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isSetOnly">isSetOnly</a>()</pre>
+<pre> returns the $_setOnly flag for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isWritable">isWritable</a>(boolean $insert=FALSE)</pre>
+<pre> returns TRUE if this column should be included in update and insert queries
+  a column is writable is it is NOT a sequence, and it is not read only
+  (unless insert is TRUE)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setAttributes">setAttributes</a>(array $attributes)</pre>
+<pre> sets the attributes that this column corresponds to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setBaseAttribute">setBaseAttribute</a>(string $baseAttribute)</pre>
+<pre> sets the column baseAttribute value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setCardinality">setCardinality</a>(string $cardinality)</pre>
+<pre> sets the column cardinality flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setCardinalityLower">setCardinalityLower</a>(int $cardinalityLower)</pre>
+<pre> sets the column cardinalityLower constraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setCardinalityUpper">setCardinalityUpper</a>(int $cardinalityUpper)</pre>
+<pre> sets the column cardinalityUpper constraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setColumnType">setColumnType</a>(string $columnType)</pre>
+<pre> sets the column columnType value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setDefault">setDefault</a>(string $default)</pre>
+<pre> sets the column default value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setLazyLoad">setLazyLoad</a>(string $lazyLoad)</pre>
+<pre> sets the table lazyLoad flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setLazyLoadExclusive">setLazyLoadExclusive</a>(string $lazyLoadExclusive)</pre>
+<pre> sets the table lazyLoadExclusive flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setName">setName</a>(string $name)</pre>
+<pre> sets the column name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setOnDeleteCascade">setOnDeleteCascade</a>(string $onDeleteCascade)</pre>
+<pre> sets the column onDeleteCascade
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setReadConstraints">setReadConstraints</a>(array $readConstraints)</pre>
+<pre> sets the read constraints for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setReadOnly">setReadOnly</a>(string $readOnly)</pre>
+<pre> sets the column read only flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setReferences">setReferences</a>(string $references)</pre>
+<pre> sets the name of the table whose primary key this column references
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setRetrieveFunction">setRetrieveFunction</a>(string $retrieveFunction)</pre>
+<pre> sets the column retrieveFunction
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setSequence">setSequence</a>(string $sequence)</pre>
+<pre> designates this column as a sequence
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setSetFunction">setSetFunction</a>(string $setFunction)</pre>
+<pre> sets the column setFunction
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setSetOnly">setSetOnly</a>(string $setOnly)</pre>
+<pre> sets the column set only flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setType">setType</a>(string $type)</pre>
+<pre> sets the column data type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setValidators">setValidators</a>(string[] $validators)</pre>
+<pre> sets the column validators
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setVars">setVars</a>(array $vars)</pre>
+<pre> sets the vars used by the validators for this column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_updateAttributeName">updateAttributeName</a>(string $attribute, string $newName)</pre>
+<pre> changes an attribute name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_SchemaColumn object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__attributes">_attributes</h3>
+  <pre>array var <b>$_attributes</b> = array()</pre>
+  <pre> the attributes that utilize this column
+</pre>
+ <hr />  <h3 id="attr__baseAttribute">_baseAttribute</h3>
+  <pre>string var <b>$_baseAttribute</b></pre>
+  <pre> the base attribute name for this column. this is the first value in the
+  $attributes parameter passed to the constructor
+</pre>
+ <hr />  <h3 id="attr__cardinality">_cardinality</h3>
+  <pre>boolean var <b>$_cardinality</b></pre>
+  <pre> whether or not this column utilizes cardinality
+</pre>
+ <hr />  <h3 id="attr__cardinalityUpper">_cardinalityUpper</h3>
+  <pre>mixed var <b>$_cardinalityUpper</b></pre>
+  <pre> the upper bound cardinality for this column
+</pre>
+ <hr />  <h3 id="attr__cardinalityLower">_cardinalityLower</h3>
+  <pre>mixed var <b>$_cardinalityLower</b></pre>
+  <pre> the lower bound cardinality for this column
+</pre>
+ <hr />  <h3 id="attr__columnType">_columnType</h3>
+  <pre>string var <b>$_columnType</b></pre>
+  <pre> a user defined column data type for this table column
+</pre>
+ <hr />  <h3 id="attr__default">_default</h3>
+  <pre>mixed var <b>$_default</b></pre>
+  <pre> the default value to assign to new values in this column
+</pre>
+ <hr />  <h3 id="attr__lazyLoad">_lazyLoad</h3>
+  <pre>boolean var <b>$_lazyLoad</b></pre>
+  <pre> whether or not this column value should be lazy loaded
+</pre>
+ <hr />  <h3 id="attr__lazyLoadExclusive">_lazyLoadExclusive</h3>
+  <pre>boolean var <b>$_lazyLoadExclusive</b></pre>
+  <pre> whether or not this column value should be lazy loaded exclusively, meaning
+  no other column can be simultaneously loaded
+</pre>
+ <hr />  <h3 id="attr__name">_name</h3>
+  <pre>string var <b>$_name</b></pre>
+  <pre> the name of the column
+</pre>
+ <hr />  <h3 id="attr__onDeleteCascade">_onDeleteCascade</h3>
+  <pre>boolean var <b>$_onDeleteCascade</b></pre>
+  <pre> if this column references another table/primary key value, then this
+  attribute defines what should happen when the record it references is
+  deleted. If FALSE, the value of this column will be set to NULL, otherwise
+  the entire row that this column belongs to will be deleted
+</pre>
+ <hr />  <h3 id="attr__readConstraints">_readConstraints</h3>
+  <pre>array var <b>$_readConstraints</b> = array()</pre>
+  <pre> an associative array of all of the read constraints for this column indexed
+  by attribute name. this value will correspond with the &quot;constraint&quot;
+  specified for that attribute in the entity model xml
+</pre>
+ <hr />  <h3 id="attr__readOnly">_readOnly</h3>
+  <pre>boolean var <b>$_readOnly</b></pre>
+  <pre> whether or not this column is read-only (cannot be written to using INSERT/
+  UPDATE queries)
+</pre>
+ <hr />  <h3 id="attr__references">_references</h3>
+  <pre>string var <b>$_references</b></pre>
+  <pre> the references constraint for this column
+</pre>
+ <hr />  <h3 id="attr__retrieveFunction">_retrieveFunction</h3>
+  <pre>string var <b>$_retrieveFunction</b></pre>
+  <pre> the name of an optional retrieve function (will be applied to SELECT queries)
+</pre>
+ <hr />  <h3 id="attr__sequence">_sequence</h3>
+  <pre>boolean var <b>$_sequence</b></pre>
+  <pre> whether or not this column is a database generated sequence
+</pre>
+ <hr />  <h3 id="attr__setFunction">_setFunction</h3>
+  <pre>string var <b>$_setFunction</b></pre>
+  <pre> the name of an optional set function (will be applied to INSERT/UPDATE queries)
+</pre>
+ <hr />  <h3 id="attr__setOnly">_setOnly</h3>
+  <pre>boolean var <b>$_setOnly</b></pre>
+  <pre> whether or not this column is set-only (cannot be read using SELECT
+  queries)
+</pre>
+ <hr />  <h3 id="attr__type">_type</h3>
+  <pre>string var <b>$_type</b></pre>
+  <pre> the column data type. this will correspond with one of the
+  SRA_DATA_TYPE_* constants
+</pre>
+ <hr />  <h3 id="attr__validators">_validators</h3>
+  <pre>string[] var <b>$_validators</b></pre>
+  <pre> an array of validators associated with this column
+</pre>
+ <hr />  <h3 id="attr__vars">_vars</h3>
+  <pre>array var <b>$_vars</b></pre>
+  <pre> an associative array of validator variables
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_SchemaColumn">SRA_SchemaColumn</h3>
+  <pre>public void function <b>SRA_SchemaColumn</b>($attributes=FALSE, $name=FALSE)</pre>
+  <pre> Constructor
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attributes</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_addAttribute">addAttribute</h3>
+  <pre>public void function <b>addAttribute</b>(string $attribute)</pre>
+  <pre> adds a attribute to the array representing those that this column pertains to
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>string</td>
+      <td><pre>the attribute to add</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_addReadConstraint">addReadConstraint</h3>
+  <pre>public void function <b>addReadConstraint</b>(string $attribute, string $readConstraint)</pre>
+  <pre> adds a readConstraint
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>string</td>
+      <td><pre>the name of the attribute that this read  constraint is for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>readConstraint</td>
+      <td>string</td>
+      <td><pre>the readConstraint to add</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAttributes">getAttributes</h3>
+  <pre>public array function <b>getAttributes</b>()</pre>
+  <pre> returns the attributes corresponding to this column
+</pre>
+ <hr />  <h3 id="method_getBaseAttribute">getBaseAttribute</h3>
+  <pre>public string function <b>getBaseAttribute</b>()</pre>
+  <pre> returns the baseAttribute value for this column
+</pre>
+ <hr />  <h3 id="method_getCardinalityLower">getCardinalityLower</h3>
+  <pre>public string function <b>getCardinalityLower</b>()</pre>
+  <pre> returns the cardinalityLower of this column
+</pre>
+ <hr />  <h3 id="method_getCardinalityUpper">getCardinalityUpper</h3>
+  <pre>public string function <b>getCardinalityUpper</b>()</pre>
+  <pre> returns the cardinalityUpper of this column
+</pre>
+ <hr />  <h3 id="method_getColumnType">getColumnType</h3>
+  <pre>public string function <b>getColumnType</b>()</pre>
+  <pre> returns the columnType value for this column
+</pre>
+ <hr />  <h3 id="method_getDefault">getDefault</h3>
+  <pre>public string function <b>getDefault</b>()</pre>
+  <pre> returns the default value for this column
+</pre>
+ <hr />  <h3 id="method_getName">getName</h3>
+  <pre>public string function <b>getName</b>()</pre>
+  <pre> returns the name of this column
+</pre>
+ <hr />  <h3 id="method_getReadConstraints">getReadConstraints</h3>
+  <pre>public string function <b>getReadConstraints</b>(string $attribute=FALSE, boolean $exploded=FALSE)</pre>
+  <pre> returns the readConstraints for this column
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>string</td>
+      <td><pre>the attribute to return the read constraint for.  if not specified, the entire read constraints array will be returned</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>exploded</td>
+      <td>boolean</td>
+      <td><pre>if TRUE, the results will be exploded into an  associative array of column/value pairs corresponding to the read
+  constraint</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getReferences">getReferences</h3>
+  <pre>public string function <b>getReferences</b>()</pre>
+  <pre> returns the name of the table whose primary key this column references
+</pre>
+ <hr />  <h3 id="method_getRetrieveFunction">getRetrieveFunction</h3>
+  <pre>public string function <b>getRetrieveFunction</b>()</pre>
+  <pre> returns the retrieveFunction used by this column
+</pre>
+ <hr />  <h3 id="method_getSetFunction">getSetFunction</h3>
+  <pre>public string function <b>getSetFunction</b>()</pre>
+  <pre> returns the setFunction used by this column
+</pre>
+ <hr />  <h3 id="method_getType">getType</h3>
+  <pre>public string function <b>getType</b>()</pre>
+  <pre> returns data type for this column
+</pre>
+ <hr />  <h3 id="method_getValidators">getValidators</h3>
+  <pre>public string[] function <b>getValidators</b>()</pre>
+  <pre> returns the column validators
+</pre>
+ <hr />  <h3 id="method_getVars">getVars</h3>
+  <pre>public array function <b>getVars</b>(string $id=FALSE)</pre>
+  <pre> returns the vars used by the validators for this column
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>an optional specific identifier or a var value to return</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_hasAttribute">hasAttribute</h3>
+  <pre>public boolean function <b>hasAttribute</b>(string $attr)</pre>
+  <pre> returns TRUE if the specified attribute uses this column
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>the attribute to check for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_hasValidator">hasValidator</h3>
+  <pre>public boolean function <b>hasValidator</b>(string $validator)</pre>
+  <pre> returns TRUE if the specified validator has been set for this column
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>validator</td>
+      <td>string</td>
+      <td><pre>the constraint to check for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isCardinality">isCardinality</h3>
+  <pre>public boolean function <b>isCardinality</b>()</pre>
+  <pre> returns TRUE if this column utilizes cardinality
+</pre>
+ <hr />  <h3 id="method_isLazyLoad">isLazyLoad</h3>
+  <pre>public boolean function <b>isLazyLoad</b>()</pre>
+  <pre> returns TRUE if this table should be lazy loaded
+</pre>
+ <hr />  <h3 id="method_isLazyLoadExclusive">isLazyLoadExclusive</h3>
+  <pre>public boolean function <b>isLazyLoadExclusive</b>()</pre>
+  <pre> returns TRUE if this table should be lazy loaded exclusively
+</pre>
+ <hr />  <h3 id="method_isOnDeleteCascade">isOnDeleteCascade</h3>
+  <pre>public boolean function <b>isOnDeleteCascade</b>()</pre>
+  <pre> returns TRUE if deletes should be cascaded to this column
+</pre>
+ <hr />  <h3 id="method_isReadOnly">isReadOnly</h3>
+  <pre>public boolean function <b>isReadOnly</b>()</pre>
+  <pre> returns the $_readOnly flag for this column
+</pre>
+ <hr />  <h3 id="method_isSequence">isSequence</h3>
+  <pre>public boolean function <b>isSequence</b>()</pre>
+  <pre> returns the $_sequence flag for this column
+</pre>
+ <hr />  <h3 id="method_isSetOnly">isSetOnly</h3>
+  <pre>public boolean function <b>isSetOnly</b>()</pre>
+  <pre> returns the $_setOnly flag for this column
+</pre>
+ <hr />  <h3 id="method_isWritable">isWritable</h3>
+  <pre>public boolean function <b>isWritable</b>(boolean $insert=FALSE)</pre>
+  <pre> returns TRUE if this column should be included in update and insert queries
+  a column is writable is it is NOT a sequence, and it is not read only
+  (unless insert is TRUE)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>insert</td>
+      <td>boolean</td>
+      <td><pre>whether or not this is being called for the insert  method (read-only attributes are writable for the initial insert)</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setAttributes">setAttributes</h3>
+  <pre>public void function <b>setAttributes</b>(array $attributes)</pre>
+  <pre> sets the attributes that this column corresponds to
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attributes</td>
+      <td>array</td>
+      <td><pre>the attributes to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setBaseAttribute">setBaseAttribute</h3>
+  <pre>public void function <b>setBaseAttribute</b>(string $baseAttribute)</pre>
+  <pre> sets the column baseAttribute value
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>baseAttribute</td>
+      <td>string</td>
+      <td><pre>the baseAttribute value to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setCardinality">setCardinality</h3>
+  <pre>public void function <b>setCardinality</b>(string $cardinality)</pre>
+  <pre> sets the column cardinality flag
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>cardinality</td>
+      <td>string</td>
+      <td><pre>the cardinality to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setCardinalityLower">setCardinalityLower</h3>
+  <pre>public void function <b>setCardinalityLower</b>(int $cardinalityLower)</pre>
+  <pre> sets the column cardinalityLower constraint
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>cardinalityLower</td>
+      <td>int</td>
+      <td><pre>the cardinalityLower to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setCardinalityUpper">setCardinalityUpper</h3>
+  <pre>public void function <b>setCardinalityUpper</b>(int $cardinalityUpper)</pre>
+  <pre> sets the column cardinalityUpper constraint
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>cardinalityUpper</td>
+      <td>int</td>
+      <td><pre>the cardinalityUpper to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setColumnType">setColumnType</h3>
+  <pre>public void function <b>setColumnType</b>(string $columnType)</pre>
+  <pre> sets the column columnType value
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>columnType</td>
+      <td>string</td>
+      <td><pre>the columnType value to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setDefault">setDefault</h3>
+  <pre>public void function <b>setDefault</b>(string $default)</pre>
+  <pre> sets the column default value
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>string</td>
+      <td><pre>the default value to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setLazyLoad">setLazyLoad</h3>
+  <pre>public void function <b>setLazyLoad</b>(string $lazyLoad)</pre>
+  <pre> sets the table lazyLoad flag
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>lazyLoad</td>
+      <td>string</td>
+      <td><pre>the flag to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setLazyLoadExclusive">setLazyLoadExclusive</h3>
+  <pre>public void function <b>setLazyLoadExclusive</b>(string $lazyLoadExclusive)</pre>
+  <pre> sets the table lazyLoadExclusive flag
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>lazyLoadExclusive</td>
+      <td>string</td>
+      <td><pre>the flag to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setName">setName</h3>
+  <pre>public void function <b>setName</b>(string $name)</pre>
+  <pre> sets the column name
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>string</td>
+      <td><pre>the name to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setOnDeleteCascade">setOnDeleteCascade</h3>
+  <pre>public void function <b>setOnDeleteCascade</b>(string $onDeleteCascade)</pre>
+  <pre> sets the column onDeleteCascade
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>onDeleteCascade</td>
+      <td>string</td>
+      <td><pre>the onDeleteCascade to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setReadConstraints">setReadConstraints</h3>
+  <pre>public void function <b>setReadConstraints</b>(array $readConstraints)</pre>
+  <pre> sets the read constraints for this column
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>readConstraints</td>
+      <td>array</td>
+      <td><pre>the read constraints to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setReadOnly">setReadOnly</h3>
+  <pre>public void function <b>setReadOnly</b>(string $readOnly)</pre>
+  <pre> sets the column read only flag
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>readOnly</td>
+      <td>string</td>
+      <td><pre>the read only flag to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setReferences">setReferences</h3>
+  <pre>public void function <b>setReferences</b>(string $references)</pre>
+  <pre> sets the name of the table whose primary key this column references
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>references</td>
+      <td>string</td>
+      <td><pre>the name of the table</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setRetrieveFunction">setRetrieveFunction</h3>
+  <pre>public void function <b>setRetrieveFunction</b>(string $retrieveFunction)</pre>
+  <pre> sets the column retrieveFunction
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>retrieveFunction</td>
+      <td>string</td>
+      <td><pre>the retrieveFunction to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setSequence">setSequence</h3>
+  <pre>public void function <b>setSequence</b>(string $sequence)</pre>
+  <pre> designates this column as a sequence
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>sequence</td>
+      <td>string</td>
+      <td><pre>the flag to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setSetFunction">setSetFunction</h3>
+  <pre>public void function <b>setSetFunction</b>(string $setFunction)</pre>
+  <pre> sets the column setFunction
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>setFunction</td>
+      <td>string</td>
+      <td><pre>the setFunction to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setSetOnly">setSetOnly</h3>
+  <pre>public void function <b>setSetOnly</b>(string $setOnly)</pre>
+  <pre> sets the column set only flag
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>setOnly</td>
+      <td>string</td>
+      <td><pre>the set only flag to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setType">setType</h3>
+  <pre>public void function <b>setType</b>(string $type)</pre>
+  <pre> sets the column data type
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>the type to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setValidators">setValidators</h3>
+  <pre>public void function <b>setValidators</b>(string[] $validators)</pre>
+  <pre> sets the column validators
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>validators</td>
+      <td>string[]</td>
+      <td><pre>the validators to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setVars">setVars</h3>
+  <pre>public void function <b>setVars</b>(array $vars)</pre>
+  <pre> sets the vars used by the validators for this column
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>vars</td>
+      <td>array</td>
+      <td><pre>the vars to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_updateAttributeName">updateAttributeName</h3>
+  <pre>public boolean function <b>updateAttributeName</b>(string $attribute, string $newName)</pre>
+  <pre> changes an attribute name
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>string</td>
+      <td><pre>the current name of the attribute to change</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>newName</td>
+      <td>string</td>
+      <td><pre>the new name for the attribute</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_SchemaColumn object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_SchemaColumn.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

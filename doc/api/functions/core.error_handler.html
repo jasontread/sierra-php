@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>core.error_handler - sierra-php v1.1.3</title>
+</head>
+<body id="function">
+  <h1>function error_handler</h1>
+&nbsp;&nbsp;&nbsp;&nbsp;package <a href="packages/core.html" target="contentFrame">core</a>  <hr />
+  <pre>public void function <b>error_handler</b>(int $errNo, string $errStr, string $errFile, int $errLine, string $errContext=FALSE)</pre>
+  <h2>Comment</h2>
+  <pre> This function can be used as the error handler for php files in a
+  production environment. It contains the logic for deciding whether or not
+  to proceed should a very severe error be thrown.
+ 
+  This is a function because set_error_handler() doesn&#039;t like static methods.
+  As of PHP 4.1.2.
+ 
+  PHP error_reporting() bit values:
+  1    E_ERROR
+  2    E_WARNING
+  4    E_PARSE
+  8    E_NOTICE
+  16   E_CORE_ERROR
+  32   E_CORE_WARNING
+  64   E_COMPILE_ERROR
+  128  E_COMPILE_WARNING
+  256  E_USER_ERROR
+  512  E_USER_WARNING
+  1024 E_USER_NOTICE
+ 
+</pre>
+  <h2>Function Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>errNo</td>
+      <td>int</td>
+      <td><pre>PHP SRA_Error number.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errStr</td>
+      <td>string</td>
+      <td><pre>description of error.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errFile</td>
+      <td>string</td>
+      <td><pre>file where error occured.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errLine</td>
+      <td>int</td>
+      <td><pre>line where error occured.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errContext</td>
+      <td>string</td>
+      <td><pre>context in which the error occurred. Pointer to  a symbol table</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <h2>Other Information</h2>
+  <table border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/core/SRA_Error.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Charlie Killian, charlie@tizac.com</td>
+  </tr>
+  </table>
+</body>
+</html>

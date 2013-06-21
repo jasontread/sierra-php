@@ -1,0 +1,1120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_WS - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_ws_format_json".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_FORMAT_JSON'] = "SRA_WS_FORMAT_JSON";
+  }
+  if ("sra_ws_format_raw".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_FORMAT_RAW'] = "SRA_WS_FORMAT_RAW";
+  }
+  if ("sra_ws_format_xml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_FORMAT_XML'] = "SRA_WS_FORMAT_XML";
+  }
+  if ("sra_ws_global_type_sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GLOBAL_TYPE_SQL'] = "SRA_WS_GLOBAL_TYPE_SQL";
+  }
+  if ("sra_ws_meta_format_json".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_META_FORMAT_JSON'] = "SRA_WS_META_FORMAT_JSON";
+  }
+  if ("sra_ws_meta_format_none".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_META_FORMAT_NONE'] = "SRA_WS_META_FORMAT_NONE";
+  }
+  if ("sra_ws_meta_format_xml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_META_FORMAT_XML'] = "SRA_WS_META_FORMAT_XML";
+  }
+  if ("sra_ws_value_type_attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_ATTR'] = "SRA_WS_VALUE_TYPE_ATTR";
+  }
+  if ("sra_ws_value_type_constant".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_CONSTANT'] = "SRA_WS_VALUE_TYPE_CONSTANT";
+  }
+  if ("sra_ws_value_type_get".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_GET'] = "SRA_WS_VALUE_TYPE_GET";
+  }
+  if ("sra_ws_value_type_get_attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_GET_ATTR'] = "SRA_WS_VALUE_TYPE_GET_ATTR";
+  }
+  if ("sra_ws_value_type_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_FILE'] = "SRA_WS_VALUE_TYPE_FILE";
+  }
+  if ("sra_ws_value_type_global".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_GLOBAL'] = "SRA_WS_VALUE_TYPE_GLOBAL";
+  }
+  if ("sra_ws_value_type_post".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_POST'] = "SRA_WS_VALUE_TYPE_POST";
+  }
+  if ("sra_ws_value_type_session".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_SESSION'] = "SRA_WS_VALUE_TYPE_SESSION";
+  }
+
+  // check attributes
+  if ("_id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__id'] = "_id";
+  }
+  if ("_api".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__api'] = "_api";
+  }
+  if ("_authenticate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__authenticate'] = "_authenticate";
+  }
+  if ("_constraintgroups".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__constraintGroups'] = "_constraintGroups";
+  }
+  if ("_create".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__create'] = "_create";
+  }
+  if ("_delete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__delete'] = "_delete";
+  }
+  if ("_entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__entity'] = "_entity";
+  }
+  if ("_excludeattrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__excludeAttrs'] = "_excludeAttrs";
+  }
+  if ("_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__format'] = "_format";
+  }
+  if ("_formatfixed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__formatFixed'] = "_formatFixed";
+  }
+  if ("_hidden".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__hidden'] = "_hidden";
+  }
+  if ("_hiddenmethod".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__hiddenMethod'] = "_hiddenMethod";
+  }
+  if ("_includeattrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__includeAttrs'] = "_includeAttrs";
+  }
+  if ("_ipauthenticator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__ipAuthenticator'] = "_ipAuthenticator";
+  }
+  if ("_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__limit'] = "_limit";
+  }
+  if ("_limitfixed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__limitFixed'] = "_limitFixed";
+  }
+  if ("_metaformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__metaFormat'] = "_metaFormat";
+  }
+  if ("_metaformatfixed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__metaFormatFixed'] = "_metaFormatFixed";
+  }
+  if ("_rest".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__rest'] = "_rest";
+  }
+  if ("_retrieve".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__retrieve'] = "_retrieve";
+  }
+  if ("_soap".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__soap'] = "_soap";
+  }
+  if ("_subentities".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__subEntities'] = "_subEntities";
+  }
+  if ("_update".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__update'] = "_update";
+  }
+  if ("_validators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__validators'] = "_validators";
+  }
+  if ("_view".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__view'] = "_view";
+  }
+  if ("_viewjson".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__viewJson'] = "_viewJson";
+  }
+  if ("_viewxml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__viewXml'] = "_viewXml";
+  }
+
+  // check methods
+  if ("sra_ws".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_WS'] = "SRA_WS";
+  }
+  if ("getapiuri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getApiUri'] = "getApiUri";
+  }
+  if ("getwsdluri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getWsdlUri'] = "getWsdlUri";
+  }
+  if ("ispublic".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isPublic'] = "isPublic";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("findvalue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_findValue'] = "findValue";
+  }
+  if ("validateattrtype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validateAttrType'] = "validateAttrType";
+  }
+  if ("validatevaluetype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validateValueType'] = "validateValueType";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_WS</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_WS</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> define a single entity specific web service. for more information, review
+  the &quot;ws&quot; element documentation provided in entity-model.dtd
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_FORMAT_JSON">SRA_WS_FORMAT_JSON</a></pre>
+<pre> the json format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_FORMAT_RAW">SRA_WS_FORMAT_RAW</a></pre>
+<pre> the raw format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_FORMAT_XML">SRA_WS_FORMAT_XML</a></pre>
+<pre> the xml format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GLOBAL_TYPE_SQL">SRA_WS_GLOBAL_TYPE_SQL</a></pre>
+<pre> identifier for the sql service type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_META_FORMAT_JSON">SRA_WS_META_FORMAT_JSON</a></pre>
+<pre> the json meta format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_META_FORMAT_NONE">SRA_WS_META_FORMAT_NONE</a></pre>
+<pre> the none meta format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_META_FORMAT_XML">SRA_WS_META_FORMAT_XML</a></pre>
+<pre> the xml meta format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_ATTR">SRA_WS_VALUE_TYPE_ATTR</a></pre>
+<pre> specifies that an attr is the name of an attribute in the entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_CONSTANT">SRA_WS_VALUE_TYPE_CONSTANT</a></pre>
+<pre> specifies that an attr/value is the name of a php constant
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_GET">SRA_WS_VALUE_TYPE_GET</a></pre>
+<pre> specifies that an attr/value is the name of a value in the get headers
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_GET_ATTR">SRA_WS_VALUE_TYPE_GET_ATTR</a></pre>
+<pre> specifies that an attr/value is a &#039;getAttribute&#039; value for the entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_FILE">SRA_WS_VALUE_TYPE_FILE</a></pre>
+<pre> specifies that an attr/value is the name of a file uploaded and located in
+  the global $_FILES array. this can only be used for value types not attrs
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_GLOBAL">SRA_WS_VALUE_TYPE_GLOBAL</a></pre>
+<pre> specifies that an attr/value is the name of a php global variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_POST">SRA_WS_VALUE_TYPE_POST</a></pre>
+<pre> specifies that an attr/value is the name of a value in the post headers
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_SESSION">SRA_WS_VALUE_TYPE_SESSION</a></pre>
+<pre> specifies that an attr/value is the name of a session variable
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__id">_id</a></pre>
+<pre> the web service name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__api">_api</a></pre>
+<pre> the resource key to use for api documentation for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__authenticate">_authenticate</a></pre>
+<pre> whether or not to authenticate clients invoking this service (an
+  authenticator must be configured for the the sra-ws-gateway.php script)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>SRA_WSConstraintGroup[] </pre></td>
+      <td>
+        <pre><a href="#attr__constraintGroups">_constraintGroups</a></pre>
+<pre> optional constraint groups that should be applied to this web service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__create">_create</a></pre>
+<pre> can a user use this service to CREATE a new instance of $_entity?
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__delete">_delete</a></pre>
+<pre> can the user use this service to DELETE an existing instance of $_entity?
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__entity">_entity</a></pre>
+<pre> the name of the entity this web service has been defined for
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__excludeAttrs">_excludeAttrs</a></pre>
+<pre> the names of attributes that should be excluded from the response
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__format">_format</a></pre>
+<pre> the default response format to use for this service. either &quot;json&quot;, &quot;xml&quot;
+  or &quot;raw&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__formatFixed">_formatFixed</a></pre>
+<pre> whether or not $_format is fixed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__hidden">_hidden</a></pre>
+<pre> hidden services are services that can be utilized but are not included in
+  the auto-generated api documentation/wsdl
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__hiddenMethod">_hiddenMethod</a></pre>
+<pre> an optional path to a static method that should be invoked to determine
+  whether or not this service is hidden IF &#039;hidden&#039; is FALSE (specified in
+  the same format as the ws-global &#039;identifier&#039; when type is &#039;method&#039;). this
+  method should return a boolean value, TRUE to hide, FALSE to display
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__includeAttrs">_includeAttrs</a></pre>
+<pre> the names of attributes that should be included in the response
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__ipAuthenticator">_ipAuthenticator</a></pre>
+<pre> an optional fixed or app relative path to a PHP source file containing an
+  ip address authentication method to be invoked
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__limit">_limit</a></pre>
+<pre> the default sql limit for this web service output (the maximum # of
+  instances that meet the service call constraints to return)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__limitFixed">_limitFixed</a></pre>
+<pre> whether or not &quot;limit&quot; is fixed, meaning the client cannot increase it
+  using the &quot;ws-limit&quot; request parameter
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__metaFormat">_metaFormat</a></pre>
+<pre> the default response metadata format. either &quot;json&quot;, &quot;xml&quot; or &quot;none&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__metaFormatFixed">_metaFormatFixed</a></pre>
+<pre> whether or not $_metaFormat is fixed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__rest">_rest</a></pre>
+<pre> whether or not to enable this service via rest
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__retrieve">_retrieve</a></pre>
+<pre> can a user use this service to retrieve instances of $_entity?
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__soap">_soap</a></pre>
+<pre> whether or not to enable this service via soap
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__subEntities">_subEntities</a></pre>
+<pre> whether or not to set the &#039;insertSubEntities&#039;/&#039;updateSubEntities&#039; flags to
+  TRUE (for CREATE and UPDATE invocations only)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__update">_update</a></pre>
+<pre> can a user use this service to UPDATE a new instance of $_entity?
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__validators">_validators</a></pre>
+<pre> additional validation methods that should be invoked when for create and
+  update requests
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__view">_view</a></pre>
+<pre> an optional entity view to use as the service response output
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__viewJson">_viewJson</a></pre>
+<pre> an optional entity view to use as the service response output when the
+  $_format requested is json
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__viewXml">_viewXml</a></pre>
+<pre> an optional entity view to use as the service response output when the
+  $_format requested is xml
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_WS">SRA_WS</a>(array $conf, string $entity)</pre>
+<pre> parses the service configuration and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getApiUri">getApiUri</a>()</pre>
+<pre> returns the uri for the api documentation for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getWsdlUri">getWsdlUri</a>()</pre>
+<pre> returns the uri for the wsdl documentation for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isPublic">isPublic</a>()</pre>
+<pre> returns TRUE if this is a public service. public services are those with
+  either soap or rest enabled and not hidden
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_WS object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_findValue">findValue</a>(string $id, string $type)</pre>
+<pre> returns the a value based on the identifier ($id) and type ($type)
+  specified, where $type is one of the following: SRA_WS_VALUE_TYPE_CONSTANT,
+  SRA_WS_VALUE_TYPE_GET_ATTR, SRA_WS_VALUE_TYPE_GET,
+  SRA_WS_VALUE_TYPE_GLOBAL, SRA_WS_VALUE_TYPE_FILE, SRA_WS_VALUE_TYPE_POST,
+  SRA_WS_VALUE_TYPE_SESSION
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_validateAttrType">validateAttrType</a>(int $attrType)</pre>
+<pre> validates an attribute type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_validateValueType">validateValueType</a>(int $valueType)</pre>
+<pre> validates an value type
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_WS_FORMAT_JSON">SRA_WS_FORMAT_JSON</h3>
+  <pre>string <b>SRA_WS_FORMAT_JSON</b> = 'json'</pre>
+  <pre> the json format identifier
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_FORMAT_RAW">SRA_WS_FORMAT_RAW</h3>
+  <pre>string <b>SRA_WS_FORMAT_RAW</b> = 'raw'</pre>
+  <pre> the raw format identifier
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_FORMAT_XML">SRA_WS_FORMAT_XML</h3>
+  <pre>string <b>SRA_WS_FORMAT_XML</b> = 'xml'</pre>
+  <pre> the xml format identifier
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_GLOBAL_TYPE_SQL">SRA_WS_GLOBAL_TYPE_SQL</h3>
+  <pre>string <b>SRA_WS_GLOBAL_TYPE_SQL</b> = 'sql'</pre>
+  <pre> identifier for the sql service type
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_META_FORMAT_JSON">SRA_WS_META_FORMAT_JSON</h3>
+  <pre>string <b>SRA_WS_META_FORMAT_JSON</b> = 'json'</pre>
+  <pre> the json meta format identifier
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_META_FORMAT_NONE">SRA_WS_META_FORMAT_NONE</h3>
+  <pre>string <b>SRA_WS_META_FORMAT_NONE</b> = 'none'</pre>
+  <pre> the none meta format identifier
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_META_FORMAT_XML">SRA_WS_META_FORMAT_XML</h3>
+  <pre>string <b>SRA_WS_META_FORMAT_XML</b> = 'xml'</pre>
+  <pre> the xml meta format identifier
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_ATTR">SRA_WS_VALUE_TYPE_ATTR</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_ATTR</b> = 'attr'</pre>
+  <pre> specifies that an attr is the name of an attribute in the entity
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_CONSTANT">SRA_WS_VALUE_TYPE_CONSTANT</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_CONSTANT</b> = 'constant'</pre>
+  <pre> specifies that an attr/value is the name of a php constant
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_GET">SRA_WS_VALUE_TYPE_GET</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_GET</b> = 'get'</pre>
+  <pre> specifies that an attr/value is the name of a value in the get headers
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_GET_ATTR">SRA_WS_VALUE_TYPE_GET_ATTR</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_GET_ATTR</b> = 'getAttr'</pre>
+  <pre> specifies that an attr/value is a &#039;getAttribute&#039; value for the entity
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_FILE">SRA_WS_VALUE_TYPE_FILE</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_FILE</b> = 'file'</pre>
+  <pre> specifies that an attr/value is the name of a file uploaded and located in
+  the global $_FILES array. this can only be used for value types not attrs
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_GLOBAL">SRA_WS_VALUE_TYPE_GLOBAL</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_GLOBAL</b> = 'global'</pre>
+  <pre> specifies that an attr/value is the name of a php global variable
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_POST">SRA_WS_VALUE_TYPE_POST</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_POST</b> = 'post'</pre>
+  <pre> specifies that an attr/value is the name of a value in the post headers
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_SESSION">SRA_WS_VALUE_TYPE_SESSION</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_SESSION</b> = 'session'</pre>
+  <pre> specifies that an attr/value is the name of a session variable
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__id">_id</h3>
+  <pre>string var <b>$_id</b></pre>
+  <pre> the web service name
+</pre>
+ <hr />  <h3 id="attr__api">_api</h3>
+  <pre>string var <b>$_api</b></pre>
+  <pre> the resource key to use for api documentation for this service
+</pre>
+ <hr />  <h3 id="attr__authenticate">_authenticate</h3>
+  <pre>boolean var <b>$_authenticate</b></pre>
+  <pre> whether or not to authenticate clients invoking this service (an
+  authenticator must be configured for the the sra-ws-gateway.php script)
+</pre>
+ <hr />  <h3 id="attr__constraintGroups">_constraintGroups</h3>
+  <pre>SRA_WSConstraintGroup[] var <b>$_constraintGroups</b> = array()</pre>
+  <pre> optional constraint groups that should be applied to this web service
+</pre>
+ <hr />  <h3 id="attr__create">_create</h3>
+  <pre>boolean var <b>$_create</b></pre>
+  <pre> can a user use this service to CREATE a new instance of $_entity?
+</pre>
+ <hr />  <h3 id="attr__delete">_delete</h3>
+  <pre>boolean var <b>$_delete</b></pre>
+  <pre> can the user use this service to DELETE an existing instance of $_entity?
+</pre>
+ <hr />  <h3 id="attr__entity">_entity</h3>
+  <pre>string var <b>$_entity</b></pre>
+  <pre> the name of the entity this web service has been defined for
+</pre>
+ <hr />  <h3 id="attr__excludeAttrs">_excludeAttrs</h3>
+  <pre>array var <b>$_excludeAttrs</b></pre>
+  <pre> the names of attributes that should be excluded from the response
+</pre>
+ <hr />  <h3 id="attr__format">_format</h3>
+  <pre>string var <b>$_format</b></pre>
+  <pre> the default response format to use for this service. either &quot;json&quot;, &quot;xml&quot;
+  or &quot;raw&quot;
+</pre>
+ <hr />  <h3 id="attr__formatFixed">_formatFixed</h3>
+  <pre>boolean var <b>$_formatFixed</b></pre>
+  <pre> whether or not $_format is fixed
+</pre>
+ <hr />  <h3 id="attr__hidden">_hidden</h3>
+  <pre>boolean var <b>$_hidden</b></pre>
+  <pre> hidden services are services that can be utilized but are not included in
+  the auto-generated api documentation/wsdl
+</pre>
+ <hr />  <h3 id="attr__hiddenMethod">_hiddenMethod</h3>
+  <pre>string var <b>$_hiddenMethod</b></pre>
+  <pre> an optional path to a static method that should be invoked to determine
+  whether or not this service is hidden IF &#039;hidden&#039; is FALSE (specified in
+  the same format as the ws-global &#039;identifier&#039; when type is &#039;method&#039;). this
+  method should return a boolean value, TRUE to hide, FALSE to display
+</pre>
+ <hr />  <h3 id="attr__includeAttrs">_includeAttrs</h3>
+  <pre>array var <b>$_includeAttrs</b></pre>
+  <pre> the names of attributes that should be included in the response
+</pre>
+ <hr />  <h3 id="attr__ipAuthenticator">_ipAuthenticator</h3>
+  <pre>string var <b>$_ipAuthenticator</b></pre>
+  <pre> an optional fixed or app relative path to a PHP source file containing an
+  ip address authentication method to be invoked
+</pre>
+ <hr />  <h3 id="attr__limit">_limit</h3>
+  <pre>int var <b>$_limit</b></pre>
+  <pre> the default sql limit for this web service output (the maximum # of
+  instances that meet the service call constraints to return)
+</pre>
+ <hr />  <h3 id="attr__limitFixed">_limitFixed</h3>
+  <pre>boolean var <b>$_limitFixed</b></pre>
+  <pre> whether or not &quot;limit&quot; is fixed, meaning the client cannot increase it
+  using the &quot;ws-limit&quot; request parameter
+</pre>
+ <hr />  <h3 id="attr__metaFormat">_metaFormat</h3>
+  <pre>string var <b>$_metaFormat</b></pre>
+  <pre> the default response metadata format. either &quot;json&quot;, &quot;xml&quot; or &quot;none&quot;
+</pre>
+ <hr />  <h3 id="attr__metaFormatFixed">_metaFormatFixed</h3>
+  <pre>boolean var <b>$_metaFormatFixed</b></pre>
+  <pre> whether or not $_metaFormat is fixed
+</pre>
+ <hr />  <h3 id="attr__rest">_rest</h3>
+  <pre>boolean var <b>$_rest</b></pre>
+  <pre> whether or not to enable this service via rest
+</pre>
+ <hr />  <h3 id="attr__retrieve">_retrieve</h3>
+  <pre>boolean var <b>$_retrieve</b></pre>
+  <pre> can a user use this service to retrieve instances of $_entity?
+</pre>
+ <hr />  <h3 id="attr__soap">_soap</h3>
+  <pre>boolean var <b>$_soap</b></pre>
+  <pre> whether or not to enable this service via soap
+</pre>
+ <hr />  <h3 id="attr__subEntities">_subEntities</h3>
+  <pre>boolean var <b>$_subEntities</b></pre>
+  <pre> whether or not to set the &#039;insertSubEntities&#039;/&#039;updateSubEntities&#039; flags to
+  TRUE (for CREATE and UPDATE invocations only)
+</pre>
+ <hr />  <h3 id="attr__update">_update</h3>
+  <pre>boolean var <b>$_update</b></pre>
+  <pre> can a user use this service to UPDATE a new instance of $_entity?
+</pre>
+ <hr />  <h3 id="attr__validators">_validators</h3>
+  <pre>array var <b>$_validators</b></pre>
+  <pre> additional validation methods that should be invoked when for create and
+  update requests
+</pre>
+ <hr />  <h3 id="attr__view">_view</h3>
+  <pre>string var <b>$_view</b></pre>
+  <pre> an optional entity view to use as the service response output
+</pre>
+ <hr />  <h3 id="attr__viewJson">_viewJson</h3>
+  <pre>string var <b>$_viewJson</b></pre>
+  <pre> an optional entity view to use as the service response output when the
+  $_format requested is json
+</pre>
+ <hr />  <h3 id="attr__viewXml">_viewXml</h3>
+  <pre>string var <b>$_viewXml</b></pre>
+  <pre> an optional entity view to use as the service response output when the
+  $_format requested is xml
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_WS">SRA_WS</h3>
+  <pre>public void function <b>SRA_WS</b>(array $conf, string $entity)</pre>
+  <pre> parses the service configuration and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>array</td>
+      <td><pre>the xml configuration array for this service</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>string</td>
+      <td><pre>the name of the entity this web service has been  defined for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getApiUri">getApiUri</h3>
+  <pre>public string function <b>getApiUri</b>()</pre>
+  <pre> returns the uri for the api documentation for this service
+</pre>
+ <hr />  <h3 id="method_getWsdlUri">getWsdlUri</h3>
+  <pre>public string function <b>getWsdlUri</b>()</pre>
+  <pre> returns the uri for the wsdl documentation for this service
+</pre>
+ <hr />  <h3 id="method_isPublic">isPublic</h3>
+  <pre>public boolean function <b>isPublic</b>()</pre>
+  <pre> returns TRUE if this is a public service. public services are those with
+  either soap or rest enabled and not hidden
+</pre>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_WS object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_findValue">findValue</h3>
+  <pre>public mixed function <b>findValue</b>(string $id, string $type)</pre>
+  <pre> returns the a value based on the identifier ($id) and type ($type)
+  specified, where $type is one of the following: SRA_WS_VALUE_TYPE_CONSTANT,
+  SRA_WS_VALUE_TYPE_GET_ATTR, SRA_WS_VALUE_TYPE_GET,
+  SRA_WS_VALUE_TYPE_GLOBAL, SRA_WS_VALUE_TYPE_FILE, SRA_WS_VALUE_TYPE_POST,
+  SRA_WS_VALUE_TYPE_SESSION
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the value identifier</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>the value type</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_validateAttrType">validateAttrType</h3>
+  <pre>public boolean function <b>validateAttrType</b>(int $attrType)</pre>
+  <pre> validates an attribute type
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attrType</td>
+      <td>int</td>
+      <td><pre>the attribute type to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_validateValueType">validateValueType</h3>
+  <pre>public boolean function <b>validateValueType</b>(int $valueType)</pre>
+  <pre> validates an value type
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>valueType</td>
+      <td>int</td>
+      <td><pre>the value type to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_WS.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

@@ -1,0 +1,1839 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>sierra-config.dtd - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_workflow_task_due_date_rel_cur".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR";
+  }
+  if ("sra_workflow_task_due_date_rel_wf_start".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START";
+  }
+  if ("sra_workflow_task_due_date_rel_wf_due_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE";
+  }
+  if ("sra_workflow_task_due_date_rel_step_due_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE";
+  }
+
+
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+  // elements
+  if ("sierra-config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config'] = "sierra-config";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::compress-output".indexOf(str) != -1 || "compress-output".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_compress-output'] = "sierra-config::compress-output";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::date-format".indexOf(str) != -1 || "date-format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_date-format'] = "sierra-config::date-format";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::date-only-format".indexOf(str) != -1 || "date-only-format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_date-only-format'] = "sierra-config::date-only-format";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::debug".indexOf(str) != -1 || "debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_debug'] = "sierra-config::debug";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::default-country".indexOf(str) != -1 || "default-country".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_default-country'] = "sierra-config::default-country";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::default-currency".indexOf(str) != -1 || "default-currency".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_default-currency'] = "sierra-config::default-currency";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::default-language".indexOf(str) != -1 || "default-language".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_default-language'] = "sierra-config::default-language";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::disable-scheduler".indexOf(str) != -1 || "disable-scheduler".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_disable-scheduler'] = "sierra-config::disable-scheduler";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::error-log-file".indexOf(str) != -1 || "error-log-file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_error-log-file'] = "sierra-config::error-log-file";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::error-mask".indexOf(str) != -1 || "error-mask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_error-mask'] = "sierra-config::error-mask";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::log-dir".indexOf(str) != -1 || "log-dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_log-dir'] = "sierra-config::log-dir";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::resources-file".indexOf(str) != -1 || "resources-file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_resources-file'] = "sierra-config::resources-file";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::tpl-dir".indexOf(str) != -1 || "tpl-dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_tpl-dir'] = "sierra-config::tpl-dir";
+  }
+  // sierra-config element attributes
+  if ("sierra-config".indexOf(str) != -1 || "sierra-config::time-zone".indexOf(str) != -1 || "time-zone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_sierra-config_time-zone'] = "sierra-config::time-zone";
+  }
+  if ("app".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_app'] = "app";
+  }
+  // app element attributes
+  if ("app".indexOf(str) != -1 || "app::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_app_key'] = "app::key";
+  }
+  // app element attributes
+  if ("app".indexOf(str) != -1 || "app::dir".indexOf(str) != -1 || "dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_app_dir'] = "app::dir";
+  }
+  if ("authenticator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator'] = "authenticator";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_key'] = "authenticator::key";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::access-log".indexOf(str) != -1 || "access-log".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_access-log'] = "authenticator::access-log";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::cancel-tpl".indexOf(str) != -1 || "cancel-tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_cancel-tpl'] = "authenticator::cancel-tpl";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::entity-type".indexOf(str) != -1 || "entity-type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_entity-type'] = "authenticator::entity-type";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::entity-user-col".indexOf(str) != -1 || "entity-user-col".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_entity-user-col'] = "authenticator::entity-user-col";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::failure-log".indexOf(str) != -1 || "failure-log".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_failure-log'] = "authenticator::failure-log";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::global-var".indexOf(str) != -1 || "global-var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_global-var'] = "authenticator::global-var";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::logout-fwd-uri".indexOf(str) != -1 || "logout-fwd-uri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_logout-fwd-uri'] = "authenticator::logout-fwd-uri";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::logout-get-var".indexOf(str) != -1 || "logout-get-var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_logout-get-var'] = "authenticator::logout-get-var";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::logout-post-var".indexOf(str) != -1 || "logout-post-var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_logout-post-var'] = "authenticator::logout-post-var";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::logout-tpl".indexOf(str) != -1 || "logout-tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_logout-tpl'] = "authenticator::logout-tpl";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::match-fail-tpl".indexOf(str) != -1 || "match-fail-tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_match-fail-tpl'] = "authenticator::match-fail-tpl";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::max-attempts".indexOf(str) != -1 || "max-attempts".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_max-attempts'] = "authenticator::max-attempts";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::max-attempt-ip".indexOf(str) != -1 || "max-attempt-ip".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_max-attempt-ip'] = "authenticator::max-attempt-ip";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::max-attempt-tpl".indexOf(str) != -1 || "max-attempt-tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_max-attempt-tpl'] = "authenticator::max-attempt-tpl";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::max-attempt-timeout".indexOf(str) != -1 || "max-attempt-timeout".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_max-attempt-timeout'] = "authenticator::max-attempt-timeout";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::path".indexOf(str) != -1 || "path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_path'] = "authenticator::path";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::resource".indexOf(str) != -1 || "resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_resource'] = "authenticator::resource";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::sys-err-tpl".indexOf(str) != -1 || "sys-err-tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_sys-err-tpl'] = "authenticator::sys-err-tpl";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::tpl-var".indexOf(str) != -1 || "tpl-var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_tpl-var'] = "authenticator::tpl-var";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::type".indexOf(str) != -1 || "type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_type'] = "authenticator::type";
+  }
+  // authenticator element attributes
+  if ("authenticator".indexOf(str) != -1 || "authenticator::use-sessions".indexOf(str) != -1 || "use-sessions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_authenticator_use-sessions'] = "authenticator::use-sessions";
+  }
+  if ("db".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db'] = "db";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_key'] = "db::key";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::bool-false".indexOf(str) != -1 || "bool-false".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_bool-false'] = "db::bool-false";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::bool-false-rep".indexOf(str) != -1 || "bool-false-rep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_bool-false-rep'] = "db::bool-false-rep";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::bool-true".indexOf(str) != -1 || "bool-true".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_bool-true'] = "db::bool-true";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::bool-true-rep".indexOf(str) != -1 || "bool-true-rep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_bool-true-rep'] = "db::bool-true-rep";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::error-level".indexOf(str) != -1 || "error-level".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_error-level'] = "db::error-level";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::ftp-user".indexOf(str) != -1 || "ftp-user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_ftp-user'] = "db::ftp-user";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::ftp-password".indexOf(str) != -1 || "ftp-password".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_ftp-password'] = "db::ftp-password";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::gmt".indexOf(str) != -1 || "gmt".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_gmt'] = "db::gmt";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::host".indexOf(str) != -1 || "host".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_host'] = "db::host";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::import-file-dir".indexOf(str) != -1 || "import-file-dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_import-file-dir'] = "db::import-file-dir";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::name".indexOf(str) != -1 || "name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_name'] = "db::name";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::password".indexOf(str) != -1 || "password".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_password'] = "db::password";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::port".indexOf(str) != -1 || "port".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_port'] = "db::port";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::type".indexOf(str) != -1 || "type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_type'] = "db::type";
+  }
+  // db element attributes
+  if ("db".indexOf(str) != -1 || "db::user".indexOf(str) != -1 || "user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_db_user'] = "db::user";
+  }
+  if ("table-cache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_table-cache'] = "table-cache";
+  }
+  // table-cache element attributes
+  if ("table-cache".indexOf(str) != -1 || "table-cache::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_table-cache_key'] = "table-cache::key";
+  }
+  // table-cache element attributes
+  if ("table-cache".indexOf(str) != -1 || "table-cache::expire".indexOf(str) != -1 || "expire".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_table-cache_expire'] = "table-cache::expire";
+  }
+  // table-cache element attributes
+  if ("table-cache".indexOf(str) != -1 || "table-cache::dir".indexOf(str) != -1 || "dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_table-cache_dir'] = "table-cache::dir";
+  }
+  if ("ini-set".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ini-set'] = "ini-set";
+  }
+  // ini-set element attributes
+  if ("ini-set".indexOf(str) != -1 || "ini-set::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ini-set_key'] = "ini-set::key";
+  }
+  // ini-set element attributes
+  if ("ini-set".indexOf(str) != -1 || "ini-set::value".indexOf(str) != -1 || "value".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ini-set_value'] = "ini-set::value";
+  }
+  if ("scheduled-task".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_scheduled-task'] = "scheduled-task";
+  }
+  // scheduled-task element attributes
+  if ("scheduled-task".indexOf(str) != -1 || "scheduled-task::class-name".indexOf(str) != -1 || "class-name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_scheduled-task_class-name'] = "scheduled-task::class-name";
+  }
+  // scheduled-task element attributes
+  if ("scheduled-task".indexOf(str) != -1 || "scheduled-task::instance".indexOf(str) != -1 || "instance".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_scheduled-task_instance'] = "scheduled-task::instance";
+  }
+  // scheduled-task element attributes
+  if ("scheduled-task".indexOf(str) != -1 || "scheduled-task::log".indexOf(str) != -1 || "log".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_scheduled-task_log'] = "scheduled-task::log";
+  }
+  // scheduled-task element attributes
+  if ("scheduled-task".indexOf(str) != -1 || "scheduled-task::method".indexOf(str) != -1 || "method".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_scheduled-task_method'] = "scheduled-task::method";
+  }
+  // scheduled-task element attributes
+  if ("scheduled-task".indexOf(str) != -1 || "scheduled-task::path".indexOf(str) != -1 || "path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_scheduled-task_path'] = "scheduled-task::path";
+  }
+  // scheduled-task element attributes
+  if ("scheduled-task".indexOf(str) != -1 || "scheduled-task::schedule".indexOf(str) != -1 || "schedule".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_scheduled-task_schedule'] = "scheduled-task::schedule";
+  }
+  if ("param".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_param'] = "param";
+  }
+  // param element attributes
+  if ("param".indexOf(str) != -1 || "param::id".indexOf(str) != -1 || "id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_param_id'] = "param::id";
+  }
+  // param element attributes
+  if ("param".indexOf(str) != -1 || "param::type".indexOf(str) != -1 || "type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_param_type'] = "param::type";
+  }
+  // param element attributes
+  if ("param".indexOf(str) != -1 || "param::value".indexOf(str) != -1 || "value".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_param_value'] = "param::value";
+  }
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="dtd" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">sierra-config.dtd</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/etc.html" target="contentFrame">etc</a></p>  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>DTD Information</h2>
+  <ul>
+    <li><a href="#comments">DTD Comments</a></li>
+    <li><a href="#elements">Elements</a></li>
+    <li><a href="#element_details">Element Details</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>XML DTD for SIERRA sierra-config configuration
+
+This file stores the sierra-config (global) configuration directives. It is stored in 
+the file sierra-config as &quot;SRA-DIR . /etc/sierra-config.xml&quot; (an xml file).
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the &quot;xml&quot; declaration):
+
+&lt;!DOCTYPE sierra-config PUBLIC &quot;-//SIERRA//DTD SIERRA CONFIG//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/etc/sierra-config.dtd&quot;&gt;
+</pre>
+  
+
+  <h2 id="elements">Elements</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th><pre><a href="#element_sierra-config">sierra-config</a><strong> [root element]</strong></pre></th>
+      <td><pre>The &quot;sierra-config&quot; element is the root element of the SIERRA System 
+Configuration. Nested &quot;param&quot; elements may be used to specify SIERRA specific 
+configuration parameters. these are accessible through the 
+SRA_Controller::getSysParam method</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_app">app</a></pre></th>
+      <td><pre>The &quot;app&quot; element is used to list all of the applications that are deployed in
+a given instance of the sierra framework</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_authenticator">authenticator</a></pre></th>
+      <td><pre>The &quot;authenticator&quot; element defines a single authentication system.</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_db">db</a></pre></th>
+      <td><pre>A &quot;db&quot; element defines a system wide db configuration. All applications will 
+automatically inherit access to the database defined here. These databases 
+are accessible through the static SRA_Controller::getSysDb($id) method. the first 
+&quot;db&quot; element listed in the xml configuration will be considered the default 
+(returned if no $id parameter is passed to SRA_Controller::getSysDb)</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_table-cache">table-cache</a></pre></th>
+      <td><pre>The &quot;table-cache&quot; element defines optional cache settings for a single 
+table in the database</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_ini-set">ini-set</a></pre></th>
+      <td><pre>The &quot;ini-set&quot; element defines one or more php ini configuration options that 
+should be set when the framework is utilized. these values will override the 
+default values specified in the php.ini file</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_scheduled-task">scheduled-task</a></pre></th>
+      <td><pre>The &quot;scheduled-task&quot; element should be used to define tasks that should be 
+performed on a scheduled basis. the task can be either an executable file, 
+or a php function or method (instance or static). tasks can be scheduled in 
+either the sierra-config or individual app-config files. the schedule provided 
+for each task is identical to the schedule specified for cron jobs (see 
+&#039;schedule&#039; attribute documentation provided below). nested params can be used 
+for php method-based tasks and will be passed to that method in the form of an 
+associative array (param &#039;type&#039; will be ignored). dates and times are evaluated 
+according to the &quot;time-zone&quot; specified in sierra-config</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_param">param</a></pre></th>
+      <td><pre>The &quot;param&quot; element defines key/value/type for specific configuration parameters</pre></td>
+    </tr>
+  </table>
+  
+  <h2 id="element_details">Element Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_sierra-config">sierra-config [root element]</h3>
+  <pre>The &quot;sierra-config&quot; element is the root element of the SIERRA System 
+Configuration. Nested &quot;param&quot; elements may be used to specify SIERRA specific 
+configuration parameters. these are accessible through the 
+SRA_Controller::getSysParam method</pre>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_app">app</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_authenticator">authenticator</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_db">db</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_ini-set">ini-set</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_param">param</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_scheduled-task">scheduled-task</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_sierra-config_compress-output">
+      <th><pre>compress-output</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not to automatically buffer and compress output
+whenever possible. in order to enable this option, the php 
+binary must be compiled --with-zlib (a fairly standard 
+configuration). when output compression is enabled, the 
+framework will first determine if it is supported by the 
+client and if --with-zip is configured (enables the php 
+&quot;gzencode&quot; function). is this check passes, then the header 
+&quot;Content-Encoding: gzip&quot; will be sent to the client and all 
+output will be buffered until the scripts completion when it 
+will be dumped using the &quot;gzencode&quot; function. this feature 
+essentially does the same thing as the apache mod_gzip module 
+for any output produced within the framework (static images, 
+css files, javascript files, etc. would not be included). if 
+compression is already enabled at the web server level, 
+framework compression should not be used
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_date-format">
+      <th><pre>date-format</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"Y-m-d</pre></td>
+      <td>No</td>
+      <td><pre>The default date format (used by SRA_GregorianDate::format).
+For details on acceptable formats, see: 
+  http://us3.php.net/manual/en/function.date.php
+All apps will automatically inherit this format unless 
+another has been specified in their corresponding 
+app-config. This format can be overriden using the 
+SRA_GregorianDate::format method. This formatting string can 
+be retrieved using SRA_Controller::getSysDateFormat(). If not 
+specified, SRA_DEFAULT_DATE_FORMAT (see lib/core/SRA_Controller.php)
+will be returned when this method is invoked.
+For SRA_Locale specific date formatting, see etc/l10n/locales.xml. 
+SRA_Locale specific date formatting is returned by 
+SRA_GregorianDate::format() which will automatically attempt 
+to detect and use the preferred user locale (based on browser 
+settings) and return the date formatted in that corresponding 
+format. This value can be retrieved usinig 
+SRA_Controller::getSysDateFormat
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_date-only-format">
+      <th><pre>date-only-format</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"Y-m-d"</pre></td>
+      <td>No</td>
+      <td><pre>same as date-format, but does not include time
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_debug">
+      <th><pre>debug</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>Whether or not the system is in debug mode. can be detected
+in your application using SRA_Controller::isSysInDebug
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_default-country">
+      <th><pre>default-country</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_LOCALE_DEFAULT_COUNTRY::php"</pre></td>
+      <td>No</td>
+      <td><pre>the default SRA_Locale country to use. can be retrieved using
+SRA_Controller::getSysDefaultCountry. this value will be used 
+as the country value whenever a user locale provided is not 
+defined in the locales.xml file and no default-country has 
+been specified in app-config. if not specified, the 
+util/l10n/SRA_Locale constant value SRA_LOCALE_DEFAULT_COUNTRY 
+will be used. The default sys locale can be retrieved using 
+SRA_Controller::getSysLocale. this will locale will utilize 
+both the default sys country and language
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_default-currency">
+      <th><pre>default-currency</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_CURRENCY_DEFAULT::php"</pre></td>
+      <td>No</td>
+      <td><pre>the default SRA_Currency currency code to use. can be
+retrieved using SRA_Controller::getSysDefaultCurrency. this 
+value will be used as the currency value whenever a user 
+locale currency is not supported. if not specified, the 
+util/l10n/SRA_Currency constant value SRA_CURRENCY_DEFAULT 
+will be used
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_default-language">
+      <th><pre>default-language</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_LOCALE_DEFAULT_LANGUAGE::php"</pre></td>
+      <td>No</td>
+      <td><pre>the default SRA_Locale language to use. can be retrieved using
+SRA_Controller::getSysDefaultLanguage. this value will be used 
+as the language value whenever a user locale provided is not 
+defined in the locales.xml file and no default-language has 
+been specified in app-config. if not specified, the 
+util/l10n/SRA_Locale constant value SRA_LOCALE_DEFAULT_LANGUAGE 
+will be used. The default sys locale can be retrieved using 
+SRA_Controller::getSysLocale. this will locale will utilize 
+both the default sys country and language
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_disable-scheduler">
+      <th><pre>disable-scheduler</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not to disable the task scheduler. when disabled,
+scheduled-task defined tasks will not be run
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_error-log-file">
+      <th><pre>error-log-file</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_DEFAULT_ERROR_LOG_FILE::php"</pre></td>
+      <td>No</td>
+      <td><pre>This variable defines the location of the system wide error
+log file. This is the location where all log entries will be 
+written to. it should be a path that is relative to the log-dir. 
+the default value if not specified is the constant value 
+SRA_DEFAULT_ERROR_LOG_FILE in SRA_Controller.php
+This value can be retrieved usinig SRA_Controller::getSysErrorLogFile
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_error-mask">
+      <th><pre>error-mask</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_DEFAULT_ERROR_MASK::php"</pre></td>
+      <td>No</td>
+      <td><pre>Defines the logging level for errors. This is a bitmask value.
+ Example: php:: SRA_ERROR_ALL ^ SRA_ERROR-OPERATIONAL ::php. 
+ the default value if not specified is the constant value 
+ SRA_DEFAULT_ERROR_MASK in SRA_Error.php
+ This value can be retrieved usinig SRA_Controller::getSysErrorMask
+ </pre></td>
+    </tr>
+    <tr id="element_sierra-config_log-dir">
+      <th><pre>log-dir</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_DEFAULT_LOG_DIR::php"</pre></td>
+      <td>No</td>
+      <td><pre>Specifies a writeable log directory on the server.
+ this directory may be relative to the base sierra directory, 
+ or a full path in the file system. the default value if not 
+ specified is the constant value SRA_DEFAULT_LOG_DIR in 
+ SRA_Controller.php (log)
+ This value can be retrieved usinig SRA_Controller::getSysLogDir
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_resources-file">
+      <th><pre>resources-file</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME::php"</pre></td>
+      <td>No</td>
+      <td><pre>the name of the default resources file for all apps. the
+default value is the constant value SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME 
+in SRA_Controller.php. The search order for this file will be:
+  SRA_DIR/etc/l10n/{resources-file}
+  SRA_DIR/{resources-file}
+  /{resources-file}
+Different properties files can be created for language/country variants 
+based on the following order of preference:
+
+  resources-file + &#039;_&#039; + locale1.language + &#039;_&#039; . locale1.country + &#039;.properties&#039;
+  resources-file + &#039;_&#039; + locale1.language + &#039;.properties&#039;
+  resources-file + &#039;_&#039; + locale2.language + &#039;_&#039; . locale2.country + &#039;.properties&#039;
+  resources-file + &#039;_&#039; + locale2.language + &#039;.properties&#039;
+  resources-file + &#039;_&#039; + localeN.language + &#039;_&#039; . localeN.country + &#039;.properties&#039;
+  resources-file + &#039;_&#039; + localeN.language + &#039;.properties&#039;
+  resources-file + &#039;.properties&#039;
+
+where locale1...localeN is the language/country preferences 
+specified in the user&#039;s browser settings (if available) or the 
+default app locale otherwise. set this attribute to &quot;0&quot; 
+if you do not desire to use a global resource file. This attribute 
+should never include the language, country, or file extension. 
+These resources will be accessible as a SRA_ResourceBundle instance 
+using the static SRA_Controller::getSysResources() method and will 
+also be merged with the bundle returned by 
+SRA_Controller::getAppResources() (with keys in the latter 
+takinig precedence)
+This system SRA_ResourceBundle can be retrieved usinig SRA_Controller::getSysResources
+
+Multiple resource files can be specified separated by spaced. 
+duplicate key values will be overriden in the order specified, 
+meaning, keys in the first bundle specified will be overriden 
+by those in the second, and so on. ONLY the first resource 
+bundle specified is mandatory. the bundles 2 and forward will 
+simply be ignored if they do not exist
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_tpl-dir">
+      <th><pre>tpl-dir</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_DEFAULT_TEMPLATES_DIR::php"</pre></td>
+      <td>No</td>
+      <td><pre>The system relative or fixed path to the directory containing
+system-wide/global templates and view components utilized within 
+the model. this value can be retrieved using 
+This value can be retrieved usinig SRA_Controller::getSysTplDir
+</pre></td>
+    </tr>
+    <tr id="element_sierra-config_time-zone">
+      <th><pre>time-zone</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if you want to use a different timezone than that is in use by
+the operating system, this attribute may be used to identify 
+that timezone. this will be a relative path to a compiled 
+timezone file in /usr/share/zoneinfo (i.e. &quot;America/Boise&quot;). 
+when a time-zone is specified, the &quot;TZ&quot; environment variable 
+will automatically be set when an application is initialized. 
+this will then effect calls to the &quot;date&quot; and &quot;time&quot; php 
+functions as well as usage of SRA_GregorianDate and times 
+stored into mysql date/time fields
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_app">app</h3>
+  <pre>The &quot;app&quot; element is used to list all of the applications that are deployed in
+a given instance of the sierra framework</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_sierra-config">sierra-config</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_app_key">
+      <th><pre>key</pre></th>
+      <td><pre>ID</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the unique identifier for the app
+</pre></td>
+    </tr>
+    <tr id="element_app_dir">
+      <th><pre>dir</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the base directory for this app. this attribute is optional
+ if it is not specified, the directory SIERRA/app/{key} 
+ will be assumed
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_authenticator">authenticator</h3>
+  <pre>The &quot;authenticator&quot; element defines a single authentication system.</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_sierra-config">sierra-config</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_param">param</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_authenticator_key">
+      <th><pre>key</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the unique identifier for this authentication system. this will
+be used to associate this authenticator to specific access 
+restrictions defined for this app. 
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_access-log">
+      <th><pre>access-log</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the log file where successful login records should be recorded.
+if not specified, they will not be recorded. this file will be 
+stored in the app &quot;log-dir&quot;
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_cancel-tpl">
+      <th><pre>cancel-tpl</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the template that should be displayed if the user clicks cancel
+when the login box is displayed. if not specified, a blank 
+screen will be displayed
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_entity-type">
+      <th><pre>entity-type</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>allows the SRA_Authenticator instance to be morphed to a
+specific entity. if specified, the object instance stored within 
+&#039;global-var&#039; and &#039;tpl-var&#039; will be of the type specified instead 
+of SRA_Authenticator. the DAO for the entity-type specified, 
+must be accessible via the SRA_DaoFactory::getDao method (this 
+class is driven by the system or app entity model configuration)
+To reference the entity, the DAO::findBySqlConstraints method 
+will be used where the key will be the &#039;entity-user-col&#039; 
+attribute and the value is the user id specified
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_entity-user-col">
+      <th><pre>entity-user-col</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the column name to use in conjunction with entity-type (see
+above for more details)
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_failure-log">
+      <th><pre>failure-log</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the log file where failed login attempts should be recorded. if
+not specified, they will be recorded in the default app log 
+file. Use &quot;0&quot; if you do not want login failures to be logged
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_global-var">
+      <th><pre>global-var</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>a global PHP variable under which the authenticator user
+   attributes should be stored. these attributes will always 
+   include &#039;user&#039; and &#039;pswd&#039; as well as any other authenticator 
+   specific user attributes
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_logout-fwd-uri">
+      <th><pre>logout-fwd-uri</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the uri that the user should be forwarded to when a logout occurs
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_logout-get-var">
+      <th><pre>logout-get-var</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>$_GET variable that will result in the user being logged out of
+this authenticator. a manual logout can also be performed via 
+the SRA_Authenticator::logout instance method. the value of this 
+parameter should be something besides empty string or 0 in order 
+for a logout to be triggered automatically
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_logout-post-var">
+      <th><pre>logout-post-var</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>$_POST variable that will result in the user being logged out of
+this authenticator. a manual logout can also be performed via 
+the SRA_Authenticator::logout instance method. the value of this 
+parameter should be something besides empty string or 0 in order 
+for a logout to be triggered automatically
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_logout-tpl">
+      <th><pre>logout-tpl</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the template that should be displayed if a logout has been
+performed. if both logout-fwd-uri and logout-tpl are specified, 
+the template will take priority. if neither are specified, the 
+user will be forwarded to the same page they are on, resulting 
+in an authentication dialog being displayed
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_match-fail-tpl">
+      <th><pre>match-fail-tpl</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>template to display if an attribute match fails. attribute matches
+are defined in the &quot;restrict-access&quot; elements. if not specified, 
+the login prompt will be re-displayed until the user enters 
+credentials with proper access or the max-attempts is exceeded
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_max-attempts">
+      <th><pre>max-attempts</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>the maximum # of failed attempts before the max-attempt-tpl
+template is displayed. login attempts are tracked using sessions 
+or IP address (based on the max-attempt-track attribute). if this 
+attribute is 0 (default) then unlimited attempts are allowed
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_max-attempt-ip">
+      <th><pre>max-attempt-ip</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not to track login attempts based on IP. the default
+behavior is to track based on a session cookie
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_max-attempt-tpl">
+      <th><pre>max-attempt-tpl</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the template to display if the user exceeds the &quot;max-attempts&quot;
+ value. REQUIRED if max-attempts is specified and &gt; 0. this 
+ template will have access to the SRA_Authenticator instance including 
+ status code
+ </pre></td>
+    </tr>
+    <tr id="element_authenticator_max-attempt-timeout">
+      <th><pre>max-attempt-timeout</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"15"</pre></td>
+      <td>No</td>
+      <td><pre># of minutes to wait before allowing a user to re-attempt to
+                login after they have exceeded &quot;max-attempts&quot;. Only applies to 
+                IP based login attempt tracking (&quot;max-attempt-ip&quot;)
+                </pre></td>
+    </tr>
+    <tr id="element_authenticator_path">
+      <th><pre>path</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>fixed or relative path to the SRA_Authenticator class file if not in
+a standard location. Standard locations include {SIERRA}/lib/auth 
+and {APP DIR}/lib where the file name should correspond 
+with the &quot;type&quot; specified + the standard &quot;.php&quot; file extension. 
+Additionally, the type can specify sub-directories (i.e. type=&quot;auth/MyAuth&quot;)
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_resource">
+      <th><pre>resource</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>authentication message to display in login screen. may also be
+a string defined in the app&#039;s &quot;resources-file&quot; file
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_sys-err-tpl">
+      <th><pre>sys-err-tpl</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the template to display if a system error occurs when this
+authenticator is invoked
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_tpl-var">
+      <th><pre>tpl-var</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the template variable under which the authenticator user
+    attributes should be stored. these attributes will always 
+    include &#039;user&#039; and &#039;pswd&#039; as well as any other authenticator 
+    specific user attributes
+    </pre></td>
+    </tr>
+    <tr id="element_authenticator_type">
+      <th><pre>type</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the authenticator type. &quot;Built-in&quot; authenticators include any
+class files stored in {SIERRA}/lib/auth including the 
+following:
+
+SRA_LdapAuthenticator:
+  &#039;server&#039;=&gt; the LDAP server dns name or IP address - (i.e. 
+             &lt;param id=&quot;server&quot; value=&quot;localhost&quot; /&gt;) - REQUIRED
+  &#039;search&#039;=&gt; the LDAP server search base (i.e. 
+             &lt;param id=&quot;search&quot; value=&quot;ou=people,o=company&quot; /&gt;) - REQUIRED
+  &#039;port&#039;   =&gt; the LDAP server port (default is 389 for non-secure 
+             [ldap://] and 636 for secure [ldaps://]) (i.e. 
+             &lt;param id=&quot;port&quot; value=&quot;389&quot; /&gt;)
+  &#039;secure&#039;=&gt; whether or not the ldap server is secure (ldaps://)
+             default value is 0 (FALSE) (i.e. 
+             &lt;param id=&quot;secure&quot; value=&quot;1&quot; /&gt;)
+  &#039;scope&#039; =&gt; (base|one|sub), the LDAP search scope. determines 
+             which PHP method is used to retrieve user 
+             attributes. base=ldap_read, one=ldap_list, 
+             sub=ldap_search (default) (i.e. 
+             &lt;param id=&quot;scope&quot; value=&quot;sub&quot; /&gt;)
+  &#039;[a]attrs&#039; =&gt; 0..* key/value pairs (of &quot;param&quot; sub-element type 
+             &#039;attrs&#039;) that should be retrieved for the user from 
+             the LDAP server. the default attr key/values (if not 
+             specified otherwise) are the following (for 
+             additional information on standard LDAP attributes, 
+             see http://www.faqs.org/rfcs/rfc2256.html): 
+             
+               cn/cn : common name - typically the person&#039;s full name
+              sn/sn : surname - typically person&#039;s last name
+              givenName/givenName : typically the person&#039;s first name
+              mail/mail : typically the person&#039;s email address
+              postalAddress/postalAddress : person&#039;s postal address
+              telephoneNumber/telephoneNumber : person&#039;s telephone number
+             
+             the attributes provided by the LDAP server will be 
+             accessible in the user&#039;s lib/core/SRA_Authenticator (see api)
+             instance provided as the &quot;tpl-var&quot; or &quot;global-var&quot; 
+             attribute specified, where the key will be the 
+             &quot;value&quot; of the &quot;param&quot; if specified, the &quot;key&quot; 
+             otherwise. these keys/value pairs can also be used 
+             to further restrict access in the &quot;restrict-access&quot; 
+             &quot;param&quot; sub-element. (i.e. 
+             &lt;param id=&quot;cn&quot; type=&quot;attrs&quot; value=&quot;fullName&quot; /&gt;
+             &lt;param id=&quot;sn&quot; type=&quot;attrs&quot; value=&quot;lastName&quot; /&gt;)
+             
+             aattrs signifies that the attribute should be converted 
+             to an array, where the split delimiter is a SPACE
+             
+  &#039;options&#039;=&gt;0..* key/value pairs (of &quot;param&quot; sub-element type &#039;options&#039;) that 
+             should be set for the ldap server using 
+             &quot;ldap_set_option($conn, key, value)&quot;
+             
+SRA_DbAuthenticator:
+  &#039;db&#039;      =&gt;the database server identifier (used to access the 
+              database via SRA_Controller::getAppDb(id). If not 
+              specified the default app DB will be used
+              (i.e. &lt;param id=&quot;db&quot; value=&quot;authDbId&quot; /&gt;)
+  &#039;table&#039;   =&gt;the name of the database table where the user 
+              records are stored (i.e. &lt;param id=&quot;table&quot; value=&quot;USER&quot; /&gt;) - REQUIRED
+  &#039;user-col&#039;=&gt;the name of the column containing the user id 
+              (i.e. &lt;param id=&quot;user-col&quot; value=&quot;USER_NAME&quot; /&gt;) - REQUIRED
+  &#039;pswd-col&#039;=&gt;the name of the column containing the password
+              (i.e. &lt;param id=&quot;pswd-col&quot; value=&quot;PASSSWORD&quot; /&gt;)
+              if not provided, only the user will be validated
+  &#039;pswd-cond-col&#039;=&gt; if the password should only be conditionally 
+              verified, this parameter may be used to specify 
+              the column containing the value used to determine 
+              when the password should NOT be evaluated
+  &#039;pswd-cond-val&#039;=&gt; if the password should only be conditionally 
+              verified, this parameter may be used to specify 
+              the value that &#039;pswd-cond-col&#039; should be equal to. 
+              if the password should NOT be evaluated. if 
+              &#039;pswd-cond-col&#039; is specified, and this 
+              parameter is not, the value that will be used in 
+              the evaluation is the TRUE value used by the 
+              database. set this value to the string &quot;TRUE&quot;, 
+              &quot;FALSE&quot; or &quot;NULL&quot; for those corresponding PHP 
+              constants to be used
+  &#039;pswd-fun&#039;=&gt;an optional database password encryption function 
+              that should be applied to match passwords. when 
+              specified, the validation query will be altered to 
+              utilize that function... WHERE PASSWORD=[pswd-fun](&#039;pass&#039;)
+              (i.e. &lt;param id=&#039;pswd-fun&quot; value=&quot;password&quot; /&gt;)
+  &#039;[a]attrs&#039; =&gt; 0..* column/value pairs (of &quot;param&quot; sub-element type 
+             &#039;attrs&#039;) that should be retrieved for the user from 
+             the user table. 
+             
+             the attributes specified will be accessible in the 
+             user&#039;s SRA_Authenticator (see api)
+             instance provided as the &quot;tpl-var&quot; or &quot;global-var&quot; 
+             attribute specified, where the key will be the 
+             &quot;value&quot; of the &quot;param&quot; if specified, the &quot;key&quot; 
+             otherwise. these keys/value pairs can also be used 
+             to further restrict access in the &quot;restrict-access&quot; 
+             &quot;param&quot; sub-element. (i.e. 
+             &lt;param id=&quot;DEPARTMENT&quot; type=&quot;attrs&quot; value=&quot;dept&quot; /&gt;
+             &lt;param id=&quot;SERIAL_NUMBER&quot; type=&quot;attrs&quot; value=&quot;serialNum&quot; /&gt;)
+             
+             aattrs signifies that the attribute should be converted 
+             to an array, where the split delimiter is a SPACE
+             
+SRA_OsAuthenticator: this authenticator required &#039;expect&#039; to be 
+              installed. when used, the &#039;groups&#039; and &#039;home-path&#039; 
+              authenticator attributes are automatically set to 
+              an array of the groups the user is a member of and 
+              the absolute path to the user&#039;s home directory
+  &#039;exclude&#039; =&gt;(optional) space separated list of users that 
+              should not be authenticated (error results in 
+              status SRA_AUTHENTICATOR_STATUS_INVALID_USER)
+  &#039;groups&#039;  =&gt;(optional) space separated list of group names one 
+              of which a user must belong to in order to be 
+              authenticated (error results in status 
+              SRA_AUTHENTICATOR_STATUS_INVALID_USER)
+  &#039;profile&#039; =&gt;(optional) user directory relative, or absolute 
+              path to a properties file containing user 
+              attributes (key/value pairs) each of these values 
+              will be set in the SRA_Authenticator::attrs 
+              instance variable. this path may contain the key 
+              ${user} which will be substituted with the user 
+              name
+             
+All SRA_Authenticators should extend auth/SRA_Authenticator 
+and adhere to the API prescribed by that class. The search order 
+for SRA_Authenticator types is:
+  1) {SIERRA}/lib/auth
+  2) {APP DIR}/lib
+  3) / (root path in file system)
+  
+SRA_AUTHENTICATOR_ATTR_USER key value will always be set into 
+the SRA_Authenticator attrs variable
+
+GLOBAL AUTHENTICATOR PARAMETERS:
+  &#039;cache-auth&#039; =&gt; an optional # of seconds to allow 
+  authentication credentials to be cached. the 
+  minimum value is 30 seconds. when set, the 
+  combination of user/password/app/authenticator 
+  will be cached for that time period. so if a 
+  request with duplicate credentials for the 
+  same authenticator is received, the same 
+  status will returned
+</pre></td>
+    </tr>
+    <tr id="element_authenticator_use-sessions">
+      <th><pre>use-sessions</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"1"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not sessions should be used to store valid logins. if
+sessions are not used, then the user will be re-authenticated 
+with each http request (they will not be required to re-submit 
+login information, but the authentication system will be hit 
+each time that they make a request) using the PHP_AUTH_USER and 
+PHP_AUTH_PWglobal variables. the default value for this 
+attribute is TRUE
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_db">db</h3>
+  <pre>A &quot;db&quot; element defines a system wide db configuration. All applications will 
+automatically inherit access to the database defined here. These databases 
+are accessible through the static SRA_Controller::getSysDb($id) method. the first 
+&quot;db&quot; element listed in the xml configuration will be considered the default 
+(returned if no $id parameter is passed to SRA_Controller::getSysDb)</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_sierra-config">sierra-config</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_table-cache">table-cache</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_db_key">
+      <th><pre>key</pre></th>
+      <td><pre>ID</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the unique identifier for this database
+</pre></td>
+    </tr>
+    <tr id="element_db_bool-false">
+      <th><pre>bool-false</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"0</pre></td>
+      <td>No</td>
+      <td><pre>space separated list of values that should be considered FALSE
+for data in boolean data type columns. strings should be 
+enclosed in single quotes while numbers should not. for example, 
+to specify that both the number 0 and the string 0 should be 
+considered boolean FALSE, this attribute value would be &quot;0 &#039;0&#039;&quot;. 
+see below for the default values for this attribute. IF data in 
+a column matched neither &quot;bool-false&quot; nor &quot;bool-true&quot;, it 
+will be set to NULL. the FIRST value specified will be the value 
+used to store FALSE values in boolean columns. constant values 
+can also be specified (do not enclose in single quotes)
+</pre></td>
+    </tr>
+    <tr id="element_db_bool-false-rep">
+      <th><pre>bool-false-rep</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"FALSE"</pre></td>
+      <td>No</td>
+      <td><pre>determines how boolean data types should be represented in PHP
+after they have been pulled from the database. the default 
+behavior is for them to assume their native PHP boolean form 
+(constants FALSE and TRUE). alternatively, you may specify a 
+string or integer value that they should assume using this 
+attribute where &quot;&#039;0&#039;&quot; will result in boolean false being 
+represented as the string 0, and &quot;0&quot; will result in boolean 
+false being represented as the integer value 0
+</pre></td>
+    </tr>
+    <tr id="element_db_bool-true">
+      <th><pre>bool-true</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"1</pre></td>
+      <td>No</td>
+      <td><pre>same as boolean-false, but for determining values that should be
+considered TRUE in boolean data type columns
+</pre></td>
+    </tr>
+    <tr id="element_db_bool-true-rep">
+      <th><pre>bool-true-rep</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"TRUE"</pre></td>
+      <td>No</td>
+      <td><pre>same as &quot;bool-false-rep&quot; but for TRUE values
+</pre></td>
+    </tr>
+    <tr id="element_db_error-level">
+      <th><pre>error-level</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"php::SRA_ERROR_PROBLEM::php"</pre></td>
+      <td>No</td>
+      <td><pre>optional value that allows for specification of an error level
+to set the app-config status to if a connection attempt to this db 
+server fails. By default, this level is SRA_ERROR_PROBLEM.
+Example: php:: SRA_ERROR_SHUTDOWN ::php
+</pre></td>
+    </tr>
+    <tr id="element_db_ftp-user">
+      <th><pre>ftp-user</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the user name to use for ftp connections to the database server
+(used for Postgres COPY command only)
+</pre></td>
+    </tr>
+    <tr id="element_db_ftp-password">
+      <th><pre>ftp-password</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the password to use for ftp connections to the database server
+(used for Postgres COPY command only)
+</pre></td>
+    </tr>
+    <tr id="element_db_gmt">
+      <th><pre>gmt</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>set this attribute to &quot;1&quot; if you want date/time values to be
+stored in the database using the GMT timezone instead of the 
+application timezone. since mysql does not support time/zone 
+offsets in date/time columns usage of that data outside of the 
+context of the framework will require modification of those 
+values to the correct desired timezone. the framework will 
+automatically convert those values using the application 
+timezone when retrieved from the database and to GMT when stored
+</pre></td>
+    </tr>
+    <tr id="element_db_host">
+      <th><pre>host</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"localhost"</pre></td>
+      <td>No</td>
+      <td><pre>resolvable name of the database server (or IP address). Default
+ value is &#039;localhost&#039;
+</pre></td>
+    </tr>
+    <tr id="element_db_import-file-dir">
+      <th><pre>import-file-dir</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>Full path to the directory where import files should be
+stored (see SRA_Database::importFile method for more info). 
+This directory should be ftp accessible. (used for 
+Postgres COPY command only)
+</pre></td>
+    </tr>
+    <tr id="element_db_name">
+      <th><pre>name</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the name of the database. if not specified, &quot;key&quot; will be used
+</pre></td>
+    </tr>
+    <tr id="element_db_password">
+      <th><pre>password</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the authentication password
+</pre></td>
+    </tr>
+    <tr id="element_db_port">
+      <th><pre>port</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the host database port. Default value is 3306 for mysql, 5432
+for postgres and 1433 for mssql
+</pre></td>
+    </tr>
+    <tr id="element_db_type">
+      <th><pre>type</pre></th>
+      <td><pre>(mssql | mysql | pgsql | sqlite)</pre></td>
+      <td><pre>"mysql"</pre></td>
+      <td>No</td>
+      <td><pre>the database type. The default type is mysql.
+ Example: php:: SRA_DB_TYPE_MYSQL::php. Available types are 
+ specified in the SRA_DB_TYPE_* constants in sql/SRA_Database
+</pre></td>
+    </tr>
+    <tr id="element_db_user">
+      <th><pre>user</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the authentication user name
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_table-cache">table-cache</h3>
+  <pre>The &quot;table-cache&quot; element defines optional cache settings for a single 
+table in the database</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_db">db</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_table-cache_key">
+      <th><pre>key</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the name of the table
+</pre></td>
+    </tr>
+    <tr id="element_table-cache_expire">
+      <th><pre>expire</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the number of minutes before the cache should be expired and
+purged (0 = never expire)
+</pre></td>
+    </tr>
+    <tr id="element_table-cache_dir">
+      <th><pre>dir</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>(optional) the directory where the cache should be stored. if
+not specified, the tmp-dir sierra-config configuration value will be 
+used
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ini-set">ini-set</h3>
+  <pre>The &quot;ini-set&quot; element defines one or more php ini configuration options that 
+should be set when the framework is utilized. these values will override the 
+default values specified in the php.ini file</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_sierra-config">sierra-config</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_ini-set_key">
+      <th><pre>key</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the name of the ini configuration option
+</pre></td>
+    </tr>
+    <tr id="element_ini-set_value">
+      <th><pre>value</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the new value for this option
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_scheduled-task">scheduled-task</h3>
+  <pre>The &quot;scheduled-task&quot; element should be used to define tasks that should be 
+performed on a scheduled basis. the task can be either an executable file, 
+or a php function or method (instance or static). tasks can be scheduled in 
+either the sierra-config or individual app-config files. the schedule provided 
+for each task is identical to the schedule specified for cron jobs (see 
+&#039;schedule&#039; attribute documentation provided below). nested params can be used 
+for php method-based tasks and will be passed to that method in the form of an 
+associative array (param &#039;type&#039; will be ignored). dates and times are evaluated 
+according to the &quot;time-zone&quot; specified in sierra-config</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_sierra-config">sierra-config</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_param">param</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_scheduled-task_class-name">
+      <th><pre>class-name</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if method specified is part of a class, this attribute should be
+the name of that class. otherwise, method will be assumed to be 
+a function name
+</pre></td>
+    </tr>
+    <tr id="element_scheduled-task_instance">
+      <th><pre>instance</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>if method and class-name are specified, whether or not that
+method should be invoked or as an instance method (a new 
+instance of class-name will be created first in the case of the 
+latter)
+</pre></td>
+    </tr>
+    <tr id="element_scheduled-task_log">
+      <th><pre>log</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if the stdout output from performing that task should be logged,
+ this should be the name of the log file (within sierra/log) that 
+ output should be stored to (will be stored along with a 
+ timestamp)
+</pre></td>
+    </tr>
+    <tr id="element_scheduled-task_method">
+      <th><pre>method</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the name of the method in &#039;class-name&#039; (or a function name if
+&#039;class-name is not specified) that should be invoked for this 
+task
+</pre></td>
+    </tr>
+    <tr id="element_scheduled-task_path">
+      <th><pre>path</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the path to the php source file. this may be absolute or
+relative to the sierra base or lib directories. it may also 
+include command line parameters when needed (i.e. &quot;/bin/ps -e&quot;)
+</pre></td>
+    </tr>
+    <tr id="element_scheduled-task_schedule">
+      <th><pre>schedule</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>'0</pre></td>
+      <td>No</td>
+      <td><pre>the cron-formatted schedule for this task. this is divided into
+5 space separated schedule identifiers in the following order:
+  minute: This controls what minute of the hour the command will 
+          run on, and is between &#039;0&#039; and &#039;59&#039;
+  hour:   This controls what hour the command will run on, and 
+          is specified in the 24 hour clock, values must be 
+          between 0 and 23 (0 is midnight)
+  dom:    This is the Day of Month, that you want the command 
+          run on, e.g. to run a command on the 19th of each 
+          month, the dom would be 19.
+  month:  This is the month a specified command will run on 
+          (1-12)
+  dow:    This is the Day of Week that you want a command to be 
+          run on (0-6 where 0=sunday)
+
+* in any of these identifiers means that the task will be 
+performed in all occurences of that type of identifier. so, for 
+example, to have a task be performed every minute of every day, 
+all 5 identifiers should be set to *. the default schedule (if 
+not specified otherwise) is to perform the task nightly at 12am. 
+multiple comma separated values may be specified for each 
+identifier.
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_param">param</h3>
+  <pre>The &quot;param&quot; element defines key/value/type for specific configuration parameters</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_sierra-config">sierra-config</a></li>
+    <li><a href="#element_authenticator">authenticator</a></li>
+    <li><a href="#element_scheduled-task">scheduled-task</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_param_id">
+      <th><pre>id</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the param name
+</pre></td>
+    </tr>
+    <tr id="element_param_type">
+      <th><pre>type</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the param type
+</pre></td>
+    </tr>
+    <tr id="element_param_value">
+      <th><pre>value</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the param value
+
+</pre></td>
+    </tr>
+  </table>
+
+  
+  </form>
+</body>
+</html>

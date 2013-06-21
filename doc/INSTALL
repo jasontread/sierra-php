@@ -1,0 +1,38 @@
+= sierra-php Installation =
+The latest version of this documentation is available here: 
+http://code.google.com/p/sierra-php/wiki/Install
+
+==Install from source archive==
+ # Download and extract the latest version of the framework from http://code.google.com/p/sierra-php/downloads/list (e.g. `sierra-php-1_x_x.tgz`)
+ # Configure the framework: `shell> php /path/to/sierra-php/bin/sra-quick-install.php` 
+    * Note: this will install the framework using the most common options. To customize your installation use the sierra-php installer: `shell> /source/to/sierra-php/bin/sra-installer.php` and select the `Configure framework` option
+
+==Install using rpm==
+When installing using the rpm, the framework is automatically installed to */var/www/sierra* 
+ # Download rpm and install rpm
+ # If you want to fine tune your framework settings use the sierra-php installer: `shell> /source/to/sierra-php/bin/sra-installer.php` and select the `Configure framework` option
+
+==Install from subversion==
+ # `svn checkout http://sierra-php.googlecode.com/svn/trunk/ sierra-php`
+ # Configure the framework: `shell> php /path/to/sierra-php/bin/sra-quick-install.php` 
+    * Note: this will install the framework using the most common options. To customize your installation use the sierra-php installer: `shell> /source/to/sierra-php/bin/sra-installer.php` and select the `Configure framework` option
+
+=Installing an application=
+Once the framework has been installed and configured, you can set up your first application also using the installer. To do so, follow these steps:
+ # Start the installer: `shell> /path/to/sierra-php/bin/sra-installer.php`
+ # Select the `Configure application` option
+ # Select `Install new application`
+ # Select `Install new application` again
+ # Provide the desired application settings
+
+=Notes=
+ * Use of PHP memory caching is also highly recommended (but not required). The [http://pecl.php.net/package/APC Pecl APC Extension] works well and is easy to install on RedHat/CentOS (`yum install php-pecl-apc`). [http://xcache.lighttpd.net xcache] and [http://eaccelerator.net eAccelerator] are both slightly faster (about 10-15%)
+ * If you plan to use any of the image manipulation features provided by `sierra/lib/model/SRA_FileAttribute.php`, you should also install the `ImageMagick` package
+ * `php-readline` is highly recommended if you intend to use the sierra-php CLI
+ *  disabling `selinux` for Apache may be required depending on the types of things you are doing in your application:
+{{{
+setsebool -P httpd_disable_trans 1
+vi /etc/selinux/targeted/booleans
+  ADD: httpd_disable_trans=1
+service httpd restart
+}}}

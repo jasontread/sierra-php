@@ -1,0 +1,8 @@
+SIERRA Framework templates. Each template provides its own inline documentation 
+in the form of smarty comments. The test directory contains SRA_TestCase output 
+templates (currently only 1). The sra-html-footer.tpl, sra-html-header.tpl and 
+templates contained in the model directory are reusable view components that may 
+be used to render entities described in an entity model. there are templates for 
+displaying forms, lists, tables, grids and more. for more information, view the 
+comments in entity model dtd (sierra/lib/model/entity-model.dtd) and the 
+comments listed in each template

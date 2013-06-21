@@ -1,0 +1,1 @@
+Contains the core framework classes, SRA_Controller being the foremost of them all. SRA_Controller MUST be included in each PHP source file that utilizes the framework. For more information, see app/sra-app/www/html/index.php 

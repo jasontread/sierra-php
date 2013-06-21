@@ -1,0 +1,2266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_EntityGenerator - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_entity_generator_dao_suffix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_GENERATOR_DAO_SUFFIX'] = "SRA_ENTITY_GENERATOR_DAO_SUFFIX";
+  }
+  if ("sra_entity_generator_vo_suffix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_GENERATOR_VO_SUFFIX'] = "SRA_ENTITY_GENERATOR_VO_SUFFIX";
+  }
+  if ("sra_entity_generator_max_schema_recursion".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION'] = "SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION";
+  }
+
+  // check attributes
+  if ("_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__name'] = "_name";
+  }
+  if ("_aopaspects".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__aopAspects'] = "_aopAspects";
+  }
+  if ("_aopintroductions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__aopIntroductions'] = "_aopIntroductions";
+  }
+  if ("_abstract".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__abstract'] = "_abstract";
+  }
+  if ("_apiresource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__apiResource'] = "_apiResource";
+  }
+  if ("_attributegenerators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__attributeGenerators'] = "_attributeGenerators";
+  }
+  if ("_columnpostfix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__columnPostfix'] = "_columnPostfix";
+  }
+  if ("_columnprefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__columnPrefix'] = "_columnPrefix";
+  }
+  if ("_constraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__constraint'] = "_constraint";
+  }
+  if ("_customdao".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__customDao'] = "_customDao";
+  }
+  if ("_dao".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dao'] = "_dao";
+  }
+  if ("_daofile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__daoFile'] = "_daoFile";
+  }
+  if ("_daoextends".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__daoExtends'] = "_daoExtends";
+  }
+  if ("_daoextendsfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__daoExtendsFile'] = "_daoExtendsFile";
+  }
+  if ("_daosuffix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__daoSuffix'] = "_daoSuffix";
+  }
+  if ("_db".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__db'] = "_db";
+  }
+  if ("_dbrefintegrity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dbRefIntegrity'] = "_dbRefIntegrity";
+  }
+  if ("_ddlcamelcase".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__ddlCamelCase'] = "_ddlCamelCase";
+  }
+  if ("_ddluppercase".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__ddlUpperCase'] = "_ddlUpperCase";
+  }
+  if ("_defaultviews".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__defaultViews'] = "_defaultViews";
+  }
+  if ("_dtdattributes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dtdAttributes'] = "_dtdAttributes";
+  }
+  if ("_dtdcamelcase".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dtdCamelCase'] = "_dtdCamelCase";
+  }
+  if ("_dtdsubelements".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dtdSubElements'] = "_dtdSubElements";
+  }
+  if ("_entitygenerators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__entityGenerators'] = "_entityGenerators";
+  }
+  if ("_entitymodelxml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__entityModelXml'] = "_entityModelXml";
+  }
+  if ("_filedir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileDir'] = "_fileDir";
+  }
+  if ("_filediruri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileDirUri'] = "_fileDirUri";
+  }
+  if ("_filehandling".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileHandling'] = "_fileHandling";
+  }
+  if ("_fileicondir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileIconDir'] = "_fileIconDir";
+  }
+  if ("_filescriptrewrite".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileScriptRewrite'] = "_fileScriptRewrite";
+  }
+  if ("_filescripturi".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileScriptUri'] = "_fileScriptUri";
+  }
+  if ("_generatepath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__generatePath'] = "_generatePath";
+  }
+  if ("_globalviews".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__globalViews'] = "_globalViews";
+  }
+  if ("_ignorebadimport".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__ignoreBadImport'] = "_ignoreBadImport";
+  }
+  if ("_matchuserid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__matchUserId'] = "_matchUserId";
+  }
+  if ("_msgs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__msgs'] = "_msgs";
+  }
+  if ("_nestedqueriesok".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__nestedQueriesOk'] = "_nestedQueriesOk";
+  }
+  if ("_nulldbemptystr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__nullDbEmptyStr'] = "_nullDbEmptyStr";
+  }
+  if ("_oncreateimport".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__onCreateImport'] = "_onCreateImport";
+  }
+  if ("_ondeleteupdate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__onDeleteUpdate'] = "_onDeleteUpdate";
+  }
+  if ("_orderby".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__orderBy'] = "_orderBy";
+  }
+  if ("_parententity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__parentEntity'] = "_parentEntity";
+  }
+  if ("_primarykey".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__primaryKey'] = "_primaryKey";
+  }
+  if ("_propagateupdate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__propagateUpdate'] = "_propagateUpdate";
+  }
+  if ("_renderappend".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__renderAppend'] = "_renderAppend";
+  }
+  if ("_renderexclude".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__renderExclude'] = "_renderExclude";
+  }
+  if ("_renderinclude".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__renderInclude'] = "_renderInclude";
+  }
+  if ("_resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__resource'] = "_resource";
+  }
+  if ("_resourcebundles".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__resourceBundles'] = "_resourceBundles";
+  }
+  if ("_resources".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__resources'] = "_resources";
+  }
+  if ("_resourcehelp".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__resourceHelp'] = "_resourceHelp";
+  }
+  if ("_schema".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__schema'] = "_schema";
+  }
+  if ("_schemaloading".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__schemaLoading'] = "_schemaLoading";
+  }
+  if ("_schemarecursioncount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__schemaRecursionCount'] = "_schemaRecursionCount";
+  }
+  if ("_skippersistence".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__skipPersistence'] = "_skipPersistence";
+  }
+  if ("_skipwsdl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__skipWsdl'] = "_skipWsdl";
+  }
+  if ("_syserrresource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__sysErrResource'] = "_sysErrResource";
+  }
+  if ("_table".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__table'] = "_table";
+  }
+  if ("_types".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__types'] = "_types";
+  }
+  if ("_unittest".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__unitTest'] = "_unitTest";
+  }
+  if ("_unittestclass".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__unitTestClass'] = "_unitTestClass";
+  }
+  if ("_viewprocessors".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__viewProcessors'] = "_viewProcessors";
+  }
+  if ("_views".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__views'] = "_views";
+  }
+  if ("_voextends".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__voExtends'] = "_voExtends";
+  }
+  if ("_voextendsfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__voExtendsFile'] = "_voExtendsFile";
+  }
+  if ("_vosuffix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__voSuffix'] = "_voSuffix";
+  }
+  if ("_validategenerators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__validateGenerators'] = "_validateGenerators";
+  }
+  if ("_webservices".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__webServices'] = "_webServices";
+  }
+  if ("_wsdb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__wsDb'] = "_wsDb";
+  }
+  if ("_wsdbname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__wsDbName'] = "_wsDbName";
+  }
+
+  // check methods
+  if ("sra_entitygenerator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_EntityGenerator'] = "SRA_EntityGenerator";
+  }
+  if ("attributegeneratortocolumn".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_attributeGeneratorToColumn'] = "attributeGeneratorToColumn";
+  }
+  if ("attrispersistent".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_attrIsPersistent'] = "attrIsPersistent";
+  }
+  if ("checkattrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_checkAttrs'] = "checkAttrs";
+  }
+  if ("excludeattrfromrender".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_excludeAttrFromRender'] = "excludeAttrFromRender";
+  }
+  if ("getresources".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getResources'] = "getResources";
+  }
+  if ("generate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_generate'] = "generate";
+  }
+  if ("getaopaspects".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAopAspects'] = "getAopAspects";
+  }
+  if ("getaopintroductions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAopIntroductions'] = "getAopIntroductions";
+  }
+  if ("getattributes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAttributes'] = "getAttributes";
+  }
+  if ("gettypesused".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTypesUsed'] = "getTypesUsed";
+  }
+  if ("getattrtype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAttrType'] = "getAttrType";
+  }
+  if ("getdaoclassname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDaoClassName'] = "getDaoClassName";
+  }
+  if ("getdaopath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDaoPath'] = "getDaoPath";
+  }
+  if ("getdtdsubelementname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDtdSubElementName'] = "getDtdSubElementName";
+  }
+  if ("getentitygenerator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getEntityGenerator'] = "getEntityGenerator";
+  }
+  if ("gettableattributes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTableAttributes'] = "getTableAttributes";
+  }
+  if ("getvoclassname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getVoClassName'] = "getVoClassName";
+  }
+  if ("getvopath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getVoPath'] = "getVoPath";
+  }
+  if ("getincludes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getIncludes'] = "getIncludes";
+  }
+  if ("getprimarykeyattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getPrimaryKeyAttribute'] = "getPrimaryKeyAttribute";
+  }
+  if ("getschema".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSchema'] = "getSchema";
+  }
+  if ("getdtdattributes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDtdAttributes'] = "getDtdAttributes";
+  }
+  if ("getdtdelements".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDtdElements'] = "getDtdElements";
+  }
+  if ("hascardinality".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_hasCardinality'] = "hasCardinality";
+  }
+  if ("hasattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_hasAttribute'] = "hasAttribute";
+  }
+  if ("isprimarytableattr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isPrimaryTableAttr'] = "isPrimaryTableAttr";
+  }
+  if ("isfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isFile'] = "isFile";
+  }
+  if ("usesfiles".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_usesFiles'] = "usesFiles";
+  }
+  if ("useswsdb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_usesWsDb'] = "usesWsDb";
+  }
+  if ("_generatedao".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__generateDAO'] = "_generateDAO";
+  }
+  if ("_generatevo".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__generateVO'] = "_generateVO";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_EntityGenerator</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p><br /><p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="model.SRA_Generator.html" target="contentFrame">SRA_Generator</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_EntityGenerator extends <a href="model.SRA_Generator.html" target="contentFrame">SRA_Generator</a></pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> Used to generate an entity model entity
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_GENERATOR_DAO_SUFFIX">SRA_ENTITY_GENERATOR_DAO_SUFFIX</a></pre>
+<pre> the class suffix to use for DAOs
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_GENERATOR_VO_SUFFIX">SRA_ENTITY_GENERATOR_VO_SUFFIX</a></pre>
+<pre> the class suffix to use for VOs
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION">SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION</a></pre>
+<pre> the max # of recursive hits that are allows to the getSchema method. if this
+  # is exceeded, an SRA_Error will be logged and the process will be killed using
+  the exit function
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__name">_name</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__aopAspects">_aopAspects</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__aopIntroductions">_aopIntroductions</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__abstract">_abstract</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__apiResource">_apiResource</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__attributeGenerators">_attributeGenerators</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__columnPostfix">_columnPostfix</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__columnPrefix">_columnPrefix</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__constraint">_constraint</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__customDao">_customDao</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__dao">_dao</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__daoFile">_daoFile</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__daoExtends">_daoExtends</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__daoExtendsFile">_daoExtendsFile</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__daoSuffix">_daoSuffix</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__db">_db</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__dbRefIntegrity">_dbRefIntegrity</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__ddlCamelCase">_ddlCamelCase</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__ddlUpperCase">_ddlUpperCase</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__defaultViews">_defaultViews</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__dtdAttributes">_dtdAttributes</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__dtdCamelCase">_dtdCamelCase</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__dtdSubElements">_dtdSubElements</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__entityGenerators">_entityGenerators</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__entityModelXml">_entityModelXml</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__fileDir">_fileDir</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__fileDirUri">_fileDirUri</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__fileHandling">_fileHandling</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__fileIconDir">_fileIconDir</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__fileScriptRewrite">_fileScriptRewrite</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__fileScriptUri">_fileScriptUri</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__generatePath">_generatePath</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__globalViews">_globalViews</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__ignoreBadImport">_ignoreBadImport</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__matchUserId">_matchUserId</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__msgs">_msgs</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__nestedQueriesOk">_nestedQueriesOk</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__nullDbEmptyStr">_nullDbEmptyStr</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__onCreateImport">_onCreateImport</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__onDeleteUpdate">_onDeleteUpdate</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__orderBy">_orderBy</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__parentEntity">_parentEntity</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__primaryKey">_primaryKey</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__propagateUpdate">_propagateUpdate</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__renderAppend">_renderAppend</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__renderExclude">_renderExclude</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__renderInclude">_renderInclude</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__resource">_resource</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__resourceBundles">_resourceBundles</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__resources">_resources</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__resourceHelp">_resourceHelp</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__schema">_schema</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__schemaLoading">_schemaLoading</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__schemaRecursionCount">_schemaRecursionCount</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__skipPersistence">_skipPersistence</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__skipWsdl">_skipWsdl</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__sysErrResource">_sysErrResource</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__table">_table</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__types">_types</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__unitTest">_unitTest</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__unitTestClass">_unitTestClass</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__viewProcessors">_viewProcessors</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__views">_views</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__voExtends">_voExtends</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__voExtendsFile">_voExtendsFile</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__voSuffix">_voSuffix</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__validateGenerators">_validateGenerators</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__webServices">_webServices</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__wsDb">_wsDb</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr__wsDbName">_wsDbName</a></pre>
+      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_EntityGenerator">SRA_EntityGenerator</a>($dbKey, $dbRefIntegrity, boolean $ddlCamelCase, $ddlUpperCase, boolean $dtdCamelCase, $msgs, $nestedQueriesOk, string $generatePath, array $types, string $entityModelXml, $resources, string $sysErrResource, array $conf, ViewProcessor[] $viewProcessors, SRA_EntityView[] $globalViews, $defaultViews, $daoSuffix, $voSuffix, $wsDb)</pre>
+<pre> Creates a new SRA_EntityGenerator with the configuration specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="model.SRA_SchemaColumn.html" target="contentFrame">SRA_SchemaColumn</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_attributeGeneratorToColumn">attributeGeneratorToColumn</a>(<a href="model.SRA_AttributeGenerator.html" target="contentFrame">SRA_AttributeGenerator</a> $generator, <a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $table, <a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $baseTable)</pre>
+<pre> Used to convert an SRA_AttributeGenerator to a SRA_SchemaColumn object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_attrIsPersistent">attrIsPersistent</a>(string $attr)</pre>
+<pre> returns TRUE if $attr is persistent
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_checkAttrs">checkAttrs</a>()</pre>
+<pre> validates that all attr generators are valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_excludeAttrFromRender">excludeAttrFromRender</a>(string $attr)</pre>
+<pre> Returns true if the $attr specified should be excluded from a render method
+  invocation (json or xml)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public ResourceBundle</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getResources">getResources</a>()</pre>
+<pre> returns the resources used by this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_generate">generate</a>()</pre>
+<pre> Used to generate this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getAopAspects">getAopAspects</a>(string $class, string $method, string $when)</pre>
+<pre> Returns all of the SRA_AopAspects for the specified class, method and
+  when
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getAopIntroductions">getAopIntroductions</a>(string $type=FALSE, string $class=FALSE)</pre>
+<pre> Returns all of the SRA_AopIntroductions of the specified type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_AttributeGenerators[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAttributes">getAttributes</a>(string $attr=NULL)</pre>
+<pre> returns the attributes associated with this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string[]</pre></td>
+      <td>
+        <pre><a href="#method_getTypesUsed">getTypesUsed</a>(boolean $complexOnly=FALSE, array $stack=NULL, boolean $recursive=TRUE, boolean $excludeNonIncludeAttrs=FALSE)</pre>
+<pre> returns all of the types used by this entity and its&#039; corresponding
+  attributes
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAttrType">getAttrType</a>(string $attr)</pre>
+<pre> returns the data (or entity) type for the attribute specified
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getDaoClassName">getDaoClassName</a>()</pre>
+<pre> Returns the DAO class name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getDaoPath">getDaoPath</a>()</pre>
+<pre> Returns the path to the DAO for this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getDtdSubElementName">getDtdSubElementName</a>(string $subName)</pre>
+<pre> Returns the DTD name value for an entity sub-element
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="model.SRA_EntityGenerator.html" target="contentFrame">SRA_EntityGenerator</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getEntityGenerator">getEntityGenerator</a>($entity)</pre>
+<pre> Returns the SRA_EntityGenerator for the $entity specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_AttributeGenerator[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getTableAttributes">getTableAttributes</a>($table)</pre>
+<pre> Returns an array of all of the attribute generators that utilize the table
+  specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getVoClassName">getVoClassName</a>()</pre>
+<pre> Returns the VO class name for this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getVoPath">getVoPath</a>()</pre>
+<pre> Returns the path to the VO for this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String[]</pre></td>
+      <td>
+        <pre><a href="#method_getIncludes">getIncludes</a>()</pre>
+<pre> Returns all of the includes for the entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="model.SRA_AttributeGenerator.html" target="contentFrame">SRA_AttributeGenerator</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getPrimaryKeyAttribute">getPrimaryKeyAttribute</a>()</pre>
+<pre> Returns the primary key attribute for this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_EntitySchema  or -1 if loading or FALSE if non-persistent</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSchema">getSchema</a>()</pre>
+<pre> Returns an array of the names of all the attributes that should be tracked
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public AttributeGenerator[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getDtdAttributes">getDtdAttributes</a>(boolean $includeSetOnly=FALSE)</pre>
+<pre> Returns the attributes that should be attributes within this entity&#039;s DTD
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public AttributeGenerator[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getDtdElements">getDtdElements</a>(boolean $includeSetOnly=FALSE)</pre>
+<pre> Returns the attributes that should be sub-elements within this entity&#039;s DTD
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_hasCardinality">hasCardinality</a>(string $attr)</pre>
+<pre> returns TRUE if the $attr specified is valid for this entity and has
+  cardinality
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_hasAttribute">hasAttribute</a>(string $attr)</pre>
+<pre> returns TRUE if this entity contains the attribute $attr
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isPrimaryTableAttr">isPrimaryTableAttr</a>($attr)</pre>
+<pre> returns TRUE if $attr is a non-cardinality attribute stored in the primary
+  entity table
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isFile">isFile</a>(string $attr)</pre>
+<pre> returns TRUE if the $attr specified is valid for this entity and is a file
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_usesFiles">usesFiles</a>(array $stack=NULL)</pre>
+<pre> returns TRUE if this entity or any of its&#039; sub-entities use file type
+  attributes
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_usesWsDb">usesWsDb</a>()</pre>
+<pre> returns TRUE if this entity uses a web service db for persistence
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre>&amp;<a href="#method__generateDAO">_generateDAO</a>(file $fp=FALSE)</pre>
+<pre> Used to generate the DAO for this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre>&amp;<a href="#method__generateVO">_generateVO</a>(file $fp=FALSE)</pre>
+<pre> Used to generate the VO for this entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_Generator object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_ENTITY_GENERATOR_DAO_SUFFIX">SRA_ENTITY_GENERATOR_DAO_SUFFIX</h3>
+  <pre><b>SRA_ENTITY_GENERATOR_DAO_SUFFIX</b> = 'DAO'</pre>
+  <pre> the class suffix to use for DAOs
+</pre>
+ <hr />  <h3 id="constant_SRA_ENTITY_GENERATOR_VO_SUFFIX">SRA_ENTITY_GENERATOR_VO_SUFFIX</h3>
+  <pre><b>SRA_ENTITY_GENERATOR_VO_SUFFIX</b> = 'VO'</pre>
+  <pre> the class suffix to use for VOs
+</pre>
+ <hr />  <h3 id="constant_SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION">SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION</h3>
+  <pre><b>SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION</b> = 20</pre>
+  <pre> the max # of recursive hits that are allows to the getSchema method. if this
+  # is exceeded, an SRA_Error will be logged and the process will be killed using
+  the exit function
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__name">_name</h3>
+  <pre>var <b>$_name</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__aopAspects">_aopAspects</h3>
+  <pre>var <b>$_aopAspects</b> = array()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__aopIntroductions">_aopIntroductions</h3>
+  <pre>var <b>$_aopIntroductions</b> = array()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__abstract">_abstract</h3>
+  <pre>var <b>$_abstract</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__apiResource">_apiResource</h3>
+  <pre>var <b>$_apiResource</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__attributeGenerators">_attributeGenerators</h3>
+  <pre>var <b>$_attributeGenerators</b> = array()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__columnPostfix">_columnPostfix</h3>
+  <pre>var <b>$_columnPostfix</b> = ''</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__columnPrefix">_columnPrefix</h3>
+  <pre>var <b>$_columnPrefix</b> = ''</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__constraint">_constraint</h3>
+  <pre>var <b>$_constraint</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__customDao">_customDao</h3>
+  <pre>var <b>$_customDao</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__dao">_dao</h3>
+  <pre>var <b>$_dao</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__daoFile">_daoFile</h3>
+  <pre>var <b>$_daoFile</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__daoExtends">_daoExtends</h3>
+  <pre>var <b>$_daoExtends</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__daoExtendsFile">_daoExtendsFile</h3>
+  <pre>var <b>$_daoExtendsFile</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__daoSuffix">_daoSuffix</h3>
+  <pre>var <b>$_daoSuffix</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__db">_db</h3>
+  <pre>var <b>$_db</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__dbRefIntegrity">_dbRefIntegrity</h3>
+  <pre>var <b>$_dbRefIntegrity</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__ddlCamelCase">_ddlCamelCase</h3>
+  <pre>var <b>$_ddlCamelCase</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__ddlUpperCase">_ddlUpperCase</h3>
+  <pre>var <b>$_ddlUpperCase</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__defaultViews">_defaultViews</h3>
+  <pre>var <b>$_defaultViews</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__dtdAttributes">_dtdAttributes</h3>
+  <pre>var <b>$_dtdAttributes</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__dtdCamelCase">_dtdCamelCase</h3>
+  <pre>var <b>$_dtdCamelCase</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__dtdSubElements">_dtdSubElements</h3>
+  <pre>var <b>$_dtdSubElements</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__entityGenerators">_entityGenerators</h3>
+  <pre>var <b>$_entityGenerators</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__entityModelXml">_entityModelXml</h3>
+  <pre>var <b>$_entityModelXml</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__fileDir">_fileDir</h3>
+  <pre>var <b>$_fileDir</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__fileDirUri">_fileDirUri</h3>
+  <pre>var <b>$_fileDirUri</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__fileHandling">_fileHandling</h3>
+  <pre>var <b>$_fileHandling</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__fileIconDir">_fileIconDir</h3>
+  <pre>var <b>$_fileIconDir</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__fileScriptRewrite">_fileScriptRewrite</h3>
+  <pre>var <b>$_fileScriptRewrite</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__fileScriptUri">_fileScriptUri</h3>
+  <pre>var <b>$_fileScriptUri</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__generatePath">_generatePath</h3>
+  <pre>var <b>$_generatePath</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__globalViews">_globalViews</h3>
+  <pre>var <b>$_globalViews</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__ignoreBadImport">_ignoreBadImport</h3>
+  <pre>var <b>$_ignoreBadImport</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__matchUserId">_matchUserId</h3>
+  <pre>var <b>$_matchUserId</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__msgs">_msgs</h3>
+  <pre>var <b>$_msgs</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__nestedQueriesOk">_nestedQueriesOk</h3>
+  <pre>var <b>$_nestedQueriesOk</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__nullDbEmptyStr">_nullDbEmptyStr</h3>
+  <pre>var <b>$_nullDbEmptyStr</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__onCreateImport">_onCreateImport</h3>
+  <pre>var <b>$_onCreateImport</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__onDeleteUpdate">_onDeleteUpdate</h3>
+  <pre>var <b>$_onDeleteUpdate</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__orderBy">_orderBy</h3>
+  <pre>var <b>$_orderBy</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__parentEntity">_parentEntity</h3>
+  <pre>var <b>$_parentEntity</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__primaryKey">_primaryKey</h3>
+  <pre>var <b>$_primaryKey</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__propagateUpdate">_propagateUpdate</h3>
+  <pre>var <b>$_propagateUpdate</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__renderAppend">_renderAppend</h3>
+  <pre>var <b>$_renderAppend</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__renderExclude">_renderExclude</h3>
+  <pre>var <b>$_renderExclude</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__renderInclude">_renderInclude</h3>
+  <pre>var <b>$_renderInclude</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__resource">_resource</h3>
+  <pre>var <b>$_resource</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__resourceBundles">_resourceBundles</h3>
+  <pre>var <b>$_resourceBundles</b> = FALSE</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__resources">_resources</h3>
+  <pre>var <b>$_resources</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__resourceHelp">_resourceHelp</h3>
+  <pre>var <b>$_resourceHelp</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__schema">_schema</h3>
+  <pre>var <b>$_schema</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__schemaLoading">_schemaLoading</h3>
+  <pre>var <b>$_schemaLoading</b> = FALSE</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__schemaRecursionCount">_schemaRecursionCount</h3>
+  <pre>var <b>$_schemaRecursionCount</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__skipPersistence">_skipPersistence</h3>
+  <pre>var <b>$_skipPersistence</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__skipWsdl">_skipWsdl</h3>
+  <pre>var <b>$_skipWsdl</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__sysErrResource">_sysErrResource</h3>
+  <pre>var <b>$_sysErrResource</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__table">_table</h3>
+  <pre>var <b>$_table</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__types">_types</h3>
+  <pre>var <b>$_types</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__unitTest">_unitTest</h3>
+  <pre>var <b>$_unitTest</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__unitTestClass">_unitTestClass</h3>
+  <pre>var <b>$_unitTestClass</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__viewProcessors">_viewProcessors</h3>
+  <pre>var <b>$_viewProcessors</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__views">_views</h3>
+  <pre>var <b>$_views</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__voExtends">_voExtends</h3>
+  <pre>var <b>$_voExtends</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__voExtendsFile">_voExtendsFile</h3>
+  <pre>var <b>$_voExtendsFile</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__voSuffix">_voSuffix</h3>
+  <pre>var <b>$_voSuffix</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__validateGenerators">_validateGenerators</h3>
+  <pre>var <b>$_validateGenerators</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__webServices">_webServices</h3>
+  <pre>var <b>$_webServices</b> = array()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__wsDb">_wsDb</h3>
+  <pre>var <b>$_wsDb</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr__wsDbName">_wsDbName</h3>
+  <pre>var <b>$_wsDbName</b></pre>
+  <pre>No API comments</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_EntityGenerator">SRA_EntityGenerator</h3>
+  <pre>private void function <b>SRA_EntityGenerator</b>($dbKey, $dbRefIntegrity, boolean $ddlCamelCase, $ddlUpperCase, boolean $dtdCamelCase, $msgs, $nestedQueriesOk, string $generatePath, array $types, string $entityModelXml, $resources, string $sysErrResource, array $conf, ViewProcessor[] $viewProcessors, SRA_EntityView[] $globalViews, $defaultViews, $daoSuffix, $voSuffix, $wsDb)</pre>
+  <pre> Creates a new SRA_EntityGenerator with the configuration specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dbKey</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>dbRefIntegrity</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>ddlCamelCase</td>
+      <td>boolean</td>
+      <td><pre>whether or not to generate camel case ddl</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>ddlUpperCase</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>dtdCamelCase</td>
+      <td>boolean</td>
+      <td><pre>whether or not to generate camel case dtds</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msgs</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>nestedQueriesOk</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>generatePath</td>
+      <td>string</td>
+      <td><pre>the directory where generated class should be  created</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>types</td>
+      <td>array</td>
+      <td><pre>an array of all of the entity types defined in the  entity model xml configuration</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>entityModelXml</td>
+      <td>string</td>
+      <td><pre>path to the entity model xml configuration</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>resources</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>sysErrResource</td>
+      <td>string</td>
+      <td><pre>the system error resource key</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>array</td>
+      <td><pre>associative array of entity configuration values</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>viewProcessors</td>
+      <td>ViewProcessor[]</td>
+      <td><pre>global view processors that may be  used by this entity</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>globalViews</td>
+      <td>SRA_EntityView[]</td>
+      <td><pre>global views that this entity or its attributes&#039; views may extend from</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>defaultViews</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>daoSuffix</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>voSuffix</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>wsDb</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_attributeGeneratorToColumn">attributeGeneratorToColumn</h3>
+  <pre>public <a href="model.SRA_SchemaColumn.html" target="contentFrame">SRA_SchemaColumn</a> function &amp;<b>attributeGeneratorToColumn</b>(<a href="model.SRA_AttributeGenerator.html" target="contentFrame">SRA_AttributeGenerator</a> $generator, <a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $table, <a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $baseTable)</pre>
+  <pre> Used to convert an SRA_AttributeGenerator to a SRA_SchemaColumn object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>generator</td>
+      <td>SRA_AttributeGenerator</td>
+      <td><pre>$generator the SRA_AttributeGenerator to convert</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>table</td>
+      <td>SRA_SchemaTable</td>
+      <td><pre>$table the table that this column will belong to</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>baseTable</td>
+      <td>SRA_SchemaTable</td>
+      <td><pre>the base table for the schema</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_attrIsPersistent">attrIsPersistent</h3>
+  <pre>public boolean function <b>attrIsPersistent</b>(string $attr)</pre>
+  <pre> returns TRUE if $attr is persistent
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>the attribute</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_checkAttrs">checkAttrs</h3>
+  <pre>public String function <b>checkAttrs</b>()</pre>
+  <pre> validates that all attr generators are valid
+</pre>
+ <hr />  <h3 id="method_excludeAttrFromRender">excludeAttrFromRender</h3>
+  <pre>public String function <b>excludeAttrFromRender</b>(string $attr)</pre>
+  <pre> Returns true if the $attr specified should be excluded from a render method
+  invocation (json or xml)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>the name of the attribute to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getResources">getResources</h3>
+  <pre>public ResourceBundle function &amp;<b>getResources</b>()</pre>
+  <pre> returns the resources used by this entity
+</pre>
+ <hr />  <h3 id="method_generate">generate</h3>
+  <pre>public String function &amp;<b>generate</b>()</pre>
+  <pre> Used to generate this entity
+</pre>
+  <p>param = SRA_EntityGenerator[] $entityGenerators an array of all of the  SRA_EntityGenerator objects in the entity model
+</p>
+ <hr />  <h3 id="method_getAopAspects">getAopAspects</h3>
+  <pre>public String function <b>getAopAspects</b>(string $class, string $method, string $when)</pre>
+  <pre> Returns all of the SRA_AopAspects for the specified class, method and
+  when
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>class</td>
+      <td>string</td>
+      <td><pre>the class to return the aspects for (one of the SRA_AOP_CLASS_* constants)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>method</td>
+      <td>string</td>
+      <td><pre>the name of the method to return the aspects for (w/o parameters or parens)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>when</td>
+      <td>string</td>
+      <td><pre>the aspect when flag. one of the SRA_AOP_ASPECT_WHEN_* constants</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAopIntroductions">getAopIntroductions</h3>
+  <pre>public String function <b>getAopIntroductions</b>(string $type=FALSE, string $class=FALSE)</pre>
+  <pre> Returns all of the SRA_AopIntroductions of the specified type
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>a type limiter. if not specified, all introductions  of any type will be returned. must correspond with one of the
+  SRA_AOP_INTRODUCTION_TYPE_* constants</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>class</td>
+      <td>string</td>
+      <td><pre>a class limiter. if not specified, all introductions  for any class will be returned. must correspond with one of the
+  SRA_AOP_CLASS_* constants</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAttributes">getAttributes</h3>
+  <pre>public SRA_AttributeGenerators[] function &amp;<b>getAttributes</b>(string $attr=NULL)</pre>
+  <pre> returns the attributes associated with this entity
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>the name of a specific attribute to return the  generator for. if specified, the return value will be a single instance of
+  SRA_AttributeGenerators</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getTypesUsed">getTypesUsed</h3>
+  <pre>public string[] function <b>getTypesUsed</b>(boolean $complexOnly=FALSE, array $stack=NULL, boolean $recursive=TRUE, boolean $excludeNonIncludeAttrs=FALSE)</pre>
+  <pre> returns all of the types used by this entity and its&#039; corresponding
+  attributes
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>complexOnly</td>
+      <td>boolean</td>
+      <td><pre>when true only complex (entity) types will be  returned</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>stack</td>
+      <td>array</td>
+      <td><pre>used internally to avoid infinite recursion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>recursive</td>
+      <td>boolean</td>
+      <td><pre>whether or not to invoke recursively</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>excludeNonIncludeAttrs</td>
+      <td>boolean</td>
+      <td><pre>whether or not to skip entity type  attributes where the skip-include flag is true</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAttrType">getAttrType</h3>
+  <pre>public string function <b>getAttrType</b>(string $attr)</pre>
+  <pre> returns the data (or entity) type for the attribute specified
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>the attribute to return the type for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDaoClassName">getDaoClassName</h3>
+  <pre>public String function <b>getDaoClassName</b>()</pre>
+  <pre> Returns the DAO class name
+</pre>
+ <hr />  <h3 id="method_getDaoPath">getDaoPath</h3>
+  <pre>public String function <b>getDaoPath</b>()</pre>
+  <pre> Returns the path to the DAO for this entity
+</pre>
+ <hr />  <h3 id="method_getDtdSubElementName">getDtdSubElementName</h3>
+  <pre>public string function <b>getDtdSubElementName</b>(string $subName)</pre>
+  <pre> Returns the DTD name value for an entity sub-element
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>subName</td>
+      <td>string</td>
+      <td><pre>the sub-element name</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getEntityGenerator">getEntityGenerator</h3>
+  <pre>public <a href="model.SRA_EntityGenerator.html" target="contentFrame">SRA_EntityGenerator</a> function &amp;<b>getEntityGenerator</b>($entity)</pre>
+  <pre> Returns the SRA_EntityGenerator for the $entity specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>Not Specified</td>
+      <td><pre>the name of the entity to return the generator for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getTableAttributes">getTableAttributes</h3>
+  <pre>public SRA_AttributeGenerator[] function &amp;<b>getTableAttributes</b>($table)</pre>
+  <pre> Returns an array of all of the attribute generators that utilize the table
+  specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>table</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getVoClassName">getVoClassName</h3>
+  <pre>public String function <b>getVoClassName</b>()</pre>
+  <pre> Returns the VO class name for this entity
+</pre>
+ <hr />  <h3 id="method_getVoPath">getVoPath</h3>
+  <pre>public String function <b>getVoPath</b>()</pre>
+  <pre> Returns the path to the VO for this entity
+</pre>
+ <hr />  <h3 id="method_getIncludes">getIncludes</h3>
+  <pre>public String[] function <b>getIncludes</b>()</pre>
+  <pre> Returns all of the includes for the entity
+</pre>
+ <hr />  <h3 id="method_getPrimaryKeyAttribute">getPrimaryKeyAttribute</h3>
+  <pre>public <a href="model.SRA_AttributeGenerator.html" target="contentFrame">SRA_AttributeGenerator</a> function &amp;<b>getPrimaryKeyAttribute</b>()</pre>
+  <pre> Returns the primary key attribute for this entity
+</pre>
+ <hr />  <h3 id="method_getSchema">getSchema</h3>
+  <pre>public SRA_EntitySchema  or -1 if loading or FALSE if non-persistent function &amp;<b>getSchema</b>()</pre>
+  <pre> Returns an array of the names of all the attributes that should be tracked
+ 
+</pre>
+ <hr />  <h3 id="method_getDtdAttributes">getDtdAttributes</h3>
+  <pre>public AttributeGenerator[] function &amp;<b>getDtdAttributes</b>(boolean $includeSetOnly=FALSE)</pre>
+  <pre> Returns the attributes that should be attributes within this entity&#039;s DTD
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>includeSetOnly</td>
+      <td>boolean</td>
+      <td><pre>whether or not to include setOnly attributes</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDtdElements">getDtdElements</h3>
+  <pre>public AttributeGenerator[] function &amp;<b>getDtdElements</b>(boolean $includeSetOnly=FALSE)</pre>
+  <pre> Returns the attributes that should be sub-elements within this entity&#039;s DTD
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>includeSetOnly</td>
+      <td>boolean</td>
+      <td><pre>whether or not to include setOnly attributes</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_hasCardinality">hasCardinality</h3>
+  <pre>public boolean function <b>hasCardinality</b>(string $attr)</pre>
+  <pre> returns TRUE if the $attr specified is valid for this entity and has
+  cardinality
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>the attribute to check for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_hasAttribute">hasAttribute</h3>
+  <pre>public boolean function <b>hasAttribute</b>(string $attr)</pre>
+  <pre> returns TRUE if this entity contains the attribute $attr
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>the attribute to check for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isPrimaryTableAttr">isPrimaryTableAttr</h3>
+  <pre>public boolean function <b>isPrimaryTableAttr</b>($attr)</pre>
+  <pre> returns TRUE if $attr is a non-cardinality attribute stored in the primary
+  entity table
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isFile">isFile</h3>
+  <pre>public boolean function <b>isFile</b>(string $attr)</pre>
+  <pre> returns TRUE if the $attr specified is valid for this entity and is a file
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>the attribute to check for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_usesFiles">usesFiles</h3>
+  <pre>public boolean function <b>usesFiles</b>(array $stack=NULL)</pre>
+  <pre> returns TRUE if this entity or any of its&#039; sub-entities use file type
+  attributes
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>stack</td>
+      <td>array</td>
+      <td><pre>used internally to avoid infinite recursion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_usesWsDb">usesWsDb</h3>
+  <pre>public boolean function <b>usesWsDb</b>()</pre>
+  <pre> returns TRUE if this entity uses a web service db for persistence
+</pre>
+ <hr />  <h3 id="method__generateDAO">_generateDAO</h3>
+  <pre>public void function &amp;<b>_generateDAO</b>(file $fp=FALSE)</pre>
+  <pre> Used to generate the DAO for this entity
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fp</td>
+      <td>file</td>
+      <td><pre>the file pointer to write to, if not specified, a new fp  will be opened</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__generateVO">_generateVO</h3>
+  <pre>public String function &amp;<b>_generateVO</b>(file $fp=FALSE)</pre>
+  <pre> Used to generate the VO for this entity
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fp</td>
+      <td>file</td>
+      <td><pre>the file pointer to write to, if not specified, a new fp  will be opened</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_Generator object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_EntityGenerator.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

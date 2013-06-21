@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_EntityViewProcessor - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+
+  // check attributes
+  if ("_id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__id'] = "_id";
+  }
+  if ("_path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__path'] = "_path";
+  }
+  if ("_args".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__args'] = "_args";
+  }
+  if ("_inputview".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__inputView'] = "_inputView";
+  }
+  if ("_outputfilepath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__outputFilePath'] = "_outputFilePath";
+  }
+  if ("_postprocesscmd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__postProcessCmd'] = "_postProcessCmd";
+  }
+  if ("_preprocesscmd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__preProcessCmd'] = "_preProcessCmd";
+  }
+
+  // check methods
+  if ("sra_entityviewprocessor".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_EntityViewProcessor'] = "SRA_EntityViewProcessor";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_EntityViewProcessor</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_EntityViewProcessor</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> Represents the data associated with a view processor
+ 
+</pre>
+  
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__id">_id</a></pre>
+<pre> unique identifier for the view
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__path">_path</a></pre>
+<pre> the path to the command line utility that should be run
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__args">_args</a></pre>
+<pre> input arguments that should be passed into the command line program. the
+  following variables can be used:
+ 
+  						outputFile 		- if specified the output of the &quot;view&quot; or
+  																of the previous SRA_EntityViewProcessor will be
+  																serialized to a file and the path
+  																to that file will be substituted with
+  																every occurrence of this variable in the
+  																args attribute. this file will be
+  																automatically deleted upon completion of
+  																the processing
+ 
+  						randomFile[N]	- if specified, a random empty file will be
+  																created and the path to that file will be
+  																substituted with every occurrence of this
+  																variable in the args attribute. the [N] is
+  																optional to differential between different
+  																random files. these files will be
+  																automatically deleted upon completion of
+  																the processing
+ 
+  						attr[_subAttr]	- if specified, the corresponding entity or
+  																entity attribute will be substituted for
+  																every occurrence of this variable in the
+  																args attribute. If this is an object, it
+  																will be specified in a serialized form
+ 																unless a &quot;toString&quot; method exists, in
+ 																which case the results from that method
+ 																call will be used
+ 
+ 						{LENGTH} 					- will be substituted with the size in bytes
+  																of the buffered output prior to execution
+  																of this processor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__inputView">_inputView</a></pre>
+<pre> whether or not the output of the view or preceding SRA_EntityViewProcessor will
+  be input directly to the program STDIN. if the program requires
+  input as a file, then use the outputFile in the args attribute as
+  defined above
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__outputFilePath">_outputFilePath</a></pre>
+<pre> the path to the output file. this attribute may contain the
+  randomFile[N]} {LENGTH}, or {$attr[_subAttr] variables which will be
+  converted to their corresponding values as defined above. If this attribute
+  is not specified, then the output will be retrieved from the program STDOUT
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__postProcessCmd">_postProcessCmd</a></pre>
+<pre> a command or commands (separated by ;) to be executed after running the
+  command line program. any of the &quot;args&quot; variables (outputFile,
+  randomFile[N]}, {LENGTH}, or {$attr[_subAttr]) may also be specified in
+  this attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__preProcessCmd">_preProcessCmd</a></pre>
+<pre> a command or commands (separated by ;) to be executed prior to running the
+  command line program. any of the &quot;args&quot; variables (outputFile,
+  randomFile[N]}, {LENGTH}, or {$attr[_subAttr]) may also be specified in
+  this attribute
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_EntityViewProcessor">SRA_EntityViewProcessor</a>($id, $path, $args, $inputView, $outputFilePath, $postProcessCmd, $preProcessCmd)</pre>
+<pre> Constructor - does nothing
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_EntityViewProcessor object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__id">_id</h3>
+  <pre>string var <b>$_id</b></pre>
+  <pre> unique identifier for the view
+</pre>
+ <hr />  <h3 id="attr__path">_path</h3>
+  <pre>string var <b>$_path</b></pre>
+  <pre> the path to the command line utility that should be run
+</pre>
+ <hr />  <h3 id="attr__args">_args</h3>
+  <pre>string var <b>$_args</b></pre>
+  <pre> input arguments that should be passed into the command line program. the
+  following variables can be used:
+ 
+  						outputFile 		- if specified the output of the &quot;view&quot; or
+  																of the previous SRA_EntityViewProcessor will be
+  																serialized to a file and the path
+  																to that file will be substituted with
+  																every occurrence of this variable in the
+  																args attribute. this file will be
+  																automatically deleted upon completion of
+  																the processing
+ 
+  						randomFile[N]	- if specified, a random empty file will be
+  																created and the path to that file will be
+  																substituted with every occurrence of this
+  																variable in the args attribute. the [N] is
+  																optional to differential between different
+  																random files. these files will be
+  																automatically deleted upon completion of
+  																the processing
+ 
+  						attr[_subAttr]	- if specified, the corresponding entity or
+  																entity attribute will be substituted for
+  																every occurrence of this variable in the
+  																args attribute. If this is an object, it
+  																will be specified in a serialized form
+ 																unless a &quot;toString&quot; method exists, in
+ 																which case the results from that method
+ 																call will be used
+ 
+ 						{LENGTH} 					- will be substituted with the size in bytes
+  																of the buffered output prior to execution
+  																of this processor
+</pre>
+ <hr />  <h3 id="attr__inputView">_inputView</h3>
+  <pre>boolean var <b>$_inputView</b></pre>
+  <pre> whether or not the output of the view or preceding SRA_EntityViewProcessor will
+  be input directly to the program STDIN. if the program requires
+  input as a file, then use the outputFile in the args attribute as
+  defined above
+</pre>
+ <hr />  <h3 id="attr__outputFilePath">_outputFilePath</h3>
+  <pre>string var <b>$_outputFilePath</b></pre>
+  <pre> the path to the output file. this attribute may contain the
+  randomFile[N]} {LENGTH}, or {$attr[_subAttr] variables which will be
+  converted to their corresponding values as defined above. If this attribute
+  is not specified, then the output will be retrieved from the program STDOUT
+</pre>
+ <hr />  <h3 id="attr__postProcessCmd">_postProcessCmd</h3>
+  <pre>string var <b>$_postProcessCmd</b></pre>
+  <pre> a command or commands (separated by ;) to be executed after running the
+  command line program. any of the &quot;args&quot; variables (outputFile,
+  randomFile[N]}, {LENGTH}, or {$attr[_subAttr]) may also be specified in
+  this attribute
+</pre>
+ <hr />  <h3 id="attr__preProcessCmd">_preProcessCmd</h3>
+  <pre>string var <b>$_preProcessCmd</b></pre>
+  <pre> a command or commands (separated by ;) to be executed prior to running the
+  command line program. any of the &quot;args&quot; variables (outputFile,
+  randomFile[N]}, {LENGTH}, or {$attr[_subAttr]) may also be specified in
+  this attribute
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_EntityViewProcessor">SRA_EntityViewProcessor</h3>
+  <pre>public void function <b>SRA_EntityViewProcessor</b>($id, $path, $args, $inputView, $outputFilePath, $postProcessCmd, $preProcessCmd)</pre>
+  <pre> Constructor - does nothing
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>args</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>inputView</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>outputFilePath</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>postProcessCmd</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>preProcessCmd</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_EntityViewProcessor object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_EntityViewProcessor.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

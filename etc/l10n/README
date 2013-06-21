@@ -1,0 +1,1 @@
+This directory contains localization enabling files including xml files for describing address formats, currencies and locales as well as localizable properties files for system wide strings. the SRA_ResourceBundle returned by SRA_Controller::getAppResources will contain both the application as well as the platform resources defined in sierra.properties

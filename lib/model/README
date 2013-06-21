@@ -1,0 +1,3 @@
+The SRA_EntityModeler allows SIERRA framework applications to define their object model in xml including entities, entity relationships, validation, and o/r mappings. The SRA_EntityModeler is essentially a DAO/VO generator. No build is required as all initializations are performed automatically the first time that the entity model is used and thereafter only updated when changes are made to the entity model.
+
+For more information, see the app-config dtd and the entity-model dtd.

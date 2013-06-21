@@ -1,0 +1,642 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.SRA_EmailMessage - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+
+  // check attributes
+  if ("attachments".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_attachments'] = "attachments";
+  }
+  if ("cc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_cc'] = "cc";
+  }
+  if ("ccname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_ccName'] = "ccName";
+  }
+  if ("from".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_from'] = "from";
+  }
+  if ("fromname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_fromName'] = "fromName";
+  }
+  if ("message".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_message'] = "message";
+  }
+  if ("messagehtml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_messageHtml'] = "messageHtml";
+  }
+  if ("messageid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_messageId'] = "messageId";
+  }
+  if ("prioritylow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_priorityLow'] = "priorityLow";
+  }
+  if ("priorityhigh".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_priorityHigh'] = "priorityHigh";
+  }
+  if ("received".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_received'] = "received";
+  }
+  if ("returnpath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_returnPath'] = "returnPath";
+  }
+  if ("serverpath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_serverPath'] = "serverPath";
+  }
+  if ("subject".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_subject'] = "subject";
+  }
+  if ("to".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_to'] = "to";
+  }
+  if ("toname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_toName'] = "toName";
+  }
+
+  // check methods
+  if ("sra_emailmessage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_EmailMessage'] = "SRA_EmailMessage";
+  }
+  if ("truncate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_truncate'] = "truncate";
+  }
+  if ("convert".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convert'] = "convert";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("_getemailparts".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getEmailParts'] = "_getEmailParts";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_EmailMessage</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.html" target="contentFrame">util</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_EmailMessage</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> used to represent the data associated with an email message. this class
+  consists only of public attributes representing this data
+</pre>
+  
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>SRA_FileAttribute[] </pre></td>
+      <td>
+        <pre><a href="#attr_attachments">attachments</a></pre>
+<pre> any file attachments included with the message
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_cc">cc</a></pre>
+<pre> the cc email address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_ccName">ccName</a></pre>
+<pre> the cc name (if provided in the message headers)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_from">from</a></pre>
+<pre> the from email address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_fromName">fromName</a></pre>
+<pre> the from name (if provided in the message headers)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_message">message</a></pre>
+<pre> the plain text message body. if only html formatted content was included
+  in the message, this attribute will be the tag stripped version of that
+  content
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_messageHtml">messageHtml</a></pre>
+<pre> the html formatted message content. if only text formatted content was
+  included in the message, this attribute will be that content with newlines
+  replaced with &lt;br /&gt; tags
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_messageId">messageId</a></pre>
+<pre> the message id
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_priorityLow">priorityLow</a></pre>
+<pre> is this message low priority. if neither $priorityLow nor $priorityHigh are
+  TRUE, the message is normal priority
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_priorityHigh">priorityHigh</a></pre>
+<pre> is this message high priority. if neither $priorityLow nor $priorityHigh
+  are TRUE, the message is normal priority
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> </pre></td>
+      <td>
+        <pre><a href="#attr_received">received</a></pre>
+<pre> the date this message was received by the destination server
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_returnPath">returnPath</a></pre>
+<pre> the email address return path. this will be an email address that may or
+  may not be the same as $from
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr_serverPath">serverPath</a></pre>
+<pre> the server path that this message took from origin to destination. each
+  entry in this attribute will be the IP address of the server in that step
+  of the path starting with the origin server and ending with the receiving
+  server
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_subject">subject</a></pre>
+<pre> the message subject
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_to">to</a></pre>
+<pre> the to email address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_toName">toName</a></pre>
+<pre> the to name (if provided in the message headers)
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_EmailMessage">SRA_EmailMessage</a>()</pre>
+<pre> object constructor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_truncate">truncate</a>(string $terminator)</pre>
+<pre> use this method to truncate this message
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_EmailMessage.html" target="contentFrame">SRA_EmailMessage</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_convert">convert</a>(string $raw)</pre>
+<pre> creates a new SRA_EmailMessage instance from raw message source (including
+  headers). the return will always be an SRA_EmailMessage object. if any
+  error occur, the SRA_EmailMessage::isValid method will return FALSE for
+  that object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_EmailMessage object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method__getEmailParts">_getEmailParts</a>(array $decoded)</pre>
+<pre> this method extracts all of the parts from a decoded message starting at
+  $decoded and continuing recursively through all of the parts and sub-parts
+  it contains. the return value will be a hash with the following keys:
+   attachments: SRA_FileAttribute[] - any attachments included in the message
+   text: string - the text part of the message (if available)
+   html: string - the html part of the message (if available)
+</pre>      </td>
+    </tr>
+  </table>
+
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_attachments">attachments</h3>
+  <pre>SRA_FileAttribute[] var <b>$attachments</b> = array()</pre>
+  <pre> any file attachments included with the message
+</pre>
+ <hr />  <h3 id="attr_cc">cc</h3>
+  <pre>string var <b>$cc</b></pre>
+  <pre> the cc email address
+</pre>
+ <hr />  <h3 id="attr_ccName">ccName</h3>
+  <pre>string var <b>$ccName</b></pre>
+  <pre> the cc name (if provided in the message headers)
+</pre>
+ <hr />  <h3 id="attr_from">from</h3>
+  <pre>string var <b>$from</b></pre>
+  <pre> the from email address
+</pre>
+ <hr />  <h3 id="attr_fromName">fromName</h3>
+  <pre>string var <b>$fromName</b></pre>
+  <pre> the from name (if provided in the message headers)
+</pre>
+ <hr />  <h3 id="attr_message">message</h3>
+  <pre>string var <b>$message</b></pre>
+  <pre> the plain text message body. if only html formatted content was included
+  in the message, this attribute will be the tag stripped version of that
+  content
+</pre>
+ <hr />  <h3 id="attr_messageHtml">messageHtml</h3>
+  <pre>string var <b>$messageHtml</b></pre>
+  <pre> the html formatted message content. if only text formatted content was
+  included in the message, this attribute will be that content with newlines
+  replaced with &lt;br /&gt; tags
+</pre>
+ <hr />  <h3 id="attr_messageId">messageId</h3>
+  <pre>string var <b>$messageId</b></pre>
+  <pre> the message id
+</pre>
+ <hr />  <h3 id="attr_priorityLow">priorityLow</h3>
+  <pre>boolean var <b>$priorityLow</b> = FALSE</pre>
+  <pre> is this message low priority. if neither $priorityLow nor $priorityHigh are
+  TRUE, the message is normal priority
+</pre>
+ <hr />  <h3 id="attr_priorityHigh">priorityHigh</h3>
+  <pre>boolean var <b>$priorityHigh</b> = FALSE</pre>
+  <pre> is this message high priority. if neither $priorityLow nor $priorityHigh
+  are TRUE, the message is normal priority
+</pre>
+ <hr />  <h3 id="attr_received">received</h3>
+  <pre><a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> var <b>$received</b></pre>
+  <pre> the date this message was received by the destination server
+</pre>
+ <hr />  <h3 id="attr_returnPath">returnPath</h3>
+  <pre>string var <b>$returnPath</b></pre>
+  <pre> the email address return path. this will be an email address that may or
+  may not be the same as $from
+</pre>
+ <hr />  <h3 id="attr_serverPath">serverPath</h3>
+  <pre>array var <b>$serverPath</b> = array()</pre>
+  <pre> the server path that this message took from origin to destination. each
+  entry in this attribute will be the IP address of the server in that step
+  of the path starting with the origin server and ending with the receiving
+  server
+</pre>
+ <hr />  <h3 id="attr_subject">subject</h3>
+  <pre>string var <b>$subject</b></pre>
+  <pre> the message subject
+</pre>
+ <hr />  <h3 id="attr_to">to</h3>
+  <pre>string var <b>$to</b></pre>
+  <pre> the to email address
+</pre>
+ <hr />  <h3 id="attr_toName">toName</h3>
+  <pre>string var <b>$toName</b></pre>
+  <pre> the to name (if provided in the message headers)
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_EmailMessage">SRA_EmailMessage</h3>
+  <pre>public void function <b>SRA_EmailMessage</b>()</pre>
+  <pre> object constructor
+</pre>
+ <hr />  <h3 id="method_truncate">truncate</h3>
+  <pre>public void function <b>truncate</b>(string $terminator)</pre>
+  <pre> use this method to truncate this message
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>terminator</td>
+      <td>string</td>
+      <td><pre>the truncate identifier. all message contents  on the same and proceeding lines from the first occurence of this value in
+  the text message will be removed from the message. NOTE: this only applies
+  to the text and NOT the html formatted message. this value may also be a
+  regular expression starting and ending with &#039;/&#039; (forward slash)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convert">convert</h3>
+  <pre>public <a href="util.SRA_EmailMessage.html" target="contentFrame">SRA_EmailMessage</a> function &amp;<b>convert</b>(string $raw)</pre>
+  <pre> creates a new SRA_EmailMessage instance from raw message source (including
+  headers). the return will always be an SRA_EmailMessage object. if any
+  error occur, the SRA_EmailMessage::isValid method will return FALSE for
+  that object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>raw</td>
+      <td>string</td>
+      <td><pre>either the raw message as a string, or the path to a  file containing the message</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_EmailMessage object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getEmailParts">_getEmailParts</h3>
+  <pre>public array function &amp;<b>_getEmailParts</b>(array $decoded)</pre>
+  <pre> this method extracts all of the parts from a decoded message starting at
+  $decoded and continuing recursively through all of the parts and sub-parts
+  it contains. the return value will be a hash with the following keys:
+   attachments: SRA_FileAttribute[] - any attachments included in the message
+   text: string - the text part of the message (if available)
+   html: string - the html part of the message (if available)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>decoded</td>
+      <td>array</td>
+      <td><pre>the decoded message to get the parts from. should  contain a &#039;Headers&#039; index (with a &#039;content-type:&#039; sub-index) and a &#039;Body&#039;
+  or &#039;Parts&#039; index (or both)</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/SRA_EmailMessage.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

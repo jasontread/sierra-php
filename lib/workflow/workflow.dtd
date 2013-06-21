@@ -1,0 +1,720 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for a SIERRA::workflow
+
+Used to define a single managed workflow. Applications may utilize workflow 
+definitions and the supporting lib/workflow/* classes to manage behavior and 
+functionality. In order to utilize a SIERRA::workflow within your application, 
+your app-config must include the "lib/workflow/workflow.xml" entity model
+(<use-entity-model key="workflow" path="lib/workflow/workflow.xml" />)
+
+To support validation of your workflow xml file, include the following
+DOCTYPE element at the beginning (after the "xml" declaration):
+
+<!DOCTYPE workflow PUBLIC "-//SIERRA//DTD SIERRA WORKFLOW//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/lib/workflow/workflow.dtd">
+-->
+
+
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ |                        Defined Types                                 |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!-- 
+A "Resource" is the key in the application SRA_ResourceBundle that contains a 
+string or name for an element. 
+-->
+<!ENTITY % Resource "CDATA">
+
+
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ |                        Top Level Elements                            |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+The "workflow" element is the root element of an workflow. it contains all of 
+the steps/tasks associated with the workflow as well as a start step designator.
+at least 1 step or task must be defined for a workflow to be valid
+
+delete-cascade    whether or not to cascade deletions to any entities belonging 
+                  to this workflow. this does not pertain to non-committed 
+                  entities. the default behavior is to not cascade delete
+
+due-date          an explicit date or relative date expression. explicit dates 
+                  should be entered in the format "YYYY-MM-DD HH:MM:SS" (time 
+                  is optional). relative expressions utilize the same format 
+                  except that any of the date values (YYYY, MM, DD, HH, MM, or 
+                  SS) may be replaced with a relative modifier in the format 
+                  "+n" where n is the increase from the current timestamp. For 
+                  example, to specify the 1st of the following month, the 
+                  "due-date" would be: "+0-+1-01" - where +0 signifies the 
+                  current year, and +1 signifies the following month. if the 
+                  current month was december (12), the following month will be 
+                  January and the year will be incremented automatically. 
+                  Another example: to specify exactly one week from the current 
+                  time, "due-date" would be "+0-+0-+7" - where the first +0 
+                  signifies the current year, the second +0 signifies the 
+                  current month, and +7 signifies 7 days from the current date. 
+                  month and year rollovers resulting in the 1 week jump will be 
+                  automatically applied (for example if the workflow was created 
+                  on 12/28). negative increments can be applied by enclosing the 
+                  increment value "n" in parenthesis. for example, to specify 1 
+                  month minus 1 week from the current date, "due-date" would be: 
+                  "+0-+1-+(7)". the increment value "n" may also be an a 
+                  parameter using the format "${param name}
+
+notify          	whether or not email notifications will be used by this 
+                  workflow. if specified, both "notify-subject" and "notify-tpl" 
+                  must also be specified
+                  
+notify-bcc        optional comma separated list of blind carbon copy recipients 
+                  for all workflow notifications. these will be used for the 1st 
+                  notification sent only. only applicable when at least 1 
+                  notification is being sent
+                  
+notify-cc         optional comma separated list of carbon copy recipients for 
+                  all workflow notifications. these will be used for the 1st 
+                  notification sent only. only applicable when at least 1 
+                  notification is being sent
+                  
+notify-from       the notification return email address. if not specified, the 
+                  web server process user name will be used (i.e. 
+                  apache@myserver.com). both a name and email address may be 
+                  specified using the format: "[email] &lt;[name]&gt;"
+
+notify-subject    the email notification subject resource identifier. must be 
+                  specified if "notify" is true
+									
+notify-tpl        the text email notification template. this template will have 
+                  access to the following dynamic workflow variables:
+                   $wfResources: the merged SRA_ResourceBundle object
+                   $wfWorkflow: the SraWorkflow instance
+                   $wfStep: the SraWorkflowStep instance (when applicable)
+                   $wfTask: the SraWorkflowTask instance
+                   $wfSetup: the SRA_Workflow (configuration) instance
+                   $wfStepSetup: the SRA_WorkflowStep (configuration) instance 
+                   (when applicable)
+                   $wfTaskSetup: the SRA_WorkflowTask (configuration) instance
+                   $wf_{entity-id}: entities currently associated with the 
+                   workflow
+                   $wfUser: the "user-entity" reference for the notification
+                  must be specified if "notify" is true
+                  
+notify-tpl-html   same as "notify-tpl" but specifies an html formatted email 
+                  message template. either "notify-tpl" or "notify-tpl-html" 
+                  MUST be specified when notifications are active for a 
+                  workflow. if both are specified, the emails sent will be 
+                  multipart mime formatted
+                  
+role-attr         same as "user-attr" for workflow roles
+
+role-attr-displ   same as "user-attr-displ" for workflow roles
+
+role-attr-members the name of the attribute within "role-entity" that specifies 
+                  the users that are members of that role. this attribute may 
+                  be either an array of user identifiers (based on "user-attr") 
+                  or an array of "user-entity" references. this attribute is 
+                  required when "roleEntity" is specified
+
+role-entity       same as "user-entity" for workflow roles. if not specified, 
+                  roles CANNOT be used within tasks for this workflow
+                  
+resource          the resource identifier for this workflow
+
+resources         a space separated list of resource bundles that should be 
+                  included in the workflow. %Resource; attributes will reference 
+                  values within these files. additionally, templates may access 
+                  them using the workflow template variable 'workflowResources'
+                  which will be a merged SRA_ResourceBundle representing all of 
+                  the files specified in this attribute
+
+start             the starting workflow step. this attribute is required when 
+                  steps are defined for the workflow
+                  
+user-attr         the name of the attribute within the user object that should 
+                  be used within the workflow as the user identifier. this 
+                  attribute will also be used to lookup the user object when 
+                  "user-key" returns a scalar value (using the dao 
+                  findBySqlConstraints or findByPk methods). if this attribute 
+                  is not specified, it will be assumed that the "user-key" is 
+                  the "user-entity" primary key attribute
+                  
+user-attr-displ   if an attribute other than "user-attr" should be used as the 
+                  display value, this attribute specifies the name of that 
+                  attribute within "user-entity". for example, if "user-attr" 
+                  is the primary key (a numeric value), and you would like the 
+                  user attribute "name" to be displayed instead of the numeric 
+                  primary key, this attribute value would be "name"
+                  
+user-attr-email   the attribute within "user-entity" containing the user's email
+                  address. the email address is used for notifications. this 
+                  attribute is required if "notify" is true
+
+user-entity       the name of the entity within the application this workflow is 
+                  a part of, that represents users. this attribute is required
+                  
+user-key          when an instance of this workflow is created, the current 
+                  active user is automatically assigned ownership of it. all 
+                  interactive tasks that are then created for the workflow 
+                  and do not specify alternative assignment (using the "user" 
+                  and/or "role" attribute) will be automatically assigned to 
+                  this workflow owner. this value specifies the name of the 
+                  value within the "user-key-type" context that a reference to 
+                  the active user object (an instance of "user-entity"). this 
+                  attribute is required
+                  
+user-key-type     where the active user object is stored. this may be any of 
+                  the following:
+                    session: within the session scope ($_SESSION)
+                    global:  within the global scope ($_GLOBALS)
+                    get:     within the get headers ($_GET)
+                    post:    within the post headers ($_POST)
+                  if the value is scalar it will be assumed to be the user 
+                  identifier as specified through "user-attr". this attribute is 
+                  required
+
+
+Used in:	NA
+-->
+<!ELEMENT workflow (step*, task*, param*)>
+<!ATTLIST workflow			delete-cascade 			(1|0)			   "0">
+<!ATTLIST workflow			due-date      			CDATA        #IMPLIED>
+<!ATTLIST workflow			notify        			(1|0)			   "0">
+<!ATTLIST workflow			notify-bcc    			CDATA        #IMPLIED>
+<!ATTLIST workflow			notify-cc     			CDATA        #IMPLIED>
+<!ATTLIST workflow			notify-from    			CDATA        #IMPLIED>
+<!ATTLIST workflow			notify-subject			%Resource;   #IMPLIED>
+<!ATTLIST workflow			notify-tpl    			CDATA        #IMPLIED>
+<!ATTLIST workflow			notify-tpl-html			CDATA        #IMPLIED>
+<!ATTLIST workflow			role-attr     			CDATA        #IMPLIED>
+<!ATTLIST workflow			role-attr-displ			CDATA        #IMPLIED>
+<!ATTLIST workflow			role-attr-members 	CDATA        #IMPLIED>
+<!ATTLIST workflow			role-entity    			CDATA        #IMPLIED>
+<!ATTLIST workflow			resource      			CDATA        #REQUIRED>
+<!ATTLIST workflow			resources     			CDATA        #REQUIRED>
+<!ATTLIST workflow			start         			IDREF        #IMPLIED>
+<!ATTLIST workflow			user-attr     			CDATA        #IMPLIED>
+<!ATTLIST workflow			user-attr-displ			CDATA        #IMPLIED>
+<!ATTLIST workflow			user-attr-email			CDATA        #IMPLIED>
+<!ATTLIST workflow			user-entity    			CDATA        #REQUIRED>
+<!ATTLIST workflow			user-key      			CDATA        #REQUIRED>
+<!ATTLIST workflow			user-key-type  			(get|global|post|session) #REQUIRED>
+
+
+<!--
+The "step" element defines a phase of work within the workflow. if a step is not 
+a "finish" step, then it will also provide 1 or more outbound step references 
+defining what should occur after this step is complete. workflow steps may be 
+used to accomplish tasks (1 or more nested "tasks") or to implement conditional 
+logic (using nested decisions) or both
+
+key          	    the unique identifier for this step
+
+connect-to        the identifier of another workflow to connect to when this 
+                  step is completed. NOTE: the connect-to workflow will be 
+                  initialized using the same params as this step
+                  
+due-date          an explicit date or relative date expression. explicit dates 
+                  should be entered in the format "YYYY-MM-DD HH:MM:SS" (time 
+                  is optional). relative expressions utilize the same format 
+                  except that any of the date values (YYYY, MM, DD, HH, MM, or 
+                  SS) may be replaced with a relative modifier in the format 
+                  "+n" where n is the increase from the current timestamp. For 
+                  example, to specify the 1st of the following month, the 
+                  "due-date" would be: "+0-+1-01" - where +0 signifies the 
+                  current year, and +1 signifies the following month. if the 
+                  current month was december (12), the following month will be 
+                  January and the year will be incremented automatically. 
+                  Another example: to specify exactly one week from the current 
+                  time, "due-date" would be "+0-+0-+7" - where the first +0 
+                  signifies the current year, the second +0 signifies the 
+                  current month, and +7 signifies 7 days from the current date. 
+                  month and year rollovers resulting in the 1 week jump will be 
+                  automatically applied (for example, if the task was created 
+                  on 12/28). negative increments can be applied by enclosing the 
+                  increment value "n" in parenthesis. for example, to specify 1 
+                  month minus 1 week from the current date, "due-date" would be: 
+                  "+0-+1-+(7)". the increment value "n" may also be an step or 
+                  workflow parameter using the format "${param name}
+                  
+due-date-rel      if the step "due-date" is relative, this attribute 
+                  determines what it is relative to. the following options are 
+                  available:
+                   0: the date/time when the task was invoked (default)
+                   1: the workflow start date
+                   2: the workflow due date (should not be greater)
+
+entity            when "entity-id" is specified, and no entity has yet been 
+                  instantiated and assigned to it, this attribute MUST be 
+                  specified designating the entity type. this will be the name 
+                  of the entity within one of the application's entity models. 
+                  un-committed entities (when entity-pk is not specified) are 
+                  stored in a workflow table and should not exceed 10mbps in 
+                  size
+
+entity-id         if this step will add a new or use an existing entity within 
+                  the workflow, this attribute will be the unique identifier 
+                  for that entity. if this step is the first reference to that 
+                  entity-id, it will be automatically added to the workflow
+                  
+entity-pk         either the explicit primary key value or the name of a 
+                  step/workflow parameter containing that value. this attribute 
+                  should be specified when this step will add an entity instance 
+                  to the workflow and that entity should be referenced from the 
+                  database. if "entity" is specified, and this attribute is not, 
+                  a new instance of that "entity" will be instantiated and added 
+                  to the workflow. parameter-based primary key values should be 
+                  entered in the format "${param name}"
+                  
+finish            whether or not this is a finish step. finish steps are those 
+                  that cause the workflow complete and terminate. finish 
+                  steps should not specify a "next" attribute or any nested 
+                  "decision" elements
+                  
+next              the default proceeding/output step once this one has been 
+                  completed. the workflow will transition to that step unless 
+                  a match is found in any of the nested "decision" elements for 
+                  this step
+                  
+notify          	should notifications be sent for this step and its 
+                  corresponding tasks? this value overrides the enclosing 
+                  workflow 'notify' flag
+                  
+notify-bcc        overrides the default workflow value for tasks in this step
+                  
+notify-cc         overrides the default workflow value for tasks in this step
+                  
+notify-from       overrides the default workflow value for tasks in this step
+
+notify-subject    overrides the default workflow value for tasks in this step
+									
+notify-tpl        overrides the default workflow value for tasks in this step
+                  
+notify-tpl-html   overrides the default workflow value for tasks in this step
+                  
+resource          the resource identifier for label used to describe this step
+
+role              if this step is the responsibility of a user other than the 
+                  owner of the workflow instance, this attribute may specify 
+                  a "role" or group of users that it should be assigned to. all 
+                  users within that role will have equal permission to complete 
+                  and add new tasks to this step. this attribute may also 
+                  reference a step/workflow parameter using the format 
+                  ${param name}
+
+user              if this task is the responsibility of a user other than the 
+                  owner of the workflow instance, this attribute may specify 
+                  the identifier of that user. this user has permission to 
+                  complete this step. this attribute may also reference a 
+                  workflow parameter using the format ${param name}
+
+
+Used in:	workflow
+-->
+<!ELEMENT step (decision*, param*, task*)>
+<!ATTLIST step  			  key        			    ID  			   #REQUIRED>
+<!ATTLIST step			    due-date      			CDATA        #IMPLIED>
+<!ATTLIST step  			  due-date-rel   			(0|1|2)      "0">
+<!ATTLIST step    			connect-to     			CDATA        #IMPLIED>
+<!ATTLIST step    			entity        			CDATA        #IMPLIED>
+<!ATTLIST step    			entity-id     			CDATA        #IMPLIED>
+<!ATTLIST step    			entity-pk     			CDATA        #IMPLIED>
+<!ATTLIST step    			finish        			(1|0)			   "0">
+<!ATTLIST step    			next          			IDREF        #IMPLIED>
+<!ATTLIST step			    notify        			(1|0)			   "0">
+<!ATTLIST step			    notify-bcc    			CDATA        #IMPLIED>
+<!ATTLIST step			    notify-cc     			CDATA        #IMPLIED>
+<!ATTLIST step			    notify-from    			CDATA        #IMPLIED>
+<!ATTLIST step			    notify-subject			%Resource;   #IMPLIED>
+<!ATTLIST step			    notify-tpl    			CDATA        #IMPLIED>
+<!ATTLIST step     			notify-tpl-html			CDATA        #IMPLIED>
+<!ATTLIST step    			resource      			%Resource;   #REQUIRED>
+<!ATTLIST step  			  role          			CDATA        #IMPLIED>
+<!ATTLIST step  			  user          			CDATA        #IMPLIED>
+
+
+<!--
+The "task" element defines a unit of work within a workflow. tasks are created 
+within the context of a workflow "step". tasks can be either interactive or 
+auto-completed. auto-completed tasks do not require any user intervention in 
+order to complete while interactive tasks do. interactive tasks are those 
+tasks containing a "view" and those flagged as "interactive". the unit of work 
+performed by a task is either the enclosing "eval" value, the "view" or the 
+user "check off" when it is designated "interactive". therefore, at least one of 
+those values must exist for each task. the optional nested "constraint-group" 
+sub-element determine whether or not this task is added to the enclosing step 
+at the time it is created
+
+commit            if an entity pertains to this task, setting this flag to true 
+                  will result in that entity being inserted/updated upon 
+                  successful completion of the task (if interactive, otherwise 
+                  performed when the task is initialized)
+
+connect-to        the identifier of another workflow to connect to when this 
+                  task is completed. NOTE: the connect-to workflow will be 
+                  initialized using the same params as this task
+
+due-date          an explicit date or relative date expression. explicit dates 
+                  should be entered in the format "YYYY-MM-DD HH:MM:SS" (time 
+                  is optional). relative expressions utilize the same format 
+                  except that any of the date values (YYYY, MM, DD, HH, MM, or 
+                  SS) may be replaced with a relative modifier in the format 
+                  "+n" where n is the increase from the current timestamp. For 
+                  example, to specify the 1st of the following month, the 
+                  "due-date" would be: "+0-+1-01" - where +0 signifies the 
+                  current year, and +1 signifies the following month. if the 
+                  current month was december (12), the following month will be 
+                  January and the year will be incremented automatically. 
+                  Another example: to specify exactly one week from the current 
+                  time, "due-date" would be "+0-+0-+7" - where the first +0 
+                  signifies the current year, the second +0 signifies the 
+                  current month, and +7 signifies 7 days from the current date. 
+                  month and year rollovers resulting in the 1 week jump will be 
+                  automatically applied (for example, if the task was created 
+                  on 12/28). negative increments can be applied by enclosing the 
+                  increment value "n" in parenthesis. for example, to specify 1 
+                  month minus 1 week from the current date, "due-date" would be: 
+                  "+0-+1-+(7)". the increment value "n" may also be an step or 
+                  workflow parameter using the format "${param name}
+                  
+due-date-rel      if the task "due-date" is relative, this attribute 
+                  determines what it is relative to. the following options are 
+                  available:
+                   0: the date/time when the task was invoked (default)
+                   1: the workflow start date
+                   2: the workflow due date (should not be greater)
+                   3: the task step due date (should not be greater)
+
+entity            see "step" "entity" - when the task pertains to a step, this 
+                  will override the step entity. when the task pertains to the 
+                  workflow, this attribute is required if the task involves an 
+                  entity
+
+entity-id         see "step" "entity-id"
+                  
+entity-pk         see "step" "entity-pk"
+                   
+interactive       is this task interactive? use this to create a "check-off" 
+                  task... a task that a user must simply check of having 
+                  completed. tasks with a "view" are interactive but in a 
+                  different way because the view must be displayed and entity 
+                  optionally validated (when "validate" is specified) in order 
+                  for them to be considered completed. only the owner of this 
+                  task, or the owner of the enclosing step, or the owner of the 
+                  enclosing workflow may "check off" a task. this attribute will 
+                  be automatically set to TRUE if a "view" is assigned to this 
+                  task
+                  
+notify          	should notifications be sent for this task? this value 
+                  overrides the enclosing workflow or step 'notify' flag
+
+notify-all        whether or not all participants in this workflow (past and 
+                  present) should be notified (using the "notify-tpl") when this 
+                  task is created. the default behavior is to only notify the 
+                  new owner(s) of the task
+                  
+notify-always     whether or not notifications should be sent when this task is 
+                  created regardless of whether or not it is interactive. the 
+                  default value for this attribute is FALSE, meaning 
+                  notifications will only be sent for the task if it is 
+                  interactive
+                  
+notify-att-name   if "notify-att-view" is specified, this attribute must also be 
+                  provided specifying what to name the attached file. this value 
+                  may contain workflow/step parameters in the format 
+                  ${param name}. it may also contain entity attributes in the 
+                  format {$attribute name} (after being parsed for parameter 
+                  names, it will be passed through the VO parseString method of 
+                  the enclosing step entity)
+                  
+notify-att-view   an entity view that should be attached to the email 
+                  notification sent when this task is invoked. this view may 
+                  be either text, pdf or some other output format. it will be 
+                  output directly to a file, renamed to "notify-attach-name" and 
+                  attached to the email notification(s)
+                  
+notify-bcc        overrides the default step/workflow value for this attribute
+                  
+notify-cc         overrides the default step/workflow value for this attribute
+                  
+notify-from       overrides the default step/workflow value for this attribute
+                  
+notify-recipients a space separated list of additional email addresses that 
+                  should be notified when this task is created. these will be 
+                  notified regardless of whether or not other notifications are 
+                  being sent. the $wfUser template variable will NOT be present 
+                  for these recipients. if the task is not interactive, 
+                  "notify-always" MUST be true in order for notifications to be 
+                  sent to these recipients. entity attributes may be specified 
+                  using the format "$[attrName]" (no quotes)
+                  
+notify-recipients-only whether or not ONLY the "notify-recipients" should be 
+                  sent notifications for this task
+
+notify-subject    overrides the default step/workflow value for this attribute
+									
+notify-tpl        overrides the default step/workflow value for this attribute
+                  
+notify-tpl-html   overrides the default step/workflow value for this attribute
+
+resource          the label resource for this task
+
+resource-descr    the resources used to provide a description for this task
+
+role              if this task is the responsibility of a user other than the 
+                  owner of the enclosing step, this attribute may specify a 
+                  "role" or group of users that it should be assigned to. all 
+                  users within that role will be notified, be assigned 
+                  responsibility for and have equal access to complete the 
+                  task. this attribute may also reference a workflow parameter 
+                  using the format ${param name}
+
+user              if this task is the responsibility of a user other than the 
+                  owner of the enclosing step, this attribute may specify the 
+                  identifier of that user. this user will be notified and 
+                  given responsibility to complete this task when it is 
+                  created. this attribute may also reference a workflow 
+                  parameter using the format ${param name}
+
+validate          if this task includes a "view" requiring user input, this 
+                  attribute may be specified identifying a validation constraint 
+                  that should be applied to the entity after the "view" has been 
+                  processed. if this validation passes successfully, the 
+                  task will be considered completed, otherwise, the task will 
+                  loop back on itself with the validation errors assigned to it. 
+                  if this attribute is set to "1", then the entity validation 
+                  will be invoked (without a specific validation identifier). 
+                  multiple constraints can be specified each separated by a 
+                  space
+                  
+validate-ignore   a space separated list of names of attributes that should be 
+                  excluded from the entity validation. if a validation error is 
+                  returned for one of these attributes, validation failure will 
+                  not be triggered
+                  
+view              if the enclosing step has an entity assigned (based on the 
+                  "entity-id" attribute) this attribute may be specified 
+                  identifying the entity view that this task should display 
+                  to the user. if this view requires input from the user, a 
+                  "validate" identifier may also be specified determining 
+                  the validation on that input that should occur prior to the 
+                  task being completed. tasks with a "view" assigned are always 
+                  interactive. multiple views can be specified each separated by 
+                  a space (each view will be rendered an concatenated starting 
+                  with the first)
+
+
+Used in:	step
+-->
+<!ELEMENT task (constraint-group?, eval-after?, eval-before?)>
+<!ATTLIST task  			  commit        			(1|0)			   "0">
+<!ATTLIST task    			connect-to     			CDATA        #IMPLIED>
+<!ATTLIST task			    due-date      			CDATA        #IMPLIED>
+<!ATTLIST task  			  due-date-rel   			(0|1|2)      "0">
+<!ATTLIST task    			entity        			CDATA        #IMPLIED>
+<!ATTLIST task    			entity-id     			CDATA        #IMPLIED>
+<!ATTLIST task    			entity-pk     			CDATA        #IMPLIED>
+<!ATTLIST task  			  interactive   			(1|0)			   "0">
+<!ATTLIST task  			  notify        			(1|0)			   "0">
+<!ATTLIST task  			  notify-all     			(1|0)			   "0">
+<!ATTLIST task  			  notify-always  			(1|0)			   "0">
+<!ATTLIST task  			  notify-att-name	    CDATA			   #IMPLIED>
+<!ATTLIST task  			  notify-att-view	    CDATA			   #IMPLIED>
+<!ATTLIST task  			  notify-bcc        	CDATA			   #IMPLIED>
+<!ATTLIST task  			  notify-cc         	CDATA			   #IMPLIED>
+<!ATTLIST task			    notify-from    			CDATA        #IMPLIED>
+<!ATTLIST task  			  notify-recipients  	CDATA			   #IMPLIED>
+<!ATTLIST task  			  notify-recipients-only (1|0)	   "0">
+<!ATTLIST task			    notify-subject			%Resource;   #IMPLIED>
+<!ATTLIST task  			  notify-tpl    			CDATA        #IMPLIED>
+<!ATTLIST task  			  notify-tpl-html			CDATA        #IMPLIED>
+<!ATTLIST task  			  resource      			%Resource;   #REQUIRED>
+<!ATTLIST task  			  resource-descr 			%Resource;   #IMPLIED>
+<!ATTLIST task  			  role          			CDATA        #IMPLIED>
+<!ATTLIST task  			  user          			CDATA        #IMPLIED>
+<!ATTLIST task  			  validate      			CDATA        #IMPLIED>
+<!ATTLIST task  			  validate-ignore			CDATA        #IMPLIED>
+<!ATTLIST task  			  view          			CDATA        #IMPLIED>
+
+
+<!--
+The "constraint" element defines a single constraint that will be evaluated 
+within the context of a decision or constraint group. each constraint returns 
+boolean TRUE or FALSE the value of which will also be used to determine how the 
+enclosing decision/constraint-group evaluates
+
+attr            	the constraint attribute identifier (see attr-type for more 
+                  info). nested attributes are supported. for example, if the 
+                  attr being evaluated is an entity instance constaining an 
+                  address object with a zipCode attribute, the identifier for 
+                  that value would be "address_zipCode"
+
+attr-type         the attribute to evaluate. this may be any of the following:
+                   attr:    attr is the name of an attribute/sub-attribute in 
+                            the entity that is referenced in the enclosing 
+                            "step" (or identified by the "entity-id" 
+                            attribute)
+                   form:    attr is the name of a form value (GET or POST)
+                   global:  attr is the name of a global variable
+                   param:   attr is the name of a workflow parameter
+                   session: attr is the name of a session variable
+                  if not specified, "attr" will be evaluated as an explicit 
+                  value
+
+entity-id         by default, the constraint will be applied against the 
+                  enclosing step entity. if it should be evaluated against 
+                  another entity within the workflow, this attribute should 
+                  specify the identifier of that entity
+
+operator          the comparison operator to apply between the "attr" and 
+                  "value". this is a bitmask value containing 1 or more of the 
+                  following bits set:
+                  
+                   EQUALITY CONSTRAINTS
+                   1:   attr and value must be equal
+                   2:   attr is greater than value
+                   4:   attr is less than value
+                   
+                   STRING CONSTRAINTS (only 1 constraint allowed if used)
+                   8:   attr starts with value
+                   16:  attr ends with value
+                   32:  value is a sub-string of attr (full text search)
+                   
+                   BOOLEAN CONSTRAINTS
+                   64:  attr evaluates to boolean TRUE (not 0, NULL, FALSE, 
+                        empty array, etc.)
+                   128: attr evaluates to boolean FALSE (0, NULL, FALSE, empty 
+                        array, etc.)
+                   
+                   MODIFIER BITS
+                   256: negate the results of any of the above operator 
+                        constraints
+                   512: attr and value must be identical (===). use in 
+                        conjunction with 1, 64 or 128
+
+                  these values are defined using the SRA_WORKFLOW_CONSTRAINT_* 
+                  constants
+                  
+value             the explicit constraint value or value identifier (see 
+                  value-type for more info). as with "attr", nested attributes 
+                  are supported. If not specified, then it will set to the value 
+                  NULL
+
+value-type        the value to evaluate. see "attr-type" for more info. if not 
+                  specified, "value" will be evaluated as an explicit value
+
+
+Used in:	decision, constraint-group
+-->
+<!ELEMENT constraint EMPTY>
+<!ATTLIST constraint		attr          			CDATA   	   #REQUIRED>
+<!ATTLIST constraint		attr-type     			(attr|form|global|param|session) "attr">
+<!ATTLIST constraint		entity-id     			CDATA        #IMPLIED>
+<!ATTLIST constraint		operator       			CDATA        "1">
+<!ATTLIST constraint		value          			CDATA   	   #IMPLIED>
+<!ATTLIST constraint		value-type     			(attr|form|global|param|session) #IMPLIED>
+
+
+<!--
+The "constraint-group" element is used to specify 1 or more constraint or 
+constraint-group sub-elements that will be evaluated as a whole based on the 
+"connective" specified for the group (either conjunction or disjunction). the 
+evaluation includes short-circuiting for conjunction join types (and)
+
+connective       	whether the connective between constraints of this decision 
+                  should be conjunctively or disjunctively joined
+
+Used in:	decision
+-->
+<!ELEMENT constraint-group (constraint*, constraint-group*)>
+<!ATTLIST constraint-group connective  			(and|or)	   "and">
+
+
+<!--
+The "decision" element defines a single alternate outbound path for a step. 
+It constains 1 or more constraints used to determine whether or not the 
+decision should be invoked. if none of a step's decisions are triggered, then 
+the step "next" path will be invoked. a decision should have at least 1 
+nested "constraint" or "constraint-group" elements
+
+connective       	whether the connective between constraints of this decision 
+                  should be conjunctively or disjunctively joined
+
+next              the proceeding/output step once the enclosing step has 
+                  been completed IF this decision is triggered
+
+Used in:	step
+-->
+<!ELEMENT decision (constraint*, constraint-group*)>
+<!ATTLIST decision			connective     			(and|or)	   "and">
+<!ATTLIST decision 			next          			IDREF        #IMPLIED>
+
+
+<!--
+The "eval-after" element specifies a PHP code block that should be invoked for a 
+particular task. this code segment will have access to any current workflow 
+entities using the "entity-id" as the variable name as well as to the 
+SraWorkflow, SraWorkflowStep and SraWorkflowTask instances using the variable 
+names $workflow, $step (when applicable) and $task. This code block MUST return 
+TRUE, or the workflow will enter an error state. the code in this element is 
+invoked AFTER the task is completed successfully (if a "view" is defined for the 
+task, this would be when that view is completed/confirmed)
+
+Used in:	task
+-->
+<!ELEMENT eval-after (#PCDATA)>
+
+
+<!--
+Like "eval-before", "eval-before" element also specifies a PHP code block that 
+should be invoked for a particular task. however, this code is invoked at the 
+same time that the task is created. the difference between "eval-before" and 
+"eval-after" is only applicable to interractive tasks (tasks with associated 
+views)
+
+Used in:	task
+-->
+<!ELEMENT eval-before (#PCDATA)>
+
+
+<!-- 
+The "param" element is used to define implementation/front-end specified 
+values. they are not used within the lib/workflow system itself. they may be 
+accessed within the SRA_Workflow/SRA_WorkflowStep::params associative array 
+attribute
+
+key               the param name
+
+value             the param value
+
+Used in:   workflow, step
+-->
+<!ELEMENT param EMPTY>
+<!ATTLIST param              key                  CDATA        #REQUIRED>
+<!ATTLIST param              value                CDATA        #IMPLIED>

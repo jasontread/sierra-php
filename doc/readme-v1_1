@@ -1,0 +1,11 @@
+This version of sierra-php includes completely new REST and SOAP web services 
+integration in the entity model (model/entity_model.dtd) as well as various 
+minor bug fixed
+
+CHANGELOG
+* REST and SOAP entity model integration: automatically incorporate web services 
+  into your application's model
+* Various bug fixes and enhancements
+
+KNOWN ISSUES
+None

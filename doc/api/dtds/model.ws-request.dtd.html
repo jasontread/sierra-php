@@ -1,0 +1,1152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>ws-request.dtd - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_workflow_task_due_date_rel_cur".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR";
+  }
+  if ("sra_workflow_task_due_date_rel_wf_start".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START";
+  }
+  if ("sra_workflow_task_due_date_rel_wf_due_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE";
+  }
+  if ("sra_workflow_task_due_date_rel_step_due_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE";
+  }
+
+
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+  // elements
+  if ("ws-request".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request'] = "ws-request";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_key'] = "ws-request::key";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::app".indexOf(str) != -1 || "app".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_app'] = "ws-request::app";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::asynchronous".indexOf(str) != -1 || "asynchronous".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_asynchronous'] = "ws-request::asynchronous";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::date-format".indexOf(str) != -1 || "date-format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_date-format'] = "ws-request::date-format";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::exclude-attrs".indexOf(str) != -1 || "exclude-attrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_exclude-attrs'] = "ws-request::exclude-attrs";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::format".indexOf(str) != -1 || "format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_format'] = "ws-request::format";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::include-attrs".indexOf(str) != -1 || "include-attrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_include-attrs'] = "ws-request::include-attrs";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::js-dates".indexOf(str) != -1 || "js-dates".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_js-dates'] = "ws-request::js-dates";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::limit".indexOf(str) != -1 || "limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_limit'] = "ws-request::limit";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::password".indexOf(str) != -1 || "password".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_password'] = "ws-request::password";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::meta-format".indexOf(str) != -1 || "meta-format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_meta-format'] = "ws-request::meta-format";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::offset".indexOf(str) != -1 || "offset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_offset'] = "ws-request::offset";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::query".indexOf(str) != -1 || "query".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_query'] = "ws-request::query";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::request-id".indexOf(str) != -1 || "request-id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_request-id'] = "ws-request::request-id";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::request-id1".indexOf(str) != -1 || "request-id1".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_request-id1'] = "ws-request::request-id1";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::session-id".indexOf(str) != -1 || "session-id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_session-id'] = "ws-request::session-id";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::time-format".indexOf(str) != -1 || "time-format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_time-format'] = "ws-request::time-format";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::use-sessions".indexOf(str) != -1 || "use-sessions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_use-sessions'] = "ws-request::use-sessions";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::user".indexOf(str) != -1 || "user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_user'] = "ws-request::user";
+  }
+  // ws-request element attributes
+  if ("ws-request".indexOf(str) != -1 || "ws-request::validators".indexOf(str) != -1 || "validators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-request_validators'] = "ws-request::validators";
+  }
+  if ("ws-constraint-group".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-constraint-group'] = "ws-constraint-group";
+  }
+  // ws-constraint-group element attributes
+  if ("ws-constraint-group".indexOf(str) != -1 || "ws-constraint-group::connective".indexOf(str) != -1 || "connective".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-constraint-group_connective'] = "ws-constraint-group::connective";
+  }
+  if ("ws-constraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-constraint'] = "ws-constraint";
+  }
+  // ws-constraint element attributes
+  if ("ws-constraint".indexOf(str) != -1 || "ws-constraint::attr".indexOf(str) != -1 || "attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-constraint_attr'] = "ws-constraint::attr";
+  }
+  // ws-constraint element attributes
+  if ("ws-constraint".indexOf(str) != -1 || "ws-constraint::attr-type".indexOf(str) != -1 || "attr-type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-constraint_attr-type'] = "ws-constraint::attr-type";
+  }
+  // ws-constraint element attributes
+  if ("ws-constraint".indexOf(str) != -1 || "ws-constraint::operator".indexOf(str) != -1 || "operator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-constraint_operator'] = "ws-constraint::operator";
+  }
+  // ws-constraint element attributes
+  if ("ws-constraint".indexOf(str) != -1 || "ws-constraint::value".indexOf(str) != -1 || "value".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-constraint_value'] = "ws-constraint::value";
+  }
+  // ws-constraint element attributes
+  if ("ws-constraint".indexOf(str) != -1 || "ws-constraint::value-type".indexOf(str) != -1 || "value-type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-constraint_value-type'] = "ws-constraint::value-type";
+  }
+  if ("ws-create".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-create'] = "ws-create";
+  }
+  if ("ws-delete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-delete'] = "ws-delete";
+  }
+  // ws-delete element attributes
+  if ("ws-delete".indexOf(str) != -1 || "ws-delete::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-delete_key'] = "ws-delete::key";
+  }
+  if ("ws-retrieve".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-retrieve'] = "ws-retrieve";
+  }
+  // ws-retrieve element attributes
+  if ("ws-retrieve".indexOf(str) != -1 || "ws-retrieve::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-retrieve_key'] = "ws-retrieve::key";
+  }
+  // ws-retrieve element attributes
+  if ("ws-retrieve".indexOf(str) != -1 || "ws-retrieve::workflow-id".indexOf(str) != -1 || "workflow-id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-retrieve_workflow-id'] = "ws-retrieve::workflow-id";
+  }
+  if ("ws-update".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-update'] = "ws-update";
+  }
+  // ws-update element attributes
+  if ("ws-update".indexOf(str) != -1 || "ws-update::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-update_key'] = "ws-update::key";
+  }
+  if ("ws-param".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-param'] = "ws-param";
+  }
+  // ws-param element attributes
+  if ("ws-param".indexOf(str) != -1 || "ws-param::name".indexOf(str) != -1 || "name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-param_name'] = "ws-param::name";
+  }
+  // ws-param element attributes
+  if ("ws-param".indexOf(str) != -1 || "ws-param::value".indexOf(str) != -1 || "value".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-param_value'] = "ws-param::value";
+  }
+  // ws-param element attributes
+  if ("ws-param".indexOf(str) != -1 || "ws-param::value-type".indexOf(str) != -1 || "value-type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_ws-param_value-type'] = "ws-param::value-type";
+  }
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="dtd" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">ws-request.dtd</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>DTD Information</h2>
+  <ul>
+    <li><a href="#comments">DTD Comments</a></li>
+    <li><a href="#elements">Elements</a></li>
+    <li><a href="#element_details">Element Details</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>XML DTD for a sierra-php web service gateway service request
+
+this DTD defines the proper structure for invoking a web service. for more 
+information, see the documentation provided in sra-ws-gateway.php and 
+entity-model.dtd
+
+to support validation use the following header:
+
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE ws-request PUBLIC &quot;-//SIERRA//DTD AJAX SERVICE REQUEST//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/lib/model/ws-request.dtd&quot;&gt;
+</pre>
+  
+
+  <h2 id="elements">Elements</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th><pre><a href="#element_ws-request">ws-request</a><strong> [root element]</strong></pre></th>
+      <td><pre>the &quot;ws-request&quot; element is the root tag of an web service invocation the 
+service name (&quot;key&quot;) MUST match an web service (&quot;ws&quot; or &quot;ws-global&quot;) defined in 
+the entity model of the application</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_ws-constraint-group">ws-constraint-group</a></pre></th>
+      <td><pre>The &quot;ws-constraint-group&quot; is used for non-global requests only. it is used to 
+specify 1 or more ws-constraint sub-elements that will be evaluated as a whole 
+based on the &quot;connective&quot; specified for the group (either conjunction or 
+disjunction). the evaluation includes short-circuiting for conjunction join 
+types (and). any constraint groups defined for a service request will be ADDED 
+to those defined for the service. Thus, all of the service defined constraint 
+groups must match AND those defined for the service request</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_ws-constraint">ws-constraint</a></pre></th>
+      <td><pre>The &quot;ws-constraint&quot; element is used to add a service request filtering 
+constraint</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_ws-create">ws-create</a></pre></th>
+      <td><pre>The &quot;ws-create&quot; element is used to create a new entity instance. the nested 
+params define the names (key) and values of the attributes to update. these will 
+be subject to validation according to the constraints specified for the service. 
+equality constraints will automatically be set and override any specified in the 
+request. if any constraint groups fail to validate an attribute attempting to be 
+set in the new entity, the response &quot;ws-status&quot; will be 
+SRA_AJAX_GATEWAY_STATUS_INVALID_PERMISSIONS
+
+
+</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_ws-delete">ws-delete</a></pre></th>
+      <td><pre>The &quot;ws-delete&quot; element is used to specify that an existing entity instance 
+should be deleted. only entity instances that the service allows the user to 
+retrieve can be deleted (the gateway will first attempt to retrieve the entity 
+using the primary key value specified as a service request constraint)</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_ws-retrieve">ws-retrieve</a></pre></th>
+      <td><pre>The &quot;ws-retrieve&quot; element is used to retrieve a specific entity instance based 
+on the primary key value provided. the &quot;retrieve&quot; flag must be set to true in 
+order to utilize this request type</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_ws-update">ws-update</a></pre></th>
+      <td><pre>The &quot;ws-update&quot; element is used to specify that an existing entity instance 
+should be updated. only entity instances the the service allows the user to 
+retrieve can be updated (the gateway will first attempt to retrieve the entity 
+using the primary key value specified as a service request constraint). the 
+nested params define the names (key) and values of the attributes to update. 
+these will be subject to validation according to the constraints specified 
+for the service. equality constraints will automatically be set and override any 
+specified in the request. if any constraint groups fail to validate an attribute 
+attempting to be set in the updating entity, the response &quot;ws-status&quot; will be
+SRA_AJAX_GATEWAY_STATUS_INVALID_PERMISSIONS</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_ws-param">ws-param</a></pre></th>
+      <td><pre>&quot;ws-param&quot; is used to specify attributes for create/update service requests and 
+method parameters for global service requests. the value can be imbedded 
+between the open and close tags of this element (use &lt;![CDATA[]]&gt; to avoid 
+having escape special characters) or using the &quot;value&quot; attribute</pre></td>
+    </tr>
+  </table>
+  
+  <h2 id="element_details">Element Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ws-request">ws-request [root element]</h3>
+  <pre>the &quot;ws-request&quot; element is the root tag of an web service invocation the 
+service name (&quot;key&quot;) MUST match an web service (&quot;ws&quot; or &quot;ws-global&quot;) defined in 
+the entity model of the application</pre>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_ws-constraint-group">ws-constraint-group</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre>(<a href="#element_ws-create">ws-create</a> | <a href="#element_ws-delete">ws-delete</a> | <a href="#element_ws-retrieve">ws-retrieve</a> | <a href="#element_ws-update">ws-update</a>)</pre></td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_ws-param">ws-param</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_ws-request_key">
+      <th><pre>key</pre></th>
+      <td><pre>ID</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the name of the web service to invoke. this is the &quot;ws&quot; or
+&quot;ws-global&quot; &quot;key&quot; value
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_app">
+      <th><pre>app</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the identifier of the app that this request pertains to
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_asynchronous">
+      <th><pre>asynchronous</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>specifies whether or not the output of this request should be
+buffered to a session variable instead of output to the client. 
+asynchronous responses can be retrieved through subsequent 
+invocations specifying the same request-id parameters and 
+query=&quot;1&quot;. the status codes 
+SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE and 
+SRA_WS_REQUEST_STATUS_TIMEOUT are utilized to indicate a status 
+for subsequent requests attempting to obtain the buffer results. 
+the response from asynchronous requests must be retrieved within 
+SRA_WS_GATEWAY_BUFFER_FILE_REMOVE minutes
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_date-format">
+      <th><pre>date-format</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the formatting string to use in the response for date values. if
+not specified, time-format will be used or the application 
+date-only-format if time-format is not specified
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_exclude-attrs">
+      <th><pre>exclude-attrs</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>space or comma separated list of attributes to exclude. these will
+be added to those defined in the entity model (if there are any). 
+use &quot;_pk_&quot; to specify the primary key. applies to entity web 
+services only
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_format">
+      <th><pre>format</pre></th>
+      <td><pre>(json | xml | raw)</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the desired response format: either &quot;json&quot;, &quot;xml&quot; or &quot;raw&quot;. the
+allowed response formats are determined by the service definition
+if an invalid format is specified, the response &quot;ws-status&quot; will 
+be SRA_WS_REQUEST_STATUS_INVALID_FORMAT. the default format is 
+&quot;xml&quot; for soap requests and &quot;json&quot; for rest
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_include-attrs">
+      <th><pre>include-attrs</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>space or comma separated list of a restricted set of attributes
+that should be included in the output of the service request. 
+these attributes can ONLY be those already permitted in the 
+service definition (a sub-set of the allowed attributes). use 
+&quot;_pk_&quot; to specify the primary key. applies to entity web 
+services only
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_js-dates">
+      <th><pre>js-dates</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>if true and the &quot;format&quot; is &quot;json&quot;, date values will be encoded
+using the javascript Date constructor
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_limit">
+      <th><pre>limit</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the result limit for this service request. this CANNOT be greater
+than the limit defined for the service request if &quot;limit-fixed&quot; is 
+true for in the service definition
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_password">
+      <th><pre>password</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>password for authentication. user and password can also be
+specified in the http headers. however, if user or password are 
+specified in the get parameters or ws-request-xml, they will 
+override the http header values
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_meta-format">
+      <th><pre>meta-format</pre></th>
+      <td><pre>(json | xml | none)</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the desired response metadata format. metadata includes such data
+as the &quot;ws-time&quot;, &quot;ws-limit&quot;, &quot;ws-status&quot;, etc. for more 
+information regarding metadata, see the documentation provided in 
+sra-ws-gateway.php and ws-response.dtd. metadata for a ws request 
+can be represented using json or xml. additionally, if &quot;none&quot;, 
+the metadata will not be included in the response output. if not 
+specified, the default format will be the same as &quot;format&quot; unless 
+&quot;format&quot; is &quot;raw&quot; in which case the default &quot;meta-format&quot; will be 
+&quot;none&quot;. if the format is not allowed because of the web service 
+definition the response &quot;ws-status&quot; will be 
+SRA_WS_REQUEST_STATUS_INVALID_FORMAT. NOTE: for soap service 
+invocations, the meta-format is ALWAYS xml
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_offset">
+      <th><pre>offset</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>the request result set offset
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_query">
+      <th><pre>query</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>used in conjunction with a previous &quot;asynchronous&quot; request in
+order to query for the results of that previous request. if true, 
+the &quot;request-id&quot; parameters must also be specified as the same 
+values submitted for the asynchronous request. this is NOT an 
+option for soap requests
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_request-id">
+      <th><pre>request-id</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>an optional identifier for the service request
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_request-id1">
+      <th><pre>request-id1</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>a second optional identifier for the service request
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_session-id">
+      <th><pre>session-id</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if a session id has been obtained from a previous service request
+ invocation, this attribute may be used to specify that session id
+ </pre></td>
+    </tr>
+    <tr id="element_ws-request_time-format">
+      <th><pre>time-format</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the formatting string to use in the response for time values. if
+not specified, the application date-format will be used
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_use-sessions">
+      <th><pre>use-sessions</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>sessions can be used to improve response times and eliminate the
+need to send user and password information with each service 
+request invocation. when this attribute is true, a session-id will 
+be returned in the response. this session-id may them be used in 
+future requests eliminating the need to provide user and password 
+authentication information for those requests (assuming that 
+authentication was successful in the original request, and the 
+application authenticators allow for session-based authentication)
+NOTE: if your web service client supports cookies, this option 
+will not improve performance
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_user">
+      <th><pre>user</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>user name for authentication. user and password can also be
+specified in the http headers. however, if user or password are 
+specified in the get parameters or ws-request-xml, they will 
+override the http header values
+</pre></td>
+    </tr>
+    <tr id="element_ws-request_validators">
+      <th><pre>validators</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>space or comma separated list of additional validation methods
+that should be invoked when an update or create request is invoked
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ws-constraint-group">ws-constraint-group</h3>
+  <pre>The &quot;ws-constraint-group&quot; is used for non-global requests only. it is used to 
+specify 1 or more ws-constraint sub-elements that will be evaluated as a whole 
+based on the &quot;connective&quot; specified for the group (either conjunction or 
+disjunction). the evaluation includes short-circuiting for conjunction join 
+types (and). any constraint groups defined for a service request will be ADDED 
+to those defined for the service. Thus, all of the service defined constraint 
+groups must match AND those defined for the service request</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_ws-request">ws-request</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_ws-constraint">ws-constraint</a></pre></td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_ws-constraint-group_connective">
+      <th><pre>connective</pre></th>
+      <td><pre>(and | or)</pre></td>
+      <td><pre>"and"</pre></td>
+      <td>No</td>
+      <td><pre>whether the connective between constraints of this group should be
+conjunctively or disjunctively joined
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ws-constraint">ws-constraint</h3>
+  <pre>The &quot;ws-constraint&quot; element is used to add a service request filtering 
+constraint</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_ws-constraint-group">ws-constraint-group</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_ws-constraint_attr">
+      <th><pre>attr</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the constraint attribute identifier (see attr-type for more info).
+if attr-type is specified, and the attr desired is part of an 
+entity within that type, then the key and attribute can be 
+separated by a &#039;_&#039;. for example, if the attr-type was &quot;global&quot; and 
+there existed an User object within the globals indexed under the 
+key &quot;user&quot;, and the actual attr desired was the &quot;uid&quot; attribute of 
+that object, the key would be &quot;user_uid&quot;. the &quot;uid&quot; portion will 
+then be passed to the &quot;getAttribute&quot; method of the global $user 
+object instance
+</pre></td>
+    </tr>
+    <tr id="element_ws-constraint_attr-type">
+      <th><pre>attr-type</pre></th>
+      <td><pre>(attr | constant | get | getAttr | global | post | session)</pre></td>
+      <td><pre>"attr"</pre></td>
+      <td>No</td>
+      <td><pre>defines where the attribute to be constrained exists. only entity
+instances that exist where this constraint is true will be 
+included in the service output. following is a definition of the 
+applicable types:
+
+ attr:    attr is the name of an attribute/sub attribute
+ constant:attr is the name of a php constant (or other php code)
+ get:     attr is the name of a value in the get headers
+ getAttr: attr is a &#039;getAttribute&#039; value for the entity. used only 
+          for &#039;retrieve&#039; service. when used limit/offset should 
+          not be used when using the service
+ global:  attr is the name of a php global variable
+ post:    attr is the name of a value in the post headers
+ session: attr is the name of a session variable
+</pre></td>
+    </tr>
+    <tr id="element_ws-constraint_operator">
+      <th><pre>operator</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"1"</pre></td>
+      <td>No</td>
+      <td><pre>a bitmask containing one or more of the following operator
+values. these define how &quot;attr&quot; and &quot;value&quot; should be compared:
+ 
+ EQUALITY CONSTRAINTS
+ 1:    attr and value must be equal
+ 2:    attr is greater than value
+ 4:    attr is less than value
+ 
+ STRING CONSTRAINTS (only 1 constraint allowed if used)
+ 8:    attr starts with value
+ 16:   attr ends with value
+ 32:   attr is a sub-string of value (full text search)
+ 
+ SORTING CONSTRAINTS
+ 64:   sort the results by attr in ascending order
+ 128:  sort the results by attr in descending order
+ 
+ NEGATE BIT
+ 256:  negate the results of any of the above operator constraints
+</pre></td>
+    </tr>
+    <tr id="element_ws-constraint_value">
+      <th><pre>value</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the constraint value (or value identifier if value-type is
+specified). if value-type is specified, and the value desired is 
+part of an entity within that type, then the key and attribute 
+can be separated by a &#039;_&#039;. for example, if the value-type was 
+&quot;global&quot; and there existed an User object within the globals 
+indexed under the key &quot;user&quot;, and the actual value desired was the 
+&quot;uid&quot; attribute of that object, the value would be &quot;user_uid&quot;. the 
+&quot;uid&quot; portion will then be passed to the &quot;getAttribute&quot; method of 
+the global $user object instance. if the value is an array then 
+the constraint will be applied for each array value using the 
+enclosing constraint group connective
+</pre></td>
+    </tr>
+    <tr id="element_ws-constraint_value-type">
+      <th><pre>value-type</pre></th>
+      <td><pre>(constant | get | global | post | session)</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if the value for this constraint is not provided explicitely in
+the &quot;value&quot; attribute above (the default behavior), then this 
+attribute defines where the value exists. must be one of the 
+following values:
+ 
+ constant:value is the name of a php constant (or other php code)
+ get:     value is the name of a value in the get headers
+ global:  value is the name of a php global variable
+ post:    value is the name of a value in the post headers
+ session: value is the name of a session variable
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ws-create">ws-create</h3>
+  <pre>The &quot;ws-create&quot; element is used to create a new entity instance. the nested 
+params define the names (key) and values of the attributes to update. these will 
+be subject to validation according to the constraints specified for the service. 
+equality constraints will automatically be set and override any specified in the 
+request. if any constraint groups fail to validate an attribute attempting to be 
+set in the new entity, the response &quot;ws-status&quot; will be 
+SRA_AJAX_GATEWAY_STATUS_INVALID_PERMISSIONS
+
+
+</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_ws-request">ws-request</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_ws-param">ws-param</a></pre></td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <p>This element does not have any attributes</p>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ws-delete">ws-delete</h3>
+  <pre>The &quot;ws-delete&quot; element is used to specify that an existing entity instance 
+should be deleted. only entity instances that the service allows the user to 
+retrieve can be deleted (the gateway will first attempt to retrieve the entity 
+using the primary key value specified as a service request constraint)</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_ws-request">ws-request</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_ws-delete_key">
+      <th><pre>key</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>primary key of the entity to delete
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ws-retrieve">ws-retrieve</h3>
+  <pre>The &quot;ws-retrieve&quot; element is used to retrieve a specific entity instance based 
+on the primary key value provided. the &quot;retrieve&quot; flag must be set to true in 
+order to utilize this request type</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_ws-request">ws-request</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_ws-retrieve_key">
+      <th><pre>key</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>primary key of the entity to retrieve
+</pre></td>
+    </tr>
+    <tr id="element_ws-retrieve_workflow-id">
+      <th><pre>workflow-id</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if the entity is stored within a workflow instance (see
+lib/workflow for more info), this attribute may be used to specify 
+the workflow identifier. if this attribute is specified, &#039;key&#039; 
+MUST be the identifier for that entity within the workflow
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ws-update">ws-update</h3>
+  <pre>The &quot;ws-update&quot; element is used to specify that an existing entity instance 
+should be updated. only entity instances the the service allows the user to 
+retrieve can be updated (the gateway will first attempt to retrieve the entity 
+using the primary key value specified as a service request constraint). the 
+nested params define the names (key) and values of the attributes to update. 
+these will be subject to validation according to the constraints specified 
+for the service. equality constraints will automatically be set and override any 
+specified in the request. if any constraint groups fail to validate an attribute 
+attempting to be set in the updating entity, the response &quot;ws-status&quot; will be
+SRA_AJAX_GATEWAY_STATUS_INVALID_PERMISSIONS</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_ws-request">ws-request</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_ws-param">ws-param</a></pre></td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_ws-update_key">
+      <th><pre>key</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>primary key of the entity to update
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_ws-param">ws-param</h3>
+  <pre>&quot;ws-param&quot; is used to specify attributes for create/update service requests and 
+method parameters for global service requests. the value can be imbedded 
+between the open and close tags of this element (use &lt;![CDATA[]]&gt; to avoid 
+having escape special characters) or using the &quot;value&quot; attribute</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_ws-request">ws-request</a></li>
+    <li><a href="#element_ws-create">ws-create</a></li>
+    <li><a href="#element_ws-update">ws-update</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre>#PCDATA</pre></td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_ws-param_name">
+      <th><pre>name</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the name of the entity attribute or method parameter
+ </pre></td>
+    </tr>
+    <tr id="element_ws-param_value">
+      <th><pre>value</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if the value is simple, it may be embedded using a value
+attribute instead of between the open and close tags
+</pre></td>
+    </tr>
+    <tr id="element_ws-param_value-type">
+      <th><pre>value-type</pre></th>
+      <td><pre>(constant | get | global | post | session | file)</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the value type (see usage documentation for ws-constraint
+value-type above). an additional value type &quot;file&quot; is also 
+supported meaning that &quot;value&quot; is the name of an uploaded file
+(present in the $_FILES super global)
+
+</pre></td>
+    </tr>
+  </table>
+
+  
+  </form>
+</body>
+</html>

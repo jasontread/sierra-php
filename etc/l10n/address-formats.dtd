@@ -1,0 +1,100 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for SIERRA address formats configuration
+
+This xml structure defines how addresses should be formatted for different 
+countries
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the "xml" declaration):
+
+<!DOCTYPE address-formats PUBLIC "-//SIERRA//DTD ADDRESS FORMATS//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/etc/l10n/address-formats.dtd">
+-->
+
+
+<!--
+The "address-formats" element is the root element. It contains one or more 
+address-format sub-elements
+
+Used in:	NA
+-->
+<!ELEMENT address-formats (address-format+)>
+
+
+<!--
+The "address-format" element is used to define a single address format. each 
+such format defines the tabular layout, selection options and field validation 
+for addresses associated with the countries specified
+
+key						space separated list of ISO 3166 country identifiers where this 
+              address format is applicable. these identifiers should not be 
+              repeated in other address-format entries. the * identifier will 
+              match any country where the identifier is not otherwise found in 
+              the xml document
+
+Used in:	address-formats
+-->
+<!ELEMENT address-format (field+)>
+<!ATTLIST address-format key            CDATA       #REQUIRED>
+
+
+<!--
+The "field" element is used to define a single address format field including 
+its tabular position, selection options and validation constraints
+
+key						the field identifier
+
+bundle        resource bundle containing the value/name options for this field. 
+              this value may contain the keyword "{$country}" which will be 
+              replaced dynamically with the country code (lower case). if this 
+              field is for the 'country', it will automatically be assigned to 
+              the iso3166 bundle
+
+col           the column position within "row" for this field. the row/col value 
+              for each field within an address-format should be unique, 
+              otherwise the first stated field will take priority over any other 
+              duplicate positioned fields
+
+regex         a regular expression validation constraint for this field
+
+required      whether or not this field is required. the default is false
+
+row           the row position for this field. the row/col value for each field 
+              within an address-format should be unique, otherwise the first 
+              stated field will take priority over any other duplicate 
+              positioned fields
+              
+show-key      if 'bundle' is specified, this attribute determines whether the 
+              key or the actual value will be shown in display mode
+
+Used in:	address-formats
+-->
+<!ELEMENT field EMPTY>
+<!ATTLIST field          key            (city|cityRegion|country|county|countyCity|districtRegion|districtTown|federalSubject|furtherDivisions|locality|pinCode|prefecture|province|postalCode|postalDistrict|region|state|street|suburb|village|zip) #REQUIRED>
+<!ATTLIST field          bundle			    CDATA		    #IMPLIED>
+<!ATTLIST field          col  			    (1|2|3|4|5)	"1">
+<!ATTLIST field          regex			    CDATA		    #IMPLIED>
+<!ATTLIST field          required			  (1|0)		    "0">
+<!ATTLIST field          row  			    (1|2|3|4|5)	"1">
+<!ATTLIST field          show-key			  (1|0)		    "0">

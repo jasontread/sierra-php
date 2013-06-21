@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_WSConstraint - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+
+  // check attributes
+  if ("_attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__attr'] = "_attr";
+  }
+  if ("_attrtype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__attrType'] = "_attrType";
+  }
+  if ("_autoset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__autoSet'] = "_autoSet";
+  }
+  if ("_connective".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__connective'] = "_connective";
+  }
+  if ("_operator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__operator'] = "_operator";
+  }
+  if ("_value".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__value'] = "_value";
+  }
+  if ("_valuetype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__valueType'] = "_valueType";
+  }
+
+  // check methods
+  if ("sra_wsconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_WSConstraint'] = "SRA_WSConstraint";
+  }
+  if ("evaluate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_evaluate'] = "evaluate";
+  }
+  if ("evaluateentity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_evaluateEntity'] = "evaluateEntity";
+  }
+  if ("getattr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAttr'] = "getAttr";
+  }
+  if ("getvalue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getValue'] = "getValue";
+  }
+  if ("isnonqueryconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isNonQueryConstraint'] = "isNonQueryConstraint";
+  }
+  if ("toqueryconstraints".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toQueryConstraints'] = "toQueryConstraints";
+  }
+  if ("issortingconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isSortingConstraint'] = "isSortingConstraint";
+  }
+  if ("isstringconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isStringConstraint'] = "isStringConstraint";
+  }
+  if ("_evaluateattr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__evaluateAttr'] = "_evaluateAttr";
+  }
+  if ("_getphpoperator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getPhpOperator'] = "_getPhpOperator";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_WSConstraint</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_WSConstraint</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> used to add implicit security or filter related constraint to an web service
+</pre>
+  
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__attr">_attr</a></pre>
+<pre> the constraint attribute identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__attrType">_attrType</a></pre>
+<pre> defines where the attribute to be constrained exists
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__autoSet">_autoSet</a></pre>
+<pre> whether or not this attribute should be automatically set for write request
+  actions (create or update)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__connective">_connective</a></pre>
+<pre> the connective to apply if the value for this constraint is an array
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__operator">_operator</a></pre>
+<pre> a bitmask containing one or more of the following operator values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__value">_value</a></pre>
+<pre> the constraint value or value identifier if value-type is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__valueType">_valueType</a></pre>
+<pre> if the value for this constraint is not provided explicitely in the value
+  attribute above (the default behavior), then this attribute defines where
+  the value exists
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_WSConstraint">SRA_WSConstraint</a>(array $conf, string $connective=SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE)</pre>
+<pre> parses the constraint configuration data and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_evaluate">evaluate</a>(boolean $forceAll=FALSE)</pre>
+<pre> returns TRUE if this constraint is a non-query constraint and the
+  evaluation of it returns TRUE, returns FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_evaluateEntity">evaluateEntity</a>(object $entity, boolean $set=TRUE, boolean $forceAll=FALSE)</pre>
+<pre> returns TRUE if $entity is valid against the constraints contained within
+  this group. if it is not valid for an equality constraint, that constraint
+  value will be automatically set into $entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getAttr">getAttr</a>()</pre>
+<pre> returns the actual value to use for $attr for non-query constraints
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getValue">getValue</a>()</pre>
+<pre> returns the actual value to use for $value
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isNonQueryConstraint">isNonQueryConstraint</a>()</pre>
+<pre> returns TRUE if this constraint is a non-query constraint
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_QueryBuilderConstraint[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_toQueryConstraints">toQueryConstraints</a>()</pre>
+<pre> converts this web service constraint into an equivalent query group
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isSortingConstraint">isSortingConstraint</a>()</pre>
+<pre> returns TRUE if this constraint is a sorting constraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isStringConstraint">isStringConstraint</a>()</pre>
+<pre> returns TRUE if this constraint is a string constraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="model.SRA_QueryBuilderConstraint.html" target="contentFrame">SRA_QueryBuilderConstraint</a></pre></td>
+      <td>
+        <pre><a href="#method__evaluateAttr">_evaluateAttr</a>(mixed $attr)</pre>
+<pre> evaluates this constraint value against the $attr value specified
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method__getPhpOperator">_getPhpOperator</a>()</pre>
+<pre> returns the PHP operator to use for this constraint. i.e. &#039;&lt;&#039;, &#039;&lt;=&#039;, etc.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_WSConstraint object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__attr">_attr</h3>
+  <pre>string var <b>$_attr</b></pre>
+  <pre> the constraint attribute identifier
+</pre>
+ <hr />  <h3 id="attr__attrType">_attrType</h3>
+  <pre>string var <b>$_attrType</b></pre>
+  <pre> defines where the attribute to be constrained exists
+</pre>
+ <hr />  <h3 id="attr__autoSet">_autoSet</h3>
+  <pre>boolean var <b>$_autoSet</b></pre>
+  <pre> whether or not this attribute should be automatically set for write request
+  actions (create or update)
+</pre>
+ <hr />  <h3 id="attr__connective">_connective</h3>
+  <pre>string var <b>$_connective</b></pre>
+  <pre> the connective to apply if the value for this constraint is an array
+</pre>
+ <hr />  <h3 id="attr__operator">_operator</h3>
+  <pre>int var <b>$_operator</b></pre>
+  <pre> a bitmask containing one or more of the following operator values
+</pre>
+ <hr />  <h3 id="attr__value">_value</h3>
+  <pre>string var <b>$_value</b></pre>
+  <pre> the constraint value or value identifier if value-type is specified
+</pre>
+ <hr />  <h3 id="attr__valueType">_valueType</h3>
+  <pre>string var <b>$_valueType</b></pre>
+  <pre> if the value for this constraint is not provided explicitely in the value
+  attribute above (the default behavior), then this attribute defines where
+  the value exists
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_WSConstraint">SRA_WSConstraint</h3>
+  <pre>public void function <b>SRA_WSConstraint</b>(array $conf, string $connective=SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE)</pre>
+  <pre> parses the constraint configuration data and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>array</td>
+      <td><pre>the configuration to parse</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>connective</td>
+      <td>string</td>
+      <td><pre>the connective to apply if the value for this  constraint is an array</pre></td>
+      <td>SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_evaluate">evaluate</h3>
+  <pre>public boolean function <b>evaluate</b>(boolean $forceAll=FALSE)</pre>
+  <pre> returns TRUE if this constraint is a non-query constraint and the
+  evaluation of it returns TRUE, returns FALSE otherwise
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>forceAll</td>
+      <td>boolean</td>
+      <td><pre>whether or not to force evaluation of even query  constraints</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_evaluateEntity">evaluateEntity</h3>
+  <pre>public boolean function <b>evaluateEntity</b>(object $entity, boolean $set=TRUE, boolean $forceAll=FALSE)</pre>
+  <pre> returns TRUE if $entity is valid against the constraints contained within
+  this group. if it is not valid for an equality constraint, that constraint
+  value will be automatically set into $entity
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>object</td>
+      <td><pre>the entity to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>set</td>
+      <td>boolean</td>
+      <td><pre>whether or not to set the entity attribute if the  constraint operator includes SRA_QUERY_BUILDER_CONSTRAINT_TYPE_EQUAL. if
+  this occurs, thie method will return TRUE</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>forceAll</td>
+      <td>boolean</td>
+      <td><pre>whether or not to force evaluation of even query  constraints</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAttr">getAttr</h3>
+  <pre>public mixed function <b>getAttr</b>()</pre>
+  <pre> returns the actual value to use for $attr for non-query constraints
+ 
+</pre>
+ <hr />  <h3 id="method_getValue">getValue</h3>
+  <pre>public mixed function <b>getValue</b>()</pre>
+  <pre> returns the actual value to use for $value
+ 
+</pre>
+ <hr />  <h3 id="method_isNonQueryConstraint">isNonQueryConstraint</h3>
+  <pre>public boolean function <b>isNonQueryConstraint</b>()</pre>
+  <pre> returns TRUE if this constraint is a non-query constraint
+ 
+</pre>
+ <hr />  <h3 id="method_toQueryConstraints">toQueryConstraints</h3>
+  <pre>public SRA_QueryBuilderConstraint[] function &amp;<b>toQueryConstraints</b>()</pre>
+  <pre> converts this web service constraint into an equivalent query group
+</pre>
+ <hr />  <h3 id="method_isSortingConstraint">isSortingConstraint</h3>
+  <pre>public boolean function <b>isSortingConstraint</b>()</pre>
+  <pre> returns TRUE if this constraint is a sorting constraint
+</pre>
+ <hr />  <h3 id="method_isStringConstraint">isStringConstraint</h3>
+  <pre>public boolean function <b>isStringConstraint</b>()</pre>
+  <pre> returns TRUE if this constraint is a string constraint
+</pre>
+ <hr />  <h3 id="method__evaluateAttr">_evaluateAttr</h3>
+  <pre>public <a href="model.SRA_QueryBuilderConstraint.html" target="contentFrame">SRA_QueryBuilderConstraint</a> function <b>_evaluateAttr</b>(mixed $attr)</pre>
+  <pre> evaluates this constraint value against the $attr value specified
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>mixed</td>
+      <td><pre>the attribute value to evaluate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getPhpOperator">_getPhpOperator</h3>
+  <pre>public string function <b>_getPhpOperator</b>()</pre>
+  <pre> returns the PHP operator to use for this constraint. i.e. &#039;&lt;&#039;, &#039;&lt;=&#039;, etc.
+</pre>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_WSConstraint object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_WSConstraint.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

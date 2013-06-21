@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>etc.l10n - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+
+
+
+
+
+  // check dtds
+  if ("address-formats.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_address-formats.dtd'] = "address-formats.dtd";
+  }
+  if ("currencies.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_currencies.dtd'] = "currencies.dtd";
+  }
+  if ("locales.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_locales.dtd'] = "locales.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="package" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1>package etc.l10n</h1>
+  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>Package Information</h2>
+  <ul>
+    <li><a href="#comments">Package Comments</a></li>
+    <li><a href="#dtds">DTDs</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>This directory contains localization enabling files including xml files for describing address formats, currencies and locales as well as localizable properties files for system wide strings. the SRA_ResourceBundle returned by SRA_Controller::getAppResources will contain both the application as well as the platform resources defined in sierra.properties<br /></pre>
+  
+
+  
+
+  <h2 id="dtds">DTD Summary</h2>
+  <table border="1" width="100%">
+    <tr id="dtd_address-formats.dtd">
+      <td><pre><a href="../dtds/etc.l10n.address-formats.dtd.html" target="contentFrame">address-formats.dtd</a></pre></td>
+      <td><pre>XML DTD for SIERRA address formats configuration
+
+This xml structure defines how addresses should be formatted for different 
+countries
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the &quot;xml&quot; declaration):
+
+&lt;!DOCTYPE address-formats PUBLIC &quot;-//SIERRA//DTD ADDRESS FORMATS//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/etc/l10n/address-formats.dtd&quot;&gt;
+</pre></td>
+    </tr>
+    <tr id="dtd_currencies.dtd">
+      <td><pre><a href="../dtds/etc.l10n.currencies.dtd.html" target="contentFrame">currencies.dtd</a></pre></td>
+      <td><pre>XML DTD for SIERRA currencies configuration
+
+This xml structure defines how unique SRA_Locale instances should be supported 
+by the SRA_Locale class
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the &quot;xml&quot; declaration):
+
+&lt;!DOCTYPE currencies PUBLIC &quot;-//SIERRA//DTD CURRENCIES//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/etc/l10n/currencies.dtd&quot;&gt;
+</pre></td>
+    </tr>
+    <tr id="dtd_locales.dtd">
+      <td><pre><a href="../dtds/etc.l10n.locales.dtd.html" target="contentFrame">locales.dtd</a></pre></td>
+      <td><pre>XML DTD for SIERRA locales configuration
+
+This xml structure how unique SRA_Locale instances should be supported by the 
+SRA_Locale class
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the &quot;xml&quot; declaration):
+
+&lt;!DOCTYPE locales PUBLIC &quot;-//SIERRA//DTD LOCALES//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/etc/l10n/locales.dtd&quot;&gt;
+</pre></td>
+    </tr>
+  </table>
+
+
+  </form>
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>sql.SRA_ResultSet - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+
+  // check attributes
+  if ("_basequery".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__baseQuery'] = "_baseQuery";
+  }
+  if ("_db".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__db'] = "_db";
+  }
+  if ("_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__limit'] = "_limit";
+  }
+  if ("_offset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__offset'] = "_offset";
+  }
+  if ("_position".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__position'] = "_position";
+  }
+  if ("_records".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__records'] = "_records";
+  }
+  if ("_columnnames".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__columnNames'] = "_columnNames";
+  }
+  if ("_numrecords".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__numRecords'] = "_numRecords";
+  }
+  if ("_query".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__query'] = "_query";
+  }
+
+  // check methods
+  if ("sra_resultset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_ResultSet'] = "SRA_ResultSet";
+  }
+  if ("add".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_add'] = "add";
+  }
+  if ("count".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_count'] = "count";
+  }
+  if ("eof".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_eof'] = "eof";
+  }
+  if ("getcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCount'] = "getCount";
+  }
+  if ("getdelimitedresults".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDelimitedResults'] = "getDelimitedResults";
+  }
+  if ("gettotalcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTotalCount'] = "getTotalCount";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("next".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_next'] = "next";
+  }
+  if ("reset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_reset'] = "reset";
+  }
+  if ("seek".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_seek'] = "seek";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_ResultSet</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/sql.html" target="contentFrame">sql</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_ResultSet</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> Represents the results from performing a database query
+ 
+</pre>
+  
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__baseQuery">_baseQuery</a></pre>
+<pre> the query that produced this result set without any limit or offset constraints
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> </pre></td>
+      <td>
+        <pre><a href="#attr__db">_db</a></pre>
+<pre> the SRA_Database that produced this result set
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#attr__limit">_limit</a></pre>
+<pre> the limit applied to this query (if any)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#attr__offset">_offset</a></pre>
+<pre> the offset applied to this query (if any)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#attr__position">_position</a></pre>
+<pre> Holds the current position in the _records array.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string[] </pre></td>
+      <td>
+        <pre><a href="#attr__records">_records</a></pre>
+<pre> Holds the array of current records.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string[] </pre></td>
+      <td>
+        <pre><a href="#attr__columnNames">_columnNames</a></pre>
+<pre> Stores the column names from the query
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>package int </pre></td>
+      <td>
+        <pre><a href="#attr__numRecords">_numRecords</a></pre>
+<pre> the # of records to return by the count() method. if not specfied,
+  count($this-&gt;_records) will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__query">_query</a></pre>
+<pre> the query that produced this result set
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_ResultSet">SRA_ResultSet</a>(<a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> $db, string $query, string $baseQuery, $limit, $offset, array $records=FALSE)</pre>
+<pre> Constructor. Used to instantiate a new SRA_ResultSet object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_add">add</a>(array $record)</pre>
+<pre> Add a record to the end of the record array.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_count">count</a>()</pre>
+<pre> Same as getCount
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_eof">eof</a>()</pre>
+<pre> returns TRUE if the record pointer is currently at the end of the result
+  set
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getCount">getCount</a>()</pre>
+<pre> Returns the # of records in this result set
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getDelimitedResults">getDelimitedResults</a>(string $delimiter=', $', boolean $includeHeader=FALSE, boolean $lineBreak="\n", string $finalLineBreak='')</pre>
+<pre> returns the results as a delimited string
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getTotalCount">getTotalCount</a>()</pre>
+<pre> Returns the total # of records in this result set. this is the total # of
+  records that would have been returned had not offset or limit been
+  applied
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(object $object)</pre>
+<pre> Static method that returns true if the object parameter references a
+  valid SRA_ResultSet object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_next">next</a>(boolean $associative=FALSE)</pre>
+<pre> Get the next record field.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_reset">reset</a>()</pre>
+<pre> Reset the SRA_ResultSet position to 0.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_seek">seek</a>(int $pos)</pre>
+<pre> Move the pointer to a certain record. Records start at 0.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__baseQuery">_baseQuery</h3>
+  <pre>private string var <b>$_baseQuery</b></pre>
+  <pre> the query that produced this result set without any limit or offset constraints
+</pre>
+ <hr />  <h3 id="attr__db">_db</h3>
+  <pre>private <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> var <b>$_db</b></pre>
+  <pre> the SRA_Database that produced this result set
+</pre>
+ <hr />  <h3 id="attr__limit">_limit</h3>
+  <pre>private int var <b>$_limit</b></pre>
+  <pre> the limit applied to this query (if any)
+</pre>
+ <hr />  <h3 id="attr__offset">_offset</h3>
+  <pre>private int var <b>$_offset</b></pre>
+  <pre> the offset applied to this query (if any)
+</pre>
+ <hr />  <h3 id="attr__position">_position</h3>
+  <pre>private int var <b>$_position</b></pre>
+  <pre> Holds the current position in the _records array.
+</pre>
+ <hr />  <h3 id="attr__records">_records</h3>
+  <pre>private string[] var <b>$_records</b></pre>
+  <pre> Holds the array of current records.
+</pre>
+ <hr />  <h3 id="attr__columnNames">_columnNames</h3>
+  <pre>private string[] var <b>$_columnNames</b></pre>
+  <pre> Stores the column names from the query
+</pre>
+ <hr />  <h3 id="attr__numRecords">_numRecords</h3>
+  <pre>package int var <b>$_numRecords</b> = FALSE</pre>
+  <pre> the # of records to return by the count() method. if not specfied,
+  count($this-&gt;_records) will be returned
+</pre>
+ <hr />  <h3 id="attr__query">_query</h3>
+  <pre>private string var <b>$_query</b></pre>
+  <pre> the query that produced this result set
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_ResultSet">SRA_ResultSet</h3>
+  <pre>public void function <b>SRA_ResultSet</b>(<a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> $db, string $query, string $baseQuery, $limit, $offset, array $records=FALSE)</pre>
+  <pre> Constructor. Used to instantiate a new SRA_ResultSet object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>db</td>
+      <td>SRA_Database</td>
+      <td><pre>ase $db the SRA_Database instance that produced this result set</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query that this object will represent. this  			parameter is used to provides associative row arrays in the next method</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>baseQuery</td>
+      <td>string</td>
+      <td><pre>the query without any limit or offset parameters</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>limit</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>offset</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>records</td>
+      <td>array</td>
+      <td><pre>the records to set to the _records instance variable.  			The default for this parameter is false and it is not required.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_add">add</h3>
+  <pre>public void function <b>add</b>(array $record)</pre>
+  <pre> Add a record to the end of the record array.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>record</td>
+      <td>array</td>
+      <td><pre>record to add.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_count">count</h3>
+  <pre>public int function <b>count</b>()</pre>
+  <pre> Same as getCount
+ 
+</pre>
+ <hr />  <h3 id="method_eof">eof</h3>
+  <pre>public boolean function <b>eof</b>()</pre>
+  <pre> returns TRUE if the record pointer is currently at the end of the result
+  set
+</pre>
+ <hr />  <h3 id="method_getCount">getCount</h3>
+  <pre>public int function <b>getCount</b>()</pre>
+  <pre> Returns the # of records in this result set
+ 
+</pre>
+ <hr />  <h3 id="method_getDelimitedResults">getDelimitedResults</h3>
+  <pre>public string function <b>getDelimitedResults</b>(string $delimiter=', $', boolean $includeHeader=FALSE, boolean $lineBreak="\n", string $finalLineBreak='')</pre>
+  <pre> returns the results as a delimited string
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>delimiter</td>
+      <td>string</td>
+      <td><pre>the delimiter to user (default is a comma). if  any of the values in the result set contains this delimiter, they will
+  be enclosed with double quotes (with any embedded double quotes escaped)</pre></td>
+      <td>'</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>'</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>includeHeader</td>
+      <td>boolean</td>
+      <td><pre>whether or not to include a header row  containing the column names. default is FALSE</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineBreak</td>
+      <td>boolean</td>
+      <td><pre>the line break character(s). default is \n</pre></td>
+      <td>"\n"</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>finalLineBreak</td>
+      <td>string</td>
+      <td><pre>if you are using this method to  construct a list such as &quot;a, b, c, d&quot; from a single column result set,
+  and you wish the final value in that list to use a custom line break
+  (such as &quot;, and &quot;), then this parameter may be used to specify that
+  custom delimiter (where $delimiter is &#039;&#039; and $lineBreak is &#039;, &#039;)</pre></td>
+      <td>''</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getTotalCount">getTotalCount</h3>
+  <pre>public int function <b>getTotalCount</b>()</pre>
+  <pre> Returns the total # of records in this result set. this is the total # of
+  records that would have been returned had not offset or limit been
+  applied
+ 
+</pre>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(object $object)</pre>
+  <pre> Static method that returns true if the object parameter references a
+  valid SRA_ResultSet object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>object</td>
+      <td><pre>$object the object to validate.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_next">next</h3>
+  <pre>public array function <b>next</b>(boolean $associative=FALSE)</pre>
+  <pre> Get the next record field.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>associative</td>
+      <td>boolean</td>
+      <td><pre>optional parameter specifying whether the returned  array should be associative based on the column name defined in the query. the
+  default value for this parameter is FALSE, meaning the returned array will have
+  a numerical index. In order for this functionality to work, the column names/aliases
+  must be explicitely defined in the query (i.e. * will not work)</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_reset">reset</h3>
+  <pre>public void function <b>reset</b>()</pre>
+  <pre> Reset the SRA_ResultSet position to 0.
+ 
+</pre>
+ <hr />  <h3 id="method_seek">seek</h3>
+  <pre>public void function <b>seek</b>(int $pos)</pre>
+  <pre> Move the pointer to a certain record. Records start at 0.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>pos</td>
+      <td>int</td>
+      <td><pre>postion to goto.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/sql/SRA_ResultSet.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

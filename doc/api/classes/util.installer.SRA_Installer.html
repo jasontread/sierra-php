@@ -1,0 +1,1091 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.installer.SRA_Installer - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_framework_installer_header".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FRAMEWORK_INSTALLER_HEADER'] = "SRA_FRAMEWORK_INSTALLER_HEADER";
+  }
+  if ("sra_installer_config_file_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_CONFIG_FILE_NAME'] = "SRA_INSTALLER_CONFIG_FILE_NAME";
+  }
+  if ("sra_installer_framework_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_FRAMEWORK_DIR'] = "SRA_INSTALLER_FRAMEWORK_DIR";
+  }
+  if ("sra_installer_framework_installer_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG'] = "SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG";
+  }
+  if ("sra_installer_framework_tmp_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR'] = "SRA_INSTALLER_FRAMEWORK_TMP_DIR";
+  }
+  if ("sra_installer_framework_tmp_dir_error".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR'] = "SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR";
+  }
+  if ("sra_installer_quick_install".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_QUICK_INSTALL'] = "SRA_INSTALLER_QUICK_INSTALL";
+  }
+  if ("sra_installer_prompt_skip".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_INSTALLER_PROMPT_SKIP'] = "SRA_INSTALLER_PROMPT_SKIP";
+  }
+
+  // check attributes
+  if ("installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_installer'] = "installer";
+  }
+  if ("name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_name'] = "name";
+  }
+  if ("resources".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_resources'] = "resources";
+  }
+  if ("resourcesapp".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_resourcesApp'] = "resourcesApp";
+  }
+  if ("resourcessys".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_resourcesSys'] = "resourcesSys";
+  }
+  if ("stdin".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_stdin'] = "stdin";
+  }
+  if ("_conf".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__conf'] = "_conf";
+  }
+  if ("_menus".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__menus'] = "_menus";
+  }
+  if ("_menustack".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__menuStack'] = "_menuStack";
+  }
+
+  // check methods
+  if ("clear".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_clear'] = "clear";
+  }
+  if ("confirm".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_confirm'] = "confirm";
+  }
+  if ("displaymenu".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_displayMenu'] = "displayMenu";
+  }
+  if ("getcurrentmenu".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCurrentMenu'] = "getCurrentMenu";
+  }
+  if ("getcurrentmenulevel".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCurrentMenuLevel'] = "getCurrentMenuLevel";
+  }
+  if ("getuserinput".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getUserInput'] = "getUserInput";
+  }
+  if ("isrootmenu".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isRootMenu'] = "isRootMenu";
+  }
+  if ("menuisvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_menuIsValid'] = "menuIsValid";
+  }
+  if ("quickinstall".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_quickInstall'] = "quickInstall";
+  }
+  if ("run".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_run'] = "run";
+  }
+  if ("setmenu".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setMenu'] = "setMenu";
+  }
+  if ("setpreviousmenu".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setPreviousMenu'] = "setPreviousMenu";
+  }
+  if ("showpreviousmenu".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_showPreviousMenu'] = "showPreviousMenu";
+  }
+  if ("syserror".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_sysError'] = "sysError";
+  }
+  if ("terminate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_terminate'] = "terminate";
+  }
+  if ("waitforenter".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_waitForEnter'] = "waitForEnter";
+  }
+  if ("_printmenuline".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__printMenuLine'] = "_printMenuLine";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_Installer</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.installer.html" target="contentFrame">util.installer</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_Installer</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> this is the base &quot;abstract&quot; class for framework installers. installers
+  defined in an xml file based on the installer dtd (the &quot;installer&quot; element
+  &quot;src&quot; attribute) MUST extend this class. for more information, see the
+  documentation provided in the installer dtd and the API in this class and
+  SRA_FrameworkInstaller
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FRAMEWORK_INSTALLER_HEADER">SRA_FRAMEWORK_INSTALLER_HEADER</a></pre>
+<pre> the header to include when rendering the framework configuration
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_CONFIG_FILE_NAME">SRA_INSTALLER_CONFIG_FILE_NAME</a></pre>
+<pre> the default name of the installer xml file (located in the framework or app
+  &quot;etc&quot; directory)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_FRAMEWORK_DIR">SRA_INSTALLER_FRAMEWORK_DIR</a></pre>
+<pre> the base directory for the framework
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG">SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG</a></pre>
+<pre> path to the framework installer confuration file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR">SRA_INSTALLER_FRAMEWORK_TMP_DIR</a></pre>
+<pre> the framework temp directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR">SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR</a></pre>
+<pre> the error message to display if the temp directory cannot be created (not
+  localized because framework cannot be initialized if this directory cannot be
+  created)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_QUICK_INSTALL">SRA_INSTALLER_QUICK_INSTALL</a></pre>
+<pre> the name of the application specific quick installer script used by the
+  quickInstall method. this script is executed BEFORE the application is
+  initialized
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_INSTALLER_PROMPT_SKIP">SRA_INSTALLER_PROMPT_SKIP</a></pre>
+<pre> the value returned by a &quot;defaults-handler&quot; indicating that a prompt value
+  should be skipped
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>object </pre></td>
+      <td>
+        <pre><a href="#attr_installer">installer</a></pre>
+<pre> a reference to the installer handler class instance (&quot;class&quot; in the
+  installer XML confuration)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_name">name</a></pre>
+<pre> the name of this installer
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> </pre></td>
+      <td>
+        <pre><a href="#attr_resources">resources</a></pre>
+<pre> a reference to the resources that should be used for this installer
+  instance
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> </pre></td>
+      <td>
+        <pre><a href="#attr_resourcesApp">resourcesApp</a></pre>
+<pre> a reference to the app resources (if this installer is being run for a
+  specific application)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> </pre></td>
+      <td>
+        <pre><a href="#attr_resourcesSys">resourcesSys</a></pre>
+<pre> a reference to the framework (global) resources
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr_stdin">stdin</a></pre>
+<pre> standard input pointer
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>hash </pre></td>
+      <td>
+        <pre><a href="#attr__conf">_conf</a></pre>
+<pre> a reference to the &quot;installer&quot; attributes from the xml confuration
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>SRA_InstallerMenu[] </pre></td>
+      <td>
+        <pre><a href="#attr__menus">_menus</a></pre>
+<pre> the menus associated with this installer (indexed by the menu &quot;key&quot;)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__menuStack">_menuStack</a></pre>
+<pre> a stack for the current displayed menu hierarchy
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_clear">clear</a>()</pre>
+<pre> clears the screen
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_confirm">confirm</a>(string $question, boolean $default=NULL)</pre>
+<pre> prompts the user to answer yes or no to $question and returns their
+  response as a boolean value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_displayMenu">displayMenu</a>(string $msg=NULL)</pre>
+<pre> clears the screen and displays the current menu
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private <a href="util.installer.SRA_InstallerMenu.html" target="contentFrame">SRA_InstallerMenu</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getCurrentMenu">getCurrentMenu</a>()</pre>
+<pre> returns a reference to the current menu
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int</pre></td>
+      <td>
+        <pre><a href="#method_getCurrentMenuLevel">getCurrentMenuLevel</a>()</pre>
+<pre> returns the current hierarchical menu level (where 1==root menu, 2==first
+  child menu, etc.)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string</pre></td>
+      <td>
+        <pre><a href="#method_getUserInput">getUserInput</a>(string $msg, string $default='', boolean $allowBlank=FALSE, string $validate=NULL, boolean $displayOptions=FALSE)</pre>
+<pre> waits for a user to provide data
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean</pre></td>
+      <td>
+        <pre><a href="#method_isRootMenu">isRootMenu</a>()</pre>
+<pre> returns TRUE if the installer is currently on the root menu
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean</pre></td>
+      <td>
+        <pre><a href="#method_menuIsValid">menuIsValid</a>(string $menu)</pre>
+<pre> returns TRUE if $menu is a valid menu
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_quickInstall">quickInstall</a>(string $app=NULL, boolean $uninstall=FALSE, boolean $skipModel=FALSE)</pre>
+<pre> invoked by bin/sra-quick-install.php to quickly configure the framework
+  using default settings
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_run">run</a>(string $conf=NULL, string $locale=NULL)</pre>
+<pre> starts the installer. this method should not be overriden
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean</pre></td>
+      <td>
+        <pre><a href="#method_setMenu">setMenu</a>(string $menu)</pre>
+<pre> sets the current menu to $menu. returns TRUE on success FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_setPreviousMenu">setPreviousMenu</a>()</pre>
+<pre> pops the current menu off the menu stack
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_showPreviousMenu">showPreviousMenu</a>(string $msg=NULL)</pre>
+<pre> shows the previous menu (or exits if currently showing the root menu)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_sysError">sysError</a>(int $line)</pre>
+<pre> displays the system error including file name and line # and terminates the
+  installer
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_terminate">terminate</a>(string $msg=NULL)</pre>
+<pre> exits the installer. this method should not be overriden
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_waitForEnter">waitForEnter</a>(string $msg)</pre>
+<pre> displays the &quot;press enter to continue&quot; message and waits for the user to do
+  so
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__printMenuLine">_printMenuLine</a>(string $text, int $length, char $edgeChar='|', char $spaceChar=' ', boolean $center=FALSE)</pre>
+<pre> prints a menu line based on the parameters specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(object $object)</pre>
+<pre> static method that returns true if $object is a SRA_Installer (or sub-class
+  instance)
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_FRAMEWORK_INSTALLER_HEADER">SRA_FRAMEWORK_INSTALLER_HEADER</h3>
+  <pre>string <b>SRA_FRAMEWORK_INSTALLER_HEADER</b> = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<!DOCTYPE sierra-config PUBLIC \"-//SIERRA//DTD SIERRA CONFIG//EN\"\n  \"http://sierra-php.googlecode.com/svn/trunk/etc/sierra-config.dtd\">\n"</pre>
+  <pre> the header to include when rendering the framework configuration
+</pre>
+ <hr />  <h3 id="constant_SRA_INSTALLER_CONFIG_FILE_NAME">SRA_INSTALLER_CONFIG_FILE_NAME</h3>
+  <pre>string <b>SRA_INSTALLER_CONFIG_FILE_NAME</b> = 'installer.xml'</pre>
+  <pre> the default name of the installer xml file (located in the framework or app
+  &quot;etc&quot; directory)
+</pre>
+ <hr />  <h3 id="constant_SRA_INSTALLER_FRAMEWORK_DIR">SRA_INSTALLER_FRAMEWORK_DIR</h3>
+  <pre>string <b>SRA_INSTALLER_FRAMEWORK_DIR</b> = dirname(dirname(dirname(dirname(__FILE__))))</pre>
+  <pre> the base directory for the framework
+</pre>
+ <hr />  <h3 id="constant_SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG">SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG</h3>
+  <pre>string <b>SRA_INSTALLER_FRAMEWORK_INSTALLER_CONFIG</b> = SRA_INSTALLER_FRAMEWORK_DIR . '/etc/' . SRA_INSTALLER_CONFIG_FILE_NAME</pre>
+  <pre> path to the framework installer confuration file
+</pre>
+ <hr />  <h3 id="constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR">SRA_INSTALLER_FRAMEWORK_TMP_DIR</h3>
+  <pre>string <b>SRA_INSTALLER_FRAMEWORK_TMP_DIR</b> = SRA_INSTALLER_FRAMEWORK_DIR . '/tmp'</pre>
+  <pre> the framework temp directory
+</pre>
+ <hr />  <h3 id="constant_SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR">SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR</h3>
+  <pre>string <b>SRA_INSTALLER_FRAMEWORK_TMP_DIR_ERROR</b> = 'ERROR: Unable to create temp directory "' . SRA_INSTALLER_FRAMEWORK_TMP_DIR . '". Check your permissions and try to run the installer again.'</pre>
+  <pre> the error message to display if the temp directory cannot be created (not
+  localized because framework cannot be initialized if this directory cannot be
+  created)
+</pre>
+ <hr />  <h3 id="constant_SRA_INSTALLER_QUICK_INSTALL">SRA_INSTALLER_QUICK_INSTALL</h3>
+  <pre>string <b>SRA_INSTALLER_QUICK_INSTALL</b> = 'quick-install.php'</pre>
+  <pre> the name of the application specific quick installer script used by the
+  quickInstall method. this script is executed BEFORE the application is
+  initialized
+</pre>
+ <hr />  <h3 id="constant_SRA_INSTALLER_PROMPT_SKIP">SRA_INSTALLER_PROMPT_SKIP</h3>
+  <pre>string <b>SRA_INSTALLER_PROMPT_SKIP</b> = '_skip_'</pre>
+  <pre> the value returned by a &quot;defaults-handler&quot; indicating that a prompt value
+  should be skipped
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_installer">installer</h3>
+  <pre>object var <b>$installer</b></pre>
+  <pre> a reference to the installer handler class instance (&quot;class&quot; in the
+  installer XML confuration)
+</pre>
+ <hr />  <h3 id="attr_name">name</h3>
+  <pre>string var <b>$name</b></pre>
+  <pre> the name of this installer
+</pre>
+ <hr />  <h3 id="attr_resources">resources</h3>
+  <pre><a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> var <b>$resources</b></pre>
+  <pre> a reference to the resources that should be used for this installer
+  instance
+</pre>
+ <hr />  <h3 id="attr_resourcesApp">resourcesApp</h3>
+  <pre><a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> var <b>$resourcesApp</b></pre>
+  <pre> a reference to the app resources (if this installer is being run for a
+  specific application)
+</pre>
+ <hr />  <h3 id="attr_resourcesSys">resourcesSys</h3>
+  <pre><a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> var <b>$resourcesSys</b></pre>
+  <pre> a reference to the framework (global) resources
+</pre>
+ <hr />  <h3 id="attr_stdin">stdin</h3>
+  <pre>int var <b>$stdin</b></pre>
+  <pre> standard input pointer
+</pre>
+ <hr />  <h3 id="attr__conf">_conf</h3>
+  <pre>hash var <b>$_conf</b></pre>
+  <pre> a reference to the &quot;installer&quot; attributes from the xml confuration
+</pre>
+ <hr />  <h3 id="attr__menus">_menus</h3>
+  <pre>SRA_InstallerMenu[] var <b>$_menus</b></pre>
+  <pre> the menus associated with this installer (indexed by the menu &quot;key&quot;)
+</pre>
+ <hr />  <h3 id="attr__menuStack">_menuStack</h3>
+  <pre>array var <b>$_menuStack</b> = array()</pre>
+  <pre> a stack for the current displayed menu hierarchy
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_clear">clear</h3>
+  <pre>public void function <b>clear</b>()</pre>
+  <pre> clears the screen
+</pre>
+ <hr />  <h3 id="method_confirm">confirm</h3>
+  <pre>public boolean function <b>confirm</b>(string $question, boolean $default=NULL)</pre>
+  <pre> prompts the user to answer yes or no to $question and returns their
+  response as a boolean value
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>question</td>
+      <td>string</td>
+      <td><pre>the question to prompt the user with to confirm</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>boolean</td>
+      <td><pre>the default value (TRUE or FALSE). if not specified  no default will be used (user must enter yes or no)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_displayMenu">displayMenu</h3>
+  <pre>private void function <b>displayMenu</b>(string $msg=NULL)</pre>
+  <pre> clears the screen and displays the current menu
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>an optional message to display on top of the menu</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getCurrentMenu">getCurrentMenu</h3>
+  <pre>private <a href="util.installer.SRA_InstallerMenu.html" target="contentFrame">SRA_InstallerMenu</a> function &amp;<b>getCurrentMenu</b>()</pre>
+  <pre> returns a reference to the current menu
+</pre>
+ <hr />  <h3 id="method_getCurrentMenuLevel">getCurrentMenuLevel</h3>
+  <pre>private int function <b>getCurrentMenuLevel</b>()</pre>
+  <pre> returns the current hierarchical menu level (where 1==root menu, 2==first
+  child menu, etc.)
+</pre>
+ <hr />  <h3 id="method_getUserInput">getUserInput</h3>
+  <pre>private string function <b>getUserInput</b>(string $msg, string $default='', boolean $allowBlank=FALSE, string $validate=NULL, boolean $displayOptions=FALSE)</pre>
+  <pre> waits for a user to provide data
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>the input message</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>string</td>
+      <td><pre>the default value</pre></td>
+      <td>''</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>allowBlank</td>
+      <td>boolean</td>
+      <td><pre>whether or not to allow blank input</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>validate</td>
+      <td>string</td>
+      <td><pre>an optional validation function or an array of  options</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>displayOptions</td>
+      <td>boolean</td>
+      <td><pre>if $validate is an array of options, should  those options be displayed to the user?</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isRootMenu">isRootMenu</h3>
+  <pre>private boolean function <b>isRootMenu</b>()</pre>
+  <pre> returns TRUE if the installer is currently on the root menu
+</pre>
+ <hr />  <h3 id="method_menuIsValid">menuIsValid</h3>
+  <pre>private boolean function <b>menuIsValid</b>(string $menu)</pre>
+  <pre> returns TRUE if $menu is a valid menu
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>menu</td>
+      <td>string</td>
+      <td><pre>the identifier of the menu to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_quickInstall">quickInstall</h3>
+  <pre>private void function <b>quickInstall</b>(string $app=NULL, boolean $uninstall=FALSE, boolean $skipModel=FALSE)</pre>
+  <pre> invoked by bin/sra-quick-install.php to quickly configure the framework
+  using default settings
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>app</td>
+      <td>string</td>
+      <td><pre>if specified, this app id will be added to sierra-config  and [app]/bin/quick-install.php will be run if it exists</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>uninstall</td>
+      <td>boolean</td>
+      <td><pre>whether or not $app should be uninstalled</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>skipModel</td>
+      <td>boolean</td>
+      <td><pre>whether or not the $app entity models should also  be initialized</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_run">run</h3>
+  <pre>public void function <b>run</b>(string $conf=NULL, string $locale=NULL)</pre>
+  <pre> starts the installer. this method should not be overriden
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>string</td>
+      <td><pre>either the sierra relative or absolute path to the  installer xml confuration OR the id of an app that this installer has
+  been launched for (the confuration file will be looked for in
+  [app dir]/etc/installer.xml). if not specified, the default framework
+  installer confuration will be used (sierra/etc/installer.xml)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>string</td>
+      <td><pre>the locale code (optional)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setMenu">setMenu</h3>
+  <pre>private boolean function <b>setMenu</b>(string $menu)</pre>
+  <pre> sets the current menu to $menu. returns TRUE on success FALSE otherwise
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>menu</td>
+      <td>string</td>
+      <td><pre>the identifier of the new menu</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setPreviousMenu">setPreviousMenu</h3>
+  <pre>private void function <b>setPreviousMenu</b>()</pre>
+  <pre> pops the current menu off the menu stack
+</pre>
+ <hr />  <h3 id="method_showPreviousMenu">showPreviousMenu</h3>
+  <pre>private void function <b>showPreviousMenu</b>(string $msg=NULL)</pre>
+  <pre> shows the previous menu (or exits if currently showing the root menu)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>an optional message to display</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_sysError">sysError</h3>
+  <pre>private void function <b>sysError</b>(int $line)</pre>
+  <pre> displays the system error including file name and line # and terminates the
+  installer
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>line</td>
+      <td>int</td>
+      <td><pre>the line number where the system error occurred</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_terminate">terminate</h3>
+  <pre>private void function <b>terminate</b>(string $msg=NULL)</pre>
+  <pre> exits the installer. this method should not be overriden
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>an optional message to display prior to exiting</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_waitForEnter">waitForEnter</h3>
+  <pre>public void function <b>waitForEnter</b>(string $msg)</pre>
+  <pre> displays the &quot;press enter to continue&quot; message and waits for the user to do
+  so
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>the message to display</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__printMenuLine">_printMenuLine</h3>
+  <pre>private void function <b>_printMenuLine</b>(string $text, int $length, char $edgeChar='|', char $spaceChar=' ', boolean $center=FALSE)</pre>
+  <pre> prints a menu line based on the parameters specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>text</td>
+      <td>string</td>
+      <td><pre>the menu line text</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td>int</td>
+      <td><pre>the longest menu line $text length</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>edgeChar</td>
+      <td>char</td>
+      <td><pre>the character to use on the edges</pre></td>
+      <td>'|'</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>spaceChar</td>
+      <td>char</td>
+      <td><pre>the character to use for spacing</pre></td>
+      <td>' '</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>center</td>
+      <td>boolean</td>
+      <td><pre>whether or not to center $text</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(object $object)</pre>
+  <pre> static method that returns true if $object is a SRA_Installer (or sub-class
+  instance)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>object</td>
+      <td><pre>$object the object to evaluate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/installer/SRA_Installer.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

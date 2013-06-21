@@ -1,0 +1,484 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.SRA_ArrayManager - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+
+  // check attributes
+  if ("_data".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__data'] = "_data";
+  }
+
+  // check methods
+  if ("sra_arraymanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_ArrayManager'] = "SRA_ArrayManager";
+  }
+  if ("getdata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getData'] = "getData";
+  }
+  if ("getelement".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getElement'] = "getElement";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("merge".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_merge'] = "merge";
+  }
+  if ("removefromarray".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_removeFromArray'] = "removeFromArray";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_ArrayManager</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.html" target="contentFrame">util</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_ArrayManager</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> This class manages some of the more complex aspects of handling arrays.
+  Each object instantiation manages a single array.
+ 
+</pre>
+  
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private Object </pre></td>
+      <td>
+        <pre><a href="#attr__data">_data</a></pre>
+<pre> The array managed by the SRA_ArrayManager object.
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_ArrayManager">SRA_ArrayManager</a>($data)</pre>
+<pre> Class constructor. Validates the data parameter and sets the _data
+  attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public Object</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getData">getData</a>($keys=NULL)</pre>
+<pre> Returns the data associated with the keys parameter specified.
+  Returns an OPERATIONAL level SRA_Error object if the array element
+  specified by the keys does not exist.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getElement">getElement</a>(array $arr, int $idx)</pre>
+<pre> Returns a numerically indexed value in an array regardless of whether
+  or not it is associative
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>($object)</pre>
+<pre> Static method that returns true if the object parameter is an
+  SRA_ArrayManager object
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_ArrayManager.html" target="contentFrame">SRA_ArrayManager</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_merge">merge</a>($primary, $secondary)</pre>
+<pre> This method may be used to merge two arrays each represented by an
+  SRA_ArrayManager object. The returned SRA_ArrayManager object will consist
+  of the contents of both arrays. If duplicate data exists, the data
+  within the &#039;primary&#039; SRA_ArrayManager parameter will overwrite that in
+  the &#039;secondary&#039; SRA_ArrayManager parameter.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array</pre></td>
+      <td>
+        <pre><a href="#method_removeFromArray">removeFromArray</a>(array $arr, mixed $val)</pre>
+<pre> removes $val from $arr if it is present
+</pre>      </td>
+    </tr>
+  </table>
+
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__data">_data</h3>
+  <pre>private Object var <b>$_data</b></pre>
+  <pre> The array managed by the SRA_ArrayManager object.
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_ArrayManager">SRA_ArrayManager</h3>
+  <pre>public void function <b>SRA_ArrayManager</b>($data)</pre>
+  <pre> Class constructor. Validates the data parameter and sets the _data
+  attribute.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>Not Specified</td>
+      <td><pre>: Object - The array that the SRA_ArrayManager object  should manage.</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getData">getData</h3>
+  <pre>public Object function &amp;<b>getData</b>($keys=NULL)</pre>
+  <pre> Returns the data associated with the keys parameter specified.
+  Returns an OPERATIONAL level SRA_Error object if the array element
+  specified by the keys does not exist.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>keys</td>
+      <td>Not Specified</td>
+      <td><pre>: String[] - An array of keys representing which data  should be returned. The keys should be ordered in descending order.
+  In other words, the first key should be contained within the 1st
+  level of the array, the second within the second level and so on.
+  If this parameter is not provided, a reference to the entire _data
+  attribute will be returned.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getElement">getElement</h3>
+  <pre>public string function <b>getElement</b>(array $arr, int $idx)</pre>
+  <pre> Returns a numerically indexed value in an array regardless of whether
+  or not it is associative
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>arr</td>
+      <td>array</td>
+      <td><pre>ay $arr The array to return the value from</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>idx</td>
+      <td>int</td>
+      <td><pre>the index of the value to return</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>($object)</pre>
+  <pre> Static method that returns true if the object parameter is an
+  SRA_ArrayManager object
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Not Specified</td>
+      <td><pre>: Object - The object to validate.</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_merge">merge</h3>
+  <pre>public <a href="util.SRA_ArrayManager.html" target="contentFrame">SRA_ArrayManager</a> function &amp;<b>merge</b>($primary, $secondary)</pre>
+  <pre> This method may be used to merge two arrays each represented by an
+  SRA_ArrayManager object. The returned SRA_ArrayManager object will consist
+  of the contents of both arrays. If duplicate data exists, the data
+  within the &#039;primary&#039; SRA_ArrayManager parameter will overwrite that in
+  the &#039;secondary&#039; SRA_ArrayManager parameter.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>primary</td>
+      <td>Not Specified</td>
+      <td><pre>: Object - The primary array. The data in  this array will overwrite any duplicate data in the secondary
+  parameter. This parameter may be an array or an SRA_ArrayManager object.</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>secondary</td>
+      <td>Not Specified</td>
+      <td><pre>: Object - The second array object. The  data in this array will be overwritten by the data in the primary
+  array if duplicate data is found. This parameter may be an array or
+  an SRA_ArrayManager object.</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_removeFromArray">removeFromArray</h3>
+  <pre>array function <b>removeFromArray</b>(array $arr, mixed $val)</pre>
+  <pre> removes $val from $arr if it is present
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>arr</td>
+      <td>array</td>
+      <td><pre>ay $arr the array to remove $val from</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>val</td>
+      <td>mixed</td>
+      <td><pre>the value or values to remove</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/SRA_ArrayManager.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

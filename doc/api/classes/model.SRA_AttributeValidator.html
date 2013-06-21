@@ -1,0 +1,1828 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_AttributeValidator - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_attribute_validator_email_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX";
+  }
+  if ("sra_attribute_validator_ipv4_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX";
+  }
+  if ("sra_attribute_validator_ipv6_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX";
+  }
+  if ("sra_attribute_validator_mac_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX";
+  }
+  if ("sra_attribute_validator_phone_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX";
+  }
+  if ("sra_attribute_validator_uri_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_URI_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_URI_REGEX";
+  }
+  if ("sra_attribute_type_msg_key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_TYPE_MSG_KEY'] = "SRA_ATTRIBUTE_TYPE_MSG_KEY";
+  }
+
+
+  // check methods
+  if ("sra_attributevalidator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_AttributeValidator'] = "SRA_AttributeValidator";
+  }
+  if ("boolean".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_boolean'] = "boolean";
+  }
+  if ("creditcard".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_creditCard'] = "creditCard";
+  }
+  if ("date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_date'] = "date";
+  }
+  if ("email".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_email'] = "email";
+  }
+  if ("fileextension".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_fileExtension'] = "fileExtension";
+  }
+  if ("integer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_integer'] = "integer";
+  }
+  if ("ip".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_ip'] = "ip";
+  }
+  if ("ipv4".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_ipv4'] = "ipv4";
+  }
+  if ("ipv6".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_ipv6'] = "ipv6";
+  }
+  if ("mac".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_mac'] = "mac";
+  }
+  if ("mask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_mask'] = "mask";
+  }
+  if ("max".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_max'] = "max";
+  }
+  if ("maxfilesize".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_maxFileSize'] = "maxFileSize";
+  }
+  if ("maxlength".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_maxLength'] = "maxLength";
+  }
+  if ("mimetype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_mimeType'] = "mimeType";
+  }
+  if ("min".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_min'] = "min";
+  }
+  if ("minfilesize".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_minFileSize'] = "minFileSize";
+  }
+  if ("minlength".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_minLength'] = "minLength";
+  }
+  if ("numeric".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_numeric'] = "numeric";
+  }
+  if ("option".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_option'] = "option";
+  }
+  if ("options".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_options'] = "options";
+  }
+  if ("phone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_phone'] = "phone";
+  }
+  if ("range".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_range'] = "range";
+  }
+  if ("required".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_required'] = "required";
+  }
+  if ("timezone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_timezone'] = "timezone";
+  }
+  if ("unique".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_unique'] = "unique";
+  }
+  if ("uri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_uri'] = "uri";
+  }
+  if ("getsqloptionsmap".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSqlOptionsMap'] = "getSqlOptionsMap";
+  }
+  if ("isvalidvalidator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValidValidator'] = "isValidValidator";
+  }
+  if ("tostring".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toString'] = "toString";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_AttributeValidator</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_AttributeValidator</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> Contains static method used for validating entity attributes based on
+  validation constrains specified in the &#039;depends&#039; attribute of the
+  &#039;attribute&#039; definition. The value there will correspond directly with a
+  static method in this class
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX">SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating email
+  addresses
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX">SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating an IPv4
+  address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX">SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating an IPv6
+  address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX">SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating mac
+  addresses
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX">SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating phone
+  numbers
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_URI_REGEX">SRA_ATTRIBUTE_VALIDATOR_URI_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating a uri
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_TYPE_MSG_KEY">SRA_ATTRIBUTE_TYPE_MSG_KEY</a></pre>
+<pre> Identifies the &quot;msg&quot; &quot;key&quot; defining a global message for type validations
+  failures (boolean|date|integer|numeric)
+</pre>      </td>
+    </tr>
+  </table>
+  
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_AttributeValidator">SRA_AttributeValidator</a>()</pre>
+<pre> Constructor - does nothing
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_boolean">boolean</a>(string $value, $params)</pre>
+<pre> The &#039;boolean&#039; validation constraint uses SRA_Util::isBoolean to determine if
+  $value is a valid representation of a boolean value. this validator is
+  automatically used if the data type is SRA_DATA_TYPE_BOOLEAN.
+  the following are considered valid representations:
+ 	 boolean constants TRUE/FALSE
+    integers 1/0
+ 	 strings &#039;1&#039;/&#039;0&#039;
+    strings &#039;true&#039;/&#039;false&#039; (not case sensitive)
+    strings &#039;t&#039;/&#039;f&#039;
+    strings &#039;yes&#039;/&#039;no&#039;
+    strings &#039;y&#039;/&#039;n&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_creditCard">creditCard</a>(string $value, $params)</pre>
+<pre> The &#039;creditCard&#039; validation constraint returns TRUE if the credit card is
+  in a valid format. $params may, but does not have to contain a parameter
+  named &quot;ccTypes&quot; which is a space separated list of the credit card types
+  to be validated. if this is not provided, all of the types below will be
+  assumed to be valid:
+     amex: American Express
+     discover: Discover
+     mc: Mastercard
+     visa: Visa
+  number validation is performed using mod 10 arithmetic
+  setting the var: &#039;allowScrambled&#039; to 1, will allow scrambled credit card
+  #s to pass validation. a scrambled cc number is preceded by 12 *&#039;s
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_date">date</a>(string $value, $params)</pre>
+<pre> The &#039;date&#039; validation constraint specifies that an attribute value must
+  be a properly formatted date according to the GNU date syntax. For more
+  information on acceptable formats see
+  http://www.gnu.org/software/tar/manual/html_chapter/tar_7.html. this
+  validator is automatically used if the data type is SRA_DATA_TYPE_DATE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_email">email</a>(string $value, $params)</pre>
+<pre> The &#039;email&#039; validation constraint specifies that an attribute value must
+  be a properly formatted email address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_fileExtension">fileExtension</a>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $value, $params)</pre>
+<pre> The &#039;fileExtension&#039; validation constraint specifies that an file attribute
+  must utilize a specific file extension (as specified in by the original
+  name of the user file). This method requires the params key
+  &#039;fileExtensions&#039; to provide a space separated list of file extensions that
+  are allowed. file extension validation is not case-sensitive.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_integer">integer</a>(string $value, $params)</pre>
+<pre> The &#039;integer&#039; validation constraint verifies that the value is numeric and
+  not floating point. this validator is automatically used if the data type
+  is SRA_DATA_TYPE_INT
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_ip">ip</a>(string $value, $params)</pre>
+<pre> The &#039;ip&#039; validation constraint verifies that the value is a valid formatted
+  IP address. this function  validates both IPv4 and IPv6 addresses (to
+  validate a specific IP version, use the ipv4 or  ipv6 functions)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_ipv4">ipv4</a>(string $value, $params)</pre>
+<pre> The &#039;ipv4&#039; validation constraint verifies that the value is a valid
+  formatted IPv4 address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_ipv6">ipv6</a>(string $value, $params)</pre>
+<pre> The &#039;ipv6&#039; validation constraint verifies that the value is a valid
+  formatted IPv6 address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_mac">mac</a>(string $value, $params)</pre>
+<pre> The &#039;mac&#039; validation constraint specifies that an attribute value must
+  be a properly formatted mac address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_mask">mask</a>(string $value, $params)</pre>
+<pre> The &#039;mask&#039; validation constraint specifies that an attribute value must
+  match a regular expression. This method requires the params key &#039;mask&#039; to
+  define the regular expression that should be matched
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_max">max</a>(numeric $value, $params)</pre>
+<pre> The &#039;max&#039; validation constraint specifies that an attribute value must
+  be less than or equal to a specific numeric value. This method requires
+  the params key &#039;max&#039; to define the maximum value constraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_maxFileSize">maxFileSize</a>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $value, $params)</pre>
+<pre> The &#039;maxFileSize&#039; validation constraint specifies that an file attribute
+  can be at most a specific size in bytes. This method requires the
+  params key &#039;maxFileSize&#039; to define the maximum size in bytes for the file.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_maxLength">maxLength</a>(string $value, $params)</pre>
+<pre> The &#039;maxLength&#039; validation constraint specifies that an attribute value can
+  only be a certain length. This method requires the params key &#039;maxLength&#039;
+  to define the maximum allowable length
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_mimeType">mimeType</a>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $value, $params)</pre>
+<pre> The &#039;mimeType&#039; validation constraint specifies that an file attribute must
+  be a specific mime-type (as specified by the browser when the file was
+  uploaded). This method requires the params key &#039;mimeTypes&#039; to provide a
+  space separated list of mime-types that are allowed. mime-type validation
+  is not case-sensitive. &#039;mimeTypes&#039; may also contain regular expressions.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_min">min</a>(numeric $value, $params)</pre>
+<pre> The &#039;min&#039; validation constraint specifies that an attribute value must
+  be greater than or equal to a specific numeric value. This method requires
+  the params key &#039;min&#039; to define the minimum value constraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_minFileSize">minFileSize</a>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $value, $params)</pre>
+<pre> The &#039;minFileSize&#039; validation constraint specifies that an file attribute
+  must be a at least a specific size in bytes. This method requires the
+  params key &#039;minFileSize&#039; to define the minimum size in bytes for the file.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_minLength">minLength</a>(string $value, $params)</pre>
+<pre> The &#039;minLength&#039; validation constraint specifies that an attribute value
+  must be a certain length. This method requires the params key &#039;minLength&#039;
+  to define the minimum allowable length
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_numeric">numeric</a>(string $value, $params)</pre>
+<pre> The &#039;numeric&#039; validation constraint verifies that the value is numeric.
+  validator is automatically used if the data type is SRA_DATA_TYPE_FLOAT
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_option">option</a>(string $value, $params)</pre>
+<pre> The &#039;option&#039; validation constraint specifies that an attribute value must
+  be equal to one value in a set of values specified in one of the following
+  ways:
+ 
+  &#039;options&#039; var:  must be a space separate list of valid options using the
+  following format:
+  		{option1} {option2}...
+  		OR
+ 		{option1 label}={option1} {option2 label}={option2}...
+ 
+  Neither option labels or values should contain spaces
+ 
+  &#039;code&#039; var: code snippet that should set an $options variable containing
+  the valid options
+ 
+  &#039;resources&#039; var: app or system relative or fixed path to a properties
+  file (minus the file extension) containing the options
+ 
+  &#039;sql&#039; var: a database query that will return 1 or 2 columns. if 1, that
+  column will be used for both key/value, if 2, the first will be used as
+  the key, the second as the display value
+ 
+  &#039;displ&#039; var: if the attribute is of type entity, and option or options
+  validation constraint is applied, then the user MUST select an existing
+  instance of that entity (i.e. where primary key value exists) and this var
+  will define the &quot;display&quot; value in the options map returned by
+  VO::getOptionsMap(). this value will be passed to VO::parseString($displ)
+  if it contains a $ symbol, and VO::getAttribute($displ) otherwise. For
+  these type of options, the following additional optional vars may be
+  specified:
+    &#039;constraint&#039;: sql constraint to apply to the query used to determine
+                  which entities should be options. if not specified, all
+                  entities will be returned in the options map subject to the
+                  remaining variable options described below
+ 	 &#039;order-by&#039;:   an sql order by statement. use if different sorting is
+                  desired than what is specified in the entity definition
+    &#039;limit&#039;:      max # of entities to be included in the options map
+    &#039;offset&#039;:     sql return pointer offset
+ 
+  Attributes that use this validation method can also use the
+  VO::getOptionsMap(string) method which will return an associative array of
+  value/label pairs of options for the attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_options">options</a>(string $value, $params)</pre>
+<pre> The &#039;option&#039; validation constraint specifies that an attribute value must
+  be equal to zero or more value in a set of values specified in one of the
+  following ways:
+ 
+  &#039;options&#039; var:  must be a space separate list of valid options using the
+  following format:
+  		{option1} {option2}...
+  		OR
+ 		{option1 label*}={option1*} {option2 label}={option2}...
+ 
+  Neither option labels or values should contain spaces
+ 
+  &#039;code&#039; var: code snippet that should set an $options variable containing
+  the valid options
+ 
+  &#039;resources&#039; var: app or system relative or fixed path to a properties
+  file (minus the file extension) containing the options. will be accessed
+  using SRA_ResourceBundle::getBundle
+ 
+  &#039;sql&#039; var: a database query that will return 1 or 2 columns. if 1, that
+  column will be used for both key/value, if 2, the first will be used as
+  the key, the second as the display value
+ 
+  &#039;displ&#039; var: if the attribute is of type entity, and option or options
+  validation constraint is applied, then the user MUST select an existing
+  instance of that entity (i.e. where primary key value exists) and this var
+  will define the &quot;display&quot; value in the options map returned by
+  VO::getOptionsMap(). this value will be passed to VO::parseString($displ)
+  if it contains a $ symbol, and VO::getAttribute($displ) otherwise. For
+  these type of options, the following additional optional vars may be
+  specified:
+    &#039;constraint&#039;: sql constraint to apply to the query used to determine
+                  which entities should be options. if not specified, all
+                  entities will be returned in the options map subject to the
+                  remaining variable options described below
+ 	 &#039;order-by&#039;:   an sql order by statement. use if different sorting is
+                  desired than what is specified in the entity definition
+    &#039;limit&#039;:      max # of entities to be included in the options map
+    &#039;offset&#039;:     sql return pointer offset
+ 
+  Attributes that use this validation method can also use the
+  VO::getOptionsMap() method which will return an associative array of
+  value/label pairs of options for the attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_phone">phone</a>(string $value, $params)</pre>
+<pre> The &#039;phone&#039; validation constraint specifies that an attribute value must
+  be a properly formatted phone number according to the pattern specified in
+  the constant SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_range">range</a>(numeric $value, $params)</pre>
+<pre> The &#039;range&#039; validation constraint specifies that an attribute value must
+  be between an upper and lower bound. This method requires the params keys
+  &#039;min&#039; and &#039;max&#039; to define the bound. this validation constraint accepts
+  only numeric types
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_required">required</a>(string $value, $params)</pre>
+<pre> The &#039;required&#039; validation constraint specifies that an attribute value must
+  be provided.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_timezone">timezone</a>(string $value, $params)</pre>
+<pre> The &#039;timezone&#039; validation constraint specifies that an attribute value must
+  be a valid timezone (see SRA_TimeZone::getAllTimeZones)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_unique">unique</a>(string $value, $params)</pre>
+<pre> The &#039;unique&#039; validation constraint specifies that an attribute value must
+  be unique within the database table in which it is stored
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the attribute value does validate, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_uri">uri</a>(string $value, $params)</pre>
+<pre> The &#039;uri&#039; validation constraint specifies that an attribute value must
+  be a properly formatted uri address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSqlOptionsMap">getSqlOptionsMap</a>(string $sql)</pre>
+<pre> Used to obtain an options map for a given sql query
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE if the validator is valid, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_isValidValidator">isValidValidator</a>(string $validator, $params, boolean $ignoreObject=FALSE)</pre>
+<pre> Used to test whether or not a validator and corresponding params are valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_toString">toString</a>()</pre>
+<pre> Returns a string representation of this object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_AttributeValidator object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX">SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX</b> = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z0-9-]+)$'</pre>
+  <pre> Constant used to define the regular expression to use for validating email
+  addresses
+</pre>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX">SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX</b> = '^(([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\\.){3}([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])(\/(1[0-1][0-9]|12[0-8]|[2-9][0-9]|1[6-9]))?$'</pre>
+  <pre> Constant used to define the regular expression to use for validating an IPv4
+  address
+</pre>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX">SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX</b> = '^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))(\/(1[0-1][0-9]|12[0-8]|[2-9][0-9]|1[6-9]))?$'</pre>
+  <pre> Constant used to define the regular expression to use for validating an IPv6
+  address
+</pre>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX">SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX</b> = '^[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]$'</pre>
+  <pre> Constant used to define the regular expression to use for validating mac
+  addresses
+</pre>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX">SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX</b> = '(([0-9]{3})|(([0-9]{3}).*.([0-9]{3}))).*.([0-9]{4}).*$'</pre>
+  <pre> Constant used to define the regular expression to use for validating phone
+  numbers
+</pre>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_URI_REGEX">SRA_ATTRIBUTE_VALIDATOR_URI_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_URI_REGEX</b> = '^(((http(s?))|(ftp))\:\/\/)(www.|[a-zA-Z0-9].)[a-zA-Z0-9\-\.]+\.([0-9]{1}|[0-9]{2}|[0-9]{3}|[a-zA-Z]{2}|[a-zA-Z]{3}).*$'</pre>
+  <pre> Constant used to define the regular expression to use for validating a uri
+</pre>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_TYPE_MSG_KEY">SRA_ATTRIBUTE_TYPE_MSG_KEY</h3>
+  <pre><b>SRA_ATTRIBUTE_TYPE_MSG_KEY</b> = 'type'</pre>
+  <pre> Identifies the &quot;msg&quot; &quot;key&quot; defining a global message for type validations
+  failures (boolean|date|integer|numeric)
+</pre>
+
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_AttributeValidator">SRA_AttributeValidator</h3>
+  <pre>private void function <b>SRA_AttributeValidator</b>()</pre>
+  <pre> Constructor - does nothing
+</pre>
+ <hr />  <h3 id="method_boolean">boolean</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>boolean</b>(string $value, $params)</pre>
+  <pre> The &#039;boolean&#039; validation constraint uses SRA_Util::isBoolean to determine if
+  $value is a valid representation of a boolean value. this validator is
+  automatically used if the data type is SRA_DATA_TYPE_BOOLEAN.
+  the following are considered valid representations:
+ 	 boolean constants TRUE/FALSE
+    integers 1/0
+ 	 strings &#039;1&#039;/&#039;0&#039;
+    strings &#039;true&#039;/&#039;false&#039; (not case sensitive)
+    strings &#039;t&#039;/&#039;f&#039;
+    strings &#039;yes&#039;/&#039;no&#039;
+    strings &#039;y&#039;/&#039;n&#039;
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_creditCard">creditCard</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>creditCard</b>(string $value, $params)</pre>
+  <pre> The &#039;creditCard&#039; validation constraint returns TRUE if the credit card is
+  in a valid format. $params may, but does not have to contain a parameter
+  named &quot;ccTypes&quot; which is a space separated list of the credit card types
+  to be validated. if this is not provided, all of the types below will be
+  assumed to be valid:
+     amex: American Express
+     discover: Discover
+     mc: Mastercard
+     visa: Visa
+  number validation is performed using mod 10 arithmetic
+  setting the var: &#039;allowScrambled&#039; to 1, will allow scrambled credit card
+  #s to pass validation. a scrambled cc number is preceded by 12 *&#039;s
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_date">date</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>date</b>(string $value, $params)</pre>
+  <pre> The &#039;date&#039; validation constraint specifies that an attribute value must
+  be a properly formatted date according to the GNU date syntax. For more
+  information on acceptable formats see
+  http://www.gnu.org/software/tar/manual/html_chapter/tar_7.html. this
+  validator is automatically used if the data type is SRA_DATA_TYPE_DATE
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_email">email</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>email</b>(string $value, $params)</pre>
+  <pre> The &#039;email&#039; validation constraint specifies that an attribute value must
+  be a properly formatted email address
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_fileExtension">fileExtension</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>fileExtension</b>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $value, $params)</pre>
+  <pre> The &#039;fileExtension&#039; validation constraint specifies that an file attribute
+  must utilize a specific file extension (as specified in by the original
+  name of the user file). This method requires the params key
+  &#039;fileExtensions&#039; to provide a space separated list of file extensions that
+  are allowed. file extension validation is not case-sensitive.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>SRA_FileAttribute</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_integer">integer</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>integer</b>(string $value, $params)</pre>
+  <pre> The &#039;integer&#039; validation constraint verifies that the value is numeric and
+  not floating point. this validator is automatically used if the data type
+  is SRA_DATA_TYPE_INT
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_ip">ip</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>ip</b>(string $value, $params)</pre>
+  <pre> The &#039;ip&#039; validation constraint verifies that the value is a valid formatted
+  IP address. this function  validates both IPv4 and IPv6 addresses (to
+  validate a specific IP version, use the ipv4 or  ipv6 functions)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_ipv4">ipv4</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>ipv4</b>(string $value, $params)</pre>
+  <pre> The &#039;ipv4&#039; validation constraint verifies that the value is a valid
+  formatted IPv4 address
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_ipv6">ipv6</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>ipv6</b>(string $value, $params)</pre>
+  <pre> The &#039;ipv6&#039; validation constraint verifies that the value is a valid
+  formatted IPv6 address
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_mac">mac</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>mac</b>(string $value, $params)</pre>
+  <pre> The &#039;mac&#039; validation constraint specifies that an attribute value must
+  be a properly formatted mac address
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_mask">mask</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>mask</b>(string $value, $params)</pre>
+  <pre> The &#039;mask&#039; validation constraint specifies that an attribute value must
+  match a regular expression. This method requires the params key &#039;mask&#039; to
+  define the regular expression that should be matched
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_max">max</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>max</b>(numeric $value, $params)</pre>
+  <pre> The &#039;max&#039; validation constraint specifies that an attribute value must
+  be less than or equal to a specific numeric value. This method requires
+  the params key &#039;max&#039; to define the maximum value constraint
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>numeric</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_maxFileSize">maxFileSize</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>maxFileSize</b>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $value, $params)</pre>
+  <pre> The &#039;maxFileSize&#039; validation constraint specifies that an file attribute
+  can be at most a specific size in bytes. This method requires the
+  params key &#039;maxFileSize&#039; to define the maximum size in bytes for the file.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>SRA_FileAttribute</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_maxLength">maxLength</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>maxLength</b>(string $value, $params)</pre>
+  <pre> The &#039;maxLength&#039; validation constraint specifies that an attribute value can
+  only be a certain length. This method requires the params key &#039;maxLength&#039;
+  to define the maximum allowable length
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_mimeType">mimeType</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>mimeType</b>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $value, $params)</pre>
+  <pre> The &#039;mimeType&#039; validation constraint specifies that an file attribute must
+  be a specific mime-type (as specified by the browser when the file was
+  uploaded). This method requires the params key &#039;mimeTypes&#039; to provide a
+  space separated list of mime-types that are allowed. mime-type validation
+  is not case-sensitive. &#039;mimeTypes&#039; may also contain regular expressions.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>SRA_FileAttribute</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_min">min</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>min</b>(numeric $value, $params)</pre>
+  <pre> The &#039;min&#039; validation constraint specifies that an attribute value must
+  be greater than or equal to a specific numeric value. This method requires
+  the params key &#039;min&#039; to define the minimum value constraint
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>numeric</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_minFileSize">minFileSize</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>minFileSize</b>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $value, $params)</pre>
+  <pre> The &#039;minFileSize&#039; validation constraint specifies that an file attribute
+  must be a at least a specific size in bytes. This method requires the
+  params key &#039;minFileSize&#039; to define the minimum size in bytes for the file.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>SRA_FileAttribute</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_minLength">minLength</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>minLength</b>(string $value, $params)</pre>
+  <pre> The &#039;minLength&#039; validation constraint specifies that an attribute value
+  must be a certain length. This method requires the params key &#039;minLength&#039;
+  to define the minimum allowable length
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_numeric">numeric</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>numeric</b>(string $value, $params)</pre>
+  <pre> The &#039;numeric&#039; validation constraint verifies that the value is numeric.
+  validator is automatically used if the data type is SRA_DATA_TYPE_FLOAT
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_option">option</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>option</b>(string $value, $params)</pre>
+  <pre> The &#039;option&#039; validation constraint specifies that an attribute value must
+  be equal to one value in a set of values specified in one of the following
+  ways:
+ 
+  &#039;options&#039; var:  must be a space separate list of valid options using the
+  following format:
+  		{option1} {option2}...
+  		OR
+ 		{option1 label}={option1} {option2 label}={option2}...
+ 
+  Neither option labels or values should contain spaces
+ 
+  &#039;code&#039; var: code snippet that should set an $options variable containing
+  the valid options
+ 
+  &#039;resources&#039; var: app or system relative or fixed path to a properties
+  file (minus the file extension) containing the options
+ 
+  &#039;sql&#039; var: a database query that will return 1 or 2 columns. if 1, that
+  column will be used for both key/value, if 2, the first will be used as
+  the key, the second as the display value
+ 
+  &#039;displ&#039; var: if the attribute is of type entity, and option or options
+  validation constraint is applied, then the user MUST select an existing
+  instance of that entity (i.e. where primary key value exists) and this var
+  will define the &quot;display&quot; value in the options map returned by
+  VO::getOptionsMap(). this value will be passed to VO::parseString($displ)
+  if it contains a $ symbol, and VO::getAttribute($displ) otherwise. For
+  these type of options, the following additional optional vars may be
+  specified:
+    &#039;constraint&#039;: sql constraint to apply to the query used to determine
+                  which entities should be options. if not specified, all
+                  entities will be returned in the options map subject to the
+                  remaining variable options described below
+ 	 &#039;order-by&#039;:   an sql order by statement. use if different sorting is
+                  desired than what is specified in the entity definition
+    &#039;limit&#039;:      max # of entities to be included in the options map
+    &#039;offset&#039;:     sql return pointer offset
+ 
+  Attributes that use this validation method can also use the
+  VO::getOptionsMap(string) method which will return an associative array of
+  value/label pairs of options for the attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_options">options</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>options</b>(string $value, $params)</pre>
+  <pre> The &#039;option&#039; validation constraint specifies that an attribute value must
+  be equal to zero or more value in a set of values specified in one of the
+  following ways:
+ 
+  &#039;options&#039; var:  must be a space separate list of valid options using the
+  following format:
+  		{option1} {option2}...
+  		OR
+ 		{option1 label*}={option1*} {option2 label}={option2}...
+ 
+  Neither option labels or values should contain spaces
+ 
+  &#039;code&#039; var: code snippet that should set an $options variable containing
+  the valid options
+ 
+  &#039;resources&#039; var: app or system relative or fixed path to a properties
+  file (minus the file extension) containing the options. will be accessed
+  using SRA_ResourceBundle::getBundle
+ 
+  &#039;sql&#039; var: a database query that will return 1 or 2 columns. if 1, that
+  column will be used for both key/value, if 2, the first will be used as
+  the key, the second as the display value
+ 
+  &#039;displ&#039; var: if the attribute is of type entity, and option or options
+  validation constraint is applied, then the user MUST select an existing
+  instance of that entity (i.e. where primary key value exists) and this var
+  will define the &quot;display&quot; value in the options map returned by
+  VO::getOptionsMap(). this value will be passed to VO::parseString($displ)
+  if it contains a $ symbol, and VO::getAttribute($displ) otherwise. For
+  these type of options, the following additional optional vars may be
+  specified:
+    &#039;constraint&#039;: sql constraint to apply to the query used to determine
+                  which entities should be options. if not specified, all
+                  entities will be returned in the options map subject to the
+                  remaining variable options described below
+ 	 &#039;order-by&#039;:   an sql order by statement. use if different sorting is
+                  desired than what is specified in the entity definition
+    &#039;limit&#039;:      max # of entities to be included in the options map
+    &#039;offset&#039;:     sql return pointer offset
+ 
+  Attributes that use this validation method can also use the
+  VO::getOptionsMap() method which will return an associative array of
+  value/label pairs of options for the attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_phone">phone</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>phone</b>(string $value, $params)</pre>
+  <pre> The &#039;phone&#039; validation constraint specifies that an attribute value must
+  be a properly formatted phone number according to the pattern specified in
+  the constant SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_range">range</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>range</b>(numeric $value, $params)</pre>
+  <pre> The &#039;range&#039; validation constraint specifies that an attribute value must
+  be between an upper and lower bound. This method requires the params keys
+  &#039;min&#039; and &#039;max&#039; to define the bound. this validation constraint accepts
+  only numeric types
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>numeric</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_required">required</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>required</b>(string $value, $params)</pre>
+  <pre> The &#039;required&#039; validation constraint specifies that an attribute value must
+  be provided.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_timezone">timezone</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>timezone</b>(string $value, $params)</pre>
+  <pre> The &#039;timezone&#039; validation constraint specifies that an attribute value must
+  be a valid timezone (see SRA_TimeZone::getAllTimeZones)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_unique">unique</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>unique</b>(string $value, $params)</pre>
+  <pre> The &#039;unique&#039; validation constraint specifies that an attribute value must
+  be unique within the database table in which it is stored
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_uri">uri</h3>
+  <pre>public boolean TRUE if the attribute value does validate, FALSE otherwise function <b>uri</b>(string $value, $params)</pre>
+  <pre> The &#039;uri&#039; validation constraint specifies that an attribute value must
+  be a properly formatted uri address
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the attribute value to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSqlOptionsMap">getSqlOptionsMap</h3>
+  <pre>public static array function &amp;<b>getSqlOptionsMap</b>(string $sql)</pre>
+  <pre> Used to obtain an options map for a given sql query
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>sql</td>
+      <td>string</td>
+      <td><pre>the sql query that will provide the options</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValidValidator">isValidValidator</h3>
+  <pre>public boolean TRUE if the validator is valid, FALSE otherwise function <b>isValidValidator</b>(string $validator, $params, boolean $ignoreObject=FALSE)</pre>
+  <pre> Used to test whether or not a validator and corresponding params are valid
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>validator</td>
+      <td>string</td>
+      <td><pre>the name of the validate method</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>ignoreObject</td>
+      <td>boolean</td>
+      <td><pre>whether or not to validate existing of the  &#039;object&#039; and &#039;attribute&#039; parameters</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_toString">toString</h3>
+  <pre>public String function <b>toString</b>()</pre>
+  <pre> Returns a string representation of this object
+</pre>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_AttributeValidator object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_AttributeValidator.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

@@ -1,0 +1,14 @@
+CHANGELOG
+* added login-tpl option to authentication in order to allow applications to define xhtml login pages instead of using the default http authentication
+* minor bug fix when used with skip-app and generating web services api documentation
+* adding web service modeling development code
+* non-persistent entity copy method fix
+* fixed ubuntu errors
+* Fixed aggregate attribute bug wherein multiple prefixes were assigned to the 2nd aggrate attribute of the same type
+* Added SRA_Util::generatePassword
+* Fixed bug in SRA_ArrayManager::merge
+* Added ability to generate models from arrays in SRA_EntityModeler::init
+* Added 'ws-gateway-skip-app' propety to entity-model allowing web service URIs to exclude the app id so they can be shorter
+
+KNOWN ISSUES
+None

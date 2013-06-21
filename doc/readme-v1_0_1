@@ -1,0 +1,12 @@
+This is a maintenance update
+
+CHANGELOG
+* Full PHP5 compatibility
+* Relative date/time formatting in util/SRA_GregorianDate::format
+* OS-based authenticator: auth/SRA_OsAuthenticator
+* Automated application licensing and browser compatibility
+* util/SRA_Util::normalizeDataUnit
+* Improved unit testing incorporated into model
+
+KNOWN ISSUES
+None

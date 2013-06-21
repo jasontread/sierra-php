@@ -1,0 +1,266 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for SIERRA installer configuration
+
+This DTD defines SIERRA framework and application installer configurations. XML 
+files based on this DTD should be named "installer.xml" and stored in the "etc" 
+directory of the framework and each application that will use the default 
+framework provided installer (sierra/bin/sra-installer.php).
+
+In addition to "etc/installer.xml", applications may also specify 3 installer 
+files "etc/.install", "etc/.uninstall" and "etc/.release". These files should 
+contain shell commands, each separated by a newline, that should be executed 
+when the application is configured (.install), unconfigured (.uninstall) or when 
+the installer is used to create a release (.release). Each of these shell 
+commands will be executed from the application directory, so app relative paths 
+can be used. For example, if an application distribution contained a file 
+"etc/myappconfig-default.xml" and should be copied to "etc/myappconfig.xml" 
+when the application is configured, and "etc/myappconfig.xml" should also be 
+removed when the application is unconfigured, the file etc/.install would 
+contain: cp etc/myappconfig-default.xml etc/myappconfig.xml
+and the file etc/.uninstall would contain: rm -f etc/myappconfig.xml
+The commands in etc/.uninstall are also executed prior to those in etc/.release 
+when an application release is created using the installer. Commands may imbed 
+the string "$appDir" which will be replaced with the absolute path to the app 
+directory prior to their execution
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the "xml" declaration):
+
+<!DOCTYPE installer PUBLIC "-//SIERRA//DTD INSTALLER//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/etc/installer.dtd">
+-->
+
+
+<!--
+the "installer" element is the root element. it defines 1 nested menu (the root 
+menu for the installer) and the following attributes
+
+class             the name of the installer class in "src" providing the 
+                  menu-item specified methods ("handler", "builder", 
+                  "defaults-handler", "include-handler", and/or "validator"). if 
+                  this attribute is not specified, the name of the class will be 
+                  assumed to be the base name of the file (minus the .php 
+                  extension). a reference to the util/installer/SRA_Installer 
+                  instance for the running installer process will be 
+                  automatically set as an instance attribute named "installer" 
+                  ($this->installer). this class provides some utility methods 
+                  that may be used to interract with the user during the install 
+                  process. for more information, see the API documentation 
+                  provided in that class
+                  
+resource          the installer name resource identifier
+
+resources 				app or framework relative, or absolute path to the properties 
+                  file (without .properties extension) to use for strings used 
+                  by the installer. if not specified, the default framework/app 
+                  resource bundle will be used
+                  
+root-menu         the identifier of the root "menu" for the installer
+
+src               the framework or app "lib" relative or absolute path to the 
+                  PHP source file containing the installer class (see "class" 
+                  above)
+
+
+Used in:	NA
+-->
+<!ELEMENT installer (menu+)>
+<!ATTLIST installer     class               CDATA     #IMPLIED
+                        resource            CDATA     #REQUIRED
+                        resources           CDATA     #IMPLIED
+                        root-menu           IDREF     #REQUIRED
+                        src                 CDATA     #REQUIRED>
+
+
+<!--
+the "menu" element defines a single installer menu. an installer menu displays 
+options available to the user in that menu. the installer uses a hierarchical 
+navigation model and will automatically add a menu option to return to the 
+parent menu (in a nested menu) or exit the installer (from the top-level menu)
+
+key       				the unique identifier for this menu
+
+default           the identifier of the default "menu-item" for this menu
+                  
+resource          the menu title resource identifier, if not specified, "key" 
+                  will be used
+                  
+resource-keys     the name of a method in "class" that should be invoked to 
+                  retrieve custom resource keys to include in "resource" 
+                  whenever the title for this menu is rendered
+
+
+Used in:	NA
+-->
+<!ELEMENT menu (menu-item+)>
+<!ATTLIST menu          key                 ID        #REQUIRED
+                        default             IDREF     #IMPLIED
+                        resource            CDATA     #IMPLIED
+                        resource-keys       CDATA     #IMPLIED>
+
+
+<!--
+the "menu-item" element defines an action that may be invoked through the 
+installer. this action may be either displaying another sub-menu, or collecting 
+some data from the user and using that data to make a configuration change, or 
+some other installation related action
+
+key       				the unique identifier for this menu item
+
+builder           this optional attribute may be used to dynamically populate 
+                  menu items. it should be the name of an installer method that 
+                  should be invoked and return an array of hashes (or single 
+                  hash) each of which defines a single menu item to be displayed 
+                  in the menu where each hash may have the same attributes 
+                  as the "menu-item" element. if this method return NULL, this 
+                  menu-item will be excluded from the menu. the menu items 
+                  configurations returned will automatically inherit attributes 
+                  of this menu-item that are not defined
+
+confirm           resource identifier for a confirmation message that should be 
+                  displayed (user must respond positively) before the action
+                  associated with this menu item will be invoked
+                  
+defaults-handler  if "prompt" is specified, this attribute may be used to 
+                  specify the name of a method in the installer object that 
+                  should be invoked to determine the default values for the data 
+                  that the user will be prompted for. this method should have 
+                  the following signature:
+                    (string : $menuItem, string : $id, hash : $data) : string
+                  where $menuItem is the menu-item "key", $id is the "prompt" 
+                  key for the question that this method should return the 
+                  default value for, and $data is the hash (indexed by prompt  
+                  key) of data that has already been collected. if this method 
+                  returns NULL, the "prompt" default value will be used 
+                  ([default]). if this method returns the constant value 
+                  SRA_INSTALLER_PROMPT_SKIP, the user will not be prompted for 
+                  that value and it will be removed from the $data hash
+                  
+                  
+display-data      if the purpose of this menu-item is to display data (the 
+                  data displayed is the string returned by "handler"), this 
+                  attribute can be set to TRUE (1) in which case the screen 
+                  will be cleared, the data displayed, and the user prompted 
+                  "Press enter to continue"
+                  
+exit              whether or not to exit the installer after this menu item 
+                  action has been completed successfully
+                  
+handler           the name of the method in the installer object that should be 
+                  invoked to handle the action associated with this menu item. 
+                  either "handler", "menu" or both may be specified ("handler" 
+                  will be invoked prior to displaying "menu" if both are 
+                  specified). this method should have the following signature: 
+                    (string : $menuItem, hash : $data) : string
+                  where $menuItem is the menu-item "key", $data is a hash 
+                  (indexed by prompt key) containing data collection based on 
+                  the values specified in the "prompt" attribute and the return 
+                  value (optional) is a message that should be displayed to the 
+                  user
+                  
+include-handler   this optional method may be used to specify the name of a 
+                  method in the installer object that should be invoked to 
+                  determine whether or not this menu-item should be included in 
+                  the menu. this method should have the following signature:
+                    (string : $menuItem) : boolean
+                  where $menuItem is the menu-item "key". if this value is 
+                  preceeded with '!', the menu-item will only be included if 
+                  the method returns FALSE
+
+menu              if this menu item should display another menu, this attribute 
+                  should be the identifier of that menu. either "handler", 
+                  "menu" or both may be specified ("handler" will be invoked 
+                  prior to displaying "menu" if both are specified)
+                  
+previous-menu     whether or not the previous menu should be displayed after 
+                  this menu item action has been completed successfully
+                  
+prompt            this attribute may be used to prompt the user for data prior 
+                  to invoking "handler". it should be a space separated list of 
+                  resource identifiers where the strings associated with those 
+                  identifiers are formatted as follows:
+                    [question]|[options]|[default]|[remove if default]|[allow null]|[validate fail msg]
+                  where [question] is the question to display to the user when 
+                  prompting for the data, [options] is a slash (/) separated 
+                  list of valid responses (this list will be appended to the 
+                  question automatically), [default] is the default value, 
+                  [remove if default] is either a 1 or a 0 indicating whether or 
+                  not this prompt value should be excluded from the $data hash 
+                  if it is equal to [default], [allow null] is either a 1 or a 
+                  0 indicating whether or not this question is optional (default 
+                  is 0, meaning that the user MUST answer this question), and 
+                  [validate fail msg] is a custom message that should be 
+                  displayed in the user enter invalid data (when "validator" 
+                  returns FALSE) - if not specified and "validator" returns 
+                  FALSE, a generic message will be displayed
+                  
+prompt-header     an optional resource identifier for a header that should be 
+                  displayed prior to prompting the user for data
+                  
+prompt-key-remove an optional substring that should be stripped from the 
+                  resource identifiers in "prompt" when creating the $data hash
+                  
+resource          the menu item title resource identifier, if not specified, 
+                  "key" will be used. this resource may contain the imbedded 
+                  value {$id} which will be replaced with the menu-item id (may 
+                  be useful for dynamically generated menu items)
+                  
+resource-keys     the name of a method in "class" that should be invoked to 
+                  retrieve custom resource keys to included in "resource" and 
+                  "confirm" whenever they are rendered
+                  
+validator         if "prompt" is specified, this attribute may be used to 
+                  specify the name of a method in the installer object that 
+                  should be invoked to determine whether or not user input is 
+                  valid for a given "prompt" resource identifier. this method 
+                  should have the following signature:
+                    (string : $menuItem, string : $id, string : $val, hash : $data) : boolean
+                  where $menuItem is the menu-item "key", $id is the "prompt" 
+                  resource identifier of the question that this method should 
+                  validate, $val is the value provided by the user, and $data is 
+                  the hash (indexed by resource identifier) of data that has 
+                  already been collected. if defined, this method should return 
+                  TRUE if the data is valid, FALSE otherwise. if it returns 
+                  FALSE, the entire menu-item action will be aborted
+
+
+Used in:	NA
+-->
+<!ELEMENT menu-item EMPTY>
+<!ATTLIST menu-item     key                 ID        #REQUIRED
+                        builder             CDATA     #IMPLIED
+                        confirm             CDATA     #IMPLIED
+                        defaults-handler    CDATA     #IMPLIED
+                        display-data        (1|0)     "0"
+                        exit                (1|0)     "0"
+                        handler             CDATA     #IMPLIED
+                        include-handler     CDATA     #IMPLIED
+                        menu                IDREF     #IMPLIED
+                        previous-menu       (1|0)     "0"
+                        prompt              CDATA     #IMPLIED
+                        prompt-header       CDATA     #IMPLIED
+                        prompt-key-remove   CDATA     #IMPLIED
+                        resource            CDATA     #IMPLIED
+                        resource-keys       CDATA     #IMPLIED
+                        validator           CDATA     #IMPLIED>

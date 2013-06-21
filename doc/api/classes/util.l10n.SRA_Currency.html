@@ -1,0 +1,1000 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.l10n.SRA_Currency - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_currency_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_DEBUG'] = "SRA_CURRENCY_DEBUG";
+  }
+  if ("sra_currency_canada".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_CANADA'] = "SRA_CURRENCY_CANADA";
+  }
+  if ("sra_currency_euro".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_EURO'] = "SRA_CURRENCY_EURO";
+  }
+  if ("sra_currency_france".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_FRANCE'] = "SRA_CURRENCY_FRANCE";
+  }
+  if ("sra_currency_germany".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_GERMANY'] = "SRA_CURRENCY_GERMANY";
+  }
+  if ("sra_currency_spain".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_SPAIN'] = "SRA_CURRENCY_SPAIN";
+  }
+  if ("sra_currency_uk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_UK'] = "SRA_CURRENCY_UK";
+  }
+  if ("sra_currency_us".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_US'] = "SRA_CURRENCY_US";
+  }
+  if ("sra_currency_default".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_DEFAULT'] = "SRA_CURRENCY_DEFAULT";
+  }
+  if ("sra_currency_xml_data_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CURRENCY_XML_DATA_FILE'] = "SRA_CURRENCY_XML_DATA_FILE";
+  }
+
+  // check attributes
+  if ("_code".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__code'] = "_code";
+  }
+  if ("_decimalprecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__decimalPrecision'] = "_decimalPrecision";
+  }
+  if ("_symbol".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__symbol'] = "_symbol";
+  }
+  if ("_symbolfront".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__symbolFront'] = "_symbolFront";
+  }
+  if ("_sysconversionfactor".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__sysConversionFactor'] = "_sysConversionFactor";
+  }
+
+  // check methods
+  if ("sra_currency".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_Currency'] = "SRA_Currency";
+  }
+  if ("convert".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convert'] = "convert";
+  }
+  if ("convertcurrencyvalue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertCurrencyValue'] = "convertCurrencyValue";
+  }
+  if ("convertsyscurrencyvalue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertSysCurrencyValue'] = "convertSysCurrencyValue";
+  }
+  if ("getcode".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCode'] = "getCode";
+  }
+  if ("getcurrencies".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCurrencies'] = "getCurrencies";
+  }
+  if ("getcurrency".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCurrency'] = "getCurrency";
+  }
+  if ("getcurrencylist".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCurrencyList'] = "getCurrencyList";
+  }
+  if ("getdecimalprecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDecimalPrecision'] = "getDecimalPrecision";
+  }
+  if ("getdisplayname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDisplayName'] = "getDisplayName";
+  }
+  if ("getformattedvalue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFormattedValue'] = "getFormattedValue";
+  }
+  if ("getsymbol".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSymbol'] = "getSymbol";
+  }
+  if ("getsysconversionfactor".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysConversionFactor'] = "getSysConversionFactor";
+  }
+  if ("issymbolfront".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isSymbolFront'] = "isSymbolFront";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("validatecode".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validateCode'] = "validateCode";
+  }
+  if ("_getcurrencydata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getCurrencyData'] = "_getCurrencyData";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_Currency</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.l10n.html" target="contentFrame">util.l10n</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_Currency</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> Class used to manage currencies and currency conversion. This is part of
+  the localization classes such as SRA_Locale and SRA_ResourceBundle. The
+  currency data will be stored in the file SRA_CURRENCY_XML_DATA_FILE.
+  This file contains a root tag &quot;currencies&quot; and 1..* child &#039;currency&#039;
+  tags. Each &#039;currency&#039; tag contains the following elements:
+ 
+  &gt; attribute key = &quot;code&quot; : Used to convert to an associative
+    array based on currency code
+  &gt; code (String) : The currency code. This will be the unique
+    identifier for the currency
+  &gt; decimal_precision (int) : The decimal precision to use for when conversions
+    result in floating point values.
+  &gt; conversion (float) : The conversion factor for
+    converting this currency to the currency represented by the
+    SRA_CURRENCY_DEFAULT constant.
+  &gt; symbol (String) : The symbol for the currency
+  &gt; symbol_front (boolean : true) : Whether or not the symbol should
+    appear at the front or the rear of formatted currency values
+ 
+ 
+  Additionally, currency names are stored in resource bundles as
+  &quot;{SRA_DIR} /etc/l10n/iso4217.properties&quot;.
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_DEBUG">SRA_CURRENCY_DEBUG</a></pre>
+<pre> SRA_Currency object debug flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_CANADA">SRA_CURRENCY_CANADA</a></pre>
+<pre> Constant representing the Canadian currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_EURO">SRA_CURRENCY_EURO</a></pre>
+<pre> Constant representing the Euro currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_FRANCE">SRA_CURRENCY_FRANCE</a></pre>
+<pre> Constant representing the French currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_GERMANY">SRA_CURRENCY_GERMANY</a></pre>
+<pre> Constant representing the German currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_SPAIN">SRA_CURRENCY_SPAIN</a></pre>
+<pre> Constant representing the Spanish currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_UK">SRA_CURRENCY_UK</a></pre>
+<pre> Constant representing the English/UK currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_US">SRA_CURRENCY_US</a></pre>
+<pre> Constant representing the US currency code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_DEFAULT">SRA_CURRENCY_DEFAULT</a></pre>
+<pre> The system currency. All persistent values will be stored using this
+  currency. A system may only utilize 1 sys currency.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CURRENCY_XML_DATA_FILE">SRA_CURRENCY_XML_DATA_FILE</a></pre>
+<pre> The location of the SRA_Currency xml definition file.
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__code">_code</a></pre>
+<pre> The unique 3 digit currency identifier.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#attr__decimalPrecision">_decimalPrecision</a></pre>
+<pre> The decimal precision to use for when conversions result in floating
+  point values.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__symbol">_symbol</a></pre>
+<pre> The currency symbol
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean </pre></td>
+      <td>
+        <pre><a href="#attr__symbolFront">_symbolFront</a></pre>
+<pre> Whether or not the symbol should appear at the front or the rear of
+  formatted currency values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private float </pre></td>
+      <td>
+        <pre><a href="#attr__sysConversionFactor">_sysConversionFactor</a></pre>
+<pre> The numeric factor used to convert this currency to the sys currency
+  (as defined by the SRA_CURRENCY_DEFAULT constant).
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_Currency">SRA_Currency</a>($code)</pre>
+<pre> The SRA_Currency constructor. This method is private as all SRA_Currency
+  objects should be accessed via the getCurrency method.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_convert">convert</a>($value, $currency)</pre>
+<pre> Method used to convert a currency value from one currency to another.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_convertCurrencyValue">convertCurrencyValue</a>($value)</pre>
+<pre> This method converts a value from the currency represented by the
+  SRA_Currency object in which the method is called, to the system
+  currency (as defined by the SRA_CURRENCY_DEFAULT constant).
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_convertSysCurrencyValue">convertSysCurrencyValue</a>($value)</pre>
+<pre> This method converts a value from the currency represented by the
+  sys currency (as defined by the SRA_CURRENCY_DEFAULT constant), to the
+  currency represented by the SRA_Currency object in which the method is
+  called.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getCode">getCode</a>()</pre>
+<pre> Returns the value of the _code attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_Currency[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getCurrencies">getCurrencies</a>()</pre>
+<pre> Static method used to return an array of all of the Currencies
+  defined within the system currency etc xml file.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_Currency.html" target="contentFrame">SRA_Currency</a></pre></td>
+      <td>
+        <pre><a href="#method_getCurrency">getCurrency</a>($code=FALSE)</pre>
+<pre> Static method used to access a SRA_Currency object. This method
+  maintains a cache array of previously instantiated SRA_Currency objects
+  so that each currency type is only instantiated once. This method
+  should always be called in place of the private SRA_Currency
+  constructor.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getCurrencyList">getCurrencyList</a>($locale=false)</pre>
+<pre> Static method that returns an associative array of currencies and their
+  corresponding display values based on the SRA_Locale parameter specified.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getDecimalPrecision">getDecimalPrecision</a>()</pre>
+<pre> Returns the value of the _decimalPrecision attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getDisplayName">getDisplayName</a>($locale=false)</pre>
+<pre> Returns the display name for the currency as defined in the
+  &quot;{SRA_DIR}/etc/l10n/iso4217.properties&quot; file.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getFormattedValue">getFormattedValue</a>($value, $locale=false)</pre>
+<pre> Returns a formatted currency string based on the value and SRA_Locale
+  provided. This value includes the currency symbol.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getSymbol">getSymbol</a>()</pre>
+<pre> Returns the value of the _symbol attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_getSysConversionFactor">getSysConversionFactor</a>()</pre>
+<pre> Returns the value of the _sysConversionFactor attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isSymbolFront">isSymbolFront</a>()</pre>
+<pre> Returns the value of the _symbolFront attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>($object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_Currency
+  object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_validateCode">validateCode</a>(string $code)</pre>
+<pre> validates a currency code
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre>&amp;<a href="#method__getCurrencyData">_getCurrencyData</a>()</pre>
+<pre> Static method that returns a reference to the _currencyData attribute
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_CURRENCY_DEBUG">SRA_CURRENCY_DEBUG</h3>
+  <pre>public boolean <b>SRA_CURRENCY_DEBUG</b> = FALSE</pre>
+  <pre> SRA_Currency object debug flag
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_CANADA">SRA_CURRENCY_CANADA</h3>
+  <pre>public String <b>SRA_CURRENCY_CANADA</b> = "cad"</pre>
+  <pre> Constant representing the Canadian currency code.
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_EURO">SRA_CURRENCY_EURO</h3>
+  <pre>public String <b>SRA_CURRENCY_EURO</b> = "xeu"</pre>
+  <pre> Constant representing the Euro currency code.
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_FRANCE">SRA_CURRENCY_FRANCE</h3>
+  <pre>public String <b>SRA_CURRENCY_FRANCE</b> = "xeu"</pre>
+  <pre> Constant representing the French currency code.
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_GERMANY">SRA_CURRENCY_GERMANY</h3>
+  <pre>public String <b>SRA_CURRENCY_GERMANY</b> = "xeu"</pre>
+  <pre> Constant representing the German currency code.
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_SPAIN">SRA_CURRENCY_SPAIN</h3>
+  <pre>public String <b>SRA_CURRENCY_SPAIN</b> = "esp"</pre>
+  <pre> Constant representing the Spanish currency code.
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_UK">SRA_CURRENCY_UK</h3>
+  <pre>public String <b>SRA_CURRENCY_UK</b> = "gbp"</pre>
+  <pre> Constant representing the English/UK currency code.
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_US">SRA_CURRENCY_US</h3>
+  <pre>public String <b>SRA_CURRENCY_US</b> = "usd"</pre>
+  <pre> Constant representing the US currency code.
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_DEFAULT">SRA_CURRENCY_DEFAULT</h3>
+  <pre>public String <b>SRA_CURRENCY_DEFAULT</b> = SRA_CURRENCY_US</pre>
+  <pre> The system currency. All persistent values will be stored using this
+  currency. A system may only utilize 1 sys currency.
+</pre>
+ <hr />  <h3 id="constant_SRA_CURRENCY_XML_DATA_FILE">SRA_CURRENCY_XML_DATA_FILE</h3>
+  <pre>public String <b>SRA_CURRENCY_XML_DATA_FILE</b> = file_exists(SRA_CONF_DIR . '/l10n/currencies.xml') ? SRA_CONF_DIR . '/l10n/currencies.xml' : SRA_CONF_DIR . '/l10n/currencies-default.xml'</pre>
+  <pre> The location of the SRA_Currency xml definition file.
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__code">_code</h3>
+  <pre>private String var <b>$_code</b></pre>
+  <pre> The unique 3 digit currency identifier.
+</pre>
+ <hr />  <h3 id="attr__decimalPrecision">_decimalPrecision</h3>
+  <pre>private int var <b>$_decimalPrecision</b> = 2</pre>
+  <pre> The decimal precision to use for when conversions result in floating
+  point values.
+</pre>
+ <hr />  <h3 id="attr__symbol">_symbol</h3>
+  <pre>private String var <b>$_symbol</b></pre>
+  <pre> The currency symbol
+</pre>
+ <hr />  <h3 id="attr__symbolFront">_symbolFront</h3>
+  <pre>private boolean var <b>$_symbolFront</b> = true</pre>
+  <pre> Whether or not the symbol should appear at the front or the rear of
+  formatted currency values
+</pre>
+ <hr />  <h3 id="attr__sysConversionFactor">_sysConversionFactor</h3>
+  <pre>private float var <b>$_sysConversionFactor</b></pre>
+  <pre> The numeric factor used to convert this currency to the sys currency
+  (as defined by the SRA_CURRENCY_DEFAULT constant).
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_Currency">SRA_Currency</h3>
+  <pre>private void function <b>SRA_Currency</b>($code)</pre>
+  <pre> The SRA_Currency constructor. This method is private as all SRA_Currency
+  objects should be accessed via the getCurrency method.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The unique 3 digit currency code. If  this value is not defined, an SRA_Error will be returned.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_convert">convert</h3>
+  <pre>public float function <b>convert</b>($value, $currency)</pre>
+  <pre> Method used to convert a currency value from one currency to another.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>Not Specified</td>
+      <td><pre>: float - The value to convert.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>currency</td>
+      <td>Not Specified</td>
+      <td><pre>: SRA_Currency - The SRA_Currency to which the value should be  			converted.</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_convertCurrencyValue">convertCurrencyValue</h3>
+  <pre>public float function <b>convertCurrencyValue</b>($value)</pre>
+  <pre> This method converts a value from the currency represented by the
+  SRA_Currency object in which the method is called, to the system
+  currency (as defined by the SRA_CURRENCY_DEFAULT constant).
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>Not Specified</td>
+      <td><pre>: float - The value to convert.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_convertSysCurrencyValue">convertSysCurrencyValue</h3>
+  <pre>public float function <b>convertSysCurrencyValue</b>($value)</pre>
+  <pre> This method converts a value from the currency represented by the
+  sys currency (as defined by the SRA_CURRENCY_DEFAULT constant), to the
+  currency represented by the SRA_Currency object in which the method is
+  called.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>Not Specified</td>
+      <td><pre>: float - The sys currency value to convert.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getCode">getCode</h3>
+  <pre>public String function <b>getCode</b>()</pre>
+  <pre> Returns the value of the _code attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getCurrencies">getCurrencies</h3>
+  <pre>public SRA_Currency[] function &amp;<b>getCurrencies</b>()</pre>
+  <pre> Static method used to return an array of all of the Currencies
+  defined within the system currency etc xml file.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getCurrency">getCurrency</h3>
+  <pre>public <a href="util.l10n.SRA_Currency.html" target="contentFrame">SRA_Currency</a> function <b>getCurrency</b>($code=FALSE)</pre>
+  <pre> Static method used to access a SRA_Currency object. This method
+  maintains a cache array of previously instantiated SRA_Currency objects
+  so that each currency type is only instantiated once. This method
+  should always be called in place of the private SRA_Currency
+  constructor.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The unique 3 digit currency code. If  this value is not defined, an SRA_Error will be returned. The default
+  currency is the system currency (SRA_CURRENCY_DEFAULT).</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getCurrencyList">getCurrencyList</h3>
+  <pre>public String function <b>getCurrencyList</b>($locale=false)</pre>
+  <pre> Static method that returns an associative array of currencies and their
+  corresponding display values based on the SRA_Locale parameter specified.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>Not Specified</td>
+      <td><pre>: SRA_Locale - The SRA_Locale object to use when determining  			the display name to use for each currency. If this parameter
+  			is not specified, the default app or system local will
+ 			be used.</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getDecimalPrecision">getDecimalPrecision</h3>
+  <pre>public int function <b>getDecimalPrecision</b>()</pre>
+  <pre> Returns the value of the _decimalPrecision attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getDisplayName">getDisplayName</h3>
+  <pre>public String function <b>getDisplayName</b>($locale=false)</pre>
+  <pre> Returns the display name for the currency as defined in the
+  &quot;{SRA_DIR}/etc/l10n/iso4217.properties&quot; file.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>Not Specified</td>
+      <td><pre>: SRA_Locale - The locale for which the display name  should be returned. If this parameter is not specified, the default
+  properties file will be used.</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getFormattedValue">getFormattedValue</h3>
+  <pre>public String function <b>getFormattedValue</b>($value, $locale=false)</pre>
+  <pre> Returns a formatted currency string based on the value and SRA_Locale
+  provided. This value includes the currency symbol.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>Not Specified</td>
+      <td><pre>: float - The currency value.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>Not Specified</td>
+      <td><pre>: SRA_Locale - The locale whose numeric formatting rules  should be used to create the display value. If this parameter is not
+  specified, the default properties file will be used.</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getSymbol">getSymbol</h3>
+  <pre>public String function <b>getSymbol</b>()</pre>
+  <pre> Returns the value of the _symbol attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getSysConversionFactor">getSysConversionFactor</h3>
+  <pre>public float function <b>getSysConversionFactor</b>()</pre>
+  <pre> Returns the value of the _sysConversionFactor attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_isSymbolFront">isSymbolFront</h3>
+  <pre>public boolean function <b>isSymbolFront</b>()</pre>
+  <pre> Returns the value of the _symbolFront attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>($object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_Currency
+  object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Not Specified</td>
+      <td><pre>: Object - The object to validate.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_validateCode">validateCode</h3>
+  <pre>public boolean function <b>validateCode</b>(string $code)</pre>
+  <pre> validates a currency code
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>string</td>
+      <td><pre>the currency code to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getCurrencyData">_getCurrencyData</h3>
+  <pre>public String function &amp;<b>_getCurrencyData</b>()</pre>
+  <pre> Static method that returns a reference to the _currencyData attribute
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/l10n/SRA_Currency.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

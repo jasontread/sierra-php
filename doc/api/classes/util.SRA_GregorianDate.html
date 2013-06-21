@@ -1,0 +1,3154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.SRA_GregorianDate - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_gregorian_date_format_iso8601".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_FORMAT_ISO8601'] = "SRA_GREGORIAN_DATE_FORMAT_ISO8601";
+  }
+  if ("sra_gregorian_date_format_rfc2822".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_FORMAT_RFC2822'] = "SRA_GREGORIAN_DATE_FORMAT_RFC2822";
+  }
+  if ("sra_gregorian_date_relative_time_cap".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP'] = "SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP";
+  }
+  if ("sra_gregorian_date_unit_day".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_DAY'] = "SRA_GREGORIAN_DATE_UNIT_DAY";
+  }
+  if ("sra_gregorian_date_unit_minute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_MINUTE'] = "SRA_GREGORIAN_DATE_UNIT_MINUTE";
+  }
+  if ("sra_gregorian_date_unit_hour".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_HOUR'] = "SRA_GREGORIAN_DATE_UNIT_HOUR";
+  }
+  if ("sra_gregorian_date_unit_second".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_SECOND'] = "SRA_GREGORIAN_DATE_UNIT_SECOND";
+  }
+  if ("sra_gregorian_date_unit_week".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_WEEK'] = "SRA_GREGORIAN_DATE_UNIT_WEEK";
+  }
+  if ("sra_gregorian_date_unit_month".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_MONTH'] = "SRA_GREGORIAN_DATE_UNIT_MONTH";
+  }
+  if ("sra_gregorian_date_unit_year".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_GREGORIAN_DATE_UNIT_YEAR'] = "SRA_GREGORIAN_DATE_UNIT_YEAR";
+  }
+
+  // check attributes
+  if ("tostringformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_toStringFormat'] = "toStringFormat";
+  }
+  if ("_dateonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dateOnly'] = "_dateOnly";
+  }
+  if ("_day".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__day'] = "_day";
+  }
+  if ("_dstoverlap".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dstOverlap'] = "_dstOverlap";
+  }
+  if ("_hour".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__hour'] = "_hour";
+  }
+  if ("_minute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__minute'] = "_minute";
+  }
+  if ("_month".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__month'] = "_month";
+  }
+  if ("_second".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__second'] = "_second";
+  }
+  if ("_tz".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__tz'] = "_tz";
+  }
+  if ("_year".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__year'] = "_year";
+  }
+
+  // check methods
+  if ("sra_gregoriandate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_GregorianDate'] = "SRA_GregorianDate";
+  }
+  if ("compare".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_compare'] = "compare";
+  }
+  if ("copy".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_copy'] = "copy";
+  }
+  if ("cron".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_cron'] = "cron";
+  }
+  if ("encode".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_encode'] = "encode";
+  }
+  if ("equals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_equals'] = "equals";
+  }
+  if ("format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_format'] = "format";
+  }
+  if ("fromrelativestr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_fromRelativeStr'] = "fromRelativeStr";
+  }
+  if ("get".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_get'] = "get";
+  }
+  if ("getday".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDay'] = "getDay";
+  }
+  if ("getdaydelta".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDayDelta'] = "getDayDelta";
+  }
+  if ("getdayofweek".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDayOfWeek'] = "getDayOfWeek";
+  }
+  if ("getdayofyear".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDayOfYear'] = "getDayOfYear";
+  }
+  if ("geteaster".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getEaster'] = "getEaster";
+  }
+  if ("getiso8601dayofweek".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getISO8601DayOfWeek'] = "getISO8601DayOfWeek";
+  }
+  if ("getiso8601enddate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getISO8601EndDate'] = "getISO8601EndDate";
+  }
+  if ("getiso8601numweeks".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getISO8601NumWeeks'] = "getISO8601NumWeeks";
+  }
+  if ("getiso8601startdate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getISO8601StartDate'] = "getISO8601StartDate";
+  }
+  if ("getiso8601weekofyear".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getISO8601WeekOfYear'] = "getISO8601WeekOfYear";
+  }
+  if ("getiso8601year".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getISO8601Year'] = "getISO8601Year";
+  }
+  if ("gethour".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getHour'] = "getHour";
+  }
+  if ("gethour12".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getHour12'] = "getHour12";
+  }
+  if ("getminute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getMinute'] = "getMinute";
+  }
+  if ("getmonth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getMonth'] = "getMonth";
+  }
+  if ("getmonthfromstr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getMonthFromStr'] = "getMonthFromStr";
+  }
+  if ("getmonthsdelta".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getMonthsDelta'] = "getMonthsDelta";
+  }
+  if ("getnumdaysinmonth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getNumDaysInMonth'] = "getNumDaysInMonth";
+  }
+  if ("getpropertyrange".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getPropertyRange'] = "getPropertyRange";
+  }
+  if ("getsecond".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSecond'] = "getSecond";
+  }
+  if ("gettimezone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTimeZone'] = "getTimeZone";
+  }
+  if ("getunixtimestamp".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getUnixTimeStamp'] = "getUnixTimeStamp";
+  }
+  if ("getyear".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getYear'] = "getYear";
+  }
+  if ("isdateonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isDateOnly'] = "isDateOnly";
+  }
+  if ("isdstoverlap".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isDstOverlap'] = "isDstOverlap";
+  }
+  if ("isfuture".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isFuture'] = "isFuture";
+  }
+  if ("isindaylightsavings".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isInDaylightSavings'] = "isInDaylightSavings";
+  }
+  if ("isleapyear".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isLeapYear'] = "isLeapYear";
+  }
+  if ("ispast".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isPast'] = "isPast";
+  }
+  if ("istoday".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isToday'] = "isToday";
+  }
+  if ("istomorrow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isTomorrow'] = "isTomorrow";
+  }
+  if ("isyesterday".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isYesterday'] = "isYesterday";
+  }
+  if ("istodayorfuture".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isTodayOrFuture'] = "isTodayOrFuture";
+  }
+  if ("isweekday".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isWeekday'] = "isWeekday";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("jump".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jump'] = "jump";
+  }
+  if ("jumpto".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpTo'] = "jumpTo";
+  }
+  if ("jumptoendofday".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToEndOfDay'] = "jumpToEndOfDay";
+  }
+  if ("jumptostartofday".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToStartOfDay'] = "jumpToStartOfDay";
+  }
+  if ("jumptoendofhour".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToEndOfHour'] = "jumpToEndOfHour";
+  }
+  if ("jumptostartofhour".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToStartOfHour'] = "jumpToStartOfHour";
+  }
+  if ("jumptoendofmonth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToEndOfMonth'] = "jumpToEndOfMonth";
+  }
+  if ("jumptostartofmonth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToStartOfMonth'] = "jumpToStartOfMonth";
+  }
+  if ("jumptoendofyear".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToEndOfYear'] = "jumpToEndOfYear";
+  }
+  if ("jumptostartofyear".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToStartOfYear'] = "jumpToStartOfYear";
+  }
+  if ("jumptoendofweek".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToEndOfWeek'] = "jumpToEndOfWeek";
+  }
+  if ("jumptostartofweek".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_jumpToStartOfWeek'] = "jumpToStartOfWeek";
+  }
+  if ("newinstancefromntp".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_newInstanceFromNtp'] = "newInstanceFromNtp";
+  }
+  if ("parsestring".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_parseString'] = "parseString";
+  }
+  if ("setapptimezone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setAppTimeZone'] = "setAppTimeZone";
+  }
+  if ("setdateonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setDateOnly'] = "setDateOnly";
+  }
+  if ("setday".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setDay'] = "setDay";
+  }
+  if ("setdayofweek".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setDayOfWeek'] = "setDayOfWeek";
+  }
+  if ("setdstoverlap".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setDstOverlap'] = "setDstOverlap";
+  }
+  if ("sethour".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setHour'] = "setHour";
+  }
+  if ("setminute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setMinute'] = "setMinute";
+  }
+  if ("setmonth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setMonth'] = "setMonth";
+  }
+  if ("setsecond".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setSecond'] = "setSecond";
+  }
+  if ("settimezone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setTimeZone'] = "setTimeZone";
+  }
+  if ("setunixtimestamp".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setUnixTimeStamp'] = "setUnixTimeStamp";
+  }
+  if ("setyear".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setYear'] = "setYear";
+  }
+  if ("setymd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setYmd'] = "setYmd";
+  }
+  if ("toint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toInt'] = "toInt";
+  }
+  if ("tointdatetime".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toIntDateTime'] = "toIntDateTime";
+  }
+  if ("tointtime".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toIntTime'] = "toIntTime";
+  }
+  if ("tostring".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toString'] = "toString";
+  }
+  if ("validatedst".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validateDst'] = "validateDst";
+  }
+  if ("validatentpserver".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validateNtpServer'] = "validateNtpServer";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_GregorianDate</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.html" target="contentFrame">util</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_GregorianDate</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> this class is used to manage gregorian based dates and times without the use
+  of the PHP date and time functions (allowing it to support dates prior to the
+  Unix Epoch (January 1 1970 00:00:00 GMT)). it may be used to represent both
+  a date and time or just a date (time is irrelevant). this object can be
+  stored in a database as an 8 character string (when &#039;dateOnly&#039; is TRUE) or a
+  14 character string (when &#039;dateOnly&#039; is FALSE) - for more info, see the
+  &#039;encode&#039; method below
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_FORMAT_ISO8601">SRA_GREGORIAN_DATE_FORMAT_ISO8601</a></pre>
+<pre> the format string for an IS0 8601 date string
+  (example: 2004-02-12T15:19:21+00:00)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_FORMAT_RFC2822">SRA_GREGORIAN_DATE_FORMAT_RFC2822</a></pre>
+<pre> the format string for an RFC 2822 date string
+  (example: Thu, 21 Dec 2000 16:01:07 +0200)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP">SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP</a></pre>
+<pre> the number of hours to limit relative time usage for in the &quot;format&quot; method
+  when the format string is &quot;RT&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_DAY">SRA_GREGORIAN_DATE_UNIT_DAY</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 day
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_MINUTE">SRA_GREGORIAN_DATE_UNIT_MINUTE</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 minute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_HOUR">SRA_GREGORIAN_DATE_UNIT_HOUR</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 hour
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_SECOND">SRA_GREGORIAN_DATE_UNIT_SECOND</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 second
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_WEEK">SRA_GREGORIAN_DATE_UNIT_WEEK</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 week
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_MONTH">SRA_GREGORIAN_DATE_UNIT_MONTH</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 month
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_GREGORIAN_DATE_UNIT_YEAR">SRA_GREGORIAN_DATE_UNIT_YEAR</a></pre>
+<pre> used by the jump method to identify a jump unit of 1 year
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_toStringFormat">toStringFormat</a></pre>
+<pre> an alternate default date format for &#039;toString&#039;. if not specified, the
+  default app-config (or sierra-config) date/date-only format will be used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__dateOnly">_dateOnly</a></pre>
+<pre> whether or not this object represents just a date (time is irrelevant)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__day">_day</a></pre>
+<pre> the date month day (1-31)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__dstOverlap">_dstOverlap</a></pre>
+<pre> this attribute defines whether or not this date/time occurs during the dst
+  rollback overlap period (i.e. the second 1:00 hour on 11/2/2008)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__hour">_hour</a></pre>
+<pre> the date hour (i.e. 0-23)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__minute">_minute</a></pre>
+<pre> the date minute (i.e. 0-59)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__month">_month</a></pre>
+<pre> the date month (1-12)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__second">_second</a></pre>
+<pre> the date second (i.e. 0-59)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> </pre></td>
+      <td>
+        <pre><a href="#attr__tz">_tz</a></pre>
+<pre> the time zone used by this object (applicable only when time is relevant -
+  &#039;dateOnly&#039; is FALSE)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__year">_year</a></pre>
+<pre> the date year (i.e. 2001)
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_GregorianDate">SRA_GregorianDate</a>(mixed $year=NULL, mixed $month=NULL, int $day=NULL, int $hour=NULL, int $minute=NULL, int $second=NULL, <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> $tz=NULL)</pre>
+<pre> instantiates a new gregorian date object based on the parameters specified.
+  if NO parameters are specified, the object will be created for the current
+  system date/time and app (or system) time zone. if ONLY $year, $month and
+  $day parameters are specified, it will be assumed that the time is not
+  relevant (&#039;dateOnly&#039; will be set to TRUE)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_compare">compare</a>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $date, boolean $dateOnly=FALSE)</pre>
+<pre> compares 2 SRA_GregorianDate instances. returns 0 if they represent the
+  exact same date/time, -1 if $date is before this date, and +1 if $date is
+  after this date. time zone is also considered in the evaluation. if either
+  date is a &#039;dateOnly&#039;, the time will be ignored in the comparison for both
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_copy">copy</a>()</pre>
+<pre> returns a new instance of SRA_GregorianDate with the same date as this
+  instance
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_cron">cron</a>(string $schedule)</pre>
+<pre> used to determine whether or not a cron formatted schedule string is valid
+  for the current time (or for the SRA_GregorianDate instance when invoked as
+  an instance method). if $schedule is not a valid formatted cron schedule
+  string, this method will return NULL. otherwise, TRUE or FALSE will be
+  returned (use the === operator to evaluate the results)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_encode">encode</a>()</pre>
+<pre> returns this gregorian date object as an encoded date string in the format
+  YYYYMMDDHHMMSS (HHMMSS are only applicable when &#039;dateOnly&#039; is FALSE). thus
+  the return value will be 8 characters in length when dateOnly is TRUE, 14
+  characters in length otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_equals">equals</a>(mixed $date)</pre>
+<pre> returns TRUE if this data is equal to $date. in order to be equal, the
+  &#039;format&#039; string must be equal and the timezone must be equal (for
+  non-date only dates only)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_format">format</a>(string $format=NULL, boolean $ignoreDateTokens=FALSE, boolean $ignoreTimeTokens=FALSE, boolean $ignoreRelativeTokens=FALSE)</pre>
+<pre> used to convert this gregorian date object to a formatted string based on
+  the $format string provided. if this method is called statically, a new
+  the formatted string will be for the current time
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a></pre></td>
+      <td>
+        <pre><a href="#method_fromRelativeStr">fromRelativeStr</a>(string $expr, <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $start=NULL)</pre>
+<pre> creates a new relative SRA_GregorianDate object based on input in the
+  format &quot;YYYY-MM-DD HH:MM:SS&quot; (time is optional). where any of the date
+  values (YYYY, MM, DD, HH, MM, or SS) may be replaced with a relative
+  modifier in the format &quot;+n&quot; where n is the increase from the current
+  timestamp. For example, to specify the 1st of the following month, the
+  $expr would be: &quot;+0-+1-01&quot; - where +0 signifies the current year, and +1
+  signifies the following month. if the current month was december (12), the
+  following month will be January and the year will be incremented
+  automatically. Another example: to specify exactly one week from the
+  current time, $expr would be &quot;+0-+0-+7&quot; - where the first +0 signifies the
+  current year, the second +0 signifies the current month, and +7 signifies 7
+  days from the current date. month and year rollovers resulting in the 1
+  week jump will be automatically applied (for example, if the action was
+  created on 12/28). negative increments can be applied by enclosing the
+  increment value &quot;n&quot; in parenthesis. for example, to specify 1 month minus 1
+  week from the current date, $expr would be: &quot;+0-+1-+(7)&quot;. returns NULL on
+  error
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_get">get</a>(string $property)</pre>
+<pre> wrapper method to the corresonding get method for the property specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getDay">getDay</a>(boolean $pad=FALSE)</pre>
+<pre> returns the date month day 1-31 or 01-31 when $pad is TRUE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getDayDelta">getDayDelta</a>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $compare)</pre>
+<pre> compares this date with $compare and returns the # of days that separate
+  them
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static int</pre></td>
+      <td>
+        <pre><a href="#method_getDayOfWeek">getDayOfWeek</a>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+<pre> returns the numeric representation of the day of week for this date
+  (0=sun and 6=sat) OR for the $year/$month/$day specified (when invoked
+  statically)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static int</pre></td>
+      <td>
+        <pre><a href="#method_getDayOfYear">getDayOfYear</a>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+<pre> returns the numeric representation of the day of year for the this date
+  (0-364 or 365 for leap years) OR for the $year/$month/$day specified (when
+  invoked statically)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a></pre></td>
+      <td>
+        <pre><a href="#method_getEaster">getEaster</a>(int $year=NULL)</pre>
+<pre> returns a date object representing when easter occurs for the year of this
+  date object, or for $year is invoked statically
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static int</pre></td>
+      <td>
+        <pre><a href="#method_getISO8601DayOfWeek">getISO8601DayOfWeek</a>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+<pre> returns the ISO 8601 numeric representation of the day of week for this
+  date (1=Mon and 7=Sun) OR for the $year/$month/$day specified (when invoked
+  statically). this is slightly different to the behavior of &#039;getDayOfWeek&#039;
+  in that weeks start on Monday and are numbered 1-7 instead of 0-6
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getISO8601EndDate">getISO8601EndDate</a>(int $year=NULL)</pre>
+<pre> returns the ISO 8601 year end date for the this date OR for the $year
+  specified (when invoked statically). the ISO 8601 end date is the day prior
+  to the following year&#039;s ISO 8601 start date (see below)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static int</pre></td>
+      <td>
+        <pre><a href="#method_getISO8601NumWeeks">getISO8601NumWeeks</a>(int $year=NULL)</pre>
+<pre> returns the number of ISO 8601 weeks in this date&#039;s year, or for the $year
+  specified (when invoked statically). this is the # of Thursdays occuring
+  in that year starting from the ISO 8601 start date (see below)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getISO8601StartDate">getISO8601StartDate</a>(int $year=NULL)</pre>
+<pre> returns the ISO 8601 year start date for the this date OR for the $year
+  specified (when invoked statically). the ISO 8601 start date is the Monday
+  of the week with the year&#039;s first Thursday in it
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static int</pre></td>
+      <td>
+        <pre><a href="#method_getISO8601WeekOfYear">getISO8601WeekOfYear</a>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+<pre> returns the ISO-8601 week number for this gregorian date (1-53) OR for the
+  $year/$month/$day specified (when invoked statically). the week number can
+  be described as counting Thursdays (week 12 contains the 12th Thursday of
+  the year). thus the first day of week 1 CAN occur in the prior year and the
+  last day of the last week CAN occur in the next year. ISO-8601 considers
+  Monday to be the first day of the week. for more information, see
+  http://en.wikipedia.org/wiki/ISO_8601
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static int</pre></td>
+      <td>
+        <pre><a href="#method_getISO8601Year">getISO8601Year</a>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+<pre> returns the ISO 8601 year for the this date OR for the $year/$month/$day
+  specified (when invoked statically). the ISO 8601 year is the year in which
+  the week this date resides in occurred. for more information see the api
+  documentation for &#039;getISO8601WeekOfYear&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getHour">getHour</a>(boolean $pad=FALSE)</pre>
+<pre> returns the date hour 0-23 or 00-23 when $pad is TRUE. returns NULL if
+  &#039;dateOnly&#039; is TRUE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getHour12">getHour12</a>(boolean $pad=FALSE)</pre>
+<pre> returns the date hour (as a 12-hour representation) 1-12 or 01-12 when $pad
+  is TRUE. returns NULL if &#039;dateOnly&#039; is TRUE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getMinute">getMinute</a>(boolean $pad=FALSE)</pre>
+<pre> returns the date minute 0-59 or 00-59 when $pad is TRUE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getMonth">getMonth</a>(boolean $pad=FALSE)</pre>
+<pre> returns the date month day 1-12 or 01-12 when $pad is TRUE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static int</pre></td>
+      <td>
+        <pre><a href="#method_getMonthFromStr">getMonthFromStr</a>(string $str)</pre>
+<pre> attempts to parse the month string $str and return the corresponding month
+  number (1-12) for that month. $str can be either a full month name, or an
+  abbreviation (with or without trainling period). the search is also not
+  case-sensitive. returns NULL if not successful
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getMonthsDelta">getMonthsDelta</a>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $compare)</pre>
+<pre> compares this date with $compare and returns the # of months that separate
+  them
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static int</pre></td>
+      <td>
+        <pre><a href="#method_getNumDaysInMonth">getNumDaysInMonth</a>(int $year=NULL, int $month=NULL)</pre>
+<pre> returns the # of days in the month/year for this date object OR for the
+  $month/$year specified (when invoked statically)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static associative array (key = range value (with leading zeros), value = display value)</pre></td>
+      <td>
+        <pre><a href="#method_getPropertyRange">getPropertyRange</a>(string $property, string $range='*', string $formatString=FALSE)</pre>
+<pre> returns an array of possible values for the property specified. the $range
+  parameter may have the following structure:
+          &quot;N1 N3 N5&quot;   : only options N1, N3 and N5 will be available
+          &quot;N1-N3&quot;      : only options &gt;= N1 and &lt;= N3 will be available
+ 				 &quot;N1-N3 N5-N8&quot;: combination of the above
+ 				 &quot;-N1&quot;        : the current property value to N1
+ 				 &quot;N1-&quot;        : N1 to the current property value
+ 				 &quot;-&quot;          : only the current property value
+ 				 &quot;-+3&quot;        : the current property value or the current value +1, +2 and +3
+ 				 &quot;-!3&quot;        : the current property value or the current value -1, -2, and -3
+ 				 &quot;N1-+3&quot;      : N1 or N1+1, or N1+2, or N1+3
+ 				 &quot;*&quot;          : all possible values for that property. for the year
+ 				                property, this range will be 1901-2038
+          &quot;%N&quot;         : only values from the resulting set that are evenly divisible by N
+          &quot;(^|v)&quot;      : sort method: ^ = ascending order, v = descending order. the default
+                         behavior is to apply the natural sort resulting from the parameters
+                         specified above
+          &quot;#&quot;          : sets the current property values as the first in the property array
+                         (followed by the sort method specified)
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getSecond">getSecond</a>(boolean $pad=FALSE)</pre>
+<pre> returns the date second 0-59 or 00-59 when $pad is TRUE. returns NULL if
+  &#039;dateOnly&#039; is TRUE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getTimeZone">getTimeZone</a>()</pre>
+<pre> returns the time zone for this date instance (if applicable)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getUnixTimeStamp">getUnixTimeStamp</a>()</pre>
+<pre> returns the current time measured in the number of seconds since the Unix
+  Epoch (January 1 1970 00:00:00 GMT). Warning: do not use this method for
+  dates that occurred prior to the unix epoch
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getYear">getYear</a>()</pre>
+<pre> returns the date year
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isDateOnly">isDateOnly</a>()</pre>
+<pre> returns TRUE if this gregorian date object represents ONLY a date (time is
+  irrelevant)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isDstOverlap">isDstOverlap</a>()</pre>
+<pre> returns TRUE if this date/time is during the dst rollback overlap period
+  (i.e. the 2nd 1:00 hour on 11/2/2008)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isFuture">isFuture</a>()</pre>
+<pre> returns TRUE if this date is in the future (after the current date)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isInDaylightSavings">isInDaylightSavings</a>()</pre>
+<pre> returns TRUE if this date object uses a timezone that applies daylight
+  savings and the current date is within the daylight savings time period.
+  applies only to non-dateOnly objects
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public OR public static boolean</pre></td>
+      <td>
+        <pre><a href="#method_isLeapYear">isLeapYear</a>(int $year=NULL)</pre>
+<pre> returns TRUE if this date object year is a leap year OR if $year is a leap
+  year (when invoked statically), FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isPast">isPast</a>()</pre>
+<pre> returns TRUE if this date is in the past (prior to the current date)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isToday">isToday</a>()</pre>
+<pre> returns TRUE if this date is today
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isTomorrow">isTomorrow</a>()</pre>
+<pre> returns TRUE if this date is today
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isYesterday">isYesterday</a>()</pre>
+<pre> returns TRUE if this date is today
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isTodayOrFuture">isTodayOrFuture</a>()</pre>
+<pre> returns TRUE if this date is today or a future date
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isWeekday">isWeekday</a>()</pre>
+<pre> returns TRUE if this date is a weekday (M-F)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(object $object)</pre>
+<pre> static method that returns true if $object is a SRA_GregorianDate instance
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jump">jump</a>(int $unit, int $quantity=1)</pre>
+<pre> used to move this date from one date to another based on the $quantity and
+  $unit specified. for example: advance date forward by 1 week, or back by
+  1 month. appropriate adjustments to all of this date&#039;s data attributes will
+  be made (example: if jumping 1 month forward starting in December, the year
+  will automatically be advanced). IF the $unit is
+  SRA_GREGORIAN_DATE_UNIT_MONTH, and the current day is greater than the # of
+  days in the new month, the current day will be changed to the last day of
+  that month. For example, if jumping 1 month forward from 1/31, the new date
+  would be 2/28 (2/29 for leap years). returns TRUE on success
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpTo">jumpTo</a>(int $dow, int $week=1, int $month=NULL)</pre>
+<pre> used to jump to the &#039;nth&#039; &#039;day&#039; of a month. example: the first sunday of
+  march
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToEndOfDay">jumpToEndOfDay</a>()</pre>
+<pre> used to jump to end of the current day
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToStartOfDay">jumpToStartOfDay</a>()</pre>
+<pre> used to jump to start of the current day
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToEndOfHour">jumpToEndOfHour</a>()</pre>
+<pre> used to jump to end of the current hour
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToStartOfHour">jumpToStartOfHour</a>()</pre>
+<pre> used to jump to start of the current hour
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToEndOfMonth">jumpToEndOfMonth</a>()</pre>
+<pre> used to jump to end of the current month
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToStartOfMonth">jumpToStartOfMonth</a>()</pre>
+<pre> used to jump to start of the current month
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToEndOfYear">jumpToEndOfYear</a>()</pre>
+<pre> used to jump to end of the current year
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToStartOfYear">jumpToStartOfYear</a>()</pre>
+<pre> used to jump to start of the current year
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToEndOfWeek">jumpToEndOfWeek</a>()</pre>
+<pre> used to jump to end of the current week (Saturday)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_jumpToStartOfWeek">jumpToStartOfWeek</a>()</pre>
+<pre> used to jump to start of the current week (Sunday)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_newInstanceFromNtp">newInstanceFromNtp</a>(string $ntpServer, int $timeout=3, int $port=123)</pre>
+<pre> uses an NTP server to instantiate a new SRA_GregorianDate object. returns
+  NULL if $ntpServer could not be queried
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_parseString">parseString</a>(string $string)</pre>
+<pre> this method can be used to parse a string replacing inbedded date time tags
+  as necessary. the tags are replaced according to the SRA_GregorianDate
+  object properties. the possible tags are those listed in the php date
+  function api. tags must be imbedded as follows:
+ 
+  {DTR_&quot;format string&quot;(+/-quantity)(SECOND|MINUTE|HOUR|DAY|WEEK|MONTH|YEAR)}
+ 
+  multiple imbedded tags may exist.
+ 
+  so, for example, to add next year to a string you would need to have the
+  following tag imbedded in that string: {DTR_&quot;Y&quot;(+1)(YEAR)}
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_setAppTimeZone">setAppTimeZone</a>(boolean $convert=TRUE)</pre>
+<pre> this method converts the date&#039;s time zone to the currently selected app
+  time zone (if an app is currently selected)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setDateOnly">setDateOnly</a>(boolean $dateOnly)</pre>
+<pre> sets whether or not this gregorian date object represents ONLY a date.
+  returns TRUE if the value was changed. hour, minute and second will default
+  to 0 and the current app (or system) time zone will be set when a date is
+  changed from dateOnly=TRUE to dateOnly=FALSE. these values will be set to
+  NULL when the opposite change is made
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setDay">setDay</a>(int $day)</pre>
+<pre> sets the date month day. returns TRUE if the value was changed. Note: IF
+  $day exceeds the # of days in the current month, the day will be changed
+  to the max # of days in that month instead. example: if the month was
+  February and $day is 31, the day that is actually set would be 28 (or 29
+  for a leap year)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setDayOfWeek">setDayOfWeek</a>($dow)</pre>
+<pre> sets the day of the current week. returns TRUE on success
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setDstOverlap">setDstOverlap</a>(boolean $dstOverlap)</pre>
+<pre> sets the _dstOverlap attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setHour">setHour</a>(int $hour)</pre>
+<pre> sets the date hour. returns TRUE if the value was changed. applies only
+  to non-dateOnly dates
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setMinute">setMinute</a>(int $minute)</pre>
+<pre> sets the date minute. returns TRUE if the value was changed. applies only
+  to non-dateOnly dates
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setMonth">setMonth</a>(int $month)</pre>
+<pre> sets the date month. returns TRUE if the value was changed. if the current
+  day exceeds the max # of days in the new month, the current day will be
+  changed to the last day of the current month
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setSecond">setSecond</a>(int $second)</pre>
+<pre> sets the date second. returns TRUE if the value was changed. applies only
+  to non-dateOnly dates
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setTimeZone">setTimeZone</a>(<a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> $tz, boolean $convert=TRUE)</pre>
+<pre> sets the date time zone. returns TRUE if the value was changed and set
+  successfully. applies only to non-dateOnly dates
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setUnixTimeStamp">setUnixTimeStamp</a>(int $timestamp)</pre>
+<pre> sets the values for this timestamp using a unix $timestamp
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setYear">setYear</a>(int $year)</pre>
+<pre> sets the date year. returns TRUE if the value was changed. if the current
+  day exceeds the max # of days in the new month, the current day will be
+  changed to the last day of the current month (applies only when changing
+  year from a leap year to a non leap year when date is 2/29 in the original
+  year)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_setYmd">setYmd</a>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+<pre> shortcut method to set all (or at least 1), year, month, and/or day.
+  returns TRUE if any value was set
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_toInt">toInt</a>()</pre>
+<pre> converts the date portion of this date instance to an integer value that
+  can be used to compare it with other dates. please note: unlike unix
+  timestamps, the values in this integer do not correspond with seconds,
+  rather it is a numeric representation of the year/month/day values in the
+  following format: YYYYMMDD. this method utilizes the GMT timezone
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_toIntDateTime">toIntDateTime</a>()</pre>
+<pre> converts this date and time for this date to an integer value that
+  can be used to compare it with other dates. please note: unlike unix
+  timestamps, the values in this integer do not correspond with seconds,
+  rather it is a numeric representation of the
+  year/month/day/hour/minute/second values in the following format:
+  YYYYMMDDHHIISS. this method utilizes the GMT timezone
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_toIntTime">toIntTime</a>()</pre>
+<pre> converts the time portion of this date instance to an integer value that
+  can be used to compare it with other dates. please note: unlike unix
+  timestamps, the values in this integer do not correspond with seconds,
+  rather it is a numeric representation of the hour/minute/second values in
+  the following format: HHMMSS. 0 is returns for dateOnly type dates. this
+  method utilizes the GMT timezone
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_toString">toString</a>(boolean $dateOnly=NULL)</pre>
+<pre> returns this date formatted using the app-config date/time format or
+  $this-&gt;toStringFormat if member attribute has been set
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_validateDst">validateDst</a>()</pre>
+<pre> this method advances this date/time object by 1 hour if it used a dst
+  timezone and the time it represents resides in one of the non-existent
+  dst times (i.e. 3/9/2008 2:00 AM will become 3/9/2008 3:00 AM for the
+  America/Denver timezone). returns TRUE if the time was changed, false
+  otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_validateNtpServer">validateNtpServer</a>(string $server)</pre>
+<pre> validates an ntp server using ntpq -p
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_GREGORIAN_DATE_FORMAT_ISO8601">SRA_GREGORIAN_DATE_FORMAT_ISO8601</h3>
+  <pre>string <b>SRA_GREGORIAN_DATE_FORMAT_ISO8601</b> = 'Y-m-dTH:i:sP'</pre>
+  <pre> the format string for an IS0 8601 date string
+  (example: 2004-02-12T15:19:21+00:00)
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_FORMAT_RFC2822">SRA_GREGORIAN_DATE_FORMAT_RFC2822</h3>
+  <pre>string <b>SRA_GREGORIAN_DATE_FORMAT_RFC2822</b> = 'D, j M Y H:i:s O'</pre>
+  <pre> the format string for an RFC 2822 date string
+  (example: Thu, 21 Dec 2000 16:01:07 +0200)
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP">SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP</b> = 6</pre>
+  <pre> the number of hours to limit relative time usage for in the &quot;format&quot; method
+  when the format string is &quot;RT&quot;
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_DAY">SRA_GREGORIAN_DATE_UNIT_DAY</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_DAY</b> = 86400</pre>
+  <pre> used by the jump method to identify a jump unit of 1 day
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_MINUTE">SRA_GREGORIAN_DATE_UNIT_MINUTE</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_MINUTE</b> = 60</pre>
+  <pre> used by the jump method to identify a jump unit of 1 minute
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_HOUR">SRA_GREGORIAN_DATE_UNIT_HOUR</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_HOUR</b> = 3600</pre>
+  <pre> used by the jump method to identify a jump unit of 1 hour
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_SECOND">SRA_GREGORIAN_DATE_UNIT_SECOND</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_SECOND</b> = 1</pre>
+  <pre> used by the jump method to identify a jump unit of 1 second
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_WEEK">SRA_GREGORIAN_DATE_UNIT_WEEK</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_WEEK</b> = 604800</pre>
+  <pre> used by the jump method to identify a jump unit of 1 week
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_MONTH">SRA_GREGORIAN_DATE_UNIT_MONTH</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_MONTH</b> = -1</pre>
+  <pre> used by the jump method to identify a jump unit of 1 month
+</pre>
+ <hr />  <h3 id="constant_SRA_GREGORIAN_DATE_UNIT_YEAR">SRA_GREGORIAN_DATE_UNIT_YEAR</h3>
+  <pre>int <b>SRA_GREGORIAN_DATE_UNIT_YEAR</b> = -2</pre>
+  <pre> used by the jump method to identify a jump unit of 1 year
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_toStringFormat">toStringFormat</h3>
+  <pre>string var <b>$toStringFormat</b></pre>
+  <pre> an alternate default date format for &#039;toString&#039;. if not specified, the
+  default app-config (or sierra-config) date/date-only format will be used
+</pre>
+ <hr />  <h3 id="attr__dateOnly">_dateOnly</h3>
+  <pre>boolean var <b>$_dateOnly</b> = TRUE</pre>
+  <pre> whether or not this object represents just a date (time is irrelevant)
+</pre>
+ <hr />  <h3 id="attr__day">_day</h3>
+  <pre>int var <b>$_day</b></pre>
+  <pre> the date month day (1-31)
+</pre>
+ <hr />  <h3 id="attr__dstOverlap">_dstOverlap</h3>
+  <pre>boolean var <b>$_dstOverlap</b></pre>
+  <pre> this attribute defines whether or not this date/time occurs during the dst
+  rollback overlap period (i.e. the second 1:00 hour on 11/2/2008)
+</pre>
+ <hr />  <h3 id="attr__hour">_hour</h3>
+  <pre>int var <b>$_hour</b></pre>
+  <pre> the date hour (i.e. 0-23)
+</pre>
+ <hr />  <h3 id="attr__minute">_minute</h3>
+  <pre>int var <b>$_minute</b></pre>
+  <pre> the date minute (i.e. 0-59)
+</pre>
+ <hr />  <h3 id="attr__month">_month</h3>
+  <pre>int var <b>$_month</b></pre>
+  <pre> the date month (1-12)
+</pre>
+ <hr />  <h3 id="attr__second">_second</h3>
+  <pre>int var <b>$_second</b></pre>
+  <pre> the date second (i.e. 0-59)
+</pre>
+ <hr />  <h3 id="attr__tz">_tz</h3>
+  <pre><a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> var <b>$_tz</b></pre>
+  <pre> the time zone used by this object (applicable only when time is relevant -
+  &#039;dateOnly&#039; is FALSE)
+</pre>
+ <hr />  <h3 id="attr__year">_year</h3>
+  <pre>int var <b>$_year</b></pre>
+  <pre> the date year (i.e. 2001)
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_GregorianDate">SRA_GregorianDate</h3>
+  <pre>public void function <b>SRA_GregorianDate</b>(mixed $year=NULL, mixed $month=NULL, int $day=NULL, int $hour=NULL, int $minute=NULL, int $second=NULL, <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> $tz=NULL)</pre>
+  <pre> instantiates a new gregorian date object based on the parameters specified.
+  if NO parameters are specified, the object will be created for the current
+  system date/time and app (or system) time zone. if ONLY $year, $month and
+  $day parameters are specified, it will be assumed that the time is not
+  relevant (&#039;dateOnly&#039; will be set to TRUE)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>mixed</td>
+      <td><pre>the year (YYYY or YY - if the latter format YY is used,  69-99 will be assumed to be 1969-1999 and 00-68 will be assumed to be
+  2000-2068), OR the full gregorian encoded date string (as retrieved from
+  &#039;encode&#039; - YYYYMMDDHHMMSS (HHMMSS are optional)). when this parameter is an
+  encoded date string (strlen == 8 or 14), the other parameters will be
+  ignored OR textual date/time description where this description adheres to
+  the formats described for calendar date items here:
+  http://www.gnu.org/software/tar/manual/html_node/tar_111.html#SEC111
+  and for time of day items here:
+  http://www.gnu.org/software/tar/manual/html_node/tar_112.html#SEC112
+  and for time zone items here:
+  http://www.gnu.org/software/tar/manual/html_node/tar_113.html#SEC113</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>mixed</td>
+      <td><pre>the month (1-12) OR the time zone for this new date</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>int</td>
+      <td><pre>the day (1-31)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>hour</td>
+      <td>int</td>
+      <td><pre>the hour (0-23)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>minute</td>
+      <td>int</td>
+      <td><pre>the minute (0-59)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>second</td>
+      <td>int</td>
+      <td><pre>the second (0-59)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>tz</td>
+      <td>SRA_TimeZone</td>
+      <td><pre>optional time zone to use for this date object.  applies only when &#039;dateOnly&#039; is FALSE. if not specified, the current app
+  (or system time zone will be used)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_compare">compare</h3>
+  <pre>public int function <b>compare</b>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $date, boolean $dateOnly=FALSE)</pre>
+  <pre> compares 2 SRA_GregorianDate instances. returns 0 if they represent the
+  exact same date/time, -1 if $date is before this date, and +1 if $date is
+  after this date. time zone is also considered in the evaluation. if either
+  date is a &#039;dateOnly&#039;, the time will be ignored in the comparison for both
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>date</td>
+      <td>SRA_GregorianDate</td>
+      <td><pre>$date the date to compare with</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>dateOnly</td>
+      <td>boolean</td>
+      <td><pre>if both this and $date are non-dateOnly dates,  this parameter can be used to compare the dates only (ignore times)</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_copy">copy</h3>
+  <pre>public <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> function &amp;<b>copy</b>()</pre>
+  <pre> returns a new instance of SRA_GregorianDate with the same date as this
+  instance
+</pre>
+ <hr />  <h3 id="method_cron">cron</h3>
+  <pre>public boolean function <b>cron</b>(string $schedule)</pre>
+  <pre> used to determine whether or not a cron formatted schedule string is valid
+  for the current time (or for the SRA_GregorianDate instance when invoked as
+  an instance method). if $schedule is not a valid formatted cron schedule
+  string, this method will return NULL. otherwise, TRUE or FALSE will be
+  returned (use the === operator to evaluate the results)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>schedule</td>
+      <td>string</td>
+      <td><pre>the cron-formatted schedule string. this string  is a space separated list of time identifiers in the following order:
+    1: the schedule minute of the hour (between 0 and 59)
+    2: the schedule hour (0 and 23 where 0 is midnight)
+    3: the schedule day of month
+    4: the schedule month (1-12)
+    5: the schedule day of week (0-6 where 0=sunday)
+  &#039;*&#039; in any of these identifiers means that the schedule should occur in
+  all instances of that type of identifier. additionally, multiple comma
+  separated values may be specified for each identifier. for more
+  information, there are a variety of resources available on the web
+  regarding &quot;cron scheduling&quot;</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_encode">encode</h3>
+  <pre>public string function <b>encode</b>()</pre>
+  <pre> returns this gregorian date object as an encoded date string in the format
+  YYYYMMDDHHMMSS (HHMMSS are only applicable when &#039;dateOnly&#039; is FALSE). thus
+  the return value will be 8 characters in length when dateOnly is TRUE, 14
+  characters in length otherwise
+</pre>
+ <hr />  <h3 id="method_equals">equals</h3>
+  <pre>public boolean function <b>equals</b>(mixed $date)</pre>
+  <pre> returns TRUE if this data is equal to $date. in order to be equal, the
+  &#039;format&#039; string must be equal and the timezone must be equal (for
+  non-date only dates only)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>date</td>
+      <td>mixed</td>
+      <td><pre>the date to compare with</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_format">format</h3>
+  <pre>public string function <b>format</b>(string $format=NULL, boolean $ignoreDateTokens=FALSE, boolean $ignoreTimeTokens=FALSE, boolean $ignoreRelativeTokens=FALSE)</pre>
+  <pre> used to convert this gregorian date object to a formatted string based on
+  the $format string provided. if this method is called statically, a new
+  the formatted string will be for the current time
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>format</td>
+      <td>string</td>
+      <td><pre>the format string to use. if not specified,  SRA_Controller::getAppDateOnlyFormat() will be used (see documentation in
+  sierra/etc/app-config*.dtd for the &quot;date-only-format&quot; attribute)
+ 
+  The following characters are allowed in the $format parameter string (break
+  any of these characters by preceding it with \):
+ 
+   DAY FORMAT CHARACTERS
+     d  day of the month, 2 digits with leading zeros: 01-31
+     D  a textual representation of a day, three letters: Mon through Sun
+     j  day of the month without leading zeros: 1-31
+     l  a full textual representation of the day of the week: Sunday - Saturday
+     L  lowercase full textual representation of the day of the week: sunday - saturday
+     N  ISO-8601 numeric representation of the day of the week: 1 (for Monday) through 7 (for Sunday)
+     S  english ordinal suffix for the day of the month: st, nd, rd or th. works well with j
+     w  numeric representation of the day of the week: 0 (for Sunday) through 6 (for Saturday)
+     z  the day of the year (starting from 0): 0 through 365
+ 
+   WEEK FORMAT CHARACTERS
+     W  ISO-8601 week number of year, weeks starting on monday: example: 42 (the 42nd week in the year)
+ 
+   MONTH FORMAT CHARACTERS
+     F  a full textual representation of a month, such as January or March: January through December
+     m  numeric representation of a month, with leading zeros: 01 through 12
+     M  a short textual representation of a month, three letters: Jan through Dec
+     n  numeric representation of a month, without leading zeros: 1 through 12
+     t  number of days in the given month: 28 through 31
+ 
+   YEAR FORMAT CHARACTERS
+     L  whether it&#039;s a leap year: 1 if it is a leap year, 0 otherwise
+     o  ISO-8601 year number. This has the same value as Y, except that if the ISO week number (W) belongs to the previous or next year, that year is used instead: examples: 1999 or 2003
+     Y  a full numeric representation of a year, 4 digits: Examples: 1999 or 2003
+     y  a two digit representation of a year: Examples: 99 or 03
+ 
+  The format characters below are ONLY applicable for non-dateOnly dates. if
+  used otherwise, they will be replaced with empty string
+   TIME FORMAT CHARACTERS
+     a  lowercase Ante meridiem and Post meridiem: am or pm
+     A  uppercase Ante meridiem and Post meridiem: AM or PM
+     g  12-hour format of an hour without leading zeros: 1 through 12
+     G  24-hour format of an hour without leading zeros: 0 through 23
+     h  12-hour format of an hour with leading zeros: 01 through 12
+     H  24-hour format of an hour with leading zeros: 00 through 23
+     i  minutes with leading zeros: 00 to 59
+     s  seconds with leading zeros: 00 to 59
+ 
+   TIMEZONE FORMAT CHARACTERS
+     e  timezone identifier: i.e. America/Boise, GMT, etc.
+     I  whether or not the date is in daylight saving time: 1 if daylight saving time, 0 otherwise
+     O  difference to Greenwich time (GMT) in hours: example: +0200
+     P  difference to Greenwich time (GMT) with colon between hours and minutes: example: +02:00
+     T  timezone abbreviation: examples: EST, MDT
+     Z  timezone offset in seconds. the offset for timezones west of GMT is always negative, and for those east of GMT is always positive: -43200 through 50400
+ 
+   FULL DATE/TIME
+     c  ISO 8601 date: 2004-02-12T15:19:21+00:00 (basically a shortcut to format string SRA_GREGORIAN_DATE_FORMAT_ISO8601)
+     r  RFC 2822 formatted date: example: Thu, 21 Dec 2000 16:01:07 +0200 (basically a shortcut to format string SRA_GREGORIAN_DATE_FORMAT_RFC2822)
+ 
+   RELATIVE DATE STRINGS
+     when a relative token is used and a relative value is not possible, the
+     application date-format or date-only-format wil be used
+     R  relative date string such as &quot;Today&quot;, &quot;Tommorow&quot;, &quot;Yesterday&quot;,
+        &quot;3 days ago&quot; (up to 6 days max), &quot;1 week ago&quot;, &quot;In 2 weeks&quot;,
+        &quot;1 month ago&quot;, &quot;In 2 months&quot;, &quot;In 1 year&quot;, &quot;1 year ago&quot;, etc. if no
+        valid relative strings are possible, this token will be replaced with
+        the date string using the app or sys default format. when a relative
+        date string is used, any other date tokens will be ignored
+     R1 relative date string - days only
+     RT relative time string - same as R, but includes relative times such as
+        &quot;About 5 minutes ago&quot;, &quot;About 2 hours ago&quot;, &quot;In about 3 hours&quot;,
+        &quot;30 seconds ago&quot;, etc. relative time strings are used for up to +/- 6
+        SRA_GREGORIAN_DATE_RELATIVE_TIME_CAP hours. when a relative time
+        string is used, any other time tokens will be ignored. if not, a
+        relative date string will be used</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>ignoreDateTokens</td>
+      <td>boolean</td>
+      <td><pre>whether or not to ignore date tokens in  $format</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>ignoreTimeTokens</td>
+      <td>boolean</td>
+      <td><pre>whether or not to ignore time tokens in  $format</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>ignoreRelativeTokens</td>
+      <td>boolean</td>
+      <td><pre>whether or not to ignore relative  date/time tokens in $format</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_fromRelativeStr">fromRelativeStr</h3>
+  <pre>public static <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> function <b>fromRelativeStr</b>(string $expr, <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $start=NULL)</pre>
+  <pre> creates a new relative SRA_GregorianDate object based on input in the
+  format &quot;YYYY-MM-DD HH:MM:SS&quot; (time is optional). where any of the date
+  values (YYYY, MM, DD, HH, MM, or SS) may be replaced with a relative
+  modifier in the format &quot;+n&quot; where n is the increase from the current
+  timestamp. For example, to specify the 1st of the following month, the
+  $expr would be: &quot;+0-+1-01&quot; - where +0 signifies the current year, and +1
+  signifies the following month. if the current month was december (12), the
+  following month will be January and the year will be incremented
+  automatically. Another example: to specify exactly one week from the
+  current time, $expr would be &quot;+0-+0-+7&quot; - where the first +0 signifies the
+  current year, the second +0 signifies the current month, and +7 signifies 7
+  days from the current date. month and year rollovers resulting in the 1
+  week jump will be automatically applied (for example, if the action was
+  created on 12/28). negative increments can be applied by enclosing the
+  increment value &quot;n&quot; in parenthesis. for example, to specify 1 month minus 1
+  week from the current date, $expr would be: &quot;+0-+1-+(7)&quot;. returns NULL on
+  error
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>expr</td>
+      <td>string</td>
+      <td><pre>the relative date expression to use</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>start</td>
+      <td>SRA_GregorianDate</td>
+      <td><pre>the start date. if not specified, the  current date will be used</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_get">get</h3>
+  <pre>public string function <b>get</b>(string $property)</pre>
+  <pre> wrapper method to the corresonding get method for the property specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>property</td>
+      <td>string</td>
+      <td><pre>the property to get:  (day|hour|meridiem|minute|month|second|year)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDay">getDay</h3>
+  <pre>public mixed function <b>getDay</b>(boolean $pad=FALSE)</pre>
+  <pre> returns the date month day 1-31 or 01-31 when $pad is TRUE
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>pad</td>
+      <td>boolean</td>
+      <td><pre>whether or not to pad the day with a leading 0 when it  is &lt; 10</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDayDelta">getDayDelta</h3>
+  <pre>public int function <b>getDayDelta</b>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $compare)</pre>
+  <pre> compares this date with $compare and returns the # of days that separate
+  them
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>compare</td>
+      <td>SRA_GregorianDate</td>
+      <td><pre>the date to compare with. if not  specified the current date will be used</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDayOfWeek">getDayOfWeek</h3>
+  <pre>public OR public static int function <b>getDayOfWeek</b>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+  <pre> returns the numeric representation of the day of week for this date
+  (0=sun and 6=sat) OR for the $year/$month/$day specified (when invoked
+  statically)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>the month. the current date month used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>int</td>
+      <td><pre>the day. the current date day used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDayOfYear">getDayOfYear</h3>
+  <pre>public OR public static int function <b>getDayOfYear</b>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+  <pre> returns the numeric representation of the day of year for the this date
+  (0-364 or 365 for leap years) OR for the $year/$month/$day specified (when
+  invoked statically)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>the month. the current date month used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>int</td>
+      <td><pre>the day. the current date day used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getEaster">getEaster</h3>
+  <pre>public OR public static <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> function <b>getEaster</b>(int $year=NULL)</pre>
+  <pre> returns a date object representing when easter occurs for the year of this
+  date object, or for $year is invoked statically
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getISO8601DayOfWeek">getISO8601DayOfWeek</h3>
+  <pre>public OR public static int function <b>getISO8601DayOfWeek</b>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+  <pre> returns the ISO 8601 numeric representation of the day of week for this
+  date (1=Mon and 7=Sun) OR for the $year/$month/$day specified (when invoked
+  statically). this is slightly different to the behavior of &#039;getDayOfWeek&#039;
+  in that weeks start on Monday and are numbered 1-7 instead of 0-6
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>the month. the current date month used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>int</td>
+      <td><pre>the day. the current date day used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getISO8601EndDate">getISO8601EndDate</h3>
+  <pre>public OR public static <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> function &amp;<b>getISO8601EndDate</b>(int $year=NULL)</pre>
+  <pre> returns the ISO 8601 year end date for the this date OR for the $year
+  specified (when invoked statically). the ISO 8601 end date is the day prior
+  to the following year&#039;s ISO 8601 start date (see below)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getISO8601NumWeeks">getISO8601NumWeeks</h3>
+  <pre>public OR public static int function <b>getISO8601NumWeeks</b>(int $year=NULL)</pre>
+  <pre> returns the number of ISO 8601 weeks in this date&#039;s year, or for the $year
+  specified (when invoked statically). this is the # of Thursdays occuring
+  in that year starting from the ISO 8601 start date (see below)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getISO8601StartDate">getISO8601StartDate</h3>
+  <pre>public OR public static <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> function &amp;<b>getISO8601StartDate</b>(int $year=NULL)</pre>
+  <pre> returns the ISO 8601 year start date for the this date OR for the $year
+  specified (when invoked statically). the ISO 8601 start date is the Monday
+  of the week with the year&#039;s first Thursday in it
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getISO8601WeekOfYear">getISO8601WeekOfYear</h3>
+  <pre>public OR public static int function <b>getISO8601WeekOfYear</b>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+  <pre> returns the ISO-8601 week number for this gregorian date (1-53) OR for the
+  $year/$month/$day specified (when invoked statically). the week number can
+  be described as counting Thursdays (week 12 contains the 12th Thursday of
+  the year). thus the first day of week 1 CAN occur in the prior year and the
+  last day of the last week CAN occur in the next year. ISO-8601 considers
+  Monday to be the first day of the week. for more information, see
+  http://en.wikipedia.org/wiki/ISO_8601
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>the month. the current date month used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>int</td>
+      <td><pre>the day. the current date day used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getISO8601Year">getISO8601Year</h3>
+  <pre>public OR public static int function <b>getISO8601Year</b>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+  <pre> returns the ISO 8601 year for the this date OR for the $year/$month/$day
+  specified (when invoked statically). the ISO 8601 year is the year in which
+  the week this date resides in occurred. for more information see the api
+  documentation for &#039;getISO8601WeekOfYear&#039;
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>the month. the current date month used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>int</td>
+      <td><pre>the day. the current date day used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getHour">getHour</h3>
+  <pre>public mixed function <b>getHour</b>(boolean $pad=FALSE)</pre>
+  <pre> returns the date hour 0-23 or 00-23 when $pad is TRUE. returns NULL if
+  &#039;dateOnly&#039; is TRUE
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>pad</td>
+      <td>boolean</td>
+      <td><pre>whether or not to pad the hour with a leading 0 when  it is &lt; 10</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getHour12">getHour12</h3>
+  <pre>public mixed function <b>getHour12</b>(boolean $pad=FALSE)</pre>
+  <pre> returns the date hour (as a 12-hour representation) 1-12 or 01-12 when $pad
+  is TRUE. returns NULL if &#039;dateOnly&#039; is TRUE
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>pad</td>
+      <td>boolean</td>
+      <td><pre>whether or not to pad the hour with a leading 0 when  it is &lt; 10</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getMinute">getMinute</h3>
+  <pre>public mixed function <b>getMinute</b>(boolean $pad=FALSE)</pre>
+  <pre> returns the date minute 0-59 or 00-59 when $pad is TRUE
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>pad</td>
+      <td>boolean</td>
+      <td><pre>whether or not to pad the minute with a leading 0 when  it is &lt; 10. returns NULL if &#039;dateOnly&#039; is TRUE</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getMonth">getMonth</h3>
+  <pre>public mixed function <b>getMonth</b>(boolean $pad=FALSE)</pre>
+  <pre> returns the date month day 1-12 or 01-12 when $pad is TRUE
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>pad</td>
+      <td>boolean</td>
+      <td><pre>whether or not to pad the month with a leading 0 when  it is &lt; 10</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getMonthFromStr">getMonthFromStr</h3>
+  <pre>public static int function <b>getMonthFromStr</b>(string $str)</pre>
+  <pre> attempts to parse the month string $str and return the corresponding month
+  number (1-12) for that month. $str can be either a full month name, or an
+  abbreviation (with or without trainling period). the search is also not
+  case-sensitive. returns NULL if not successful
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the month string to parse. example: September, sept, jun  sept.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getMonthsDelta">getMonthsDelta</h3>
+  <pre>public int function <b>getMonthsDelta</b>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $compare)</pre>
+  <pre> compares this date with $compare and returns the # of months that separate
+  them
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>compare</td>
+      <td>SRA_GregorianDate</td>
+      <td><pre>the date to compare with. if not  specified, the current date will be used</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getNumDaysInMonth">getNumDaysInMonth</h3>
+  <pre>public OR public static int function <b>getNumDaysInMonth</b>(int $year=NULL, int $month=NULL)</pre>
+  <pre> returns the # of days in the month/year for this date object OR for the
+  $month/$year specified (when invoked statically)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>the month. the current date month used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getPropertyRange">getPropertyRange</h3>
+  <pre>public static associative array (key = range value (with leading zeros), value = display value) function <b>getPropertyRange</b>(string $property, string $range='*', string $formatString=FALSE)</pre>
+  <pre> returns an array of possible values for the property specified. the $range
+  parameter may have the following structure:
+          &quot;N1 N3 N5&quot;   : only options N1, N3 and N5 will be available
+          &quot;N1-N3&quot;      : only options &gt;= N1 and &lt;= N3 will be available
+ 				 &quot;N1-N3 N5-N8&quot;: combination of the above
+ 				 &quot;-N1&quot;        : the current property value to N1
+ 				 &quot;N1-&quot;        : N1 to the current property value
+ 				 &quot;-&quot;          : only the current property value
+ 				 &quot;-+3&quot;        : the current property value or the current value +1, +2 and +3
+ 				 &quot;-!3&quot;        : the current property value or the current value -1, -2, and -3
+ 				 &quot;N1-+3&quot;      : N1 or N1+1, or N1+2, or N1+3
+ 				 &quot;*&quot;          : all possible values for that property. for the year
+ 				                property, this range will be 1901-2038
+          &quot;%N&quot;         : only values from the resulting set that are evenly divisible by N
+          &quot;(^|v)&quot;      : sort method: ^ = ascending order, v = descending order. the default
+                         behavior is to apply the natural sort resulting from the parameters
+                         specified above
+          &quot;#&quot;          : sets the current property values as the first in the property array
+                         (followed by the sort method specified)
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>property</td>
+      <td>string</td>
+      <td><pre>the property to return the range for: (day|hour|hour12|meridiem|minute|month|second|year)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>range</td>
+      <td>string</td>
+      <td><pre>the range to return. defaults to &#039;*&#039;</pre></td>
+      <td>'*'</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>formatString</td>
+      <td>string</td>
+      <td><pre>optional format string defining the display value                format for each range value. if $formatString
+                contains the substring &quot;rangeVal&quot;, then that value will be
+                substituted with the actual range value and the display value
+                will be the value returned by the app resource bundle using
+                the resulting string as the key. if $formatString is not
+                specified, the following default formatStrings will be assumed:
+                 day:      &#039;j&#039;
+                 hour[12]: &#039;H&#039;
+                 meridiem: &#039;A&#039;
+                 minute:   &#039;i&#039;
+                 month:    &#039;n&#039;
+                 second:   &#039;s&#039;
+                 year:     &#039;Y&#039;</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSecond">getSecond</h3>
+  <pre>public mixed function <b>getSecond</b>(boolean $pad=FALSE)</pre>
+  <pre> returns the date second 0-59 or 00-59 when $pad is TRUE. returns NULL if
+  &#039;dateOnly&#039; is TRUE
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>pad</td>
+      <td>boolean</td>
+      <td><pre>whether or not to pad the second with a leading 0 when  it is &lt; 10</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getTimeZone">getTimeZone</h3>
+  <pre>public <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> function &amp;<b>getTimeZone</b>()</pre>
+  <pre> returns the time zone for this date instance (if applicable)
+</pre>
+ <hr />  <h3 id="method_getUnixTimeStamp">getUnixTimeStamp</h3>
+  <pre>public int function <b>getUnixTimeStamp</b>()</pre>
+  <pre> returns the current time measured in the number of seconds since the Unix
+  Epoch (January 1 1970 00:00:00 GMT). Warning: do not use this method for
+  dates that occurred prior to the unix epoch
+</pre>
+ <hr />  <h3 id="method_getYear">getYear</h3>
+  <pre>public int function <b>getYear</b>()</pre>
+  <pre> returns the date year
+</pre>
+ <hr />  <h3 id="method_isDateOnly">isDateOnly</h3>
+  <pre>public boolean function <b>isDateOnly</b>()</pre>
+  <pre> returns TRUE if this gregorian date object represents ONLY a date (time is
+  irrelevant)
+</pre>
+ <hr />  <h3 id="method_isDstOverlap">isDstOverlap</h3>
+  <pre>public boolean function <b>isDstOverlap</b>()</pre>
+  <pre> returns TRUE if this date/time is during the dst rollback overlap period
+  (i.e. the 2nd 1:00 hour on 11/2/2008)
+</pre>
+ <hr />  <h3 id="method_isFuture">isFuture</h3>
+  <pre>public boolean function <b>isFuture</b>()</pre>
+  <pre> returns TRUE if this date is in the future (after the current date)
+</pre>
+ <hr />  <h3 id="method_isInDaylightSavings">isInDaylightSavings</h3>
+  <pre>public boolean function <b>isInDaylightSavings</b>()</pre>
+  <pre> returns TRUE if this date object uses a timezone that applies daylight
+  savings and the current date is within the daylight savings time period.
+  applies only to non-dateOnly objects
+</pre>
+ <hr />  <h3 id="method_isLeapYear">isLeapYear</h3>
+  <pre>public OR public static boolean function <b>isLeapYear</b>(int $year=NULL)</pre>
+  <pre> returns TRUE if this date object year is a leap year OR if $year is a leap
+  year (when invoked statically), FALSE otherwise
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year. the current date year used if not specified</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isPast">isPast</h3>
+  <pre>public boolean function <b>isPast</b>()</pre>
+  <pre> returns TRUE if this date is in the past (prior to the current date)
+</pre>
+ <hr />  <h3 id="method_isToday">isToday</h3>
+  <pre>public boolean function <b>isToday</b>()</pre>
+  <pre> returns TRUE if this date is today
+</pre>
+ <hr />  <h3 id="method_isTomorrow">isTomorrow</h3>
+  <pre>public boolean function <b>isTomorrow</b>()</pre>
+  <pre> returns TRUE if this date is today
+</pre>
+ <hr />  <h3 id="method_isYesterday">isYesterday</h3>
+  <pre>public boolean function <b>isYesterday</b>()</pre>
+  <pre> returns TRUE if this date is today
+</pre>
+ <hr />  <h3 id="method_isTodayOrFuture">isTodayOrFuture</h3>
+  <pre>public boolean function <b>isTodayOrFuture</b>()</pre>
+  <pre> returns TRUE if this date is today or a future date
+</pre>
+ <hr />  <h3 id="method_isWeekday">isWeekday</h3>
+  <pre>public boolean function <b>isWeekday</b>()</pre>
+  <pre> returns TRUE if this date is a weekday (M-F)
+</pre>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(object $object)</pre>
+  <pre> static method that returns true if $object is a SRA_GregorianDate instance
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>object</td>
+      <td><pre>$object the object to evaluate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_jump">jump</h3>
+  <pre>public boolean function <b>jump</b>(int $unit, int $quantity=1)</pre>
+  <pre> used to move this date from one date to another based on the $quantity and
+  $unit specified. for example: advance date forward by 1 week, or back by
+  1 month. appropriate adjustments to all of this date&#039;s data attributes will
+  be made (example: if jumping 1 month forward starting in December, the year
+  will automatically be advanced). IF the $unit is
+  SRA_GREGORIAN_DATE_UNIT_MONTH, and the current day is greater than the # of
+  days in the new month, the current day will be changed to the last day of
+  that month. For example, if jumping 1 month forward from 1/31, the new date
+  would be 2/28 (2/29 for leap years). returns TRUE on success
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>unit</td>
+      <td>int</td>
+      <td><pre>the unit of measure. this value MUST correspond with one  of the SRA_GREGORIAN_DATE_UNIT_* constants</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>quantity</td>
+      <td>int</td>
+      <td><pre>the quantity of $unit to jump. if not specified, 1  will be assumed</pre></td>
+      <td>1</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_jumpTo">jumpTo</h3>
+  <pre>public boolean function <b>jumpTo</b>(int $dow, int $week=1, int $month=NULL)</pre>
+  <pre> used to jump to the &#039;nth&#039; &#039;day&#039; of a month. example: the first sunday of
+  march
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dow</td>
+      <td>int</td>
+      <td><pre>the day of week to jump to (0=sunday, 6=saturday)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>week</td>
+      <td>int</td>
+      <td><pre>the week jump to. default is 1. example: 1=1st $dow of  $month - ($dow=0, $week=1, $month=3 would be the first Sunday of March).
+  $week MUST be between 1 and 5 and the jump will NEVER go into the next
+  month. so to jump to the last week of $month, simply set $week=5</pre></td>
+      <td>1</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>an optional month. if not specified, the current month  will be used</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_jumpToEndOfDay">jumpToEndOfDay</h3>
+  <pre>public boolean function <b>jumpToEndOfDay</b>()</pre>
+  <pre> used to jump to end of the current day
+</pre>
+ <hr />  <h3 id="method_jumpToStartOfDay">jumpToStartOfDay</h3>
+  <pre>public boolean function <b>jumpToStartOfDay</b>()</pre>
+  <pre> used to jump to start of the current day
+</pre>
+ <hr />  <h3 id="method_jumpToEndOfHour">jumpToEndOfHour</h3>
+  <pre>public boolean function <b>jumpToEndOfHour</b>()</pre>
+  <pre> used to jump to end of the current hour
+</pre>
+ <hr />  <h3 id="method_jumpToStartOfHour">jumpToStartOfHour</h3>
+  <pre>public boolean function <b>jumpToStartOfHour</b>()</pre>
+  <pre> used to jump to start of the current hour
+</pre>
+ <hr />  <h3 id="method_jumpToEndOfMonth">jumpToEndOfMonth</h3>
+  <pre>public boolean function <b>jumpToEndOfMonth</b>()</pre>
+  <pre> used to jump to end of the current month
+</pre>
+ <hr />  <h3 id="method_jumpToStartOfMonth">jumpToStartOfMonth</h3>
+  <pre>public boolean function <b>jumpToStartOfMonth</b>()</pre>
+  <pre> used to jump to start of the current month
+</pre>
+ <hr />  <h3 id="method_jumpToEndOfYear">jumpToEndOfYear</h3>
+  <pre>public boolean function <b>jumpToEndOfYear</b>()</pre>
+  <pre> used to jump to end of the current year
+</pre>
+ <hr />  <h3 id="method_jumpToStartOfYear">jumpToStartOfYear</h3>
+  <pre>public boolean function <b>jumpToStartOfYear</b>()</pre>
+  <pre> used to jump to start of the current year
+</pre>
+ <hr />  <h3 id="method_jumpToEndOfWeek">jumpToEndOfWeek</h3>
+  <pre>public boolean function <b>jumpToEndOfWeek</b>()</pre>
+  <pre> used to jump to end of the current week (Saturday)
+</pre>
+ <hr />  <h3 id="method_jumpToStartOfWeek">jumpToStartOfWeek</h3>
+  <pre>public boolean function <b>jumpToStartOfWeek</b>()</pre>
+  <pre> used to jump to start of the current week (Sunday)
+</pre>
+ <hr />  <h3 id="method_newInstanceFromNtp">newInstanceFromNtp</h3>
+  <pre>public <a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> function &amp;<b>newInstanceFromNtp</b>(string $ntpServer, int $timeout=3, int $port=123)</pre>
+  <pre> uses an NTP server to instantiate a new SRA_GregorianDate object. returns
+  NULL if $ntpServer could not be queried
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>ntpServer</td>
+      <td>string</td>
+      <td><pre>the ntp server to use</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>timeout</td>
+      <td>int</td>
+      <td><pre>the # of seconds to wait to establish a connection with  $ntpServer. default is 3 seconds</pre></td>
+      <td>3</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>port</td>
+      <td>int</td>
+      <td><pre>the port to use to connect to $ntpServer (defaults to the  standard ntp port 13)</pre></td>
+      <td>123</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_parseString">parseString</h3>
+  <pre>public string function <b>parseString</b>(string $string)</pre>
+  <pre> this method can be used to parse a string replacing inbedded date time tags
+  as necessary. the tags are replaced according to the SRA_GregorianDate
+  object properties. the possible tags are those listed in the php date
+  function api. tags must be imbedded as follows:
+ 
+  {DTR_&quot;format string&quot;(+/-quantity)(SECOND|MINUTE|HOUR|DAY|WEEK|MONTH|YEAR)}
+ 
+  multiple imbedded tags may exist.
+ 
+  so, for example, to add next year to a string you would need to have the
+  following tag imbedded in that string: {DTR_&quot;Y&quot;(+1)(YEAR)}
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>string</td>
+      <td>string</td>
+      <td><pre>$string the string to parse</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setAppTimeZone">setAppTimeZone</h3>
+  <pre>public boolean function &amp;<b>setAppTimeZone</b>(boolean $convert=TRUE)</pre>
+  <pre> this method converts the date&#039;s time zone to the currently selected app
+  time zone (if an app is currently selected)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>convert</td>
+      <td>boolean</td>
+      <td><pre>whether or not to adjust this date&#039;s time by the  difference in offsets between the current time zone and the new time zone.
+  default is TRUE</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setDateOnly">setDateOnly</h3>
+  <pre>public boolean function <b>setDateOnly</b>(boolean $dateOnly)</pre>
+  <pre> sets whether or not this gregorian date object represents ONLY a date.
+  returns TRUE if the value was changed. hour, minute and second will default
+  to 0 and the current app (or system) time zone will be set when a date is
+  changed from dateOnly=TRUE to dateOnly=FALSE. these values will be set to
+  NULL when the opposite change is made
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dateOnly</td>
+      <td>boolean</td>
+      <td><pre>the value to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setDay">setDay</h3>
+  <pre>public boolean function <b>setDay</b>(int $day)</pre>
+  <pre> sets the date month day. returns TRUE if the value was changed. Note: IF
+  $day exceeds the # of days in the current month, the day will be changed
+  to the max # of days in that month instead. example: if the month was
+  February and $day is 31, the day that is actually set would be 28 (or 29
+  for a leap year)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>int</td>
+      <td><pre>the day to set (1-31)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setDayOfWeek">setDayOfWeek</h3>
+  <pre>public boolean function <b>setDayOfWeek</b>($dow)</pre>
+  <pre> sets the day of the current week. returns TRUE on success
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dow</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setDstOverlap">setDstOverlap</h3>
+  <pre>public boolean function <b>setDstOverlap</b>(boolean $dstOverlap)</pre>
+  <pre> sets the _dstOverlap attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dstOverlap</td>
+      <td>boolean</td>
+      <td><pre>the overlap value to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setHour">setHour</h3>
+  <pre>public boolean function <b>setHour</b>(int $hour)</pre>
+  <pre> sets the date hour. returns TRUE if the value was changed. applies only
+  to non-dateOnly dates
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>hour</td>
+      <td>int</td>
+      <td><pre>the hour to set (0-23)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setMinute">setMinute</h3>
+  <pre>public boolean function <b>setMinute</b>(int $minute)</pre>
+  <pre> sets the date minute. returns TRUE if the value was changed. applies only
+  to non-dateOnly dates
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>minute</td>
+      <td>int</td>
+      <td><pre>the minute to set (0-59)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setMonth">setMonth</h3>
+  <pre>public boolean function <b>setMonth</b>(int $month)</pre>
+  <pre> sets the date month. returns TRUE if the value was changed. if the current
+  day exceeds the max # of days in the new month, the current day will be
+  changed to the last day of the current month
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>the month to set (1-12)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setSecond">setSecond</h3>
+  <pre>public boolean function <b>setSecond</b>(int $second)</pre>
+  <pre> sets the date second. returns TRUE if the value was changed. applies only
+  to non-dateOnly dates
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>second</td>
+      <td>int</td>
+      <td><pre>the second to set (0-59)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setTimeZone">setTimeZone</h3>
+  <pre>public boolean function <b>setTimeZone</b>(<a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> $tz, boolean $convert=TRUE)</pre>
+  <pre> sets the date time zone. returns TRUE if the value was changed and set
+  successfully. applies only to non-dateOnly dates
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tz</td>
+      <td>SRA_TimeZone</td>
+      <td><pre>the new time zone to use</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>convert</td>
+      <td>boolean</td>
+      <td><pre>whether or not to adjust this date&#039;s time by the  difference in offsets between the current time zone and the new time zone.
+  default is TRUE</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setUnixTimeStamp">setUnixTimeStamp</h3>
+  <pre>public boolean function <b>setUnixTimeStamp</b>(int $timestamp)</pre>
+  <pre> sets the values for this timestamp using a unix $timestamp
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>timestamp</td>
+      <td>int</td>
+      <td><pre>the timestamp to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setYear">setYear</h3>
+  <pre>public boolean function <b>setYear</b>(int $year)</pre>
+  <pre> sets the date year. returns TRUE if the value was changed. if the current
+  day exceeds the max # of days in the new month, the current day will be
+  changed to the last day of the current month (applies only when changing
+  year from a leap year to a non leap year when date is 2/29 in the original
+  year)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year to set (YY or YYYY). year must be greater than  1752 when the gregorian calendar was official adopted. if $year is only 2
+  characters, they will be prefixed with the current century (i.e. 06 will be
+  prefixed will &#039;20&#039;)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setYmd">setYmd</h3>
+  <pre>public boolean function <b>setYmd</b>(int $year=NULL, int $month=NULL, int $day=NULL)</pre>
+  <pre> shortcut method to set all (or at least 1), year, month, and/or day.
+  returns TRUE if any value was set
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>int</td>
+      <td><pre>the year to set</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>int</td>
+      <td><pre>the month to set</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>int</td>
+      <td><pre>the day to set</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_toInt">toInt</h3>
+  <pre>public int function <b>toInt</b>()</pre>
+  <pre> converts the date portion of this date instance to an integer value that
+  can be used to compare it with other dates. please note: unlike unix
+  timestamps, the values in this integer do not correspond with seconds,
+  rather it is a numeric representation of the year/month/day values in the
+  following format: YYYYMMDD. this method utilizes the GMT timezone
+</pre>
+ <hr />  <h3 id="method_toIntDateTime">toIntDateTime</h3>
+  <pre>public int function <b>toIntDateTime</b>()</pre>
+  <pre> converts this date and time for this date to an integer value that
+  can be used to compare it with other dates. please note: unlike unix
+  timestamps, the values in this integer do not correspond with seconds,
+  rather it is a numeric representation of the
+  year/month/day/hour/minute/second values in the following format:
+  YYYYMMDDHHIISS. this method utilizes the GMT timezone
+</pre>
+ <hr />  <h3 id="method_toIntTime">toIntTime</h3>
+  <pre>public int function <b>toIntTime</b>()</pre>
+  <pre> converts the time portion of this date instance to an integer value that
+  can be used to compare it with other dates. please note: unlike unix
+  timestamps, the values in this integer do not correspond with seconds,
+  rather it is a numeric representation of the hour/minute/second values in
+  the following format: HHMMSS. 0 is returns for dateOnly type dates. this
+  method utilizes the GMT timezone
+</pre>
+ <hr />  <h3 id="method_toString">toString</h3>
+  <pre>public string function <b>toString</b>(boolean $dateOnly=NULL)</pre>
+  <pre> returns this date formatted using the app-config date/time format or
+  $this-&gt;toStringFormat if member attribute has been set
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dateOnly</td>
+      <td>boolean</td>
+      <td><pre>optional parameter allowing the output to be  either the $dateOnly based format (when 1 or TRUE), or the full timestamp
+  format (when 0 or FALSE). if not specified (NULL), the format used will be
+  based on the _dateOnly flag for this instance</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_validateDst">validateDst</h3>
+  <pre>public boolean function <b>validateDst</b>()</pre>
+  <pre> this method advances this date/time object by 1 hour if it used a dst
+  timezone and the time it represents resides in one of the non-existent
+  dst times (i.e. 3/9/2008 2:00 AM will become 3/9/2008 3:00 AM for the
+  America/Denver timezone). returns TRUE if the time was changed, false
+  otherwise
+</pre>
+ <hr />  <h3 id="method_validateNtpServer">validateNtpServer</h3>
+  <pre>public boolean function <b>validateNtpServer</b>(string $server)</pre>
+  <pre> validates an ntp server using ntpq -p
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>server</td>
+      <td>string</td>
+      <td><pre>the server to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/SRA_GregorianDate.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

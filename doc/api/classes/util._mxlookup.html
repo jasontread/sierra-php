@@ -1,0 +1,1167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util._mxlookup - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_util_ip_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_IP_REGEX'] = "SRA_UTIL_IP_REGEX";
+  }
+  if ("sra_util_aspell".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_ASPELL'] = "SRA_UTIL_ASPELL";
+  }
+  if ("sra_util_data_unit_bit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_BIT'] = "SRA_UTIL_DATA_UNIT_BIT";
+  }
+  if ("sra_util_data_unit_byte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_BYTE'] = "SRA_UTIL_DATA_UNIT_BYTE";
+  }
+  if ("sra_util_data_unit_kilobit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_KILOBIT'] = "SRA_UTIL_DATA_UNIT_KILOBIT";
+  }
+  if ("sra_util_data_unit_kilobyte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_KILOBYTE'] = "SRA_UTIL_DATA_UNIT_KILOBYTE";
+  }
+  if ("sra_util_data_unit_megabit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_MEGABIT'] = "SRA_UTIL_DATA_UNIT_MEGABIT";
+  }
+  if ("sra_util_data_unit_megabyte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_MEGABYTE'] = "SRA_UTIL_DATA_UNIT_MEGABYTE";
+  }
+  if ("sra_util_data_unit_gigabit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_GIGABIT'] = "SRA_UTIL_DATA_UNIT_GIGABIT";
+  }
+  if ("sra_util_data_unit_gigabyte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_GIGABYTE'] = "SRA_UTIL_DATA_UNIT_GIGABYTE";
+  }
+  if ("sra_util_data_unit_terabit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_TERABIT'] = "SRA_UTIL_DATA_UNIT_TERABIT";
+  }
+  if ("sra_util_data_unit_terabyte".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_TERABYTE'] = "SRA_UTIL_DATA_UNIT_TERABYTE";
+  }
+  if ("sra_util_data_unit_bit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_BIT_LABELS'] = "SRA_UTIL_DATA_UNIT_BIT_LABELS";
+  }
+  if ("sra_util_data_unit_byte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_BYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_BYTE_LABELS";
+  }
+  if ("sra_util_data_unit_kilobit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_KILOBIT_LABELS'] = "SRA_UTIL_DATA_UNIT_KILOBIT_LABELS";
+  }
+  if ("sra_util_data_unit_kilobyte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS";
+  }
+  if ("sra_util_data_unit_megabit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_MEGABIT_LABELS'] = "SRA_UTIL_DATA_UNIT_MEGABIT_LABELS";
+  }
+  if ("sra_util_data_unit_megabyte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS";
+  }
+  if ("sra_util_data_unit_gigabit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_GIGABIT_LABELS'] = "SRA_UTIL_DATA_UNIT_GIGABIT_LABELS";
+  }
+  if ("sra_util_data_unit_gigabyte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS";
+  }
+  if ("sra_util_data_unit_terabit_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_TERABIT_LABELS'] = "SRA_UTIL_DATA_UNIT_TERABIT_LABELS";
+  }
+  if ("sra_util_data_unit_terabyte_labels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_DATA_UNIT_TERABYTE_LABELS'] = "SRA_UTIL_DATA_UNIT_TERABYTE_LABELS";
+  }
+  if ("sra_util_measurement_centimeter".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_CENTIMETER'] = "SRA_UTIL_MEASUREMENT_CENTIMETER";
+  }
+  if ("sra_util_measurement_foot".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_FOOT'] = "SRA_UTIL_MEASUREMENT_FOOT";
+  }
+  if ("sra_util_measurement_inch".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_INCH'] = "SRA_UTIL_MEASUREMENT_INCH";
+  }
+  if ("sra_util_measurement_kilometer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_KILOMETER'] = "SRA_UTIL_MEASUREMENT_KILOMETER";
+  }
+  if ("sra_util_measurement_meter".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_METER'] = "SRA_UTIL_MEASUREMENT_METER";
+  }
+  if ("sra_util_measurement_mile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_MILE'] = "SRA_UTIL_MEASUREMENT_MILE";
+  }
+  if ("sra_util_measurement_yard".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_YARD'] = "SRA_UTIL_MEASUREMENT_YARD";
+  }
+  if ("sra_util_measurement_gram".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_GRAM'] = "SRA_UTIL_MEASUREMENT_GRAM";
+  }
+  if ("sra_util_measurement_kilogram".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_KILOGRAM'] = "SRA_UTIL_MEASUREMENT_KILOGRAM";
+  }
+  if ("sra_util_measurement_ounce".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_OUNCE'] = "SRA_UTIL_MEASUREMENT_OUNCE";
+  }
+  if ("sra_util_measurement_pound".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_MEASUREMENT_POUND'] = "SRA_UTIL_MEASUREMENT_POUND";
+  }
+  if ("sra_util_root".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_ROOT'] = "SRA_UTIL_ROOT";
+  }
+  if ("sra_util_services_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SERVICES_CONFIG'] = "SRA_UTIL_SERVICES_CONFIG";
+  }
+  if ("sra_util_su_cmds_invalid_pswd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_CMDS_INVALID_PSWD'] = "SRA_UTIL_SU_CMDS_INVALID_PSWD";
+  }
+  if ("sra_util_su_cmds_invalid_user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_CMDS_INVALID_USER'] = "SRA_UTIL_SU_CMDS_INVALID_USER";
+  }
+  if ("sra_util_su_cmds_script".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_CMDS_SCRIPT'] = "SRA_UTIL_SU_CMDS_SCRIPT";
+  }
+  if ("sra_util_su_password".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_PASSWORD'] = "SRA_UTIL_SU_PASSWORD";
+  }
+  if ("sra_util_su_pswd_bad".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_PSWD_BAD'] = "SRA_UTIL_SU_PSWD_BAD";
+  }
+  if ("sra_util_su_pswd_retype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_SU_PSWD_RETYPE'] = "SRA_UTIL_SU_PSWD_RETYPE";
+  }
+  if ("sra_util_use_app_config_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_USE_APP_CONFIG_DEBUG'] = "SRA_UTIL_USE_APP_CONFIG_DEBUG";
+  }
+  if ("sra_util_use_sys_config_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_USE_SYS_CONFIG_DEBUG'] = "SRA_UTIL_USE_SYS_CONFIG_DEBUG";
+  }
+  if ("sra_util_url_safe_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_UTIL_URL_SAFE_REGEX'] = "SRA_UTIL_URL_SAFE_REGEX";
+  }
+
+  // check attributes
+  if ("dns_socket".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_dns_socket'] = "dns_socket";
+  }
+  if ("qname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_QNAME'] = "QNAME";
+  }
+  if ("dns_packet".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_dns_packet'] = "dns_packet";
+  }
+  if ("ancount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_ANCOUNT'] = "ANCOUNT";
+  }
+  if ("cix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_cIx'] = "cIx";
+  }
+  if ("dns_repl_domain".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_dns_repl_domain'] = "dns_repl_domain";
+  }
+  if ("arrmx".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_arrMX'] = "arrMX";
+  }
+
+  // check methods
+  if ("_mxlookup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__mxlookup'] = "_mxlookup";
+  }
+  if ("parse_data".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_parse_data'] = "parse_data";
+  }
+  if ("gdi".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_gdi'] = "gdi";
+  }
+  if ("qname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_QNAME'] = "QNAME";
+  }
+  if ("gord".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_gord'] = "gord";
+  }
+  if ("pack_dns_packet".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_pack_dns_packet'] = "pack_dns_packet";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class _mxlookup</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.html" target="contentFrame">util</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class _mxlookup</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> utility class uses by SRA_Util::mxlookup
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_IP_REGEX">SRA_UTIL_IP_REGEX</a></pre>
+<pre> regular expression used to locate an ip address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_ASPELL">SRA_UTIL_ASPELL</a></pre>
+<pre> the name of the aspell cli utility used by the getSpellCheckLanguages and
+  spellcheck methods. aspell must be installed and present in the $PATH in
+  order to use those methods
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_BIT">SRA_UTIL_DATA_UNIT_BIT</a></pre>
+<pre> unit identifiers for a &#039;bit&#039;, this is the smallest unit size. the
+  SRA_UTIL_DATA_UNIT_* constants are used by the SRA_Util::normalizeDataUnit
+  method below
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_BYTE">SRA_UTIL_DATA_UNIT_BYTE</a></pre>
+<pre> unit identifiers for a &#039;byte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_KILOBIT">SRA_UTIL_DATA_UNIT_KILOBIT</a></pre>
+<pre> unit identifiers for a &#039;kilobit&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_KILOBYTE">SRA_UTIL_DATA_UNIT_KILOBYTE</a></pre>
+<pre> unit identifiers for a &#039;kilobyte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_MEGABIT">SRA_UTIL_DATA_UNIT_MEGABIT</a></pre>
+<pre> unit identifiers for a &#039;megabit&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_MEGABYTE">SRA_UTIL_DATA_UNIT_MEGABYTE</a></pre>
+<pre> unit identifiers for a &#039;megabyte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_GIGABIT">SRA_UTIL_DATA_UNIT_GIGABIT</a></pre>
+<pre> unit identifiers for a &#039;gigabit&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_GIGABYTE">SRA_UTIL_DATA_UNIT_GIGABYTE</a></pre>
+<pre> unit identifiers for a &#039;gigabyte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_TERABIT">SRA_UTIL_DATA_UNIT_TERABIT</a></pre>
+<pre> unit identifiers for a &#039;terabit&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_TERABYTE">SRA_UTIL_DATA_UNIT_TERABYTE</a></pre>
+<pre> unit identifiers for a &#039;terabyte&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_BIT_LABELS">SRA_UTIL_DATA_UNIT_BIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a bit. if a label is
+  prefixed with : the search for it will not be case sensitive
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_BYTE_LABELS">SRA_UTIL_DATA_UNIT_BYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a byte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_KILOBIT_LABELS">SRA_UTIL_DATA_UNIT_KILOBIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a kilobit
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS">SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a kilobyte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_MEGABIT_LABELS">SRA_UTIL_DATA_UNIT_MEGABIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a megabit
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS">SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a megabyte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_GIGABIT_LABELS">SRA_UTIL_DATA_UNIT_GIGABIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a gigabit
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS">SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a gigabyte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_TERABIT_LABELS">SRA_UTIL_DATA_UNIT_TERABIT_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a terabit
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_DATA_UNIT_TERABYTE_LABELS">SRA_UTIL_DATA_UNIT_TERABYTE_LABELS</a></pre>
+<pre> space separated list of unit labels used to identify a terabyte
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_CENTIMETER">SRA_UTIL_MEASUREMENT_CENTIMETER</a></pre>
+<pre> measurement identifiers for a &#039;centimeter&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_FOOT">SRA_UTIL_MEASUREMENT_FOOT</a></pre>
+<pre> measurement identifiers for a &#039;foot&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_INCH">SRA_UTIL_MEASUREMENT_INCH</a></pre>
+<pre> measurement identifiers for an &#039;inch&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_KILOMETER">SRA_UTIL_MEASUREMENT_KILOMETER</a></pre>
+<pre> measurement identifiers for a &#039;kilometer&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_METER">SRA_UTIL_MEASUREMENT_METER</a></pre>
+<pre> measurement identifiers for a &#039;meter&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_MILE">SRA_UTIL_MEASUREMENT_MILE</a></pre>
+<pre> measurement identifiers for a &#039;mile&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_YARD">SRA_UTIL_MEASUREMENT_YARD</a></pre>
+<pre> measurement identifiers for a &#039;yard&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_GRAM">SRA_UTIL_MEASUREMENT_GRAM</a></pre>
+<pre> measurement identifiers for a &#039;gram&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_KILOGRAM">SRA_UTIL_MEASUREMENT_KILOGRAM</a></pre>
+<pre> measurement identifiers for a &#039;kilogram&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_OUNCE">SRA_UTIL_MEASUREMENT_OUNCE</a></pre>
+<pre> measurement identifiers for an &#039;ounce&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_MEASUREMENT_POUND">SRA_UTIL_MEASUREMENT_POUND</a></pre>
+<pre> measurement identifiers for a &#039;pound&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_ROOT">SRA_UTIL_ROOT</a></pre>
+<pre> the root username
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SERVICES_CONFIG">SRA_UTIL_SERVICES_CONFIG</a></pre>
+<pre> path to the services config file used by SRA_Util::getServiceName($port)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_CMDS_INVALID_PSWD">SRA_UTIL_SU_CMDS_INVALID_PSWD</a></pre>
+<pre> string token that identifies an invalid password in SRA_Util::suCmds
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_CMDS_INVALID_USER">SRA_UTIL_SU_CMDS_INVALID_USER</a></pre>
+<pre> string token that identifies an invalid user in SRA_Util::suCmds
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_CMDS_SCRIPT">SRA_UTIL_SU_CMDS_SCRIPT</a></pre>
+<pre> the name of the temporary script created by SRA_Util::suCmds
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_PASSWORD">SRA_UTIL_SU_PASSWORD</a></pre>
+<pre> string token that identifies the password prompt in SRA_Util::suCmds and
+  SRA_Util::suPswd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_PSWD_BAD">SRA_UTIL_SU_PSWD_BAD</a></pre>
+<pre> string token that identifies an bad password in SRA_Util::suPswd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_SU_PSWD_RETYPE">SRA_UTIL_SU_PSWD_RETYPE</a></pre>
+<pre> string token that identifies the retype password command in SRA_Util::suPswd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_USE_APP_CONFIG_DEBUG">SRA_UTIL_USE_APP_CONFIG_DEBUG</a></pre>
+<pre> The value to use in the printDebug method to identify that the app debug flag should be used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_USE_SYS_CONFIG_DEBUG">SRA_UTIL_USE_SYS_CONFIG_DEBUG</a></pre>
+<pre> The value to use in the printDebug method to identify that the system debug flag should be used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_UTIL_URL_SAFE_REGEX">SRA_UTIL_URL_SAFE_REGEX</a></pre>
+<pre> regular expression used to strip out non-url-safe characters
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr_dns_socket">dns_socket</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr_QNAME">QNAME</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr_dns_packet">dns_packet</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr_ANCOUNT">ANCOUNT</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr_cIx">cIx</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr_dns_repl_domain">dns_repl_domain</a></pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#attr_arrMX">arrMX</a></pre>
+      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method__mxlookup">_mxlookup</a>($domain, $dns, $timeout)</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method_parse_data">parse_data</a>($retval)</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method_gdi">gdi</a>($cIx, $bytes=1)</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method_QNAME">QNAME</a>($domain)</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method_gord">gord</a>($ln=1)</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method_pack_dns_packet">pack_dns_packet</a>()</pre>
+      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_UTIL_IP_REGEX">SRA_UTIL_IP_REGEX</h3>
+  <pre>string <b>SRA_UTIL_IP_REGEX</b> = '/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/'</pre>
+  <pre> regular expression used to locate an ip address
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_ASPELL">SRA_UTIL_ASPELL</h3>
+  <pre>string <b>SRA_UTIL_ASPELL</b> = 'aspell'</pre>
+  <pre> the name of the aspell cli utility used by the getSpellCheckLanguages and
+  spellcheck methods. aspell must be installed and present in the $PATH in
+  order to use those methods
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_BIT">SRA_UTIL_DATA_UNIT_BIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_BIT</b> = 'b'</pre>
+  <pre> unit identifiers for a &#039;bit&#039;, this is the smallest unit size. the
+  SRA_UTIL_DATA_UNIT_* constants are used by the SRA_Util::normalizeDataUnit
+  method below
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_BYTE">SRA_UTIL_DATA_UNIT_BYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_BYTE</b> = 'B'</pre>
+  <pre> unit identifiers for a &#039;byte&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_KILOBIT">SRA_UTIL_DATA_UNIT_KILOBIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_KILOBIT</b> = 'Kb'</pre>
+  <pre> unit identifiers for a &#039;kilobit&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_KILOBYTE">SRA_UTIL_DATA_UNIT_KILOBYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_KILOBYTE</b> = 'KB'</pre>
+  <pre> unit identifiers for a &#039;kilobyte&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_MEGABIT">SRA_UTIL_DATA_UNIT_MEGABIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_MEGABIT</b> = 'Mb'</pre>
+  <pre> unit identifiers for a &#039;megabit&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_MEGABYTE">SRA_UTIL_DATA_UNIT_MEGABYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_MEGABYTE</b> = 'MB'</pre>
+  <pre> unit identifiers for a &#039;megabyte&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_GIGABIT">SRA_UTIL_DATA_UNIT_GIGABIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_GIGABIT</b> = 'Gb'</pre>
+  <pre> unit identifiers for a &#039;gigabit&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_GIGABYTE">SRA_UTIL_DATA_UNIT_GIGABYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_GIGABYTE</b> = 'GB'</pre>
+  <pre> unit identifiers for a &#039;gigabyte&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_TERABIT">SRA_UTIL_DATA_UNIT_TERABIT</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_TERABIT</b> = 'Tb'</pre>
+  <pre> unit identifiers for a &#039;terabit&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_TERABYTE">SRA_UTIL_DATA_UNIT_TERABYTE</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_TERABYTE</b> = 'TB'</pre>
+  <pre> unit identifiers for a &#039;terabyte&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_BIT_LABELS">SRA_UTIL_DATA_UNIT_BIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_BIT_LABELS</b> = 'b,b/s,:bit,:bit/s,,bs,,bS,,bps,bpS,,,b/S,,,,,,,:bits,:bits/s,'</pre>
+  <pre> space separated list of unit labels used to identify a bit. if a label is
+  prefixed with : the search for it will not be case sensitive
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_BYTE_LABELS">SRA_UTIL_DATA_UNIT_BYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_BYTE_LABELS</b> = 'B,B/s,:byte,:byte/s,,Bs,,BS,,Bps,BpS,,,B/S,,,,,,,:bytes,:bytes/s,'</pre>
+  <pre> space separated list of unit labels used to identify a byte
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_KILOBIT_LABELS">SRA_UTIL_DATA_UNIT_KILOBIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_KILOBIT_LABELS</b> = 'Kb,Kb/s,:kilobit,:kilobit/s,kb,Kbs,kbs,KbS,kbS,Kbps,KbpS,kbps,kbpS,Kb/S,kb/s,kb/S,:kbit,:kbits,:kbit/s,:kilo bit,:kilobits,:kilobits/s,:kilo bits'</pre>
+  <pre> space separated list of unit labels used to identify a kilobit
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS">SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_KILOBYTE_LABELS</b> = 'KB,KB/s,:kilobyte,:kilobyte/s,kB,KBs,kBs,KBS,kBS,KBps,KBpS,kBps,kBpS,KB/S,kB/s,kB/S,:kbyte,:kbytes,:kbyte/s,:kilo byte,:kilobytes,:kilobytes/s,:kilo bytes'</pre>
+  <pre> space separated list of unit labels used to identify a kilobyte
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_MEGABIT_LABELS">SRA_UTIL_DATA_UNIT_MEGABIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_MEGABIT_LABELS</b> = 'Mb,Mb/s,:megabit,:megabit/s,mb,Mbs,mbs,MbS,mbS,Mbps,MbpS,mbps,mbpS,Mb/S,mb/s,mb/S,:mbit,:mbits,:mbit/s,:mega bit,:megabits,:megabits/s,:mega bits'</pre>
+  <pre> space separated list of unit labels used to identify a megabit
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS">SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_MEGABYTE_LABELS</b> = 'MB,MB/s,megabyte,megabyte/s,mB,MBs,mBs,MBS,mBS,MBps,MBpS,mBps,mBpS,MB/S,mB/s,mB/S,:mbyte,:mbytes,:mbyte/s,:mega byte,megabytes,megabytes/s,:mega bytes'</pre>
+  <pre> space separated list of unit labels used to identify a megabyte
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_GIGABIT_LABELS">SRA_UTIL_DATA_UNIT_GIGABIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_GIGABIT_LABELS</b> = 'Gb,Gb/s,:gigabit,:gigabit/s,gb,Gbs,gbs,GbS,gbS,Gbps,GbpS,gbps,gbpS,Gb/S,gb/s,gb/S,:gbit,:gbits,:gbit/s,:giga bit,:gigabits,:gigabits/s,:giga bits'</pre>
+  <pre> space separated list of unit labels used to identify a gigabit
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS">SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_GIGABYTE_LABELS</b> = 'GB,GB/s,:gigabyte,:gigabyte/s,gB,GBs,gBs,GBS,gBS,GBps,GBpS,gBps,gBpS,GB/S,gB/s,gB/S,:gbyte,:gbytes,:gbyte/s,:giga byte,:gigabytes,:gigabytes/s,:giga bytes'</pre>
+  <pre> space separated list of unit labels used to identify a gigabyte
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_TERABIT_LABELS">SRA_UTIL_DATA_UNIT_TERABIT_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_TERABIT_LABELS</b> = 'Tb,Tb/s,:terabit,:terabit/s,tb,Tbs,tbs,TbS,tbS,Tbps,TbpS,tbps,tbpS,Tb/S,tb/s,tb/S,:tbit,:tbits,:tbit/s,:tera bit,:terabits,:terabits/s,:tera bits'</pre>
+  <pre> space separated list of unit labels used to identify a terabit
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_DATA_UNIT_TERABYTE_LABELS">SRA_UTIL_DATA_UNIT_TERABYTE_LABELS</h3>
+  <pre>string <b>SRA_UTIL_DATA_UNIT_TERABYTE_LABELS</b> = 'TB,TB/s,:terabyte,:terabyte/s,tB,TBs,tBs,TBS,tBS,TBps,TBpS,tBps,tBpS,TB/S,tB/s,tB/S,:tbyte,:tbytes,:tbyte/s,:tera byte,:terabytes,:terabytes/s,:tera bytes'</pre>
+  <pre> space separated list of unit labels used to identify a terabyte
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_CENTIMETER">SRA_UTIL_MEASUREMENT_CENTIMETER</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_CENTIMETER</b> = 'cm'</pre>
+  <pre> measurement identifiers for a &#039;centimeter&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_FOOT">SRA_UTIL_MEASUREMENT_FOOT</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_FOOT</b> = 'ft'</pre>
+  <pre> measurement identifiers for a &#039;foot&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_INCH">SRA_UTIL_MEASUREMENT_INCH</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_INCH</b> = 'in'</pre>
+  <pre> measurement identifiers for an &#039;inch&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_KILOMETER">SRA_UTIL_MEASUREMENT_KILOMETER</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_KILOMETER</b> = 'km'</pre>
+  <pre> measurement identifiers for a &#039;kilometer&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_METER">SRA_UTIL_MEASUREMENT_METER</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_METER</b> = 'm'</pre>
+  <pre> measurement identifiers for a &#039;meter&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_MILE">SRA_UTIL_MEASUREMENT_MILE</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_MILE</b> = 'mi'</pre>
+  <pre> measurement identifiers for a &#039;mile&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_YARD">SRA_UTIL_MEASUREMENT_YARD</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_YARD</b> = 'yd'</pre>
+  <pre> measurement identifiers for a &#039;yard&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_GRAM">SRA_UTIL_MEASUREMENT_GRAM</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_GRAM</b> = 'gm'</pre>
+  <pre> measurement identifiers for a &#039;gram&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_KILOGRAM">SRA_UTIL_MEASUREMENT_KILOGRAM</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_KILOGRAM</b> = 'kg'</pre>
+  <pre> measurement identifiers for a &#039;kilogram&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_OUNCE">SRA_UTIL_MEASUREMENT_OUNCE</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_OUNCE</b> = 'oz'</pre>
+  <pre> measurement identifiers for an &#039;ounce&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_MEASUREMENT_POUND">SRA_UTIL_MEASUREMENT_POUND</h3>
+  <pre>string <b>SRA_UTIL_MEASUREMENT_POUND</b> = 'lb'</pre>
+  <pre> measurement identifiers for a &#039;pound&#039;
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_ROOT">SRA_UTIL_ROOT</h3>
+  <pre>string <b>SRA_UTIL_ROOT</b> = 'root'</pre>
+  <pre> the root username
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_SERVICES_CONFIG">SRA_UTIL_SERVICES_CONFIG</h3>
+  <pre>string <b>SRA_UTIL_SERVICES_CONFIG</b> = '/etc/services'</pre>
+  <pre> path to the services config file used by SRA_Util::getServiceName($port)
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_CMDS_INVALID_PSWD">SRA_UTIL_SU_CMDS_INVALID_PSWD</h3>
+  <pre>string <b>SRA_UTIL_SU_CMDS_INVALID_PSWD</b> = 'incorrect password'</pre>
+  <pre> string token that identifies an invalid password in SRA_Util::suCmds
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_CMDS_INVALID_USER">SRA_UTIL_SU_CMDS_INVALID_USER</h3>
+  <pre>string <b>SRA_UTIL_SU_CMDS_INVALID_USER</b> = 'not exist'</pre>
+  <pre> string token that identifies an invalid user in SRA_Util::suCmds
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_CMDS_SCRIPT">SRA_UTIL_SU_CMDS_SCRIPT</h3>
+  <pre>string <b>SRA_UTIL_SU_CMDS_SCRIPT</b> = '.su-cmds'</pre>
+  <pre> the name of the temporary script created by SRA_Util::suCmds
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_PASSWORD">SRA_UTIL_SU_PASSWORD</h3>
+  <pre>string <b>SRA_UTIL_SU_PASSWORD</b> = '"assword:"'</pre>
+  <pre> string token that identifies the password prompt in SRA_Util::suCmds and
+  SRA_Util::suPswd
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_PSWD_BAD">SRA_UTIL_SU_PSWD_BAD</h3>
+  <pre>string <b>SRA_UTIL_SU_PSWD_BAD</b> = 'BAD'</pre>
+  <pre> string token that identifies an bad password in SRA_Util::suPswd
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_SU_PSWD_RETYPE">SRA_UTIL_SU_PSWD_RETYPE</h3>
+  <pre>string <b>SRA_UTIL_SU_PSWD_RETYPE</b> = 'etype'</pre>
+  <pre> string token that identifies the retype password command in SRA_Util::suPswd
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_USE_APP_CONFIG_DEBUG">SRA_UTIL_USE_APP_CONFIG_DEBUG</h3>
+  <pre>int <b>SRA_UTIL_USE_APP_CONFIG_DEBUG</b> = -1</pre>
+  <pre> The value to use in the printDebug method to identify that the app debug flag should be used
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_USE_SYS_CONFIG_DEBUG">SRA_UTIL_USE_SYS_CONFIG_DEBUG</h3>
+  <pre>int <b>SRA_UTIL_USE_SYS_CONFIG_DEBUG</b> = -2</pre>
+  <pre> The value to use in the printDebug method to identify that the system debug flag should be used
+</pre>
+ <hr />  <h3 id="constant_SRA_UTIL_URL_SAFE_REGEX">SRA_UTIL_URL_SAFE_REGEX</h3>
+  <pre>string <b>SRA_UTIL_URL_SAFE_REGEX</b> = '|[^\w-_\.]|'</pre>
+  <pre> regular expression used to strip out non-url-safe characters
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_dns_socket">dns_socket</h3>
+  <pre>var <b>$dns_socket</b> = NULL</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr_QNAME">QNAME</h3>
+  <pre>var <b>$QNAME</b> = ""</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr_dns_packet">dns_packet</h3>
+  <pre>var <b>$dns_packet</b> = NULL</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr_ANCOUNT">ANCOUNT</h3>
+  <pre>var <b>$ANCOUNT</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr_cIx">cIx</h3>
+  <pre>var <b>$cIx</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr_dns_repl_domain">dns_repl_domain</h3>
+  <pre>var <b>$dns_repl_domain</b></pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="attr_arrMX">arrMX</h3>
+  <pre>var <b>$arrMX</b> = array()</pre>
+  <pre>No API comments</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method__mxlookup">_mxlookup</h3>
+  <pre>void function <b>_mxlookup</b>($domain, $dns, $timeout)</pre>
+  <pre>No API comments</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>domain</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>dns</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>timeout</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_parse_data">parse_data</h3>
+  <pre>void function <b>parse_data</b>($retval)</pre>
+  <pre>No API comments</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>retval</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_gdi">gdi</h3>
+  <pre>void function <b>gdi</b>($cIx, $bytes=1)</pre>
+  <pre>No API comments</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>cIx</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>bytes</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>1</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_QNAME">QNAME</h3>
+  <pre>void function <b>QNAME</b>($domain)</pre>
+  <pre>No API comments</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>domain</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_gord">gord</h3>
+  <pre>void function <b>gord</b>($ln=1)</pre>
+  <pre>No API comments</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>ln</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>1</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_pack_dns_packet">pack_dns_packet</h3>
+  <pre>void function <b>pack_dns_packet</b>()</pre>
+  <pre>No API comments</pre>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/SRA_Util.php</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for SIERRA sierra-config configuration
+
+This file stores the sierra-config (global) configuration directives. It is stored in 
+the file sierra-config as "SRA-DIR . /etc/sierra-config.xml" (an xml file).
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the "xml" declaration):
+
+<!DOCTYPE sierra-config PUBLIC "-//SIERRA//DTD SIERRA CONFIG//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/etc/sierra-config.dtd">
+-->
+
+
+<!--
+The "sierra-config" element is the root element of the SIERRA System 
+Configuration. Nested "param" elements may be used to specify SIERRA specific 
+configuration parameters. these are accessible through the 
+SRA_Controller::getSysParam method
+                  
+compress-output   whether or not to automatically buffer and compress output 
+                  whenever possible. in order to enable this option, the php 
+                  binary must be compiled --with-zlib (a fairly standard 
+                  configuration). when output compression is enabled, the 
+                  framework will first determine if it is supported by the 
+                  client and if --with-zip is configured (enables the php 
+                  "gzencode" function). is this check passes, then the header 
+                  "Content-Encoding: gzip" will be sent to the client and all 
+                  output will be buffered until the scripts completion when it 
+                  will be dumped using the "gzencode" function. this feature 
+                  essentially does the same thing as the apache mod_gzip module 
+                  for any output produced within the framework (static images, 
+                  css files, javascript files, etc. would not be included). if 
+                  compression is already enabled at the web server level, 
+                  framework compression should not be used
+                  
+date-format       The default date format (used by SRA_GregorianDate::format). 
+                  For details on acceptable formats, see: 
+                    http://us3.php.net/manual/en/function.date.php
+                  All apps will automatically inherit this format unless 
+                  another has been specified in their corresponding 
+                  app-config. This format can be overriden using the 
+                  SRA_GregorianDate::format method. This formatting string can 
+                  be retrieved using SRA_Controller::getSysDateFormat(). If not 
+                  specified, SRA_DEFAULT_DATE_FORMAT (see lib/core/SRA_Controller.php)
+                  will be returned when this method is invoked.
+                  For SRA_Locale specific date formatting, see etc/l10n/locales.xml. 
+                  SRA_Locale specific date formatting is returned by 
+                  SRA_GregorianDate::format() which will automatically attempt 
+                  to detect and use the preferred user locale (based on browser 
+                  settings) and return the date formatted in that corresponding 
+                  format. This value can be retrieved usinig 
+                  SRA_Controller::getSysDateFormat
+                  
+date-only-format  same as date-format, but does not include time
+
+debug             Whether or not the system is in debug mode. can be detected 
+                  in your application using SRA_Controller::isSysInDebug
+
+default-country   the default SRA_Locale country to use. can be retrieved using 
+                  SRA_Controller::getSysDefaultCountry. this value will be used 
+                  as the country value whenever a user locale provided is not 
+                  defined in the locales.xml file and no default-country has 
+                  been specified in app-config. if not specified, the 
+                  util/l10n/SRA_Locale constant value SRA_LOCALE_DEFAULT_COUNTRY 
+                  will be used. The default sys locale can be retrieved using 
+                  SRA_Controller::getSysLocale. this will locale will utilize 
+                  both the default sys country and language
+                  
+default-currency  the default SRA_Currency currency code to use. can be 
+                  retrieved using SRA_Controller::getSysDefaultCurrency. this 
+                  value will be used as the currency value whenever a user 
+                  locale currency is not supported. if not specified, the 
+                  util/l10n/SRA_Currency constant value SRA_CURRENCY_DEFAULT 
+                  will be used
+                  
+default-language  the default SRA_Locale language to use. can be retrieved using 
+                  SRA_Controller::getSysDefaultLanguage. this value will be used 
+                  as the language value whenever a user locale provided is not 
+                  defined in the locales.xml file and no default-language has 
+                  been specified in app-config. if not specified, the 
+                  util/l10n/SRA_Locale constant value SRA_LOCALE_DEFAULT_LANGUAGE 
+                  will be used. The default sys locale can be retrieved using 
+                  SRA_Controller::getSysLocale. this will locale will utilize 
+                  both the default sys country and language
+                  
+disable-scheduler whether or not to disable the task scheduler. when disabled, 
+                  scheduled-task defined tasks will not be run
+
+error-log-file    This variable defines the location of the system wide error 
+                  log file. This is the location where all log entries will be 
+                  written to. it should be a path that is relative to the log-dir. 
+                  the default value if not specified is the constant value 
+                  SRA_DEFAULT_ERROR_LOG_FILE in SRA_Controller.php
+                  This value can be retrieved usinig SRA_Controller::getSysErrorLogFile
+
+error-mask        Defines the logging level for errors. This is a bitmask value.
+                  Example: php:: SRA_ERROR_ALL ^ SRA_ERROR-OPERATIONAL ::php. 
+                  the default value if not specified is the constant value 
+                  SRA_DEFAULT_ERROR_MASK in SRA_Error.php
+                  This value can be retrieved usinig SRA_Controller::getSysErrorMask
+                  
+log-dir           Specifies a writeable log directory on the server.
+                  this directory may be relative to the base sierra directory, 
+                  or a full path in the file system. the default value if not 
+                  specified is the constant value SRA_DEFAULT_LOG_DIR in 
+                  SRA_Controller.php (log)
+                  This value can be retrieved usinig SRA_Controller::getSysLogDir
+
+resources-file    the name of the default resources file for all apps. the 
+                  default value is the constant value SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME 
+                  in SRA_Controller.php. The search order for this file will be:
+                    SRA_DIR/etc/l10n/{resources-file}
+                    SRA_DIR/{resources-file}
+                    /{resources-file}
+                  Different properties files can be created for language/country variants 
+                  based on the following order of preference:
+                  
+                    resources-file + '_' + locale1.language + '_' . locale1.country + '.properties'
+                    resources-file + '_' + locale1.language + '.properties'
+                    resources-file + '_' + locale2.language + '_' . locale2.country + '.properties'
+                    resources-file + '_' + locale2.language + '.properties'
+                    resources-file + '_' + localeN.language + '_' . localeN.country + '.properties'
+                    resources-file + '_' + localeN.language + '.properties'
+                    resources-file + '.properties'
+                  
+                  where locale1...localeN is the language/country preferences 
+                  specified in the user's browser settings (if available) or the 
+                  default app locale otherwise. set this attribute to "0" 
+                  if you do not desire to use a global resource file. This attribute 
+                  should never include the language, country, or file extension. 
+                  These resources will be accessible as a SRA_ResourceBundle instance 
+                  using the static SRA_Controller::getSysResources() method and will 
+                  also be merged with the bundle returned by 
+                  SRA_Controller::getAppResources() (with keys in the latter 
+                  takinig precedence)
+                  This system SRA_ResourceBundle can be retrieved usinig SRA_Controller::getSysResources
+                  
+                  Multiple resource files can be specified separated by spaced. 
+                  duplicate key values will be overriden in the order specified, 
+                  meaning, keys in the first bundle specified will be overriden 
+                  by those in the second, and so on. ONLY the first resource 
+                  bundle specified is mandatory. the bundles 2 and forward will 
+                  simply be ignored if they do not exist
+                  
+tpl-dir           The system relative or fixed path to the directory containing 
+                  system-wide/global templates and view components utilized within 
+                  the model. this value can be retrieved using 
+                  This value can be retrieved usinig SRA_Controller::getSysTplDir
+                  
+time-zone         if you want to use a different timezone than that is in use by 
+                  the operating system, this attribute may be used to identify 
+                  that timezone. this will be a relative path to a compiled 
+                  timezone file in /usr/share/zoneinfo (i.e. "America/Boise"). 
+                  when a time-zone is specified, the "TZ" environment variable 
+                  will automatically be set when an application is initialized. 
+                  this will then effect calls to the "date" and "time" php 
+                  functions as well as usage of SRA_GregorianDate and times 
+                  stored into mysql date/time fields
+
+Used in:  NA
+-->
+<!ELEMENT sierra-config (app*, authenticator*, db*, ini-set*, param*, scheduled-task*)>
+<!ATTLIST sierra-config    compress-output     (1|0)      "0">
+<!ATTLIST sierra-config    date-format         CDATA      "Y-m-d H:i:s">
+<!ATTLIST sierra-config    date-only-format    CDATA      "Y-m-d">
+<!ATTLIST sierra-config    debug               (1|0)      "0">
+<!ATTLIST sierra-config    default-country     CDATA      "php::SRA_LOCALE_DEFAULT_COUNTRY::php">
+<!ATTLIST sierra-config    default-currency    CDATA      "php::SRA_CURRENCY_DEFAULT::php">
+<!ATTLIST sierra-config    default-language    CDATA      "php::SRA_LOCALE_DEFAULT_LANGUAGE::php">
+<!ATTLIST sierra-config    disable-scheduler   (1|0)      "1">
+<!ATTLIST sierra-config    error-log-file      CDATA      "php::SRA_DEFAULT_ERROR_LOG_FILE::php">
+<!ATTLIST sierra-config    error-mask          CDATA      "php::SRA_DEFAULT_ERROR_MASK::php">
+<!ATTLIST sierra-config    log-dir             CDATA      "php::SRA_DEFAULT_LOG_DIR::php">
+<!ATTLIST sierra-config    resources-file      CDATA      "php::SRA_RESOURCE_BUNDLE_DEFAULT_BUNDLE_NAME::php">
+<!ATTLIST sierra-config    tpl-dir             CDATA      "php::SRA_DEFAULT_TEMPLATES_DIR::php">
+<!ATTLIST sierra-config    time-zone           CDATA      #IMPLIED>
+
+
+<!--
+The "app" element is used to list all of the applications that are deployed in
+a given instance of the sierra framework
+
+key             the unique identifier for the app
+
+dir             the base directory for this app. this attribute is optional
+                if it is not specified, the directory SIERRA/app/{key} 
+                will be assumed
+
+Used in:  sierra-config
+-->
+<!ELEMENT app EMPTY>
+<!ATTLIST app    key                  ID        #REQUIRED>
+<!ATTLIST app    dir                  CDATA      #IMPLIED>
+
+
+<!--
+The "authenticator" element defines a single authentication system.
+
+key             the unique identifier for this authentication system. this will 
+                be used to associate this authenticator to specific access 
+                restrictions defined for this app. 
+
+access-log      the log file where successful login records should be recorded. 
+                if not specified, they will not be recorded. this file will be 
+                stored in the app "log-dir"
+                
+cancel-tpl      the template that should be displayed if the user clicks cancel 
+                when the login box is displayed. if not specified, a blank 
+                screen will be displayed
+                
+entity-type     allows the SRA_Authenticator instance to be morphed to a 
+                specific entity. if specified, the object instance stored within 
+                'global-var' and 'tpl-var' will be of the type specified instead 
+                of SRA_Authenticator. the DAO for the entity-type specified, 
+                must be accessible via the SRA_DaoFactory::getDao method (this 
+                class is driven by the system or app entity model configuration)
+                To reference the entity, the DAO::findBySqlConstraints method 
+                will be used where the key will be the 'entity-user-col' 
+                attribute and the value is the user id specified
+                
+entity-user-col the column name to use in conjunction with entity-type (see 
+                above for more details)
+
+failure-log     the log file where failed login attempts should be recorded. if 
+                not specified, they will be recorded in the default app log 
+                file. Use "0" if you do not want login failures to be logged
+                
+global-var			a global PHP variable under which the authenticator user 
+                attributes should be stored. these attributes will always 
+                include 'user' and 'pswd' as well as any other authenticator 
+                specific user attributes
+                
+login-tpl       template containing an html login form which should be displayed 
+                instead of the default http authentication prompt (the login 
+                dialog displayed by your browser). when used, this form should 
+                post back to itself (action="") utilizing method="post" and 
+                contain form fields for both user (name="user") and password 
+                (name="password"). if a login is unsuccessful, this template 
+                will be re-dispalyed with the template variable "authStatus" set 
+                to one of the SRA_AUTHENTICATOR_STATUS_* constant values. 
+                
+                Note: if multiple authenticators have been used, the template 
+                variable "authStatus" will contain the status code from the last 
+                attempted authenticator and "authStatus_[authenticator id]", 
+                template variables will also be used in order to distinguish 
+                between the different statuses. 
+                
+                Note: if this template is being re-displayed due to a 
+                login error, the previous post fields will be accessible using 
+                the template variable 'form' which will be a reference to $_POST
+                Final note: if multiple authenticators are specified for a given 
+                resource, 'login-tpl' will be displayed from the last 
+                authenticator only
+                
+                Note: if multiple authenticators are specified for a given 
+                resource, 'login-tpl' will be displayed from the last 
+                authenticator only
+                
+                Note: standard http authentication will still be used for web 
+                services
+                
+                Note: when login-tpl is used, the user and password will be 
+                stored in a PHP session variable and thereby subject to session 
+                expiration and repeat logins based on your PHP session ttl. when 
+                this occurs, the template variable 'timeout' will be set to true
+                
+                Note: when this option is used, the $_SERVER['PHP_AUTH_USER'] 
+                and $_SERVER['PHP_AUTH_PW'] super global values will 
+                automatically be set
+                
+                Note: if a session timeout occurs during a POST, you can support 
+                that without losing data by adding something like the following 
+                to your login-tpl:
+                {foreach from=$form key=name item=val}
+                {if $name neq 'user' && $name neq 'password'}
+                <textarea name="{$name}" style="display:none">{$val}</textarea>
+                {/if}
+                {/foreach}
+
+logout-fwd-uri  the uri that the user should be forwarded to when a logout occurs
+
+logout-get-var  $_GET variable that will result in the user being logged out of 
+                this authenticator. a manual logout can also be performed via 
+                the SRA_Authenticator::logout instance method. the value of this 
+                parameter should be something besides empty string or 0 in order 
+                for a logout to be triggered automatically
+
+logout-post-var $_POST variable that will result in the user being logged out of 
+                this authenticator. a manual logout can also be performed via 
+                the SRA_Authenticator::logout instance method. the value of this 
+                parameter should be something besides empty string or 0 in order 
+                for a logout to be triggered automatically
+                
+logout-tpl      the template that should be displayed if a logout has been 
+                performed. if both logout-fwd-uri and logout-tpl are specified, 
+                the template will take priority. if neither are specified, the 
+                user will be forwarded to the same page they are on, resulting 
+                in an authentication dialog being displayed
+                
+match-fail-tpl  template to display if an attribute match fails. attribute matches 
+                are defined in the "restrict-access" elements. if not specified, 
+                the login prompt will be re-displayed until the user enters 
+                credentials with proper access or the max-attempts is exceeded
+                
+max-attempts    the maximum # of failed attempts before the max-attempt-tpl 
+                template is displayed. login attempts are tracked using sessions 
+                or IP address (based on the max-attempt-track attribute). if this 
+                attribute is 0 (default) then unlimited attempts are allowed
+                
+max-attempt-tpl the template to display if the user exceeds the "max-attempts"
+                value. REQUIRED if max-attempts is specified and > 0. this 
+                template will have access to the SRA_Authenticator instance including 
+                status code
+                
+max-attempt-ip  whether or not to track login attempts based on IP. the default 
+                behavior is to track based on a session cookie
+                
+max-attempt-timeout # of minutes to wait before allowing a user to re-attempt to 
+                login after they have exceeded "max-attempts". Only applies to 
+                IP based login attempt tracking ("max-attempt-ip")
+                
+path            fixed or relative path to the SRA_Authenticator class file if not in 
+                a standard location. Standard locations include {SIERRA}/lib/auth 
+                and {APP DIR}/lib where the file name should correspond 
+                with the "type" specified + the standard ".php" file extension. 
+                Additionally, the type can specify sub-directories (i.e. type="auth/MyAuth")
+                
+resource        authentication message to display in login screen. may also be 
+                a string defined in the app's "resources-file" file
+                
+sys-err-tpl     the template to display if a system error occurs when this 
+                authenticator is invoked
+                
+tpl-var					the template variable under which the authenticator user 
+                attributes should be stored. these attributes will always 
+                include 'user' and 'pswd' as well as any other authenticator 
+                specific user attributes
+                
+type            the authenticator type. "Built-in" authenticators include any 
+                class files stored in {SIERRA}/lib/auth including the 
+                following:
+                
+                SRA_LdapAuthenticator:
+                  'server'=> the LDAP server dns name or IP address - (i.e. 
+                             <param id="server" value="localhost" />) - REQUIRED
+                  'search'=> the LDAP server search base (i.e. 
+                             <param id="search" value="ou=people,o=company" />) - REQUIRED
+                  'port'   => the LDAP server port (default is 389 for non-secure 
+                             [ldap://] and 636 for secure [ldaps://]) (i.e. 
+                             <param id="port" value="389" />)
+                  'secure'=> whether or not the ldap server is secure (ldaps://)
+                             default value is 0 (FALSE) (i.e. 
+                             <param id="secure" value="1" />)
+                  'scope' => (base|one|sub), the LDAP search scope. determines 
+                             which PHP method is used to retrieve user 
+                             attributes. base=ldap_read, one=ldap_list, 
+                             sub=ldap_search (default) (i.e. 
+                             <param id="scope" value="sub" />)
+                  '[a]attrs' => 0..* key/value pairs (of "param" sub-element type 
+                             'attrs') that should be retrieved for the user from 
+                             the LDAP server. the default attr key/values (if not 
+                             specified otherwise) are the following (for 
+                             additional information on standard LDAP attributes, 
+                             see http://www.faqs.org/rfcs/rfc2256.html): 
+                             
+                               cn/cn : common name - typically the person's full name
+                              sn/sn : surname - typically person's last name
+                              givenName/givenName : typically the person's first name
+                              mail/mail : typically the person's email address
+                              postalAddress/postalAddress : person's postal address
+                              telephoneNumber/telephoneNumber : person's telephone number
+                             
+                             the attributes provided by the LDAP server will be 
+                             accessible in the user's lib/core/SRA_Authenticator (see api)
+                             instance provided as the "tpl-var" or "global-var" 
+                             attribute specified, where the key will be the 
+                             "value" of the "param" if specified, the "key" 
+                             otherwise. these keys/value pairs can also be used 
+                             to further restrict access in the "restrict-access" 
+                             "param" sub-element. (i.e. 
+                             <param id="cn" type="attrs" value="fullName" />
+                             <param id="sn" type="attrs" value="lastName" />)
+                             
+                             aattrs signifies that the attribute should be converted 
+                             to an array, where the split delimiter is a SPACE
+                             
+                  'options'=>0..* key/value pairs (of "param" sub-element type 'options') that 
+                             should be set for the ldap server using 
+                             "ldap_set_option($conn, key, value)"
+                             
+                SRA_DbAuthenticator:
+                  'db'      =>the database server identifier (used to access the 
+                              database via SRA_Controller::getAppDb(id). If not 
+                              specified the default app DB will be used
+                              (i.e. <param id="db" value="authDbId" />)
+                  'table'   =>the name of the database table where the user 
+                              records are stored (i.e. <param id="table" value="USER" />) - REQUIRED
+                  'user-col'=>the name of the column containing the user id 
+                              (i.e. <param id="user-col" value="USER_NAME" />) - REQUIRED
+                  'pswd-col'=>the name of the column containing the password
+                              (i.e. <param id="pswd-col" value="PASSSWORD" />)
+                              if not provided, only the user will be validated
+                  'pswd-cond-col'=> if the password should only be conditionally 
+                              verified, this parameter may be used to specify 
+                              the column containing the value used to determine 
+                              when the password should NOT be evaluated
+                  'pswd-cond-val'=> if the password should only be conditionally 
+                              verified, this parameter may be used to specify 
+                              the value that 'pswd-cond-col' should be equal to. 
+                              if the password should NOT be evaluated. if 
+                              'pswd-cond-col' is specified, and this 
+                              parameter is not, the value that will be used in 
+                              the evaluation is the TRUE value used by the 
+                              database. set this value to the string "TRUE", 
+                              "FALSE" or "NULL" for those corresponding PHP 
+                              constants to be used
+                  'pswd-fun'=>an optional database password encryption function 
+                              that should be applied to match passwords. when 
+                              specified, the validation query will be altered to 
+                              utilize that function... WHERE PASSWORD=[pswd-fun]('pass')
+                              (i.e. <param id='pswd-fun" value="password" />)
+                  '[a]attrs' => 0..* column/value pairs (of "param" sub-element type 
+                             'attrs') that should be retrieved for the user from 
+                             the user table. 
+                             
+                             the attributes specified will be accessible in the 
+                             user's SRA_Authenticator (see api)
+                             instance provided as the "tpl-var" or "global-var" 
+                             attribute specified, where the key will be the 
+                             "value" of the "param" if specified, the "key" 
+                             otherwise. these keys/value pairs can also be used 
+                             to further restrict access in the "restrict-access" 
+                             "param" sub-element. (i.e. 
+                             <param id="DEPARTMENT" type="attrs" value="dept" />
+                             <param id="SERIAL_NUMBER" type="attrs" value="serialNum" />)
+                             
+                             aattrs signifies that the attribute should be converted 
+                             to an array, where the split delimiter is a SPACE
+                             
+                SRA_OsAuthenticator: this authenticator required 'expect' to be 
+                              installed. when used, the 'groups' and 'home-path' 
+                              authenticator attributes are automatically set to 
+                              an array of the groups the user is a member of and 
+                              the absolute path to the user's home directory
+                  'exclude' =>(optional) space separated list of users that 
+                              should not be authenticated (error results in 
+                              status SRA_AUTHENTICATOR_STATUS_INVALID_USER)
+                  'groups'  =>(optional) space separated list of group names one 
+                              of which a user must belong to in order to be 
+                              authenticated (error results in status 
+                              SRA_AUTHENTICATOR_STATUS_INVALID_USER)
+                  'profile' =>(optional) user directory relative, or absolute 
+                              path to a properties file containing user 
+                              attributes (key/value pairs) each of these values 
+                              will be set in the SRA_Authenticator::attrs 
+                              instance variable. this path may contain the key 
+                              ${user} which will be substituted with the user 
+                              name
+                             
+                All SRA_Authenticators should extend auth/SRA_Authenticator 
+                and adhere to the API prescribed by that class. The search order 
+                for SRA_Authenticator types is:
+                  1) {SIERRA}/lib/auth
+                  2) {APP DIR}/lib
+                  3) / (root path in file system)
+                  
+                SRA_AUTHENTICATOR_ATTR_USER key value will always be set into 
+                the SRA_Authenticator attrs variable
+                
+                GLOBAL AUTHENTICATOR PARAMETERS:
+                  'cache-auth' => an optional # of seconds to allow 
+                                  authentication credentials to be cached. the 
+                                  minimum value is 30 seconds. when set, the 
+                                  combination of user/password/app/authenticator 
+                                  will be cached for that time period. so if a 
+                                  request with duplicate credentials for the 
+                                  same authenticator is received, the same 
+                                  status will returned
+                
+use-sessions    whether or not sessions should be used to store valid logins. if 
+                sessions are not used, then the user will be re-authenticated 
+                with each http request (they will not be required to re-submit 
+                login information, but the authentication system will be hit 
+                each time that they make a request) using the PHP_AUTH_USER and 
+                PHP_AUTH_PWglobal variables. the default value for this 
+                attribute is TRUE
+
+Used in:  sierra-config
+-->
+<!ELEMENT authenticator (param*)>
+<!ATTLIST authenticator  key               CDATA      #REQUIRED>
+<!ATTLIST authenticator  access-log        CDATA      #IMPLIED>
+<!ATTLIST authenticator  cancel-tpl        CDATA      #IMPLIED>
+<!ATTLIST authenticator  entity-type       CDATA      #IMPLIED>
+<!ATTLIST authenticator  entity-user-col   CDATA      #IMPLIED>
+<!ATTLIST authenticator  failure-log       CDATA      #IMPLIED>
+<!ATTLIST authenticator  global-var        CDATA      #IMPLIED>
+<!ATTLIST authenticator  login-tpl         CDATA      #IMPLIED>
+<!ATTLIST authenticator  logout-fwd-uri    CDATA      #IMPLIED>
+<!ATTLIST authenticator  logout-get-var    CDATA      #IMPLIED>
+<!ATTLIST authenticator  logout-post-var   CDATA      #IMPLIED>
+<!ATTLIST authenticator  logout-tpl        CDATA      #IMPLIED>
+<!ATTLIST authenticator  match-fail-tpl    CDATA      #IMPLIED>
+<!ATTLIST authenticator  max-attempts      CDATA      "0">
+<!ATTLIST authenticator  max-attempt-ip    (1|0)      "0">
+<!ATTLIST authenticator  max-attempt-tpl   CDATA      #IMPLIED>
+<!ATTLIST authenticator  max-attempt-timeout CDATA    "15">
+<!ATTLIST authenticator  path              CDATA      #IMPLIED>
+<!ATTLIST authenticator  resource          CDATA      #REQUIRED>
+<!ATTLIST authenticator  sys-err-tpl       CDATA      #REQUIRED>
+<!ATTLIST authenticator  tpl-var           CDATA      #IMPLIED>
+<!ATTLIST authenticator  type              CDATA      #REQUIRED>
+<!ATTLIST authenticator  use-sessions      (1|0)      "1">
+
+
+<!--
+A "db" element defines a system wide db configuration. All applications will 
+automatically inherit access to the database defined here. These databases 
+are accessible through the static SRA_Controller::getSysDb($id) method. the first 
+"db" element listed in the xml configuration will be considered the default 
+(returned if no $id parameter is passed to SRA_Controller::getSysDb)
+
+key             the unique identifier for this database
+
+bool-false      space separated list of values that should be considered FALSE 
+                for data in boolean data type columns. strings should be 
+                enclosed in single quotes while numbers should not. for example, 
+                to specify that both the number 0 and the string 0 should be 
+                considered boolean FALSE, this attribute value would be "0 '0'". 
+                see below for the default values for this attribute. IF data in 
+                a column matched neither "bool-false" nor "bool-true", it 
+                will be set to NULL. the FIRST value specified will be the value 
+                used to store FALSE values in boolean columns. constant values 
+                can also be specified (do not enclose in single quotes)
+                
+bool-false-rep  determines how boolean data types should be represented in PHP 
+                after they have been pulled from the database. the default 
+                behavior is for them to assume their native PHP boolean form 
+                (constants FALSE and TRUE). alternatively, you may specify a 
+                string or integer value that they should assume using this 
+                attribute where "'0'" will result in boolean false being 
+                represented as the string 0, and "0" will result in boolean 
+                false being represented as the integer value 0
+
+bool-true       same as boolean-false, but for determining values that should be 
+                considered TRUE in boolean data type columns
+                
+bool-true-rep   same as "bool-false-rep" but for TRUE values
+
+error-level     optional value that allows for specification of an error level 
+                to set the app-config status to if a connection attempt to this db 
+                server fails. By default, this level is SRA_ERROR_PROBLEM.
+                Example: php:: SRA_ERROR_SHUTDOWN ::php
+                
+ftp-user        the user name to use for ftp connections to the database server 
+                (used for Postgres COPY command only)
+
+ftp-password    the password to use for ftp connections to the database server 
+                (used for Postgres COPY command only)
+                
+gmt             set this attribute to "1" if you want date/time values to be 
+                stored in the database using the GMT timezone instead of the 
+                application timezone. since mysql does not support time/zone 
+                offsets in date/time columns usage of that data outside of the 
+                context of the framework will require modification of those 
+                values to the correct desired timezone. the framework will 
+                automatically convert those values using the application 
+                timezone when retrieved from the database and to GMT when stored
+
+host            resolvable name of the database server (or IP address). Default
+                value is 'localhost'
+
+import-file-dir Full path to the directory where import files should be 
+                stored (see SRA_Database::importFile method for more info). 
+                This directory should be ftp accessible. (used for 
+                Postgres COPY command only)
+                
+name            the name of the database. if not specified, "key" will be used
+
+password        the authentication password
+
+password-decrypt function to use to decrypt the password
+
+port            the host database port. Default value is 3306 for mysql, 5432 
+                for postgres and 1433 for mssql
+                
+read-only-db    may be used to reference an alternate database that should be 
+                used for read queries. fetch queries will use this database 
+                connection
+                
+type            the database type. The default type is mysql.
+                Example: php:: SRA_DB_TYPE_MYSQL::php. Available types are 
+                specified in the SRA_DB_TYPE_* constants in sql/SRA_Database
+
+user            the authentication user name
+
+Used in:  sierra-config
+-->
+<!ELEMENT db (table-cache*)>
+<!ATTLIST db          key                 ID        #REQUIRED>
+<!ATTLIST db          bool-false          CDATA      "0 '0'">
+<!ATTLIST db          bool-false-rep      CDATA      "FALSE">
+<!ATTLIST db          bool-true           CDATA      "1 '1'">
+<!ATTLIST db          bool-true-rep       CDATA      "TRUE">
+<!ATTLIST db					error-level					CDATA			"php::SRA_ERROR_PROBLEM::php">
+<!ATTLIST db          ftp-user            CDATA      #IMPLIED>
+<!ATTLIST db          ftp-password        CDATA      #IMPLIED>
+<!ATTLIST db          gmt                 (1|0)      "0">
+<!ATTLIST db          host                CDATA      "localhost">
+<!ATTLIST db          import-file-dir     CDATA      #IMPLIED>
+<!ATTLIST db          name                CDATA      #IMPLIED>
+<!ATTLIST db          password            CDATA      #IMPLIED>
+<!ATTLIST db          password-decrypt    CDATA      #IMPLIED>
+<!ATTLIST db          port                CDATA      #IMPLIED>
+<!ATTLIST db					read-only-db				IDREF			 #IMPLIED>
+<!ATTLIST db					type								(mssql|mysql|pgsql|sqlite|oracle)	"mysql">
+<!ATTLIST db          user                CDATA      #IMPLIED>
+
+
+<!--
+The "table-cache" element defines optional cache settings for a single 
+table in the database
+
+key             the name of the table
+
+expire          the number of minutes before the cache should be expired and 
+                purged (0 = never expire)
+
+dir             (optional) the directory where the cache should be stored. if 
+                not specified, the tmp-dir sierra-config configuration value will be 
+                used
+
+Used in:  db
+-->
+<!ELEMENT table-cache EMPTY>
+<!ATTLIST table-cache  key                 CDATA      #REQUIRED>
+<!ATTLIST table-cache  expire              CDATA      #REQUIRED>
+<!ATTLIST table-cache  dir                 CDATA      #IMPLIED>
+
+
+<!--
+The "ini-set" element defines one or more php ini configuration options that 
+should be set when the framework is utilized. these values will override the 
+default values specified in the php.ini file
+
+key             the name of the ini configuration option
+
+value           the new value for this option
+
+Used in:  sierra-config
+-->
+<!ELEMENT ini-set EMPTY>
+<!ATTLIST ini-set       key               CDATA      #REQUIRED>
+<!ATTLIST ini-set       value             CDATA      #REQUIRED>
+
+
+<!--
+The "scheduled-task" element should be used to define tasks that should be 
+performed on a scheduled basis. the task can be either an executable file, 
+or a php function or method (instance or static). tasks can be scheduled in 
+either the sierra-config or individual app-config files. the schedule provided 
+for each task is identical to the schedule specified for cron jobs (see 
+'schedule' attribute documentation provided below). nested params can be used 
+for php method-based tasks and will be passed to that method in the form of an 
+associative array (param 'type' will be ignored). dates and times are evaluated 
+according to the "time-zone" specified in sierra-config
+
+class-name      if method specified is part of a class, this attribute should be 
+                the name of that class. otherwise, method will be assumed to be 
+                a function name
+
+instance        if method and class-name are specified, whether or not that 
+                method should be invoked or as an instance method (a new 
+                instance of class-name will be created first in the case of the 
+                latter)
+
+log             if the stdout output from performing that task should be logged,
+                this should be the name of the log file (within sierra/log) that 
+                output should be stored to (will be stored along with a 
+                timestamp)
+
+method          the name of the method in 'class-name' (or a function name if 
+                'class-name is not specified) that should be invoked for this 
+                task
+
+path            the path to the php source file. this may be absolute or 
+                relative to the sierra base or lib directories. it may also 
+                include command line parameters when needed (i.e. "/bin/ps -e")
+
+schedule        the cron-formatted schedule for this task. this is divided into 
+                5 space separated schedule identifiers in the following order:
+                  minute: This controls what minute of the hour the command will 
+                          run on, and is between '0' and '59'
+                  hour:   This controls what hour the command will run on, and 
+                          is specified in the 24 hour clock, values must be 
+                          between 0 and 23 (0 is midnight)
+                  dom:    This is the Day of Month, that you want the command 
+                          run on, e.g. to run a command on the 19th of each 
+                          month, the dom would be 19.
+                  month:  This is the month a specified command will run on 
+                          (1-12)
+                  dow:    This is the Day of Week that you want a command to be 
+                          run on (0-6 where 0=sunday)
+                
+                * in any of these identifiers means that the task will be 
+                performed in all occurences of that type of identifier. so, for 
+                example, to have a task be performed every minute of every day, 
+                all 5 identifiers should be set to *. the default schedule (if 
+                not specified otherwise) is to perform the task nightly at 12am. 
+                multiple comma separated values may be specified for each 
+                identifier.
+
+Used in:  sierra-config
+-->
+<!ELEMENT scheduled-task (param*)>
+<!ATTLIST scheduled-task class-name       CDATA      #IMPLIED>
+<!ATTLIST scheduled-task instance         (1|0)      "0">
+<!ATTLIST scheduled-task log              CDATA      #IMPLIED>
+<!ATTLIST scheduled-task method           CDATA      #IMPLIED>
+<!ATTLIST scheduled-task path             CDATA      #REQUIRED>
+<!ATTLIST scheduled-task schedule         CDATA      '0 0 * * *'>
+
+
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ |                        Subordinate Elements                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+<!-- 
+The "param" element defines key/value/type for specific configuration parameters
+
+id                the param name
+
+type              the param type
+
+value             the param value
+
+Used in:   authenticator, scheduled-task
+-->
+<!ELEMENT param EMPTY>
+<!ATTLIST param              id                  CDATA        #REQUIRED>
+<!ATTLIST param              type                CDATA        #IMPLIED>
+<!ATTLIST param              value               CDATA        #IMPLIED>
+

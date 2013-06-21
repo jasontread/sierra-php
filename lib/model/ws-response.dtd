@@ -1,0 +1,214 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for a sierra-php web service gateway service response
+
+this DTD defines the xml structure used for "xml" type "meta-format" responses
+
+to support validation use the following header:
+
+<?xml version="1.0"?>
+<!DOCTYPE ws-response PUBLIC "-//SIERRA//DTD AJAX SERVICE RESPONSE//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/lib/model/ws-response.dtd">
+-->
+
+
+<!--
+"ws-response" represents the response from invoking a web service when 
+"meta-format" is "xml". the attributes of this element represent the metadata 
+and the value (the data between the open and close tags) represents the result 
+of the request invocation encoded using into "format". the value between the 
+open and close tags is used to store the xml encoded results of a service 
+invocation. when the format is "xml", responses will not validate against this 
+DTD as the values in between the open and close ws-response tags will simply be 
+the XML output from invoking the service
+  
+
+action        if this is a non-global service, what action was performed
+
+count         this value has different meanings depending on the request type:
+                entity create:   1 if the insert was successful
+                entity delete:   0 if the delete was successful
+                entity retrieve: the total # of matching entity instances 
+                                 regardless of the limit and offset specified in 
+                                 the request
+                entity update:   1 if an update occurred
+                global method:   the value of the SRA_WS_RESULT_COUNT_KEY 
+                                 key in the return hash (if applicable)
+                global rb:       the total # of strings in the resource bundle
+                global sql:      the total query count regardless of limit and 
+                                 offset
+
+format        the format of the nested response element. this is one of the 
+              following values:
+                json: the nested "response" element contains a json encode value
+                raw:  the nested "response" will be the raw output from the 
+                      service (applies to global "method" type services only)
+                xml:  the nested "response" contains an xml formatted entity or 
+                      entities. for global "rb" type services, the response 
+                      will be a nested "ws-resource-bundle" instead of "response" 
+                      and for global "sql" type services, the response will be a 
+                      nested "ws-query-results" instead of "response". for entity 
+                      service requests with validation errors, the 
+                      "validation-errors" sub-elment will be present
+
+global        is this a global service?
+
+limit         the actual limit used in the request (may or may not be the same 
+              as the request limit)
+
+offset        the request offset
+
+request-id    identifier specified in the service request
+
+request-id1   identifier specified in the service request
+
+service       the name of the service that was invoked
+
+session-id    the session id for this request if use-sessions was true
+
+status        the result of the service invocation. this value will correspond 
+              with one of the SRA_WS_REQUEST_STATUS_* constant values
+              
+time          the amount of time (in seconds) to complete the request (w/ 2 
+              decimal places)
+
+Used in:  NA
+-->
+<!ELEMENT ws-response (ws-json|ws-query-results|ws-raw|ws-resource-bundle|ws-validation-errors|ws-error)>
+<!ATTLIST ws-response 
+          action        CDATA          (create|delete|retrieve|update)
+          count         CDATA          #IMPLIED
+          format        (json|xml|raw) #REQUIRED
+          global        (1|0)          #REQUIRED
+          limit         CDATA          #IMPLIED
+          offset        CDATA          #IMPLIED
+          request-id    CDATA          #IMPLIED
+          request-id1   CDATA          #IMPLIED
+          service       CDATA          #REQUIRED
+          session-id    CDATA          #IMPLIED
+          status        (authentication-failed|invalid-app|invalid-attrs|invalid-format|invalid-limit|invalid-meta-format|invalid-pk|invalid-protocol|invalid-request|invalid-service|failed|not-allowed|not-available|timeout|success|validation-error) #REQUIRED
+          time          CDATA          #REQUIRED>
+
+
+<!--
+"ws-json" is used to provide the response data when "format" is "json". the 
+following structures will be used:
+
+  entities:        an array of entitities (see below)
+  entity:          a hash of attribute name/values returned from the request. 
+                   the validateErrors hash will be set if validation errors 
+                   occur
+  sql query:       an array of hashes where each hash is a row and the keys in 
+                   the hash are the column names
+  resource bundle: a hash of key/value pairs
+
+Used in: ws-response
+-->
+<!ELEMENT ws-json (#PCDATA)>
+
+<!--
+"ws-query-results" represents the xml formatted results of a global sql service 
+request
+
+Used in: ws-response
+-->
+<!ELEMENT ws-query-results (ws-row*)>
+
+
+<!--
+"ws-raw" is used to provide the raw response data (for global services where 
+"format" is "raw")
+
+Used in: ws-response
+-->
+<!ELEMENT ws-raw (#PCDATA)>
+
+
+<!--
+"row" represents a single row of data returned from a global sql service request
+
+key           the row number (first row is 1)
+
+Used in: ws-query-results
+-->
+<!ELEMENT ws-row (ws-col*)>
+<!ATTLIST ws-row
+          key           CDATA          #IMPLIED>
+
+
+<!--
+"col" represents a single col of data returned from a global sql service request
+the value embedded between the open and close tags will be the value of that 
+column
+
+key           the column name
+
+Used in: row
+-->
+<!ELEMENT ws-col (#PCDATA)>
+<!ATTLIST ws-col
+          key           CDATA          #IMPLIED>
+
+
+<!--
+"ws-resource-bundle" represents the xml formatted results of a global resource 
+bundle service request
+
+Used in: ws-response
+-->
+<!ELEMENT ws-resource-bundle (ws-string*)>
+
+
+<!--
+"string" represents a string in a resource bundle. the value embedded between 
+the open and close tags will be the value of that string
+
+key           the string key/id
+
+Used in: ws-resource-bundle
+-->
+<!ELEMENT ws-string (#PCDATA)>
+<!ATTLIST ws-string
+          key           CDATA          #IMPLIED>
+
+
+<!--
+"validation-errors" represents the xml formatted results from an entity update 
+or create invocation where validation errors occurred
+
+Used in: ws-response
+-->
+<!ELEMENT ws-validation-errors (ws-error*)>
+
+
+<!--
+"error" represents a single error message. the value embedded between the open 
+and close tags will be the value of that error message
+
+key           the attribute the caused this error message (optional)
+
+Used in: validation-errors
+-->
+<!ELEMENT ws-error (#PCDATA)>
+<!ATTLIST ws-error
+          key           CDATA          #IMPLIED>

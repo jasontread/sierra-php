@@ -1,0 +1,16 @@
+This directory contains any system wide batch execution files.
+
+The following files are included:
+	
+run-tests.php - used to run unit tests type ./run-tests.php for usage info
+
+sra-console.php - used to start the SIERRA PHP console. can be started with or without 
+                  an application identifier (i.e. ./sra-console.php example)
+                  
+sra-installer.php - the sierra framework installer
+
+sra-quick-install.php - quick installer for the framework, configures the framework using default options
+
+sra-task-fork.php - used by sra-task-scheduler.php to fork tasks
+
+sra-task-scheduler.php - used to run scheduled tasks (scheduled-task in sierra-config.xml and app-config.xml)

@@ -1,0 +1,1491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.l10n.SRA_Locale - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_locale_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_DEBUG'] = "SRA_LOCALE_DEBUG";
+  }
+  if ("sra_locale_canada".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_CANADA'] = "SRA_LOCALE_CANADA";
+  }
+  if ("sra_locale_canada_french".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_CANADA_FRENCH'] = "SRA_LOCALE_CANADA_FRENCH";
+  }
+  if ("sra_locale_english".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_ENGLISH'] = "SRA_LOCALE_ENGLISH";
+  }
+  if ("sra_locale_france".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_FRANCE'] = "SRA_LOCALE_FRANCE";
+  }
+  if ("sra_locale_french".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_FRENCH'] = "SRA_LOCALE_FRENCH";
+  }
+  if ("sra_locale_german".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_GERMAN'] = "SRA_LOCALE_GERMAN";
+  }
+  if ("sra_locale_germany".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_GERMANY'] = "SRA_LOCALE_GERMANY";
+  }
+  if ("sra_locale_spain".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_SPAIN'] = "SRA_LOCALE_SPAIN";
+  }
+  if ("sra_locale_spanish".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_SPANISH'] = "SRA_LOCALE_SPANISH";
+  }
+  if ("sra_locale_uk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_UK'] = "SRA_LOCALE_UK";
+  }
+  if ("sra_locale_us".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_US'] = "SRA_LOCALE_US";
+  }
+  if ("sra_locale_xml_data_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_XML_DATA_FILE'] = "SRA_LOCALE_XML_DATA_FILE";
+  }
+  if ("sra_locale_default_country".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_DEFAULT_COUNTRY'] = "SRA_LOCALE_DEFAULT_COUNTRY";
+  }
+  if ("sra_locale_default_language".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_DEFAULT_LANGUAGE'] = "SRA_LOCALE_DEFAULT_LANGUAGE";
+  }
+  if ("sra_locale_default_locale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LOCALE_DEFAULT_LOCALE'] = "SRA_LOCALE_DEFAULT_LOCALE";
+  }
+
+  // check attributes
+  if ("_country".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__country'] = "_country";
+  }
+  if ("_currency".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__currency'] = "_currency";
+  }
+  if ("_dateformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dateFormat'] = "_dateFormat";
+  }
+  if ("_datetimeformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dateTimeFormat'] = "_dateTimeFormat";
+  }
+  if ("_decimalseparator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__decimalSeparator'] = "_decimalSeparator";
+  }
+  if ("_intgroupseparator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__intGroupSeparator'] = "_intGroupSeparator";
+  }
+  if ("_iso3country".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__iso3Country'] = "_iso3Country";
+  }
+  if ("_iso3language".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__iso3Language'] = "_iso3Language";
+  }
+  if ("_language".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__language'] = "_language";
+  }
+  if ("_timeformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__timeFormat'] = "_timeFormat";
+  }
+
+  // check methods
+  if ("sra_locale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_Locale'] = "SRA_Locale";
+  }
+  if ("equals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_equals'] = "equals";
+  }
+  if ("formatnumber".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_formatNumber'] = "formatNumber";
+  }
+  if ("getcountrylist".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCountryList'] = "getCountryList";
+  }
+  if ("getcurrency".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCurrency'] = "getCurrency";
+  }
+  if ("getcountry".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCountry'] = "getCountry";
+  }
+  if ("getcountryname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCountryName'] = "getCountryName";
+  }
+  if ("getappdateformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDateFormat'] = "getAppDateFormat";
+  }
+  if ("getdatetimeformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDateTimeFormat'] = "getDateTimeFormat";
+  }
+  if ("getdecimalseparator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDecimalSeparator'] = "getDecimalSeparator";
+  }
+  if ("getdefaultlocale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDefaultLocale'] = "getDefaultLocale";
+  }
+  if ("getid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getId'] = "getId";
+  }
+  if ("getiso3country".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getISO3Country'] = "getISO3Country";
+  }
+  if ("getiso3language".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getISO3Language'] = "getISO3Language";
+  }
+  if ("getintgroupseparator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getIntGroupSeparator'] = "getIntGroupSeparator";
+  }
+  if ("getlabel".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getLabel'] = "getLabel";
+  }
+  if ("getlanguage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getLanguage'] = "getLanguage";
+  }
+  if ("getlanguagename".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getLanguageName'] = "getLanguageName";
+  }
+  if ("getlanguagelist".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getLanguageList'] = "getLanguageList";
+  }
+  if ("getlocale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getLocale'] = "getLocale";
+  }
+  if ("gettimeformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTimeFormat'] = "getTimeFormat";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("removeduplicatelocales".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_removeDuplicateLocales'] = "removeDuplicateLocales";
+  }
+  if ("unformatnumber".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_unformatNumber'] = "unformatNumber";
+  }
+  if ("validatecountrycode".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validateCountryCode'] = "validateCountryCode";
+  }
+  if ("validatelanguagecode".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validateLanguageCode'] = "validateLanguageCode";
+  }
+  if ("_getlocaledata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getLocaleData'] = "_getLocaleData";
+  }
+  if ("_getlocale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getLocale'] = "_getLocale";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_Locale</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.l10n.html" target="contentFrame">util.l10n</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_Locale</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> The SRA_Locale class (including api comments) was borrowed directly from
+  Java:
+ 
+  SRA_Locales represent a specific country and culture. Classes which can
+  be
+  passed a SRA_Locale object tailor their information for a given locale. For
+  instance, currency number formatting is handled differently for the USA
+  and France.
+ 
+  SRA_Locales are made up of a language code, and a country code. Language
+  codes are represented by
+  &lt;a href=&quot;http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt&quot;&gt;
+  ISO 639:1988&lt;/a&gt; w/ additions from ISO 639/RA Newsletter No. 1/1989
+  and a decision of the Advisory Committee of ISO/TC39 on August 8, 1997.
+ 
+  Country codes are represented by
+  &lt;a href=&quot;http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html&quot;&gt;
+  ISO 3166&lt;/a&gt;.
+ 
+  The default locale is determined based on the values of the system
+  etc or the app conf.
+ 
+  SRA_Locales are stored in the SRA_LOCALE_XML_DATA_FILE file. This file
+  consists of 1..* locales in the format described in the corresponding dtd.
+ 
+  Country and language display name attributes are retrieved from
+  property files located in the {SRA_DIR}/etc/l10n directory.
+  Country display names are stored as &quot;iso3166.properties&quot; and languages
+  as &quot;iso639.properties&quot;.
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_DEBUG">SRA_LOCALE_DEBUG</a></pre>
+<pre> SRA_Locale object debug flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_CANADA">SRA_LOCALE_CANADA</a></pre>
+<pre> Constant which represents the English speaking portion of Canada. This
+  symbol is broken up into 2 values separated by the &quot;&amp;&quot; symbol. The
+  first value is the country code and the second value is the language
+  code (as defined by the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_CANADA_FRENCH">SRA_LOCALE_CANADA_FRENCH</a></pre>
+<pre> Constant which represents the French speaking portion of Canada. This
+  symbol is broken up into 2 values separated by the &quot;&amp;&quot; symbol. The
+  first value is the country code and the second value is the language
+  code (as defined by the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_ENGLISH">SRA_LOCALE_ENGLISH</a></pre>
+<pre> Constant which represents the English language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_FRANCE">SRA_LOCALE_FRANCE</a></pre>
+<pre> Constant which represents France. This symbol is broken up into 2 values
+  separated by the &quot;&amp;&quot; symbol. The first value is the country code and
+  the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_FRENCH">SRA_LOCALE_FRENCH</a></pre>
+<pre> Constant which represents the French language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_GERMAN">SRA_LOCALE_GERMAN</a></pre>
+<pre> Constant which represents the German language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_GERMANY">SRA_LOCALE_GERMANY</a></pre>
+<pre> Constant which represents Germany. This symbol is broken up into 2
+  values separated by the &quot;&amp;&quot; symbol. The first value is the country code
+  and the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_SPAIN">SRA_LOCALE_SPAIN</a></pre>
+<pre> Contant which represents Spain. This symbol is broken up into 2 values
+  separated by the &quot;&amp;&quot; symbol. The first value is the country code and
+  the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_SPANISH">SRA_LOCALE_SPANISH</a></pre>
+<pre> Constant which represents the Spanish language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_UK">SRA_LOCALE_UK</a></pre>
+<pre> Constant which represents the United Kingdom. This symbol is broken up
+  into 2 values separated by the &quot;&amp;&quot; symbol. The first value is the
+  country code and the second value is the language code (as defined by
+  the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_US">SRA_LOCALE_US</a></pre>
+<pre> String which represents the United States. This symbol is broken up into
+  2 values separated by the &quot;&amp;&quot; symbol. The first value is the country
+  code and the second value is the language code (as defined by the
+  language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_XML_DATA_FILE">SRA_LOCALE_XML_DATA_FILE</a></pre>
+<pre> The location of the SRA_Locale xml definition file.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_DEFAULT_COUNTRY">SRA_LOCALE_DEFAULT_COUNTRY</a></pre>
+<pre> the default country to use if one is not specified in the getLocale method or
+  if the country specified is not configured in the locales xml file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_DEFAULT_LANGUAGE">SRA_LOCALE_DEFAULT_LANGUAGE</a></pre>
+<pre> the default country to use if one is not specified in the getLocale method or
+  if the country specified is not configured in the locales xml file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LOCALE_DEFAULT_LOCALE">SRA_LOCALE_DEFAULT_LOCALE</a></pre>
+<pre> the default country to use if one is not specified in the getLocale method
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__country">_country</a></pre>
+<pre> The country code for the instantiated SRA_Locale object.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private <a href="util.l10n.SRA_Currency.html" target="contentFrame">SRA_Currency</a> </pre></td>
+      <td>
+        <pre><a href="#attr__currency">_currency</a></pre>
+<pre> The currency used by this locale (for more info see the SRA_Currency
+  class api).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__dateFormat">_dateFormat</a></pre>
+<pre> The date format string (i.e. Y-m-d &gt; 2000-01-01)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__dateTimeFormat">_dateTimeFormat</a></pre>
+<pre> The date time format string (i.e. Y-m-d h:i:s &gt; 2000-01-01
+  12:00:00).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private char </pre></td>
+      <td>
+        <pre><a href="#attr__decimalSeparator">_decimalSeparator</a></pre>
+<pre> The separator to use between the whole and decimal portion of a
+  number. The default is a period
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private char </pre></td>
+      <td>
+        <pre><a href="#attr__intGroupSeparator">_intGroupSeparator</a></pre>
+<pre> The separator to use between whole number groups (i.e. 100,000). The
+  default is a comma.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__iso3Country">_iso3Country</a></pre>
+<pre> The three-letter ISO identifier for the country.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__iso3Language">_iso3Language</a></pre>
+<pre> The three-letter ISO identifier for the language.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__language">_language</a></pre>
+<pre> The language code for the instantiated SRA_Locale object.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__timeFormat">_timeFormat</a></pre>
+<pre> The time format string (i.e. h:i:s &gt; 12:00:00)
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_Locale">SRA_Locale</a>()</pre>
+<pre> do not instantiate directly. instead use the singleton getLocale method
+  to object an instance of this class
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_equals">equals</a>($object)</pre>
+<pre> Compares two locales. To be equal, object must be a SRA_Locale with the
+  same language and country.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_formatNumber">formatNumber</a>($number)</pre>
+<pre> Returns a formatted string representation of the number specified.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static String[]</pre></td>
+      <td>
+        <pre><a href="#method_getCountryList">getCountryList</a>($locale=false)</pre>
+<pre> Static method that returns an associative array of coutries and
+  their corresponding display values based on the SRA_Locale parameter
+  specified.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_Currency.html" target="contentFrame">SRA_Currency</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getCurrency">getCurrency</a>()</pre>
+<pre> Returns a reference to the _currency attribute
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getCountry">getCountry</a>()</pre>
+<pre> Returns the value of the _country attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getCountryName">getCountryName</a>(<a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> $locale=FALSE)</pre>
+<pre> Returns the locale specific country name, or NULL if the locale only
+  represents a language
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getAppDateFormat">getAppDateFormat</a>()</pre>
+<pre> Returns the value of the _dateFormat attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getDateTimeFormat">getDateTimeFormat</a>()</pre>
+<pre> Returns the value of the _dateTimeFormat attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public char</pre></td>
+      <td>
+        <pre><a href="#method_getDecimalSeparator">getDecimalSeparator</a>()</pre>
+<pre> Returns the value of the _decimalSeparator attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getDefaultLocale">getDefaultLocale</a>($locale=false)</pre>
+<pre> Static method that returns a default SRA_Locale object. The
+  precedence for the return SRA_Locale object is as follows:
+ 
+  1) If locale parameter is valid SRA_Locale object, it is returned
+  2) If app is initialized, app SRA_Locale is returned
+  3) Otherwise, system SRA_Locale is returned
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getId">getId</a>()</pre>
+<pre> Returns the unique identifier for this locale. this value can be used to
+  re-instantiate this locale using the SRA_Locale::getLocale($code) method
+  where the $code is the id
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getISO3Country">getISO3Country</a>()</pre>
+<pre> Returns the value of the _iso3Country attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getISO3Language">getISO3Language</a>()</pre>
+<pre> Returns the value of the _iso3Language attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public char</pre></td>
+      <td>
+        <pre><a href="#method_getIntGroupSeparator">getIntGroupSeparator</a>()</pre>
+<pre> Returns the value of the _intGroupSeparator attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getLabel">getLabel</a>()</pre>
+<pre> Returns the label for this locale in the format: [Language Name][/[Country Name]]
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getLanguage">getLanguage</a>()</pre>
+<pre> Returns the value of the _language attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getLanguageName">getLanguageName</a>(<a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> $locale=FALSE)</pre>
+<pre> Returns the locale specific language name
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static String[]</pre></td>
+      <td>
+        <pre><a href="#method_getLanguageList">getLanguageList</a>($locale=false)</pre>
+<pre> Static method that returns an associative array of languages and
+  their corresponding display values based on the SRA_Locale parameter
+  specified.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a></pre></td>
+      <td>
+        <pre><a href="#method_getLocale">getLocale</a>($code, $language=FALSE, $defaultCountry=FALSE)</pre>
+<pre> Static method used to retrieve a reference to a locale object based
+  on the parameters provided. This method should be used in place of
+  the constructor.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getTimeFormat">getTimeFormat</a>()</pre>
+<pre> Returns the value of the _timeFormat attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>($object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_Locale
+  object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static SRA_Locale[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_removeDuplicateLocales">removeDuplicateLocales</a>(SRA_Locale[] $locales)</pre>
+<pre> Static method that removes any duplicate SRA_Locales from an array
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_unformatNumber">unformatNumber</a>($number)</pre>
+<pre> Unformats a number based on the locale.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_validateCountryCode">validateCountryCode</a>(string $code)</pre>
+<pre> validates a country code
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_validateLanguageCode">validateLanguageCode</a>(string $code)</pre>
+<pre> validates a language code
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_XmlParser.html" target="contentFrame">SRA_XmlParser</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method__getLocaleData">_getLocaleData</a>()</pre>
+<pre> Returns a reference to the _localeData attribute
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method__getLocale">_getLocale</a>(string $country, string $language)</pre>
+<pre> instantiates a new SRA_Locale
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_LOCALE_DEBUG">SRA_LOCALE_DEBUG</h3>
+  <pre>public boolean <b>SRA_LOCALE_DEBUG</b> = FALSE</pre>
+  <pre> SRA_Locale object debug flag
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_CANADA">SRA_LOCALE_CANADA</h3>
+  <pre>public String <b>SRA_LOCALE_CANADA</b> = "CA&en"</pre>
+  <pre> Constant which represents the English speaking portion of Canada. This
+  symbol is broken up into 2 values separated by the &quot;&amp;&quot; symbol. The
+  first value is the country code and the second value is the language
+  code (as defined by the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_CANADA_FRENCH">SRA_LOCALE_CANADA_FRENCH</h3>
+  <pre>public String <b>SRA_LOCALE_CANADA_FRENCH</b> = "CA&fr"</pre>
+  <pre> Constant which represents the French speaking portion of Canada. This
+  symbol is broken up into 2 values separated by the &quot;&amp;&quot; symbol. The
+  first value is the country code and the second value is the language
+  code (as defined by the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_ENGLISH">SRA_LOCALE_ENGLISH</h3>
+  <pre>public String <b>SRA_LOCALE_ENGLISH</b> = "en"</pre>
+  <pre> Constant which represents the English language.
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_FRANCE">SRA_LOCALE_FRANCE</h3>
+  <pre>public String <b>SRA_LOCALE_FRANCE</b> = "FR&fr"</pre>
+  <pre> Constant which represents France. This symbol is broken up into 2 values
+  separated by the &quot;&amp;&quot; symbol. The first value is the country code and
+  the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_FRENCH">SRA_LOCALE_FRENCH</h3>
+  <pre>public String <b>SRA_LOCALE_FRENCH</b> = "fr"</pre>
+  <pre> Constant which represents the French language.
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_GERMAN">SRA_LOCALE_GERMAN</h3>
+  <pre>public String <b>SRA_LOCALE_GERMAN</b> = "de"</pre>
+  <pre> Constant which represents the German language.
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_GERMANY">SRA_LOCALE_GERMANY</h3>
+  <pre>public String <b>SRA_LOCALE_GERMANY</b> = "de-de"</pre>
+  <pre> Constant which represents Germany. This symbol is broken up into 2
+  values separated by the &quot;&amp;&quot; symbol. The first value is the country code
+  and the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_SPAIN">SRA_LOCALE_SPAIN</h3>
+  <pre>public String <b>SRA_LOCALE_SPAIN</b> = "es-es"</pre>
+  <pre> Contant which represents Spain. This symbol is broken up into 2 values
+  separated by the &quot;&amp;&quot; symbol. The first value is the country code and
+  the second value is the language code (as defined by the language
+  constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_SPANISH">SRA_LOCALE_SPANISH</h3>
+  <pre>public String <b>SRA_LOCALE_SPANISH</b> = "es"</pre>
+  <pre> Constant which represents the Spanish language.
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_UK">SRA_LOCALE_UK</h3>
+  <pre>public String <b>SRA_LOCALE_UK</b> = "gb-en"</pre>
+  <pre> Constant which represents the United Kingdom. This symbol is broken up
+  into 2 values separated by the &quot;&amp;&quot; symbol. The first value is the
+  country code and the second value is the language code (as defined by
+  the language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_US">SRA_LOCALE_US</h3>
+  <pre>public String <b>SRA_LOCALE_US</b> = "us-en"</pre>
+  <pre> String which represents the United States. This symbol is broken up into
+  2 values separated by the &quot;&amp;&quot; symbol. The first value is the country
+  code and the second value is the language code (as defined by the
+  language constants... i.e. SRA_LOCALE_ENGLIGH).
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_XML_DATA_FILE">SRA_LOCALE_XML_DATA_FILE</h3>
+  <pre>public String <b>SRA_LOCALE_XML_DATA_FILE</b> = file_exists(SRA_CONF_DIR . '/l10n/locales.xml') ? SRA_CONF_DIR . '/l10n/locales.xml' : SRA_CONF_DIR . '/l10n/locales-default.xml'</pre>
+  <pre> The location of the SRA_Locale xml definition file.
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_DEFAULT_COUNTRY">SRA_LOCALE_DEFAULT_COUNTRY</h3>
+  <pre>public String <b>SRA_LOCALE_DEFAULT_COUNTRY</b> = 'us'</pre>
+  <pre> the default country to use if one is not specified in the getLocale method or
+  if the country specified is not configured in the locales xml file
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_DEFAULT_LANGUAGE">SRA_LOCALE_DEFAULT_LANGUAGE</h3>
+  <pre>public String <b>SRA_LOCALE_DEFAULT_LANGUAGE</b> = 'en'</pre>
+  <pre> the default country to use if one is not specified in the getLocale method or
+  if the country specified is not configured in the locales xml file
+</pre>
+ <hr />  <h3 id="constant_SRA_LOCALE_DEFAULT_LOCALE">SRA_LOCALE_DEFAULT_LOCALE</h3>
+  <pre>public String <b>SRA_LOCALE_DEFAULT_LOCALE</b> = SRA_LOCALE_US</pre>
+  <pre> the default country to use if one is not specified in the getLocale method
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__country">_country</h3>
+  <pre>private String var <b>$_country</b></pre>
+  <pre> The country code for the instantiated SRA_Locale object.
+</pre>
+ <hr />  <h3 id="attr__currency">_currency</h3>
+  <pre>private <a href="util.l10n.SRA_Currency.html" target="contentFrame">SRA_Currency</a> var <b>$_currency</b></pre>
+  <pre> The currency used by this locale (for more info see the SRA_Currency
+  class api).
+</pre>
+ <hr />  <h3 id="attr__dateFormat">_dateFormat</h3>
+  <pre>private String var <b>$_dateFormat</b> = "Y-m-d"</pre>
+  <pre> The date format string (i.e. Y-m-d &gt; 2000-01-01)
+</pre>
+ <hr />  <h3 id="attr__dateTimeFormat">_dateTimeFormat</h3>
+  <pre>private String var <b>$_dateTimeFormat</b> = "Y-m-d h:i:s"</pre>
+  <pre> The date time format string (i.e. Y-m-d h:i:s &gt; 2000-01-01
+  12:00:00).
+</pre>
+ <hr />  <h3 id="attr__decimalSeparator">_decimalSeparator</h3>
+  <pre>private char var <b>$_decimalSeparator</b> = "."</pre>
+  <pre> The separator to use between the whole and decimal portion of a
+  number. The default is a period
+</pre>
+ <hr />  <h3 id="attr__intGroupSeparator">_intGroupSeparator</h3>
+  <pre>private char var <b>$_intGroupSeparator</b> = ","</pre>
+  <pre> The separator to use between whole number groups (i.e. 100,000). The
+  default is a comma.
+</pre>
+ <hr />  <h3 id="attr__iso3Country">_iso3Country</h3>
+  <pre>private String var <b>$_iso3Country</b></pre>
+  <pre> The three-letter ISO identifier for the country.
+</pre>
+ <hr />  <h3 id="attr__iso3Language">_iso3Language</h3>
+  <pre>private String var <b>$_iso3Language</b></pre>
+  <pre> The three-letter ISO identifier for the language.
+</pre>
+ <hr />  <h3 id="attr__language">_language</h3>
+  <pre>private String var <b>$_language</b></pre>
+  <pre> The language code for the instantiated SRA_Locale object.
+</pre>
+ <hr />  <h3 id="attr__timeFormat">_timeFormat</h3>
+  <pre>private String var <b>$_timeFormat</b> = "h:i:s"</pre>
+  <pre> The time format string (i.e. h:i:s &gt; 12:00:00)
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_Locale">SRA_Locale</h3>
+  <pre>private void function <b>SRA_Locale</b>()</pre>
+  <pre> do not instantiate directly. instead use the singleton getLocale method
+  to object an instance of this class
+ 
+</pre>
+ <hr />  <h3 id="method_equals">equals</h3>
+  <pre>public boolean function <b>equals</b>($object)</pre>
+  <pre> Compares two locales. To be equal, object must be a SRA_Locale with the
+  same language and country.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Not Specified</td>
+      <td><pre>: Object - The locale to compare with.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_formatNumber">formatNumber</h3>
+  <pre>public String function <b>formatNumber</b>($number)</pre>
+  <pre> Returns a formatted string representation of the number specified.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>number</td>
+      <td>Not Specified</td>
+      <td><pre>: float - The number to convert.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getCountryList">getCountryList</h3>
+  <pre>public static String[] function <b>getCountryList</b>($locale=false)</pre>
+  <pre> Static method that returns an associative array of coutries and
+  their corresponding display values based on the SRA_Locale parameter
+  specified.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>Not Specified</td>
+      <td><pre>: SRA_Locale - The SRA_Locale object to use when determining  			the display name to use for each country. If this parameter
+  			is not specified, the default app or system local will
+ 			be used.</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getCurrency">getCurrency</h3>
+  <pre>public <a href="util.l10n.SRA_Currency.html" target="contentFrame">SRA_Currency</a> function &amp;<b>getCurrency</b>()</pre>
+  <pre> Returns a reference to the _currency attribute
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getCountry">getCountry</h3>
+  <pre>public String function <b>getCountry</b>()</pre>
+  <pre> Returns the value of the _country attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getCountryName">getCountryName</h3>
+  <pre>public String function <b>getCountryName</b>(<a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> $locale=FALSE)</pre>
+  <pre> Returns the locale specific country name, or NULL if the locale only
+  represents a language
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>SRA_Locale</td>
+      <td><pre>$locale - an optional locale to use when getting the country  name resource bundle. if not specified, this SRA_Locale will be used</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppDateFormat">getAppDateFormat</h3>
+  <pre>public String function <b>getAppDateFormat</b>()</pre>
+  <pre> Returns the value of the _dateFormat attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getDateTimeFormat">getDateTimeFormat</h3>
+  <pre>public String function <b>getDateTimeFormat</b>()</pre>
+  <pre> Returns the value of the _dateTimeFormat attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getDecimalSeparator">getDecimalSeparator</h3>
+  <pre>public char function <b>getDecimalSeparator</b>()</pre>
+  <pre> Returns the value of the _decimalSeparator attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getDefaultLocale">getDefaultLocale</h3>
+  <pre>public static <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> function &amp;<b>getDefaultLocale</b>($locale=false)</pre>
+  <pre> Static method that returns a default SRA_Locale object. The
+  precedence for the return SRA_Locale object is as follows:
+ 
+  1) If locale parameter is valid SRA_Locale object, it is returned
+  2) If app is initialized, app SRA_Locale is returned
+  3) Otherwise, system SRA_Locale is returned
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>Not Specified</td>
+      <td><pre>: SRA_Locale - An optional SRA_Locale parameter. If  			this parameter is a valid SRA_Locale object, it will be
+  			returned.</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getId">getId</h3>
+  <pre>public String function <b>getId</b>()</pre>
+  <pre> Returns the unique identifier for this locale. this value can be used to
+  re-instantiate this locale using the SRA_Locale::getLocale($code) method
+  where the $code is the id
+ 
+</pre>
+ <hr />  <h3 id="method_getISO3Country">getISO3Country</h3>
+  <pre>public String function <b>getISO3Country</b>()</pre>
+  <pre> Returns the value of the _iso3Country attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getISO3Language">getISO3Language</h3>
+  <pre>public String function <b>getISO3Language</b>()</pre>
+  <pre> Returns the value of the _iso3Language attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getIntGroupSeparator">getIntGroupSeparator</h3>
+  <pre>public char function <b>getIntGroupSeparator</b>()</pre>
+  <pre> Returns the value of the _intGroupSeparator attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getLabel">getLabel</h3>
+  <pre>public String function <b>getLabel</b>()</pre>
+  <pre> Returns the label for this locale in the format: [Language Name][/[Country Name]]
+ 
+</pre>
+ <hr />  <h3 id="method_getLanguage">getLanguage</h3>
+  <pre>public String function <b>getLanguage</b>()</pre>
+  <pre> Returns the value of the _language attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getLanguageName">getLanguageName</h3>
+  <pre>public String function <b>getLanguageName</b>(<a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> $locale=FALSE)</pre>
+  <pre> Returns the locale specific language name
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>SRA_Locale</td>
+      <td><pre>$locale - an optional locale to use when getting the country  name resource bundle. if not specified, this SRA_Locale will be used</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getLanguageList">getLanguageList</h3>
+  <pre>public static String[] function <b>getLanguageList</b>($locale=false)</pre>
+  <pre> Static method that returns an associative array of languages and
+  their corresponding display values based on the SRA_Locale parameter
+  specified.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>locale</td>
+      <td>Not Specified</td>
+      <td><pre>: SRA_Locale - The SRA_Locale object to use when determining  			the display name to use for each language. If this parameter
+  			is not specified, the default app or system local will
+ 			be used.</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getLocale">getLocale</h3>
+  <pre>public static <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> function <b>getLocale</b>($code, $language=FALSE, $defaultCountry=FALSE)</pre>
+  <pre> Static method used to retrieve a reference to a locale object based
+  on the parameters provided. This method should be used in place of
+  the constructor.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The country and language code combined  (separated by an _ symbol). This parameter may corresond with one
+  of the SRA_LOCALE_* country constants. If the parameter contains no
+  &amp; symbols, this parameter will be considered the country code only
+  and the additional langauge parameter will also need to be
+  provided.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>language</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The langauge code for this local. This  parameter only needs to be provided if the code parameter contains
+  only the country identifier.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>defaultCountry</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getTimeFormat">getTimeFormat</h3>
+  <pre>public String function <b>getTimeFormat</b>()</pre>
+  <pre> Returns the value of the _timeFormat attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>($object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_Locale
+  object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Not Specified</td>
+      <td><pre>: Object - The object to validate.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_removeDuplicateLocales">removeDuplicateLocales</h3>
+  <pre>public static SRA_Locale[] function &amp;<b>removeDuplicateLocales</b>(SRA_Locale[] $locales)</pre>
+  <pre> Static method that removes any duplicate SRA_Locales from an array
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>locales</td>
+      <td>SRA_Locale[]</td>
+      <td><pre>the array of SRA_Locales to remove duplicates from</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_unformatNumber">unformatNumber</h3>
+  <pre>public float function <b>unformatNumber</b>($number)</pre>
+  <pre> Unformats a number based on the locale.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>number</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The number to unformat.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_validateCountryCode">validateCountryCode</h3>
+  <pre>public boolean function <b>validateCountryCode</b>(string $code)</pre>
+  <pre> validates a country code
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>string</td>
+      <td><pre>the country code to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_validateLanguageCode">validateLanguageCode</h3>
+  <pre>public boolean function <b>validateLanguageCode</b>(string $code)</pre>
+  <pre> validates a language code
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>string</td>
+      <td><pre>the language code to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getLocaleData">_getLocaleData</h3>
+  <pre>public <a href="util.SRA_XmlParser.html" target="contentFrame">SRA_XmlParser</a> function &amp;<b>_getLocaleData</b>()</pre>
+  <pre> Returns a reference to the _localeData attribute
+ 
+</pre>
+ <hr />  <h3 id="method__getLocale">_getLocale</h3>
+  <pre>private <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> function &amp;<b>_getLocale</b>(string $country, string $language)</pre>
+  <pre> instantiates a new SRA_Locale
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>country</td>
+      <td>string</td>
+      <td><pre>country code.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>language</td>
+      <td>string</td>
+      <td><pre>language code.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/l10n/SRA_Locale.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

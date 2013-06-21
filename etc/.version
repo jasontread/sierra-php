@@ -1,0 +1,6 @@
+svn-ci-url=https://sierra-php.googlecode.com/svn/trunk/
+svn-path=sierra-php
+svn-url=http://sierra-php.googlecode.com/svn/trunk/
+version=1.1.4
+versions-info=http://sierra-php.googlecode.com/svn/trunk/etc/.versions
+versions-readme=http://sierra-php.googlecode.com/svn/trunk/etc/.versions-readme

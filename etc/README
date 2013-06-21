@@ -1,0 +1,11 @@
+This directory contains system wide configurations including the following:
+
+app-config.dtd - dtd for specific application configurations (app-config.xml in app/[app name]/etc)
+
+installer.dtd - the dtd for installer configurations
+
+installer.xml - the sierra-php framework installer configuration
+
+sierra-config.dtd - the dtd for validation and description of the sierra-php framework configuration
+	
+l10n - see l10n/README

@@ -1,0 +1,719 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>auth - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_authenticator_file_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_FILE_PREFIX'] = "SRA_AUTHENTICATOR_FILE_PREFIX";
+  }
+  if ("sra_authenticator_logout_file_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_LOGOUT_FILE_PREFIX'] = "SRA_AUTHENTICATOR_LOGOUT_FILE_PREFIX";
+  }
+  if ("sra_ldap_authenticator_scope_base".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_SCOPE_BASE'] = "SRA_LDAP_AUTHENTICATOR_SCOPE_BASE";
+  }
+  if ("sra_ldap_authenticator_scope_one".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_SCOPE_ONE'] = "SRA_LDAP_AUTHENTICATOR_SCOPE_ONE";
+  }
+  if ("sra_authenticator_logout_cookie".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_LOGOUT_COOKIE'] = "SRA_AUTHENTICATOR_LOGOUT_COOKIE";
+  }
+  if ("sra_authenticator_logout_fwd_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_LOGOUT_FWD_VAR'] = "SRA_AUTHENTICATOR_LOGOUT_FWD_VAR";
+  }
+  if ("sra_ldap_authenticator_scope_sub".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_SCOPE_SUB'] = "SRA_LDAP_AUTHENTICATOR_SCOPE_SUB";
+  }
+  if ("sra_ldap_authenticator_uid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_UID'] = "SRA_LDAP_AUTHENTICATOR_UID";
+  }
+  if ("sra_authenticator_attr_user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_ATTR_USER'] = "SRA_AUTHENTICATOR_ATTR_USER";
+  }
+  if ("sra_authenticator_status_success".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_STATUS_SUCCESS'] = "SRA_AUTHENTICATOR_STATUS_SUCCESS";
+  }
+  if ("sra_authenticator_status_failed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_STATUS_FAILED'] = "SRA_AUTHENTICATOR_STATUS_FAILED";
+  }
+  if ("sra_authenticator_status_invalid_pswd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_STATUS_INVALID_PSWD'] = "SRA_AUTHENTICATOR_STATUS_INVALID_PSWD";
+  }
+  if ("sra_authenticator_status_invalid_user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_STATUS_INVALID_USER'] = "SRA_AUTHENTICATOR_STATUS_INVALID_USER";
+  }
+  if ("sra_authenticator_default_timeout".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_DEFAULT_TIMEOUT'] = "SRA_AUTHENTICATOR_DEFAULT_TIMEOUT";
+  }
+  if ("sra_authenticator_status_invalid_attrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_STATUS_INVALID_ATTRS'] = "SRA_AUTHENTICATOR_STATUS_INVALID_ATTRS";
+  }
+  if ("sra_ldap_authenticator_invalid_user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_INVALID_USER'] = "SRA_LDAP_AUTHENTICATOR_INVALID_USER";
+  }
+  if ("sra_authenticator_status_error".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_STATUS_ERROR'] = "SRA_AUTHENTICATOR_STATUS_ERROR";
+  }
+  if ("sra_ldap_authenticator_invalid_pswd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_INVALID_PSWD'] = "SRA_LDAP_AUTHENTICATOR_INVALID_PSWD";
+  }
+  if ("sra_ldap_authenticator_default_port".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_PORT'] = "SRA_LDAP_AUTHENTICATOR_DEFAULT_PORT";
+  }
+  if ("sra_ldap_authenticator_default_secure_port".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_SECURE_PORT'] = "SRA_LDAP_AUTHENTICATOR_DEFAULT_SECURE_PORT";
+  }
+  if ("sra_authenticator_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_DEBUG'] = "SRA_AUTHENTICATOR_DEBUG";
+  }
+  if ("sra_authenticator_debug_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AUTHENTICATOR_DEBUG_FILE'] = "SRA_AUTHENTICATOR_DEBUG_FILE";
+  }
+  if ("sra_ldap_authenticator_default_scope".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_SCOPE'] = "SRA_LDAP_AUTHENTICATOR_DEFAULT_SCOPE";
+  }
+
+
+
+  // check classes
+  if ("sra_authenticator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Authenticator'] = "SRA_Authenticator";
+  }
+  if ("sra_dbauthenticator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_DbAuthenticator'] = "SRA_DbAuthenticator";
+  }
+  if ("sra_ldapauthenticator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_LdapAuthenticator'] = "SRA_LdapAuthenticator";
+  }
+  if ("sra_osauthenticator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_OsAuthenticator'] = "SRA_OsAuthenticator";
+  }
+  if ("sra_pop3authenticator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Pop3Authenticator'] = "SRA_Pop3Authenticator";
+  }
+
+
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="package" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1>package auth</h1>
+  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>Package Information</h2>
+  <ul>
+    <li><a href="#comments">Package Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#classes">Classes</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>The authentication classes can be used to secure areas of your application based on the authentication configuration provided in app-config. Usage of these classes are documented thoroughly in the app-config dtd<br /></pre>
+  
+  <h2 id="constants">Constant Summary</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_FILE_PREFIX">SRA_AUTHENTICATOR_FILE_PREFIX</a></pre>
+<pre> file prefix for storing authenticator cache files and login counts in a file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_LOGOUT_FILE_PREFIX">SRA_AUTHENTICATOR_LOGOUT_FILE_PREFIX</a></pre>
+<pre> file prefix for storing logout records
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_SCOPE_BASE">SRA_LDAP_AUTHENTICATOR_SCOPE_BASE</a></pre>
+<pre> base scope identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_SCOPE_ONE">SRA_LDAP_AUTHENTICATOR_SCOPE_ONE</a></pre>
+<pre> one-level scope identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_LOGOUT_COOKIE">SRA_AUTHENTICATOR_LOGOUT_COOKIE</a></pre>
+<pre> the name of a cookie to set when a user logs out
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_LOGOUT_FWD_VAR">SRA_AUTHENTICATOR_LOGOUT_FWD_VAR</a></pre>
+<pre> the attribute key under which the username will be stored in the &#039;attrs&#039; attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_SCOPE_SUB">SRA_LDAP_AUTHENTICATOR_SCOPE_SUB</a></pre>
+<pre> sub-tree scope identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_UID">SRA_LDAP_AUTHENTICATOR_UID</a></pre>
+<pre> user id ldap code
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_ATTR_USER">SRA_AUTHENTICATOR_ATTR_USER</a></pre>
+<pre> the attribute key under which the username will be stored in the &#039;attrs&#039; attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_STATUS_SUCCESS">SRA_AUTHENTICATOR_STATUS_SUCCESS</a></pre>
+<pre> status code signifying that the user was authenticated successfully
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_STATUS_FAILED">SRA_AUTHENTICATOR_STATUS_FAILED</a></pre>
+<pre> status code signifying that the user authentication failed (but a more
+  specific reason is not known). this is the default status code.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_STATUS_INVALID_PSWD">SRA_AUTHENTICATOR_STATUS_INVALID_PSWD</a></pre>
+<pre> status code signifying that the user authentication failed because the password
+  specified is not valid (the user is valid)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_STATUS_INVALID_USER">SRA_AUTHENTICATOR_STATUS_INVALID_USER</a></pre>
+<pre> status code signifying that the user authentication failed because the username
+  specified is not valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_DEFAULT_TIMEOUT">SRA_AUTHENTICATOR_DEFAULT_TIMEOUT</a></pre>
+<pre> the default timeout value where access tracking is performed based on IP
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_STATUS_INVALID_ATTRS">SRA_AUTHENTICATOR_STATUS_INVALID_ATTRS</a></pre>
+<pre> status code signifying that the user authentication was successful, but the
+  user attribute validation failed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_INVALID_USER">SRA_LDAP_AUTHENTICATOR_INVALID_USER</a></pre>
+<pre> error code identifying that a user is not valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_STATUS_ERROR">SRA_AUTHENTICATOR_STATUS_ERROR</a></pre>
+<pre> status code signifying that the user authentication failed due to a system error
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_INVALID_PSWD">SRA_LDAP_AUTHENTICATOR_INVALID_PSWD</a></pre>
+<pre> error code identifying that a password is not valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_PORT">SRA_LDAP_AUTHENTICATOR_DEFAULT_PORT</a></pre>
+<pre> default non-secure ldap port
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_SECURE_PORT">SRA_LDAP_AUTHENTICATOR_DEFAULT_SECURE_PORT</a></pre>
+<pre> default non-secure ldap port
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_DEBUG">SRA_AUTHENTICATOR_DEBUG</a></pre>
+<pre> SRA_Authenticator debug flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AUTHENTICATOR_DEBUG_FILE">SRA_AUTHENTICATOR_DEBUG_FILE</a></pre>
+<pre> SRA_Authenticator debug file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_SCOPE">SRA_LDAP_AUTHENTICATOR_DEFAULT_SCOPE</a></pre>
+<pre> default ldap scope
+</pre>      </td>
+    </tr>
+  </table>
+
+  
+  <h2 id="classes">Class Summary</h2>
+  <table border="1" width="100%">
+    <tr id="class_SRA_Authenticator">
+      <td><pre><a href="../classes/auth.SRA_Authenticator.html" target="contentFrame">SRA_Authenticator</a></pre></td>
+      <td><pre> Abstract class defining the API that should be adhered to by any SIERRA
+  SRA_Authenticator.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_DbAuthenticator">
+      <td><pre><a href="../classes/auth.SRA_DbAuthenticator.html" target="contentFrame">SRA_DbAuthenticator</a></pre></td>
+      <td><pre> Authenticates a user in an DB server. This SRA_Authenticator utilizes the
+  following parameters:
+   &#039;db&#039;      =&gt;the database server identifier (used to access the
+               database via SRA_Controller::getAppDb(id). If not
+               specified the default app DB will be used
+               (i.e. &lt;param id=&quot;db&quot; value=&quot;authDbId&quot; /&gt;)
+   &#039;table&#039;   =&gt;the name of the database table where the user
+               records are stored (i.e. &lt;param id=&quot;table&quot; value=&quot;USER&quot; /&gt;) - REQUIRED
+   &#039;user-col&#039;=&gt;the name of the column containing the user id
+               (i.e. &lt;param id=&quot;user-col&quot; value=&quot;USER_NAME&quot; /&gt;) - REQUIRED
+   &#039;pswd-col&#039;=&gt;the name of the column containing the password
+               (i.e. &lt;param id=&quot;pswd-col&quot; value=&quot;PASSSWORD&quot; /&gt;). if not
+               provided, only the user will be validated
+   &#039;pswd-cond-col&#039;=&gt; if the password should only be conditionally verified,
+               this parameter may be used to specify the column containing the
+               value used to determine when the password should NOT be
+               evaluated
+   &#039;pswd-cond-val&#039;=&gt; if the password should only be conditionally verified,
+               this parameter may be used to specify the value that
+               &#039;pswd-cond-col&#039; should be equal to. if the password should NOT
+               be evaluated. if &#039;pswd-cond-col&#039; is specified, and this
+               parameter is not, the value that will be used in the evaluation
+               is the TRUE value used by the database. set this value to the
+               string &quot;TRUE&quot;, &quot;FALSE&quot; or &quot;NULL&quot; for those corresponding PHP
+               constants to be used
+   &#039;pswd-fun&#039;=&gt;an optional database password encryption function
+               that should be applied to match passwords. when
+               specified, the validation query will be altered to
+               utilize that function... WHERE PASSWORD=password(&#039;pass&#039;)
+               (i.e. &lt;param id=&#039;pswd-fun&quot; value=&quot;password&quot; /&gt;)
+   &#039;attrs&#039; =&gt; 0..* column/value pairs (of &quot;param&quot; sub-element type
+              &#039;attrs&#039;) that should be retrieved for the user from
+              the user table.
+ 
+              the attributes specified will be accessible in the
+              user&#039;s lib/core/SRA_Authenticator (see api)
+              instance provided as the &quot;tpl-var&quot; or &quot;global-var&quot;
+              attribute specified, where the key will be the
+              &quot;value&quot; of the &quot;param&quot; if specified, the &quot;key&quot;
+              otherwise. these keys/value pairs can also be used
+              to further restrict access in the &quot;restrict-access&quot;
+              &quot;match-property&quot; element. (i.e.
+              &lt;param id=&quot;DEPARTMENT&quot; type=&quot;attrs&quot; value=&quot;dept&quot; /&gt;
+              &lt;param id=&quot;SERIAL_NUMBER&quot; type=&quot;attrs&quot; value=&quot;serialNum&quot; /&gt;)
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_LdapAuthenticator">
+      <td><pre><a href="../classes/auth.SRA_LdapAuthenticator.html" target="contentFrame">SRA_LdapAuthenticator</a></pre></td>
+      <td><pre> Authenticates a user in an LDAP server. This SRA_Authenticator utilizes the
+  following parameters:
+ 	&#039;server&#039;=&gt; the LDAP server dns name or IP address - (i.e.
+ 						 &lt;param id=&quot;server&quot; value=&quot;localhost&quot; /&gt;) - REQUIRED
+ 	&#039;search&#039;=&gt; the LDAP server search base (i.e.
+ 						 &lt;param id=&quot;search&quot; value=&quot;ou=people,o=company&quot; /&gt;) - REQUIRED
+ 	&#039;port&#039; 	=&gt; the LDAP server port (default is 389 for non-secure
+ 						 [ldap://] and 636 for secure [ldaps://]) (i.e.
+ 						 &lt;param id=&quot;port&quot; value=&quot;389&quot; /&gt;)
+ 	&#039;secure&#039;=&gt; whether or not the ldap server is secure (ldaps://)
+ 						 default value is 0 (FALSE) (i.e.
+ 						 &lt;param id=&quot;secure&quot; value=&quot;1&quot; /&gt;)
+  	&#039;scope&#039; =&gt; (base|one|sub), the LDAP search scope. determines
+ 						 which PHP method is used to retrieve user
+ 						 attributes. base=ldap_read, one=ldap_list,
+ 						 sub=ldap_search (default) (i.e.
+ 						 &lt;param id=&quot;scope&quot; value=&quot;sub&quot; /&gt;)
+ 	&#039;attrs&#039; =&gt; 0..* key/value pairs (of &quot;param&quot; sub-element type
+ 						 &#039;attrs&#039;) that should be retrieved for the user from
+ 						 the LDAP server. the default attr key/values (if not
+ 						 specified otherwise) are the following (for
+ 						 additional information on standard LDAP attributes,
+ 						 see http://www.faqs.org/rfcs/rfc2256.html):
+ 
+ 							cn/cn : common name - typically the person&#039;s full name
+ 							sn/sn : surname - typically person&#039;s last name
+ 							givenName/givenName : typically the person&#039;s first name
+ 							mail/mail : typically the person&#039;s email address
+ 							postalAddress/postalAddress : person&#039;s postal address
+ 								telephoneNumber/telephoneNumber : person&#039;s telephone number
+ 
+ 						 the attributes provided by the LDAP server will be
+ 						 accessible in the user&#039;s lib/core/SRA_Authenticator (see api)
+ 						 instance provided as the &quot;tpl-var&quot; or &quot;global-var&quot;
+ 						 attribute specified, where the key will be the
+ 						 &quot;value&quot; of the &quot;param&quot; if specified, the &quot;key&quot;
+ 						 otherwise. these keys/value pairs can also be used
+ 						 to further restrict access in the &quot;restrict-access&quot;
+ 						 &quot;match-property&quot; element. (i.e.
+ 						 &lt;param id=&quot;cn&quot; type=&quot;attrs&quot; value=&quot;fullName&quot; /&gt;
+ 						 &lt;param id=&quot;sn&quot; type=&quot;attrs&quot; value=&quot;lastName&quot; /&gt;)
+ 	&#039;options&#039;=&gt;0..* key/value pairs (of &quot;param&quot; sub-element type &#039;options&#039;) that
+ 						 should be set for the ldap server using
+ 						 &quot;ldap_set_option($conn, key, value)&quot;
+ 
+  If an LDAP error occurs that is not pertaining to an invalid user or password
+  the error code will be stored to the errMsg attribute
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_OsAuthenticator">
+      <td><pre><a href="../classes/auth.SRA_OsAuthenticator.html" target="contentFrame">SRA_OsAuthenticator</a></pre></td>
+      <td><pre> Authenticates a user using expect (http://expect.nist.gov) and the linux &quot;su&quot;
+  command. in order to use this authentication method, expect MUST be installed
+  (yum install expect expectk). Alternatively, if the PHP script requiring
+  authentication is running from the command line, the user invoking that
+  script will be assumed and no authentication will be required. when using
+  sierra/bin/sra-console.php, an alternate user may be specified using the
+  PASSWD_FILE or USERNAME/PASSWORD arguments
+  This SRA_Authenticator utilizes the following parameters:
+    exclude  =&gt; (optional) space separated list of users that should not be
+                authenticated
+    groups   =&gt; (optional) space separated list of group names one of which a
+                user must belong to in order to be authenticated
+    profile  =&gt; (optional) user directory relative, or absolute path to a
+                properties file containing user attributes (key/value pairs)
+                each of these values will be set in the
+                SRA_Authenticator::attrs instance variable. this path may
+                contain the key ${user} which will be substituted with the
+                user name
+    transpose =&gt;(optional) identifies user names that should be transposed.
+                the format for this parameter is: [authenticator user]=[os user]
+                multiple transpose usernames may be specified each separated
+                by a space. direct authentication for transposed users is
+                automatically disallowed
+  in addition to the authenticator &#039;user&#039; key that is automatically set by
+  SRA_Authenticator and the keys set through the &#039;profile&#039; parameter above,
+  this authenticator will also automatically set the following keys:
+    uid:      : the user&#039;s os uid
+    gid:      : the user&#039;s primary group gid
+    groups    : array of groups that the user is a member of
+    home      : absolute path to the user&#039;s home directory
+    transposed: if the username was transposed, this value will be the
+                transposed username (&#039;user&#039; will be the non-transposed user)
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Pop3Authenticator">
+      <td><pre><a href="../classes/auth.SRA_Pop3Authenticator.html" target="contentFrame">SRA_Pop3Authenticator</a></pre></td>
+      <td><pre> Authenticates a user using a POP3 email server. This SRA_Authenticator
+  utilizes the following parameters:
+ 	&#039;host&#039;=&gt; the POP3 server dns name or IP address - (i.e.
+     &lt;param id=&quot;server&quot; value=&quot;mail.mydomain.com&quot; /&gt;) - REQUIRED
+ 	&#039;port&#039;=&gt; (1|0) - tcp/ip port to connect on (default is 110 or 995 for tls)
+ 	&#039;tls&#039;=&gt; (1|0) - whether or not to use a tls secure connection to the server
+     (default is 0)
+ 	&#039;apop&#039;=&gt; (1|0) - whether or not to use APOP authentication (must be
+      supported by the mail server - default is 0)
+   &#039;append&#039; =&gt; optional text to append to the user (if it is not already there)
+      this may be useful for mail servers that require the entire email address
+      as the user name thereby allowing the user to just enter the email name
+</pre></td>
+    </tr>
+  </table>
+
+
+
+  <h2 id="constant_details">Constant Details</h2>
+  <h3 id="constant_SRA_AUTHENTICATOR_FILE_PREFIX">SRA_AUTHENTICATOR_FILE_PREFIX</h3>
+  <pre>string <b>SRA_AUTHENTICATOR_FILE_PREFIX</b> = '.sierra_auth_'</pre>
+  <pre> file prefix for storing authenticator cache files and login counts in a file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_LOGOUT_FILE_PREFIX">SRA_AUTHENTICATOR_LOGOUT_FILE_PREFIX</h3>
+  <pre>string <b>SRA_AUTHENTICATOR_LOGOUT_FILE_PREFIX</b> = '.sierra_auth_logout_'</pre>
+  <pre> file prefix for storing logout records
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_SCOPE_BASE">SRA_LDAP_AUTHENTICATOR_SCOPE_BASE</h3>
+  <pre>string <b>SRA_LDAP_AUTHENTICATOR_SCOPE_BASE</b> = 'base'</pre>
+  <pre> base scope identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_SCOPE_ONE">SRA_LDAP_AUTHENTICATOR_SCOPE_ONE</h3>
+  <pre>string <b>SRA_LDAP_AUTHENTICATOR_SCOPE_ONE</b> = 'one'</pre>
+  <pre> one-level scope identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_LOGOUT_COOKIE">SRA_AUTHENTICATOR_LOGOUT_COOKIE</h3>
+  <pre>string <b>SRA_AUTHENTICATOR_LOGOUT_COOKIE</b> = 'sraLogout'</pre>
+  <pre> the name of a cookie to set when a user logs out
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_LOGOUT_FWD_VAR">SRA_AUTHENTICATOR_LOGOUT_FWD_VAR</h3>
+  <pre>string <b>SRA_AUTHENTICATOR_LOGOUT_FWD_VAR</b> = 'sraLogoutFwd'</pre>
+  <pre> the attribute key under which the username will be stored in the &#039;attrs&#039; attribute
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_SCOPE_SUB">SRA_LDAP_AUTHENTICATOR_SCOPE_SUB</h3>
+  <pre>string <b>SRA_LDAP_AUTHENTICATOR_SCOPE_SUB</b> = 'sub'</pre>
+  <pre> sub-tree scope identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_UID">SRA_LDAP_AUTHENTICATOR_UID</h3>
+  <pre>string <b>SRA_LDAP_AUTHENTICATOR_UID</b> = 'uid'</pre>
+  <pre> user id ldap code
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_ATTR_USER">SRA_AUTHENTICATOR_ATTR_USER</h3>
+  <pre>string <b>SRA_AUTHENTICATOR_ATTR_USER</b> = 'user'</pre>
+  <pre> the attribute key under which the username will be stored in the &#039;attrs&#039; attribute
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_STATUS_SUCCESS">SRA_AUTHENTICATOR_STATUS_SUCCESS</h3>
+  <pre>int <b>SRA_AUTHENTICATOR_STATUS_SUCCESS</b> = 1</pre>
+  <pre> status code signifying that the user was authenticated successfully
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_STATUS_FAILED">SRA_AUTHENTICATOR_STATUS_FAILED</h3>
+  <pre>int <b>SRA_AUTHENTICATOR_STATUS_FAILED</b> = 2</pre>
+  <pre> status code signifying that the user authentication failed (but a more
+  specific reason is not known). this is the default status code.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_STATUS_INVALID_PSWD">SRA_AUTHENTICATOR_STATUS_INVALID_PSWD</h3>
+  <pre>int <b>SRA_AUTHENTICATOR_STATUS_INVALID_PSWD</b> = 4</pre>
+  <pre> status code signifying that the user authentication failed because the password
+  specified is not valid (the user is valid)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_STATUS_INVALID_USER">SRA_AUTHENTICATOR_STATUS_INVALID_USER</h3>
+  <pre>int <b>SRA_AUTHENTICATOR_STATUS_INVALID_USER</b> = 8</pre>
+  <pre> status code signifying that the user authentication failed because the username
+  specified is not valid
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_DEFAULT_TIMEOUT">SRA_AUTHENTICATOR_DEFAULT_TIMEOUT</h3>
+  <pre>int <b>SRA_AUTHENTICATOR_DEFAULT_TIMEOUT</b> = 15</pre>
+  <pre> the default timeout value where access tracking is performed based on IP
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_STATUS_INVALID_ATTRS">SRA_AUTHENTICATOR_STATUS_INVALID_ATTRS</h3>
+  <pre>int <b>SRA_AUTHENTICATOR_STATUS_INVALID_ATTRS</b> = 16</pre>
+  <pre> status code signifying that the user authentication was successful, but the
+  user attribute validation failed
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_INVALID_USER">SRA_LDAP_AUTHENTICATOR_INVALID_USER</h3>
+  <pre>int <b>SRA_LDAP_AUTHENTICATOR_INVALID_USER</b> = 32</pre>
+  <pre> error code identifying that a user is not valid
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_STATUS_ERROR">SRA_AUTHENTICATOR_STATUS_ERROR</h3>
+  <pre>int <b>SRA_AUTHENTICATOR_STATUS_ERROR</b> = 32</pre>
+  <pre> status code signifying that the user authentication failed due to a system error
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_INVALID_PSWD">SRA_LDAP_AUTHENTICATOR_INVALID_PSWD</h3>
+  <pre>int <b>SRA_LDAP_AUTHENTICATOR_INVALID_PSWD</b> = 49</pre>
+  <pre> error code identifying that a password is not valid
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_PORT">SRA_LDAP_AUTHENTICATOR_DEFAULT_PORT</h3>
+  <pre>int <b>SRA_LDAP_AUTHENTICATOR_DEFAULT_PORT</b> = 389</pre>
+  <pre> default non-secure ldap port
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_SECURE_PORT">SRA_LDAP_AUTHENTICATOR_DEFAULT_SECURE_PORT</h3>
+  <pre>int <b>SRA_LDAP_AUTHENTICATOR_DEFAULT_SECURE_PORT</b> = 636</pre>
+  <pre> default non-secure ldap port
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_DEBUG">SRA_AUTHENTICATOR_DEBUG</h3>
+  <pre>boolean <b>SRA_AUTHENTICATOR_DEBUG</b> = FALSE</pre>
+  <pre> SRA_Authenticator debug flag
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_AUTHENTICATOR_DEBUG_FILE">SRA_AUTHENTICATOR_DEBUG_FILE</h3>
+  <pre>string <b>SRA_AUTHENTICATOR_DEBUG_FILE</b> = SRA_DIR . '/tmp/.sierra_auth_debug'</pre>
+  <pre> SRA_Authenticator debug file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_Authenticator.php</p>
+ <hr />  <h3 id="constant_SRA_LDAP_AUTHENTICATOR_DEFAULT_SCOPE">SRA_LDAP_AUTHENTICATOR_DEFAULT_SCOPE</h3>
+  <pre>string <b>SRA_LDAP_AUTHENTICATOR_DEFAULT_SCOPE</b> = SRA_LDAP_AUTHENTICATOR_SCOPE_SUB</pre>
+  <pre> default ldap scope
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/auth/SRA_LdapAuthenticator.php</p>
+  </form>
+</body>
+</html>

@@ -1,0 +1,2060 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>workflow.dtd - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_workflow_task_due_date_rel_cur".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR";
+  }
+  if ("sra_workflow_task_due_date_rel_wf_start".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START";
+  }
+  if ("sra_workflow_task_due_date_rel_wf_due_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE";
+  }
+  if ("sra_workflow_task_due_date_rel_step_due_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE";
+  }
+
+
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+  // elements
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow'] = "workflow";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::delete-cascade".indexOf(str) != -1 || "delete-cascade".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_delete-cascade'] = "workflow::delete-cascade";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::due-date".indexOf(str) != -1 || "due-date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_due-date'] = "workflow::due-date";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::notify".indexOf(str) != -1 || "notify".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_notify'] = "workflow::notify";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::notify-bcc".indexOf(str) != -1 || "notify-bcc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_notify-bcc'] = "workflow::notify-bcc";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::notify-cc".indexOf(str) != -1 || "notify-cc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_notify-cc'] = "workflow::notify-cc";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::notify-from".indexOf(str) != -1 || "notify-from".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_notify-from'] = "workflow::notify-from";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::notify-subject".indexOf(str) != -1 || "notify-subject".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_notify-subject'] = "workflow::notify-subject";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::notify-tpl".indexOf(str) != -1 || "notify-tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_notify-tpl'] = "workflow::notify-tpl";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::notify-tpl-html".indexOf(str) != -1 || "notify-tpl-html".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_notify-tpl-html'] = "workflow::notify-tpl-html";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::role-attr".indexOf(str) != -1 || "role-attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_role-attr'] = "workflow::role-attr";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::role-attr-displ".indexOf(str) != -1 || "role-attr-displ".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_role-attr-displ'] = "workflow::role-attr-displ";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::role-attr-members".indexOf(str) != -1 || "role-attr-members".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_role-attr-members'] = "workflow::role-attr-members";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::role-entity".indexOf(str) != -1 || "role-entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_role-entity'] = "workflow::role-entity";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::resource".indexOf(str) != -1 || "resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_resource'] = "workflow::resource";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::resources".indexOf(str) != -1 || "resources".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_resources'] = "workflow::resources";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::start".indexOf(str) != -1 || "start".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_start'] = "workflow::start";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::user-attr".indexOf(str) != -1 || "user-attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_user-attr'] = "workflow::user-attr";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::user-attr-displ".indexOf(str) != -1 || "user-attr-displ".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_user-attr-displ'] = "workflow::user-attr-displ";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::user-attr-email".indexOf(str) != -1 || "user-attr-email".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_user-attr-email'] = "workflow::user-attr-email";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::user-entity".indexOf(str) != -1 || "user-entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_user-entity'] = "workflow::user-entity";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::user-key".indexOf(str) != -1 || "user-key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_user-key'] = "workflow::user-key";
+  }
+  // workflow element attributes
+  if ("workflow".indexOf(str) != -1 || "workflow::user-key-type".indexOf(str) != -1 || "user-key-type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_workflow_user-key-type'] = "workflow::user-key-type";
+  }
+  if ("step".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step'] = "step";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_key'] = "step::key";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::due-date".indexOf(str) != -1 || "due-date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_due-date'] = "step::due-date";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::due-date-rel".indexOf(str) != -1 || "due-date-rel".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_due-date-rel'] = "step::due-date-rel";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::connect-to".indexOf(str) != -1 || "connect-to".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_connect-to'] = "step::connect-to";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::entity".indexOf(str) != -1 || "entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_entity'] = "step::entity";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::entity-id".indexOf(str) != -1 || "entity-id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_entity-id'] = "step::entity-id";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::entity-pk".indexOf(str) != -1 || "entity-pk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_entity-pk'] = "step::entity-pk";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::finish".indexOf(str) != -1 || "finish".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_finish'] = "step::finish";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::next".indexOf(str) != -1 || "next".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_next'] = "step::next";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::notify".indexOf(str) != -1 || "notify".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_notify'] = "step::notify";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::notify-bcc".indexOf(str) != -1 || "notify-bcc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_notify-bcc'] = "step::notify-bcc";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::notify-cc".indexOf(str) != -1 || "notify-cc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_notify-cc'] = "step::notify-cc";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::notify-from".indexOf(str) != -1 || "notify-from".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_notify-from'] = "step::notify-from";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::notify-subject".indexOf(str) != -1 || "notify-subject".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_notify-subject'] = "step::notify-subject";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::notify-tpl".indexOf(str) != -1 || "notify-tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_notify-tpl'] = "step::notify-tpl";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::notify-tpl-html".indexOf(str) != -1 || "notify-tpl-html".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_notify-tpl-html'] = "step::notify-tpl-html";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::resource".indexOf(str) != -1 || "resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_resource'] = "step::resource";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::role".indexOf(str) != -1 || "role".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_role'] = "step::role";
+  }
+  // step element attributes
+  if ("step".indexOf(str) != -1 || "step::user".indexOf(str) != -1 || "user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_step_user'] = "step::user";
+  }
+  if ("task".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task'] = "task";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::commit".indexOf(str) != -1 || "commit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_commit'] = "task::commit";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::connect-to".indexOf(str) != -1 || "connect-to".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_connect-to'] = "task::connect-to";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::due-date".indexOf(str) != -1 || "due-date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_due-date'] = "task::due-date";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::due-date-rel".indexOf(str) != -1 || "due-date-rel".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_due-date-rel'] = "task::due-date-rel";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::entity".indexOf(str) != -1 || "entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_entity'] = "task::entity";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::entity-id".indexOf(str) != -1 || "entity-id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_entity-id'] = "task::entity-id";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::entity-pk".indexOf(str) != -1 || "entity-pk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_entity-pk'] = "task::entity-pk";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::interactive".indexOf(str) != -1 || "interactive".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_interactive'] = "task::interactive";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify".indexOf(str) != -1 || "notify".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify'] = "task::notify";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-all".indexOf(str) != -1 || "notify-all".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-all'] = "task::notify-all";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-always".indexOf(str) != -1 || "notify-always".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-always'] = "task::notify-always";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-att-name".indexOf(str) != -1 || "notify-att-name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-att-name'] = "task::notify-att-name";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-att-view".indexOf(str) != -1 || "notify-att-view".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-att-view'] = "task::notify-att-view";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-bcc".indexOf(str) != -1 || "notify-bcc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-bcc'] = "task::notify-bcc";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-cc".indexOf(str) != -1 || "notify-cc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-cc'] = "task::notify-cc";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-from".indexOf(str) != -1 || "notify-from".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-from'] = "task::notify-from";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-recipients".indexOf(str) != -1 || "notify-recipients".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-recipients'] = "task::notify-recipients";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-recipients-only".indexOf(str) != -1 || "notify-recipients-only".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-recipients-only'] = "task::notify-recipients-only";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-subject".indexOf(str) != -1 || "notify-subject".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-subject'] = "task::notify-subject";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-tpl".indexOf(str) != -1 || "notify-tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-tpl'] = "task::notify-tpl";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::notify-tpl-html".indexOf(str) != -1 || "notify-tpl-html".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_notify-tpl-html'] = "task::notify-tpl-html";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::resource".indexOf(str) != -1 || "resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_resource'] = "task::resource";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::resource-descr".indexOf(str) != -1 || "resource-descr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_resource-descr'] = "task::resource-descr";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::role".indexOf(str) != -1 || "role".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_role'] = "task::role";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::user".indexOf(str) != -1 || "user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_user'] = "task::user";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::validate".indexOf(str) != -1 || "validate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_validate'] = "task::validate";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::validate-ignore".indexOf(str) != -1 || "validate-ignore".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_validate-ignore'] = "task::validate-ignore";
+  }
+  // task element attributes
+  if ("task".indexOf(str) != -1 || "task::view".indexOf(str) != -1 || "view".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_task_view'] = "task::view";
+  }
+  if ("constraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint'] = "constraint";
+  }
+  // constraint element attributes
+  if ("constraint".indexOf(str) != -1 || "constraint::attr".indexOf(str) != -1 || "attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint_attr'] = "constraint::attr";
+  }
+  // constraint element attributes
+  if ("constraint".indexOf(str) != -1 || "constraint::attr-type".indexOf(str) != -1 || "attr-type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint_attr-type'] = "constraint::attr-type";
+  }
+  // constraint element attributes
+  if ("constraint".indexOf(str) != -1 || "constraint::entity-id".indexOf(str) != -1 || "entity-id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint_entity-id'] = "constraint::entity-id";
+  }
+  // constraint element attributes
+  if ("constraint".indexOf(str) != -1 || "constraint::operator".indexOf(str) != -1 || "operator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint_operator'] = "constraint::operator";
+  }
+  // constraint element attributes
+  if ("constraint".indexOf(str) != -1 || "constraint::value".indexOf(str) != -1 || "value".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint_value'] = "constraint::value";
+  }
+  // constraint element attributes
+  if ("constraint".indexOf(str) != -1 || "constraint::value-type".indexOf(str) != -1 || "value-type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint_value-type'] = "constraint::value-type";
+  }
+  if ("constraint-group".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint-group'] = "constraint-group";
+  }
+  // constraint-group element attributes
+  if ("constraint-group".indexOf(str) != -1 || "constraint-group::connective".indexOf(str) != -1 || "connective".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_constraint-group_connective'] = "constraint-group::connective";
+  }
+  if ("decision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_decision'] = "decision";
+  }
+  // decision element attributes
+  if ("decision".indexOf(str) != -1 || "decision::connective".indexOf(str) != -1 || "connective".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_decision_connective'] = "decision::connective";
+  }
+  // decision element attributes
+  if ("decision".indexOf(str) != -1 || "decision::next".indexOf(str) != -1 || "next".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_decision_next'] = "decision::next";
+  }
+  if ("eval-after".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_eval-after'] = "eval-after";
+  }
+  if ("eval-before".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_eval-before'] = "eval-before";
+  }
+  if ("param".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_param'] = "param";
+  }
+  // param element attributes
+  if ("param".indexOf(str) != -1 || "param::key".indexOf(str) != -1 || "key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_param_key'] = "param::key";
+  }
+  // param element attributes
+  if ("param".indexOf(str) != -1 || "param::value".indexOf(str) != -1 || "value".indexOf(str) != -1) {
+    match = true;
+    matches['qs_element_param_value'] = "param::value";
+  }
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="dtd" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">workflow.dtd</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/workflow.html" target="contentFrame">workflow</a></p>  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>DTD Information</h2>
+  <ul>
+    <li><a href="#comments">DTD Comments</a></li>
+    <li><a href="#entities">Entities</a></li>
+    <li><a href="#elements">Elements</a></li>
+    <li><a href="#element_details">Element Details</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>XML DTD for a SIERRA::workflow
+
+Used to define a single managed workflow. Applications may utilize workflow 
+definitions and the supporting lib/workflow/* classes to manage behavior and 
+functionality. In order to utilize a SIERRA::workflow within your application, 
+your app-config must include the &quot;lib/workflow/workflow.xml&quot; entity model
+(&lt;use-entity-model key=&quot;workflow&quot; path=&quot;lib/workflow/workflow.xml&quot; /&gt;)
+
+To support validation of your workflow xml file, include the following
+DOCTYPE element at the beginning (after the &quot;xml&quot; declaration):
+
+&lt;!DOCTYPE workflow PUBLIC &quot;-//SIERRA//DTD SIERRA WORKFLOW//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/lib/workflow/workflow.dtd&quot;&gt;
+</pre>
+  
+  <h2 id="entities">Entities</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Comment</th>
+    </tr>
+    <tr>
+      <th><pre>Resource</pre></th>
+      <td>CDATA</td>
+      <td><pre>A &quot;Resource&quot; is the key in the application SRA_ResourceBundle that contains a 
+string or name for an element. 
+</pre></td>
+    </tr>
+  </table>
+
+  <h2 id="elements">Elements</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th><pre><a href="#element_workflow">workflow</a><strong> [root element]</strong></pre></th>
+      <td><pre>The &quot;workflow&quot; element is the root element of an workflow. it contains all of 
+the steps/tasks associated with the workflow as well as a start step designator.
+at least 1 step or task must be defined for a workflow to be valid</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_step">step</a></pre></th>
+      <td><pre>The &quot;step&quot; element defines a phase of work within the workflow. if a step is not 
+a &quot;finish&quot; step, then it will also provide 1 or more outbound step references 
+defining what should occur after this step is complete. workflow steps may be 
+used to accomplish tasks (1 or more nested &quot;tasks&quot;) or to implement conditional 
+logic (using nested decisions) or both</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_task">task</a></pre></th>
+      <td><pre>The &quot;task&quot; element defines a unit of work within a workflow. tasks are created 
+within the context of a workflow &quot;step&quot;. tasks can be either interactive or 
+auto-completed. auto-completed tasks do not require any user intervention in 
+order to complete while interactive tasks do. interactive tasks are those 
+tasks containing a &quot;view&quot; and those flagged as &quot;interactive&quot;. the unit of work 
+performed by a task is either the enclosing &quot;eval&quot; value, the &quot;view&quot; or the 
+those values must exist for each task. the optional nested &quot;constraint-group&quot; 
+sub-element determine whether or not this task is added to the enclosing step 
+at the time it is created
+
+user              if this task is the responsibility of a user other than the 
+                  owner of the enclosing step, this attribute may specify the 
+                  identifier of that user. this user will be notified and 
+                  given responsibility to complete this task when it is 
+                  created. this attribute may also reference a workflow 
+                  parameter using the format ${param name}</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_constraint">constraint</a></pre></th>
+      <td><pre>The &quot;constraint&quot; element defines a single constraint that will be evaluated 
+within the context of a decision or constraint group. each constraint returns 
+boolean TRUE or FALSE the value of which will also be used to determine how the 
+enclosing decision/constraint-group evaluates</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_constraint-group">constraint-group</a></pre></th>
+      <td><pre>The &quot;constraint-group&quot; element is used to specify 1 or more constraint or 
+constraint-group sub-elements that will be evaluated as a whole based on the 
+&quot;connective&quot; specified for the group (either conjunction or disjunction). the 
+evaluation includes short-circuiting for conjunction join types (and)</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_decision">decision</a></pre></th>
+      <td><pre>The &quot;decision&quot; element defines a single alternate outbound path for a step. 
+It constains 1 or more constraints used to determine whether or not the 
+decision should be invoked. if none of a step&#039;s decisions are triggered, then 
+the step &quot;next&quot; path will be invoked. a decision should have at least 1 
+nested &quot;constraint&quot; or &quot;constraint-group&quot; elements</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_eval-after">eval-after</a></pre></th>
+      <td><pre>The &quot;eval-after&quot; element specifies a PHP code block that should be invoked for a 
+particular task. this code segment will have access to any current workflow 
+entities using the &quot;entity-id&quot; as the variable name as well as to the 
+SraWorkflow, SraWorkflowStep and SraWorkflowTask instances using the variable 
+names $workflow, $step (when applicable) and $task. This code block MUST return 
+TRUE, or the workflow will enter an error state. the code in this element is 
+invoked AFTER the task is completed successfully (if a &quot;view&quot; is defined for the 
+task, this would be when that view is completed/confirmed)
+
+</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_eval-before">eval-before</a></pre></th>
+      <td><pre>Like &quot;eval-before&quot;, &quot;eval-before&quot; element also specifies a PHP code block that 
+should be invoked for a particular task. however, this code is invoked at the 
+same time that the task is created. the difference between &quot;eval-before&quot; and 
+&quot;eval-after&quot; is only applicable to interractive tasks (tasks with associated 
+views)
+
+</pre></td>
+    </tr>
+    <tr>
+      <th><pre><a href="#element_param">param</a></pre></th>
+      <td><pre>The &quot;param&quot; element is used to define implementation/front-end specified 
+values. they are not used within the lib/workflow system itself. they may be 
+accessed within the SRA_Workflow/SRA_WorkflowStep::params associative array 
+attribute</pre></td>
+    </tr>
+  </table>
+  
+  <h2 id="element_details">Element Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_workflow">workflow [root element]</h3>
+  <pre>The &quot;workflow&quot; element is the root element of an workflow. it contains all of 
+the steps/tasks associated with the workflow as well as a start step designator.
+at least 1 step or task must be defined for a workflow to be valid</pre>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_step">step</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_task">task</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_param">param</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_workflow_delete-cascade">
+      <th><pre>delete-cascade</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not to cascade deletions to any entities belonging
+to this workflow. this does not pertain to non-committed 
+entities. the default behavior is to not cascade delete
+</pre></td>
+    </tr>
+    <tr id="element_workflow_due-date">
+      <th><pre>due-date</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>an explicit date or relative date expression. explicit dates
+should be entered in the format &quot;YYYY-MM-DD HH:MM:SS&quot; (time 
+is optional). relative expressions utilize the same format 
+except that any of the date values (YYYY, MM, DD, HH, MM, or 
+SS) may be replaced with a relative modifier in the format 
+&quot;+n&quot; where n is the increase from the current timestamp. For 
+example, to specify the 1st of the following month, the 
+&quot;due-date&quot; would be: &quot;+0-+1-01&quot; - where +0 signifies the 
+current year, and +1 signifies the following month. if the 
+current month was december (12), the following month will be 
+January and the year will be incremented automatically. 
+Another example: to specify exactly one week from the current 
+time, &quot;due-date&quot; would be &quot;+0-+0-+7&quot; - where the first +0 
+signifies the current year, the second +0 signifies the 
+current month, and +7 signifies 7 days from the current date. 
+month and year rollovers resulting in the 1 week jump will be 
+automatically applied (for example if the workflow was created 
+on 12/28). negative increments can be applied by enclosing the 
+increment value &quot;n&quot; in parenthesis. for example, to specify 1 
+month minus 1 week from the current date, &quot;due-date&quot; would be: 
+&quot;+0-+1-+(7)&quot;. the increment value &quot;n&quot; may also be an a 
+parameter using the format &quot;${param name}
+</pre></td>
+    </tr>
+    <tr id="element_workflow_notify">
+      <th><pre>notify</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not email notifications will be used by this
+ workflow. if specified, both &quot;notify-subject&quot; and &quot;notify-tpl&quot; 
+ must also be specified
+ </pre></td>
+    </tr>
+    <tr id="element_workflow_notify-bcc">
+      <th><pre>notify-bcc</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>optional comma separated list of blind carbon copy recipients
+for all workflow notifications. these will be used for the 1st 
+notification sent only. only applicable when at least 1 
+notification is being sent
+</pre></td>
+    </tr>
+    <tr id="element_workflow_notify-cc">
+      <th><pre>notify-cc</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>optional comma separated list of carbon copy recipients for
+all workflow notifications. these will be used for the 1st 
+notification sent only. only applicable when at least 1 
+notification is being sent
+</pre></td>
+    </tr>
+    <tr id="element_workflow_notify-from">
+      <th><pre>notify-from</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the notification return email address. if not specified, the
+web server process user name will be used (i.e. 
+apache@myserver.com). both a name and email address may be 
+specified using the format: &quot;[email] &amp;lt;[name]&amp;gt;&quot;
+</pre></td>
+    </tr>
+    <tr id="element_workflow_notify-subject">
+      <th><pre>notify-subject</pre></th>
+      <td><pre>Resource</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the email notification subject resource identifier. must be
+specified if &quot;notify&quot; is true
+         </pre></td>
+    </tr>
+    <tr id="element_workflow_notify-tpl">
+      <th><pre>notify-tpl</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the text email notification template. this template will have
+access to the following dynamic workflow variables:
+ $wfResources: the merged SRA_ResourceBundle object
+ $wfWorkflow: the SraWorkflow instance
+ $wfStep: the SraWorkflowStep instance (when applicable)
+ $wfTask: the SraWorkflowTask instance
+ $wfSetup: the SRA_Workflow (configuration) instance
+ $wfStepSetup: the SRA_WorkflowStep (configuration) instance 
+ (when applicable)
+ $wfTaskSetup: the SRA_WorkflowTask (configuration) instance
+ $wf_{entity-id}: entities currently associated with the 
+ workflow
+ $wfUser: the &quot;user-entity&quot; reference for the notification
+must be specified if &quot;notify&quot; is true
+</pre></td>
+    </tr>
+    <tr id="element_workflow_notify-tpl-html">
+      <th><pre>notify-tpl-html</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>same as &quot;notify-tpl&quot; but specifies an html formatted email
+message template. either &quot;notify-tpl&quot; or &quot;notify-tpl-html&quot; 
+MUST be specified when notifications are active for a 
+workflow. if both are specified, the emails sent will be 
+multipart mime formatted
+</pre></td>
+    </tr>
+    <tr id="element_workflow_role-attr">
+      <th><pre>role-attr</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>same as &quot;user-attr&quot; for workflow roles
+</pre></td>
+    </tr>
+    <tr id="element_workflow_role-attr-displ">
+      <th><pre>role-attr-displ</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>same as &quot;user-attr-displ&quot; for workflow roles
+</pre></td>
+    </tr>
+    <tr id="element_workflow_role-attr-members">
+      <th><pre>role-attr-members</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the name of the attribute within &quot;role-entity&quot; that specifies
+the users that are members of that role. this attribute may 
+be either an array of user identifiers (based on &quot;user-attr&quot;) 
+or an array of &quot;user-entity&quot; references. this attribute is 
+required when &quot;roleEntity&quot; is specified
+</pre></td>
+    </tr>
+    <tr id="element_workflow_role-entity">
+      <th><pre>role-entity</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>same as &quot;user-entity&quot; for workflow roles. if not specified,
+roles CANNOT be used within tasks for this workflow
+</pre></td>
+    </tr>
+    <tr id="element_workflow_resource">
+      <th><pre>resource</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the resource identifier for this workflow
+</pre></td>
+    </tr>
+    <tr id="element_workflow_resources">
+      <th><pre>resources</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>a space separated list of resource bundles that should be
+included in the workflow. %Resource; attributes will reference 
+values within these files. additionally, templates may access 
+them using the workflow template variable &#039;workflowResources&#039;
+which will be a merged SRA_ResourceBundle representing all of 
+the files specified in this attribute
+</pre></td>
+    </tr>
+    <tr id="element_workflow_start">
+      <th><pre>start</pre></th>
+      <td><pre>IDREF</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the starting workflow step. this attribute is required when
+steps are defined for the workflow
+</pre></td>
+    </tr>
+    <tr id="element_workflow_user-attr">
+      <th><pre>user-attr</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the name of the attribute within the user object that should
+be used within the workflow as the user identifier. this 
+attribute will also be used to lookup the user object when 
+&quot;user-key&quot; returns a scalar value (using the dao 
+findBySqlConstraints or findByPk methods). if this attribute 
+is not specified, it will be assumed that the &quot;user-key&quot; is 
+the &quot;user-entity&quot; primary key attribute
+</pre></td>
+    </tr>
+    <tr id="element_workflow_user-attr-displ">
+      <th><pre>user-attr-displ</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if an attribute other than &quot;user-attr&quot; should be used as the
+display value, this attribute specifies the name of that 
+attribute within &quot;user-entity&quot;. for example, if &quot;user-attr&quot; 
+is the primary key (a numeric value), and you would like the 
+user attribute &quot;name&quot; to be displayed instead of the numeric 
+primary key, this attribute value would be &quot;name&quot;
+</pre></td>
+    </tr>
+    <tr id="element_workflow_user-attr-email">
+      <th><pre>user-attr-email</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the attribute within &quot;user-entity&quot; containing the user&#039;s email
+ address. the email address is used for notifications. this 
+ attribute is required if &quot;notify&quot; is true
+</pre></td>
+    </tr>
+    <tr id="element_workflow_user-entity">
+      <th><pre>user-entity</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the name of the entity within the application this workflow is
+a part of, that represents users. this attribute is required
+</pre></td>
+    </tr>
+    <tr id="element_workflow_user-key">
+      <th><pre>user-key</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>when an instance of this workflow is created, the current
+active user is automatically assigned ownership of it. all 
+interactive tasks that are then created for the workflow 
+and do not specify alternative assignment (using the &quot;user&quot; 
+and/or &quot;role&quot; attribute) will be automatically assigned to 
+this workflow owner. this value specifies the name of the 
+value within the &quot;user-key-type&quot; context that a reference to 
+the active user object (an instance of &quot;user-entity&quot;). this 
+attribute is required
+</pre></td>
+    </tr>
+    <tr id="element_workflow_user-key-type">
+      <th><pre>user-key-type</pre></th>
+      <td><pre>(get | global | post | session)</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>where the active user object is stored. this may be any of
+the following:
+  session: within the session scope ($_SESSION)
+  global:  within the global scope ($_GLOBALS)
+  get:     within the get headers ($_GET)
+  post:    within the post headers ($_POST)
+if the value is scalar it will be assumed to be the user 
+identifier as specified through &quot;user-attr&quot;. this attribute is 
+required
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_step">step</h3>
+  <pre>The &quot;step&quot; element defines a phase of work within the workflow. if a step is not 
+a &quot;finish&quot; step, then it will also provide 1 or more outbound step references 
+defining what should occur after this step is complete. workflow steps may be 
+used to accomplish tasks (1 or more nested &quot;tasks&quot;) or to implement conditional 
+logic (using nested decisions) or both</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_workflow">workflow</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_decision">decision</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_param">param</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_task">task</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_step_key">
+      <th><pre>key</pre></th>
+      <td><pre>ID</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the unique identifier for this step
+</pre></td>
+    </tr>
+    <tr id="element_step_due-date">
+      <th><pre>due-date</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>an explicit date or relative date expression. explicit dates
+should be entered in the format &quot;YYYY-MM-DD HH:MM:SS&quot; (time 
+is optional). relative expressions utilize the same format 
+except that any of the date values (YYYY, MM, DD, HH, MM, or 
+SS) may be replaced with a relative modifier in the format 
+&quot;+n&quot; where n is the increase from the current timestamp. For 
+example, to specify the 1st of the following month, the 
+&quot;due-date&quot; would be: &quot;+0-+1-01&quot; - where +0 signifies the 
+current year, and +1 signifies the following month. if the 
+current month was december (12), the following month will be 
+January and the year will be incremented automatically. 
+Another example: to specify exactly one week from the current 
+time, &quot;due-date&quot; would be &quot;+0-+0-+7&quot; - where the first +0 
+signifies the current year, the second +0 signifies the 
+current month, and +7 signifies 7 days from the current date. 
+month and year rollovers resulting in the 1 week jump will be 
+automatically applied (for example, if the task was created 
+on 12/28). negative increments can be applied by enclosing the 
+increment value &quot;n&quot; in parenthesis. for example, to specify 1 
+month minus 1 week from the current date, &quot;due-date&quot; would be: 
+&quot;+0-+1-+(7)&quot;. the increment value &quot;n&quot; may also be an step or 
+workflow parameter using the format &quot;${param name}
+</pre></td>
+    </tr>
+    <tr id="element_step_due-date-rel">
+      <th><pre>due-date-rel</pre></th>
+      <td><pre>(0 | 1 | 2)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>if the step &quot;due-date&quot; is relative, this attribute
+determines what it is relative to. the following options are 
+available:
+ 0: the date/time when the task was invoked (default)
+ 1: the workflow start date
+ 2: the workflow due date (should not be greater)
+</pre></td>
+    </tr>
+    <tr id="element_step_connect-to">
+      <th><pre>connect-to</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the identifier of another workflow to connect to when this
+step is completed. NOTE: the connect-to workflow will be 
+initialized using the same params as this step
+</pre></td>
+    </tr>
+    <tr id="element_step_entity">
+      <th><pre>entity</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>when &quot;entity-id&quot; is specified, and no entity has yet been
+instantiated and assigned to it, this attribute MUST be 
+specified designating the entity type. this will be the name 
+of the entity within one of the application&#039;s entity models. 
+un-committed entities (when entity-pk is not specified) are 
+stored in a workflow table and should not exceed 10mbps in 
+size
+</pre></td>
+    </tr>
+    <tr id="element_step_entity-id">
+      <th><pre>entity-id</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if this step will add a new or use an existing entity within
+the workflow, this attribute will be the unique identifier 
+for that entity. if this step is the first reference to that 
+entity-id, it will be automatically added to the workflow
+</pre></td>
+    </tr>
+    <tr id="element_step_entity-pk">
+      <th><pre>entity-pk</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>either the explicit primary key value or the name of a
+step/workflow parameter containing that value. this attribute 
+should be specified when this step will add an entity instance 
+to the workflow and that entity should be referenced from the 
+database. if &quot;entity&quot; is specified, and this attribute is not, 
+a new instance of that &quot;entity&quot; will be instantiated and added 
+to the workflow. parameter-based primary key values should be 
+entered in the format &quot;${param name}&quot;
+</pre></td>
+    </tr>
+    <tr id="element_step_finish">
+      <th><pre>finish</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not this is a finish step. finish steps are those
+that cause the workflow complete and terminate. finish 
+steps should not specify a &quot;next&quot; attribute or any nested 
+&quot;decision&quot; elements
+</pre></td>
+    </tr>
+    <tr id="element_step_next">
+      <th><pre>next</pre></th>
+      <td><pre>IDREF</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the default proceeding/output step once this one has been
+completed. the workflow will transition to that step unless 
+a match is found in any of the nested &quot;decision&quot; elements for 
+this step
+</pre></td>
+    </tr>
+    <tr id="element_step_notify">
+      <th><pre>notify</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>should notifications be sent for this step and its
+ corresponding tasks? this value overrides the enclosing 
+ workflow &#039;notify&#039; flag
+ </pre></td>
+    </tr>
+    <tr id="element_step_notify-bcc">
+      <th><pre>notify-bcc</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default workflow value for tasks in this step
+ </pre></td>
+    </tr>
+    <tr id="element_step_notify-cc">
+      <th><pre>notify-cc</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default workflow value for tasks in this step
+ </pre></td>
+    </tr>
+    <tr id="element_step_notify-from">
+      <th><pre>notify-from</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default workflow value for tasks in this step
+</pre></td>
+    </tr>
+    <tr id="element_step_notify-subject">
+      <th><pre>notify-subject</pre></th>
+      <td><pre>Resource</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default workflow value for tasks in this step
+         </pre></td>
+    </tr>
+    <tr id="element_step_notify-tpl">
+      <th><pre>notify-tpl</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default workflow value for tasks in this step
+ </pre></td>
+    </tr>
+    <tr id="element_step_notify-tpl-html">
+      <th><pre>notify-tpl-html</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default workflow value for tasks in this step
+ </pre></td>
+    </tr>
+    <tr id="element_step_resource">
+      <th><pre>resource</pre></th>
+      <td><pre>Resource</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the resource identifier for label used to describe this step
+</pre></td>
+    </tr>
+    <tr id="element_step_role">
+      <th><pre>role</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if this step is the responsibility of a user other than the
+owner of the workflow instance, this attribute may specify 
+a &quot;role&quot; or group of users that it should be assigned to. all 
+users within that role will have equal permission to complete 
+and add new tasks to this step. this attribute may also 
+reference a step/workflow parameter using the format 
+${param name}
+</pre></td>
+    </tr>
+    <tr id="element_step_user">
+      <th><pre>user</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if this task is the responsibility of a user other than the
+owner of the workflow instance, this attribute may specify 
+the identifier of that user. this user has permission to 
+complete this step. this attribute may also reference a 
+workflow parameter using the format ${param name}
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_task">task</h3>
+  <pre>The &quot;task&quot; element defines a unit of work within a workflow. tasks are created 
+within the context of a workflow &quot;step&quot;. tasks can be either interactive or 
+auto-completed. auto-completed tasks do not require any user intervention in 
+order to complete while interactive tasks do. interactive tasks are those 
+tasks containing a &quot;view&quot; and those flagged as &quot;interactive&quot;. the unit of work 
+performed by a task is either the enclosing &quot;eval&quot; value, the &quot;view&quot; or the 
+those values must exist for each task. the optional nested &quot;constraint-group&quot; 
+sub-element determine whether or not this task is added to the enclosing step 
+at the time it is created
+
+user              if this task is the responsibility of a user other than the 
+                  owner of the enclosing step, this attribute may specify the 
+                  identifier of that user. this user will be notified and 
+                  given responsibility to complete this task when it is 
+                  created. this attribute may also reference a workflow 
+                  parameter using the format ${param name}</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_workflow">workflow</a></li>
+    <li><a href="#element_step">step</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_constraint-group">constraint-group</a></pre></td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_eval-after">eval-after</a></pre></td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_eval-before">eval-before</a></pre></td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_task_commit">
+      <th><pre>commit</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>if an entity pertains to this task, setting this flag to true
+will result in that entity being inserted/updated upon 
+successful completion of the task (if interactive, otherwise 
+performed when the task is initialized)
+</pre></td>
+    </tr>
+    <tr id="element_task_connect-to">
+      <th><pre>connect-to</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the identifier of another workflow to connect to when this
+task is completed. NOTE: the connect-to workflow will be 
+initialized using the same params as this task
+</pre></td>
+    </tr>
+    <tr id="element_task_due-date">
+      <th><pre>due-date</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>an explicit date or relative date expression. explicit dates
+should be entered in the format &quot;YYYY-MM-DD HH:MM:SS&quot; (time 
+is optional). relative expressions utilize the same format 
+except that any of the date values (YYYY, MM, DD, HH, MM, or 
+SS) may be replaced with a relative modifier in the format 
+&quot;+n&quot; where n is the increase from the current timestamp. For 
+example, to specify the 1st of the following month, the 
+&quot;due-date&quot; would be: &quot;+0-+1-01&quot; - where +0 signifies the 
+current year, and +1 signifies the following month. if the 
+current month was december (12), the following month will be 
+January and the year will be incremented automatically. 
+Another example: to specify exactly one week from the current 
+time, &quot;due-date&quot; would be &quot;+0-+0-+7&quot; - where the first +0 
+signifies the current year, the second +0 signifies the 
+current month, and +7 signifies 7 days from the current date. 
+month and year rollovers resulting in the 1 week jump will be 
+automatically applied (for example, if the task was created 
+on 12/28). negative increments can be applied by enclosing the 
+increment value &quot;n&quot; in parenthesis. for example, to specify 1 
+month minus 1 week from the current date, &quot;due-date&quot; would be: 
+&quot;+0-+1-+(7)&quot;. the increment value &quot;n&quot; may also be an step or 
+workflow parameter using the format &quot;${param name}
+</pre></td>
+    </tr>
+    <tr id="element_task_due-date-rel">
+      <th><pre>due-date-rel</pre></th>
+      <td><pre>(0 | 1 | 2)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>if the task &quot;due-date&quot; is relative, this attribute
+determines what it is relative to. the following options are 
+available:
+ 0: the date/time when the task was invoked (default)
+ 1: the workflow start date
+ 2: the workflow due date (should not be greater)
+ 3: the task step due date (should not be greater)
+</pre></td>
+    </tr>
+    <tr id="element_task_entity">
+      <th><pre>entity</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>see &quot;step&quot; &quot;entity&quot; - when the task pertains to a step, this
+will override the step entity. when the task pertains to the 
+workflow, this attribute is required if the task involves an 
+entity
+</pre></td>
+    </tr>
+    <tr id="element_task_entity-id">
+      <th><pre>entity-id</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>see &quot;step&quot; &quot;entity-id&quot;
+ </pre></td>
+    </tr>
+    <tr id="element_task_entity-pk">
+      <th><pre>entity-pk</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>see &quot;step&quot; &quot;entity-pk&quot;
+  </pre></td>
+    </tr>
+    <tr id="element_task_interactive">
+      <th><pre>interactive</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>is this task interactive? use this to create a &quot;check-off&quot;
+task... a task that a user must simply check of having 
+completed. tasks with a &quot;view&quot; are interactive but in a 
+different way because the view must be displayed and entity 
+optionally validated (when &quot;validate&quot; is specified) in order 
+for them to be considered completed. only the owner of this 
+task, or the owner of the enclosing step, or the owner of the 
+enclosing workflow may &quot;check off&quot; a task. this attribute will 
+be automatically set to TRUE if a &quot;view&quot; is assigned to this 
+task
+</pre></td>
+    </tr>
+    <tr id="element_task_notify">
+      <th><pre>notify</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>should notifications be sent for this task? this value
+ overrides the enclosing workflow or step &#039;notify&#039; flag
+</pre></td>
+    </tr>
+    <tr id="element_task_notify-all">
+      <th><pre>notify-all</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not all participants in this workflow (past and
+present) should be notified (using the &quot;notify-tpl&quot;) when this 
+task is created. the default behavior is to only notify the 
+new owner(s) of the task
+</pre></td>
+    </tr>
+    <tr id="element_task_notify-always">
+      <th><pre>notify-always</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not notifications should be sent when this task is
+created regardless of whether or not it is interactive. the 
+default value for this attribute is FALSE, meaning 
+notifications will only be sent for the task if it is 
+interactive
+</pre></td>
+    </tr>
+    <tr id="element_task_notify-att-name">
+      <th><pre>notify-att-name</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if &quot;notify-att-view&quot; is specified, this attribute must also be
+provided specifying what to name the attached file. this value 
+may contain workflow/step parameters in the format 
+${param name}. it may also contain entity attributes in the 
+format {$attribute name} (after being parsed for parameter 
+names, it will be passed through the VO parseString method of 
+the enclosing step entity)
+</pre></td>
+    </tr>
+    <tr id="element_task_notify-att-view">
+      <th><pre>notify-att-view</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>an entity view that should be attached to the email
+notification sent when this task is invoked. this view may 
+be either text, pdf or some other output format. it will be 
+output directly to a file, renamed to &quot;notify-attach-name&quot; and 
+attached to the email notification(s)
+</pre></td>
+    </tr>
+    <tr id="element_task_notify-bcc">
+      <th><pre>notify-bcc</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default step/workflow value for this attribute
+ </pre></td>
+    </tr>
+    <tr id="element_task_notify-cc">
+      <th><pre>notify-cc</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default step/workflow value for this attribute
+ </pre></td>
+    </tr>
+    <tr id="element_task_notify-from">
+      <th><pre>notify-from</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default step/workflow value for this attribute
+ </pre></td>
+    </tr>
+    <tr id="element_task_notify-recipients">
+      <th><pre>notify-recipients</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>a space separated list of additional email addresses that
+should be notified when this task is created. these will be 
+notified regardless of whether or not other notifications are 
+being sent. the $wfUser template variable will NOT be present 
+for these recipients. if the task is not interactive, 
+&quot;notify-always&quot; MUST be true in order for notifications to be 
+sent to these recipients. entity attributes may be specified 
+using the format &quot;$[attrName]&quot; (no quotes)
+</pre></td>
+    </tr>
+    <tr id="element_task_notify-recipients-only">
+      <th><pre>notify-recipients-only</pre></th>
+      <td><pre>(1 | 0)</pre></td>
+      <td><pre>"0"</pre></td>
+      <td>No</td>
+      <td><pre>whether or not ONLY the &quot;notify-recipients&quot; should be
+                  sent notifications for this task
+</pre></td>
+    </tr>
+    <tr id="element_task_notify-subject">
+      <th><pre>notify-subject</pre></th>
+      <td><pre>Resource</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default step/workflow value for this attribute
+         </pre></td>
+    </tr>
+    <tr id="element_task_notify-tpl">
+      <th><pre>notify-tpl</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default step/workflow value for this attribute
+ </pre></td>
+    </tr>
+    <tr id="element_task_notify-tpl-html">
+      <th><pre>notify-tpl-html</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>overrides the default step/workflow value for this attribute
+</pre></td>
+    </tr>
+    <tr id="element_task_resource">
+      <th><pre>resource</pre></th>
+      <td><pre>Resource</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the label resource for this task
+</pre></td>
+    </tr>
+    <tr id="element_task_resource-descr">
+      <th><pre>resource-descr</pre></th>
+      <td><pre>Resource</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the resources used to provide a description for this task
+</pre></td>
+    </tr>
+    <tr id="element_task_role">
+      <th><pre>role</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if this task is the responsibility of a user other than the
+owner of the enclosing step, this attribute may specify a 
+&quot;role&quot; or group of users that it should be assigned to. all 
+users within that role will be notified, be assigned 
+responsibility for and have equal access to complete the 
+task. this attribute may also reference a workflow parameter 
+using the format ${param name}
+</pre></td>
+    </tr>
+    <tr id="element_task_user">
+      <th><pre>user</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>&quot;check off&quot; when it is designated &quot;interactive&quot;. therefore, at least one of</pre></td>
+    </tr>
+    <tr id="element_task_validate">
+      <th><pre>validate</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if this task includes a &quot;view&quot; requiring user input, this
+attribute may be specified identifying a validation constraint 
+that should be applied to the entity after the &quot;view&quot; has been 
+processed. if this validation passes successfully, the 
+task will be considered completed, otherwise, the task will 
+loop back on itself with the validation errors assigned to it. 
+if this attribute is set to &quot;1&quot;, then the entity validation 
+will be invoked (without a specific validation identifier). 
+multiple constraints can be specified each separated by a 
+space
+</pre></td>
+    </tr>
+    <tr id="element_task_validate-ignore">
+      <th><pre>validate-ignore</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>a space separated list of names of attributes that should be
+excluded from the entity validation. if a validation error is 
+returned for one of these attributes, validation failure will 
+not be triggered
+</pre></td>
+    </tr>
+    <tr id="element_task_view">
+      <th><pre>view</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>if the enclosing step has an entity assigned (based on the
+&quot;entity-id&quot; attribute) this attribute may be specified 
+identifying the entity view that this task should display 
+to the user. if this view requires input from the user, a 
+&quot;validate&quot; identifier may also be specified determining 
+the validation on that input that should occur prior to the 
+task being completed. tasks with a &quot;view&quot; assigned are always 
+interactive. multiple views can be specified each separated by 
+a space (each view will be rendered an concatenated starting 
+with the first)
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_constraint">constraint</h3>
+  <pre>The &quot;constraint&quot; element defines a single constraint that will be evaluated 
+within the context of a decision or constraint group. each constraint returns 
+boolean TRUE or FALSE the value of which will also be used to determine how the 
+enclosing decision/constraint-group evaluates</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_constraint-group">constraint-group</a></li>
+    <li><a href="#element_decision">decision</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_constraint_attr">
+      <th><pre>attr</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the constraint attribute identifier (see attr-type for more
+ info). nested attributes are supported. for example, if the 
+ attr being evaluated is an entity instance constaining an 
+ address object with a zipCode attribute, the identifier for 
+ that value would be &quot;address_zipCode&quot;
+</pre></td>
+    </tr>
+    <tr id="element_constraint_attr-type">
+      <th><pre>attr-type</pre></th>
+      <td><pre>(attr | form | global | param | session)</pre></td>
+      <td><pre>"attr"</pre></td>
+      <td>No</td>
+      <td><pre>the attribute to evaluate. this may be any of the following:
+  attr:    attr is the name of an attribute/sub-attribute in 
+           the entity that is referenced in the enclosing 
+           &quot;step&quot; (or identified by the &quot;entity-id&quot; 
+           attribute)
+  form:    attr is the name of a form value (GET or POST)
+  global:  attr is the name of a global variable
+  param:   attr is the name of a workflow parameter
+  session: attr is the name of a session variable
+ if not specified, &quot;attr&quot; will be evaluated as an explicit 
+ value
+</pre></td>
+    </tr>
+    <tr id="element_constraint_entity-id">
+      <th><pre>entity-id</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>by default, the constraint will be applied against the
+enclosing step entity. if it should be evaluated against 
+another entity within the workflow, this attribute should 
+specify the identifier of that entity
+</pre></td>
+    </tr>
+    <tr id="element_constraint_operator">
+      <th><pre>operator</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td><pre>"1"</pre></td>
+      <td>No</td>
+      <td><pre>the comparison operator to apply between the &quot;attr&quot; and
+&quot;value&quot;. this is a bitmask value containing 1 or more of the 
+following bits set:
+
+ EQUALITY CONSTRAINTS
+ 1:   attr and value must be equal
+ 2:   attr is greater than value
+ 4:   attr is less than value
+ 
+ STRING CONSTRAINTS (only 1 constraint allowed if used)
+ 8:   attr starts with value
+ 16:  attr ends with value
+ 32:  value is a sub-string of attr (full text search)
+ 
+ BOOLEAN CONSTRAINTS
+ 64:  attr evaluates to boolean TRUE (not 0, NULL, FALSE, 
+      empty array, etc.)
+ 128: attr evaluates to boolean FALSE (0, NULL, FALSE, empty 
+      array, etc.)
+ 
+ MODIFIER BITS
+ 256: negate the results of any of the above operator 
+      constraints
+ 512: attr and value must be identical (===). use in 
+      conjunction with 1, 64 or 128
+
+these values are defined using the SRA_WORKFLOW_CONSTRAINT_* 
+constants
+</pre></td>
+    </tr>
+    <tr id="element_constraint_value">
+      <th><pre>value</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the explicit constraint value or value identifier (see
+value-type for more info). as with &quot;attr&quot;, nested attributes 
+are supported. If not specified, then it will set to the value 
+NULL
+</pre></td>
+    </tr>
+    <tr id="element_constraint_value-type">
+      <th><pre>value-type</pre></th>
+      <td><pre>(attr | form | global | param | session)</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the value to evaluate. see &quot;attr-type&quot; for more info. if not
+specified, &quot;value&quot; will be evaluated as an explicit value
+
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_constraint-group">constraint-group</h3>
+  <pre>The &quot;constraint-group&quot; element is used to specify 1 or more constraint or 
+constraint-group sub-elements that will be evaluated as a whole based on the 
+&quot;connective&quot; specified for the group (either conjunction or disjunction). the 
+evaluation includes short-circuiting for conjunction join types (and)</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_task">task</a></li>
+    <li><a href="#element_constraint-group">constraint-group</a></li>
+    <li><a href="#element_decision">decision</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_constraint">constraint</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_constraint-group">constraint-group</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_constraint-group_connective">
+      <th><pre>connective</pre></th>
+      <td><pre>(and | or)</pre></td>
+      <td><pre>"and"</pre></td>
+      <td>No</td>
+      <td><pre>whether the connective between constraints of this decision
+should be conjunctively or disjunctively joined
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_decision">decision</h3>
+  <pre>The &quot;decision&quot; element defines a single alternate outbound path for a step. 
+It constains 1 or more constraints used to determine whether or not the 
+decision should be invoked. if none of a step&#039;s decisions are triggered, then 
+the step &quot;next&quot; path will be invoked. a decision should have at least 1 
+nested &quot;constraint&quot; or &quot;constraint-group&quot; elements</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_step">step</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_constraint">constraint</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><pre><a href="#element_constraint-group">constraint-group</a></pre></td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_decision_connective">
+      <th><pre>connective</pre></th>
+      <td><pre>(and | or)</pre></td>
+      <td><pre>"and"</pre></td>
+      <td>No</td>
+      <td><pre>whether the connective between constraints of this decision
+should be conjunctively or disjunctively joined
+</pre></td>
+    </tr>
+    <tr id="element_decision_next">
+      <th><pre>next</pre></th>
+      <td><pre>IDREF</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the proceeding/output step once the enclosing step has
+been completed IF this decision is triggered
+
+</pre></td>
+    </tr>
+  </table>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_eval-after">eval-after</h3>
+  <pre>The &quot;eval-after&quot; element specifies a PHP code block that should be invoked for a 
+particular task. this code segment will have access to any current workflow 
+entities using the &quot;entity-id&quot; as the variable name as well as to the 
+SraWorkflow, SraWorkflowStep and SraWorkflowTask instances using the variable 
+names $workflow, $step (when applicable) and $task. This code block MUST return 
+TRUE, or the workflow will enter an error state. the code in this element is 
+invoked AFTER the task is completed successfully (if a &quot;view&quot; is defined for the 
+task, this would be when that view is completed/confirmed)
+
+</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_task">task</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre>#PCDATA</pre></td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <p>This element does not have any attributes</p>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_eval-before">eval-before</h3>
+  <pre>Like &quot;eval-before&quot;, &quot;eval-before&quot; element also specifies a PHP code block that 
+should be invoked for a particular task. however, this code is invoked at the 
+same time that the task is created. the difference between &quot;eval-before&quot; and 
+&quot;eval-after&quot; is only applicable to interractive tasks (tasks with associated 
+views)
+
+</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_task">task</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <table border="1">
+    <tr>
+      <th>Sub Element</th>
+      <th>Required?</th>
+      <th>More than one?</th>
+    </tr>
+    <tr>
+      <td><pre>#PCDATA</pre></td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+  </table>
+
+  <h4>Attributes</h4>
+  <p>This element does not have any attributes</p>
+
+ <hr />  <a href="#top" style="float:right">Top</a>
+  <h3 id="element_param">param</h3>
+  <pre>The &quot;param&quot; element is used to define implementation/front-end specified 
+values. they are not used within the lib/workflow system itself. they may be 
+accessed within the SRA_Workflow/SRA_WorkflowStep::params associative array 
+attribute</pre>
+  <h4>Used In</h4>
+  <ul>
+    <li><a href="#element_workflow">workflow</a></li>
+    <li><a href="#element_step">step</a></li>
+  </ul>
+
+  <h4>Sub Elements</h4>
+  <p>This element does not have any sub-elements</p>
+
+  <h4>Attributes</h4>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default Value</th>
+      <th>Required?</th>
+      <th>Comment</th>
+    </tr>
+    <tr id="element_param_key">
+      <th><pre>key</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+      <td><pre>the param name
+</pre></td>
+    </tr>
+    <tr id="element_param_value">
+      <th><pre>value</pre></th>
+      <td><pre>CDATA</pre></td>
+      <td>None</td>
+      <td>No</td>
+      <td><pre>the param value
+
+</pre></td>
+    </tr>
+  </table>
+
+  
+  </form>
+</body>
+</html>

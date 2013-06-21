@@ -1,0 +1,1107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.SRA_XmlParser - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_xmlparser_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_XMLPARSER_DEBUG'] = "SRA_XMLPARSER_DEBUG";
+  }
+
+  // check attributes
+  if ("err".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_err'] = "err";
+  }
+  if ("_cachefilename".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__cacheFileName'] = "_cacheFileName";
+  }
+  if ("_data".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__data'] = "_data";
+  }
+  if ("_includeroottag".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__includeRootTag'] = "_includeRootTag";
+  }
+  if ("_roottag".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__rootTag'] = "_rootTag";
+  }
+  if ("_xmlparsedata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__xmlParseData'] = "_xmlParseData";
+  }
+  if ("_xmlparserfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__xmlParserFile'] = "_xmlParserFile";
+  }
+
+  // check methods
+  if ("sra_xmlparser".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_XmlParser'] = "SRA_XmlParser";
+  }
+  if ("arraytoxml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_arrayToXML'] = "arrayToXML";
+  }
+  if ("deletecache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_deleteCache'] = "deleteCache";
+  }
+  if ("getcachefilename".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCacheFileName'] = "getCacheFileName";
+  }
+  if ("getdata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getData'] = "getData";
+  }
+  if ("setdata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setData'] = "setData";
+  }
+  if ("getdataattributes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getDataAttributes'] = "getDataAttributes";
+  }
+  if ("getroottag".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getRootTag'] = "getRootTag";
+  }
+  if ("getxmlparser".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getXmlParser'] = "getXmlParser";
+  }
+  if ("getxmlparserfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getXmlParserFile'] = "getXmlParserFile";
+  }
+  if ("iscached".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isCached'] = "isCached";
+  }
+  if ("isdirty".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isDirty'] = "isDirty";
+  }
+  if ("isincluderoottag".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isIncludeRootTag'] = "isIncludeRootTag";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("write".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_write'] = "write";
+  }
+  if ("_cache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__cache'] = "_cache";
+  }
+  if ("_checkforsinglelevel".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__checkForSingleLevel'] = "_checkForSingleLevel";
+  }
+  if ("_getkey".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getKey'] = "_getKey";
+  }
+  if ("_process".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__process'] = "_process";
+  }
+  if ("_processclose".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__processClose'] = "_processClose";
+  }
+  if ("_processopen".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__processOpen'] = "_processOpen";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_XmlParser</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.html" target="contentFrame">util</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_XmlParser</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> This class is used to parse xml files, maintain xml data structures,
+  cache xml data structures, and write data to xml files. It also
+  performs some xml file validation including checking for existence of
+  the required header. All xml tags are case insensitive. This parser
+  uses only lower-case xml tags.
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_XMLPARSER_DEBUG">SRA_XMLPARSER_DEBUG</a></pre>
+<pre> SRA_XmlParser class debug flag
+ 
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public Object </pre></td>
+      <td>
+        <pre><a href="#attr_err">err</a></pre>
+<pre> used to store any errors generated by this class constructor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__cacheFileName">_cacheFileName</a></pre>
+<pre> The name of the cached xml array file.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private Object </pre></td>
+      <td>
+        <pre><a href="#attr__data">_data</a></pre>
+<pre> Attribute used to store the data for the xml file. This will be an
+  associative data structure (key=element).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean </pre></td>
+      <td>
+        <pre><a href="#attr__includeRootTag">_includeRootTag</a></pre>
+<pre> Whether or not the root tag was included in the associative array
+  data structure when the file was parsed.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__rootTag">_rootTag</a></pre>
+<pre> The value of the root tag.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private Object </pre></td>
+      <td>
+        <pre><a href="#attr__xmlParseData">_xmlParseData</a></pre>
+<pre> Used by the _process* methods to maintain the relevant parse related
+  data. This attribute will be an associative array with the
+  following sub-elements:
+ 
+  val
+  currTag
+  levels
+  prevTag
+  multipleData
+  xml
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__xmlParserFile">_xmlParserFile</a></pre>
+<pre> The name of the file from which the xml data was extracted.
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_XmlParser">SRA_XmlParser</a>($xmlParserFile, $includeRootTag=FALSE, $createFile=FALSE, $rootTag=FALSE)</pre>
+<pre> Class constructor. This method loads the data from the xml file
+  specified into the _data attribute as an associative multi-level
+  array. This parser uses all lower-case xml tags even if the tags
+  are otherwise written in the source xml file. This method is
+  private and should not be directly accessed. Instead, new SRA_XmlParser
+  objects should be retrieved through the SRA_XmlParser::getXmlParser
+  static method.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_arrayToXML">arrayToXML</a>($array, $margin, $parentKey=false)</pre>
+<pre> Static method used to convert an associative array back to xml format.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_deleteCache">deleteCache</a>($xmlParserFile, $includeRootTag=FALSE)</pre>
+<pre> Used to delete a cached xml file
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getCacheFileName">getCacheFileName</a>()</pre>
+<pre> Returns the value of the _cacheFileName attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public Object</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getData">getData</a>($keys=false, $importFile=true)</pre>
+<pre> Returns a reference to the _data attribute or to the keys data
+  specified by the sub parameter. If the requested element is a data
+  element (contains no sub-elements) with attributes, then only the
+  data will be returned.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setData">setData</a>(mixed $data)</pre>
+<pre> sets the xml data
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public Object</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getDataAttributes">getDataAttributes</a>($keys=false)</pre>
+<pre> Similiar to the getData method except that this method returns the
+  attributes associated with the data. It returns an empty array if
+  none exist.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getRootTag">getRootTag</a>()</pre>
+<pre> Returns the value of the _rootTag attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_XmlParser.html" target="contentFrame">SRA_XmlParser</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getXmlParser">getXmlParser</a>($xmlParserFile, $includeRootTag=FALSE, $createFile=FALSE, $rootTag=NULL, boolean $noCache=FALSE)</pre>
+<pre> Static method used to instantiate a new SRA_XmlParser object, or return
+  an existing one. This method maintains a cached array of SRA_XmlParser
+  objects. If one is requested that has already been instantiated, a
+  reference to the existing object is returned. Otherwise, an new
+  object is instantiated, added to the cache, and returned as a
+  reference.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getXmlParserFile">getXmlParserFile</a>()</pre>
+<pre> Returns the value of the _xmlParserFile attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isCached">isCached</a>($xmlParserFile, $includeRootTag=FALSE)</pre>
+<pre> Used to check if an xml file is cached
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isDirty">isDirty</a>()</pre>
+<pre> Returns true if the data associated with this SRA_XmlParser is dirty,
+  false otherwise.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isIncludeRootTag">isIncludeRootTag</a>()</pre>
+<pre> Returns the value of the _includeRootTag attribute.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>($object)</pre>
+<pre> Static method used to validate a SRA_XmlParser object.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_write">write</a>(string $xmlFile=NULL, string $header=NULL)</pre>
+<pre> This method writes the current SRA_XmlParser data to the associated xml and
+  cache files overwriting any existing data in those file.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method__cache">_cache</a>()</pre>
+<pre> Writes the existing SRA_XmlParser data to a cache file.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method__checkForSingleLevel">_checkForSingleLevel</a>($data)</pre>
+<pre> checks for and promotes single level elements in $data
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method__getKey">_getKey</a>($tag)</pre>
+<pre> This method is used to provide the functionality for retrieving an
+  xml special attribute &#039;key&#039; which defines the index key to use in
+  the resultant associative array.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__process">_process</a>()</pre>
+<pre> Method used to begin parsing of an xml file. Also manages xml file
+  cache.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__processClose">_processClose</a>()</pre>
+<pre> Method used to process an xml close tag.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__processOpen">_processOpen</a>()</pre>
+<pre> Method used to process an xml open tag.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_XMLPARSER_DEBUG">SRA_XMLPARSER_DEBUG</h3>
+  <pre>public String <b>SRA_XMLPARSER_DEBUG</b> = FALSE</pre>
+  <pre> SRA_XmlParser class debug flag
+ 
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_err">err</h3>
+  <pre>public Object var <b>$err</b> = NULL</pre>
+  <pre> used to store any errors generated by this class constructor
+</pre>
+ <hr />  <h3 id="attr__cacheFileName">_cacheFileName</h3>
+  <pre>private String var <b>$_cacheFileName</b></pre>
+  <pre> The name of the cached xml array file.
+</pre>
+ <hr />  <h3 id="attr__data">_data</h3>
+  <pre>private Object var <b>$_data</b></pre>
+  <pre> Attribute used to store the data for the xml file. This will be an
+  associative data structure (key=element).
+</pre>
+ <hr />  <h3 id="attr__includeRootTag">_includeRootTag</h3>
+  <pre>private boolean var <b>$_includeRootTag</b></pre>
+  <pre> Whether or not the root tag was included in the associative array
+  data structure when the file was parsed.
+</pre>
+ <hr />  <h3 id="attr__rootTag">_rootTag</h3>
+  <pre>private String var <b>$_rootTag</b></pre>
+  <pre> The value of the root tag.
+</pre>
+ <hr />  <h3 id="attr__xmlParseData">_xmlParseData</h3>
+  <pre>private Object var <b>$_xmlParseData</b> = array()</pre>
+  <pre> Used by the _process* methods to maintain the relevant parse related
+  data. This attribute will be an associative array with the
+  following sub-elements:
+ 
+  val
+  currTag
+  levels
+  prevTag
+  multipleData
+  xml
+ 
+</pre>
+ <hr />  <h3 id="attr__xmlParserFile">_xmlParserFile</h3>
+  <pre>private String var <b>$_xmlParserFile</b></pre>
+  <pre> The name of the file from which the xml data was extracted.
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_XmlParser">SRA_XmlParser</h3>
+  <pre>private void function <b>SRA_XmlParser</b>($xmlParserFile, $includeRootTag=FALSE, $createFile=FALSE, $rootTag=FALSE)</pre>
+  <pre> Class constructor. This method loads the data from the xml file
+  specified into the _data attribute as an associative multi-level
+  array. This parser uses all lower-case xml tags even if the tags
+  are otherwise written in the source xml file. This method is
+  private and should not be directly accessed. Instead, new SRA_XmlParser
+  objects should be retrieved through the SRA_XmlParser::getXmlParser
+  static method.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>xmlParserFile</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The name of the file to parse.  This name must include the .xml file extension. alternatively, this can
+  be an xml string</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>includeRootTag</td>
+      <td>Not Specified</td>
+      <td><pre>: boolean - Whether or not the root tag  should be included in the associative array this method generates
+  (all data will then be accessible through
+  $objectReference[&quot;root_tag&quot;][&quot;...&quot;]).</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>createFile</td>
+      <td>Not Specified</td>
+      <td><pre>: boolean - Whether or not the file should be  created if it does not exist. By default this parameter is false.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>rootTag</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The root tag to use if the createFile  parameter is true.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_arrayToXML">arrayToXML</h3>
+  <pre>public String function &amp;<b>arrayToXML</b>($array, $margin, $parentKey=false)</pre>
+  <pre> Static method used to convert an associative array back to xml format.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>array</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>margin</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>parentKey</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_deleteCache">deleteCache</h3>
+  <pre>public boolean function <b>deleteCache</b>($xmlParserFile, $includeRootTag=FALSE)</pre>
+  <pre> Used to delete a cached xml file
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>xmlParserFile</td>
+      <td>Not Specified</td>
+      <td><pre>: String - path to the xml file</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>includeRootTag</td>
+      <td>Not Specified</td>
+      <td><pre>: boolean - Whether or not the root tag  should be included</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getCacheFileName">getCacheFileName</h3>
+  <pre>public String function <b>getCacheFileName</b>()</pre>
+  <pre> Returns the value of the _cacheFileName attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getData">getData</h3>
+  <pre>public Object function &amp;<b>getData</b>($keys=false, $importFile=true)</pre>
+  <pre> Returns a reference to the _data attribute or to the keys data
+  specified by the sub parameter. If the requested element is a data
+  element (contains no sub-elements) with attributes, then only the
+  data will be returned.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>keys</td>
+      <td>Not Specified</td>
+      <td><pre>: String[] - An array of strings representing a sub  element that should be returned from the _data attribute. If the
+  sub-element does not exist, this method will return an OPERATIONAL
+  level error. For example, if the _data structure was of the format:
+ 
+  array( &quot;root&quot; =&gt; array(&quot;level1&quot; =&gt; array(&quot;level2&quot; =&gt; &quot;text&quot;)))
+ 
+  and the level2 element was needed, this parameter would be of the
+  following format:
+ 
+  keys = array(&quot;root&quot;, &quot;level1&quot;, &quot;level2&quot;)
+ 
+  The order of this parameter is important. Using the example above,
+  the following parameter would generate an SRA_Error:
+ 
+  keys = array(&quot;root&quot;, &quot;level2&quot;, &quot;level1&quot;)
+ 
+  because there is not &quot;level2&quot; node within the &quot;root&quot; node.</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>importFile</td>
+      <td>Not Specified</td>
+      <td><pre>: boolean - Whether or not the return value  			should be the contents of a file if the data references
+  			a file. SRA_File data elements are designated by setting the
+  			&#039;is_file&#039; attribute to 1. The default value for this
+  			parameter is true.</pre></td>
+      <td>true</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_setData">setData</h3>
+  <pre>public void function <b>setData</b>(mixed $data)</pre>
+  <pre> sets the xml data
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>mixed</td>
+      <td><pre>the data to set</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getDataAttributes">getDataAttributes</h3>
+  <pre>public Object function &amp;<b>getDataAttributes</b>($keys=false)</pre>
+  <pre> Similiar to the getData method except that this method returns the
+  attributes associated with the data. It returns an empty array if
+  none exist.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>keys</td>
+      <td>Not Specified</td>
+      <td><pre>: String[] - An array of strings representing a sub  			element that should be returned from the _data attribute.
+  			See SRA_XmlParser::getData api for more information.</pre></td>
+      <td>false</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getRootTag">getRootTag</h3>
+  <pre>public String function <b>getRootTag</b>()</pre>
+  <pre> Returns the value of the _rootTag attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getXmlParser">getXmlParser</h3>
+  <pre>public <a href="util.SRA_XmlParser.html" target="contentFrame">SRA_XmlParser</a> function &amp;<b>getXmlParser</b>($xmlParserFile, $includeRootTag=FALSE, $createFile=FALSE, $rootTag=NULL, boolean $noCache=FALSE)</pre>
+  <pre> Static method used to instantiate a new SRA_XmlParser object, or return
+  an existing one. This method maintains a cached array of SRA_XmlParser
+  objects. If one is requested that has already been instantiated, a
+  reference to the existing object is returned. Otherwise, an new
+  object is instantiated, added to the cache, and returned as a
+  reference.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>xmlParserFile</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The name of the file to parse. See  constructor api for more info. alternative, this can be an xml string</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>includeRootTag</td>
+      <td>Not Specified</td>
+      <td><pre>: boolean - Whether or not to include the  root tag in the data structure. See constructor api for more info.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>createFile</td>
+      <td>Not Specified</td>
+      <td><pre>: boolean - Whether or not the file should be  created if it does not exist. See constructor api for more info.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>rootTag</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The value of the root tag (only applies  if creating a new xml file). See constructor api for more info.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>noCache</td>
+      <td>boolean</td>
+      <td><pre>whether or not to return a cached parser if  available</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_getXmlParserFile">getXmlParserFile</h3>
+  <pre>public String function <b>getXmlParserFile</b>()</pre>
+  <pre> Returns the value of the _xmlParserFile attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_isCached">isCached</h3>
+  <pre>public boolean function <b>isCached</b>($xmlParserFile, $includeRootTag=FALSE)</pre>
+  <pre> Used to check if an xml file is cached
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>xmlParserFile</td>
+      <td>Not Specified</td>
+      <td><pre>: String - path to the xml file</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>includeRootTag</td>
+      <td>Not Specified</td>
+      <td><pre>: boolean - Whether or not the root tag  should be included</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_isDirty">isDirty</h3>
+  <pre>public boolean function <b>isDirty</b>()</pre>
+  <pre> Returns true if the data associated with this SRA_XmlParser is dirty,
+  false otherwise.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_isIncludeRootTag">isIncludeRootTag</h3>
+  <pre>public boolean function <b>isIncludeRootTag</b>()</pre>
+  <pre> Returns the value of the _includeRootTag attribute.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>($object)</pre>
+  <pre> Static method used to validate a SRA_XmlParser object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_write">write</h3>
+  <pre>public void function <b>write</b>(string $xmlFile=NULL, string $header=NULL)</pre>
+  <pre> This method writes the current SRA_XmlParser data to the associated xml and
+  cache files overwriting any existing data in those file.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>xmlFile</td>
+      <td>string</td>
+      <td><pre>an optional parameter specifying another xml file to  write to. If this parameter is not specified, the $xmlFile specified in the
+  constructor will be written to</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>header</td>
+      <td>string</td>
+      <td><pre>an optional header to include when writing to the  xml file</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__cache">_cache</h3>
+  <pre>public void function <b>_cache</b>()</pre>
+  <pre> Writes the existing SRA_XmlParser data to a cache file.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method__checkForSingleLevel">_checkForSingleLevel</h3>
+  <pre>public void function <b>_checkForSingleLevel</b>($data)</pre>
+  <pre> checks for and promotes single level elements in $data
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getKey">_getKey</h3>
+  <pre>public void function <b>_getKey</b>($tag)</pre>
+  <pre> This method is used to provide the functionality for retrieving an
+  xml special attribute &#039;key&#039; which defines the index key to use in
+  the resultant associative array.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tag</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The tag to get the data for. If data does  not exist for this tag, the value of this tag will be returned.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method__process">_process</h3>
+  <pre>private void function <b>_process</b>()</pre>
+  <pre> Method used to begin parsing of an xml file. Also manages xml file
+  cache.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method__processClose">_processClose</h3>
+  <pre>private void function <b>_processClose</b>()</pre>
+  <pre> Method used to process an xml close tag.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method__processOpen">_processOpen</h3>
+  <pre>private void function <b>_processOpen</b>()</pre>
+  <pre> Method used to process an xml open tag.
+ 
+</pre>
+  <p>author = Jason Read <jason@idir.org></p>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/SRA_XmlParser.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

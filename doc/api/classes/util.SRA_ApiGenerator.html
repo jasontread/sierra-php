@@ -1,0 +1,1099 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.SRA_ApiGenerator - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_api_generator_default_cache_ttl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_API_GENERATOR_DEFAULT_CACHE_TTL'] = "SRA_API_GENERATOR_DEFAULT_CACHE_TTL";
+  }
+  if ("sra_api_generator_package_readme_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_API_GENERATOR_PACKAGE_README_FILE'] = "SRA_API_GENERATOR_PACKAGE_README_FILE";
+  }
+
+  // check attributes
+  if ("_cache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__cache'] = "_cache";
+  }
+  if ("_cssuri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__cssUri'] = "_cssUri";
+  }
+  if ("_path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__path'] = "_path";
+  }
+  if ("_recursive".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__recursive'] = "_recursive";
+  }
+  if ("_rewriteuri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__rewriteUri'] = "_rewriteUri";
+  }
+  if ("_skipdirs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__skipDirs'] = "_skipDirs";
+  }
+  if ("_title".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__title'] = "_title";
+  }
+
+  // check methods
+  if ("sra_apigenerator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_ApiGenerator'] = "SRA_ApiGenerator";
+  }
+  if ("generate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_generate'] = "generate";
+  }
+  if ("render".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_render'] = "render";
+  }
+  if ("_getclasses".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getClasses'] = "_getClasses";
+  }
+  if ("_getclasscomment".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getClassComment'] = "_getClassComment";
+  }
+  if ("_getclassconstants".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getClassConstants'] = "_getClassConstants";
+  }
+  if ("_getclassextends".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getClassExtends'] = "_getClassExtends";
+  }
+  if ("_getclassid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getClassId'] = "_getClassId";
+  }
+  if ("_getconstants".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getConstants'] = "_getConstants";
+  }
+  if ("_getconstantproperties".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getConstantProperties'] = "_getConstantProperties";
+  }
+  if ("_getconstantfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getConstantFile'] = "_getConstantFile";
+  }
+  if ("_getdtds".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getDtds'] = "_getDtds";
+  }
+  if ("_getdtdcomment".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getDtdComment'] = "_getDtdComment";
+  }
+  if ("_getfunctions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getFunctions'] = "_getFunctions";
+  }
+  if ("_getfunctioncomment".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getFunctionComment'] = "_getFunctionComment";
+  }
+  if ("_getpackage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getPackage'] = "_getPackage";
+  }
+  if ("_getpackages".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getPackages'] = "_getPackages";
+  }
+  if ("_getpackagecomments".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getPackageComments'] = "_getPackageComments";
+  }
+  if ("_getsubclasses".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getSubclasses'] = "_getSubclasses";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_ApiGenerator</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.html" target="contentFrame">util</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_ApiGenerator</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> utility classes that may be used to generate HTML formatted API documentation
+  for PHP classes and DTDs. API documentation should adhere to the javadoc
+  annotation style in order for this class to be able to properly extract the
+  documentation. this class should be instantiated prior to invoking the
+  &#039;render&#039; method
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_API_GENERATOR_DEFAULT_CACHE_TTL">SRA_API_GENERATOR_DEFAULT_CACHE_TTL</a></pre>
+<pre> the default cache TTL for api metadata
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_API_GENERATOR_PACKAGE_README_FILE">SRA_API_GENERATOR_PACKAGE_README_FILE</a></pre>
+<pre> space separated list of the names of the files that can be placed in package
+  directories to produce package-level comments
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>int 
+ </pre></td>
+      <td>
+        <pre><a href="#attr__cache">_cache</a></pre>
+<pre> the # of seconds to allow the api generator to cache data related to
+  generated the api. set to 0 for no caching
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string 
+ </pre></td>
+      <td>
+        <pre><a href="#attr__cssUri">_cssUri</a></pre>
+<pre> an optional CSS URI to link to each of the rendered pages
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed 
+ </pre></td>
+      <td>
+        <pre><a href="#attr__path">_path</a></pre>
+<pre> the absolute base path (or array of base paths)
+  containing the sub-directories/packages, classes and DTDs for which the API
+  documentation should be generated for. suffix a path with two underscore
+  (__) if you want that directory itself to also be considered a package.
+  only subdirectories containing at least 1 php or dtd file will be included
+  in the package list
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean 
+ </pre></td>
+      <td>
+        <pre><a href="#attr__recursive">_recursive</a></pre>
+<pre> whether or not the api documentation should be generated recursively
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string 
+ </pre></td>
+      <td>
+        <pre><a href="#attr__rewriteUri">_rewriteUri</a></pre>
+<pre> if you have setup a rewrite rule for the script invoking this method, this
+  parameter may be used to specify the URI of that script. Here is a what the
+  rewrite rules should look like (where the rewrite URI is &quot;/api&quot;)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array 
+ </pre></td>
+      <td>
+        <pre><a href="#attr__skipDirs">_skipDirs</a></pre>
+<pre> an array of the names of directories that should not
+  be included in the API documentation (including sub-directories)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string 
+ </pre></td>
+      <td>
+        <pre><a href="#attr__title">_title</a></pre>
+<pre> the title for this API documentation
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_ApiGenerator">SRA_ApiGenerator</a>(string $title, mixed $path, array $skipDirs=NULL, string $cssUri=NULL, boolean $recursive=TRUE)</pre>
+<pre> instantiates a new instance of the API generator with the parameters
+  specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean</pre></td>
+      <td>
+        <pre><a href="#method_generate">generate</a>(string $path)</pre>
+<pre> generates the api into the directory specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>void</pre></td>
+      <td>
+        <pre><a href="#method_render">render</a>(string $rewriteUri=NULL, int $cache=SRA_API_GENERATOR_DEFAULT_CACHE_TTL)</pre>
+<pre> use this method to generate API documentation dynamically. to do so, simply
+  include this class into your web accessible PHP script, and invoke this
+  method when the script is requested
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>hash</pre></td>
+      <td>
+        <pre><a href="#method__getClasses">_getClasses</a>(boolean $basename=FALSE, mixed $path=NULL, $property='classes')</pre>
+<pre> returns a hash of classes in $this-&gt;_path. this hash will be indexed by the
+  class/dtd name and the value in the hash will be the absolute path to the
+  directory for that class or the basename of the class or DTD
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string</pre></td>
+      <td>
+        <pre><a href="#method__getClassComment">_getClassComment</a>(string $id)</pre>
+<pre> returns the api comment for the class specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed</pre></td>
+      <td>
+        <pre><a href="#method__getClassConstants">_getClassConstants</a>(string $path)</pre>
+<pre> returns the a hash of the constants/values in the class identified by
+  $name. returns NULL if no constants exist in that file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string</pre></td>
+      <td>
+        <pre><a href="#method__getClassExtends">_getClassExtends</a>(string $id)</pre>
+<pre> returns the name of the class that $id extends (if applicable)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string</pre></td>
+      <td>
+        <pre><a href="#method__getClassId">_getClassId</a>(string $name)</pre>
+<pre> returns the id of the class specified by $name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>hash</pre></td>
+      <td>
+        <pre><a href="#method__getConstants">_getConstants</a>(boolean $value=FALSE, mixed $path=NULL)</pre>
+<pre> returns a hash of constants in $this-&gt;_path. this hash will be indexed by
+  the constant name and the value in the hash will be the absolute path to
+  the php source file containing that constant or the value of the function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string</pre></td>
+      <td>
+        <pre><a href="#method__getConstantProperties">_getConstantProperties</a>(string $id)</pre>
+<pre> returns the api comment for the constant specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string</pre></td>
+      <td>
+        <pre><a href="#method__getConstantFile">_getConstantFile</a>(string $id)</pre>
+<pre> returns the file containing the constant specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>hash</pre></td>
+      <td>
+        <pre><a href="#method__getDtds">_getDtds</a>(boolean $basename=FALSE, mixed $path=NULL)</pre>
+<pre> returns a hash of DTDs in $this-&gt;_path. this hash will be indexed by the
+  class/dtd name and the value in the hash will be the absolute path to the
+  directory for that class or the basename of the class or DTD
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string</pre></td>
+      <td>
+        <pre><a href="#method__getDtdComment">_getDtdComment</a>(string $id)</pre>
+<pre> returns the api comment for the dtd specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>hash</pre></td>
+      <td>
+        <pre><a href="#method__getFunctions">_getFunctions</a>(boolean $basename=FALSE, mixed $path=NULL)</pre>
+<pre> returns a hash of functions in $this-&gt;_path. this hash will be indexed by
+  the function name and the value in the hash will be the absolute path to
+  the php source file containing that function or the name of the function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string</pre></td>
+      <td>
+        <pre><a href="#method__getFunctionComment">_getFunctionComment</a>(string $id)</pre>
+<pre> returns the api comment for the function specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string</pre></td>
+      <td>
+        <pre><a href="#method__getPackage">_getPackage</a>(string $id)</pre>
+<pre> returns the name of the package for the item $id
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>hash</pre></td>
+      <td>
+        <pre><a href="#method__getPackages">_getPackages</a>()</pre>
+<pre> returns a hash of packages in $this-&gt;_path. this hash will be indexed by the
+  package name and the value in the hash will be the absolute path to the
+  directory for that class
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>hash</pre></td>
+      <td>
+        <pre><a href="#method__getPackageComments">_getPackageComments</a>()</pre>
+<pre> returns a hash of package comments. this hash will be indexed by the
+  package name and the value in the hash will be the comment value. package
+  comments are defined by a file in the root package directory named one of
+  the files names in SRA_API_GENERATOR_PACKAGE_README_FILE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>hash</pre></td>
+      <td>
+        <pre><a href="#method__getSubclasses">_getSubclasses</a>(string $class)</pre>
+<pre> returns a hash of all of the known subclasses of $class. the return hash
+  will be indexed by class id and the value will be the name of the subclass
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_API_GENERATOR_DEFAULT_CACHE_TTL">SRA_API_GENERATOR_DEFAULT_CACHE_TTL</h3>
+  <pre>int <b>SRA_API_GENERATOR_DEFAULT_CACHE_TTL</b> = 300</pre>
+  <pre> the default cache TTL for api metadata
+</pre>
+ <hr />  <h3 id="constant_SRA_API_GENERATOR_PACKAGE_README_FILE">SRA_API_GENERATOR_PACKAGE_README_FILE</h3>
+  <pre>string <b>SRA_API_GENERATOR_PACKAGE_README_FILE</b> = 'README .readme'</pre>
+  <pre> space separated list of the names of the files that can be placed in package
+  directories to produce package-level comments
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__cache">_cache</h3>
+  <pre>int 
+ var <b>$_cache</b></pre>
+  <pre> the # of seconds to allow the api generator to cache data related to
+  generated the api. set to 0 for no caching
+</pre>
+ <hr />  <h3 id="attr__cssUri">_cssUri</h3>
+  <pre>string 
+ var <b>$_cssUri</b></pre>
+  <pre> an optional CSS URI to link to each of the rendered pages
+</pre>
+ <hr />  <h3 id="attr__path">_path</h3>
+  <pre>mixed 
+ var <b>$_path</b></pre>
+  <pre> the absolute base path (or array of base paths)
+  containing the sub-directories/packages, classes and DTDs for which the API
+  documentation should be generated for. suffix a path with two underscore
+  (__) if you want that directory itself to also be considered a package.
+  only subdirectories containing at least 1 php or dtd file will be included
+  in the package list
+</pre>
+ <hr />  <h3 id="attr__recursive">_recursive</h3>
+  <pre>boolean 
+ var <b>$_recursive</b></pre>
+  <pre> whether or not the api documentation should be generated recursively
+</pre>
+ <hr />  <h3 id="attr__rewriteUri">_rewriteUri</h3>
+  <pre>string 
+ var <b>$_rewriteUri</b></pre>
+  <pre> if you have setup a rewrite rule for the script invoking this method, this
+  parameter may be used to specify the URI of that script. Here is a what the
+  rewrite rules should look like (where the rewrite URI is &quot;/api&quot;)
+</pre>
+ <hr />  <h3 id="attr__skipDirs">_skipDirs</h3>
+  <pre>array 
+ var <b>$_skipDirs</b></pre>
+  <pre> an array of the names of directories that should not
+  be included in the API documentation (including sub-directories)
+</pre>
+ <hr />  <h3 id="attr__title">_title</h3>
+  <pre>string 
+ var <b>$_title</b></pre>
+  <pre> the title for this API documentation
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_ApiGenerator">SRA_ApiGenerator</h3>
+  <pre>void function <b>SRA_ApiGenerator</b>(string $title, mixed $path, array $skipDirs=NULL, string $cssUri=NULL, boolean $recursive=TRUE)</pre>
+  <pre> instantiates a new instance of the API generator with the parameters
+  specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>string</td>
+      <td><pre>the title for this API documentation</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>mixed</td>
+      <td><pre>the absolute base path (or array of base paths)  containing the sub-directories/packages, classes and DTDs for which the API
+  documentation should be generated for. suffix a path with two underscore
+  (__) if you want that directory itself to also be considered a package.
+  only subdirectories containing at least 1 php or dtd file will be included
+  in the package list</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>skipDirs</td>
+      <td>array</td>
+      <td><pre>an array of the names of directories that should not  be included in the API documentation (including sub-directories)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>cssUri</td>
+      <td>string</td>
+      <td><pre>an optional CSS URI to link to each of the rendered  pages</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>recursive</td>
+      <td>boolean</td>
+      <td><pre>whether or not the api documentation should be  generated recursively from $path</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_generate">generate</h3>
+  <pre>boolean function <b>generate</b>(string $path)</pre>
+  <pre> generates the api into the directory specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>string</td>
+      <td><pre>the path to the directory where the api should be  generated to</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_render">render</h3>
+  <pre>void function <b>render</b>(string $rewriteUri=NULL, int $cache=SRA_API_GENERATOR_DEFAULT_CACHE_TTL)</pre>
+  <pre> use this method to generate API documentation dynamically. to do so, simply
+  include this class into your web accessible PHP script, and invoke this
+  method when the script is requested
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>rewriteUri</td>
+      <td>string</td>
+      <td><pre>if you have setup a rewrite rule for the script  invoking this method, this parameter may be used to specify the URI of that
+  script. Here is a what the rewrite rules should look like (where the
+  rewrite URI is &quot;/api&quot;) in .htaccess if this feature is used (otherwise,
+  ugly URLs will be used)... substitute [api-script] with the name of your
+  script:
+  RewriteEngine On
+  RewriteRule ^api/classes/(.*).html /[api-script].php?class=$1
+  RewriteRule ^api/classes.html /[api-script].php?classlist
+  RewriteRule ^api/dtds/(.*).html /[api-script].php?dtd=$1
+  RewriteRule ^api/functions/(.*).html /[api-script].php?function=$1
+  RewriteRule ^api/packages/(.*)/classes.html /[api-script].php?classlist&amp;package=$1
+  RewriteRule ^api/packages/(.*).html /[api-script].php?package=$1
+  RewriteRule ^api/packages.html /[api-script].php?packagelist
+  RewriteRule ^api/overview.html /[api-script].php?overview
+  RewriteRule ^api/ /[api-script].php</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>cache</td>
+      <td>int</td>
+      <td><pre>the # of seconds to allow the api generator to cache  data related to generated the api. set to 0 for no caching</pre></td>
+      <td>SRA_API_GENERATOR_DEFAULT_CACHE_TTL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getClasses">_getClasses</h3>
+  <pre>hash function <b>_getClasses</b>(boolean $basename=FALSE, mixed $path=NULL, $property='classes')</pre>
+  <pre> returns a hash of classes in $this-&gt;_path. this hash will be indexed by the
+  class/dtd name and the value in the hash will be the absolute path to the
+  directory for that class or the basename of the class or DTD
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>basename</td>
+      <td>boolean</td>
+      <td><pre>whether or not the value in the return hash should  be the absolute path to the file containing the class OR the basename of
+  the class</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>mixed</td>
+      <td><pre>an alternate path. if not specified $this-&gt;_path will  be used</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>property</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>'classes'</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getClassComment">_getClassComment</h3>
+  <pre>string function <b>_getClassComment</b>(string $id)</pre>
+  <pre> returns the api comment for the class specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the id of the class</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getClassConstants">_getClassConstants</h3>
+  <pre>mixed function <b>_getClassConstants</b>(string $path)</pre>
+  <pre> returns the a hash of the constants/values in the class identified by
+  $name. returns NULL if no constants exist in that file
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>string</td>
+      <td><pre>the path to the file containing the class</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getClassExtends">_getClassExtends</h3>
+  <pre>string function <b>_getClassExtends</b>(string $id)</pre>
+  <pre> returns the name of the class that $id extends (if applicable)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the id of the class</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getClassId">_getClassId</h3>
+  <pre>string function <b>_getClassId</b>(string $name)</pre>
+  <pre> returns the id of the class specified by $name
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>string</td>
+      <td><pre>the name of the class</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getConstants">_getConstants</h3>
+  <pre>hash function <b>_getConstants</b>(boolean $value=FALSE, mixed $path=NULL)</pre>
+  <pre> returns a hash of constants in $this-&gt;_path. this hash will be indexed by
+  the constant name and the value in the hash will be the absolute path to
+  the php source file containing that constant or the value of the function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>boolean</td>
+      <td><pre>whether or not the value in the return hash should  be the value of the constant or the absolute path to the file containing
+  the constant</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>mixed</td>
+      <td><pre>an alternate path. if not specified $this-&gt;_path will  be used</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getConstantProperties">_getConstantProperties</h3>
+  <pre>string function <b>_getConstantProperties</b>(string $id)</pre>
+  <pre> returns the api comment for the constant specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the id of the constant</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getConstantFile">_getConstantFile</h3>
+  <pre>string function <b>_getConstantFile</b>(string $id)</pre>
+  <pre> returns the file containing the constant specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the id of the constant</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getDtds">_getDtds</h3>
+  <pre>hash function <b>_getDtds</b>(boolean $basename=FALSE, mixed $path=NULL)</pre>
+  <pre> returns a hash of DTDs in $this-&gt;_path. this hash will be indexed by the
+  class/dtd name and the value in the hash will be the absolute path to the
+  directory for that class or the basename of the class or DTD
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>basename</td>
+      <td>boolean</td>
+      <td><pre>whether or not the value in the return hash should  be the absolute path to the file containing the class OR the basename of
+  the class</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>mixed</td>
+      <td><pre>an alternate path. if not specified $this-&gt;_path will  be used</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getDtdComment">_getDtdComment</h3>
+  <pre>string function <b>_getDtdComment</b>(string $id)</pre>
+  <pre> returns the api comment for the dtd specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the id of the dtd</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getFunctions">_getFunctions</h3>
+  <pre>hash function <b>_getFunctions</b>(boolean $basename=FALSE, mixed $path=NULL)</pre>
+  <pre> returns a hash of functions in $this-&gt;_path. this hash will be indexed by
+  the function name and the value in the hash will be the absolute path to
+  the php source file containing that function or the name of the function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>basename</td>
+      <td>boolean</td>
+      <td><pre>whether or not the value in the return hash should  be the absolute path to the file containing the class OR the basename of
+  the class</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>mixed</td>
+      <td><pre>an alternate path. if not specified $this-&gt;_path will  be used</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getFunctionComment">_getFunctionComment</h3>
+  <pre>string function <b>_getFunctionComment</b>(string $id)</pre>
+  <pre> returns the api comment for the function specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the id of the function</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getPackage">_getPackage</h3>
+  <pre>string function <b>_getPackage</b>(string $id)</pre>
+  <pre> returns the name of the package for the item $id
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the item to return the package for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getPackages">_getPackages</h3>
+  <pre>hash function <b>_getPackages</b>()</pre>
+  <pre> returns a hash of packages in $this-&gt;_path. this hash will be indexed by the
+  package name and the value in the hash will be the absolute path to the
+  directory for that class
+</pre>
+ <hr />  <h3 id="method__getPackageComments">_getPackageComments</h3>
+  <pre>hash function <b>_getPackageComments</b>()</pre>
+  <pre> returns a hash of package comments. this hash will be indexed by the
+  package name and the value in the hash will be the comment value. package
+  comments are defined by a file in the root package directory named one of
+  the files names in SRA_API_GENERATOR_PACKAGE_README_FILE
+</pre>
+ <hr />  <h3 id="method__getSubclasses">_getSubclasses</h3>
+  <pre>hash function <b>_getSubclasses</b>(string $class)</pre>
+  <pre> returns a hash of all of the known subclasses of $class. the return hash
+  will be indexed by class id and the value will be the name of the subclass
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>class</td>
+      <td>string</td>
+      <td><pre>the name of the class to return the subclasses for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/SRA_ApiGenerator.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

@@ -1,0 +1,1226 @@
+<!DOCTYPE entity-model PUBLIC "-//SIERRA//DTD ENTITY MODEL//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/lib/model/entity-model.dtd">
+ 
+<entity-model resources="lib/workflow/workflow" sync-schema="1">
+  <entity key="SraWorkflow" primary-key="workflowId" render-append="getCurrentStepDispl getName getParams">
+    <aop>
+      <aspect key="cascadeDelete" pointcut="dao.delete" when="after"><![CDATA[
+      // cascade delete entities pertaining to the workflow
+      if ($deleted && $cascadeDelete) {
+        $keys = array_keys($cascadeDelete);
+        foreach($keys as $key) {
+          $cascadeDelete[$key]->delete();
+        }
+      }
+      ]]></aspect>
+      <aspect key="cascadeDeleteInit" pointcut="dao.delete"><![CDATA[
+      // retrieve reference to entities that should be cascade deleted
+      if (($setup =& $record->getSetup()) && $setup->cascadeDelete && ($entities =& $record->getEntities())) {
+        $cascadeDelete = array();
+        $keys = array_keys($entities);
+        foreach($keys as $key) {
+          if (($obj =& $entities[$key]->getEntity()) && $obj->recordExists && method_exists($obj, 'delete')) {
+            $cascadeDelete[] =& $obj;
+          }
+        }
+      }
+      ]]></aspect>
+      <aspect key="setStepWorkflow" pointcut="vo.getSteps" when="after"><![CDATA[
+      // assign this workflow to the steps
+      if (is_array($this->_steps)) {
+        $keys = array_keys($this->_steps);
+        foreach($keys as $key) {
+          $this->_steps[$key]->setWorkflow($this, FALSE);
+        }
+      }
+      ]]></aspect>
+      <aspect key="setEntityWorkflow" pointcut="vo.getEntities" when="after"><![CDATA[
+      // assign this workflow to the entities
+      if (is_array($this->_entities)) {
+        $keys = array_keys($this->_entities);
+        foreach($keys as $key) {
+          $this->_entities[$key]->setWorkflow($this, FALSE);
+        }
+      }
+      ]]></aspect>
+      
+      <introduction key="appendParams" class="vo" type="method" value="appendParams($params)"><![CDATA[
+      $currentParams = $this->getParams();
+      if (is_array($params)) {
+        foreach($params as $key => $val) {
+          $currentParams[$key] = $val;
+        }
+        $this->setSerializedParams(serialize($currentParams));
+      }
+      ]]></introduction>
+      <introduction key="getActiveUserId" class="vo" type="method" value="getActiveUserId()"><![CDATA[
+      // returns the identifier of the current active user
+      $setup =& $this->getSetup();
+      switch ($setup->userKeyType) {
+        case SRA_WORKFLOW_USER_KEY_TYPE_GET: 
+          $user = $_GET[$setup->userKey];
+          break;
+        case SRA_WORKFLOW_USER_KEY_TYPE_GLOBAL: 
+          $user =& SRA_Util::getGlobal($setup->userKey);
+          break;
+        case SRA_WORKFLOW_USER_KEY_TYPE_POST: 
+          $user = $_POST[$setup->userKey];
+          break;
+        case SRA_WORKFLOW_USER_KEY_TYPE_SESSION:
+          session_start();
+          $user =& $_SESSION[$setup->userKey];
+          break;
+      }
+      if (!$user) { SRA_Error::logError('SraWorkflow::getActiveUserId: Unable to get user reference using key ' . $setup->userKey . ' and type ' . $setup->userKeyType, __FILE__, __LINE__); }
+      return $this->getUserId($user);
+      ]]></introduction>
+      <introduction key="getCurrentStepDispl" class="vo" type="method" value="getCurrentStepDispl()"><![CDATA[
+      $setup =& $this->getSetup();
+      return $setup->resources->getString($this->getCurrentStep());
+      ]]></introduction>
+      <introduction key="getEntity" class="vo" type="method" value="&amp;getEntity($id)"><![CDATA[
+      $this->getEntities();
+      if (is_array($this->_entities)) {
+        $keys = array_keys($this->_entities);
+        foreach($keys as $key) {
+          if ($this->_entities[$key]->getId() == $id) {
+            return $this->_entities[$key];
+          }
+        }
+      }
+      $nl = NULL;
+      return $nl;
+      ]]></introduction>
+      <introduction key="getEntityObj" class="vo" type="method" value="&amp;getEntityObj($id)"><![CDATA[
+      $obj = NULL;
+      if ($entity =& $this->getEntity($id) && SRA_Error::isError($obj =& $entity->getEntity())) {
+        $obj = NULL;
+      }
+      // set workflow id attribute
+      $this->setEntityWfId($obj);
+      
+      return $obj;
+      ]]></introduction>
+      <introduction key="getName" class="vo" type="method" value="getName()"><![CDATA[
+      // returns the localized name for this workflow from the workflow setup
+      $setup =& $this->getSetup();
+      return $setup ? $setup->name : NULL;
+      ]]></introduction>
+      <introduction key="getParam" class="vo" type="method" value="getParam($id)"><![CDATA[
+      $params = $this->getParams();
+      return isset($params[$id]) ? $params[$id] : NULL;
+      ]]></introduction>
+      <introduction key="getParams" class="vo" type="method" value="getParams()"><![CDATA[
+      return $this->getSerializedParams() ? unserialize($this->getSerializedParams()) : array();
+      ]]></introduction>
+      <introduction key="getRole" class="vo" type="method" value="&amp;getRole($id)"><![CDATA[
+      // returns a reference to the role specified by $id
+      $role = NULL;
+      if ($id) {
+        $setup =& $this->getSetup();
+        if (SRA_Error::isError($dao =& SRA_DaoFactory::getDao($setup->roleEntity))) {
+          $role =& SRA_Error::logError('SraWorkflow::getRole: Failed - Unable to obtain reference to role entity ' . $setup->roleEntity, __FILE__, __LINE__);
+        }
+        else {
+          if ($setup->roleAttr) {
+            $roles =& $dao->findByConstraints(array($setup->roleAttr => $id));
+            if (is_array($roles) && count($roles) == 1) {
+              $role =& $roles[0];
+            }
+            else {
+              $role =& SRA_Error::logError('SraWorkflow::getRole: Failed - Unable to obtain reference to role object using attribute ' . $setup->roleAttr . ' and value ' . $id, __FILE__, __LINE__);
+            }
+          }
+          else {
+            $role =& $dao->findByPk($id);
+          }
+        }
+      }
+      else {
+        $role =& SRA_Error::logError('SraWorkflow::getRole: Failed - No $id specified', __FILE__, __LINE__);
+      }
+      return $role;
+      ]]></introduction>
+      <introduction key="getRoleAttrDispl" class="vo" type="method" value="getRoleAttrDispl(&amp; $role)"><![CDATA[
+      // returns the display attribute value for $role. if $role is not an 
+      // object value, the role object will be looked up using the getRole 
+      // method
+      if (!is_object($role) && SRA_Error::isError($role =& $this->getRole($role))) {
+        return NULL;
+      }
+      else {
+        $setup =& $this->getSetup();
+        return $setup->roleAttrDispl ? $role->getAttribute($setup->roleAttrDispl) : $this->getRoleId($role);
+      }
+      ]]></introduction>
+      <introduction key="getRoleId" class="vo" type="method" value="getRoleId(&amp; $role)"><![CDATA[
+      // returns the identity attribute value for $role. if $role is not an 
+      // object value, the role object will be looked up using the getRole 
+      // method
+      if (!is_object($role) && SRA_Error::isError($role =& $this->getRole($role))) {
+        return NULL;
+      }
+      else {
+        $setup =& $this->getSetup();
+        return $setup->roleAttr ? $role->getAttribute($setup->roleAttr) : $role->getPrimaryKey();
+      }
+      ]]></introduction>
+      <introduction key="getRoleMemberIds" class="vo" type="method" value="getRoleMemberIds(&amp; $role)"><![CDATA[
+      // returns the user ids associated with $role. if $role is not an 
+      // object value, the role object will be looked up using the getRole 
+      // method
+      if (!is_object($role) && SRA_Error::isError($role =& $this->getRole($role))) {
+        return NULL;
+      }
+      else {
+        $setup =& $this->getSetup();
+        if ($setup->roleAttrMembers && is_array($members =& $role->getAttribute($setup->roleAttrMembers))) {
+          $keys = array_keys($members);
+          foreach($keys as $key) {
+            if (is_object($members[$key])) {
+              $members[$key] = $this->getRoleId($members[$key]);
+            }
+          }
+        }
+        else {
+          $members = NULL;
+        }
+        return $members;
+      }
+      ]]></introduction>
+      <introduction key="getRoleMembers" class="vo" type="method" value="&amp;getRoleMembers(&amp; $role)"><![CDATA[
+      // returns the user objects associated with $role. if $role is not an 
+      // object value, the role object will be looked up using the getRole 
+      // method
+      if (!is_object($role) && SRA_Error::isError($role =& $this->getRole($role))) {
+        return NULL;
+      }
+      else {
+        $setup =& $this->getSetup();
+        if ($setup->roleAttrMembers && is_array($members =& $role->getAttribute($setup->roleAttrMembers))) {
+          $keys = array_keys($members);
+          foreach($keys as $key) {
+            if (!is_object($members[$key])) {
+              if (SRA_Error::isError($members[$key] =& $this->getUser($members[$key]))) {
+                unset($members[$key]);
+              }
+            }
+          }
+        }
+        else {
+          $members = NULL;
+        }
+        return $members;
+      }
+      ]]></introduction>
+      <introduction key="getSetup" class="vo" type="method" value="&amp;getSetup()"><![CDATA[
+      $nl = NULL;
+      return $this->_id ? SRA_WorkflowManager::getWorkflowSetup($this->_id) : $nl;
+      ]]></introduction>
+      <introduction key="getStep" class="vo" type="method" value="&amp;getStep($stepId=NULL)"><![CDATA[
+      // returns the step specified by $stepId if it has occurred within this 
+      // workflow, NULL otherwise. the workflow must be initialized in order to 
+      // invoke this method. if $stepId is not specified, the current step 
+      // will be returned or NULL if no current step exists
+      $stepId = $stepId ? $stepId : $this->getCurrentStep();
+      if ($this->getStatus() != 'initialized' && $stepId) {
+        $step = NULL;
+        $this->getSteps();
+        if ($this->_steps) {
+          $keys = array_keys($this->_steps);
+          foreach($keys as $key) {
+            if ($this->_steps[$key]->getStep() == $stepId) {
+              $step =& $this->_steps[$key];
+              break;
+            }
+          }
+        }
+        return $step;
+      }
+      else {
+        return NULL;
+      }
+      ]]></introduction>
+      <introduction key="getUser" class="vo" type="method" value="&amp;getUser($id=NULL)"><![CDATA[
+      // returns a reference to the user specified by $id. if $id is not 
+      // specified, a reference to the current active user will be returned
+      $user = NULL;
+      $id = $id ? $id : $this->getActiveUserId();
+      if ($id) {
+        $setup =& $this->getSetup();
+        if (SRA_Error::isError($dao =& SRA_DaoFactory::getDao($setup->userEntity))) {
+          $user =& SRA_Error::logError('SraWorkflow::getUser: Failed - Unable to obtain reference to user entity ' . $setup->userEntity, __FILE__, __LINE__);
+        }
+        else {
+          if ($setup->userAttr) {
+            $users =& $dao->findByConstraints(array($setup->userAttr => $id));
+            if (is_array($users) && count($users) == 1) {
+              $user =& $users[0];
+            }
+            else {
+              $user =& SRA_Error::logError('SraWorkflow::getUser: Failed - Unable to obtain reference to user object using attribute ' . $setup->userAttr . ' and value ' . $id, __FILE__, __LINE__);
+            }
+          }
+          else {
+            $user =& $dao->findByPk($id);
+          }
+        }
+      }
+      else {
+        $user =& SRA_Error::logError('SraWorkflow::getUser: Failed - No $id specified', __FILE__, __LINE__);
+      }
+      return $user;
+      ]]></introduction>
+      <introduction key="getUserAttrDispl" class="vo" type="method" value="getUserAttrDispl(&amp; $user)"><![CDATA[
+      // returns the display attribute value for $user. if $user is not an 
+      // object value, the user object will be looked up using the getUser 
+      // method
+      if (!is_object($user) && SRA_Error::isError($user =& $this->getUser($user))) {
+        return NULL;
+      }
+      else {
+        $setup =& $this->getSetup();
+        return $setup->userAttrDispl ? $user->getAttribute($setup->userAttrDispl) : $this->getUserId($user);
+      }
+      ]]></introduction>
+      <introduction key="getUserAttrEmail" class="vo" type="method" value="getUserAttrEmail(&amp; $user)"><![CDATA[
+      // returns the email attribute value for $user. if $user is not an 
+      // object value, the user object will be looked up using the getUser 
+      // method
+      if (!is_object($user) && SRA_Error::isError($user =& $this->getUser($user))) {
+        return NULL;
+      }
+      else {
+        $setup =& $this->getSetup();
+        return $setup->userAttrEmail ? $user->getAttribute($setup->userAttrEmail) : NULL;
+      }
+      ]]></introduction>
+      <introduction key="getUserId" class="vo" type="method" value="getUserId(&amp; $user)"><![CDATA[
+      // returns the identity attribute value for $user. if $user is not an 
+      // object value, the user object will be looked up using the getUser 
+      // method
+      if (!is_object($user) && SRA_Error::isError($user =& $this->getUser($user))) {
+        return NULL;
+      }
+      else {
+        $setup =& $this->getSetup();
+        return $setup->userAttr ? $user->getAttribute($setup->userAttr) : $user->getPrimaryKey();
+      }
+      ]]></introduction>
+      <introduction key="setEntityWfId" class="vo" type="method" value="setEntityWfId(&amp;$obj)"><![CDATA[
+      
+      if ($obj) { $obj->_workflowId_ = $this->getWorkflowId(); }
+      ]]></introduction>
+      <introduction key="setParams" class="vo" type="method" value="setParams($params)"><![CDATA[
+      if ($params) { $this->setSerializedParams(serialize($params)); }
+      ]]></introduction>
+      <introduction key="start" class="vo" type="method" value="&amp;start()"><![CDATA[
+      // starts the workflow processing by advancing the workflow to the first 
+      // step. if that step does not require user intervention, it will 
+      // automatically be completed and the workflow advanced to the next step. 
+      // this will continue until an interactive step is encountered or the 
+      // workflow completes. the workflow status will be returned. if this 
+      // status is "in-progress", then the pending interactive step may be 
+      // retrieved using the "getStep" method
+      $setup =& $this->getSetup();
+      $this->setStatus('in-progress');
+      // set due date
+      if ($setup->dueDate) {
+        if (!SRA_GregorianDate::isValid($dueDate =& SRA_GregorianDate::fromRelativeStr($setup->dueDate))) {
+          $this->setStatus('error');
+          $err = 'Due date expression is not valid';
+          $this->setError($err);
+          SRA_Error::logError('SraWorkflow::start: ' . $err, __FILE__, __LINE__);
+        }
+        else {
+          $this->setDueDate($dueDate);
+        }
+      }
+      // instantiate and start tasks
+      if ($this->getStatus() != 'error' && count($setup->tasks)) {
+        $dao = SRA_DaoFactory::getDao('SraWorkflowTask');
+        $keys = array_keys($setup->tasks);
+        foreach($keys as $key) {
+          if ($setup->tasks[$key]->constraintGroup && !$setup->tasks[$key]->constraintGroup->evaluate($this, $this->getParams())) {
+            continue;
+          }
+          $task =& $dao->newInstance(array('task' => $key));
+          $task->setWorkflow($this);
+          $task->insert();
+          $this->addTasks($task, FALSE);
+          $task->_workflow =& $this;
+          if ($task->start() == 'error') {
+            $this->setStatus('error');
+            $this->setError($task->getError());
+            break; 
+          }
+        }
+      }
+      if ($this->getStatus() != 'error') {
+        $this->setCurrentStep($setup->start);
+        $this->_advance();
+      }
+      return $this->getStatus();
+      ]]></introduction>
+      <introduction key="substituteParams" class="vo" type="method" value="substituteParams($str)"><![CDATA[
+      // substitutes param values within a string in the format ${param name}
+      return SRA_Util::substituteParams($str, $this->getParams());
+      ]]></introduction>
+      <introduction key="tasksAreCompleted" class="vo" type="method" value="tasksAreCompleted()"><![CDATA[
+      // returns TRUE if the workflow has no tasks assigned, or if all tasks 
+      // assigned are completed (or in error status)
+      if ($tasks =& $this->getTasks()) {
+        $keys = array_keys($tasks);
+        foreach($keys as $key) {
+          if (!$tasks[$key]->isTerminal()) { return FALSE; }
+        }
+      }
+      return TRUE;
+      ]]></introduction>
+      <introduction key="_advance" class="vo" type="method" value="_advance()"><![CDATA[
+      // advances to the next interactive step starting with the currentStep or 
+      // completes the workflow if no interactive steps remain
+      $setup =& $this->getSetup();
+      
+      if ($setup->steps && $this->getCurrentStep()) {
+        $dao =& SRA_DaoFactory::getDao('SraWorkflowStep');
+        do {
+          if ($this->getStatus() != 'initialized' && !($step =& $this->getStep())) {
+            $step =& $dao->newInstance(array('step' => $this->getCurrentStep()));
+            $step->setWorkflow($this);
+            $step->insert();
+            $this->addSteps($step);
+          }
+          $nextStepId = $step->start() == 'completed' && !$step->isTerminal() ? $step->getNextStepId() : NULL;
+          if ($nextStepId) { $this->setCurrentStep($nextStepId); }
+        } while($step->getStatus() == 'completed' && !$step->isTerminal() && $nextStepId);
+        
+        if ($step->isTerminal() && ($step->getStatus() == 'error' || $this->tasksAreCompleted())) {
+          $this->setStatus($step->getStatus());
+          $this->setError($step->getError());
+          $this->setEnded(new SRA_GregorianDate());
+        }
+        else if (!$step->isTerminal()) {
+          $this->setCurrentRole($step->getRole());
+          $this->setCurrentRoleDispl($step->getRoleDispl());
+          $this->setCurrentUserId($step->getUser());
+          $this->setCurrentUserDispl($step->getUserDispl());
+        }
+        else if ($step->isTerminal()) {
+          $this->setCurrentStep(NULL);
+          $this->setCurrentRole(NULL);
+          $this->setCurrentRoleDispl(NULL);
+          $this->setCurrentUserId(NULL);
+          $this->setCurrentUserDispl(NULL);
+        }
+      }
+      else if ($this->tasksAreCompleted()) {
+        $this->setStatus('completed');
+      }
+      if ($this->isDirty()) { $this->update(); }
+      ]]></introduction>
+    </aop>
+    <attribute key="workflowId" sequence="1" />
+    <attribute key="currentStep" max-length="64" />
+    <attribute key="currentRole" max-length="128" />
+    <attribute key="currentRoleDispl" max-length="128" />
+    <attribute key="currentUserId" default="$this-&gt;getActiveUserId()" max-length="128" />
+    <attribute key="currentUserDispl" default="$this-&gt;getUserAttrDispl($this-&gt;getUser())" max-length="128" />
+    <attribute key="dueDate" type="date" />
+    <attribute key="ended" type="date" />
+    <attribute key="entities" cardinality="0..*" on-delete-cascade="1" on-remove-delete="1" type="SraWorkflowEntity" />
+    <attribute key="error" />
+    <attribute key="id" depends="required" max-length="255" />
+    <attribute key="owner" default="$this-&gt;getActiveUserId()" depends="required" max-length="128" />
+    <attribute key="ownerDispl" default="$this-&gt;getUserAttrDispl($this-&gt;getUser())" max-length="128" />
+    <attribute key="serializedParams" />
+    <attribute key="started" default="new SRA_GregorianDate()" type="time" />
+    <attribute key="status" default="initialized" depends="option" max-length="16">
+      <var key="options" value="text.status.initialized=initialized text.status.inProgress=in-progress text.status.completed=completed text.status.cancelled=cancelled text.status.error=error" />
+    </attribute>
+    <attribute key="steps" cardinality="0..*" on-delete-cascade="1" on-remove-delete="1" type="SraWorkflowStep" />
+    <attribute key="tasks" cardinality="0..*" on-delete-cascade="1" on-remove-delete="1" resource="text.tasks" table="sra_workflow_tasks" type="SraWorkflowTask" />
+  </entity>
+  
+  <entity key="SraWorkflowEntity" primary-key="entityId">
+    <aop>
+      <aspect key="setPk" pointcut="dao.update"><![CDATA[
+      // remove serialized entity value is primary key is set
+      if (is_object($entity =& $record->getEntity()) && $entity->recordExists && $entity->getPrimaryKey()) {
+        $nl = NULL;
+        $record->setSerializedEntity($nl);
+        $record->setPk($entity->getPrimaryKey());
+      }
+      ]]></aspect>
+      
+      <introduction key="getEntity" class="vo" type="method" value="&amp;getEntity()"><![CDATA[
+      if ($this->getType() && !SRA_Error::isError($dao =& SRA_DaoFactory::getDao($this->getType()))) {
+        return $this->getPk() ? $dao->findByPk($this->getPk()) : unserialize($this->getSerializedEntity());
+      }
+      ]]></introduction>
+      <introduction key="setEntity" class="vo" type="method" value="setEntity(&amp; $entity)"><![CDATA[
+      if (is_object($entity)) {
+        if ($entity->recordExists && $entity->getPrimaryKey()) {
+          $this->setPk($entity->getPrimaryKey());
+        }
+        $sentity = serialize($entity);
+        $this->setSerializedEntity($sentity);
+        $this->setSerializedEntityIndex($sentity);
+      }
+      ]]></introduction>
+      <introduction key="updateEntity" class="vo" type="method" value="updateEntity($data)"><![CDATA[
+      // updates and saves this workflow entity based on the data provided. 
+      // $data should be a key value pair of attributes/values that should be 
+      // saved. if this workflow entity represents an existing entity, that 
+      // entity will be updated, otherwise the updated entity will be serialized
+      // returns TRUE on success, FALSE otherwise
+      if (is_array($data) && ($entity =& $this->getEntity())) {
+        if ($entity->recordExists && $entity->getPrimaryKey()) {
+          $entity->setAttributes($data);
+          if (!SRA_Error::isError($entity->update())) { return TRUE; }
+        }
+        else {
+          $entity->setAttributes($data);
+          $this->setEntity($entity);
+          if (!SRA_Error::isError($this->update())) { return TRUE; }
+        }
+      }
+      return FALSE;
+      ]]></introduction>
+    </aop>
+    <attribute key="entityId" sequence="1" />
+    <attribute key="type" depends="required" max-length="128" />
+    <attribute key="id" depends="required" max-length="64" />
+    <attribute key="pk" max-length="64" />
+    <attribute key="serializedEntity" lazy-load-exclusive="1" type="blob" max-length="10485760" />
+    <attribute key="serializedEntityIndex" lazy-load-exclusive="1" max-length="10485760" />
+    <attribute key="workflow" column="workflow_id" type="SraWorkflow" />
+  </entity>
+  
+  <entity key="SraWorkflowStep" primary-key="stepId">
+    <aop>
+      <aspect key="connectTo" pointcut="vo.setStatus" when="after"><![CDATA[
+      // initialize connectTo workflow
+      if ($this->recordExists) {
+        $workflow =& $this->getWorkflow();
+        $setup =& $this->getSetup();
+        if ($setup->connectTo && $this->isDirty('status') && $this->_status == 'completed') {
+          if (!SRA_Error::isError($workflow =& SRA_WorkflowManager::initializeWorkflow($setup->connectTo, $setup->params))) {
+            $workflow->start();
+          }
+        }
+      }
+      ]]></aspect>
+      
+      <introduction key="getEntity" class="vo" type="method" value="&amp;getEntity()"><![CDATA[
+      // returns the entity assigned to this step. returns NULL if no entity 
+      // is assigned, an SRA_Error object if an entity is assigned but cannot be
+      // referenced. if an entity is assigned but not yet added to the workflow, 
+      // it will be instantiated and assigned
+      if (!isset($this->_workflow)) { $this->getWorkflow(); }
+      $setup =& $this->getSetup();
+      
+      // create/get entity references
+      $entity = NULL;
+      if ($setup->entityId) {
+        // get existing entity
+        if (!($entity =& $this->_workflow->getEntity($setup->entityId))) {
+          // try to create
+          if ($setup->entity) {
+            $dao =& SRA_DaoFactory::getDao('SraWorkflowEntity');
+            $entityDao =& SRA_DaoFactory::getDao($setup->entity);
+            $wfEntity =& $dao->newInstance(array('id' => $setup->entityId, 'type' => $setup->entity));
+            $setup->entityPk ? $wfEntity->setPk($this->substituteParams($setup->entityPk)) : $wfEntity->setEntity($entityDao->newInstance());
+            $this->_workflow->addEntities($wfEntity);
+            $this->_workflow->update();
+            $entity =& $this->_workflow->getEntity($setup->entityId);
+          }
+          // error, cannot get entity reference
+          else {
+            $entity =& SRA_Error::logError('SraWorkflowStep::getEntity: Unable to retrieve entity: ' . $this->getStep(), __FILE__, __LINE__);
+          }
+        }
+      }
+      return $entity;
+      ]]></introduction>
+      <introduction key="getEntityObj" class="vo" type="method" value="&amp;getEntityObj()"><![CDATA[
+      // returns the entity object assigned to this step. returns NULL if no 
+      // entity is assigned or if an error occurs (error will be logged)
+      $setup =& $this->getSetup();
+      $obj = NULL;
+      if ($setup->entityId) {
+        $entity =& $this->getEntity();
+        if (SRA_Error::isError($entity) || !$entity) {
+          $err = 'Unable to obtain SraWorkflowEntity reference for validation';
+        }
+        else {
+          if (SRA_Error::isError($obj =& $entity->getEntity())) {
+            $err = 'Unable to obtain entity reference for validation';
+          }
+        }
+        if ($err) {
+          SRA_Error::logError('SraWorkflowStep::getNextStepId: ' . $err . ' - ' . $this->getStep(), __FILE__, __LINE__);
+          $obj = NULL;
+        }
+      }
+      // set workflow id attribute
+      if ($wf =& $this->getWorkflow()) { $wf->setEntityWfId($obj); }
+      return $obj;
+      ]]></introduction>
+      <introduction key="getName" class="vo" type="method" value="getName()"><![CDATA[
+      // returns the localized name for this step from the step setup
+      $setup =& $this->getSetup();
+      return $setup ? $setup->name : NULL;
+      ]]></introduction>
+      <introduction key="getNextStepId" class="vo" type="method" value="getNextStepId()"><![CDATA[
+      // returns the ID of the next step based on the setup for this step 
+      // including taking into account all decisions associated with it. returns 
+      // NULL if this step is not yet complete, or if it is a "finish"/terminal 
+      // step or if an error occurs
+      $setup =& $this->getSetup();
+      if ($this->getStatus() != 'completed' || $setup->finish) { 
+        SRA_Error::logError('SraWorkflowStep::getNextStepId: Next step id cannot be retrieved if step is terminal or not completed: ' . $this->getStep(), __FILE__, __LINE__);
+        return NULL; 
+      }
+      else {
+        if ($setup->decisions) {
+          if (!isset($this->_workflow)) { $this->getWorkflow(); }
+          $entity =& $this->getEntityObj();
+          $keys = array_keys($setup->decisions);
+          foreach($keys as $key) {
+            if ($setup->decisions[$key]->evaluate($this->_workflow, $this->_workflow->getParams())) { return $setup->decisions[$key]->next; }
+          }
+        }
+        // no decisions triggered, proceed with the default "next" step
+        return $setup->next;
+      }
+      ]]></introduction>
+      <introduction key="getParam" class="vo" type="method" value="getParam($id)"><![CDATA[
+      $params = $this->getParams();
+      return isset($params[$id]) ? $params[$id] : NULL;
+      ]]></introduction>
+      <introduction key="getParams" class="vo" type="method" value="getParams()"><![CDATA[
+      return $setup =& $this->getSetup() ? $setup->params : array();
+      ]]></introduction>
+      <introduction key="getSetup" class="vo" type="method" value="&amp;getSetup()"><![CDATA[
+      $nl = NULL;
+      if (!isset($this->_workflow)) { $this->getWorkflow(); }
+      return ($wfSetup =& $this->_workflow->getSetup()) && ($setup =& $wfSetup->steps[$this->getStep()]) ? $setup : $nl;
+      ]]></introduction>
+      <introduction key="getStatus" class="vo" type="method" value="getStatus()"><![CDATA[
+      // returns the current status of this step. this is one of the following:
+      // initialized: step has been created but "start" has not been invoked
+      // in-progress: 1 or more tasks are "in-progress"
+      // completed:   all tasks are in "completed" status
+      // error:       step error is set or 1 or more tasks are in "error" status
+      if ($this->getError()) {
+        return 'error';
+      }
+      else if ($this->getStarted()) {
+        $db =& SRA_Controller::getAppDb();
+        $results =& $db->fetch('SELECT t.status FROM sra_workflow_task t, sra_workflow_step_tasks s WHERE s.step_id=' . $this->getPrimaryKey() . ' AND s.task_id=t.task_id');
+        while($row =& $results->next()) {
+          if ($row[0] == 'in-progress' || $row[0] == 'error') { return $row[0]; }
+        }
+        return 'completed';
+      }
+      else {
+        return 'initialized';
+      }
+      ]]></introduction>
+      <introduction key="getWorkflowId" class="vo" type="method" value="getWorkflowId()"><![CDATA[
+      // returns the workflow id for this step
+      return SRA_Database::getQueryValue(SRA_Controller::getAppDb(), 'SELECT workflow_id FROM sra_workflow_step WHERE step_id=' . $this->getPrimaryKey(), SRA_DATA_TYPE_INT);
+      ]]></introduction>
+      <introduction key="isInteractive" class="vo" type="method" value="isInteractive()"><![CDATA[
+      // returns true if this step is interactive (1 or more of its' tasks are
+      // interactive)
+      $tasks =& $this->getTasks();
+      $keys = array_keys($tasks);
+      foreach($keys as $key) {
+        if ($tasks[$key]->isInteractive()) { return TRUE; }
+      }
+      return FALSE;
+      ]]></introduction>
+      <introduction key="isTerminal" class="vo" type="method" value="isTerminal()"><![CDATA[
+      // returns true if this is a terminal step. terminal steps are those 
+      // that have been run and are either set as a "finish" step or have 
+      // resulted in an error
+      $setup =& $this->getSetup();
+      return $this->getStatus() == 'error' || ($this->getStatus() == 'completed' && $setup->finish);
+      ]]></introduction>
+      <introduction key="start" class="vo" type="method" value="start()"><![CDATA[
+      // starts this step processing. if no user interaction is required, the 
+      // step will complete and the status will be changed to "completed". if
+      // an error occurs while attempting to do so, the status will be chanaged 
+      // to "error". if the step requires user interaction, the status will 
+      // be changed to "in-progress". any applicable task notifications will 
+      // also be sent when this method is invoked. returns the status of the 
+      // step
+      if ($this->getStatus() == 'initialized') {
+        $this->setStarted(new SRA_GregorianDate());
+        if (!isset($this->_workflow)) { $this->getWorkflow(); }
+        $setup =& $this->getSetup();
+        
+        // create/get entity references
+        if ($this->getStatus() != 'error' && SRA_Error::isError($entity =& $this->getEntity())) {
+          $this->setError($entity->getErrorMessage());
+        }
+        
+        // set due date
+        if (!$err && $setup->dueDate) {
+          $start = $setup->dueDateRel == SRA_WORKFLOW_STEP_DUE_DATE_REL_WF_START ? $workflow->getStarted() : ($setup->dueDateRel == SRA_WORKFLOW_STEP_DUE_DATE_REL_WF_DUE_DATE ? $workflow->getDueDate() : NULL);
+          if (!SRA_GregorianDate::isValid($dueDate =& SRA_GregorianDate::fromRelativeStr($setup->dueDate, $start))) {
+            $err = 'Due date expression is not valid';
+          }
+          else {
+            $this->setDueDate($dueDate);
+          }
+        }
+        
+        // assignment
+        if ($this->getStatus() != 'error') {
+          // assign to new user
+          if ($setup->user || $setup->role) {
+            if ($setup->user) {
+              $this->setUser($this->substituteParams($setup->user));
+              $this->setUserDispl($this->_workflow->getUserAttrDispl($this->getUser()));
+            }
+            if ($setup->role) { 
+              $this->setRole($this->substituteParams($setup->role));
+              $this->setRoleDispl($this->_workflow->getRoleAttrDispl($this->getRole()));
+            }
+          }
+          // assign to workflow owner
+          else {
+            $this->setUser($this->_workflow->getOwner());
+            $this->setUserDispl($this->_workflow->getOwnerDispl());
+          }
+        }
+        
+        // instantiate and start tasks
+        if ($this->getStatus() != 'error' && count($setup->tasks)) {
+          $dao = SRA_DaoFactory::getDao('SraWorkflowTask');
+          $keys = array_keys($setup->tasks);
+          foreach($keys as $key) {
+            if ($setup->tasks[$key]->constraintGroup && !$setup->tasks[$key]->constraintGroup->evaluate($this->_workflow, $this->_workflow->getParams())) {
+              continue;
+            }
+            $task =& $dao->newInstance(array('task' => $key));
+            $task->setStep($this);
+            $task->insert();
+            $this->addTasks($task, FALSE);
+            if ($task->start() == 'error') { break; }
+          }
+        }
+        
+        $this->update();
+        
+      }
+      return $this->getStatus();
+      ]]></introduction>
+      <introduction key="substituteParams" class="vo" type="method" value="substituteParams($str)"><![CDATA[
+      // substitutes param values within a string in the format ${param name}
+      $setup =& $this->getSetup();
+      $str = SRA_Util::substituteParams($str, $setup->params);
+      if (!isset($this->_workflow)) { $this->getWorkflow(); }
+      return $this->_workflow->substituteParams($str);
+      ]]></introduction>
+    </aop>
+    <attribute key="stepId" sequence="1" />
+    <attribute key="dueDate" type="date" />
+    <attribute key="ended" type="date" />
+    <attribute key="error" />
+    <attribute key="started" type="date" />
+    <attribute key="role" max-length="128" />
+    <attribute key="roleDispl" max-length="128" />
+    <attribute key="step" depends="required" max-length="64" />
+    <attribute key="tasks" cardinality="0..*" on-delete-cascade="1" on-remove-delete="1" resource="text.tasks" table="sra_workflow_step_tasks" type="SraWorkflowTask" />
+    <attribute key="user" max-length="128" />
+    <attribute key="userDispl" max-length="128" />
+    <attribute key="workflow" column="workflow_id" type="SraWorkflow" />
+  </entity>
+  
+  <entity key="SraWorkflowTask" primary-key="taskId">
+    <aop>
+      <advice key="setEnded"><![CDATA[
+      // set the ended timestamp for this task
+      if ($record && $record->validate() && $record->isDirty('status') && $record->getStatus() == 'completed') {
+        $record->setEnded(new SRA_GregorianDate());
+      }
+      ]]></advice>
+      
+      <aspect key="connectTo" pointcut="vo.setStatus" when="after"><![CDATA[
+      // initialize connectTo workflow
+      if ($this->recordExists) {
+        $workflow =& $this->getWorkflow();
+        $setup =& $this->getSetup();
+        if ($setup->connectTo && $this->isDirty('status') && $this->_status == 'completed') {
+          if (!SRA_Error::isError($workflow =& SRA_WorkflowManager::initializeWorkflow($setup->connectTo, $setup->params))) {
+            $workflow->start();
+          }
+        }
+      }
+      ]]></aspect>
+      <aspect key="setEndedInsert" advice="setEnded" pointcut="dao.insert" />
+      <aspect key="setEndedUpdate" advice="setEnded" pointcut="dao.update" />
+      
+      <introduction key="commitEntity" class="vo" type="method" value="commitEntity()"><![CDATA[
+      // commits the task entity when applicable. returns an array of error 
+      // messages if an error occurs
+      $setup =& $this->getSetup();
+      if ($setup->commit && ($entity =& $this->getEntity())) {
+        if (SRA_Error::isError($obj =& $entity->getEntity())) {
+          return array('Unable to obtain entity reference for commit');
+        }
+        else {
+          if (!$obj->validate()) { return $obj->validateErrors; }
+          if (SRA_Error::isError($commitErr = $obj->update())) {
+            return array($commitErr->getErrorMessage());
+          }
+          else {
+            $entity->setEntity($obj);
+            $entity->update();
+          }
+        }
+      }
+      return FALSE;
+      ]]></introduction>
+      <introduction key="evalTaskCode" class="vo" type="method" value="evalTaskCode($code)"><![CDATA[
+      // evaluates $code. returns TRUE on success, FALSE otherwise
+      $result = TRUE;
+      if ($code) {
+        $setup =& $this->getSetup();
+        $owner =& $this->getOwner();
+        $workflow =& $this->getTaskWorkflow();
+        $wfSetup =& $workflow->getSetup();
+        $entity =& $this->getEntity();
+        $this->getStep();
+        if ($this->_step) { $wfStepSetup =& $this->_step->getSetup(); }
+        $entities =& $workflow->getEntities();
+        $keys = array_keys($entities);
+        foreach($keys as $key) {
+          ${$entities[$key]->getId()} =& $entities[$key]->getEntity();
+        }
+        if ($this->_step) { $step =& $this->_step; }
+        $task =& $this;
+        if (!eval($code)) { $result = FALSE; }
+      }
+      return $result;
+      ]]></introduction>
+      <introduction key="getDescription" class="vo" type="method" value="getDescription()"><![CDATA[
+      // returns the localized description for this task from the task setup
+      $setup =& $this->getSetup();
+      return $setup ? $setup->description : NULL;
+      ]]></introduction>
+      <introduction key="getEntity" class="vo" type="method" value="&amp;getEntity()"><![CDATA[
+      // returns the entity assigned to this task. returns NULL if no entity 
+      // is assigned, an SRA_Error object if an entity is assigned but cannot be
+      // referenced. if an entity is assigned but not yet added to the workflow, 
+      // it will be instantiated and assigned
+      $setup =& $this->getSetup();
+      
+      // create/get entity references
+      $entity = NULL;
+      if ($setup->entityId) {
+        $workflow =& $this->getTaskWorkflow();
+        
+        // get existing entity
+        if (!$entity =& $workflow->getEntity($setup->entityId)) {
+          // try to create
+          if ($setup->entity) {
+            $dao =& SRA_DaoFactory::getDao('SraWorkflowEntity');
+            $entityDao =& SRA_DaoFactory::getDao($setup->entity);
+            $wfEntity =& $dao->newInstance(array('id' => $setup->entityId, 'type' => $setup->entity));
+            $setup->entityPk ? $wfEntity->setPk($workflow->substituteParams($setup->entityPk)) : $wfEntity->setEntity($entityDao->newInstance());
+            $workflow->addEntities($wfEntity);
+            $workflow->update();
+            $entity =& $workflow->getEntity($setup->entityId);
+          }
+          // error, cannot get entity reference
+          else {
+            $entity =& SRA_Error::logError('SraWorkflowTask::getEntity: Unable to retrieve entity', __FILE__, __LINE__);
+          }
+        }
+      }
+      return $entity;
+      ]]></introduction>
+      <introduction key="getEntityObj" class="vo" type="method" value="&amp;getEntityObj()"><![CDATA[
+      // returns the entity object assigned to this task. returns NULL if no 
+      // entity is assigned or if an error occurs (error will be logged)
+      $setup =& $this->getSetup();
+      $obj = NULL;
+      if ($setup->entityId) {
+        $entity =& $this->getEntity();
+        if (SRA_Error::isError($entity) || !$entity) {
+          $err = 'Unable to obtain SraWorkflowEntity reference for validation';
+        }
+        else {
+          if (SRA_Error::isError($obj =& $entity->getEntity())) {
+            $err = 'Unable to obtain entity reference for validation';
+          }
+        }
+        if ($err) {
+          SRA_Error::logError('SraWorkflowTask::getNextStepId: ' . $err, __FILE__, __LINE__);
+          $obj = NULL;
+        }
+      }
+      // set workflow id attribute
+      if ($wf =& $this->getTaskWorkflow()) { $wf->setEntityWfId($obj); }
+      return $obj;
+      ]]></introduction>
+      <introduction key="getName" class="vo" type="method" value="getName()"><![CDATA[
+      // returns the localized name for this task from the task setup
+      $setup =& $this->getSetup();
+      return $setup ? $setup->name : NULL;
+      ]]></introduction>
+      <introduction key="getOwner" class="vo" type="method" value="&amp;getOwner()"><![CDATA[
+      // returns the owner of this task (either a workflow or a workflow step)
+      return $this->getStep() ? $this->getStep() : ($this->_workflow ? $this->_workflow : $this->getWorkflow());
+      ]]></introduction>
+      <introduction key="getSetup" class="vo" type="method" value="&amp;getSetup()"><![CDATA[
+      $nl = NULL;
+      $owner =& $this->getOwner();
+      return $owner && ($ownerSetup =& $owner->getSetup()) && ($setup =& $ownerSetup->tasks[$this->getTask()]) ? $setup : $nl;
+      ]]></introduction>
+      <introduction key="getTaskWorkflow" class="vo" type="method" value="&amp;getTaskWorkflow()"><![CDATA[
+      // returns the task workflow (either a reference to the workflow attribute 
+      // or the step workflow if task is part of a step)
+      if (!($workflow =& $this->_workflow) && !($workflow =& $this->getWorkflow()) && $this->getStep()) {
+        $workflow =& $this->_step->getWorkflow();
+      }
+      return $workflow;
+      ]]></introduction>
+      <introduction key="getValidate" class="vo" type="method" value="getValidate()"><![CDATA[
+      // returns the view for this task from the task setup
+      $setup =& $this->getSetup();
+      return $setup->validate;
+      ]]></introduction>
+      <introduction key="getView" class="vo" type="method" value="getView()"><![CDATA[
+      // returns the view for this task from the task setup
+      $setup =& $this->getSetup();
+      return $setup ? $setup->view : NULL;
+      ]]></introduction>
+      <introduction key="getViewContent" class="vo" type="method" value="getViewContent()"><![CDATA[
+      // returns the view content for this task from the task setup
+      if (($view = $this->getView()) && is_object($obj =& $this->getEntityObj())) {
+        ob_start();
+        $views = explode(' ', $this->getView());
+        foreach($views as $view) { $obj->render($view); }
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
+      }
+      ]]></introduction>
+      <introduction key="isInteractive" class="vo" type="method" value="isInteractive()"><![CDATA[
+      // returns true if this task is interactive
+      $setup =& $this->getSetup();
+      return $setup->interactive;
+      ]]></introduction>
+      <introduction key="isTerminal" class="vo" type="method" value="isTerminal()"><![CDATA[
+      // returns true if this is this task is completed (status == completed or error)
+      return $this->getStatus() == 'error' || $this->getStatus() == 'completed';
+      ]]></introduction>
+      <introduction key="process" class="vo" type="method" value="process($data=NULL, $attrPrefix=NULL)"><![CDATA[
+      // for interactive tasks only: used to designate that the view has been 
+      // displayed and updates the task entity when applicable using the $data 
+      // hash provided. returns an error hash (attr/msg) if validation is not 
+      // successful, an SRA_Error object if an error occurs (in which case the 
+      // workflow will be aborted), FALSE if this task is not-interactive 
+      // or is already completed (an error will be logged also) or TRUE on 
+      // success. when successful, $attrPrefix is a prefix value in the data hash 
+      // to remove. any elements in the hash that do not have this prefix will 
+      // be ignored. $data should only be specified (and will only be used) if 
+      // this task has a validation constraint (the "validate" xml attribute)
+      $setup =& $this->getSetup();
+      if ($this->getStatus() != 'in-progress' || !$setup->interactive) {
+        SRA_Error::logError('SraWorkflowTask::process: task cannot be processed because it is not "in-progress": ' . $setup->name, __FILE__, __LINE__);
+        return FALSE;
+      }
+      else {
+        $data =& $data && $attrPrefix ? SRA_Util::getPrefixedArrayValues($attrPrefix, $data) : $data;
+        if ($setup->view && $data) {
+          $entity =& $this->getEntity();
+          if (SRA_Error::isError($entity) || !$entity) {
+            $err = 'Unable to obtain SraWorkflowEntity reference for validation';
+          }
+          else {
+            if (SRA_Error::isError($obj =& $entity->getEntity())) {
+              $err = 'Unable to obtain entity reference for validation';
+            }
+            else {
+              if ($data) {
+                $keys = array_keys($data);
+                foreach($keys as $key) {
+                  $obj->setAttribute($key, $data[$key]);
+                }
+              }
+              if ($validationConstraints = $this->getValidate()) {
+                foreach($validationConstraints as $validationConstraint) {
+                  $obj->validate($validationConstraint == '1' ? NULL : $validationConstraint);
+                  if ($obj->validateErrors) { break; }
+                }
+              }
+              $errors = $obj->validateErrors;
+              if ($setup->validateIgnore) {
+                foreach($setup->validateIgnore as $attr) {
+                  if (isset($errors[$attr])) { unset($errors[$attr]); }
+                }
+              }
+              if ($errors && count($errors)) { 
+                return $errors; 
+              }
+              else {
+                if ($entity->getPk()) {
+                  $obj->update();
+                }
+                else {
+                  $entity->setEntity($obj);
+                  $entity->update();
+                }
+              }
+            }
+          }
+        }
+        
+        if (!$err && !$this->evalTaskCode($setup->evalAfter)) { $err = 'eval-after code failed because it did not return TRUE'; }
+        
+        // commit entity
+        if (!$err && $commitErrors = $this->commitEntity()) { return $commitErrors; }
+        
+        $owner =& $this->getOwner();
+        if ($err) {
+          $this->setStatus('error');
+          $this->setError($err);
+          $this->update();
+          if (method_exists($owner, 'setStatus')) { $owner->setStatus('error'); }
+          $owner->setError($err);
+          $owner->update();
+          return SRA_Error::logError('SraWorkflowTask::process: ' . $err . ' - ' . $this->getStep(), __FILE__, __LINE__);
+        }
+        else {
+          $this->getStep();
+          $this->setStatus('completed');
+          $this->update();
+          if ($this->_step) {
+            if ($this->_step->isTerminal() || $this->_step->getStatus() == 'completed') {
+              $this->_step->setEnded(new SRA_GregorianDate());
+              $this->_step->update();
+              if ($this->_step->isTerminal()) {
+                $this->_step->_workflow->setStatus('completed');
+                $this->_step->_workflow->update();
+              }
+              else {
+                $this->_step->_workflow->setCurrentStep($this->_step->getNextStepId());
+                $this->_step->_workflow->_advance();
+              }
+            }
+          }
+          else {
+            $this->_workflow->_advance();
+          }
+          return TRUE;
+        }
+      }
+      ]]></introduction>
+      <introduction key="start" class="vo" type="method" value="start()"><![CDATA[
+      if ($this->getStatus() == 'initialized') {
+        $setup =& $this->getSetup();
+        $owner =& $this->getOwner();
+        $workflow =& $this->getTaskWorkflow();
+        $wfSetup =& $workflow->getSetup();
+        $entity =& $this->getEntity();
+        $this->getStep();
+        
+        if ($this->_step) { $wfStepSetup =& $this->_step->getSetup(); }
+        if (!$err && !$this->evalTaskCode($setup->evalBefore)) { $err = 'eval-before code failed because it did not return TRUE'; }
+        
+        // set due date
+        if (!$err && $setup->dueDate) {
+          $start = $setup->dueDateRel == SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START ? $workflow->getStarted() : ($setup->dueDateRel == SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE ? $workflow->getDueDate() : ($this->_step && $setup->dueDateRel == SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE ? $this->_step->getDueDate() : NULL));
+          if (!SRA_GregorianDate::isValid($dueDate =& SRA_GregorianDate::fromRelativeStr($setup->dueDate, $start))) {
+            $err = 'Due date expression is not valid';
+          }
+          else {
+            $this->setDueDate($dueDate);
+          }
+        }
+        
+        // assignment
+        if (!$err && $setup->interactive) {
+          // assign to new user
+          if ($setup->user || $setup->role) {
+            if ($setup->user) {
+              $this->setUser($owner->substituteParams($setup->user));
+              $this->setUserDispl($workflow->getUserAttrDispl($this->getUser()));
+            }
+            if ($setup->role) { 
+              $this->setRole($owner->substituteParams($setup->role));
+              $this->setRoleDispl($workflow->getRoleAttrDispl($this->getRole()));
+            }
+          }
+          // assign to workflow owner
+          else {
+            $this->setUser($workflow->getOwner());
+            $this->setUserDispl($workflow->getOwnerDispl());
+          }
+        }
+        
+        // notifications
+        if (!$err && $setup->notify && ($setup->interactive || $setup->notifyAlways)) {
+          $emails = array();
+          $emailUsers = array();
+          
+          if (!$setup->notifyRecipientsOnly) {
+            $users = array();
+            $roles = array();
+            if ($setup->notifyAll) {
+              $steps =& $workflow->getSteps();
+              $keys = array_keys($steps);
+              foreach($keys as $key) {
+                if ($steps[$key]->getUser()) { $users[$steps[$key]->getUser()] = TRUE; }
+                if ($steps[$key]->getRole()) { $roles[$steps[$key]->getRole()] = TRUE; }
+                $tasks =& $steps[$key]->getTasks();
+                $tkeys = array_keys($tasks);
+                foreach($tkeys as $tkey) {
+                  if ($tasks[$tkey]->getUser()) { $users[$tasks[$tkey]->getUser()] = TRUE; }
+                  if ($tasks[$tkey]->getRole()) { $roles[$tasks[$tkey]->getRole()] = TRUE; }
+                }
+              }
+              $tasks =& $workflow->getTasks();
+              $keys = array_keys($tasks);
+              foreach($keys as $key) {
+                if ($tasks[$key]->getUser()) { $users[$tasks[$key]->getUser()] = TRUE; }
+                if ($tasks[$key]->getRole()) { $roles[$tasks[$key]->getRole()] = TRUE; }
+              }
+            }
+            else {
+              if ($this->getUser()) { $users[$this->getUser()] = TRUE; }
+              if ($this->getRole()) { $roles[$this->getRole()] = TRUE; }
+            }
+            $users = array_keys($users);
+            $roles = array_keys($roles);
+            foreach($users as $user) {
+              $user =& $workflow->getUser($user);
+              if ($email = $workflow->getUserAttrEmail($user)) { 
+                $emails[$email] = TRUE; 
+                $emailUsers[$email] =& $user;
+              }
+            }
+            foreach($roles as $role) {
+              if ($members =& $workflow->getRoleMembers($role)) {
+                $keys = array_keys($members);
+                foreach($keys as $key) {
+                  if ($email = $workflow->getUserAttrEmail($members[$key])) { 
+                    $emails[$email] = TRUE; 
+                    $emailUsers[$email] =& $members[$key];
+                  }
+                }
+              }
+            }
+          }
+          if ($setup->notifyRecipients) {
+            foreach($setup->notifyRecipients as $email) {
+              if (SRA_Util::beginsWith($email, '$')) {
+                if (!$obj) { $obj =& $entity->getEntity(); }
+                if (!$obj || !($email = $obj->getAttribute(substr($email, 1)))) { 
+                  continue;
+                }
+              }
+              $emails[$email] = TRUE; 
+              $emailUsers[$email] = NULL;
+            }
+          }
+          $emails = array_keys($emails);
+          
+          if (count($emails)) {
+            $tpl =& SRA_Controller::getAppTemplate();
+            $tpl->assignByRef('wfResources', $wfSetup->resources);
+            $tpl->assignByRef('wfWorkflow', $workflow);
+            $tpl->assignByRef('wfStep', $this->_step);
+            $tpl->assignByRef('wfTask', $this);
+            $tpl->assignByRef('wfSetup', $wfSetup);
+            $tpl->assignByRef('wfStepSetup', $wfStepSetup);
+            $tpl->assignByRef('wfTaskSetup', $setup);
+            $entities =& $workflow->getEntities();
+            $keys = array_keys($entities);
+            foreach($keys as $key) {
+              $tpl->assignByRef('wf_' . $entities[$key]->getId(), $entities[$key]->getEntity());
+            }
+            $attachment = NULL;
+            if ($setup->notifyAttachView) {
+              $obj =& $entity->getEntity();
+              $fileName = $obj->parseString($owner->substituteParams($setup->notifyAttachName));
+              for($i=0; file_exists($attachment = SRA_Controller::getAppTmpDir() . '/' . ($i ? $i . $fileName : $fileName)); $i++) {}
+              $obj->renderToFile($setup->notifyAttachView, $attachment);
+            }
+            $notifyBcc = $setup->notifyBcc ? $setup->notifyBcc : $wfSetup->notifyBcc;
+            $notifyCc = $setup->notifyCc ? $setup->notifyCc : $wfSetup->notifyCc;
+            foreach($emails as $email) {
+              $tpl->assignByRef('wfUser', $emailUsers[$email]);
+              $tpl->displayToEmail($email, $setup->notifySubject, $setup->notifyTpl ? $setup->notifyTpl : (!$setup->notifyTplHtml ? ($wfStepSetup->notifyTpl ? $wfStepSetup->notifyTpl : $wfSetup->notifyTpl) : NULL), $setup->notifyTplHtml ? $setup->notifyTplHtml : (!$setup->notifyTpl ? ($wfStepSetup->notifyTplHtml ? $wfStepSetup->notifyTplHtml : $wfSetup->notifyTplHtml) : NULL), $setup->notifyFrom, NULL, NULL, $email == $emails[0] ? $notifyCc : NULL, $email == $emails[0] ? $notifyBcc : NULL, $attachment);
+            }
+            if ($attachment) { SRA_File::unlink($attachment); }
+          }
+        }
+        
+        // commit entity
+        if (!$err && !$setup->interactive && ($commitErrors = $this->commitEntity())) { $err = implode("\n", $commitErrors); }
+        
+        if ($err) {
+          $this->setStatus('error');
+          $this->setError($err);
+          SRA_Error::logError('SraWorkflowTask::start: ' . $err . ': ' . $setup->name, __FILE__, __LINE__); 
+        }
+        else {
+          $this->setStatus($setup->interactive ? 'in-progress' : 'completed');
+        }
+        $this->update();
+      }
+      return $this->getStatus();
+      ]]></introduction>
+    </aop>
+    <attribute key="taskId" sequence="1" />
+    <attribute key="dueDate" type="date" />
+    <attribute key="ended" type="date" />
+    <attribute key="error" />
+    <attribute key="started" default="new SRA_GregorianDate()" type="time" />
+    <attribute key="status" default="initialized" depends="option" max-length="16">
+      <var key="options" value="text.status.initialized=initialized text.status.inProgress=in-progress text.status.completed=completed text.status.error=error" />
+    </attribute>
+    <attribute key="role" max-length="128" />
+    <attribute key="roleDispl" max-length="128" />
+    <attribute key="step" table="sra_workflow_step_tasks" type="SraWorkflowStep" />
+    <attribute key="task" depends="required" max-length="64" />
+    <attribute key="user" max-length="128" />
+    <attribute key="userDispl" max-length="128" />
+    <attribute key="workflow" table="sra_workflow_tasks" type="SraWorkflow" />
+  </entity>
+  
+  <index columns="current_role" key="currentRoleIdx" table="sra_workflow" />
+  <index columns="current_user_id" key="currentUserIdIdx" table="sra_workflow" />
+  <index columns="due_date" key="dueDateIdx" table="sra_workflow" />
+  <index columns="ended" key="endedIdx" table="sra_workflow" />
+  <index columns="id" key="idIdx" table="sra_workflow" />
+  <index columns="owner" key="ownerIdx" table="sra_workflow" />
+  <index columns="started" key="startedIdx" table="sra_workflow" />
+  <index columns="status" key="statusIdx" table="sra_workflow" />
+  
+  <index columns="serialized_entity_index" key="entityIdx" modifier="fulltext" table="sra_workflow_entity" />
+  <index columns="pk, type" key="entityIdIdx" table="sra_workflow_entity" />
+  
+  <index columns="due_date" key="stepDueDateIdx" table="sra_workflow_step" />
+  <index columns="role" key="stepRoleIdx" table="sra_workflow_step" />
+  <index columns="user" key="stepUserIdx" table="sra_workflow_step" />
+  
+  <index columns="due_date" key="taskDueDateIdx" table="sra_workflow_task" />
+  <index columns="role" key="taskRoleIdx" table="sra_workflow_task" />
+  <index columns="status" key="taskStatusIdx" table="sra_workflow_task" />
+  <index columns="user" key="taskUserIdx" table="sra_workflow_task" />
+  
+  <msg key="email" resource="error.email" />
+  <msg key="maxLength" resource="error.maxLength" />
+  <msg key="option" resource="error.option" />
+  <msg key="required" resource="error.required" />
+  <msg key="type" resource="error.type" />
+</entity-model>

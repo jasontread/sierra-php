@@ -1,0 +1,2757 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for a SIERRA app entity model
+
+This file defines a app entity model.
+
+To support validation of your entity-model xml file, include the following
+DOCTYPE element at the beginning (after the "xml" declaration):
+
+<!DOCTYPE entity-model PUBLIC "-//SIERRA//DTD ENTITY MODEL//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/lib/model/entity-model.dtd">
+-->
+
+
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ |                        Defined Types                                 |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!-- 
+An "Resource" is the key in the application SRA_ResourceBundle that contains a 
+string or name for an element. 
+-->
+<!ENTITY % Resource "CDATA">
+
+
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ |                        Top Level Elements                            |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+The "entity-model" element is the root element of an entity model. It defines 
+1 or more entity sub-elements as well as the following attributes (default 
+values are specified). "msg" sub-elements will be propogated down to this 
+all of the "entity" sub-elements
+
+abstract          if TRUE (1), then this "entity-model" cannot be used 
+                  independently. rather, it is provided as an extendable 
+                  "entity-model" only (see the "extends" element). entities in 
+                  an abstract "entity-model" will not be generated and can 
+                  only be used by specifying "extends" in the enclosing 
+                  "entity" elements
+                  
+auto-pk           if you do not want to have to explicitely state the primary 
+                  key attributes for your persistable entities, you may provide 
+                  this attribute specying a name template for a primary key that
+                  will be automatically added to each persistable entity that 
+                  does not already have a primary key defined. the string 
+                  "{$name}" will automatically be replaced with the entity name 
+                  (with the first letter lowercase). Auto-generated primary key 
+                  attributes will always be sequences. for example: "{$name}Id"
+                  would result in an entity named "Product" automatically 
+                  receiving a primary key attribute "productId" 
+                  
+db                the key/identifier of the database that should be referenced 
+                  for this entity model. if not specified, then the default 
+                  app database will be used. for more information, see the 
+                  app-config DTD documentation for the "db" element
+
+ddl-camel-case    whether or not to use camel case table and column names 
+                  in the DDL. these will be an exact copy of the entity and 
+                  attribute names specified in your entity model regardless of 
+                  the naming convention you use and is the default value for 
+                  this attribute. If you prefer the upper case underscore 
+                  separated convention, then set this attribute to 0. However, 
+                  in order for dash separated naming convention to work your 
+                  entity and attribute names MUST STRICTLY adhere to the camel 
+                  case convention including acronyms (e.g. myId and NOT myID)
+
+ddl-path          the app relative path (including file name) where the ddl 
+                  should be auto-generated to. if not specified, no ddl will be 
+                  generated. each entity-model is stored to a separate ddl file. 
+                  the ddl that is generated will be dependent on the database 
+                  type used by the app. this file will be overwritten each 
+                  time the entity model is rendered
+                  
+dtd-camel-case    whether or not to use camel case entity and attribute names 
+                  in the DTD. these will be an exact copy of the entity and 
+                  attribute names specified in your entity model regardless of 
+                  the naming convention you use and is the default value for 
+                  this attribute. If you prefer the more standard lower case 
+                  dash separated convention, then set this attribute to 0. 
+                  However, in order for dash separated naming convention to work 
+                  your entity and attribute names MUST STRICTLY adhere to the 
+                  camel case convention including acronyms (e.g. myId and NOT 
+                  myID)
+                  
+ddl-upper-case    whether or not the ddl and corresponding column/table names 
+                  (if they are not explicitily provided) should be uppercase. 
+                  this only applied if ddl-camel-case is FALSE
+                  
+dtd-path          the app relative path (including file name) where the dtd 
+                  should be auto-generated to. if not specified, no dtd will be 
+                  generated. this file will be overwritten each time the entity 
+                  model is rendered. the name of this file (minus path and 
+                  extension and anything following the first underscore) will 
+                  be the DOCTYPE in the generated DTD
+                  
+dtd-uri           the uri to the generated dtd. this value will be placed in the 
+                  sample DOCTYPE value in the generated dtd. if not specified, 
+                  the file path will be used (preceded by 'file://'). it is a 
+                  very good idea to provide a web accessible uri to your dtd if 
+                  you intend to distribute and use it externally
+
+dao-suffix        the file name suffix to use for DAOs (Data Access Objects)
+
+file*             global "file*" attributes. these will be assigned to all 
+                  entities for which DAOs are generated unless overriden by 
+                  those entities. for details on the meaning of these 
+                  attributes, see the 'entity' ELEMENT documentation.
+                  
+file-icon-dir     see "attribute" comments... inherited by nested file type 
+                  attributes where "file-icon-icon" is specified, but 
+                  "file-icon-dir" is not specified in either it or its 
+                  enclosing "entity"
+
+generate-path     the app relative path where auto-generated DAOs and VOs 
+                  should be stored. the default path is [app dir]/lib/model
+                  
+header-tpl        an optional header template to include on top of all generated 
+                  source files (value objects and daos). this template will be 
+                  included after the <?php tag
+                  
+ignore-bad-import whether or not to ignore listed 'import' identifiers 
+                  (see below) that are not valid. set this flag to 1 if you 
+                  want to simply skip over imports that do not exist. by default, 
+                  if an import does not exist, an error is logged and the entire 
+                  build process is aborted
+                  
+import            defines one or more entity models that should be included by 
+                  this model. Duplicate elements or attributes will be overriden 
+                  by the previous extends "entity-model" or the extending 
+                  "entity-model". each value in this attribute should be the 
+                  fixed or relative paths to extended "entity-model". the 
+                  ".xml" extension is not necessary. the search order for the
+                  xml file referenced provided in the SRA_File::getRelativePath() 
+                  api. the import file name should not be prefixed with 'etc' if 
+                  it is in the etc directory (that directory will be searched 
+                  first). elements with a 'key' attribute will be merged as 
+                  standard numerically indexed arrays. Any import files 
+                  references will NOT cause the entity model to be reloaded when 
+                  they are saved. the entity model will ONLY be reloaded when 
+                  the base entity model xml file is saved. 
+                  
+mysql-table-type  MySql specific configuration parameter defining the table type 
+                  that should be used when creating ddl and schemas. the default 
+                  type is MyIsam when "ref-integrity" is FALSE, InnoDB when it 
+                  is TRUE. Alternatively, BDB, or some other supported table 
+                  type may be used. However, if you select a type that does not 
+                  support referential integrity constraints (any type besides 
+                  InnoDB for mysql), but set ref-integrity to TRUE, there will 
+                  be serious data integrity problems due to the fact that 
+                  records will not be updated correctly
+                  
+nested-queries-ok whether or not the database server supports nested queries. 
+                  prior to MySql 4.1, nested queries were not supported. if not 
+                  supported, some database operations may be slower
+                  
+ref-integrity     defines at what layer referential integrity should be 
+                  enforced. the two layers that this may occur in are either the 
+                  application or database layers. enforcing referential integrity 
+                  at the database layer is always the best choice. however, if 
+                  your database does not support referential integrity (i.e. 
+                  MySql with anything but InnoDB tables), then referential 
+                  integrity must be enforced at the application layer. the two 
+                  disadvantages to this approach are 1) performance: the 
+                  database is more efficient in handling referential integrity, 
+                  and 2) data integrity: application layer referential integrity 
+                  is not guaranteed to work in all cases. if database 
+                  referential integrity is used, "sync-schema" is TRUE, and 
+                  MySql is used, the tables that are created will be InnoDB 
+                  instead of the default MyIsam unless another type has been 
+                  specified by "mysql-table-type" (warning: only InnoDB supports 
+                  referential integrity in mysql in the most recent version 5.0). 
+                  The default value for this attribute is "db" for any database 
+                  other than MySQL and "app" otherwise. 
+                  
+resources         an alternate properties file containing the resources for this 
+                  entity model. if not specified, the default application 
+                  resource bundle will be used:
+                  (etc/l10n/app.properties)
+                  If specified, all entities in the model will read their 
+                  resources from there (unless the entity specifies otherwise). 
+                  Entities will still have access to the default app 
+                  resource bundle because it will be merged with this bundle. 
+                  multiple files can be separated using a space character as the 
+                  delimiter
+                  
+sync-schema       whether or not the database schema should be synced every  
+                  time that a change to the entity model is made. this means 
+                  that whenever a new table, column or index is created, it 
+                  will also be created in the database according to the 
+                  definition provided for it in the entity model. there are two 
+                  ways through which table modifications may occur. 1) if the 
+                  table has no data, it will simply be dropped and re-created, 
+                  or 2) if the table does have data (1 or more rows), then any 
+                  new columns will be added, but removed removed or changed 
+                  columns will not be altered and must be manually updated. for 
+                  example, if a varchar column length was changed (determined by 
+                  the "maxLength" attribute constraint) in a table that already 
+                  contains data, that change would not be automatically applied 
+                  to the table. if the table contained no data, however, the 
+                  table would simply be dropped and re-created. the database 
+                  user MUST have DROP, CREATE and ALTER privileges in order to 
+                  use this feature. By default, this feature is enabled. Indexes 
+                  can only be auto created when the table is created, meaning 
+                  once a table has data, any new indexes must be manually created 
+                  
+sys-err-resource  key in the application SRA_ResourceBundle that contains a string
+                  to use for system errors
+                  
+vo-suffix         the file name suffix to use for VOs (Value Objects)
+
+ws-api-css-uri    optional uri to a css file to use to format sra-ws-gateway.php 
+                  generated api documentation
+                  
+ws-gateway-rewrite whether or not the "ws-gateway-uri" has an Apache RewriteRule
+                  allowing use of more simple web service uris
+                  
+                  to enable this feature simply add the following to the 
+                  .htaccess file in the app web directory:
+                  
+                  RewriteEngine On
+                  RewriteRule ^{ws-gateway-uri}/(.*)/(.*)/(.*)/(.*)/(.*) /{uri to "sra-ws-gateway.php"}?ws1=$1&ws2=$2&ws3=$3&ws4=$4&ws5=$5&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri}/(.*)/(.*)/(.*)/(.*) /{uri to "sra-ws-gateway.php"}?ws1=$1&ws2=$2&ws3=$3&ws4=$4&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri}/(.*)/(.*)/(.*) /{uri to "sra-ws-gateway.php"}?ws1=$1&ws=2=$2&ws3=$3&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri}/(.*)/(.*) /{uri to "sra-ws-gateway.php"}?ws1=$1&ws2=$2&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri}/(.*) /{uri to "sra-ws-gateway.php"}?ws1=$1&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri} /{uri to "sra-ws-gateway.php"}?%{QUERY_STRING}
+                  
+                  where the wsN parameters can be the following values:
+                    ws1: ws-app, ws-request-xml
+                    ws2: ws, ws-doc
+                    ws3: ws-action, ws-doc, ws-format
+                    ws4: ws-id, ws-format
+                    ws5: ws-format
+                  and the possible parameter combinations are the following:
+                    ws-app=&ws-request-xml=
+                      invoke a web service request using the request xml 
+                      "ws-request-xml"
+                    ws-app=&ws=
+                      invoke web service "ws"
+                    ws-app=&ws=&ws-action=
+                      invoke action "ws-action" of web service "ws"
+                    ws-app=&ws=&ws-action=&ws-id=
+                      invoke action "ws-action" of web service "ws" for entity 
+                      with primary key "ws-id"
+                    ws-app=&ws=&ws-action=&ws-format=
+                      invoke action "ws-action" of web service "ws" and output 
+                      results in "ws-format"
+                    ws-app=&ws=&ws-action=&ws-id=&ws-format=
+                      invoke action "ws-action" of web service "ws" for entity 
+                      with primary key "ws-id" and output results in "ws-format"
+                    ws-app=&ws-doc=
+                      show documentation for all app web services
+                    ws-app=&ws=&ws-doc=
+                      show documentation for web service "ws"
+                  
+ws-gateway-skip-app whether or not to skip adding the app ID into web service 
+                  URIs generated on the api documentation and WSDLs. if TRUE, 
+                  a RewriteRule should be added to automatically add the app ID 
+                  to the URL parameters. 
+                  
+                  e.g. (when ws-gateway-rewrite is false)
+                  RewriteEngine On
+                  RewriteRule ^{uri to "sra-ws-gateway.php"} /{uri to "sra-ws-gateway.php"}?ws-app=[app id]
+                  
+                  e.g. (when ws-gateway-rewrite is true)
+                  RewriteEngine On
+                  RewriteRule ^{ws-gateway-uri}/(.*)/(.*)/(.*)/(.*) /{uri to "sra-ws-gateway.php"}?ws1=[app id]&ws2=$1&ws3=$2&ws4=$3&ws5=$4&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri}/(.*)/(.*)/(.*) /{uri to "sra-ws-gateway.php"}?ws1=[app id]&ws2=$1&ws3=$2&ws4=$3&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri}/(.*)/(.*) /{uri to "sra-ws-gateway.php"}?ws1=[app id]&ws2=$1&ws3=$2&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri}/(.*) /{uri to "sra-ws-gateway.php"}?ws1=[app id]&ws2=$1&%{QUERY_STRING}
+                  RewriteRule ^{ws-gateway-uri} /{uri to "sra-ws-gateway.php"}?ws1=[app id]&%{QUERY_STRING}
+                  
+ws-gateway-uri    the uri to the sierra/lib/model/sra-ws-gateway.php script. 
+                  this attribute is required when your model defines 1 or more 
+                  web services using the "ws-global" or "ws" 
+                  elements
+
+
+Used in:  NA
+-->
+<!ELEMENT entity-model (entity*, global-views?, index*, msg*, view-processor*, ws-global*)>
+<!ATTLIST entity-model    abstract            (1|0)      "0">
+<!ATTLIST entity-model    auto-pk             CDATA      #IMPLIED>
+<!ATTLIST entity-model    dao-suffix          CDATA      "DAO">
+<!ATTLIST entity-model    db                  CDATA      #IMPLIED>
+<!ATTLIST entity-model    ddl-camel-case      (1|0)      "0">
+<!ATTLIST entity-model    ddl-path            CDATA      #IMPLIED>
+<!ATTLIST entity-model    ddl-upper-case      (1|0)      "0">
+<!ATTLIST entity-model    dtd-camel-case      (1|0)      "0">
+<!ATTLIST entity-model    dtd-path            CDATA      #IMPLIED>
+<!ATTLIST entity-model    dtd-uri             CDATA      #IMPLIED>
+<!ATTLIST entity-model    file-dir            CDATA      #IMPLIED>
+<!ATTLIST entity-model    file-dir-uri        CDATA      #IMPLIED>
+<!ATTLIST entity-model    file-handling       (db|dir)   "db">
+<!ATTLIST entity-model    file-icon-dir       CDATA      #IMPLIED>
+<!ATTLIST entity-model    file-script-rewrite (1|0)      "0">
+<!ATTLIST entity-model    file-script-uri     CDATA      #IMPLIED>
+<!ATTLIST entity-model    generate-path       CDATA      "lib/model">
+<!ATTLIST entity-model    header-tpl          CDATA      #IMPLIED>
+<!ATTLIST entity-model    ignore-bad-import   (1|0)      "0">
+<!ATTLIST entity-model    import              CDATA      #IMPLIED>
+<!ATTLIST entity-model    mysql-table-type    CDATA      "MyISAM">
+<!ATTLIST entity-model    ref-integrity       (db|app)   #IMPLIED>
+<!ATTLIST entity-model    nested-queries-ok   (1|0)      "1">
+<!ATTLIST entity-model    resources           CDATA      #IMPLIED>
+<!ATTLIST entity-model    sync-schema         (1|0)      "0">
+<!ATTLIST entity-model    sys-err-resource    %Resource; "error.sys">
+<!ATTLIST entity-model    vo-suffix           CDATA      "VO">
+<!ATTLIST entity-model    ws-api-css-uri      CDATA      #IMPLIED>
+<!ATTLIST entity-model    ws-gateway-rewrite  (1|0)      "0">
+<!ATTLIST entity-model    ws-gateway-skip-app (1|0)      "0">
+<!ATTLIST entity-model    ws-gateway-uri      CDATA      #IMPLIED>
+
+
+<!--
+The "entity" element describes the characteristics of a single Entity in an 
+application's object model. This includes attributes, relational 
+characteristics, and validation. An entity must contain at least 1 attribute. 
+"msg" sub-elements will be propogated down to this entity's attributes. Every 
+persistable entity MUST have at least 1 non-sequence attribute in its primary 
+database table in order for inserts to be able to be performed
+
+key               the name of the entity. this will translate to the class/file 
+                  name of the generated VO. Entity names should utilize the 
+                  Camel Case naming convention under which the first name 
+                  character is upper case and each new word in the name is 
+                  capitalized:
+                  e.g. ThisIsMyEntity
+                  
+abstract          whether or not this entity is abstract. abstract entities will 
+                  not be generated, and can only be used as extendable entities 
+                  within an "entity-model". if the enclosing "entity-model" is 
+                  abstract, then all "entity" elements in that model will also 
+                  implicitely be "abstract"
+
+api-resource      key in the application SRA_ResourceBundle that contains a string
+                  that should be used in the generated api documentation for 
+                  this entity
+                  
+column-postfix    this value will automatically be added to the end of 
+                  each of this entity's persistable attributes column names 
+                  unless those names are explicitily provided
+                  
+column-prefix     this value will automatically be added to the beginning of 
+                  each of this entity's persistable attributes column names 
+                  unless those names are explicitily provided
+                  
+constraint        an sql constraint to apply defining active/inactive records 
+                  in the entity table. if not specified, all records will be 
+                  considered active. this would most likely be the inverse of 
+                  the 'on-delete-update' attribute
+
+dao               if an existing DAO already exists, then this should be the 
+                  app relative path to that DAO (without the file 
+                  extension). For example, "daos/MyDao". In this case, only 
+                  the VO class will be generated. the 'lib' path prefix is 
+                  optional if the file is in the standard app lib directory
+                  
+dao-extends       the app relative path to a PHP class file that the 
+                  generated DAO should extend. for example: "lib/MyDao" (do not 
+                  include file extension). the 'lib' path prefix is optional if 
+                  the file is in the standard app lib directory
+                  
+extends           the name of another entity in the enclosing "entity-model" 
+                  or an extending "entity-model" that this entity extends. the 
+                  resulting generated 
+                  VO class will not "extend" this class, but the attributes 
+                  specified in that class will be merged into the attributes 
+                  specified for this class. if duplicate attributes exist, then 
+                  the extending entity attribute properties will override those 
+                  of the extended
+
+file-dir          the fixed or relative directory where files should be stored. 
+                  if relative, the following search order will be used:
+                  
+                    {app-dir}
+                    {sierra-dir}
+                    
+                  the web server must have read/write access to this directory. 
+                  the DAOs will handle the unique naming of files. 
+                  file extensions will automatically be appended to the file 
+                  names to facilitate browser mime-type recognition. the 
+                  trailing forward slash should not be added to this attribute.
+                  it is the implementor's responsibility to provide security on 
+                  this directory
+
+file-dir-uri      the web server recognizable uri to the "file-dir" identified
+                  
+file-handling     determines how "is-file" attributes in this entity should be 
+                  stored. if not specified, the enclosing "entity-model" 
+                  "file-handling" will be used. the following handling methods 
+                  are supported:
+                  
+                  "db" : files will be stored in the entity/attribute database 
+                  table. if this handling method is used, the "file-script-uri" 
+                  attributes MUST be specified as well. the database column type 
+                  for this file handling method must be BLOB (BYTEA in postgres)
+                  this is the default "file-handling" method. If "type" is not 
+                  set for a given file attribute, that type will automatically 
+                  be set to SRA_DATA_TYPE_BLOB.
+                  
+                  "dir" : files will be stored in the local file system. if this 
+                  handling method is used, the "file-dir" and "file-dir-uri" 
+                  attributes MUST be specified as well. the database column type 
+                  for this file handling method must be VARCHAR(255) or CHAR(255). 
+                  If "type" is not set for a given file attribute, that type 
+                  will automatically be set to SRA_DATA_TYPE_STRING with a 
+                  "max-length" of 255
+                  
+file-icon-dir     see "attribute" comments... inherited by nested file type 
+                  attributes where "file-icon-icon" is specified, but 
+                  "file-icon-dir" is not
+                  
+file-script-rewrite  whether or not the "file-script-uri" is an Apache RewriteRule
+                  It is better to use this option because it will result in 
+                  more browser compatible mime-type recognition for file 
+                  downloads (the uri will be in a friendly format such as:
+                  /{file-script-uri}/{encrypted id}/{file name w/ extension}
+                  rather than: 
+                  /{file-script-uri}?eid={encrypted id}
+                  
+                  To enable this feature simply add the following to the 
+                  .htaccess file in the app web directory:
+                  
+                  RewriteEngine On
+                  RewriteRule ^{file-script-uri}/(.*)/(.*) /{uri to "sra-file-renderer.php"}?eid=$1
+
+file-script-uri   the app specific uri to the "sra-file-renderer.php" file (a 
+                  script that includes that file, a copy or a symlink) provided 
+                  in the lib/model/ directory.
+                  
+ignore-bad-import whether or not to ignore listed 'on-create-import' identifiers 
+                  (see below) that are not valid. set this flag to 1 if you 
+                  want to simply skip over imports that do not exist. by default, 
+                  if an import does not exist, an error is logged
+                  
+is-global         when true, all of this entity's attributes will have is-global 
+                  automatically set to true (unless a value has been explicitely 
+                  set for that attribute)
+                  
+match-user-id     the name of the entity attribute that the user-id should match 
+                  in order for a user to be able to "get" any attribute in this 
+                  entity. this value will be passed to the "getAttribute" method 
+                  and the results compared. if the return value is an array, 
+                  then the user will only be able to access the attribute if 
+                  their user id exists in that array. in order to use this 
+                  feature, the SRA_Authenticator::getUserId method must return a 
+                  user id. use this configuration to restrict access to db 
+                  stored files. if a security violation is detected, the return 
+                  value of the corresponding getter/setter will be aborted 
+                  (getter returns null) and the activity will be logged
+                  
+mysql-table-type  For MySQL databases only. Override the same attribute for the 
+                  enclosing entity-model. Use this to utilize a different 
+                  storage engine type for a specific table
+                  
+null-db-empty-str whether or not empty string ('') should be used in place of 
+                  NULL for any of this entitys' attributes when database edits 
+                  occur and the value of that attribute is NULL. this will also 
+                  have the reverse effect of setting the attribute values to 
+                  NULL whenever they are set to an emtpy string using the 
+                  attribute set method
+                  
+on-create-import  the path to a file containing newline separated sql statements that 
+                  should be loaded dynamically whenever the table this entity 
+                  uses is created. this will ONLY be used in conjunction with 
+                  the 'sync-schema' option set to true. all imports are performed 
+                  after ALL missing tables have been created, so this file may 
+                  contain references to other tables as well. the search path 
+                  for this file will be first the 'etc' directory for the 
+                  platform, followed by the normal platform relative search 
+                  traversal. this value can contain multiple space separated 
+                  values. Invalid files will be skipped and an error logged 
+                  unless ignore-bad-import (above) is set to true. comments can 
+                  be delimited in this file starting with /* and ending with */
+                  
+on-delete-update  an alternate update criteria for the entity table when a 
+                  record is deleted. for example, "ENABLED=0". this value will 
+                  be used in the "SET" clause of the generated SQL update query. 
+                  if not specified, the record will simply be deleted. if specified, 
+                  you will also most likely need to specify a "constraint" value 
+                  that is the inverse of the on-delete-update criteria
+                  
+order-by          an optional 'ORDER BY' sql value for the DAO findAll method
+                  This value will be the name of a column in the entity 'table' 
+                  specified upon which ordering should be based. Multiple 
+                  column name may be specified separated by commas and 
+                  optionally followed by 'ASC' or 'DESC'
+                  
+primary-key       the identifier or the attribute that is the primary key (unique 
+                  identifier) for this entity. every persistable entity MUST have 
+                  a primary key designated. 
+                  
+propagate-update  whether or not 'entity' type attributes should be scanned for 
+                  changes, and updated when updates to this entity are made
+                  
+render-append     a space separated list of non-standard attribute names and 
+                  method names the values of which should be included in xml or 
+                  json output rendering of this entity using the toJson/toXml 
+                  methods or the built-in json/xml views. for example, to have 
+                  the return value of invoking the aop introduction methods 
+                  "getNumChildren" and "getParent" in the rendered output, the 
+                  value of this attribute would be "getNumChildren getParent". 
+                  If the return value of any appended values is an entity 
+                  instance, the rendered xml will not validate against the dtd 
+                  for the entity model
+                  
+render-exclude    attributes that should always be excluded from the xml or 
+                  json output rendering of this entity using the toJson/toXml 
+                  methods or the built-in json/xml views. this should be a space 
+                  separated list of attribute names. these attributes will NEVER 
+                  be included in the json/xml rendering of this entity
+                  
+render-include    the opposite of 'render-exclude'. ONLY these attributes and
+                  those listed in render-append will be rendered
+                  
+resource          key in the application SRA_ResourceBundle that contains a string
+                  or name describing this entity. If not specified, the 
+                  following search order will be used to determine the correct 
+                  resource key:
+                    {entity name}
+                    entity.{entity name}
+                    text.{entity name}
+                  
+resources         an alternate properties file containing the resources for this 
+                  entity. if not specified in the entity, or the enclosing 
+                  entity-model, the default application resource bundle will be 
+                  used. Entities will still have access to the default app 
+                  resource bundle because it will be merged with this bundle.
+                  multiple files can be separated using a space character as the 
+                  delimiter
+                  
+resource-help     key in the application SRA_ResourceBundle that contains a string
+                  or name providing help for this entity
+                  
+skip-persistence  if TRUE, then this entity will be non-persistent, meaning no 
+                  DAO will be generated for it. additionally, auto-pk, if 
+                  specified, will not be applied to non-persistent entities
+                  
+skip-wsdl         whether or not to skip adding this entity to the wsdl 
+                  generated by the web services gateway
+                  
+table             if the 'dao' attribute has not been defined, this method 
+                  identifies the application database table where this entity's 
+                  base attributes are stored. if neither 'table' nor 'dao' is 
+                  defined, and "skip-persistence" is not true, the table name 
+                  will be auto-set based on the entity-model camel-case-ddl 
+                  setting
+                  
+unit-test         the app relative or absolute path to a php class file that 
+                  extends test/SRA_TestCase.php and provides the unit testing 
+                  for this entity. an instance of this class can be obtained 
+                  utilizing the VO::getUnitTestInstance method. the name of the
+                  class should be the same as the name of the file minus the 
+                  .php extension. the .php extension is not required for this 
+                  attribute
+                  
+vo-extends        the app relative path to a PHP class file that the 
+                  generated VO should extend. for example: "lib/MyVo" (do not 
+                  include file extension). the 'lib' path prefix is optional if 
+                  the file is in the standard app lib directory
+
+
+Used in:  entity-model
+-->
+<!ELEMENT entity (aop?, attribute*, default-view*, msg*, validate*, view*, ws*)>
+<!ATTLIST entity            key                 CDATA      #REQUIRED>
+<!ATTLIST entity            abstract            (1|0)      "0">
+<!ATTLIST entity            api-resource        %Resource; #IMPLIED>
+<!ATTLIST entity            column-postfix      CDATA      #IMPLIED>
+<!ATTLIST entity            column-prefix       CDATA      #IMPLIED>
+<!ATTLIST entity            constraint          CDATA      #IMPLIED>
+<!ATTLIST entity            dao                 CDATA      #IMPLIED>
+<!ATTLIST entity            dao-extends         CDATA      #IMPLIED>
+<!ATTLIST entity            extends             CDATA      #IMPLIED>
+<!ATTLIST entity            file-dir            CDATA      #IMPLIED>
+<!ATTLIST entity            file-dir-uri        CDATA      #IMPLIED>
+<!ATTLIST entity            file-handling       (db|dir)   "db">
+<!ATTLIST entity            file-icon-dir       CDATA      #IMPLIED>
+<!ATTLIST entity            file-script-rewrite (1|0)      "0">
+<!ATTLIST entity            file-script-uri     CDATA      #IMPLIED>
+<!ATTLIST entity            ignore-bad-import   (1|0)      "0">
+<!ATTLIST entity            is-global           (1|0)      "0">
+<!ATTLIST entity            match-user-id       CDATA      #IMPLIED>
+<!ATTLIST entity            mysql-table-type    CDATA      "MyISAM">
+<!ATTLIST entity            null-db-empty-str   (1|0)      "0">
+<!ATTLIST entity            on-create-import    CDATA      #IMPLIED>
+<!ATTLIST entity            on-delete-update    CDATA      #IMPLIED>
+<!ATTLIST entity            order-by            CDATA      #IMPLIED>
+<!ATTLIST entity            primary-key         CDATA      #IMPLIED>
+<!ATTLIST entity            propagate-update    (1|0)      "0">
+<!ATTLIST entity            render-append       CDATA      #IMPLIED>
+<!ATTLIST entity            render-exclude      CDATA      #IMPLIED>
+<!ATTLIST entity            render-include      CDATA      #IMPLIED>
+<!ATTLIST entity            resource            %Resource; #IMPLIED>
+<!ATTLIST entity            resources           CDATA      #IMPLIED>
+<!ATTLIST entity            resource-help       %Resource; #IMPLIED>
+<!ATTLIST entity            skip-persistence    (1|0)      "0">
+<!ATTLIST entity            skip-wsdl           (1|0)      "0">
+<!ATTLIST entity            table               CDATA      #IMPLIED>
+<!ATTLIST entity            unit-test           CDATA      #IMPLIED>
+<!ATTLIST entity            vo-extends          CDATA      #IMPLIED>
+
+
+<!--
+The "global-views" element contains one or more 'view' configurations that may 
+be used throughout the model in entity and attribute configurations. For 
+example, a global view may be created for displaying links that may then be 
+referenced in any link type attributes. it also may define default view for 
+attributes based on the type
+
+
+Used in:  entity-model
+-->
+<!ELEMENT global-views (default-view*, view+)>
+
+
+<!--
+The "aop" element is used to apply cross-cutting concerns to classes derived 
+from this entity-model. these are secondary requirements that will be 
+dynamically attached to the class source files. for more an introduction to AOP 
+programming, do a google search for "AOP Introduction". For our purposes, the 
+aop terms you will need to understand are as follows:
+
+advice:       the code to attach to the joinpoints as well as when that should 
+              occur (either before the method starts, or after it ends)
+              
+aspect:       the combination of a pointcut and advice. as aspect will result in 
+              code modification at build time
+              
+introduction: an additional include, attribute or method that should be added to 
+              a class
+              
+pointcut:     a set of join points where advice should be applied
+
+Used in:  entity
+-->
+<!ELEMENT aop (advice*, aspect*, introduction*, pointcut*)>
+
+
+<!--
+The "advice" element defines cross-cutting code. this is code that is applied as
+an aspect to a method in a class that is derived from this entity model. advice 
+may be applied to multiple such methods. the body of this element is the code 
+that should be applied. this code may perform such activities as logging, 
+validation, additional logic, etc. It has full access to the parameters to that 
+method invocation as well as the object instance variables and any other data 
+and/or code accessible within the current running php process. the code may 
+additionally pre-maturely exit the method using return.
+
+key               the unique idnetifier for this advice. used to reference it in 
+                  an aspect
+                  
+when              when the advice should be applied. 'before' signifies that it 
+                  will be attached before any other code in that method, while 
+                  'after' signifies that it will be attached after all the other 
+                  code in that method has been executed (before the return of 
+                  course).
+
+Used in:  aop
+-->
+<!ELEMENT advice (#PCDATA)>
+<!ATTLIST advice             key                 CDATA      #REQUIRED>
+<!ATTLIST advice             when                (before|after) "before">
+
+
+<!--
+The "aspect" element is the glue between advice and pointcuts. it defines the 
+code to be attached (advice) as well as the location(s) where that code should 
+be attached (pointcut). the advice and pointcut may either be defined in this 
+element (if never will never be used in another aspect) or in external 
+referenced advice and pointcut elements
+
+key               the unique identifier for this aspect
+                  
+advice            reference to the advice definition to apply in this aspect. if 
+                  the advice will only be used once in this aspect, then the 
+                  value of this element can be used to specify that advice
+
+comment           an optional aspect comment. this will be inserted above the 
+                  code resulting from this aspect
+
+pointcut          reference to the pointcut definition to apply in this aspect. 
+                  if the pointcut will only be used once in this aspect, then 
+                  the value of this attribute may be the joinpoints for the 
+                  pointcut
+
+when              if 'advice' is not a reference, this attribute can be specified 
+                  otherwise it is taken from the referenced advice
+
+Used in:  aop
+-->
+<!ELEMENT aspect (#PCDATA)>
+<!ATTLIST aspect             key                 CDATA      #REQUIRED>
+<!ATTLIST aspect             advice              CDATA      #IMPLIED>
+<!ATTLIST aspect             comment             CDATA      #IMPLIED>
+<!ATTLIST aspect             pointcut            CDATA      #REQUIRED>
+<!ATTLIST aspect             when                (before|after) "before">
+
+
+<!--
+The "introduction" element defines an additional include, attribute or method 
+that should be attached to a class. for method introductions, the body of this 
+element should define the method body code
+
+key               the unique identifier for this introduction
+
+class             the entity class that this introduction applies to. this is 
+                  either the dao (data access object) or vo (value object)
+                  
+type              the type of introduction this is. an introduction can be 
+                  either an additional php include, class attribute or class 
+                  method
+                  
+value             the value of the introduction. this attribute assumes 
+                  different meanings based on the type. for attributes, this is 
+                  the name of the attribute (no $ needed) + an optional default 
+                  value (i.e. name or name="Jason"). for includes, this is 
+                  the path to the source file to include (relative or fixed). 
+                  for methods, this is the method signature (name and 
+                  parameters - i.e. myNewMethod($param1)) - $ are required for 
+                  parameters. to return by reference, simply prefix the method 
+                  name with $. for constants, the value will be the name of the 
+                  constant, followed by an equals sign and the value for that 
+                  constant (strings should be enclosed in quotes)
+
+Used in:  aop
+-->
+<!ELEMENT introduction (#PCDATA)>
+<!ATTLIST introduction       key                 CDATA      #REQUIRED>
+<!ATTLIST introduction       class               (dao|vo) #REQUIRED>
+<!ATTLIST introduction       type                (attribute|constant|include|method) #REQUIRED>
+<!ATTLIST introduction       value               CDATA      #REQUIRED>
+
+
+<!--
+The "pointcut" element defines a set of join points where advice should be 
+applied. it is referenced in aspects.
+                  
+key               the unique identifier for this aspect
+
+joinpoints        space separated list of method names. each value may be either 
+                  the full method name (minus parens and param definition), or 
+                  a ereg expression representing 1 or more method names. 
+                  these values may optionally be prefixed with the class type 
+                  identifier (dao|vo) - for example, "setName" would 
+                  reference the method setName in any entity class while 
+                  "vo.setName" would only reference the method setName in the 
+                  value object for this entity. joinpoints may also be 
+                  references to methods attached to a class by means of an 
+                  introduction
+
+Used in:  aop
+-->
+<!ELEMENT pointcut EMPTY>
+<!ATTLIST pointcut           key                 CDATA      #REQUIRED>
+<!ATTLIST pointcut           joinpoints          CDATA      #REQUIRED>
+
+
+<!--
+The "attribute" element describes a single attribute in an entity. attributes 
+can have any type of associative relationship to the entity such as 1..1, 1..*, 
+0..* etc. Relational attributes reference other entities. This element also 
+describes validation constraints and o/r mapping details. 
+
+key               the name of the attribute. this will translate to the name of 
+                  the attribute in the generated VO (preceded by _) as well as 
+                  to the name of the generated getter/setter methods in the 
+                  generated VO. Attribute names should utilize the Camel Case 
+                  naming convention under which the first name character is 
+                  lower case and each new word in the name is capitalized:
+                  e.g. thisIsMyVariable
+                  
+aggregate         whether or not the attributes of an entity type attribute 
+                  should be aggregated into the enclosing entity. if this 
+                  attribute is also mapped (using "mapped" or nested 
+                  "attr-mapping"), then only those attributes included in the 
+                  mapping will be aggregated. the aggregated attributes may be 
+                  prefixed (see "aggregate-prefix") and will be treated 
+                  as equals in terms of functionality within the class. this 
+                  functionality includes the get/set/add/remove methods as well 
+                  as supporting methods. nested aggregate attributes are not 
+                  supported. when using this feature in your entity model, be 
+                  sure to avoid duplicate attribute names which will result in 
+                  syntax errors in the generated classes. aggregate attributes 
+                  will not be included in xml rendering in the immediate entity.
+                  you will also not be able to render these attribute directly 
+                  using the enclosing entity's renderAttribute method. 
+                  additionally, the parseString method does not support 
+                  immediate mapping of these attributes
+                    
+aggregate-prefix  an optional prefix value for aggregated attributes. when 
+                  applied, the first letter of the aggregate attributes will 
+                  be converted to uppercase automatically in order to preserve 
+                  the hobble-case standard within the generated classes
+                  
+api-resource      key in the application SRA_ResourceBundle that contains a string
+                  that should be used in the generated api documentation for 
+                  this entity. If this attribute utilizes the "options" 
+                  validator your app SRA_ResourceBundle should also include a 
+                  string for the key: entity-model.multiple_options_separated_by_a_space
+                  (SRA_ENTITY_MODELER_MULTIPLE_OPTIONS_API_RESOURCE constant in 
+                  the SRA_EntityModeler class) which is included in the api comments 
+                  for that attribute identifying that multiple options will be 
+                  stored in the database, or xml as space separated values
+                  
+cardinality       defines relational attribute constraints defining the upper 
+                  and lower bounds of the # of attributes of this type that an 
+                  entity may have. For example: 0..* signifies zero or more 
+                  (no upper bound) attributes of this type. attributes with an 
+                  upper bound greater than 1 will be arrays of the corresponding 
+                  'type'. if the upper bound is greater than 1, the 'table' 
+                  must be different from the entity table unless the attribute 
+                  is of a scalar type. for the latter, either an external or the 
+                  entity table may be used to store the attribute. if the entity 
+                  table is used, each value in the scalar array will be stored 
+                  in the column representing this attribute separated by the 
+                  delimiter |#|. the column data type will be text regardless of 
+                  the scalar attribute type in this case. if a "max-length" 
+                  constraint is set for this attribute, be sure that length is 
+                  sufficient to store all of the values + the delimiter values. 
+                  if not specified, the column data type will be text with a 
+                  max-length of 255. if the upper bound is > 1 and the same 
+                  table/entity is re-used within the same enclosing entity, a 
+                  "constraint" MUST be set for each such attribute to 
+                  distinguish between the attributes when storing to the 
+                  database
+                  
+cardinality-err-resource  key in the application SRA_ResourceBundle that contains a 
+                  string that should be used for error messages due to cardinality 
+                  upper or lower bound violations. only necessary when the 
+                  upper bound cardinality is greater than 1. if not specified, 
+                  the enclosing entity-model sys-err-resource will be used
+                  
+cardinality-unique if value determines whether or not duplicate values may 
+                  exist for this attribute. this attribute only applies when 
+                  cardinality is used and the attribute a scalar type. the 
+                  default is true, meaning all values must be unique
+                  
+circular-ref      if this attribute references another entity type, and the 
+                  reference is circular (meaning both entities have attributes 
+                  that refer to each other), then one of those attributes MUST 
+                  set this flag to TRUE. If this is not done, the circular 
+                  reference will cause a repeating recursive loop to occur when 
+                  the VO::renderXml method is invoked for one of those entities.
+                  because of this, the circular flagged attribute will not be 
+                  included in the rendered xml nor dtd description for that 
+                  entity
+
+column            the name of the database table column where this attribute 
+                  can be referenced. if "column" is not defined, and 
+                  "skip-persistence" is not true, the column name will be 
+                  auto-set based on the entity-model camel-case-ddl setting. 
+                  There are 3 possible table locations where this column can be 
+                  stored: the primary entity table, a separate non-entity table, 
+                  or a foreign entity table. the first 2 apply to any attribute, 
+                  while the 3rd applies only to entity type attributes 
+                  (where "type" is set):
+                  
+                   1) If "table" is specified, it will be assumed that this 
+                      column exists in that table
+                   2) If "table" is not specified:
+                      a) If "type" is not set: It will be assumed that this 
+                         column exists in the primary entity table
+                      b) If "type" is set: If "table-pk-column" is not 
+                         specified, it will be assumed that this column exists 
+                         in the primary entity table, otherwise it will be 
+                         assumed that this column exists in the referenced 
+                         entity's primary table under the name "table-pk-column"
+                  
+column-type       an optional more specific column data type definition for  
+                  storage of this attribute in a database table column. by 
+                  default, the column-type will be chosen based on "type" where 
+                  the scalar types are defined as follows:
+                   SRA_DATA_TYPE_BLOB: blob with optional maxFileSize constraint 
+                                       applied if specified. standard blob 
+                                       otherwise (limited to 65535 bytes in 
+                                       mysql)
+        
+                   SRA_DATA_TYPE_BOOLEAN: boolean or enumeration of 
+                                             '[bool-false]','[bool-true]' 
+                                             if a boolean data type is not 
+                                             provided by the database (see 
+                                             sierra-config dtd for more 
+                                             information)
+        
+                   SRA_DATA_TYPE_DATE: timestamp
+
+                   SRA_DATA_TYPE_FLOAT: double
+
+                   SRA_DATA_TYPE_INT: integer
+
+                   SRA_DATA_TYPE_STRING: varchar of max-length size if max-length 
+                                          specified, text or blob otherwise
+                                          
+                  However, if you are using ddl-path or sync-schema you may 
+                  desire to use a more optimal column type. if this is the case 
+                  that column type may be specified using this attribute
+                  
+constraint        an sql constraint to apply when referencing attributes stored 
+                  in external tables (i.e. ACTIVE=1). ONLY single quotes should 
+                  be used for strings. Multiple constraints can be specified, 
+                  each separated by a comma. if this attribute is an entity, and 
+                  a constraint is applied, then each constraint column MUST be a 
+                  column in that entity's primary table that also pertains to 
+                  an attribute belonging to that entity
+                   
+date-format       if this attribute is a date/time, this attr can be used to 
+                  provide alternate date formatting string for this attribute 
+                  when the "toString" method is invoked or when the getter is 
+                  invoked with the $format parameter === TRUE or 1. the default 
+                  format when that method is invoked is the app-config 
+                  "date-format" for time types or "date-only-format" for dates
+                  
+default           The default value for this attribute. This may be PHP code that 
+                  generates that value, or a scalar value. if this value is not 
+                  PHP code, it will also be used as the default value for the 
+                  database column this attribute corresponds to when ddl is 
+                  auto-generated. It is not PHP code if it does not contain '::' 
+                  and it does not contain '->' and it does not start with '$'
+                  
+depends           space separated list of attribute validation constraints to 
+                  apply on this attribute. these values will correspond with one 
+                  of the SRA_AttributeValidator::{method} names. if this attribute 
+                  is a scalar data type, the following constraints will result 
+                  in column type constraints being automatically applied if the 
+                  database used supports them:
+                   max: value is <= a specific value (using "CHECK ([column] <= [max])" if supported)
+                   
+                   maxLength: the length specification for varchar data types
+                   
+                   min: value is >= a specific value (using "CHECK ([column] >= [min])" if supported)
+                   
+                   range: value is in a numeric range (using "CHECK ([column] BETWEEN [min] and [max])" if supported)
+                   
+                   required: YES - not null, NO - default is null (if "default" value not specified)
+                   
+dtd-name          used to explicitely state the dtd element name to use for this 
+                  attribute. the default dtd name for attributes is a combination 
+                  of the enclosing entity name followed by the attribute name. 
+                  In some cases this may create a naming conflict with another 
+                  entity in which case you will need to specify an explicit 
+                  dtd-name for that attribute in order to avoid the conflict 
+                  (no 2 elements within a given dtd can have the same name)
+                  
+file-icon-attr    if this attribute is a file (is-file="1") and you wish to 
+                  use a separate entity attribute to store the path to the icon 
+                  to use to represent that file, this value should be the name 
+                  of the attribute to use to maintain that path. if used, 
+                  "file-icon-dir" MUST be specified at the attribute or higher 
+                  level. icons are automatically determined based on the file 
+                  mime-type and the icons stored in "file-icon-dir". if an icon 
+                  cannot be determined for a given file, the attribute will be 
+                  set to NULL. this attribute may be used only with file 
+                  attributes without cardinality. the value stored in the 
+                  referenced attribute will be the absolute path to the 
+                  representative icon
+                  
+file-icon-dir     the absolute or app relative path to to the directory 
+                  containing all of the possible icons. this directory should 
+                  contain icons using the same naming convention that is used 
+                  for linux themes (KDE/Gnome). In fact, you may simply download 
+                  a free theme and use the files contained in the "mimetypes" 
+                  folder for a given icon size as this directory
+                  
+file-index-attr   if this attribute is a file (is-file="1") and you wish to 
+                  maintain a searchable text index for this file using another 
+                  attribute, this value should be the name of the attribute to 
+                  use to maintain that index. when used, IF the file is a 
+                  text parsable format, the text will be extracted from it and 
+                  stored to this attribute. the column for that attribute may 
+                  in turn use a FULLTEXT index (mysql) in that database and be 
+                  used for search purposes. For more information on text 
+                  parsable file formats, and setting up custom parsers, see the 
+                  api for SRA_FileAttribute::toText. this attribute may be used 
+                  only with file attributes without cardinality
+                  
+file-size-attr    if this attribute is a file (is-file="1") and you wish to 
+                  store the size (in bytes) of that file in a separate entity 
+                  attribute, this should be the name of that attribute
+                  
+file-size-kb-attr if this attribute is a file (is-file="1") and you wish to 
+                  store the size (in kilobytes) of that file in a separate 
+                  entity attribute, this should be the name of that attribute
+                  
+file-size-mb-attr if this attribute is a file (is-file="1") and you wish to 
+                  store the size (in megabytes) of that file in a separate 
+                  entity attribute, this should be the name of that attribute
+                  
+file-uri-attr     if this attribute is a file (is-file="1") and you wish to 
+                  store the uri to that file in a separate entity attribute, 
+                  this should be the name of that attribute. this feature may be 
+                  desireable when files are stored in the database in order to 
+                  increase query performance and reduce database load. this is 
+                  because in order to get the uri, if the file is stored in the 
+                  database, the full contents of that file be be pulled from the 
+                  database. using file-uri-attr, you may lazy-load the file 
+                  attribute, and simply use the uri to reference that file. this 
+                  feature may be used for file type attributes with or without 
+                  cardinality
+                  
+file-processor    if this attribute is a file, this attribute may be provided to 
+                  specify a command line program that should be executed on that 
+                  file when it is first uploaded (when the set method is invoked 
+                  with a value from the $_FILES global array). the cli program 
+                  execution path can include the imbedded variable {$file} which 
+                  will be replaced with the absolute path to the uploaded file 
+                  before it is persisted to the database or file system. for 
+                  example, if the file is an image, and a dimensional 
+                  restriction is to be imposed before the file is persisted (or 
+                  even evaluated by the depends constraints), this attribute 
+                  may look something like this (using the ImageMagick convert 
+                  cli program):
+                  
+                  "/usr/bin/convert -sample 200x300 {$file} {$file}"
+                  
+                  where 200 is the maximum width and 300 is the maximum height 
+                  (ImageMagick maintains the aspect ratio of the image when 
+                  resizing) and the first {$file} is the input file (the temp 
+                  file created by php) and the second is the output file which 
+                  actually overwrites the original one. The location of the file 
+                  MUST be the same as the original file when the file-processor 
+                  concludes processing
+                  
+global-name       if this attribute is global accross multiple entities, this 
+                  attribute provides the global identifier for the attribute. 
+                  global attributes can be merged using the generated value 
+                  object 'mergeGlobals' method which accepts an array of 
+                  entities and merges all of the common globals in those 
+                  entities. if the global-name will be the same as the name 
+                  attribute, then use is-global instead
+                  
+indexed           whether or not this attribute should be individually indexed. 
+                  this is basically just a shortcut to adding an "index" element 
+                  in the entity model solely for the attribute. the name that 
+                  will be assigned to the index is "[table name]_[column]_idx". 
+                  consult your database vendor documentation for information on 
+                  which data types can and cannot be indexed
+                  
+is-file           whether or not this attribute is stored as a file. for more 
+                  information on file type attributes, see the "entity" element 
+                  "file*" attributes documentation. if is-file is true and
+                  
+is-global         used in place of global-name when the name attribute should 
+                  also be the global-name. only attributes with a defined 
+                  global-name or where is-global is true will be included in
+                  the 'mergeGlobals' operation
+                  
+json-view         an optional attribute view to use when outputing this 
+                  attribute to json
+                  
+lazy-load         whether or not this attribute should be loaded by default. 
+                  if true, then the attribute will only be retrieved when 
+                  a corresponding 'get' method is called for that attribute. 
+                  this only applies to attributes that are Entities themselves 
+                  or scalar value stored in tables other than the base entity 
+                  table. This option MUST be used wherever circular references 
+                  exist in your object model. The default value is TRUE for all 
+                  attributes meeting the following conditions for any 
+                  cardinality value:
+                    1) Stored in an external table
+                    2) Reference to an entity
+                    3) is-file is true and file-handling is db 
+                       (lazy-load-exclusive is set if the column exists in the 
+                       same table as the entity)
+                  an attribute CANNOT be lazy loaded if it exists in the same 
+                  database table as the entity. to enforce that behavior, use
+                  "lazy-load-exclusive"
+                    
+lazy-load-exclusive by default all columns within a given table are loaded 
+                  simultaneously. thus, if multiple "lazy-load" columns exist in 
+                  a table, all of them will be retrieved when any of them is. 
+                  to avoid this behavior and require that an attribute be 
+                  explicitely queried ONLY when it is needed, set this attribute 
+                  to TRUE
+                  
+mapped            used in place of nested "attr-mapping" elements when all of 
+                  the "type" attributes are mapped (fully mapped). primary key 
+                  attributes will not be mapped
+                  
+mapped-exclude    if "mapped" is true, this attribute may be specified 
+                  containing a space separated list of attribute names that 
+                  should be excluded from the mapping
+                  
+mapped-include    if "mapped" is true, this attribute may be specified 
+                  containing a space separated list of attribute names that 
+                  should be included in the mapping (only these attributes will 
+                  be included)
+                  
+mapped-prefix     if specified, this prefix will be added to each column name 
+                  of the referenced entity type. this is necessary if, for 
+                  example, an entity contains two fully mapped attributes of the 
+                  same type (otherwise duplicate column names would be used). 
+                  This value will be proceed the enclosing entity 
+                  "column-prefix"
+                  
+mapped-postfix    same as "mapped-prefix" but added to the end of the column 
+                  name
+                  
+mapped-resource-prefix if specified, this prefix will be added to each resource 
+                  identifier in a fully mapped attribute. this includes 
+                  "resource" and "resource-help"
+                  
+mapped-resource-postfix same as "mapped-resource-prefix" but added to the end of 
+                  the resource name
+                  
+match-user-id     the name of the entity attribute that the user-id should match 
+                  in order for a user to be able to get/set this attribute. this 
+                  value will be passed to the "getAttribute" method and the 
+                  results compared. if the return value is an array, then the 
+                  user will only be able to access the attribute if their user 
+                  id exists in that array. in order to use this feature, the 
+                  SRA_Authenticator::getUserId method must return a user id. use 
+                  this configuration to restrict access to db stored files. this 
+                  configuration can also be declared at the entity level in 
+                  which case all attributes that do not explicitely define a 
+                  "match-user-id" configuration will inherit that value. if a 
+                  security violation is detected, the return value of the 
+                  corresponding getter/setter will be aborted (getter returns 
+                  null) and the activity will be logged
+                  
+max-length        this attribute is a shortcut to defining a "maxLength"  
+                  validation constraint and a maxLength var defining the maximum 
+                  length for the attribute. If specified, the "maxLength" 
+                  validation constraint will be added to the attribute and the 
+                  value provided will be the maximum character length for that 
+                  attribute
+                  
+min-length        this attribute is a shortcut to defining a "minLength"  
+                  validation constraint and a minLength var defining the minimum 
+                  length for the attribute. If specified, the "minLength" 
+                  validation constraint will be added to the attribute and the 
+                  value provided will be the minimum character length for that 
+                  attribute
+                  
+null-db-empty-str whether or not empty string ('') should be used in place of 
+                  NULL for this attribute when database edits occur and the 
+                  value of this attribute is NULL. this will also have the 
+                  reverse effect of setting the attribute values to NULL 
+                  whenever they are set to an emtpy string using the attribute 
+                  set method
+                  
+on-delete-cascade if this attribute references another entity, AND this entity 
+                  (the entity that this attribute belongs to) is deleted, AND 
+                  the default behavior is to NOT delete the referenced entity. 
+                  Instead, if this entity's primary key is stored in the 
+                  referenced entity's table, that value will be set to NULL. If 
+                  you desire that the referenced entity also be deleted when 
+                  this entity is deleted, set this attribute to TRUE. If an 
+                  attribute is not an entity, and it is contained in another 
+                  table it will implicitely be DELETED when the entity is 
+                  deleted. To avoid this, you MUST explicitely set this 
+                  attribute to FALSE for that attribute
+                  
+on-remove-delete  if this attribute is an entity, and should only exist within 
+                  the context of a single entity of the enclosing entity type, 
+                  then setting this attribute to TRUE will result in that entity  
+                  being deleted whenever it is disassociated from the entity. 
+                  the default behavior is to either delete the link table entry 
+                  (if the two entities use a link table), or set the id of the 
+                  enclosing entity to NULL (or empty string if this attribute's 
+                  null-db-empty-str is TRUE) in the referenced entity's table 
+                  (if the referenced entity table contains the id of the 
+                  enclosing entity)
+                  
+order-by          an optional 'ORDER BY' sql value for attributes with greater 
+                  than one upper bound cardinality stored in an external table
+                  This value will be the name of a column in the 'table' 
+                  specified upon which ordering should be based. Multiple 
+                  column name may be specified separated by commas and 
+                  optionally followed by 'ASC' or 'DESC'
+
+read-only         determines that an attribute can only be read, but never set
+
+recursive-link    use this to creative a recursive link between this attribute 
+                  and another member of its enclosing entity. basically, the 
+                  value for recursive-link should be the name of another 
+                  attribute in the same entity that is an entity, or array of 
+                  entities containing the same attribute. the result is that 
+                  invoking "get" for this attribute will recursively return 
+                  both the immediate values as well as the values of the 
+                  recursive-link attributes all merged into a single array
+                  
+render-displ-option if this attribute has options, this determines whether the 
+                  option label or actual attribute value should be output to 
+                  json/xml rendering. by default this value is false.
+                  
+render-exclude    if this attribute is an entity, this attribute specifies a 
+                  space separate list of sub-attributes that should NOT be 
+                  included when an object is rendered to json or xml using the 
+                  toJson/toXml methods or the built-in xml/json entity views
+                  
+render-include    if this attribute is an entity, this attribute specifies a 
+                  space separate list of sub-attributes that should be included 
+                  when an object is rendered to json or xml using the 
+                  toJson/toXml methods or the built-in xml/json entity views. 
+                  if specified, only those attributes will be included
+
+resource          key in the entity SRA_ResourceBundle that contains a string
+                  or name describing this attribute. this attribute may include 
+                  embedded attribute values using the following format:
+                    "description.{$type->getSourceTypeId()}" : resource will 
+                        be identified by "description." followed by the return 
+                        value of calling the 'getSourceTypeId() method on the 
+                        'type' attribute of this entity. 
+                    "description.{$name}" : resource will be identified by 
+                        "description." followed by the value of the 'name' 
+                        attribute of this entity.
+                  If not specified, the following search order will be used to 
+                  determine the correct resource key:
+                    {attribute name}
+                    attribute.{attribute name}
+                    {enclosing entity name}.{attribute name}
+                    {enclosing entity resource}.{attribute name}
+                    text.{attribute name}
+                    {type}: if this attribute is an entity
+                  
+resource-help     key in the application SRA_ResourceBundle that contains a string
+                  or name providing help for this attribute. this attribute may 
+                  include embedded attribute values using the following format:
+                    "description.{$type->getSourceTypeId()}" : resource will 
+                        be identified by "description." followed by the return 
+                        value of calling the 'getSourceTypeId() method on the 
+                        'type' attribute of this entity. 
+                    "description.{$name}" : resource will be identified by 
+                        "description." followed by the value of the 'name' 
+                        attribute of this entity.
+                  If not specified, the following search order will be used to 
+                  determine the correct resource key:
+                    {attribute name}-help
+                    attribute.{attribute name}-help
+                    {enclosing entity name}.{attribute name}-help
+                    {enclosing entity resource}.{attribute name}-help
+                        
+retrieve-function a database function to perform when this attribute is 
+                  retrieved
+
+sequence          whether or not this attribute is generated automatically 
+                  by the database as an auto-incrementing sequence. if TRUE, the 
+                  type will automatically be set to SRA_DATA_TYPE_INT
+                  
+set-convert       an optional name of a static method or function that should be 
+                  invoked with the attribute value as a parameter the return 
+                  value of which will be used in place of the original value. 
+                  for example, to have the alternate form attribute store a tag 
+                  stripped value, this attribute would be "strip_tags" (a 
+                  standard PHP function). Note: If this method is stored in a 
+                  non-standard PHP source file, that file should be included in 
+                  the entity using an aop "introduction". multiple set convert 
+                  values may be specified each separated by a space. static 
+                  methods can be specified using the form ClassName::MethodName
+                  the signature for a set-convert function/method should be 
+                  method(mixed : Object) : mixed. Note: for attributes with 
+                  cardinality, the set-convert methods will only be invoked 
+                  by the "add" method using single values. the return value of 
+                  each invocation will be captured by reference using '&'
+                  
+set-function      a database function to perform when this attribute is set. 
+
+set-only          determines that an attribute can only be set, but never read
+
+skip-default-views set to TRUE if you do not want this attribute to inherit 
+                  matching default views for the model. more more info, see the 
+                  documentation provided for the "default-view" element
+                  
+skip-include      if this attribute is an entity "type", and you do not want the 
+                  generated VO to automatically include the PHP value object 
+                  source file for that type, set this attribute to true
+
+skip-persistence  whether or not this attribute is persistent. only applicable 
+                  if the enclosing entity is persistent. non-persistent 
+                  entities will not be included in the table definitions or 
+                  queries for the enclosing entity
+                  
+skip-wsdl         whether or not to skip adding this attribute to the wsdl 
+                  generated by the web services gateway
+                  
+sync-attributes   a space separated list of other entity attributes that should 
+                  be set whenever this attribute is set. never create circular 
+                  sync references between attributes as this will cause an 
+                  infinite loop condition. the syncronization will occur after 
+                  any "set-convert" operations for this attribute. Note: for 
+                  attributes with cardinality, the syncronization will occur 
+                  only within the "add" and "remove" methods (not the "set" 
+                  method)
+                  
+table             if the attribute is stored in another table, this 
+                  attribute defines the name of that table. the primary key for 
+                  the enclosing entity should also exist in this table using the 
+                  same column name, or an overrided value specified in 
+                  "table-pk-column"
+                  
+table-pk-column   this attribute can be used in 2 ways:
+                  1) if "table" is specified and the enclosing entity primary 
+                     key column name is different in that table, then specify 
+                     the correct column name using this attribute.
+                  2) if "type" is specified, and the referenced type primary 
+                     table has the column containing a primary key reference 
+                     back to this entity, then this attribute specifies the name 
+                     of that column in the referenced entity primary table
+                  
+type              the data type of this attribute. this may be the name of one 
+                  of the other entities, or a standard type as defined in the 
+                  lib/SRA_Database TYPE constants. The default type is 
+                  SRA_DATA_TYPE_STRING (String). Validation for this type is 
+                  not performed by setters unless explicitely specified in the 
+                  "depends" attribute. database mapping of an instance of an 
+                  instance of a foreign entity to this entity is designated 
+                  using the "column" and "table-pk-column" attributes (see 
+                  comments above for more information)
+                  
+type-err-resource key in the application SRA_ResourceBundle that contains a string
+                  that should be used for error messages due to invalid type 
+                  errors. only necessary when the 'type' references another 
+                  entity in this model. if not specified, the 
+                  enclosing entity-model sys-err-resource will be used
+                  
+union-link        similiar to recursive-link, this value specifies another 
+                  attribute in the SAME entity whose values should be unioned 
+                  with this attributes values when the GET method is invoked. 
+                  
+xml-use-attribute this flag may be set for scalar attributes without cardinality 
+                  ONLY. when set, this entity attribute will be rendered as an 
+                  xml attribute instead of a nested element (the default 
+                  behavior) when the 'renderXml' or 'render("xml")' methods are 
+                  invoked. this change will also be reflected in the 
+                  auto-generated DTD (when applicable). the PHP htmlspecialchars 
+                  method will be invoked on the value for this attribute when 
+                  this flag is set and prior to inserting it into the xml
+                  
+xml-view          an optional attribute view to use when outputing this 
+                  attribute to xml
+
+
+Used in:  entity
+-->
+<!ELEMENT attribute (attr-mapping*, msg*, thumbnail*, var*, view*)>
+<!ATTLIST attribute          key                 CDATA      #REQUIRED>
+<!ATTLIST attribute          aggregate           (1|0)      "0">
+<!ATTLIST attribute          aggregate-prefix    CDATA      #IMPLIED>
+<!ATTLIST attribute          api-resource        %Resource; #IMPLIED>
+<!ATTLIST attribute          cardinality         CDATA      #IMPLIED>
+<!ATTLIST attribute          cardinality-delimiter CDATA    #IMPLIED>
+<!ATTLIST attribute          cardinality-err-resource      %Resource;  #IMPLIED>
+<!ATTLIST attribute          cardinality-unique  (1|0)      "1">
+<!ATTLIST attribute          circular-ref        (1|0)      "0">
+<!ATTLIST attribute          column              CDATA      #IMPLIED>
+<!ATTLIST attribute          column-type         CDATA      #IMPLIED>
+<!ATTLIST attribute          constraint          CDATA      #IMPLIED>
+<!ATTLIST attribute          date-format         CDATA      #IMPLIED>
+<!ATTLIST attribute          default             CDATA      #IMPLIED>
+<!ATTLIST attribute          depends             CDATA      #IMPLIED>
+<!ATTLIST attribute          dtd-name            CDATA      #IMPLIED>
+<!ATTLIST attribute          file-icon-attr      CDATA      #IMPLIED>
+<!ATTLIST attribute          file-icon-dir       CDATA      #IMPLIED>
+<!ATTLIST attribute          file-index-attr     CDATA      #IMPLIED>
+<!ATTLIST attribute          file-size-attr      CDATA      #IMPLIED>
+<!ATTLIST attribute          file-size-kb-attr   CDATA      #IMPLIED>
+<!ATTLIST attribute          file-size-mb-attr   CDATA      #IMPLIED>
+<!ATTLIST attribute          file-uri-attr       CDATA      #IMPLIED>
+<!ATTLIST attribute          file-processor      CDATA      #IMPLIED>
+<!ATTLIST attribute          global-name         CDATA      #IMPLIED>
+<!ATTLIST attribute          indexed             (1|0)      "0">
+<!ATTLIST attribute          is-file             (1|0)      "0">
+<!ATTLIST attribute          is-global           (1|0)      "0">
+<!ATTLIST attribute          json-view           CDATA      #IMPLIED>
+<!ATTLIST attribute          lazy-load           (1|0)      "0">
+<!ATTLIST attribute          lazy-load-exclusive (1|0)      "0">
+<!ATTLIST attribute          mapped              (1|0)      "0">
+<!ATTLIST attribute          mapped-exclude      CDATA      #IMPLIED>
+<!ATTLIST attribute          mapped-include      CDATA      #IMPLIED>
+<!ATTLIST attribute          mapped-postfix      CDATA      #IMPLIED>
+<!ATTLIST attribute          mapped-prefix       CDATA      #IMPLIED>
+<!ATTLIST attribute          mapped-resource-postfix CDATA  #IMPLIED>
+<!ATTLIST attribute          mapped-resource-prefix CDATA   #IMPLIED>
+<!ATTLIST attribute          match-user-id       CDATA      #IMPLIED>
+<!ATTLIST attribute          max-length          CDATA      #IMPLIED>
+<!ATTLIST attribute          min-length          CDATA      #IMPLIED>
+<!ATTLIST attribute          null-db-empty-str   (1|0)      "0">
+<!ATTLIST attribute          on-delete-cascade   (1|0)      "0">
+<!ATTLIST attribute          on-remove-delete    (1|0)      "0">
+<!ATTLIST attribute          order-by            CDATA      #IMPLIED>
+<!ATTLIST attribute          read-only           (1|0)      "0">
+<!ATTLIST attribute          recursive-link      CDATA      #IMPLIED>
+<!ATTLIST attribute          render-displ-option (1|0)      "0">
+<!ATTLIST attribute          render-exclude      CDATA      #IMPLIED>
+<!ATTLIST attribute          render-include      CDATA      #IMPLIED>
+<!ATTLIST attribute          resource            %Resource; #IMPLIED>
+<!ATTLIST attribute          resource-help       %Resource; #IMPLIED>
+<!ATTLIST attribute          retrieve-function   CDATA      #IMPLIED>
+<!ATTLIST attribute          sequence            (1|0)      "0">
+<!ATTLIST attribute          set-convert         CDATA      #IMPLIED>
+<!ATTLIST attribute          set-function        CDATA      #IMPLIED>
+<!ATTLIST attribute          set-only            (1|0)      "0">
+<!ATTLIST attribute          skip-default-views  (1|0)      "0">
+<!ATTLIST attribute          skip-include        (1|0)      "0">
+<!ATTLIST attribute          skip-persistence    (1|0)      "0">
+<!ATTLIST attribute          skip-wsdl           (1|0)      "0">
+<!ATTLIST attribute          sync-attributes     CDATA      #IMPLIED>
+<!ATTLIST attribute          table               CDATA      #IMPLIED>
+<!ATTLIST attribute          table-pk-column     CDATA      #IMPLIED>
+<!ATTLIST attribute          type                CDATA      "php:: SRA_DATA_TYPE_STRING ::php">
+<!ATTLIST attribute          type-err-resource   CDATA      #IMPLIED>
+<!ATTLIST attribute          union-link          CDATA      #IMPLIED>
+<!ATTLIST attribute          xml-use-attribute   (1|0)      "0">
+<!ATTLIST attribute          xml-view            CDATA      #IMPLIED>
+
+
+<!-- 
+The "validate" element defines an entity validation sequence. these are 
+different then attribute validators defined using "depends". "validate" is used 
+to specify sets of attributes that are required either as a whole (all required) 
+or partially (at least one required)
+
+key               unique identifier for the entity validation sequence. this may 
+                  be used to identify this validation sequence when invoking the 
+                  $entity->validate method
+
+attrs             space separated list of names referencing the attributes or 
+                  member methods that should be included in this entity 
+                  validation sequence. attributes that are included will be 
+                  considered set if they are not equal (===) to NULL. this would 
+                  include the values FALSE, 0, '0' and empty array. conditional 
+                  inclusion can be applied by separating the conditional 
+                  attribute/method from the attribute to include using an = 
+                  (equal sign). the conditional attribute/method may optionally 
+                  be preceded by the ! (NOT) operator. Multiple attributes may 
+                  be specified following the equal sign separated by an '^' (AND 
+                  validation) or an '|' (OR validation) but no spaces. For 
+                  example:
+                  
+                    name : name attribute is required
+                    
+                    myCustomValidation : member method myCustomValidation() must 
+                  return a value that evaluates to TRUE
+                  
+                    foreign=phoneNumber : require phone number if the 'foreign' 
+                  attribute evaluates to TRUE
+                  
+                    !isExtraLarge=neckSize : require neck size if the method 
+                  isExtraLarge() does NOT return TRUE
+                  
+                    happy=smiling^dancing : requires both smiling and dancing if
+                  the 'happy' attribute evaluates to TRUE
+                  
+                    sad=crying|sobbing : require either crying or sobbing if the 
+                  'sad' attribute evaluates to TRUE
+                  
+                  there should be NO SPACES in a conditional expression
+                  
+equal             whether or not this validation constraint should additionally 
+                  validate that the attrs specified all have the same value. 
+                  this may be useful for verifying validity of data input by 
+                  requiring the user to enter that data twice (not applicable to 
+                  conditional attr constraints)
+                  
+eval-php-false    by default attrs are considered not set when they evaluate to 
+                  NULL using the strict equality operator (===). set this flag 
+                  to true to alter this behavior so that an attribute is 
+                  considered not set when it evaluates to PHP FALSE. this 
+                  includes NULL as well as FALSE, 0, '0', and empty array
+                  
+mandatory         whether or not this is a mandatory validation sequence. 
+                  all mandatory validation sequences are triggered when the 
+                  "validate" method is invoked without specifying a specific 
+                  sequence. this invocation occurs always prior to an insert or 
+                  update
+                  
+not-equal         has the opposite meaning of "equal"
+
+require-all       whether or not all attributes (non-conditional or conditional) 
+                  in the validation sequence are required ('AND'). the default 
+                  is TRUE. Set this to "0" to specify that only 1 of the 
+                  attributes is required
+
+resource          key in the application SRA_ResourceBundle reference the string 
+                  that should be displayed when this validation sequence fails. 
+                  this resource may contain the variable {$entity} which will be 
+                  substituted with the entity label at runtime. additionally, 
+                  each of the labels for the attributes will be set in the 
+                  variables "attrN" where N is the order in which the attributes 
+                  appear in "attrs" (above) starting with N=1
+
+Used in:   entity
+-->
+<!ELEMENT validate EMPTY>
+<!ATTLIST validate          key                 CDATA      #REQUIRED>
+<!ATTLIST validate          attrs               CDATA      #REQUIRED>
+<!ATTLIST validate          equal               (1|0)      "0">
+<!ATTLIST validate          eval-php-false      (1|0)      "0">
+<!ATTLIST validate          mandatory           (1|0)      "0">
+<!ATTLIST validate          not-equal           (1|0)      "0">
+<!ATTLIST validate          require-all         (1|0)      "1">
+<!ATTLIST validate          resource            %Resource; #REQUIRED>
+
+
+<!-- 
+The "attr-mapping" element defines a limited scope of which attributes of an 
+entity type attribute will actually be used and persisted by the attribute that 
+maps them. If specified, these mappings will define entirely which attributes of 
+the entity will be persistable. Any attributes for which a attr-mapping is not 
+specified will not be persisted
+
+key               the name of attribute. may include sub-attributes of the 
+                  mapped entity
+
+column            optional name for the table column that this attribute will be 
+                  persisted to
+                  
+resource          overrides the corresponding attribute's "resource". must be a 
+                  fully valid resource identifier (resource searching will not 
+                  be applied)
+
+resource-help     overrides the corresponding attribute's "resource-help". must 
+                  be a fully valid resource identifier (resource searching will 
+                  not be applied)
+
+Used in:   attribute
+-->
+<!ELEMENT attr-mapping EMPTY>
+<!ATTLIST attr-mapping      key                  CDATA       #REQUIRED>
+<!ATTLIST attr-mapping      column               CDATA       #IMPLIED>
+<!ATTLIST attr-mapping      resource             %Resource;  #IMPLIED>
+<!ATTLIST attr-mapping      resource-help        %Resource;  #IMPLIED>
+
+
+<!-- 
+The "thumbnail" element is used in conjunction with file type attributes 
+(where is-file is true) when the model should automatically attempt to generate
+a thumbnail (or thumbnails) for that attribute and store those also as file 
+type attributes using another member attribute in the same entity. for more 
+information on this functionality, see the api for 
+SRA_FileAttribute::toThumbnail. this attribute may be used only with file 
+attributes without cardinality. the value stored in the referenced attribute 
+will be a new SRA_FileAttribute instance representing the thumbnail. at least 
+1 height or width (or both) MUST be specified for all thumbnails. if both height 
+and width are specified, and "preserve-aspect" is not true, the aspect ratio of 
+the image may be affected because that exact height/width will be used for the 
+generated thumbnail. if only one, height or width is specified, or if both are 
+specified and "preserve-aspect" is true, those values will be the max height
+or width of the generated thumbnail while the other dimension will be 
+proportional to the dimension that is used according to the image aspect ratio. 
+thumbnails will be generated to png format by default. gif and jpeg are also 
+supported formats and may be specified using the "format" attribute. if multiple 
+thumbnails are created as a result of the thumbnail generation process (i.e. 
+when file is pdf with multiple pages), the first page thumbnail will be used 
+UNLESS the thumbnail attribute referenced has cardinality in which case ALL of 
+the thumbnails will be set in the same order of the pages. thumbnails cannot be 
+generated for file attributes with cardinality
+
+key               the name of the entity attribute (in the same entity as the 
+                  enclosing attribute) that the thumbnail(s) should be saved to
+                  
+attr              if the referenced attribute is an entity (versus a file), this 
+                  value should specified the name of the entity member attribute
+                  that should be used to store the thumbnail image
+
+attr-page-num     if the referenced attribute is an entity, and the file that 
+                  the thumbnails are generated for may include multiple page 
+                  pdf or postscript documents, this value may be used to store 
+                  the page number for each of the generated thumbnails. in order 
+                  to use this feature, however, the cardinality relationship 
+                  must be 0..* for the referenced attribute, otherwise, a 
+                  thumbnail will only be generated for the first page in the 
+                  document
+
+format            the image format for the generated thumbnail(s)
+                  
+height            the maximum height of the generated thumbnail(s)
+
+include-types     space separated list of ereg regular expressions that should
+                  be used to match the mime-types that should be included in the 
+                  thumbnail generation. thumbnail(s) will not be generated for 
+                  any files that do not match these mime types
+                  
+preserve-aspect   whether or not to preserve the aspect ratio of the original 
+                  source file. if true, the thumbnail dimensions will not 
+                  exceed height or width. if false, the thumbnail dimensions 
+                  will be exactly height and width. when true, both height and 
+                  width should be specified
+                  
+skip-types        space separated list of a ereg regular expressions that should 
+                  be used to skip the mime-types that should be not be included  
+                  in the thumbnail generation. thumbnail(s) will only be 
+                  generated for files that do not match these mime types
+
+width             the maximum width of the generated thumbnail(s)
+
+Used in:   attribute
+-->
+<!ELEMENT thumbnail EMPTY>
+<!ATTLIST thumbnail         key                 CDATA      #REQUIRED>
+<!ATTLIST thumbnail         attr                CDATA      #IMPLIED>
+<!ATTLIST thumbnail         attr-page-num       CDATA      #IMPLIED>
+<!ATTLIST thumbnail         format              (gif|jpg|png) "png">
+<!ATTLIST thumbnail         include-types       CDATA      #IMPLIED>
+<!ATTLIST thumbnail         height              CDATA      #IMPLIED>
+<!ATTLIST thumbnail         preserve-aspect     (1|0)      "1">
+<!ATTLIST thumbnail         skip-types          CDATA      #IMPLIED>
+<!ATTLIST thumbnail         width               CDATA      #IMPLIED>
+
+
+<!-- 
+The "default-view" element is used to automatically associate a a view within 
+"global-views" to all attributes of a given type. for example, if you wanted all 
+"string" attributes to automatically use a global view named "output" which is 
+simple a text label output, you could use this element instead of creating a 
+"view" extends sub-element for each attribute. in this case you would first 
+create a global-view named "output-text" and then create a "default-view" where 
+id="output", type="string" and view="output-text". you may restrict associations 
+using the optional attributes, cardinality, and entities attributes. default 
+views can be ignored or overriden in model attributes using the 
+"skip-default-views" attribute or by creating a custom view using the same name.
+default views apply ONLY to attributes. "default-view" elements can also be 
+overriden at the entity level using by nesting them within the entity element
+                  
+id                the id for this view within the attributes they are associated 
+                  to. a "default-view" will be overriden if a matching attribute 
+                  already has a view with this name. 
+
+attrs             optional space separated list of attribute names that should 
+                  or should not inherit this default view. precede this value 
+                  with an exclamation mark "!" if the names are attributes 
+                  that should NOT inherit this default view
+
+cardinality       cardinality to match in order for this default view to be 
+                  inherited by an attribute. if not specified, the view will 
+                  only be inherited by attributes that do not have cardianity
+                  
+depends           space sepeated list of depends contraints that should be 
+                  matched or not matched in order for this default view to be 
+                  inherited by an attribute. if not specified depends contraints 
+                  will be ignored. if specified, all of the constraints 
+                  specified must be used by the attribute (if not preceeded with 
+                  "!"). preceed this value with an exclamation mark "!" if only 
+                  attributes that do not use ANY of those contraints should 
+                  inherit the default view
+
+entities          optional space separated list of entity names that should 
+                  or should not inherit this default view. precede this value 
+                  with and exclamation mark "!" if the names are entities that 
+                  should NOT inherit this default view. if an entity does not 
+                  inherit a default view, none of its' attributes will either
+
+types             space separated list of the data types of the attributes that 
+                  should inherit this default view. only attributes of these 
+                  types will inherit the view. the types may be scalar or entity
+                  use '*' to specify all types
+
+view              the name (key) of the view within "default-views" that should 
+                  be inherited. 
+
+Used in:   entity, global-views
+-->
+<!ELEMENT default-view EMPTY>
+<!ATTLIST default-view      id                  CDATA      #REQUIRED>
+<!ATTLIST default-view      attrs               CDATA      #IMPLIED>
+<!ATTLIST default-view      cardinality         CDATA      #IMPLIED>
+<!ATTLIST default-view      depends             CDATA      #IMPLIED>
+<!ATTLIST default-view      entities            CDATA      #IMPLIED>
+<!ATTLIST default-view      types               CDATA      #REQUIRED>
+<!ATTLIST default-view      view                CDATA      #REQUIRED>
+
+
+<!-- 
+The "view" element defines a single entity/attribute view. These views are used 
+to display the entities/attributes for viewing or editing. For example, one view 
+may be defined to display in a read-only format, one in a form that a user can 
+fill in, and one to display the entity data in a printable pdf format. views can 
+be rendered utilizing the corresponding VO::render and VO::renderAttribute 
+methods. The following template variables will automatically be set:
+    entity: a reference to the entity instance/value
+    attribute: a reference to the attribute instance/value
+    [attribute|entity]Name: the name of the entity or attribute
+    [attribute|entity]Label: the label for the entity or attribute
+    attributeIndex: the current attribute index (where multiplicty is used)
+    fieldName: the field name for an attribute view. this value may be 
+               automatically prefixed or postfixed using SRA_EntityView::getGlobalFieldNamePrefix() 
+               and SRA_EntityView::getGlobalFieldNamePostfix()
+    params: SRA_Params object representing the params specified for the view
+    attrs: an array of the names of the attributes that will be rendered as determined by the "attrs" value
+    viewName: the name of the view being rendered
+    
+A view named 'xml' (not case sensitive) is reserved for every entity. rendering 
+that view will result in a pass-thru call to the VO::renderXml method.
+
+A view may have 0..* nested param elements. the corresponding view templates 
+used by the view may use these values in different ways. consult the documentation 
+for those view templates for further information. 
+
+One reserved param type is 'view-resources' (SRA_ENTITY_MODELER_VIEW_RESOURCES_PARAM_TYPE)
+which may be used to specify resource bundles that should be made available 
+within an entity (attr views not supported) view. The 'id' for these params will 
+be the template variable through which that resource bundle reference may be 
+accessed, and the value will be the path (app/framework relative, or fixed path) 
+to the resource bundle. When rendered, the correct localized resource bundle 
+will be selected and made available accordingly within the template. This 
+feature applies also to the 'xml' and 'json' built-in views. When applied within 
+an xml view (template="xml"), each resource bundle will be included using the 
+"view-resources" ("ViewResources" for camel-case dtds) element (directly below 
+the root xml document element) where the "id" of that element will correspond 
+with the "id" of the "param", and each of these elements will contains 0..* 
+nested "view-resources-string" ("ViewResourcesString" for camel-case dtds) for 
+each string included in that resource bundle file (the "id" attribute of this 
+element will be equal to the key and the value of that element will be the 
+string value). When applied within a json view (template="json"), an attribute 
+named "ViewResources" will be automatically appended to the json serialized 
+object. This attribute will be an associative array indexed by the resources 
+"id", where the value of each will also be an associative array of key/value 
+pairs representing the strings included in the resource bundle.
+
+Additionally, the view itself may utilize nested params of type 'formInitVals' 
+defining 0..* attribute values that should be added to the object initialization 
+array when [VO]::newInstanceFromForm is invoked. the key in these params will be 
+the attribute name, and the value will be either an explicit value or php code 
+that will generate that value. the value will be postfixed with a ;. the view 
+may also utilize nested params of type 'formInitValsRemove' which will 
+remove any initialization values if they are equal to the value specified in 
+the param, or just set if a value is not specified.. the view may also utilize 
+nested params of type 'formInitValsPre' which are similiar to 'formInitVals' but 
+may be overwritten by $_POST/$_GET values for the corresponding attributes
+
+
+key               unique identifier for the view
+
+attrs             optionally defines which attributes should be displayed and 
+                  the order that they should be displayed in if 
+                  "render-attributes" is true. If this attribute 
+                  is specified, then only the attributes listed in it will be 
+                  displayed. attribute names should be space separated. this 
+                  option only applies when the view is for an entity, or an 
+                  entity attribute referencing another entity. if not specified 
+                  and "render-attributes" is true, all of the entity's 
+                  attributes will be rendered in the order they appear in the 
+                  entity descriptor. Optionally, this may be a PHP code segment, 
+                  that will return an array of attribute names. In order to use 
+                  this functionality, the "attrs" value must be prefixed with:
+                  "code:"
+                  
+cardinality-attr  used for attribute views only where a cardinality property is 
+                  defined for that attribute. in that scenario, this attribute 
+                  specifies which entity attribute specifies the # of attributes 
+                  of that type that should referenced to the attribute. if the 
+                  actual # of instances exceeds that #, the view will 
+                  automatically ignore the extra instances. if not enough 
+                  instances currently exist, new instances will be created. 
+
+default           whether or not this is the default view. only one view can be 
+                  designated as default within the enclosing entity or attribute 
+                  element. if no view is designated as default, the first view 
+                  defined will automatically be assigned as the default 
+                  (default view is displayed when corresponding 'render' method 
+                  is called without a view identfier). views within "global-views" 
+                  may extend other global views
+                  
+extends           a reference to the key of another view configuration that this 
+                  view should inherit from. any common settings between this and 
+                  the corresponding referenced view will be overriden by the 
+                  settings specified for this view. the referenced view may be 
+                  any "view" defined in the xml at a higher hierarchical level. 
+                  for example, if this view is for any attribute, it may extend 
+                  any views within the enclosing entity, OR any of the 
+                  "global-views" defined for the entity-model. entity views can 
+                  extend both other views in the same entity as well as global 
+                  views. multiple views can be extended and will be processed 
+                  in the order defined
+                  
+field-name        an alternate field name to use for attribute views. if 
+                  specified, this name will be used instead of the attribute 
+                  name. this will break automatic form instantiation using 
+                  newInstanceFromForm
+                  
+forward-view      if this view forwards this view to nested attributes/entities, 
+                  the foward-view may be specified to identify the view that 
+                  should be rendered when this forwarding occurs. otherwise, the 
+                  same view id used by this view will be rendered
+                  
+id-constraint     specifies the php code that will provide the list of ids for 
+                  the entities that should be displayed. applies only when the 
+                  view is assigned to an attribute, and that attribute has 
+                  upper bound cardinality > 1, and that attribute represents an 
+                  entity. if a value in this constraint is the string 'NEW', a 
+                  new instance of the corresponding entity will be instantiated 
+                  and displayed
+                  
+iterate           if the view is for an attribute, and the attribute is an 
+                  array, then the default behavior is to display the "template" 
+                  once for the entire array. setting iterate to "1" will result 
+                  in the view being rendered once for value in the array
+                  
+lookup-processor  relative or fixed path to a class that extends lib/model/SRA_LookupProcessor
+                  If a SRA_LookupProcessor is specified, that class must implement 
+                  the static method SRA_LookupProcessor::lookup as described in the 
+                  SRA_LookupProcessor api. This method will return an array of 
+                  entities of the type that encloses this view. SRA_LookupProcessors 
+                  can ONLY be used for entity views, and not for attributes. 
+                  If a SRA_LookupProcessor is defined, this view will become 
+                  statically accessible via the {entity}::render($viewId) method 
+                  and the entire view definition will be processed once for each 
+                  entity instance returned by the SRA_LookupProcessor. the view 
+                  "params" will be passed into the SRA_LookupProcessor::lookup 
+                  method along with the entity name. Examples:
+                    "MyLookupProcessor": SRA_LookupProcessor subclass is stored in 
+                    the standard lib directory for the app
+                    
+                    "lib/processors/MyLookupProcessor": SRA_LookupProcessor subclass is 
+                    stored in the sub-directory "processors" beneath the standard 
+                    lib directory for the app
+                    
+                    "lib/model/SRA_ListLookupProcessor": a powerful lookup processor 
+                    located in SRA_DIR/lib/model/ that can be utilized to display 
+                    lists of entities in any format including the ability to 
+                    segment the view into multiple pages.
+                  
+                  the following "lp-*" attributes are only applicable when a 
+                  "lookup-processor" has been defined. if both tpl and html/msg 
+                  are specified, the template will be displayed first
+                  
+lp-no-results-msg a message (resource key) to display if the lookup processor returns no entities
+                  
+lp-no-results-tpl a template to display if the lookup processor returns no entities
+                  
+mime-type         if specified, a "Content-type" header will be output with 
+                  the mime-type specified. Mime-type can also be specified using 
+                  the "view-header" sub-elements
+                  
+post              html to render last (after the post-template if specified)
+                  
+post-template     the last smarty template to be displayed for the entity. may 
+                  perform view functions such as setting up a footer. this 
+                  template will only be displayed once even if the multiplicty 
+                  is greater than 1 for an attribute view that utilized the 
+                  multiplicty option
+                  
+pre               html to render first (before the pre-template if specified)
+                  
+pre-template      the first smarty template to be displayed for the entity. may 
+                  perform view functions such as setting up a header. this 
+                  template will only be displayed once even if the multiplicty 
+                  is greater than 1 for an attribute view that utilized the 
+                  multiplicty option
+                  
+render-attributes whether or not the entity's or attribute's sub-attributes 
+                  should be rendered. if TRUE, they will be rendered after the 
+                  "template" and before the "post-template". this option only 
+                  applies for entity views, or an attribute that references 
+                  another entity. if the latter is the case, then 1 of 3 
+                  scenarios apply:
+                    1) if "attrs" has been specified, then each of 
+                    those attributes will be rendered using the entity's 
+                    "renderAttribute" method
+                    2) if "attrs" has not been specified, and the 
+                    referenced entity has a view with the same identifier, the 
+                    entity's "render" method will be invoked for that view. 
+                    "skip-attributes" may also be specified in this scenario
+                    3) if "render-attributes" is FALSE, then no attribute 
+                    rendering will be performed. However, the "template" will 
+                    be displayed with the "attribute" value set to the instance 
+                    of the entity or entitites
+                  
+skip-attributes   space separated list of attributes that should not be rendered 
+                  when "render-attributes" is true
+                  
+template          the primary smarty template utilized to render the entity or 
+                  attribute. Some standard templates are provided in 
+                  SRA_DIR/www/tpl/views. They include documentation 
+                  pertaining to relevant "param"s for customization of the 
+                  template. In many cases these standard templates will suffice, 
+                  however, if you require extensive customization to your view, 
+                  you will need to create a custom view template. 
+                  
+                  if 'template' is the value "xml", then an xml representation 
+                  of the entity will be the initial output (can be used to feed 
+                  view-processors with xml formatted output). this will also 
+                  result in the attributes 'iterate', 'post-template', 
+                  'pre-template' and 'render-attributes' to be 
+                  ignored. However, 'attrs' and 'skip-attributes' CAN be used to 
+                  limit the xml data that is output for the entity. the 'xml' 
+                  template cannot be used for attribute views.
+                  
+view-processors   references view-processors (using the "view-processor" 
+                  "key" attribute) that should be invoked on the output of this 
+                  view. these will be executed in the order specified 
+                  where the input to the first will be the output from the "view" 
+                  template, and the input to the 2nd will be the output from the 
+                  first and so on. all template outputs (including post-template) 
+                  will be buffered and input to the first view-processor
+
+Used in:   entity, attribute
+-->
+<!ELEMENT view (param*, view-header*, view-label*, view-value*)>
+<!ATTLIST view              key                  CDATA      #REQUIRED>
+<!ATTLIST view              attrs                CDATA      #IMPLIED>
+<!ATTLIST view              cardinality-attr     CDATA      #IMPLIED>
+<!ATTLIST view              default              (1|0)      "0">
+<!ATTLIST view              extends              CDATA      #IMPLIED>
+<!ATTLIST view              field-name           CDATA      #IMPLIED>
+<!ATTLIST view              forward-view         CDATA      #IMPLIED>
+<!ATTLIST view              id-constraint        CDATA      #IMPLIED>
+<!ATTLIST view              iterate              (1|0)      "0">
+<!ATTLIST view              lookup-processor     CDATA      #IMPLIED>
+<!ATTLIST view              lp-no-results-msg    CDATA      #IMPLIED>
+<!ATTLIST view              lp-no-results-tpl    CDATA      #IMPLIED>
+<!ATTLIST view              mime-type            CDATA      #IMPLIED>
+<!ATTLIST view              multiplicty-attr     CDATA      #IMPLIED>
+<!ATTLIST view              post                 CDATA      #IMPLIED>
+<!ATTLIST view              post-template        CDATA      #IMPLIED>
+<!ATTLIST view              pre                  CDATA      #IMPLIED>
+<!ATTLIST view              pre-template         CDATA      #IMPLIED>
+<!ATTLIST view              render-attributes    (1|0)      "0">
+<!ATTLIST view              skip-attributes      CDATA      #IMPLIED>
+<!ATTLIST view              template             CDATA      #IMPLIED>
+<!ATTLIST view              view-processors      CDATA      #IMPLIED>
+
+
+<!-- 
+The "view-header" is a single http header output that should precede the output 
+from a "view" (for more information see 'header' function documentation in the 
+PHP manual)
+
+key               the header string to be output. This may include the following 
+                  imbedded strings
+
+                  {$attr[_subAttr]}  - if specified, the corresponding attribute 
+                                      value will be substituted (if this value 
+                                      is an object, it will be substituted in a 
+                                      serialized form)
+                                      
+                  {LENGTH} - will be substituted with the size in bytes of the 
+                             buffered output. Can ONLY be used in conjunction 
+                             with a view-processor, otherwise output is not 
+                             buffered, so no length will be available
+
+replace           indicates whether the header should replace a previous similar 
+                  header, or add a second header of the same type. By default 
+                  it will replace, but if you specify "0" for this attribute you 
+                  can force multiple headers of the same type
+                  
+response-code     force the HTTP response code to the specified value
+
+Used in:   view
+-->
+<!ELEMENT view-header EMPTY>
+<!ATTLIST view-header        key                  CDATA      #REQUIRED>
+<!ATTLIST view-header        replace              (1|0)      "1">
+<!ATTLIST view-header        response-code        CDATA      #IMPLIED>
+
+
+<!-- 
+A "view-label" is used override the default label for an entity/attribute within 
+a view. 
+
+key               the name of the attribute that this label overrides. to 
+                  override the entity label (if the view is for an entity), this 
+                  value should be the name of the entity
+                  
+label             the label that should be used. this may be a value in the 
+                  app's properties file
+
+Used in:   view
+-->
+<!ELEMENT view-label EMPTY>
+<!ATTLIST view-label        key                  CDATA      #REQUIRED>
+<!ATTLIST view-label        label                CDATA      #REQUIRED>
+
+
+<!-- 
+A "view-value" is used override the default value for an attribute 
+
+key                the name of the attribute that this value overrides
+                  
+value              the value that should be used
+
+Used in:   view
+-->
+<!ELEMENT view-value EMPTY>
+<!ATTLIST view-value        key                  CDATA      #REQUIRED>
+<!ATTLIST view-value        value                CDATA      #REQUIRED>
+
+
+<!-- 
+The "view-processor" element allows the output of a "view" template or another 
+"view-processor" to be used as input to a command line program. This is useful 
+in that it allows additional processing to take place on the view output such as 
+xsl-fo processing for example
+
+key               unique identifier for this view processor
+
+path              the path to the command line utility that should be run
+                  
+args              input arguments that should be passed into the command line 
+                  program. the following variables can be specified in this 
+                  attribute:
+                  
+                  {$outputFile}       if specified the output of the "view" or 
+                                      of the previous "view-processor" will be 
+                                      serialized to a file and the path 
+                                      to that file will be substituted with 
+                                      every occurrence of this variable in the 
+                                      args attribute. this file will be 
+                                      automatically deleted upon completion of 
+                                      the processing
+                                      
+                  {$randomFile[N]}    if specified, a random empty file will be 
+                                      created and the path to that file will be 
+                                      substituted with every occurrence of this 
+                                      variable in the args attribute. the [N] is 
+                                      optional to differential between different 
+                                      random files. these files will be 
+                                      automatically deleted upon completion of 
+                                      the processing. [N] may be a value between 
+                                      1 and 10 only. Each different random file 
+                                      will only be created once and shared 
+                                      between all viewProcessor instances in the 
+                                      process
+                                      
+                  {$attr[_subAttr]}   if specified, the corresponding entity or 
+                                      entity attribute will be substituted for 
+                                      every occurrence of this variable in the 
+                                      args attribute. If this is an object, it 
+                                      will be specified in a serialized form 
+                                      unless a "toString" method exists, in 
+                                      which case the results from that method 
+                                      call will be used
+                                      
+                  {LENGTH}            will be substituted with the size in bytes 
+                                      of the buffered output prior to execution 
+                                      of this processor
+                                      
+                  {$param}            the id of a view parameter. the value of
+                                      that parameter will be substituted
+                                      
+                  {SRA_DIR}           the path to the framework
+                  
+                  {APP_DIR}           the path to the application
+                                      
+input-view        whether or not the output of the "view" or preceding 
+                  "view-processor" will be input directly to the STDIN for this 
+                  program. if the program requires input as a file, then use 
+                  the {$outputFile} in the args attribute as defined above
+                  
+output-file-path  the path to the output file. this attribute may contain 
+                  the {$randomFile[N]}, {LENGTH}, or {$attr[_subAttr]} variables 
+                  which will be converted to their corresponding values as 
+                  defined above. If this attribute is not specified, then the 
+                  output will be retrieved from the STDOUT for the program
+                  
+post-process-cmd  a command or commands (separated by ;) to be executed 
+                  after running the command line program. any of the "args"
+                  variables ({$outputFile}, {$randomFile[N]}, {LENGTH}, or
+                  {$attr[_subAttr]}) may also be specified in this attribute
+                  
+pre-process-cmd   a command or commands (separated by ;) to be executed 
+                  prior to running the command line program. any of the "args"
+                  variables ({$outputFile}, {$randomFile[N]}, {LENGTH}, or 
+                  {$attr[_subAttr]}) may also be specified in this attribute
+
+Used in:   entity-model
+-->
+<!ELEMENT view-processor EMPTY>
+<!ATTLIST view-processor    key                  CDATA      #REQUIRED>
+<!ATTLIST view-processor    args                 CDATA      #REQUIRED>
+<!ATTLIST view-processor    input-view           (1|0)      "1">
+<!ATTLIST view-processor    output-file-path     CDATA      #IMPLIED>
+<!ATTLIST view-processor    path                 CDATA      #REQUIRED>
+<!ATTLIST view-processor    post-process-cmd     CDATA      #IMPLIED>
+<!ATTLIST view-processor    pre-process-cmd      CDATA      #IMPLIED>
+
+
+<!-- 
+The "index" element defines a single index to add to the generated ddl for this 
+entity model. indexes should be used to optimize database queries. for example, 
+if you know you will query frequently on a particular non-primary key column, 
+then by adding an index for that table/column the performance of those queries 
+will be significantly improved. indexes should only be added if "ddl-path" is 
+defined or "sync-schema" is TRUE in the enclosing "entity-model" element. the 
+sql that is generated for each defined index will be of the form:
+CREATE INDEX [name] ON [table] ([columns]) [postfix]
+
+key               the unique name for this index
+                  
+columns           the columns included in this index. database vendor specific 
+                  definitions can be applied if supported. this attribute is 
+                  required
+
+modifier          an optional index modifier (for mysql: [UNIQUE|FULLTEXT|SPATIAL]) 
+                  if specified, this value will be inserted after "CREATE" and 
+                  before "INDEX" in the generated sql for this index. database 
+                  vendor specific modifiers may be used if supported
+                  
+postfix           any additional sql to append to the CREATE INDEX statement
+                  
+table             the table to apply this index to 
+
+Used in:   entity-model
+-->
+<!ELEMENT index EMPTY>
+<!ATTLIST index             key                  CDATA      #REQUIRED>
+<!ATTLIST index             columns              CDATA      #REQUIRED>
+<!ATTLIST index             modifier             CDATA      #IMPLIED>
+<!ATTLIST index             postfix              CDATA      #IMPLIED>
+<!ATTLIST index             table                CDATA      #REQUIRED>
+
+
+<!--
+The "ws" element is used to define a single entity specific web service exposed 
+through the "ws-gateway-uri" defined for this entity model. this element 
+specifies how an entity may be accessed and manipulated via a ajax/rest/soap 
+web service request. this includes security implications as well as access 
+control. web services can only be exposed if "ws-gateway-uri" has been defined 
+in the enclosing entity-model. ONLY those web services specified in the 
+entity-model for a given entity can be accessed. if this service contains 
+multiple constraint groups, they will be joined using the AND connective. web 
+services may allow users to CREATE, DELETE, RETRIEVE and UPDATE entities of the 
+enclosing type. By default only the retrieve functionality is enabled. at least 
+1 of the CRUD functional flags MUST be enabled. for information on how to invoke 
+a web service review the documentation provided in sra-ws-gateway.php
+
+key           the web service name. this MUST be unique within the entire entity 
+              model, or combination of entity models for a given application 
+              instance otherwise the gateway will be unable to determine how to 
+              route service requests
+              
+api           the resource key to use for api documentation for this service. it 
+              is used by the sra-ws-gateway.php for automatic generation of 
+              service api/wsdl documentation. if not specified, the 
+              documentation will be auto-generated
+              
+authenticate  whether or not to authenticate clients invoking this service (an 
+              authenticator must be configured for the the sra-ws-gateway.php 
+              script). if false, authentication will be bypassed even if it has 
+              been specified for the script
+              
+create        can a user use this service to CREATE a new instance of this 
+              entity. creating an entity will be subject to the same constraints 
+              specified for the service. equality attribute constraints 
+              (operator 1) will implicitely be SET to the entity instance IF 
+              auto-set is true, and the remaining constraints validated. if the 
+              service utilizes any constraint groups using the "or" connective, 
+              then if a matching non-attribute constraint is evaluated to TRUE 
+              first, no change will be made to the entity instance, otherwise, 
+              if the first attribute constraint will be evaluated (where an 
+              equality constraint will result in that value being set). for 
+              example, if a constraint group specifies that the "name" attribute 
+              must be "Tom" or "Tim" and the attr value specified for name in 
+              the request is "Jim", that name will be changed to "Tom". however, 
+              if the request "name" value is "Tom" or "Tim" it will not be 
+              changed. If that same constraint group had an initial constraint 
+              specifying that a global variable $uid == 1 and that constraint 
+              matched, then the validation will short-circuit and the name would 
+              not be changed regardless of the value for it specified in the 
+              request. if any constraint group fails to validate the new entity 
+              object, "ws-status" will be 
+              SRA_WS_REQUEST_STATUS_INVALID_PERMISSIONS. if a user attempts to 
+              create an entity when that function is not enabled "ws-status" 
+              will be SRA_WS_REQUEST_STATUS_NOT_ALLOWED
+              
+delete        can the user use this service to DELETE an existing instance of 
+              this entity? in order to be able to delete the entity instance, 
+              the user MUST be able to access it first. if the user does not 
+              have access to the entity "ws-status" will be 
+              SRA_WS_REQUEST_STATUS_INVALID_PERMISSIONS. if a user attempts to 
+              delete an entity when that function is not enabled "ws-status" 
+              will be SRA_WS_REQUEST_STATUS_NOT_ALLOWED
+              
+exclude-attrs space or comma separated list of the names of attributes that 
+              should be excluded from the output of this service for a 
+              particular entity instance. these will be passed in the form of 
+              "skipAttributes" parameters to the "render", "toJson" or "toXml" 
+              methods depending on the output type of this service. all allowed 
+              attributes not included in this list will be included in the 
+              output. if exclude-attrs are specified and attributes are set as 
+              part of a create or update service request that exist in 
+              exclude-attrs, "ws-status" will be 
+              SRA_WS_REQUEST_STATUS_INVALID_ATTRS. This attribute may include 
+              sub-attribute filters using '_'. the value "_pk_" will be 
+              automatically substituted with the name of the primary key 
+              attribute
+              
+format        the default response format to use for this service: either 
+              "json", "xml" or "raw" formats are supported. however, "raw" is 
+              only allowed if a "view" is specified for this service
+              
+format-fixed  whether or not "format" is fixed, meaning the service client 
+              cannot specify a different format using the "ws-format" request 
+              parameter
+              
+hidden        hidden services are services that can be utilized but are not 
+              included in the auto-generated api documentation/wsdl
+              
+hidden-method an optional path to a static method that should be invoked to 
+              determine whether or not this service is hidden IF 'hidden' is  
+              false (specified in the same format as the ws-global identifier 
+              when type is 'method'). this method should return a boolean value, 
+              TRUE to hide, FALSE to display
+
+include-attrs space or comma separated list of the names of attributes that 
+              should be included in the output of this service for a particular 
+              entity instance. these will be passed in the form of 
+              "includeAttributes" parameters to the "render", "toJson" or 
+              "toXml" methods depending on the output type of this service. ONLY 
+              the allowed attributes included in this list will be included in 
+              the output. if include-attrs are specified and attributes are set 
+              as part of a create or update service request that do not exist in 
+              include-attrs, "ws-status" will be 
+              SRA_WS_REQUEST_STATUS_INVALID_ATTRS. This attribute may include 
+              sub-attribute filters using '_'. the value "_pk_" will be 
+              automatically substituted with the name of the primary key 
+              attribute. in addition to attribute names, method names may also 
+              be specified
+              
+ip-authenticator an optional fixed or app relative path to a PHP source file 
+              containing an ip address authentication method to be invoked (with 
+              or without the ".php" file extension) followed by "::" and the 
+              method name. i.e. "dir/WebServiceIpAuthenticator::authenticate" 
+              where "WebServiceIpAuthenticator.php" exists in the directory 
+              [app]/lib/dir/. the file search path will be [app]/lib, [app], 
+              [sierra], /. this method should have the following signature: 
+              ($ip) : boolean and return TRUE if the IP is allowed, FALSE if it 
+              is not. if a service is invoked from an invalid IP, the ws-status 
+              SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED will be returned
+
+limit         the default sql limit for this web service output (the maximum 
+              # of instances that meet the service call constraints to return). 
+              if not specified, all applicable instances will be returned, 
+              however large that may be - applies only when the "retrieve" flag 
+              is set
+              
+limit-fixed   whether or not "limit" is fixed, meaning the client cannot 
+              increase it using the "ws-limit" request parameter. if true, 
+              "limit" will be the default "ws-limit" unless "ws-limit" is 
+              specified by the client AND is less than "limit"
+              
+meta-format   the default response metadata format. metadata includes such data 
+              as the "ws-time", "ws-limit", "ws-status", etc. for more 
+              information regarding metadata, see the documentation provided in 
+              sra-ws-gateway.php. metadata for a ws request can be represented 
+              using json or xml. additionally, if "none", the metadata will not 
+              be included in the response output. if not specified, the default 
+              format will be the same as "format" (or the "ws-format" specified 
+              by the client) unless "format" is "raw" in which case the default 
+              "meta-format" will be "none"
+
+meta-format-fixed whether or not "meta-format" is fixed, meaning the service 
+              client cannot specify a different format using the 
+              "ws-meta-format" request parameter
+              
+rest          whether or not to enable this service via rest
+              
+retrieve      can this web service be used to retrieve entities (subject to the 
+              service constraints). unlike 'create', 'delete' and 'update' the 
+              default value for this attribute is true
+              
+soap          whether or not to enable this service via soap
+              
+sub-entities  whether or not to set the 'insertSubEntities'/'updateSubEntities'
+              flags to TRUE (for CREATE and UPDATE invocations only). when true, 
+              the 'validateSubEntities' validation method will also be invoked 
+              and any error messages resulting from it will be returned. by 
+              default this attribute is true
+              
+update        can the user use this service to UPDATE an existing instance of 
+              this entity? the same rules apply to updating an entity as they do 
+              for creating an entity (see comments for "create" attribute above)
+              if a user attempts to update an entity when that function is not 
+              enabled "ws-status" will be SRA_WS_REQUEST_STATUS_NOT_ALLOWED
+              
+validators    space or comma separated list of additional validation methods 
+              that should be invoked when an update or create request is invoked
+
+view          an optional entity view to use as the service response output
+
+view-json     an optional entity view to use as the service response output when 
+              the "ws-format" requested is json (or if "format" is "json" and 
+              "format-fixed" is true). if not specified, and "view" is specified 
+              and the requested response format is "json", then the output of 
+              "view" will automatically be serialized to json format
+
+view-xml      an optional entity view to use as the service response output when 
+              the "ws-format" requested is xml (or if "format" is "xml" and 
+              "format-fixed" is true). if not specified, and "view" is specified 
+              the response format "xml" will NOT be allowed
+
+
+Used in:  entity
+-->
+<!ELEMENT ws (ws-constraint-group*)>
+<!ATTLIST ws      key                 ID         #REQUIRED>
+<!ATTLIST ws      api                 CDATA      #IMPLIED>
+<!ATTLIST ws      authenticate        (0|1)      "1">
+<!ATTLIST ws      create              (0|1)      "0">
+<!ATTLIST ws      delete              (0|1)      "0">
+<!ATTLIST ws      exclude-attrs       CDATA      #IMPLIED>
+<!ATTLIST ws      format              (json|xml|raw) "json">
+<!ATTLIST ws      format-fixed        (0|1)      "0">
+<!ATTLIST ws      hidden              (0|1)      "0">
+<!ATTLIST ws      hidden-method       CDATA      #IMPLIED>
+<!ATTLIST ws      include-attrs       CDATA      #IMPLIED>
+<!ATTLIST ws      ip-authenticator    CDATA      #IMPLIED>
+<!ATTLIST ws      limit               CDATA      #IMPLIED>
+<!ATTLIST ws      limit-fixed         (0|1)      "0">
+<!ATTLIST ws      meta-format         (json|xml|none) #IMPLIED>
+<!ATTLIST ws      meta-format-fixed   (0|1)      "0">
+<!ATTLIST ws      rest                (0|1)      "1">
+<!ATTLIST ws      retrieve            (0|1)      "1">
+<!ATTLIST ws      soap                (0|1)      "1">
+<!ATTLIST ws      sub-entities        (0|1)      "1">
+<!ATTLIST ws      update              (0|1)      "0">
+<!ATTLIST ws      validators          CDATA      #IMPLIED>
+<!ATTLIST ws      view                CDATA      #IMPLIED>
+<!ATTLIST ws      view-json           CDATA      #IMPLIED>
+<!ATTLIST ws      view-xml            CDATA      #IMPLIED>
+
+
+<!--
+The "ws-constraint-group" element is used to specify 1 or more ws-constraint 
+sub-elements that will be evaluated as a whole based on the "connective" 
+specified for the group (either conjunction or disjunction). the evaluation 
+includes short-circuiting for conjunction join types (and)
+
+connective    whether the connective between constraints of this group should be 
+              conjunctively or disjunctively joined
+
+
+Used in:  ws
+-->
+<!ELEMENT ws-constraint-group (ws-constraint*)>
+<!ATTLIST ws-constraint-group connective       (and|or)   "and">
+
+
+<!--
+The "ws-constraint" element is used to add implicit security or filter related 
+constraint to an web service. the "ws-gateway-uri" may be secured through 
+the sierra-php app authentication, however, past that, without any service 
+constraints for a given entity web service ("ws"), an authenticated user (or 
+non-authenticated user if the "ws-gateway-uri" script is not secured) may 
+utilize that service. if constraints overlap between the request and the ws 
+definition, the definition constraints will override those in the request
+
+attr          the constraint attribute identifier (see attr-type for more info). 
+              if attr-type is specified, and the attr desired is part of an 
+              entity within that type, then the key and attribute can be 
+              separated by a '_'. for example, if the attr-type was "global" and 
+              there existed an User object within the globals indexed under the 
+              key "user", and the actual attr desired was the "uid" attribute of 
+              that object, the key would be "user_uid". the "uid" portion will 
+              then be passed to the "getAttribute" method of the global $user 
+              object instance
+              
+auto-set      whether or not this attribute should be automatically set for 
+              create and update requests. this only applies if operation 
+              contains the equality bit (1) for this constraint value
+
+attr-type     defines where the attribute to be constrained exists. only entity 
+              instances that exist where this constraint is true will be 
+              included in the service output. following is a definition of the 
+              applicable types:
+              
+               attr:    attr is the name of an attribute/sub attribute
+               constant:attr is the name of a php constant (or other php code)
+               get:     attr is the name of a value in the get headers
+               getAttr: attr is a 'getAttribute' value for the entity. used only 
+                        for 'retrieve' service. when used limit/offset should 
+                        not be used when using the service
+               global:  attr is the name of a php global variable
+               post:    attr is the name of a value in the post headers
+               session: attr is the name of a session variable
+
+operator      a bitmask containing one or more of the following operator 
+              values. these define how "attr" and "value" should be compared:
+               
+               EQUALITY CONSTRAINTS
+               1:    attr and value must be equal
+               2:    attr is greater than value
+               4:    attr is less than value
+               
+               STRING CONSTRAINTS (only 1 constraint allowed if used)
+               8:    attr starts with value
+               16:   attr ends with value
+               32:   attr is a sub-string of value (full text search)
+               
+               SORTING CONSTRAINTS
+               64:   sort the results by attr in ascending order
+               128:  sort the results by attr in descending order
+               
+               NEGATE BIT
+               256:  negate the results of any of the above operator constraints
+
+value         the constraint value (or value identifier if value-type is 
+              specified). if value-type is specified, and the value desired is 
+              part of an entity within that type, then the key and attribute 
+              can be separated by a '_'. for example, if the value-type was 
+              "global" and there existed an User object within the globals 
+              indexed under the key "user", and the actual value desired was the 
+              "uid" attribute of that object, the value would be "user_uid". the 
+              "uid" portion will then be passed to the "getAttribute" method of 
+              the global $user object instance. if the value is an array then 
+              the constraint will be applied for each array value using the 
+              enclosing constraint group connective
+
+value-type    if the value for this constraint is not provided explicitely in 
+              the "value" attribute above (the default behavior), then this 
+              attribute defines where the value exists. must be one of the 
+              following values:
+               
+               constant:value is the name of a php constant (or other php code)
+               get:     value is the name of a value in the get headers
+               global:  value is the name of a php global variable
+               post:    value is the name of a value in the post headers
+               session: value is the name of a session variable
+
+
+Used in:  ws-constraint-group
+-->
+<!ELEMENT ws-constraint EMPTY>
+<!ATTLIST ws-constraint   attr                CDATA      #REQUIRED>
+<!ATTLIST ws-constraint   attr-type           (attr|constant|get|getAttr|global|post|session) "attr">
+<!ATTLIST ws-constraint   auto-set            (0|1)      "0">
+<!ATTLIST ws-constraint   operator            CDATA      "1">
+<!ATTLIST ws-constraint   value               CDATA      #REQUIRED>
+<!ATTLIST ws-constraint   value-type          (constant|get|global|post|session) #IMPLIED>
+
+
+<!--
+the "ws-global" element is used to define a web service that will be exposed 
+using the "ws-gateway-uri" for this entity model. unlike "ws", "ws-global" 
+services are less structured and not entity specific. this element contains 0..* 
+nested "ws-param" elements (see documentation provided below). the use of these 
+nested elements varies as does the output depending on the service "type". for 
+information on how to invoke a web service review the documentation provided in 
+sra-ws-gateway.php
+
+TYPE DEPENDENT I/O:
+
+method:
+ ws-param:
+ *        all params will be passed to the method in the form of an associative 
+          array where the key is the param key and the value is the param value
+          
+ RESULTS OUTPUT
+ the return value will be whatever value is returned by the method serialized 
+ according to the "format" specified. method return values can be null, scalar, 
+ an object, map or an array. for the latter three, the results will be an 
+ associative array according to the object properties/values or array 
+ keys/values. if the method invocation returns an SRA_Error object, "ws-status" 
+ will be SRA_WS_REQUEST_STATUS_FAILED. If the return value is an array and 
+ contains the key SRA_WS_RESULT_COUNT_KEY, that value will be returned as 
+ the 'ws-count' meta value in the results (and removed from the return value).
+ NOTE: if "format" is "xml", the method output must be an object or array of 
+ objects that have a "renderXml" method or the "ws-status" will be 
+ SRA_WS_REQUEST_STATUS_FAILED
+ 
+ Note: api and wsdl documentation for this service type will be retrieved using 
+       the SRA_Util::parsePhpSource method. using this documentation format, you 
+       may specify the type of api documentation to use for the method 
+       method parameters. additionally, the method api documentation will be 
+       used to document this service is "api" is not specified
+
+sql:  
+ ws-param:
+ *        dynamic sql params. the "key" value for these params can be nested in 
+          the sql statement beginning and ending with a "#" symbol and will be 
+          replaced at runtime with the appropriate value
+ RESULTS OUTPUT
+ SELECT queries:                 json: an array of associative arrays each 
+                                 representing one row of the results where the 
+                                 key in the associative array is the column name 
+                                 (or alias) assigned in the sql query 
+                                 (serialized according to the "output" type 
+                                 specified
+                                 xml: <query-results>
+                                        <row key="[row num]">
+                                          <col key="[col name]"><![CDATA[[col value]]]></col>
+                                        </row>
+                                      </query-results>
+                                 raw: NOT SUPPORTED
+ DELETE, INSERT, UPDATE queries: empty - "ws-count" will be the # of rows 
+                                 affected by the query
+ 
+rb: 
+ ws-param:
+ keys       the names of the resource bundle values to return (separated by 
+            spaces). if not specified, all strings in the identified bundle will 
+            be returned
+ search     search string. the search is not case sensitive
+ beginsWith begins with search string. the search is not case sensitive
+ endsWith   ends with search string. the search is not case sensitive
+ 
+ RESULTS OUTPUT
+ json: an associative array of the resource bundle strings (names/values)
+ xml:  <resource-bundle path="[identifier attr value]">
+         <string key="[resource name]"><![CDATA[[resource value]]]></string>
+       </resource-bundle>
+ raw: NOT SUPPORTED
+ 
+
+key           the global service name. this MUST be unique within the entire 
+              entity model, or combination of entity models for a given 
+              application instance
+              
+api           the resource key to use for api documentation for this service. it 
+              is used by the sra-ws-gateway.php for automatic generation of 
+              service api/wsdl documentation. if not specified, the 
+              documentation will be auto-generated
+              
+authenticate  whether or not to authenticate clients invoking this service (an 
+              authenticator must be configured for the the sra-ws-gateway.php 
+              script). if false, authentication will be bypassed even if it has 
+              been specified for the script
+              
+format        the default response format to use for this service: either 
+              "json", "xml" or "raw" formats are supported. however, "raw" is 
+              only allowed for method type services
+              
+format-fixed  whether or not "format" is fixed, meaning the service client 
+              cannot specify a different format using the "ws-format" request 
+              parameter
+              
+hidden        hidden services are services that can be utilized but are not 
+              included in the auto-generated api documentation/wsdl
+              
+hidden-method an optional path to a static method that should be invoked to 
+              determine whether or not this service is hidden IF 'hidden' is  
+              false (specified in the same format as the ws-global identifier 
+              when type is 'method'). this method should return a boolean value, 
+              TRUE to hide, FALSE to display
+              
+identifier    the identifier for this service. the value for this attribute will 
+              vary depending on the service type:
+               method: the fixed or app relative path to the PHP source file 
+                       containing the method to be invoked (with or without the
+                       ".php" file extension) followed by "::" and the method 
+                       name. i.e. "dir/MyClass::myMethod" where "MyClass.php" 
+                       exists in the file [app]/lib/dir/MyClass.php. the file 
+                       search path will be [app]/lib, [app], [sierra], /. this 
+                       method should have the following signature: 
+                       ($params, $limit, $offset) where $params is an 
+                       associative array
+               sql:    the base sql query. this query may contain dynamic 
+                       parameters utilizing the nested ws-param 
+                       elements
+               rb:     the relative or full path to the resource bundle
+               
+introspect-api whether or not to introspect the class for api documentation if 
+              this is a method type service. this documentation will be used 
+              then in the auto generation of api documentation. for more 
+              information, see the documentation provided in 
+              SRA_Util::parsePhpSource regarding how to document source files. 
+              Both method and param comments will be used. Additionally, the 
+              limit/offset request input documentation will only be displayed IF 
+              those are defined as the latter 2 parameters for that method (must 
+              use the param names: $limit and $offset). Additionally, the api 
+              comments for those parameters will be used as the comments for 
+              the request api documentation
+              
+ip-authenticator an optional fixed or app relative path to a PHP source file 
+              containing an ip address authentication method to be invoked (with 
+              or without the ".php" file extension) followed by "::" and the 
+              method name. i.e. "dir/WebServiceIpAuthenticator::authenticate" 
+              where "WebServiceIpAuthenticator.php" exists in the directory 
+              [app]/lib/dir/. the file search path will be [app]/lib, [app], 
+              [sierra], /. this method should have the following signature: 
+              ($ip) : boolean and return TRUE if the IP is allowed, FALSE if it 
+              is not. if a service is invoked from an invalid IP, the ws-status 
+              SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED will be returned
+               
+limit         the default sql limit for this service output. if not specified, 
+              no limit will be applied to the sql query (applies only to sql 
+              type services). if specified for a resource bundle request, a 
+              maximum of this number of strings will be returned. this value (if 
+              specified) will be passed as the 2nd parameter to method type 
+              global services
+              
+limit-fixed   whether or not "limit" is fixed, meaning the client cannot 
+              increase it using the "ws-limit" request parameter. if true, 
+              "limit" will be the default "ws-limit" unless "ws-limit" is 
+              specified by the client AND is less than "limit"
+              
+meta-format   the default response metadata format. metadata includes such data 
+              as the "ws-time", "ws-limit", "ws-status", etc. for more 
+              information regarding metadata, see the documentation provided in 
+              sra-ws-gateway.php. metadata for a ws request can be represented 
+              using json or xml. additionally, if "none", the metadata will not 
+              be included in the response output. if not specified, the default 
+              format will be the same as "format" (or the "ws-format" specified 
+              by the client) unless "format" is "raw" in which case the default 
+              "meta-format" will be "none"
+
+meta-format-fixed whether or not "meta-format" is fixed, meaning the service 
+              client cannot specify a different format using the 
+              "ws-meta-format" request parameter
+              
+rest          whether or not to enable this service via rest
+
+soap          whether or not to enable this service via soap
+
+type          the service type. must be one of the following:
+               method: exposes a static class method
+               sql:    exposes an sql query execution
+               rb:     exposes the strings specified in a resource bundle
+
+Used in:  entity-model
+-->
+<!ELEMENT ws-global (ws-param*)>
+<!ATTLIST ws-global key               ID              #REQUIRED>
+<!ATTLIST ws-global api               CDATA           #IMPLIED>
+<!ATTLIST ws-global authenticate      (0|1)           "1">
+<!ATTLIST ws-global format            (json|xml|raw)  "json">
+<!ATTLIST ws-global format-fixed      (0|1)           "0">
+<!ATTLIST ws-global hidden            (0|1)           "0">
+<!ATTLIST ws-global hidden-method     CDATA           #IMPLIED>
+<!ATTLIST ws-global identifier        CDATA           #REQUIRED>
+<!ATTLIST ws-global introspect-api    (0|1)           "1">
+<!ATTLIST ws-global ip-authenticator  CDATA           #IMPLIED>
+<!ATTLIST ws-global limit             CDATA           #IMPLIED>
+<!ATTLIST ws-global limit-fixed       (0|1)           "0">
+<!ATTLIST ws-global meta-format       (json|xml|none) #IMPLIED>
+<!ATTLIST ws-global meta-format-fixed (0|1)           "0">
+<!ATTLIST ws-global rest              (0|1)           "1">
+<!ATTLIST ws-global soap              (0|1)           "1">
+<!ATTLIST ws-global type              (method|rb|sql) "method">
+
+
+<!-- 
+The "ws-param" element is used to provide a generic means to specifying runtime 
+parameters for a global web service ("ws-global"). the value should be imbedded 
+between the open and close tags of this element (use <![CDATA[]]> to avoid 
+having escape special characters) or specified as the "value" attribute
+
+key            the name of the parameter. must be unique within the enclosing 
+               element
+                  
+allow-override whether or not this parameter can be overriden by the request. if 
+               false, and this same parameter is specified in a ws request, the 
+               request parameter will be ignored
+
+value          if the value is simple, it may be imbedded using a value 
+               attribute instead of between the open and close tags
+
+value-type     the value type (see usage documentation for ws-constraint 
+               value-type above). an additional value type "file" is also 
+               supported meaning that "value" is the name of an uploaded file
+               (present in the $_FILES super global)
+
+Used in:   ws-global
+-->
+<!ELEMENT ws-param (#PCDATA)>
+<!ATTLIST ws-param key                CDATA                          #REQUIRED>
+<!ATTLIST ws-param allow-override     (0|1)                          "0">
+<!ATTLIST ws-param value              CDATA                          #IMPLIED>
+<!ATTLIST ws-param value-type         (get|global|post|session|file) #IMPLIED>
+
+
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ |                        Subordinate Elements                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+<!-- 
+The "msg" element defines a key/value pair that will be used when 'depends' 
+validation errors occur
+
+key               the name of the 'depends' validation constraint. automatic  
+                  data types validation constraints "boolean", "date", "integer" 
+                  and "numeric" can be specified individually, by their 
+                  corresponding names, or globally using the key "type" (SRA_ATTRIBUTE_TYPE_MSG_KEY).
+                  However, the global message "type" will only be used if the 
+                  validation constraint is implicitily assigned (i.e. an 
+                  explicit depends="(boolean|date|integer|numeric)" is not 
+                  used in the entity model xml in which case those constraints 
+                  will automatically be assigned to attributes of those types)
+
+resource          key in the application SRA_ResourceBundle reference the string 
+                  that should be displayed when the validation error is 
+                  triggered for an attribute. this resource may contain the 
+                  string may contain the variable {$attr} which will be substituted 
+                  for the attribute label at runtime whever the message is 
+                  utilized
+
+Used in:   attribute
+-->
+<!ELEMENT msg EMPTY>
+<!ATTLIST msg                key                  CDATA        #REQUIRED>
+<!ATTLIST msg                resource             %Resource;   #REQUIRED>
+
+
+<!-- 
+The "param" element defines a generic key/value pair. when used in a "view", 
+these params will be passed into the corresponding templates encapsulated as a 
+SRA_Params object
+
+id                the param name
+
+type              the param type
+
+value             the param value. the value {SRA_DIR} will be substituted for 
+                  the path to the framework (i.e. /var/www/sierra) and the value 
+                  {APP_DIR} will be substituted with the path to the application
+                  (i.e. /var/www/sierra/app/sraos). These value may be nested 
+                  within this attribute (i.e. "{APP_DIR}/etc/style.xsl")
+
+Used in:   view
+-->
+<!ELEMENT param EMPTY>
+<!ATTLIST param              id                   CDATA        #REQUIRED>
+<!ATTLIST param              type                 CDATA        #IMPLIED>
+<!ATTLIST param              value                CDATA        #IMPLIED>
+
+
+<!-- 
+The "var" element defines a key/value pair that will be passed into 
+SRA_AttributeValidator::{method} for 'depends' validation contraints (the second 
+parameter of all SRA_AttributeValidator methods accepts an associative array of 
+key/value pairs). this array will also be passed into the 
+SRA_ResourceBundle::getString method when retrieving the 'msg' specified for that 
+error. 
+
+key               the name of the 'depends' validation constraint
+
+value             key in the application SRA_ResourceBundle reference the string 
+                  that should be displayed when the validation error is 
+                  triggered for an attribute
+
+Used in:   attribute
+-->
+<!ELEMENT var EMPTY>
+<!ATTLIST var                key                  CDATA      #REQUIRED>
+<!ATTLIST var                value                CDATA      #REQUIRED>

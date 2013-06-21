@@ -1,0 +1,1218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>test.SRA_TestCase - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_test_case_classname_tpl_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEST_CASE_CLASSNAME_TPL_VAR'] = "SRA_TEST_CASE_CLASSNAME_TPL_VAR";
+  }
+  if ("sra_test_case_results_tpl_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEST_CASE_RESULTS_TPL_VAR'] = "SRA_TEST_CASE_RESULTS_TPL_VAR";
+  }
+  if ("sra_test_case_default_template".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEST_CASE_DEFAULT_TEMPLATE'] = "SRA_TEST_CASE_DEFAULT_TEMPLATE";
+  }
+
+  // check attributes
+  if ("failed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_failed'] = "failed";
+  }
+  if ("total".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_total'] = "total";
+  }
+  if ("passed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_passed'] = "passed";
+  }
+  if ("status".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_status'] = "status";
+  }
+  if ("_currentmethod".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__currentMethod'] = "_currentMethod";
+  }
+  if ("_results".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__results'] = "_results";
+  }
+
+  // check methods
+  if ("assertclass".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertClass'] = "assertClass";
+  }
+  if ("assertcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertCount'] = "assertCount";
+  }
+  if ("assertequal".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertEqual'] = "assertEqual";
+  }
+  if ("assertfalse".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertFalse'] = "assertFalse";
+  }
+  if ("assertnotclass".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertNotClass'] = "assertNotClass";
+  }
+  if ("assertnotcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertNotCount'] = "assertNotCount";
+  }
+  if ("assertnotequal".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertNotEqual'] = "assertNotEqual";
+  }
+  if ("assertnotnull".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertNotNull'] = "assertNotNull";
+  }
+  if ("assertnottype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertNotType'] = "assertNotType";
+  }
+  if ("assertnull".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertNull'] = "assertNull";
+  }
+  if ("asserttrue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertTrue'] = "assertTrue";
+  }
+  if ("asserttype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assertType'] = "assertType";
+  }
+  if ("runtests".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_runTests'] = "runTests";
+  }
+  if ("setup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setUp'] = "setUp";
+  }
+  if ("teardown".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_tearDown'] = "tearDown";
+  }
+  if ("_addresult".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__addResult'] = "_addResult";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_TestCase</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/test.html" target="contentFrame">test</a></p>  <h2>Known Direct Subclasses</h2>
+<a href="test.SRA_TestCaseImpl.html" target="contentFrame">SRA_TestCaseImpl</a>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_TestCase</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> this class is modeled after the junit testing framework. some of the comments
+  below have been taken from the api for junit.framework.SRA_TestCase
+ 
+  a test case defines the fixture to run multiple tests. to define a test case:
+ 
+  1) implement a subclass of SRA_TestCase. an empty SRA_TestCase implementation
+     is provided ([SIERRA DIR]/lib/util/SRA_TestCaseImpl.php) and can be copied
+     as the starting point for your implementation
+  2) define any necessary instance variables that store the state of the
+     fixture
+  3) initialize the fixture state by overriding setUp if necessary
+  4) define 1 or more methods named: test* which implement your testing logic
+     (1)
+  5) clean-up after a test by overriding tearDown if necessary
+  6) run your test cases using the providing script:
+     sierra/bin/run-tests.php [testCaseFileN]. for more information on running
+     that script run: sierra/bin/sra-run-tests.php --help
+ 
+  NOTES:
+  (1) Your test* methods, may invoke any of the assert methods provided by the
+      this parent class. these include the following:
+       $this-&gt;assertClass($class, $value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertCount($value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertEqual($expected, $value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertFalse($value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertNotClass($class, $value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertNotCount($value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertNotEqual($expected, $value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertNotNull($value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertNotType($type, $value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertNull($value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertTrue($value, $lineNumber=NULL, $msg=NULL)
+       $this-&gt;assertType($type, $value, $lineNumber=NULL, $msg=NULL)
+      the setUp and tearDown method implementations may also invoke the assert*
+      methods. the line number ($lineNumber=NULL, $msg=NULL) is optional but should be
+      specified for tracking purposes. the PHP constant __LINE__ should used
+      for that parameter
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEST_CASE_CLASSNAME_TPL_VAR">SRA_TEST_CASE_CLASSNAME_TPL_VAR</a></pre>
+<pre> the name of the template variable under which the name of the
+  SRA_TestCase class will be stored
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEST_CASE_RESULTS_TPL_VAR">SRA_TEST_CASE_RESULTS_TPL_VAR</a></pre>
+<pre> the name of the template variable under which the SRA_TestCase $_results will
+  be stored
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEST_CASE_DEFAULT_TEMPLATE">SRA_TEST_CASE_DEFAULT_TEMPLATE</a></pre>
+<pre> the default output results template to use
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr_failed">failed</a></pre>
+<pre> the number of tests that failed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr_total">total</a></pre>
+<pre> the total number of tests run
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr_passed">passed</a></pre>
+<pre> the number of tests that passed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_status">status</a></pre>
+<pre> this attribute stores the overall results of running all of the tests
+  (after the &#039;runTests&#039; method has been invoked - it is NULL prior to
+  invoking &#039;runTests&#039;). it is TRUE if all of the tests ran successfully,
+  FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__currentMethod">_currentMethod</a></pre>
+<pre> stores the name of the current method being invoked
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__results">_results</a></pre>
+<pre> used to store the test case results stats. indexed by method name, followed
+  by assertion line number and result. the result is an associative array
+  containing the following index values:
+   class:  if $value was an object, the name of the instance class
+   expected: the expected value if applicable
+   method: the name of the assertion method that generated this result
+   passed: TRUE if the assertion passed, FALSE otherwise
+   type:   the data type of $value
+   value:  a reference to the $value
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertClass">assertClass</a>(string $class, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method asserts that $value is an object is of the class specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertCount">assertCount</a>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method asserts that $value is an array and has 1 or more elements
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertEqual">assertEqual</a>(mixed $expected, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method utilizes SRA_Util::equal to determine if $expected and $value are
+  equal. For more information on what constitutes equality, see the api
+  documentation for that method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertFalse">assertFalse</a>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method utilizes SRA_Util::convertBoolean to determine if $value is FALSE
+  For more information on what constitutes FALSE, see the api documentation
+  for that method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertNotClass">assertNotClass</a>(string $class, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method asserts that value is an object and is NOT of the class specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertNotCount">assertNotCount</a>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method asserts that $value is an empty array
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertNotEqual">assertNotEqual</a>(mixed $expected, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method utilizes SRA_Util::equal to determine if $expected and $value are
+  NOT equal. For more information on what constitutes equality, see the api
+  documentation for that method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertNotNull">assertNotNull</a>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method utilizes asserts that $value is not NULL. $value is NULL if
+  it == NULL or !isset
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertNotType">assertNotType</a>(string $type, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method asserts that value is NOT of the data type specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertNull">assertNull</a>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method utilizes asserts that $value is NULL. $value is NULL if
+  it == NULL or !isset
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertTrue">assertTrue</a>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method utilizes SRA_Util::convertBoolean to determine if $value is TRUE
+  For more information on what constitutes TRUE, see the api documentation
+  for SRA_Util::isBoolean
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assertType">assertType</a>(string $type, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+<pre> This method asserts that value is of the data type specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_runTests">runTests</a>(string $template=NULL)</pre>
+<pre> runs the tests associated with this unit test class and outputs the results
+  using $template. returns TRUE on success (successful invocation of the unit
+  tests, NOT success of all of the tests), FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setUp">setUp</a>()</pre>
+<pre> This method may be overriden by SRA_TestCase implementations to implement any
+  setup related functionality such as setting instance variable for use in
+  the test* methods. if this method returns an SRA_Error object, the test
+  execution will be aborted. this implementation does nothing.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_tearDown">tearDown</a>()</pre>
+<pre> This method may be overriden by SRA_TestCase implementations to implement any
+  teardown related functionality such as releasing resources that were
+  opened by the setUp method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method__addResult">_addResult</a>(string $method, boolean $result, mixed $value, int $lineNumber, $msg, $expected=NULL)</pre>
+<pre>
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(object $object)</pre>
+<pre> Static method that returns TRUE if the object parameter references a
+  valid SRA_TestCase object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_TEST_CASE_CLASSNAME_TPL_VAR">SRA_TEST_CASE_CLASSNAME_TPL_VAR</h3>
+  <pre>string <b>SRA_TEST_CASE_CLASSNAME_TPL_VAR</b> = 'class'</pre>
+  <pre> the name of the template variable under which the name of the
+  SRA_TestCase class will be stored
+</pre>
+ <hr />  <h3 id="constant_SRA_TEST_CASE_RESULTS_TPL_VAR">SRA_TEST_CASE_RESULTS_TPL_VAR</h3>
+  <pre>string <b>SRA_TEST_CASE_RESULTS_TPL_VAR</b> = 'results'</pre>
+  <pre> the name of the template variable under which the SRA_TestCase $_results will
+  be stored
+</pre>
+ <hr />  <h3 id="constant_SRA_TEST_CASE_DEFAULT_TEMPLATE">SRA_TEST_CASE_DEFAULT_TEMPLATE</h3>
+  <pre>string <b>SRA_TEST_CASE_DEFAULT_TEMPLATE</b> = 'test/sra-test-results.tpl'</pre>
+  <pre> the default output results template to use
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_failed">failed</h3>
+  <pre>int var <b>$failed</b></pre>
+  <pre> the number of tests that failed
+</pre>
+ <hr />  <h3 id="attr_total">total</h3>
+  <pre>int var <b>$total</b></pre>
+  <pre> the total number of tests run
+</pre>
+ <hr />  <h3 id="attr_passed">passed</h3>
+  <pre>int var <b>$passed</b></pre>
+  <pre> the number of tests that passed
+</pre>
+ <hr />  <h3 id="attr_status">status</h3>
+  <pre>boolean var <b>$status</b> = NULL</pre>
+  <pre> this attribute stores the overall results of running all of the tests
+  (after the &#039;runTests&#039; method has been invoked - it is NULL prior to
+  invoking &#039;runTests&#039;). it is TRUE if all of the tests ran successfully,
+  FALSE otherwise
+</pre>
+ <hr />  <h3 id="attr__currentMethod">_currentMethod</h3>
+  <pre>string var <b>$_currentMethod</b></pre>
+  <pre> stores the name of the current method being invoked
+</pre>
+ <hr />  <h3 id="attr__results">_results</h3>
+  <pre>array var <b>$_results</b> = array()</pre>
+  <pre> used to store the test case results stats. indexed by method name, followed
+  by assertion line number and result. the result is an associative array
+  containing the following index values:
+   class:  if $value was an object, the name of the instance class
+   expected: the expected value if applicable
+   method: the name of the assertion method that generated this result
+   passed: TRUE if the assertion passed, FALSE otherwise
+   type:   the data type of $value
+   value:  a reference to the $value
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_assertClass">assertClass</h3>
+  <pre>public void function <b>assertClass</b>(string $class, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method asserts that $value is an object is of the class specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>class</td>
+      <td>string</td>
+      <td><pre>the name of the class that $value should be an  instance of</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertCount">assertCount</h3>
+  <pre>public void function <b>assertCount</b>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method asserts that $value is an array and has 1 or more elements
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertEqual">assertEqual</h3>
+  <pre>public void function <b>assertEqual</b>(mixed $expected, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method utilizes SRA_Util::equal to determine if $expected and $value are
+  equal. For more information on what constitutes equality, see the api
+  documentation for that method
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>expected</td>
+      <td>mixed</td>
+      <td><pre>the expected value. this may be any data type  including scalar, array, object</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the actual value</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertFalse">assertFalse</h3>
+  <pre>public void function <b>assertFalse</b>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method utilizes SRA_Util::convertBoolean to determine if $value is FALSE
+  For more information on what constitutes FALSE, see the api documentation
+  for that method
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertNotClass">assertNotClass</h3>
+  <pre>public void function <b>assertNotClass</b>(string $class, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method asserts that value is an object and is NOT of the class specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>class</td>
+      <td>string</td>
+      <td><pre>the name of the class that $value should be an  instance of</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertNotCount">assertNotCount</h3>
+  <pre>public void function <b>assertNotCount</b>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method asserts that $value is an empty array
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertNotEqual">assertNotEqual</h3>
+  <pre>public void function <b>assertNotEqual</b>(mixed $expected, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method utilizes SRA_Util::equal to determine if $expected and $value are
+  NOT equal. For more information on what constitutes equality, see the api
+  documentation for that method
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>expected</td>
+      <td>mixed</td>
+      <td><pre>the expected value. this may be any data type  including scalar, array, object</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the actual value</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertNotNull">assertNotNull</h3>
+  <pre>public void function <b>assertNotNull</b>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method utilizes asserts that $value is not NULL. $value is NULL if
+  it == NULL or !isset
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertNotType">assertNotType</h3>
+  <pre>public void function <b>assertNotType</b>(string $type, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method asserts that value is NOT of the data type specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>the name of the data type</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertNull">assertNull</h3>
+  <pre>public void function <b>assertNull</b>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method utilizes asserts that $value is NULL. $value is NULL if
+  it == NULL or !isset
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertTrue">assertTrue</h3>
+  <pre>public void function <b>assertTrue</b>(mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method utilizes SRA_Util::convertBoolean to determine if $value is TRUE
+  For more information on what constitutes TRUE, see the api documentation
+  for SRA_Util::isBoolean
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assertType">assertType</h3>
+  <pre>public void function <b>assertType</b>(string $type, mixed $value, int $lineNumber=NULL, string $msg=NULL)</pre>
+  <pre> This method asserts that value is of the data type specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>the name of the data type</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>the value to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number in the SRA_TestCase implementation where  this assertion was invoked from</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>optional message to include in the results for this  assertion</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_runTests">runTests</h3>
+  <pre>public boolean function <b>runTests</b>(string $template=NULL)</pre>
+  <pre> runs the tests associated with this unit test class and outputs the results
+  using $template. returns TRUE on success (successful invocation of the unit
+  tests, NOT success of all of the tests), FALSE otherwise
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>template</td>
+      <td>string</td>
+      <td><pre>the smarty template to use for test results output.  if not specified, the default template: SRA_TEST_CASE_DEFAULT_TEMPLATE will
+  be used. for details on how to create a custom output template, review the
+  smarty code in the default template</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setUp">setUp</h3>
+  <pre>public void function <b>setUp</b>()</pre>
+  <pre> This method may be overriden by SRA_TestCase implementations to implement any
+  setup related functionality such as setting instance variable for use in
+  the test* methods. if this method returns an SRA_Error object, the test
+  execution will be aborted. this implementation does nothing.
+</pre>
+ <hr />  <h3 id="method_tearDown">tearDown</h3>
+  <pre>public void function <b>tearDown</b>()</pre>
+  <pre> This method may be overriden by SRA_TestCase implementations to implement any
+  teardown related functionality such as releasing resources that were
+  opened by the setUp method
+</pre>
+ <hr />  <h3 id="method__addResult">_addResult</h3>
+  <pre>public void function <b>_addResult</b>(string $method, boolean $result, mixed $value, int $lineNumber, $msg, $expected=NULL)</pre>
+  <pre>
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>method</td>
+      <td>string</td>
+      <td><pre>the name of the assertion method</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>boolean</td>
+      <td><pre>the result value (TRUE or FALSE)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>reference to the value that was tested</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>int</td>
+      <td><pre>the line number from where the assertion was called</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>expected</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(object $object)</pre>
+  <pre> Static method that returns TRUE if the object parameter references a
+  valid SRA_TestCase object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>object</td>
+      <td><pre>$object the object to validate.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/test/SRA_TestCase.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

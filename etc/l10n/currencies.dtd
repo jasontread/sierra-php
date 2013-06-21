@@ -1,0 +1,71 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for SIERRA currencies configuration
+
+This xml structure defines how unique SRA_Locale instances should be supported 
+by the SRA_Locale class
+
+To support validation of your configuration file, include the following
+DOCTYPE element at the beginning (after the "xml" declaration):
+
+<!DOCTYPE currencies PUBLIC "-//SIERRA//DTD CURRENCIES//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/etc/l10n/currencies.dtd">
+-->
+
+
+<!--
+The "currencies" element is the root element. It contains one or more currency 
+sub-elements. For more information, please review the util/SRA_Currency API 
+documentation. all codes should be LOWERCASE.
+
+Used in:	NA
+-->
+<!ELEMENT currencies (currency+)>
+
+
+<!--
+The "currency" element defines the SRA_Locale specific characteristics for a single 
+currency using the following attributes:
+
+key						The currency code. This will be the unique identifier for the currency
+
+conversion		The conversion factor for converting this currency to the currency 
+							represented by the SRA_CURRENCY_SYS constant.
+							
+precision			The decimal precision for this currency. default is 2
+
+symbol				The symbol for the currency > symbol_front (boolean : true) : 
+							Whether or not the symbol should appear at the front or the rear 
+							of formatted currency values
+							
+symbol-front	Whether or not the currency symbol should be placed at the front 
+							of a currency value (vs the back). the default is true
+
+Used in:	countries
+-->
+<!ELEMENT currency EMPTY>
+<!ATTLIST currency	key									ID				#REQUIRED>
+<!ATTLIST currency	conversion					CDATA			#REQUIRED>
+<!ATTLIST currency	precision						CDATA			"2">
+<!ATTLIST currency	symbol							CDATA			#REQUIRED>
+<!ATTLIST currency	symbol-front				(0|1)			"1">

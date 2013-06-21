@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE installer PUBLIC "-//SIERRA//DTD INSTALLER//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/etc/installer.dtd">
+<installer root-menu="installer.root" resource="installer" resources="installer" src="util/installer/SRA_FrameworkInstaller.php">
+  <menu key="installer.root">
+    <menu-item key="installer.root.configure" 
+               confirm="installer.root.configure.confirm" 
+               defaults-handler="defaultsConfigure" 
+               exit="1" 
+               handler="configure" 
+               prompt="installer.root.configure.compress-output installer.root.configure.date-format installer.root.configure.date-only-format installer.root.configure.default-country installer.root.configure.default-currency installer.root.configure.default-language installer.root.configure.disable-scheduler installer.root.configure.error-log-file installer.root.configure.error-mask installer.root.configure.log-dir installer.root.configure.resources-file" 
+               prompt-header="installer.root.configure.header" 
+               prompt-key-remove="installer.root.configure." 
+               validator="validatorConfigure" />
+    <menu-item key="installer.root.app" 
+               handler="resetApp" 
+               include-handler="isConfigured" 
+               menu="installer.app" />
+    <menu-item key="installer.root.configureDb" 
+               handler="resetApp" 
+               include-handler="isConfigured" 
+               menu="installer.configureDb" />
+    <menu-item key="installer.root.update" 
+               handler="resetApp" 
+               menu="installer.update" />
+    <menu-item key="installer.root.unconfigure" 
+               confirm="installer.root.unconfigure.confirm"
+               exit="1" 
+               handler="unconfigure" 
+               include-handler="isConfigured" />
+  </menu>
+  <menu key="installer.app" default="installer.app.new">
+    <menu-item key="installer.app.new" 
+               menu="installer.configureAppNew" />
+    <menu-item key="installer.configureApp.existing" 
+               include-handler="hasAppConfiguration" 
+               menu="installer.configureAppExisting" />
+  </menu>
+  <menu key="installer.configureAppExisting">
+    <menu-item key="installer.app.select" 
+               builder="builderGetApps" 
+               handler="setApp"
+               menu="installer.configureApp" />
+  </menu>
+  <menu key="installer.configureAppNew" default="installer.configureAppNew.empty" resource="installer.app.new">
+    <menu-item key="installer.configureAppNew.empty"
+               confirm="installer.app.new.confirm"
+               defaults-handler="defaultsConfigureAppNew" 
+               exit="1" 
+               handler="installNewApp"
+               prompt="installer.root.configure.app installer.root.configure.app-dir installer.root.configure.date-format installer.root.configure.date-only-format installer.root.configure.default-country installer.root.configure.default-currency installer.root.configure.default-language installer.root.configure.error-log-file installer.root.configure.error-mask installer.root.configure.resources-file installer.root.configure.blank-templates" 
+               prompt-header="installer.configureApp.header" 
+               prompt-key-remove="installer.root.configure." 
+               validator="validatorConfigure" />
+    <menu-item key="installer.configureAppNew.src" 
+               confirm="installer.app.new.confirm"
+               defaults-handler="defaultsConfigureAppNew" 
+               exit="1" 
+               handler="installNewApp"
+               prompt="installer.root.configure.app-path installer.root.configure.app installer.root.configure.app-dir installer.root.configure.date-format installer.root.configure.date-only-format installer.root.configure.default-country installer.root.configure.default-currency installer.root.configure.default-language installer.root.configure.error-log-file installer.root.configure.error-mask installer.root.configure.resources-file" 
+               prompt-key-remove="installer.root.configure." 
+               validator="validatorConfigure" />
+  </menu>
+  <menu key="installer.configureApp" default="installer.configureApp.view" resource-keys="resourceKeysConfigureApp">
+    <menu-item key="installer.configureApp.view" 
+               display-data="1" 
+               handler="configureAppView"
+               include-handler="isAppConfigured" />
+    <menu-item key="installer.configureApp.configure" 
+               defaults-handler="defaultsConfigureApp" 
+               handler="configureApp" 
+               include-handler="!isAppConfigured"
+               prompt="installer.root.configure.date-format installer.root.configure.date-only-format installer.root.configure.default-country installer.root.configure.default-currency installer.root.configure.default-language installer.root.configure.error-log-file installer.root.configure.error-mask installer.root.configure.resources-file" 
+               prompt-header="installer.configureApp.header" 
+               prompt-key-remove="installer.root.configure." 
+               validator="validatorConfigure" />
+    <menu-item key="installer.configureApp.apache" 
+               confirm="installer.configureApp.apache.confirm" 
+               defaults-handler="defaultsConfigureAppApache" 
+               display-data="1" 
+               handler="configureAppApache" 
+               include-handler="isAppConfigured"
+               prompt="installer.configureApp.apache.vhost installer.configureApp.apache.alias-dir installer.configureApp.apache.hostname installer.configureApp.apache.alias installer.configureApp.apache.ip installer.configureApp.apache.accesslog installer.configureApp.apache.errorlog installer.configureApp.apache.alias-ws installer.configureApp.apache.alias-files installer.configureApp.apache.alias-files-rewrite installer.configureApp.apache.ssl installer.configureApp.apache.ssl-cert installer.configureApp.apache.ssl-key installer.configureApp.apache.ssl-chain installer.configureApp.apache.mod-deflate installer.configureApp.apache.add-to-conf-d installer.configureApp.apache.conf-d"
+               prompt-key-remove="installer.configureApp.apache."
+               validator="validatorConfigureAppApache" />
+    <menu-item key="installer.configureApp.configureDb" 
+               include-handler="isAppConfigured" 
+               menu="installer.configureDb" />
+    <menu-item key="installer.configureApp.update" 
+               menu="installer.updateApp" />
+    <menu-item key="installer.configureApp.unconfigure" 
+               confirm="installer.configureApp.unconfigure.confirm"
+               handler="unconfigureApp" 
+               include-handler="isAppConfigured" />
+    <menu-item key="installer.configureApp.uninstall" 
+               confirm="installer.configureApp.uninstall.confirm"
+               exit="1"
+               handler="uninstallApp" />
+    <menu-item key="installer.configureApp.installer" 
+               display-data="1" 
+               handler="configureAppInstaller" 
+               include-handler="isAppHasInstaller" />
+  </menu>
+  <menu key="installer.configureDb" default="installer.configureDb.add">
+    <menu-item key="installer.configureDb.add" 
+               defaults-handler="defaultsConfigureDb" 
+               handler="configureDbAdd"
+               prompt="installer.root.configureDb.key installer.root.configureDb.type installer.root.configureDb.host installer.root.configureDb.port installer.root.configureDb.name installer.root.configureDb.user installer.root.configureDb.password" 
+               prompt-header="installer.root.configure.header"
+               prompt-key-remove="installer.root.configureDb."
+               validator="validatorConfigureDb" />
+    <menu-item key="installer.configureDb.existing" 
+               include-handler="hasDbConfiguration" 
+               menu="installer.configureDbExisting" />
+  </menu>
+  <menu key="installer.configureDbExisting">
+    <menu-item key="installer.configureDbExisting.select" 
+               builder="builderGetDbOptions" 
+               handler="setDb"
+               menu="installer.configureDbView" />
+  </menu>
+  <menu key="installer.configureDbView" default="installer.configureDbView.view" resource-keys="resourceKeysConfigureDbView">
+    <menu-item key="installer.configureDbView.view" 
+               display-data="1" 
+               handler="configureDbView" />
+    <menu-item key="installer.configureDbView.edit" 
+               defaults-handler="defaultsDbEdit" 
+               handler="configureDbAdd"
+               prompt="installer.root.configureDb.key installer.root.configureDb.type installer.root.configureDb.host installer.root.configureDb.port installer.root.configureDb.name installer.root.configureDb.user installer.root.configureDb.password" 
+               prompt-header="installer.root.configure.header"
+               prompt-key-remove="installer.root.configureDb."
+               validator="validatorConfigureDb" />
+    <menu-item key="installer.configureDbView.remove" 
+               confirm="installer.configureDbView.remove.confirm" 
+               handler="configureDbRemove"
+               previous-menu="1"
+               resource-keys="resourceKeysConfigureDbView" />
+  </menu>
+  <menu key="installer.update" default="installer.update.latestVersion">
+    <menu-item key="installer.update.latestVersion" 
+               confirm="installer.update.confirm"
+               exit="1" 
+               handler="updateLatestVersion"
+               include-handler="latestVersionAvailable"
+               resource-keys="resourceKeysLatestVersion" />
+    <menu-item key="installer.update.specificVersion" 
+               builder="builderGetVersions" 
+               confirm="installer.update.confirm" 
+               exit="1" 
+               handler="updateSpecificVersion" />
+    <menu-item key="installer.update.manual" 
+               confirm="installer.update.confirm" 
+               exit="1" 
+               handler="updateManual"
+               prompt="installer.update.manual.path" />
+    <menu-item key="installer.update.svn" 
+               confirm="installer.update.svn.confirm"
+               defaults-handler="defaultsUpdateSvn" 
+               exit="1" 
+               handler="updateSvn"
+               include-handler="isSvnInstalled"
+               prompt="installer.update.svn.url installer.update.svn.user installer.update.svn.password"
+               prompt-key-remove="installer.update.svn."/>
+    <menu-item key="installer.update.createRelease"
+               defaults-handler="defaultsCreateRelease" 
+               handler="createRelease"
+               prompt="installer.update.createRelease.version installer.update.createRelease.archiveType installer.update.createRelease.path"
+               prompt-key-remove="installer.update.createRelease."
+               validator="validatorCreateRelease" />
+  </menu>
+  <menu key="installer.updateApp" resource-keys="resourceKeysConfigureApp">
+    <menu-item key="installer.updateApp.latestVersion" 
+               confirm="installer.updateApp.confirm"
+               exit="1" 
+               handler="updateAppLatestVersion"
+               include-handler="latestAppVersionAvailable"
+               resource="installer.update.latestVersion"
+               resource-keys="resourceKeysAppLatestVersion" />
+    <menu-item key="installer.updateApp.specificVersion" 
+               builder="builderGetAppVersions" 
+               confirm="installer.updateApp.confirm" 
+               exit="1" 
+               handler="updateAppSpecificVersion" />
+    <menu-item key="installer.updateApp.manual" 
+               confirm="installer.updateApp.confirm" 
+               exit="1" 
+               handler="updateAppManual"
+               prompt="installer.updateApp.manual.path" />
+    <menu-item key="installer.updateApp.svn" 
+               confirm="installer.updateApp.confirm"
+               defaults-handler="defaultsUpdateAppSvn" 
+               exit="1" 
+               handler="updateAppSvn"
+               include-handler="appHasSvnRepository"
+               prompt="installer.update.svn.url installer.update.svn.user installer.update.svn.password"
+               prompt-key-remove="installer.update.svn."/>
+    <menu-item key="installer.updateApp.createRelease"
+               defaults-handler="defaultsAppCreateRelease" 
+               handler="createAppRelease"
+               prompt="installer.update.createRelease.version installer.update.createRelease.archiveType installer.update.createRelease.path installer.update.createRelease.pruneSvn"
+               prompt-key-remove="installer.update.createRelease."
+               validator="validatorCreateRelease" />
+  </menu>
+</installer>

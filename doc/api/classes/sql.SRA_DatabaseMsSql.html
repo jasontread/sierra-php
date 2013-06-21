@@ -1,0 +1,1032 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>sql.SRA_DatabaseMsSql - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_database_mssql_freetds_conf".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATABASE_MSSQL_FREETDS_CONF'] = "SRA_DATABASE_MSSQL_FREETDS_CONF";
+  }
+  if ("sra_database_mssql_supports_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATABASE_MSSQL_SUPPORTS_LIMIT'] = "SRA_DATABASE_MSSQL_SUPPORTS_LIMIT";
+  }
+
+
+  // check methods
+  if ("sra_databasemssql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_DatabaseMsSql'] = "SRA_DatabaseMsSql";
+  }
+  if ("_closeconn".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__closeConn'] = "_closeConn";
+  }
+  if ("commit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_commit'] = "commit";
+  }
+  if ("convertblob".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertBlob'] = "convertBlob";
+  }
+  if ("convertdate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertDate'] = "convertDate";
+  }
+  if ("converttime".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertTime'] = "convertTime";
+  }
+  if ("convertfloat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertFloat'] = "convertFloat";
+  }
+  if ("converttext".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertText'] = "convertText";
+  }
+  if ("convertstring".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_convertString'] = "convertString";
+  }
+  if ("execute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_execute'] = "execute";
+  }
+  if ("fetch".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_fetch'] = "fetch";
+  }
+  if ("getnextsequence".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getNextSequence'] = "getNextSequence";
+  }
+  if ("importfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_importFile'] = "importFile";
+  }
+  if ("_openconn".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__openConn'] = "_openConn";
+  }
+  if ("rollback".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_rollback'] = "rollback";
+  }
+  if ("starttransaction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_startTransaction'] = "startTransaction";
+  }
+  if ("getcolumndefinition".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getColumnDefinition'] = "getColumnDefinition";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_DatabaseMsSql</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/sql.html" target="contentFrame">sql</a></p><br /><p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_DatabaseMsSql extends <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a></pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> This class extends from the abstract SRA_Database class. It is utilized to
+  handle database interraction with a MS Sql server (SQL Server). In
+  order for sql server access to function tcp/ip connectivity must be
+  activated in MS SQL, using &quot;Server Network SRA_Utility&quot;.  This class
+  utilizes the TDS protocol (Tabular Data Stream) to connect to sql
+  server using the native php sql server functions.
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATABASE_MSSQL_FREETDS_CONF">SRA_DATABASE_MSSQL_FREETDS_CONF</a></pre>
+<pre> The location of the free tds etc file (&#039;/usr/local/freetds/etc/freetds.conf&#039;
+  or wherever the server&#039;s freetds etc file is installed). This file is required
+  for all implementations that utilize sql server tds connectivity. This file must
+  exist, and specify each server that is connected to by the SRA_DatabaseMsSql class
+  (see SRA_DatabaseMsSql::_openConn api for more details).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATABASE_MSSQL_SUPPORTS_LIMIT">SRA_DATABASE_MSSQL_SUPPORTS_LIMIT</a></pre>
+<pre> Whether or not the mssql server supports the LIMIT/OFFSET sql syntax
+</pre>      </td>
+    </tr>
+  </table>
+  
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_DatabaseMsSql">SRA_DatabaseMsSql</a>()</pre>
+<pre> Empty constructor to keep PHP from calling parent constructor.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected void</pre></td>
+      <td>
+        <pre><a href="#method__closeConn">_closeConn</a>(object $conn)</pre>
+<pre> This method closes one database connection using the appropriate
+  database close command. It is called by the parent close method.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_commit">commit</a>(object $conn=NULL)</pre>
+<pre> This method implements the parent commit method. See SRA_Database class
+  api for info.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_convertBlob">convertBlob</a>(string $blob)</pre>
+<pre> This method implements the parent convertBlob method. See SRA_Database
+  class api for info. MsSql encodes blobs using base64 encryption.
+  Consequently, all blob fields must be text fields, not binary fields.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertDate">convertDate</a>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $dateTime)</pre>
+<pre> Convert a dateOnly SRA_GregorianDate object into a database readable
+  string. This format is required for insertion into the database. this is an
+  abstract method that must be implemented by the child SRA_Database*
+  classes. This method returns an SRA_Error object if the $dateTime parameter
+  is not a valid SRA_GregorianDate object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertTime">convertTime</a>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $dateTime)</pre>
+<pre> Convert a date/time SRA_GregorianDate object into a database readable
+  string using the db timezone. This format is required for insertion into
+  the database. this is an abstract method that must be implemented by the
+  child SRA_Database* classes. This method returns an SRA_Error object if the
+  $dateTime parameter is not a valid SRA_GregorianDate object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_convertFloat">convertFloat</a>(float $value)</pre>
+<pre> This method implements the parent convertFloat method. See SRA_Database
+  class api for info
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertText">convertText</a>(string $text)</pre>
+<pre> This method implements the parent convertText method. See SRA_Database
+  class api for info
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_convertString">convertString</a>(string $str)</pre>
+<pre> alias for convertText
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="sql.SRA_ExecuteSet.html" target="contentFrame">SRA_ExecuteSet</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_execute">execute</a>(string $query, string $incCol=FALSE, int $errorLevel=SRA_ERROR_PROBLEM, object $conn=NULL)</pre>
+<pre> This method implements the parent execute method. See SRA_Database class
+  api for info.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="sql.SRA_ResultSet.html" target="contentFrame">SRA_ResultSet</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_fetch">fetch</a>(string $query, array $types=NULL, int $limit=FALSE, int $offset=FALSE, int $errorLevel=SRA_ERROR_PROBLEM)</pre>
+<pre> This method implements the parent fetch method. See SRA_Database class
+  api for info.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getNextSequence">getNextSequence</a>(string $sequence, int $errorLevel=SRA_ERROR_PROBLEM, object $conn=NULL)</pre>
+<pre> This method implements the parent getNextSequence method. See SRA_Database class api for info.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_importFile">importFile</a>(string $fileName, string $tableName, boolean $deleteFile=true, string $delimiter=", $")</pre>
+<pre> Implements the SRA_Database::importFile method. See api for this method for more info. This method returns
+  an SRA_Error object if it is not implemented by the child SRA_Database class.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>protected object</pre></td>
+      <td>
+        <pre><a href="#method__openConn">_openConn</a>(array $config)</pre>
+<pre> This method is used to open one connection to a database server. It
+  is called by the SRA_Database parent class in order to open needed
+  database connections. It returns either a connection object (if
+  successful) or an SRA_Error object if not.
+ 
+  Before a connection attempt is made, this method verifies that
+  the &#039;server&#039; value specified in the config parameter is defined in
+  the freetds.conf file identified by the SRA_DATABASE_MSSQL_FREETDS_CONF
+  constant.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_rollback">rollback</a>(object $conn=NULL)</pre>
+<pre> This method implements the parent rollback method. See SRA_Database
+  class api for info.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_startTransaction">startTransaction</a>(object $conn=NULL)</pre>
+<pre> This method implements the SRA_Database::startTransaction method.  See
+  this method&#039;s api for more info.
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getColumnDefinition">getColumnDefinition</a>(<a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $table, <a href="model.SRA_SchemaColumn.html" target="contentFrame">SRA_SchemaColumn</a> $column, boolean $dbRefIntegrity=TRUE, boolean $addCheckConstraint=TRUE)</pre>
+<pre> provides an sql statement defining the data type, constraints, and
+  referential integrity (optional) for a given SRA_SchemaColumn. this method
+  may be implemented by each of the underlying database types if the
+  default MYSQL implementation does not suffice
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(object $object)</pre>
+<pre> Static method that returns TRUE if the object parameter references a
+  valid SRA_DatabaseMsSql object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_DATABASE_MSSQL_FREETDS_CONF">SRA_DATABASE_MSSQL_FREETDS_CONF</h3>
+  <pre>public String <b>SRA_DATABASE_MSSQL_FREETDS_CONF</b> = SRA_DIR . '/etc/freetds.conf'</pre>
+  <pre> The location of the free tds etc file (&#039;/usr/local/freetds/etc/freetds.conf&#039;
+  or wherever the server&#039;s freetds etc file is installed). This file is required
+  for all implementations that utilize sql server tds connectivity. This file must
+  exist, and specify each server that is connected to by the SRA_DatabaseMsSql class
+  (see SRA_DatabaseMsSql::_openConn api for more details).
+</pre>
+ <hr />  <h3 id="constant_SRA_DATABASE_MSSQL_SUPPORTS_LIMIT">SRA_DATABASE_MSSQL_SUPPORTS_LIMIT</h3>
+  <pre>public boolean <b>SRA_DATABASE_MSSQL_SUPPORTS_LIMIT</b> = FALSE</pre>
+  <pre> Whether or not the mssql server supports the LIMIT/OFFSET sql syntax
+</pre>
+
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_DatabaseMsSql">SRA_DatabaseMsSql</h3>
+  <pre>public void function <b>SRA_DatabaseMsSql</b>()</pre>
+  <pre> Empty constructor to keep PHP from calling parent constructor.
+ 
+</pre>
+ <hr />  <h3 id="method__closeConn">_closeConn</h3>
+  <pre>protected void function <b>_closeConn</b>(object $conn)</pre>
+  <pre> This method closes one database connection using the appropriate
+  database close command. It is called by the parent close method.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection to close.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_commit">commit</h3>
+  <pre>public void function <b>commit</b>(object $conn=NULL)</pre>
+  <pre> This method implements the parent commit method. See SRA_Database class
+  api for info.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection object to commit a  transaction for. If null (default) this method will simply return
+  SRA_Database::processCommit. Otherwise it will attempt to commit the
+  transaction using the specified connection.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertBlob">convertBlob</h3>
+  <pre>public string function &amp;<b>convertBlob</b>(string $blob)</pre>
+  <pre> This method implements the parent convertBlob method. See SRA_Database
+  class api for info. MsSql encodes blobs using base64 encryption.
+  Consequently, all blob fields must be text fields, not binary fields.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>blob</td>
+      <td>string</td>
+      <td><pre>the blob value to convert.</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertDate">convertDate</h3>
+  <pre>public string function <b>convertDate</b>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $dateTime)</pre>
+  <pre> Convert a dateOnly SRA_GregorianDate object into a database readable
+  string. This format is required for insertion into the database. this is an
+  abstract method that must be implemented by the child SRA_Database*
+  classes. This method returns an SRA_Error object if the $dateTime parameter
+  is not a valid SRA_GregorianDate object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dateTime</td>
+      <td>SRA_GregorianDate</td>
+      <td><pre>the date to convert</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertTime">convertTime</h3>
+  <pre>public string function <b>convertTime</b>(<a href="util.SRA_GregorianDate.html" target="contentFrame">SRA_GregorianDate</a> $dateTime)</pre>
+  <pre> Convert a date/time SRA_GregorianDate object into a database readable
+  string using the db timezone. This format is required for insertion into
+  the database. this is an abstract method that must be implemented by the
+  child SRA_Database* classes. This method returns an SRA_Error object if the
+  $dateTime parameter is not a valid SRA_GregorianDate object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dateTime</td>
+      <td>SRA_GregorianDate</td>
+      <td><pre>the time to convert</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertFloat">convertFloat</h3>
+  <pre>public String function <b>convertFloat</b>(float $value)</pre>
+  <pre> This method implements the parent convertFloat method. See SRA_Database
+  class api for info
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>float</td>
+      <td><pre>the float to convert.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  <p>author = Jason Read <jason@idir.org></p>
+ <hr />  <h3 id="method_convertText">convertText</h3>
+  <pre>public string function <b>convertText</b>(string $text)</pre>
+  <pre> This method implements the parent convertText method. See SRA_Database
+  class api for info
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>text</td>
+      <td>string</td>
+      <td><pre>the text to convert.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_convertString">convertString</h3>
+  <pre>public string function <b>convertString</b>(string $str)</pre>
+  <pre> alias for convertText
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to convert</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_execute">execute</h3>
+  <pre>public <a href="sql.SRA_ExecuteSet.html" target="contentFrame">SRA_ExecuteSet</a> function &amp;<b>execute</b>(string $query, string $incCol=FALSE, int $errorLevel=SRA_ERROR_PROBLEM, object $conn=NULL)</pre>
+  <pre> This method implements the parent execute method. See SRA_Database class
+  api for info.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query to execute. See SRA_Database::execute  method api for more info.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>incCol</td>
+      <td>string</td>
+      <td><pre>the name of the db managed incremental  column to retrieve and store in the SRA_ExecuteSet return object the
+  incremental value that was used (applied only to INSERT queries
+  performed on tables that contain db managed incremental columns).
+  See SRA_Database::execute method api for more info.</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errorLevel</td>
+      <td>int</td>
+      <td><pre>the query error logging level. See  SRA_Database::execute method api for more info.</pre></td>
+      <td>SRA_ERROR_PROBLEM</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection object to perform  the query on. If null (default) this method will simply return
+  SRA_Database::processUpdate. Otherwise it will attempt to perform the
+  query using the specified connection.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_fetch">fetch</h3>
+  <pre>public <a href="sql.SRA_ResultSet.html" target="contentFrame">SRA_ResultSet</a> function &amp;<b>fetch</b>(string $query, array $types=NULL, int $limit=FALSE, int $offset=FALSE, int $errorLevel=SRA_ERROR_PROBLEM)</pre>
+  <pre> This method implements the parent fetch method. See SRA_Database class
+  api for info.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>string</td>
+      <td><pre>the query to fetch. (See SRA_Database::fetch  method api for more info).</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>types</td>
+      <td>array</td>
+      <td><pre>the query return types. (See  SRA_Database::fetch method api for more info).</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>limit</td>
+      <td>int</td>
+      <td><pre>(See SRA_Database::fetch method api for more info).  					LIMIT and OFFSET are not supported by mssql, so this behavior
+  					is implemented programatically</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>offset</td>
+      <td>int</td>
+      <td><pre>(See SRA_Database::fetch method api for more info)</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errorLevel</td>
+      <td>int</td>
+      <td><pre>the error level for the query. (See  SRA_Database::fetch method api for more info).</pre></td>
+      <td>SRA_ERROR_PROBLEM</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getNextSequence">getNextSequence</h3>
+  <pre>public int function <b>getNextSequence</b>(string $sequence, int $errorLevel=SRA_ERROR_PROBLEM, object $conn=NULL)</pre>
+  <pre> This method implements the parent getNextSequence method. See SRA_Database class api for info.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>sequence</td>
+      <td>string</td>
+      <td><pre>the name of the sequence to return the next value for.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>errorLevel</td>
+      <td>int</td>
+      <td><pre>the query error logging level. See SRA_Database::getNextSequence method api  for more info</pre></td>
+      <td>SRA_ERROR_PROBLEM</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection object to perform the sequence query on. If null  (default) this method will simply return SRA_Database::processNextSequence. Otherwise it will attempt
+  to perform the query using the specified connection. See SRA_Database::getNextSequence api for more info.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_importFile">importFile</h3>
+  <pre>public boolean function <b>importFile</b>(string $fileName, string $tableName, boolean $deleteFile=true, string $delimiter=", $")</pre>
+  <pre> Implements the SRA_Database::importFile method. See api for this method for more info. This method returns
+  an SRA_Error object if it is not implemented by the child SRA_Database class.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>string</td>
+      <td><pre>the name of the file to import. This file must be delimited with the same 			number of columns as are in the table.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>tableName</td>
+      <td>string</td>
+      <td><pre>the name of the table to insert the data into.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>deleteFile</td>
+      <td>boolean</td>
+      <td><pre>whether or not the file should be deleted if the import is successful.  			By default this value is true.</pre></td>
+      <td>true</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>delimiter</td>
+      <td>string</td>
+      <td><pre>the delimiter to use for the file import. The default value for this is a  			comma. Note: If a delimiter occurs in a data column, it should be escaped using backslash.</pre></td>
+      <td>"</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>"</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__openConn">_openConn</h3>
+  <pre>protected object function <b>_openConn</b>(array $config)</pre>
+  <pre> This method is used to open one connection to a database server. It
+  is called by the SRA_Database parent class in order to open needed
+  database connections. It returns either a connection object (if
+  successful) or an SRA_Error object if not.
+ 
+  Before a connection attempt is made, this method verifies that
+  the &#039;server&#039; value specified in the config parameter is defined in
+  the freetds.conf file identified by the SRA_DATABASE_MSSQL_FREETDS_CONF
+  constant.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>config</td>
+      <td>array</td>
+      <td><pre>the connection data to use for the  connection. (See SRA_Database::_openConn api for more info).</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_rollback">rollback</h3>
+  <pre>public void function <b>rollback</b>(object $conn=NULL)</pre>
+  <pre> This method implements the parent rollback method. See SRA_Database
+  class api for info.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection object to rollback a  transaction for. If null (default) this method will simply return
+  SRA_Database::processRollback. Otherwise it will attempt to rollback
+  the transaction using the specified connection.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_startTransaction">startTransaction</h3>
+  <pre>public void function <b>startTransaction</b>(object $conn=NULL)</pre>
+  <pre> This method implements the SRA_Database::startTransaction method.  See
+  this method&#039;s api for more info.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conn</td>
+      <td>object</td>
+      <td><pre>the database connection to start the  transaction for. If null (default) this method will simply return
+  SRA_Database::startTransactions.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getColumnDefinition">getColumnDefinition</h3>
+  <pre>public string function <b>getColumnDefinition</b>(<a href="model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a> $table, <a href="model.SRA_SchemaColumn.html" target="contentFrame">SRA_SchemaColumn</a> $column, boolean $dbRefIntegrity=TRUE, boolean $addCheckConstraint=TRUE)</pre>
+  <pre> provides an sql statement defining the data type, constraints, and
+  referential integrity (optional) for a given SRA_SchemaColumn. this method
+  may be implemented by each of the underlying database types if the
+  default MYSQL implementation does not suffice
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>table</td>
+      <td>SRA_SchemaTable</td>
+      <td><pre>$table the SRA_SchemaTable that the column belongs to</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>column</td>
+      <td>SRA_SchemaColumn</td>
+      <td><pre>$column the SRA_SchemaColumn to create the definition for</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>dbRefIntegrity</td>
+      <td>boolean</td>
+      <td><pre>whether or not referential integrity should  be enforced at the database layer</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>addCheckConstraint</td>
+      <td>boolean</td>
+      <td><pre>whether or not to add a check constraint  to the column definition</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(object $object)</pre>
+  <pre> Static method that returns TRUE if the object parameter references a
+  valid SRA_DatabaseMsSql object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>object</td>
+      <td><pre>$object the object to validate.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/sql/SRA_DatabaseMsSql.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

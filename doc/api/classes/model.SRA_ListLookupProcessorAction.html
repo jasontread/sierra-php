@@ -1,0 +1,769 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_ListLookupProcessorAction - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_list_lookup_processor_action_type_update".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE";
+  }
+  if ("sra_list_lookup_processor_action_type_delete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE";
+  }
+  if ("sra_list_lookup_processor_action_type_view".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW";
+  }
+  if ("sra_list_lookup_processor_action_type_new".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW";
+  }
+  if ("sra_list_lookup_processor_action_type_edit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT";
+  }
+
+  // check attributes
+  if ("id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_id'] = "id";
+  }
+  if ("alt".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_alt'] = "alt";
+  }
+  if ("globalalt".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_globalAlt'] = "globalAlt";
+  }
+  if ("apost".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_aPost'] = "aPost";
+  }
+  if ("apre".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_aPre'] = "aPre";
+  }
+  if ("btn".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_btn'] = "btn";
+  }
+  if ("cssclass".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_cssClass'] = "cssClass";
+  }
+  if ("msgcomplete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_msgComplete'] = "msgComplete";
+  }
+  if ("msgconfirm".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_msgConfirm'] = "msgConfirm";
+  }
+  if ("globalmsgcomplete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_globalMsgComplete'] = "globalMsgComplete";
+  }
+  if ("globalmsgconfirm".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_globalMsgConfirm'] = "globalMsgConfirm";
+  }
+  if ("img".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_img'] = "img";
+  }
+  if ("imgclass".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_imgClass'] = "imgClass";
+  }
+  if ("link".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_link'] = "link";
+  }
+  if ("nonglobal".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_nonGlobal'] = "nonGlobal";
+  }
+  if ("post".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_post'] = "post";
+  }
+  if ("pre".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_pre'] = "pre";
+  }
+  if ("type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_type'] = "type";
+  }
+  if ("view".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_view'] = "view";
+  }
+  if ("viewfwd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_viewFwd'] = "viewFwd";
+  }
+
+  // check methods
+  if ("getalt".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAlt'] = "getAlt";
+  }
+  if ("getmsgcomplete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getMsgComplete'] = "getMsgComplete";
+  }
+  if ("getmsgconfirm".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getMsgConfirm'] = "getMsgConfirm";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_ListLookupProcessorAction</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_ListLookupProcessorAction</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> Used to store all of the data associated with a list lookup processor action
+  see the SRA_ListLookupProcessor class header api for more details
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE</a></pre>
+<pre> identifies an update action, the LLP results will still be displayed with the
+  corresponding updated entities reflected
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE</a></pre>
+<pre> identifies a delete action, the LLP results will still be displayed with the
+  corresponding deleted entities removed. cannot be used in conjunction with
+  any of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* types
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW</a></pre>
+<pre> identifies a view action. the LLP results will not be displayed. ONLY 1
+  of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* constants should be
+  used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW</a></pre>
+<pre> identifies a new action. same as SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW,
+  but a new entity will be instantiated and rendered using the view specified.
+  If this action is associated to a specific entity, that entity will be copied
+  into the view specified for this action
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT</a></pre>
+<pre> identifies an action that involves editing the entity (updating, inserting,
+  deleting)
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_id">id</a></pre>
+<pre> unique identifier for this action
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_alt">alt</a></pre>
+<pre> the resource to use as the alt/title string for the action link
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_globalAlt">globalAlt</a></pre>
+<pre> the resource to use as the alt/title string for the action in global links
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_aPost">aPost</a></pre>
+<pre> html code to render after the close &lt;/a&gt; tag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_aPre">aPre</a></pre>
+<pre> html code to render before the close &lt;/a&gt; tag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_btn">btn</a></pre>
+<pre> whether or not to render the view action as a button. the default behavior
+  is to render it as a link. $link must also be specified if this is the case
+  it will be used for the button text
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_cssClass">cssClass</a></pre>
+<pre> the html class to use in the &lt;a.../ &gt; or &lt;button... /&gt; tag generated for the action link
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_msgComplete">msgComplete</a></pre>
+<pre> the resource to display when an action has occurred successfully (displayed
+  in a javascript alert window)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_msgConfirm">msgConfirm</a></pre>
+<pre> the resource to display if an action is initiated (clicked) (displayed
+  in a javascript confirm window)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_globalMsgComplete">globalMsgComplete</a></pre>
+<pre> the resource to display when an action has occurred successfully globally (displayed
+  in a javascript alert window)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_globalMsgConfirm">globalMsgConfirm</a></pre>
+<pre> the resource to display if an action is initiated globally (clicked) (displayed
+  in a javascript confirm window)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_img">img</a></pre>
+<pre> the img src value to use for the action link. Only 1, _img or _link should
+  be specified, if both are specified, $link will be ignored
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_imgClass">imgClass</a></pre>
+<pre> class to assign to the rendered image ($img)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_link">link</a></pre>
+<pre> the resource to use as the text for the action link
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_nonGlobal">nonGlobal</a></pre>
+<pre> whether or not this action cannot be applied globally (NOTE: it will still
+  show up in the global actions links unless explicitely specified otherwise)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_post">post</a></pre>
+<pre> html code to render after the action link (but before the close &lt;/a&gt; tag)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_pre">pre</a></pre>
+<pre> html code to render before the action link (but after the close &lt;/a&gt; tag)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr_type">type</a></pre>
+<pre> the action type. this value is a bitmask representing one or more of the
+  SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_* constants above
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_view">view</a></pre>
+<pre> the id of the view that should be displayed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_viewFwd">viewFwd</a></pre>
+<pre> the id of the view that should be displayed if the action is completed
+  successfully
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_getAlt">getAlt</a>($global=FALSE)</pre>
+<pre>
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_getMsgComplete">getMsgComplete</a>($global=FALSE)</pre>
+<pre>
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_getMsgConfirm">getMsgConfirm</a>($global=FALSE)</pre>
+<pre>
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_ListLookupProcessorAction object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE</b> = 1</pre>
+  <pre> identifies an update action, the LLP results will still be displayed with the
+  corresponding updated entities reflected
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE</b> = 2</pre>
+  <pre> identifies a delete action, the LLP results will still be displayed with the
+  corresponding deleted entities removed. cannot be used in conjunction with
+  any of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* types
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW</b> = 4</pre>
+  <pre> identifies a view action. the LLP results will not be displayed. ONLY 1
+  of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* constants should be
+  used
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW</b> = 8</pre>
+  <pre> identifies a new action. same as SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW,
+  but a new entity will be instantiated and rendered using the view specified.
+  If this action is associated to a specific entity, that entity will be copied
+  into the view specified for this action
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT</b> = SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE + SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE + SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW</pre>
+  <pre> identifies an action that involves editing the entity (updating, inserting,
+  deleting)
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_id">id</h3>
+  <pre>string var <b>$id</b></pre>
+  <pre> unique identifier for this action
+</pre>
+ <hr />  <h3 id="attr_alt">alt</h3>
+  <pre>string var <b>$alt</b></pre>
+  <pre> the resource to use as the alt/title string for the action link
+</pre>
+ <hr />  <h3 id="attr_globalAlt">globalAlt</h3>
+  <pre>string var <b>$globalAlt</b></pre>
+  <pre> the resource to use as the alt/title string for the action in global links
+</pre>
+ <hr />  <h3 id="attr_aPost">aPost</h3>
+  <pre>string var <b>$aPost</b></pre>
+  <pre> html code to render after the close &lt;/a&gt; tag
+</pre>
+ <hr />  <h3 id="attr_aPre">aPre</h3>
+  <pre>string var <b>$aPre</b></pre>
+  <pre> html code to render before the close &lt;/a&gt; tag
+</pre>
+ <hr />  <h3 id="attr_btn">btn</h3>
+  <pre>boolean var <b>$btn</b></pre>
+  <pre> whether or not to render the view action as a button. the default behavior
+  is to render it as a link. $link must also be specified if this is the case
+  it will be used for the button text
+</pre>
+ <hr />  <h3 id="attr_cssClass">cssClass</h3>
+  <pre>string var <b>$cssClass</b></pre>
+  <pre> the html class to use in the &lt;a.../ &gt; or &lt;button... /&gt; tag generated for the action link
+</pre>
+ <hr />  <h3 id="attr_msgComplete">msgComplete</h3>
+  <pre>string var <b>$msgComplete</b></pre>
+  <pre> the resource to display when an action has occurred successfully (displayed
+  in a javascript alert window)
+</pre>
+ <hr />  <h3 id="attr_msgConfirm">msgConfirm</h3>
+  <pre>string var <b>$msgConfirm</b></pre>
+  <pre> the resource to display if an action is initiated (clicked) (displayed
+  in a javascript confirm window)
+</pre>
+ <hr />  <h3 id="attr_globalMsgComplete">globalMsgComplete</h3>
+  <pre>string var <b>$globalMsgComplete</b></pre>
+  <pre> the resource to display when an action has occurred successfully globally (displayed
+  in a javascript alert window)
+</pre>
+ <hr />  <h3 id="attr_globalMsgConfirm">globalMsgConfirm</h3>
+  <pre>string var <b>$globalMsgConfirm</b></pre>
+  <pre> the resource to display if an action is initiated globally (clicked) (displayed
+  in a javascript confirm window)
+</pre>
+ <hr />  <h3 id="attr_img">img</h3>
+  <pre>string var <b>$img</b></pre>
+  <pre> the img src value to use for the action link. Only 1, _img or _link should
+  be specified, if both are specified, $link will be ignored
+</pre>
+ <hr />  <h3 id="attr_imgClass">imgClass</h3>
+  <pre>string var <b>$imgClass</b></pre>
+  <pre> class to assign to the rendered image ($img)
+</pre>
+ <hr />  <h3 id="attr_link">link</h3>
+  <pre>string var <b>$link</b></pre>
+  <pre> the resource to use as the text for the action link
+</pre>
+ <hr />  <h3 id="attr_nonGlobal">nonGlobal</h3>
+  <pre>boolean var <b>$nonGlobal</b></pre>
+  <pre> whether or not this action cannot be applied globally (NOTE: it will still
+  show up in the global actions links unless explicitely specified otherwise)
+</pre>
+ <hr />  <h3 id="attr_post">post</h3>
+  <pre>string var <b>$post</b></pre>
+  <pre> html code to render after the action link (but before the close &lt;/a&gt; tag)
+</pre>
+ <hr />  <h3 id="attr_pre">pre</h3>
+  <pre>string var <b>$pre</b></pre>
+  <pre> html code to render before the action link (but after the close &lt;/a&gt; tag)
+</pre>
+ <hr />  <h3 id="attr_type">type</h3>
+  <pre>int var <b>$type</b></pre>
+  <pre> the action type. this value is a bitmask representing one or more of the
+  SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_* constants above
+</pre>
+ <hr />  <h3 id="attr_view">view</h3>
+  <pre>string var <b>$view</b></pre>
+  <pre> the id of the view that should be displayed
+</pre>
+ <hr />  <h3 id="attr_viewFwd">viewFwd</h3>
+  <pre>string var <b>$viewFwd</b></pre>
+  <pre> the id of the view that should be displayed if the action is completed
+  successfully
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_getAlt">getAlt</h3>
+  <pre>public void function <b>getAlt</b>($global=FALSE)</pre>
+  <pre>
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>global</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getMsgComplete">getMsgComplete</h3>
+  <pre>public void function <b>getMsgComplete</b>($global=FALSE)</pre>
+  <pre>
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>global</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getMsgConfirm">getMsgConfirm</h3>
+  <pre>public void function <b>getMsgConfirm</b>($global=FALSE)</pre>
+  <pre>
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>global</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_ListLookupProcessorAction object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_ListLookupProcessorAction.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

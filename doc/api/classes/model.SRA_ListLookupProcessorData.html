@@ -1,0 +1,1246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_ListLookupProcessorData - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("list_lookup_processor_data_template_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR'] = "LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR";
+  }
+
+  // check attributes
+  if ("actionspos".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_actionsPos'] = "actionsPos";
+  }
+  if ("entityname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_entityName'] = "entityName";
+  }
+  if ("entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_entity'] = "entity";
+  }
+  if ("formname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_formName'] = "formName";
+  }
+  if ("formtype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_formType'] = "formType";
+  }
+  if ("globalactions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_globalActions'] = "globalActions";
+  }
+  if ("limitfield".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_limitField'] = "limitField";
+  }
+  if ("numcols".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_numCols'] = "numCols";
+  }
+  if ("pagefield".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_pageField'] = "pageField";
+  }
+  if ("params".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_params'] = "params";
+  }
+  if ("resultsstring".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_resultsString'] = "resultsString";
+  }
+  if ("selectorsuffix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_selectorSuffix'] = "selectorSuffix";
+  }
+  if ("_actions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__actions'] = "_actions";
+  }
+  if ("_globalactions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__globalActions'] = "_globalActions";
+  }
+  if ("_currentpage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__currentPage'] = "_currentPage";
+  }
+  if ("_dynamicsortattrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dynamicSortAttrs'] = "_dynamicSortAttrs";
+  }
+  if ("_fieldvalues".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fieldValues'] = "_fieldValues";
+  }
+  if ("_globalfieldseq".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__globalFieldSeq'] = "_globalFieldSeq";
+  }
+  if ("_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__limit'] = "_limit";
+  }
+  if ("_resultcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__resultCount'] = "_resultCount";
+  }
+  if ("_selectedentities".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__selectedEntities'] = "_selectedEntities";
+  }
+  if ("_sortorder".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__sortOrder'] = "_sortOrder";
+  }
+
+  // check methods
+  if ("getactions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getActions'] = "getActions";
+  }
+  if ("getcurrentpage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCurrentPage'] = "getCurrentPage";
+  }
+  if ("getendpos".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getEndPos'] = "getEndPos";
+  }
+  if ("getfieldvalues".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFieldValues'] = "getFieldValues";
+  }
+  if ("getfirstsortattr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFirstSortAttr'] = "getFirstSortAttr";
+  }
+  if ("getlastpage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getLastPage'] = "getLastPage";
+  }
+  if ("getlimit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getLimit'] = "getLimit";
+  }
+  if ("getnextglobalfieldseq".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getNextGlobalFieldSeq'] = "getNextGlobalFieldSeq";
+  }
+  if ("getnextpage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getNextPage'] = "getNextPage";
+  }
+  if ("getpreviouspage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getPreviousPage'] = "getPreviousPage";
+  }
+  if ("getpagesarray".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getPagesArray'] = "getPagesArray";
+  }
+  if ("getparam".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getParam'] = "getParam";
+  }
+  if ("getparams".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getParams'] = "getParams";
+  }
+  if ("getresultcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getResultCount'] = "getResultCount";
+  }
+  if ("getsortmethod".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSortMethod'] = "getSortMethod";
+  }
+  if ("getsortmethods".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSortMethods'] = "getSortMethods";
+  }
+  if ("getsortorder".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSortOrder'] = "getSortOrder";
+  }
+  if ("getsortmethodprefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSortMethodPrefix'] = "getSortMethodPrefix";
+  }
+  if ("gettogglesortmethod".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getToggleSortMethod'] = "getToggleSortMethod";
+  }
+  if ("gettogglesortmethodprefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getToggleSortMethodPrefix'] = "getToggleSortMethodPrefix";
+  }
+  if ("getstartpos".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getStartPos'] = "getStartPos";
+  }
+  if ("incnumcols".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_incNumCols'] = "incNumCols";
+  }
+  if ("incselectorsuffix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_incSelectorSuffix'] = "incSelectorSuffix";
+  }
+  if ("isselected".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isSelected'] = "isSelected";
+  }
+  if ("issortable".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isSortable'] = "isSortable";
+  }
+  if ("_togglesortmethod".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__toggleSortMethod'] = "_toggleSortMethod";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_ListLookupProcessorData</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_ListLookupProcessorData</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> Used to store all of the data associated with a particular SRA_ListLookupProcessor::lookup
+  invocation. The instance of this class representing that data is stored in the
+  SRA_Template using the key value
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR">LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR</a></pre>
+<pre> the template variable under which this class instance will be accessible for
+  a given SRA_ListLookupProcessor::lookup invocations
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_actionsPos">actionsPos</a></pre>
+<pre> the position for the actions, either the leftmost (L) or rightmost (R), or
+  a numbered column (column #s begin at 0) column
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_entityName">entityName</a></pre>
+<pre> the name of the entity the lookup was processed for
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>Entity </pre></td>
+      <td>
+        <pre><a href="#attr_entity">entity</a></pre>
+<pre> a new instance of $entityName
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_formName">formName</a></pre>
+<pre> the name of the html form containing the list lookup processor field elements
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_formType">formType</a></pre>
+<pre> the form type (get or post)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_globalActions">globalActions</a></pre>
+<pre> whether or not global actions exist for the LLP view
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_limitField">limitField</a></pre>
+<pre> the name of the limit field
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr_numCols">numCols</a></pre>
+<pre> the number of columns in the table
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_pageField">pageField</a></pre>
+<pre> the name of the page # field
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="util.SRA_Params.html" target="contentFrame">SRA_Params</a> </pre></td>
+      <td>
+        <pre><a href="#attr_params">params</a></pre>
+<pre> SRA_Params for the LLP
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_resultsString">resultsString</a></pre>
+<pre> the results string for the current data
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr_selectorSuffix">selectorSuffix</a></pre>
+<pre> the current suffix to use for drop down selectors
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>SRA_LookupProcessorAction[] </pre></td>
+      <td>
+        <pre><a href="#attr__actions">_actions</a></pre>
+<pre> ordered array of actions (in the order they should be displayed) for the
+  current list view
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>SRA_LookupProcessorAction[] </pre></td>
+      <td>
+        <pre><a href="#attr__globalActions">_globalActions</a></pre>
+<pre> ordered array of global actions (in the order they should be displayed) for the
+  current list view
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__currentPage">_currentPage</a></pre>
+<pre> the current page # (between 1 and lastPage)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__dynamicSortAttrs">_dynamicSortAttrs</a></pre>
+<pre> dynamic sort attr/method associative array
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__fieldValues">_fieldValues</a></pre>
+<pre> associative array of all of the current form values (index by field name)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__globalFieldSeq">_globalFieldSeq</a></pre>
+<pre> sequence for global select checkboxes
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__limit">_limit</a></pre>
+<pre> the # of results displayed per page
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__resultCount">_resultCount</a></pre>
+<pre> the total # of results
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array() </pre></td>
+      <td>
+        <pre><a href="#attr__selectedEntities">_selectedEntities</a></pre>
+<pre> primary keys values of the entities selected for a view or action
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array() </pre></td>
+      <td>
+        <pre><a href="#attr__sortOrder">_sortOrder</a></pre>
+<pre> ordered array defining the sort order of attrs contained in _dynamicSortAttrs
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public SRA_LookupProcessorAction[]</pre></td>
+      <td>
+        <pre><a href="#method_getActions">getActions</a>(boolean $global=FALSE)</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>public #_currentPage</pre></td>
+      <td>
+        <pre><a href="#method_getCurrentPage">getCurrentPage</a>()</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>public the result end position for the current list view (between #_limit and #_resultCount)</pre></td>
+      <td>
+        <pre><a href="#method_getEndPos">getEndPos</a>()</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getFieldValues">getFieldValues</a>(string $fieldName=FALSE)</pre>
+<pre> returns the value for the field specified or all fields
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string or FALSE</pre></td>
+      <td>
+        <pre><a href="#method_getFirstSortAttr">getFirstSortAttr</a>()</pre>
+<pre> returns the name of the first sortable attribute (FALSE if none)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public #_lastPage</pre></td>
+      <td>
+        <pre><a href="#method_getLastPage">getLastPage</a>()</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>public #_limit</pre></td>
+      <td>
+        <pre><a href="#method_getLimit">getLimit</a>()</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getNextGlobalFieldSeq">getNextGlobalFieldSeq</a>()</pre>
+<pre> returns the next global field sequence value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getNextPage">getNextPage</a>()</pre>
+<pre> returns the next page #. if the current page is the last page, then returns 1
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getPreviousPage">getPreviousPage</a>()</pre>
+<pre> returns the previous page #. if the current page is the first page, then returns the last page
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_getPagesArray">getPagesArray</a>(int $max=FALSE, int $median=FALSE)</pre>
+<pre> returns a numerical array containing all of the pages available for the
+  current list view
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_Params.html" target="contentFrame">SRA_Params</a></pre></td>
+      <td>
+        <pre><a href="#method_getParam">getParam</a>(string $key)</pre>
+<pre> returns a param value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_Params.html" target="contentFrame">SRA_Params</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getParams">getParams</a>($type=FALSE)</pre>
+<pre> returns the SRA_Params (or a subtype)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public #_resultCount</pre></td>
+      <td>
+        <pre><a href="#method_getResultCount">getResultCount</a>()</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>public asc|desc|FALSE</pre></td>
+      <td>
+        <pre><a href="#method_getSortMethod">getSortMethod</a>($attr)</pre>
+<pre> returns the associated sort method for the attribute specified, or FALSE if
+  no sorting has been applied to that attrible
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_getSortMethods">getSortMethods</a>()</pre>
+<pre> returns an associative array of all current sort methods indexed by attribute
+  name where the value is the sort method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_getSortOrder">getSortOrder</a>()</pre>
+<pre> returns an associative array of all current sort attributes indexed by their
+  order in the sort
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_(ASC|DESC)_SORT_CONSTRAINT_PREFIX</pre></td>
+      <td>
+        <pre><a href="#method_getSortMethodPrefix">getSortMethodPrefix</a>($attr, $default)</pre>
+<pre> returns the dynamic sort method form field prefix
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public asc|desc</pre></td>
+      <td>
+        <pre><a href="#method_getToggleSortMethod">getToggleSortMethod</a>($attr, $default=FALSE)</pre>
+<pre> returns the associated toggle sort method for a given attribute. meaning,
+  if the current dynamically set sort method for the attribute is ascending,
+  then this method will return descending, and vise-versa. if no current
+  sort method exists for the attribute, then $default is returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_(ASC|DESC)_SORT_CONSTRAINT_PREFIX</pre></td>
+      <td>
+        <pre><a href="#method_getToggleSortMethodPrefix">getToggleSortMethodPrefix</a>($attr, $default)</pre>
+<pre> returns the dynamic toggled sort method form field prefix
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public the result starting position for the current list view (between 1 and #_resultCount)</pre></td>
+      <td>
+        <pre><a href="#method_getStartPos">getStartPos</a>()</pre>
+      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_incNumCols">incNumCols</a>()</pre>
+<pre> increments the # of columns in the table
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_incSelectorSuffix">incSelectorSuffix</a>()</pre>
+<pre> increments #incSelectorSuffix
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isSelected">isSelected</a>($pk)</pre>
+<pre> returns TRUE if the entity specified is selected
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isSortable">isSortable</a>($attr, $sortableAttrs)</pre>
+<pre> returns TRUE if the attr specified is sortable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method__toggleSortMethod">_toggleSortMethod</a>($method)</pre>
+<pre> returns the opposite of the sort method specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_ListLookupProcessorData object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR">LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR</h3>
+  <pre><b>LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR</b> = 'listData'</pre>
+  <pre> the template variable under which this class instance will be accessible for
+  a given SRA_ListLookupProcessor::lookup invocations
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_actionsPos">actionsPos</h3>
+  <pre>string var <b>$actionsPos</b> = FALSE</pre>
+  <pre> the position for the actions, either the leftmost (L) or rightmost (R), or
+  a numbered column (column #s begin at 0) column
+</pre>
+ <hr />  <h3 id="attr_entityName">entityName</h3>
+  <pre>string var <b>$entityName</b></pre>
+  <pre> the name of the entity the lookup was processed for
+</pre>
+ <hr />  <h3 id="attr_entity">entity</h3>
+  <pre>Entity var <b>$entity</b></pre>
+  <pre> a new instance of $entityName
+</pre>
+ <hr />  <h3 id="attr_formName">formName</h3>
+  <pre>string var <b>$formName</b></pre>
+  <pre> the name of the html form containing the list lookup processor field elements
+</pre>
+ <hr />  <h3 id="attr_formType">formType</h3>
+  <pre>string var <b>$formType</b></pre>
+  <pre> the form type (get or post)
+</pre>
+ <hr />  <h3 id="attr_globalActions">globalActions</h3>
+  <pre>boolean var <b>$globalActions</b></pre>
+  <pre> whether or not global actions exist for the LLP view
+</pre>
+ <hr />  <h3 id="attr_limitField">limitField</h3>
+  <pre>string var <b>$limitField</b></pre>
+  <pre> the name of the limit field
+</pre>
+ <hr />  <h3 id="attr_numCols">numCols</h3>
+  <pre>int var <b>$numCols</b></pre>
+  <pre> the number of columns in the table
+</pre>
+ <hr />  <h3 id="attr_pageField">pageField</h3>
+  <pre>string var <b>$pageField</b></pre>
+  <pre> the name of the page # field
+</pre>
+ <hr />  <h3 id="attr_params">params</h3>
+  <pre><a href="util.SRA_Params.html" target="contentFrame">SRA_Params</a> var <b>$params</b></pre>
+  <pre> SRA_Params for the LLP
+</pre>
+ <hr />  <h3 id="attr_resultsString">resultsString</h3>
+  <pre>string var <b>$resultsString</b></pre>
+  <pre> the results string for the current data
+</pre>
+ <hr />  <h3 id="attr_selectorSuffix">selectorSuffix</h3>
+  <pre>int var <b>$selectorSuffix</b></pre>
+  <pre> the current suffix to use for drop down selectors
+</pre>
+ <hr />  <h3 id="attr__actions">_actions</h3>
+  <pre>SRA_LookupProcessorAction[] var <b>$_actions</b></pre>
+  <pre> ordered array of actions (in the order they should be displayed) for the
+  current list view
+</pre>
+ <hr />  <h3 id="attr__globalActions">_globalActions</h3>
+  <pre>SRA_LookupProcessorAction[] var <b>$_globalActions</b></pre>
+  <pre> ordered array of global actions (in the order they should be displayed) for the
+  current list view
+</pre>
+ <hr />  <h3 id="attr__currentPage">_currentPage</h3>
+  <pre>int var <b>$_currentPage</b></pre>
+  <pre> the current page # (between 1 and lastPage)
+</pre>
+ <hr />  <h3 id="attr__dynamicSortAttrs">_dynamicSortAttrs</h3>
+  <pre>array var <b>$_dynamicSortAttrs</b> = array()</pre>
+  <pre> dynamic sort attr/method associative array
+</pre>
+ <hr />  <h3 id="attr__fieldValues">_fieldValues</h3>
+  <pre>array var <b>$_fieldValues</b></pre>
+  <pre> associative array of all of the current form values (index by field name)
+</pre>
+ <hr />  <h3 id="attr__globalFieldSeq">_globalFieldSeq</h3>
+  <pre>int var <b>$_globalFieldSeq</b></pre>
+  <pre> sequence for global select checkboxes
+</pre>
+ <hr />  <h3 id="attr__limit">_limit</h3>
+  <pre>int var <b>$_limit</b></pre>
+  <pre> the # of results displayed per page
+</pre>
+ <hr />  <h3 id="attr__resultCount">_resultCount</h3>
+  <pre>int var <b>$_resultCount</b></pre>
+  <pre> the total # of results
+</pre>
+ <hr />  <h3 id="attr__selectedEntities">_selectedEntities</h3>
+  <pre>array() var <b>$_selectedEntities</b> = array()</pre>
+  <pre> primary keys values of the entities selected for a view or action
+</pre>
+ <hr />  <h3 id="attr__sortOrder">_sortOrder</h3>
+  <pre>array() var <b>$_sortOrder</b> = array()</pre>
+  <pre> ordered array defining the sort order of attrs contained in _dynamicSortAttrs
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_getActions">getActions</h3>
+  <pre>public SRA_LookupProcessorAction[] function <b>getActions</b>(boolean $global=FALSE)</pre>
+  <pre>No API comments</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>global</td>
+      <td>boolean</td>
+      <td><pre>whether or not to return the global actions</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getCurrentPage">getCurrentPage</h3>
+  <pre>public #_currentPage function <b>getCurrentPage</b>()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="method_getEndPos">getEndPos</h3>
+  <pre>public the result end position for the current list view (between #_limit and #_resultCount) function <b>getEndPos</b>()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="method_getFieldValues">getFieldValues</h3>
+  <pre>public mixed function &amp;<b>getFieldValues</b>(string $fieldName=FALSE)</pre>
+  <pre> returns the value for the field specified or all fields
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fieldName</td>
+      <td>string</td>
+      <td><pre>optional name of the field to return the value for  if not specified, the full associative array of field/value pairs will be
+  returned</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getFirstSortAttr">getFirstSortAttr</h3>
+  <pre>public string or FALSE function <b>getFirstSortAttr</b>()</pre>
+  <pre> returns the name of the first sortable attribute (FALSE if none)
+</pre>
+ <hr />  <h3 id="method_getLastPage">getLastPage</h3>
+  <pre>public #_lastPage function <b>getLastPage</b>()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="method_getLimit">getLimit</h3>
+  <pre>public #_limit function <b>getLimit</b>()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="method_getNextGlobalFieldSeq">getNextGlobalFieldSeq</h3>
+  <pre>public int function <b>getNextGlobalFieldSeq</b>()</pre>
+  <pre> returns the next global field sequence value
+</pre>
+ <hr />  <h3 id="method_getNextPage">getNextPage</h3>
+  <pre>public int function <b>getNextPage</b>()</pre>
+  <pre> returns the next page #. if the current page is the last page, then returns 1
+</pre>
+ <hr />  <h3 id="method_getPreviousPage">getPreviousPage</h3>
+  <pre>public int function <b>getPreviousPage</b>()</pre>
+  <pre> returns the previous page #. if the current page is the first page, then returns the last page
+</pre>
+ <hr />  <h3 id="method_getPagesArray">getPagesArray</h3>
+  <pre>public array function <b>getPagesArray</b>(int $max=FALSE, int $median=FALSE)</pre>
+  <pre> returns a numerical array containing all of the pages available for the
+  current list view
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>max</td>
+      <td>int</td>
+      <td><pre>the maximum # of pages to return in the array</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>median</td>
+      <td>int</td>
+      <td><pre>if $max is specified, defines the median position for  the pages array. meaning the array will contain a maximum of max/2 pages
+  prior to that median page # and max/2 after. the default median is the
+  #_currentPage</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getParam">getParam</h3>
+  <pre>public <a href="util.SRA_Params.html" target="contentFrame">SRA_Params</a> function <b>getParam</b>(string $key)</pre>
+  <pre> returns a param value
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>string</td>
+      <td><pre>the identifier of the param to return</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getParams">getParams</h3>
+  <pre>public <a href="util.SRA_Params.html" target="contentFrame">SRA_Params</a> function &amp;<b>getParams</b>($type=FALSE)</pre>
+  <pre> returns the SRA_Params (or a subtype)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getResultCount">getResultCount</h3>
+  <pre>public #_resultCount function <b>getResultCount</b>()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="method_getSortMethod">getSortMethod</h3>
+  <pre>public asc|desc|FALSE function <b>getSortMethod</b>($attr)</pre>
+  <pre> returns the associated sort method for the attribute specified, or FALSE if
+  no sorting has been applied to that attrible
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSortMethods">getSortMethods</h3>
+  <pre>public array function <b>getSortMethods</b>()</pre>
+  <pre> returns an associative array of all current sort methods indexed by attribute
+  name where the value is the sort method
+</pre>
+ <hr />  <h3 id="method_getSortOrder">getSortOrder</h3>
+  <pre>public array function <b>getSortOrder</b>()</pre>
+  <pre> returns an associative array of all current sort attributes indexed by their
+  order in the sort
+</pre>
+ <hr />  <h3 id="method_getSortMethodPrefix">getSortMethodPrefix</h3>
+  <pre>public SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_(ASC|DESC)_SORT_CONSTRAINT_PREFIX function <b>getSortMethodPrefix</b>($attr, $default)</pre>
+  <pre> returns the dynamic sort method form field prefix
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getToggleSortMethod">getToggleSortMethod</h3>
+  <pre>public asc|desc function <b>getToggleSortMethod</b>($attr, $default=FALSE)</pre>
+  <pre> returns the associated toggle sort method for a given attribute. meaning,
+  if the current dynamically set sort method for the attribute is ascending,
+  then this method will return descending, and vise-versa. if no current
+  sort method exists for the attribute, then $default is returned
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getToggleSortMethodPrefix">getToggleSortMethodPrefix</h3>
+  <pre>public SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_(ASC|DESC)_SORT_CONSTRAINT_PREFIX function <b>getToggleSortMethodPrefix</b>($attr, $default)</pre>
+  <pre> returns the dynamic toggled sort method form field prefix
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getStartPos">getStartPos</h3>
+  <pre>public the result starting position for the current list view (between 1 and #_resultCount) function <b>getStartPos</b>()</pre>
+  <pre>No API comments</pre>
+ <hr />  <h3 id="method_incNumCols">incNumCols</h3>
+  <pre>public void function <b>incNumCols</b>()</pre>
+  <pre> increments the # of columns in the table
+</pre>
+ <hr />  <h3 id="method_incSelectorSuffix">incSelectorSuffix</h3>
+  <pre>public void function <b>incSelectorSuffix</b>()</pre>
+  <pre> increments #incSelectorSuffix
+</pre>
+ <hr />  <h3 id="method_isSelected">isSelected</h3>
+  <pre>public boolean function <b>isSelected</b>($pk)</pre>
+  <pre> returns TRUE if the entity specified is selected
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>pk</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isSortable">isSortable</h3>
+  <pre>public boolean function <b>isSortable</b>($attr, $sortableAttrs)</pre>
+  <pre> returns TRUE if the attr specified is sortable
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>sortableAttrs</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__toggleSortMethod">_toggleSortMethod</h3>
+  <pre>public string function <b>_toggleSortMethod</b>($method)</pre>
+  <pre> returns the opposite of the sort method specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>method</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_ListLookupProcessorData object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_ListLookupProcessorData.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

@@ -1,0 +1,2740 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>core.SRA_Controller - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_controller_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CONTROLLER_DEBUG'] = "SRA_CONTROLLER_DEBUG";
+  }
+  if ("sra_lib_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIB_DIR'] = "SRA_LIB_DIR";
+  }
+  if ("sra_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DIR'] = "SRA_DIR";
+  }
+  if ("sra_app_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_APP_DIR_NAME'] = "SRA_APP_DIR_NAME";
+  }
+  if ("sra_bin_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_BIN_DIR_NAME'] = "SRA_BIN_DIR_NAME";
+  }
+  if ("sra_conf_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CONF_DIR_NAME'] = "SRA_CONF_DIR_NAME";
+  }
+  if ("sra_conf_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CONF_DIR'] = "SRA_CONF_DIR";
+  }
+  if ("sra_entity_modeler_config_key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_CONFIG_KEY'] = "SRA_ENTITY_MODELER_CONFIG_KEY";
+  }
+  if ("sra_license_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LICENSE_PREFIX'] = "SRA_LICENSE_PREFIX";
+  }
+  if ("sra_license_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LICENSE_VAR'] = "SRA_LICENSE_VAR";
+  }
+  if ("sra_start_time".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_START_TIME'] = "SRA_START_TIME";
+  }
+  if ("sra_tmp_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TMP_DIR_NAME'] = "SRA_TMP_DIR_NAME";
+  }
+  if ("sra_tmp_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TMP_DIR'] = "SRA_TMP_DIR";
+  }
+  if ("sra_app_rb_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_APP_RB_NAME'] = "SRA_APP_RB_NAME";
+  }
+  if ("sra_sys_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SYS_CONFIG'] = "SRA_SYS_CONFIG";
+  }
+  if ("sra_app_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_APP_CONFIG'] = "SRA_APP_CONFIG";
+  }
+  if ("sra_sys_php_extension".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SYS_PHP_EXTENSION'] = "SRA_SYS_PHP_EXTENSION";
+  }
+  if ("sra_sys_xml_extension".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SYS_XML_EXTENSION'] = "SRA_SYS_XML_EXTENSION";
+  }
+  if ("sra_max_int_val".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_MAX_INT_VAL'] = "SRA_MAX_INT_VAL";
+  }
+  if ("sra_default_date_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_DATE_FORMAT'] = "SRA_DEFAULT_DATE_FORMAT";
+  }
+  if ("sra_default_date_only_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_DATE_ONLY_FORMAT'] = "SRA_DEFAULT_DATE_ONLY_FORMAT";
+  }
+  if ("sra_default_error_log_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_ERROR_LOG_FILE'] = "SRA_DEFAULT_ERROR_LOG_FILE";
+  }
+  if ("sra_default_log_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_LOG_DIR'] = "SRA_DEFAULT_LOG_DIR";
+  }
+  if ("sra_default_lib_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_LIB_DIR'] = "SRA_DEFAULT_LIB_DIR";
+  }
+  if ("sra_default_html_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_HTML_DIR'] = "SRA_DEFAULT_HTML_DIR";
+  }
+  if ("sra_default_templates_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_TEMPLATES_DIR'] = "SRA_DEFAULT_TEMPLATES_DIR";
+  }
+  if ("sra_path_separator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_PATH_SEPARATOR'] = "SRA_PATH_SEPARATOR";
+  }
+  if ("sra_ps_path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_PS_PATH'] = "SRA_PS_PATH";
+  }
+  if ("sra_version_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_VERSION_FILE'] = "SRA_VERSION_FILE";
+  }
+  if ("sra_hostname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_HOSTNAME'] = "SRA_HOSTNAME";
+  }
+
+
+  // check methods
+  if ("getallappconfs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAllAppConfs'] = "getAllAppConfs";
+  }
+  if ("getappdb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDb'] = "getAppDb";
+  }
+  if ("getsysdb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysDb'] = "getSysDb";
+  }
+  if ("getappconf".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppConf'] = "getAppConf";
+  }
+  if ("getsysconf".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysConf'] = "getSysConf";
+  }
+  if ("getappdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDir'] = "getAppDir";
+  }
+  if ("getsysdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysDir'] = "getSysDir";
+  }
+  if ("getappconfdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppConfDir'] = "getAppConfDir";
+  }
+  if ("getsysconfdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysConfDir'] = "getSysConfDir";
+  }
+  if ("getapplibdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppLibDir'] = "getAppLibDir";
+  }
+  if ("getsyslibdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysLibDir'] = "getSysLibDir";
+  }
+  if ("getappname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppName'] = "getAppName";
+  }
+  if ("getappparams".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppParams'] = "getAppParams";
+  }
+  if ("getsysparams".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysParams'] = "getSysParams";
+  }
+  if ("getappshortname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppShortName'] = "getAppShortName";
+  }
+  if ("getapphtmldir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppHtmlDir'] = "getAppHtmlDir";
+  }
+  if ("getapptpldir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppTplDir'] = "getAppTplDir";
+  }
+  if ("getsystpldir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysTplDir'] = "getSysTplDir";
+  }
+  if ("getapperrorlogfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppErrorLogFile'] = "getAppErrorLogFile";
+  }
+  if ("getsyserrorlogfile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysErrorLogFile'] = "getSysErrorLogFile";
+  }
+  if ("isappindebug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isAppInDebug'] = "isAppInDebug";
+  }
+  if ("issysindebug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isSysInDebug'] = "isSysInDebug";
+  }
+  if ("getcurrentappid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getCurrentAppId'] = "getCurrentAppId";
+  }
+  if ("getapplocale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppLocale'] = "getAppLocale";
+  }
+  if ("getsyslocale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysLocale'] = "getSysLocale";
+  }
+  if ("getapptemplate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppTemplate'] = "getAppTemplate";
+  }
+  if ("getsystemplate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysTemplate'] = "getSysTemplate";
+  }
+  if ("getapptimezone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppTimeZone'] = "getAppTimeZone";
+  }
+  if ("getsystimezone".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysTimeZone'] = "getSysTimeZone";
+  }
+  if ("getapplogdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppLogDir'] = "getAppLogDir";
+  }
+  if ("getsyslogdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysLogDir'] = "getSysLogDir";
+  }
+  if ("getapptmpdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppTmpDir'] = "getAppTmpDir";
+  }
+  if ("getsystmpdir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysTmpDir'] = "getSysTmpDir";
+  }
+  if ("getappconfattr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppConfAttr'] = "getAppConfAttr";
+  }
+  if ("getsysconfattr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysConfAttr'] = "getSysConfAttr";
+  }
+  if ("getappdefaultcountry".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDefaultCountry'] = "getAppDefaultCountry";
+  }
+  if ("getsysdefaultcountry".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysDefaultCountry'] = "getSysDefaultCountry";
+  }
+  if ("getappdefaultcurrency".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDefaultCurrency'] = "getAppDefaultCurrency";
+  }
+  if ("getsysdefaultcurrency".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysDefaultCurrency'] = "getSysDefaultCurrency";
+  }
+  if ("getappdefaultlanguage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDefaultLanguage'] = "getAppDefaultLanguage";
+  }
+  if ("getsysdefaultlanguage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysDefaultLanguage'] = "getSysDefaultLanguage";
+  }
+  if ("getapperrormask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppErrorMask'] = "getAppErrorMask";
+  }
+  if ("getsyserrormask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysErrorMask'] = "getSysErrorMask";
+  }
+  if ("getappresources".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppResources'] = "getAppResources";
+  }
+  if ("getsysresources".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysResources'] = "getSysResources";
+  }
+  if ("_getresources".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getResources'] = "_getResources";
+  }
+  if ("getappdateformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDateFormat'] = "getAppDateFormat";
+  }
+  if ("getappdateonlyformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDateOnlyFormat'] = "getAppDateOnlyFormat";
+  }
+  if ("getsysdateformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysDateFormat'] = "getSysDateFormat";
+  }
+  if ("getsysdateonlyformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysDateOnlyFormat'] = "getSysDateOnlyFormat";
+  }
+  if ("getappentitymodel".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppEntityModel'] = "getAppEntityModel";
+  }
+  if ("getappentitymodels".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppEntityModels'] = "getAppEntityModels";
+  }
+  if ("getapplatestversion".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppLatestVersion'] = "getAppLatestVersion";
+  }
+  if ("getappsvninfo".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppSvnInfo'] = "getAppSvnInfo";
+  }
+  if ("getappversion".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppVersion'] = "getAppVersion";
+  }
+  if ("getappversions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppVersions'] = "getAppVersions";
+  }
+  if ("getappversionrb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppVersionRb'] = "getAppVersionRb";
+  }
+  if ("getsyslatestversion".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysLatestVersion'] = "getSysLatestVersion";
+  }
+  if ("getsyssvninfo".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysSvnInfo'] = "getSysSvnInfo";
+  }
+  if ("getsysversion".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysVersion'] = "getSysVersion";
+  }
+  if ("getsysversions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysVersions'] = "getSysVersions";
+  }
+  if ("getsysversionrb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSysVersionRb'] = "getSysVersionRb";
+  }
+  if ("getappworkflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppWorkflow'] = "getAppWorkflow";
+  }
+  if ("getappworkflows".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppWorkflows'] = "getAppWorkflows";
+  }
+  if ("getuserlocale".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getUserLocale'] = "getUserLocale";
+  }
+  if ("getuserlocales".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getUserLocales'] = "getUserLocales";
+  }
+  if ("init".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_init'] = "init";
+  }
+  if ("isappinitialized".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isAppInitialized'] = "isAppInitialized";
+  }
+  if ("appkeyisvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_appKeyIsValid'] = "appKeyIsValid";
+  }
+  if ("getruntime".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getRunTime'] = "getRunTime";
+  }
+  if ("getrequesturi".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getRequestUri'] = "getRequestUri";
+  }
+  if ("getservername".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getServerName'] = "getServerName";
+  }
+  if ("getserveruri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getServerUri'] = "getServerUri";
+  }
+  if ("hasappdb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_hasAppDb'] = "hasAppDb";
+  }
+  if ("hassysdb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_hasSysDb'] = "hasSysDb";
+  }
+  if ("issecure".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isSecure'] = "isSecure";
+  }
+  if ("runningfromcli".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_runningFromCli'] = "runningFromCli";
+  }
+  if ("runningfromconsole".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_runningFromConsole'] = "runningFromConsole";
+  }
+  if ("_compressoutput".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__compressOutput'] = "_compressOutput";
+  }
+  if ("_getsvninfo".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getSvnInfo'] = "_getSvnInfo";
+  }
+  if ("_populatedefaultdbconf".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__populateDefaultDbConf'] = "_populateDefaultDbConf";
+  }
+  if ("registershutdownmethod".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_registerShutdownMethod'] = "registerShutdownMethod";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_Controller</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/core.html" target="contentFrame">core</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_Controller</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> This class provides static methods that may be used to initialize
+  applications, retrieve references to application and system objects such as
+  SRA_Template and SRA_Database instances, configuration information, and more
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CONTROLLER_DEBUG">SRA_CONTROLLER_DEBUG</a></pre>
+<pre> This constant specifies whether or not the system should run in debug mode.
+  This mode enables any debug messages to be sent to the active console.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIB_DIR">SRA_LIB_DIR</a></pre>
+<pre> The base directory of the system library (does not include trailing /).
+  This constant is used by many of the class files to import dependent class files.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DIR">SRA_DIR</a></pre>
+<pre> The base directory of the system.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_APP_DIR_NAME">SRA_APP_DIR_NAME</a></pre>
+<pre> the default name of the applications directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_BIN_DIR_NAME">SRA_BIN_DIR_NAME</a></pre>
+<pre> the name of the sierra and app bin directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CONF_DIR_NAME">SRA_CONF_DIR_NAME</a></pre>
+<pre> The base name of the sierra and app configuration directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CONF_DIR">SRA_CONF_DIR</a></pre>
+<pre> The base name of the sierra and app configuration directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_CONFIG_KEY">SRA_ENTITY_MODELER_CONFIG_KEY</a></pre>
+<pre> Defines the app-conf attribute name used to specify whether or not to
+  use the SRA_EntityModeler
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LICENSE_PREFIX">SRA_LICENSE_PREFIX</a></pre>
+<pre> the file name prefix used to store license acceptance files (see
+  app-config.dtd &quot;license&quot; attribute documentation for more information)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LICENSE_VAR">SRA_LICENSE_VAR</a></pre>
+<pre> the default license acceptance field name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>float </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_START_TIME">SRA_START_TIME</a></pre>
+<pre> the time that this file was initially included into the current running
+  PHP process
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TMP_DIR_NAME">SRA_TMP_DIR_NAME</a></pre>
+<pre> The base name of the sierra and app temp directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TMP_DIR">SRA_TMP_DIR</a></pre>
+<pre> The base name of the sierra and app configuration directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_APP_RB_NAME">SRA_APP_RB_NAME</a></pre>
+<pre> The default name of the SRA_Template context variable to assign the app
+  SRA_ResourceBundle reference to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SYS_CONFIG">SRA_SYS_CONFIG</a></pre>
+<pre> The SRA_DIR relative path to the system config file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_APP_CONFIG">SRA_APP_CONFIG</a></pre>
+<pre> The app base directory relative path to the app config file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SYS_PHP_EXTENSION">SRA_SYS_PHP_EXTENSION</a></pre>
+<pre> The default PHP extension to use
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SYS_XML_EXTENSION">SRA_SYS_XML_EXTENSION</a></pre>
+<pre> The default XML extension to use
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_MAX_INT_VAL">SRA_MAX_INT_VAL</a></pre>
+<pre> the maximum integer value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_DATE_FORMAT">SRA_DEFAULT_DATE_FORMAT</a></pre>
+<pre> the default SRA_GregorianDate::toString display format as specified in the
+  sierra-config dtd for date-format
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_DATE_ONLY_FORMAT">SRA_DEFAULT_DATE_ONLY_FORMAT</a></pre>
+<pre> the default SRA_GregorianDate::toString display format as specified in the
+  sierra-config dtd for date-only-format
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_ERROR_LOG_FILE">SRA_DEFAULT_ERROR_LOG_FILE</a></pre>
+<pre> the default error-log-file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_LOG_DIR">SRA_DEFAULT_LOG_DIR</a></pre>
+<pre> the default log-dir
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_LIB_DIR">SRA_DEFAULT_LIB_DIR</a></pre>
+<pre> the default app lib-dir
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_HTML_DIR">SRA_DEFAULT_HTML_DIR</a></pre>
+<pre> the default application html directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_TEMPLATES_DIR">SRA_DEFAULT_TEMPLATES_DIR</a></pre>
+<pre> the default templates directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_PATH_SEPARATOR">SRA_PATH_SEPARATOR</a></pre>
+<pre> used to separate directories in the include_path environment variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_PS_PATH">SRA_PS_PATH</a></pre>
+<pre> name of the ps cli program
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_VERSION_FILE">SRA_VERSION_FILE</a></pre>
+<pre> the name of the version information file (stored in the framework and app
+  &quot;etc&quot; directory). this file contains the following values:
+    svn-ci-password=[overrides svn-password for checkin operations]
+    svn-ci-path=[overrides svn-path for checkin operations]
+    svn-ci-url=[overrides svn-url for checkin operations]
+    svn-ci-user=[overrides svn-user for checkin operations]
+    svn-password=[the subversion repository password]
+    svn-path=[the name of the framework/app subversion repository]
+    svn-url=[the url to the subversion repository containing the framework/app]
+    svn-user=[the subversion repository username]
+    version=[current version identifier]
+    versions-info=[path or uri to the versions info file]
+    versions-readme=[path or uri to the versions readme file]
+  the versions-info file contains a list of all of the available versions in
+  the format (where the topmost entry is considered the latest version):
+    [version id]=[path or uri to source archive]
+  the versions-readme file contains a list of the readme notes for each version
+  in the format:
+    [version id]=[path or uri to change info notes]
+  use the SRA_Controller::getAppSvnInfo, SRA_Controller::getSysSvnInfo,
+  SRA_Controller::getAppVersion, SRA_Controller::getSysVersion,
+  SRA_Controller::getAppVersionRb, SRA_Controller::getSysVersionRb,
+  SRA_Controller::getAppVersions, SRA_Controller::getSysVersions,
+  SRA_Controller::getAppLatestVersion, and SRA_Controller::getSysLatestVersion
+  methods to retrieve and use the data provided in these files
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_HOSTNAME">SRA_HOSTNAME</a></pre>
+<pre> the hostname for the server
+</pre>      </td>
+    </tr>
+  </table>
+  
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAllAppConfs">getAllAppConfs</a>()</pre>
+<pre> Returns a reference to an array of all app configuration arrays, indexed by
+  app key. If this is the first time that this method has been called then it
+  will have to load the configurations and assign them to static variables.
+  If not, it will simply return a reference to the existing static variables
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppDb">getAppDb</a>(string $id=FALSE)</pre>
+<pre> Returns a reference to the currently active app database connection if
+  it exists, otherwise, a sys db connection will be returned (if it exists)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSysDb">getSysDb</a>(string $id=FALSE)</pre>
+<pre> This is the only method that can be referenced before init. It returns a
+  reference to the system database as is configured in the system etc file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppConf">getAppConf</a>(string $appKey=NULL)</pre>
+<pre> Returns a reference to the active app&#039;s configuration array
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSysConf">getSysConf</a>(boolean $resetCache=FALSE)</pre>
+<pre> Returns a reference to the system configuration array. If this is the first
+  time that this method has been called then it will have to load the
+  configuration and assign it to a static variable. If not, it will simply
+  return a reference to the existing static variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppDir">getAppDir</a>()</pre>
+<pre> Returns the path to the app base directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysDir">getSysDir</a>()</pre>
+<pre> Returns the path to the sierra framework base directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppConfDir">getAppConfDir</a>()</pre>
+<pre> Returns the path to the app configuration directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysConfDir">getSysConfDir</a>()</pre>
+<pre> Returns the path to the sierra configuration directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppLibDir">getAppLibDir</a>()</pre>
+<pre> Returns the path to the app base lib directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysLibDir">getSysLibDir</a>()</pre>
+<pre> Returns the path to the system lib directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppName">getAppName</a>()</pre>
+<pre> Returns the name of the current initialized application. this is the app
+  identifier (key), or the string that maps to that identifer in the
+  application resources (app.properties)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getAppParams">getAppParams</a>(string $id=NULL, string $type=NULL)</pre>
+<pre> returns parameters specified in the app-config for the current running
+  application. if $id is specified, the return value will the value for
+  that param. if $type is specified, only params of that type will be
+  returned. if neither $id nor $type are specified, then the full
+  SRA_Params object will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysParams">getSysParams</a>(string $id=NULL, string $type=NULL)</pre>
+<pre> returns parameters system wide parameters as specified in
+  sierra-config.xml. if $id is specified, the return value will the value
+  for that param. if $type is specified, only params of that type will be
+  returned. if neither $id nor $type are specified, then the full
+  SRA_Params object will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppShortName">getAppShortName</a>()</pre>
+<pre> Returns the short name of the current initialized application. this is
+  the resource bundle value &#039;[app id].short&#039;, or SRA_Controller::getAppName
+  if that key value does not exist
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppHtmlDir">getAppHtmlDir</a>()</pre>
+<pre> Returns the path to the current application&#039;s html directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppTplDir">getAppTplDir</a>()</pre>
+<pre> Returns the templates directory for the current active app if
+  initialized, the framework otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysTplDir">getSysTplDir</a>()</pre>
+<pre> Returns the templates directory for the system
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppErrorLogFile">getAppErrorLogFile</a>()</pre>
+<pre> Returns the path to the error log file that should be used currently.
+  this will be the system error-log-file unless a app is initialized
+  and a app specific log file has been specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysErrorLogFile">getSysErrorLogFile</a>()</pre>
+<pre> Returns the path to the framework wide error log file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isAppInDebug">isAppInDebug</a>()</pre>
+<pre> returns TRUE if &#039;debug&#039; is set in app-config,
+  SRA_Controller::isSysInDebug otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isSysInDebug">isSysInDebug</a>()</pre>
+<pre> returns TRUE if &#039;debug&#039; is set in sierra-config, SRA_CONTROLLER_DEBUG
+  otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getCurrentAppId">getCurrentAppId</a>()</pre>
+<pre> Returns the app key (string identifier) of the currently initialized app
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppLocale">getAppLocale</a>()</pre>
+<pre> Returns the default SRA_Locale associated with the active app if one is
+  active, otherwise the sys locale
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSysLocale">getSysLocale</a>()</pre>
+<pre> Returns the default SRA_Locale for the system
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="core.SRA_Template.html" target="contentFrame">SRA_Template</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppTemplate">getAppTemplate</a>()</pre>
+<pre> Returns a reference to an application specific SRA_Template object. If
+  this is the first time that this method has been called
+  then it will have to instantiate the SRA_Template object and assign it
+  to a static variable. If not, it will simply return a reference to
+  the existing static variable.
+ 
+  This method will automatically add the following template reference
+  variables:
+    Controller: a reference to an SRA_Controller instance
+    Date: a reference to a SRA_GregorianDate instance
+    Error: a reference to a SRA_Error instance
+    File: a reference to a SRA_File instance
+    Locale: a reference to the user&#039;s preferred SRA_Locale
+    Util: a reference to a SRA_Util instance
+    Template: a reference to the SRA_Template that is returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="core.SRA_Template.html" target="contentFrame">SRA_Template</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSysTemplate">getSysTemplate</a>()</pre>
+<pre> Returns a reference to an system SRA_Template object. If this is the first
+  time that this method has been called then it will have to instantiate the
+  SRA_Template object and assign it to a static variable. If not, it will
+  simply return a reference to the existing static variable.
+ 
+  This method will automatically add the following template reference
+  variables:
+    Controller: a reference to an SRA_Controller instance
+    Date: a reference to a SRA_GregorianDate instance
+    Error: a reference to a SRA_Error instance
+    File: a reference to a SRA_File instance
+    Locale: a reference to the user&#039;s preferred SRA_Locale
+    Util: a reference to a SRA_Util instance
+    Template: a reference to the SRA_Template that is returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppTimeZone">getAppTimeZone</a>(boolean $id=FALSE)</pre>
+<pre> Returns the SRA_TimeZone for the current initialized app, if not app
+  is initialized, or a default timezone is not specified for the app,
+  SRA_Controller::getSysTimeZone will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSysTimeZone">getSysTimeZone</a>(boolean $id=FALSE)</pre>
+<pre> Returns the temp directory for the system
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppLogDir">getAppLogDir</a>()</pre>
+<pre> Returns the log directory for the current active app if initialized,
+  the framework otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysLogDir">getSysLogDir</a>()</pre>
+<pre> Returns the log directory for the system
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppTmpDir">getAppTmpDir</a>()</pre>
+<pre> Returns the temp directory for the current active app if initialized, the
+  framework otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysTmpDir">getSysTmpDir</a>()</pre>
+<pre> Returns the temp directory for the system
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppConfAttr">getAppConfAttr</a>($attr)</pre>
+<pre> Returns a configuration attribute value for the currently initialized app
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysConfAttr">getSysConfAttr</a>($attr)</pre>
+<pre> Returns a configuration attribute value for the system
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppDefaultCountry">getAppDefaultCountry</a>()</pre>
+<pre> Returns the default SRA_Locale country to use
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysDefaultCountry">getSysDefaultCountry</a>()</pre>
+<pre> Returns the default SRA_Locale country to use for the entire framework
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppDefaultCurrency">getAppDefaultCurrency</a>()</pre>
+<pre> Returns the default currency to use
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysDefaultCurrency">getSysDefaultCurrency</a>()</pre>
+<pre> Returns the default currency to use for the entire framework
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppDefaultLanguage">getAppDefaultLanguage</a>()</pre>
+<pre> Returns the default SRA_Locale language to use
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysDefaultLanguage">getSysDefaultLanguage</a>()</pre>
+<pre> Returns the default SRA_Locale language to use for the entire framework
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppErrorMask">getAppErrorMask</a>()</pre>
+<pre> Returns the app error-mask (if a app is initialized, otherwise
+  returns the framework error-mask)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysErrorMask">getSysErrorMask</a>()</pre>
+<pre> Returns the framework error-mask if specified, SRA_DEFAULT_ERROR_MASK
+  otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppResources">getAppResources</a>()</pre>
+<pre> Returns a reference to the SRA_ResourceBundle for the active app according
+  to the preferences specified in the app config
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSysResources">getSysResources</a>()</pre>
+<pre> Returns a reference to the global SRA_ResourceBundle according to the
+  preferences specified in sierra config
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method__getResources">_getResources</a>($bundles, $locales=FALSE, $sysSpecific=FALSE)</pre>
+<pre> Returns a reference to the global SRA_ResourceBundle according to the
+  preferences specified in sierra config
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getAppDateFormat">getAppDateFormat</a>()</pre>
+<pre> returns the &quot;date-format&quot; specified in the app-config for the current
+  active app. if no &quot;date-format&quot; was specified in app-config,
+  SRA_Controller::getSysDateFormat will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getAppDateOnlyFormat">getAppDateOnlyFormat</a>()</pre>
+<pre> returns the &quot;date-only-format&quot; specified in the app-config for the current
+  active app. if no &quot;date-only-format&quot; was specified in app-config,
+  SRA_Controller::getSysDateOnlyFormat will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getSysDateFormat">getSysDateFormat</a>()</pre>
+<pre> returns the &quot;date-format&quot; specified in the sierra-config. if no
+  &quot;date-format&quot; has been specified in sierra-config the constant
+  SRA_DEFAULT_DATE_FORMAT will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_getSysDateOnlyFormat">getSysDateOnlyFormat</a>()</pre>
+<pre> returns the &quot;date-only-format&quot; specified in the sierra-config. if no
+  &quot;date-only-format&quot; has been specified in sierra-config the constant
+  SRA_DEFAULT_DATE_ONLY_FORMAT will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppEntityModel">getAppEntityModel</a>(string $id)</pre>
+<pre> returns an associative array with the keys: &#039;name&#039;, &#039;path&#039; for the
+  entity model specified by $id
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppEntityModels">getAppEntityModels</a>()</pre>
+<pre> returns the &quot;use-entity-model&quot; configuration for the current app. this will
+  be an associative array indexed by entity-model key and the value is an
+  associative array with the keys: &#039;name&#039;, &#039;path&#039;, &#039;resources&#039;, where
+  resources is the path to the resource bundle for this workflow
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppLatestVersion">getAppLatestVersion</a>()</pre>
+<pre> returns the identifier of the latest version for the current application.
+  returns NULL if no version info is available
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public hash</pre></td>
+      <td>
+        <pre><a href="#method_getAppSvnInfo">getAppSvnInfo</a>(boolean $checkin=FALSE)</pre>
+<pre> returns the subversion repository information for the current application.
+  this value will be a hash with the following keys:
+    password: the subversion repository password (optional)
+    path:     the name of the framework/app subversion repository
+    url:      the url to the subversion repository containing the framework/app
+    user:     the subversion repository username (optional)
+  if this information has not been specified in SRA_VERSION_FILE, NULL will
+  be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppVersion">getAppVersion</a>()</pre>
+<pre> returns the version identifier of the current application. returns NULL
+  if no version info is available
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public hash</pre></td>
+      <td>
+        <pre><a href="#method_getAppVersions">getAppVersions</a>()</pre>
+<pre> returns an array of versions available for the application. the return
+  value is a hash indexed by version id where the value is a hash with the
+  following keys:
+    version: the version id
+    readme:  the path or uri to the readme file for this version (optional)
+    src:     the path or uri to the version source archive
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a></pre></td>
+      <td>
+        <pre><a href="#method_getAppVersionRb">getAppVersionRb</a>()</pre>
+<pre> returns a reference to the SRA_ResourceBundle instance representing the
+  application version file (SRA_VERSION_FILE). returns NULL if no version
+  file exists
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysLatestVersion">getSysLatestVersion</a>()</pre>
+<pre> returns the identifier of the latest version for the framework
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public hash</pre></td>
+      <td>
+        <pre><a href="#method_getSysSvnInfo">getSysSvnInfo</a>(boolean $checkin=FALSE)</pre>
+<pre> returns the subversion repository information for the framework. this value
+  will be a hash with the following keys:
+    password: the subversion repository password (optional)
+    path:     the name of the framework/app subversion repository
+    url:      the url to the subversion repository containing the framework/app
+    user:     the subversion repository username (optional)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSysVersion">getSysVersion</a>()</pre>
+<pre> returns the version identifier of the framework. returns NULL if no version
+  info is available
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public hash</pre></td>
+      <td>
+        <pre><a href="#method_getSysVersions">getSysVersions</a>()</pre>
+<pre> returns an array of versions available for the framework. the return
+  value is a hash indexed by version id where the value is a hash with the
+  following keys:
+    version: the version id
+    readme:  the path or uri to the readme file for this version (optional)
+    src:     the path or uri to the version source archive
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a></pre></td>
+      <td>
+        <pre><a href="#method_getSysVersionRb">getSysVersionRb</a>()</pre>
+<pre> returns a reference to the SRA_ResourceBundle instance representing the
+  framework version file (SRA_VERSION_FILE)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppWorkflow">getAppWorkflow</a>(string $id)</pre>
+<pre> returns an associative array with the keys: &#039;name&#039;, &#039;path&#039; for the workflow
+  specified by $id
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppWorkflows">getAppWorkflows</a>()</pre>
+<pre> returns the &quot;use-workflow&quot; configuration for the current app. this will
+  be an associative array indexed by entity-model key and the value is an
+  associative array with the keys: &#039;name&#039;, &#039;path&#039;, &#039;resources&#039;, where
+  resources is the path to the resource bundle for this workflow
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getUserLocale">getUserLocale</a>()</pre>
+<pre> Returns the preferred user locale as determined from the
+  $_SERVER[&#039;HTTP_ACCEPT_LANGUAGE&#039;] global variable and the users&#039;
+  predefined browser language settings. if the locales cannot be determined
+  then the default app SRA_Locale will be returned. Only the first (the
+  highest priority) SRA_Locale specified in the user&#039;s browser settings will
+  be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_Locale[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getUserLocales">getUserLocales</a>()</pre>
+<pre> Returns the preferred user locales as determined from the
+  $_SERVER[&#039;HTTP_ACCEPT_LANGUAGE&#039;] global variable and the users&#039;
+  predefined browser language settings. if the locales cannot be determined
+  then the default app SRA_Locale will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_init">init</a>(string $appKey, $ignoreAuth=FALSE, $skipEntityModels=FALSE, boolean $skipLicensing=FALSE, boolean $skipBrowserCompatibility=FALSE)</pre>
+<pre> This method should be called before any other app specific methods. It
+  requires a app identifier key that specifies which app config information
+  identified in the system etc file to use. If a valid key is not provided or
+  if any other errors occur this method will return an SRA_Error object.
+ 
+  Whenever the init method is called, any existing static _db or _template
+  references will be destroyed. This will allow the app object to be called
+  multiple times within one process for different apps. returns TRUE if the
+  application was initialized, FALSE if was already initialized, and an error
+  object if $appKey is not valid or another error occurs
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isAppInitialized">isAppInitialized</a>(string $app=NULL)</pre>
+<pre> returns TRUE if $app has been initialized, FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_appKeyIsValid">appKeyIsValid</a>($appKey)</pre>
+<pre> This method returns true if the app key specified is a valid app key
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_getRunTime">getRunTime</a>(int $decimalPrecision=2)</pre>
+<pre> returns the runtime of the current php process in seconds
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getRequestUri">getRequestUri</a>($includeProtocol=TRUE)</pre>
+<pre> Returns the full request uri
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getServerName">getServerName</a>()</pre>
+<pre> Returns the server name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getServerUri">getServerUri</a>(boolean $includeProtocol=TRUE)</pre>
+<pre> Returns the base server uri
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_hasAppDb">hasAppDb</a>()</pre>
+<pre> returns TRUE if an application database has been defined
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_hasSysDb">hasSysDb</a>()</pre>
+<pre> returns TRUE if a system database has been defined
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isSecure">isSecure</a>()</pre>
+<pre> Returns TRUE if the current connection is secure
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_runningFromCli">runningFromCli</a>()</pre>
+<pre> returns TRUE when the framework is being from the the command line (not
+  running from an http request)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_runningFromConsole">runningFromConsole</a>()</pre>
+<pre> returns TRUE when the framework is being from the the console
+  (bin/sra-console.php)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method__compressOutput">_compressOutput</a>()</pre>
+<pre> starts output buffering and compression where supported. this will
+  result in the entire output being buffered until completion, and then
+  output in a compressed (gzip) format to the browser
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public hash</pre></td>
+      <td>
+        <pre><a href="#method__getSvnInfo">_getSvnInfo</a>($rb, boolean $checkin)</pre>
+<pre> returns the subversion repository information for the $rb specified. this
+  value will be a hash with the following keys:
+    password: the subversion repository password (optional)
+    path:     the name of the framework/app subversion repository
+    url:      the url to the subversion repository containing the framework/app
+    user:     the subversion repository username (optional)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre>&amp;<a href="#method__populateDefaultDbConf">_populateDefaultDbConf</a>(array $conf)</pre>
+<pre> Used to populate default etc values in a db etc element of a app
+  or system configuration
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_registerShutdownMethod">registerShutdownMethod</a>($obj, $methodName, $params=NULL, $shutdown=FALSE)</pre>
+<pre> This method is used to register an object method that should be called when the end
+  of the current server process ends. This may be useful in order to perform any object
+  specific cleanup or shutdown operations such as closing a connection to a database or
+  an open file pointer. An SRA_Error will be returned if the method specified is not part
+  of the object.
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_CONTROLLER_DEBUG">SRA_CONTROLLER_DEBUG</h3>
+  <pre>boolean <b>SRA_CONTROLLER_DEBUG</b> = FALSE</pre>
+  <pre> This constant specifies whether or not the system should run in debug mode.
+  This mode enables any debug messages to be sent to the active console.
+</pre>
+ <hr />  <h3 id="constant_SRA_LIB_DIR">SRA_LIB_DIR</h3>
+  <pre>string <b>SRA_LIB_DIR</b> = dirname(dirname(realpath(__FILE__)))</pre>
+  <pre> The base directory of the system library (does not include trailing /).
+  This constant is used by many of the class files to import dependent class files.
+</pre>
+ <hr />  <h3 id="constant_SRA_DIR">SRA_DIR</h3>
+  <pre>string <b>SRA_DIR</b> = dirname(SRA_LIB_DIR)</pre>
+  <pre> The base directory of the system.
+</pre>
+ <hr />  <h3 id="constant_SRA_APP_DIR_NAME">SRA_APP_DIR_NAME</h3>
+  <pre>string <b>SRA_APP_DIR_NAME</b> = 'app'</pre>
+  <pre> the default name of the applications directory
+</pre>
+ <hr />  <h3 id="constant_SRA_BIN_DIR_NAME">SRA_BIN_DIR_NAME</h3>
+  <pre>string <b>SRA_BIN_DIR_NAME</b> = 'bin'</pre>
+  <pre> the name of the sierra and app bin directory
+</pre>
+ <hr />  <h3 id="constant_SRA_CONF_DIR_NAME">SRA_CONF_DIR_NAME</h3>
+  <pre>string <b>SRA_CONF_DIR_NAME</b> = 'etc'</pre>
+  <pre> The base name of the sierra and app configuration directory
+</pre>
+ <hr />  <h3 id="constant_SRA_CONF_DIR">SRA_CONF_DIR</h3>
+  <pre>string <b>SRA_CONF_DIR</b> = SRA_DIR . '/' . SRA_CONF_DIR_NAME</pre>
+  <pre> The base name of the sierra and app configuration directory
+</pre>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_CONFIG_KEY">SRA_ENTITY_MODELER_CONFIG_KEY</h3>
+  <pre><b>SRA_ENTITY_MODELER_CONFIG_KEY</b> = 'use-entity-model'</pre>
+  <pre> Defines the app-conf attribute name used to specify whether or not to
+  use the SRA_EntityModeler
+</pre>
+ <hr />  <h3 id="constant_SRA_LICENSE_PREFIX">SRA_LICENSE_PREFIX</h3>
+  <pre>string <b>SRA_LICENSE_PREFIX</b> = '.sra-license-'</pre>
+  <pre> the file name prefix used to store license acceptance files (see
+  app-config.dtd &quot;license&quot; attribute documentation for more information)
+</pre>
+ <hr />  <h3 id="constant_SRA_LICENSE_VAR">SRA_LICENSE_VAR</h3>
+  <pre>string <b>SRA_LICENSE_VAR</b> = 'licenseAccepted'</pre>
+  <pre> the default license acceptance field name
+</pre>
+ <hr />  <h3 id="constant_SRA_START_TIME">SRA_START_TIME</h3>
+  <pre>float <b>SRA_START_TIME</b> = microtime(TRUE)</pre>
+  <pre> the time that this file was initially included into the current running
+  PHP process
+</pre>
+ <hr />  <h3 id="constant_SRA_TMP_DIR_NAME">SRA_TMP_DIR_NAME</h3>
+  <pre>string <b>SRA_TMP_DIR_NAME</b> = 'tmp'</pre>
+  <pre> The base name of the sierra and app temp directory
+</pre>
+ <hr />  <h3 id="constant_SRA_TMP_DIR">SRA_TMP_DIR</h3>
+  <pre>string <b>SRA_TMP_DIR</b> = SRA_DIR . '/' . SRA_TMP_DIR_NAME</pre>
+  <pre> The base name of the sierra and app configuration directory
+</pre>
+ <hr />  <h3 id="constant_SRA_APP_RB_NAME">SRA_APP_RB_NAME</h3>
+  <pre>string <b>SRA_APP_RB_NAME</b> = 'resources'</pre>
+  <pre> The default name of the SRA_Template context variable to assign the app
+  SRA_ResourceBundle reference to
+</pre>
+ <hr />  <h3 id="constant_SRA_SYS_CONFIG">SRA_SYS_CONFIG</h3>
+  <pre>string <b>SRA_SYS_CONFIG</b> = SRA_CONF_DIR_NAME . '/sierra-config.xml'</pre>
+  <pre> The SRA_DIR relative path to the system config file
+</pre>
+ <hr />  <h3 id="constant_SRA_APP_CONFIG">SRA_APP_CONFIG</h3>
+  <pre>string <b>SRA_APP_CONFIG</b> = SRA_CONF_DIR_NAME . '/app-config.xml'</pre>
+  <pre> The app base directory relative path to the app config file
+</pre>
+ <hr />  <h3 id="constant_SRA_SYS_PHP_EXTENSION">SRA_SYS_PHP_EXTENSION</h3>
+  <pre>string <b>SRA_SYS_PHP_EXTENSION</b> = 'php'</pre>
+  <pre> The default PHP extension to use
+</pre>
+ <hr />  <h3 id="constant_SRA_SYS_XML_EXTENSION">SRA_SYS_XML_EXTENSION</h3>
+  <pre>string <b>SRA_SYS_XML_EXTENSION</b> = 'xml'</pre>
+  <pre> The default XML extension to use
+</pre>
+ <hr />  <h3 id="constant_SRA_MAX_INT_VAL">SRA_MAX_INT_VAL</h3>
+  <pre>int <b>SRA_MAX_INT_VAL</b> = 2147483647</pre>
+  <pre> the maximum integer value
+</pre>
+ <hr />  <h3 id="constant_SRA_DEFAULT_DATE_FORMAT">SRA_DEFAULT_DATE_FORMAT</h3>
+  <pre>string <b>SRA_DEFAULT_DATE_FORMAT</b> = 'Y-m-d H:i:s'</pre>
+  <pre> the default SRA_GregorianDate::toString display format as specified in the
+  sierra-config dtd for date-format
+</pre>
+ <hr />  <h3 id="constant_SRA_DEFAULT_DATE_ONLY_FORMAT">SRA_DEFAULT_DATE_ONLY_FORMAT</h3>
+  <pre>string <b>SRA_DEFAULT_DATE_ONLY_FORMAT</b> = 'Y-m-d'</pre>
+  <pre> the default SRA_GregorianDate::toString display format as specified in the
+  sierra-config dtd for date-only-format
+</pre>
+ <hr />  <h3 id="constant_SRA_DEFAULT_ERROR_LOG_FILE">SRA_DEFAULT_ERROR_LOG_FILE</h3>
+  <pre>string <b>SRA_DEFAULT_ERROR_LOG_FILE</b> = 'sra-err.log'</pre>
+  <pre> the default error-log-file
+</pre>
+ <hr />  <h3 id="constant_SRA_DEFAULT_LOG_DIR">SRA_DEFAULT_LOG_DIR</h3>
+  <pre>string <b>SRA_DEFAULT_LOG_DIR</b> = 'log'</pre>
+  <pre> the default log-dir
+</pre>
+ <hr />  <h3 id="constant_SRA_DEFAULT_LIB_DIR">SRA_DEFAULT_LIB_DIR</h3>
+  <pre>string <b>SRA_DEFAULT_LIB_DIR</b> = 'lib'</pre>
+  <pre> the default app lib-dir
+</pre>
+ <hr />  <h3 id="constant_SRA_DEFAULT_HTML_DIR">SRA_DEFAULT_HTML_DIR</h3>
+  <pre>string <b>SRA_DEFAULT_HTML_DIR</b> = 'www/html'</pre>
+  <pre> the default application html directory
+</pre>
+ <hr />  <h3 id="constant_SRA_DEFAULT_TEMPLATES_DIR">SRA_DEFAULT_TEMPLATES_DIR</h3>
+  <pre>string <b>SRA_DEFAULT_TEMPLATES_DIR</b> = 'www/tpl'</pre>
+  <pre> the default templates directory
+</pre>
+ <hr />  <h3 id="constant_SRA_PATH_SEPARATOR">SRA_PATH_SEPARATOR</h3>
+  <pre>string <b>SRA_PATH_SEPARATOR</b> = ':'</pre>
+  <pre> used to separate directories in the include_path environment variable
+</pre>
+ <hr />  <h3 id="constant_SRA_PS_PATH">SRA_PS_PATH</h3>
+  <pre>string <b>SRA_PS_PATH</b> = 'ps'</pre>
+  <pre> name of the ps cli program
+</pre>
+ <hr />  <h3 id="constant_SRA_VERSION_FILE">SRA_VERSION_FILE</h3>
+  <pre>string <b>SRA_VERSION_FILE</b> = '.version'</pre>
+  <pre> the name of the version information file (stored in the framework and app
+  &quot;etc&quot; directory). this file contains the following values:
+    svn-ci-password=[overrides svn-password for checkin operations]
+    svn-ci-path=[overrides svn-path for checkin operations]
+    svn-ci-url=[overrides svn-url for checkin operations]
+    svn-ci-user=[overrides svn-user for checkin operations]
+    svn-password=[the subversion repository password]
+    svn-path=[the name of the framework/app subversion repository]
+    svn-url=[the url to the subversion repository containing the framework/app]
+    svn-user=[the subversion repository username]
+    version=[current version identifier]
+    versions-info=[path or uri to the versions info file]
+    versions-readme=[path or uri to the versions readme file]
+  the versions-info file contains a list of all of the available versions in
+  the format (where the topmost entry is considered the latest version):
+    [version id]=[path or uri to source archive]
+  the versions-readme file contains a list of the readme notes for each version
+  in the format:
+    [version id]=[path or uri to change info notes]
+  use the SRA_Controller::getAppSvnInfo, SRA_Controller::getSysSvnInfo,
+  SRA_Controller::getAppVersion, SRA_Controller::getSysVersion,
+  SRA_Controller::getAppVersionRb, SRA_Controller::getSysVersionRb,
+  SRA_Controller::getAppVersions, SRA_Controller::getSysVersions,
+  SRA_Controller::getAppLatestVersion, and SRA_Controller::getSysLatestVersion
+  methods to retrieve and use the data provided in these files
+</pre>
+ <hr />  <h3 id="constant_SRA_HOSTNAME">SRA_HOSTNAME</h3>
+  <pre>string <b>SRA_HOSTNAME</b> = trim(shell_exec('/bin/hostname'))</pre>
+  <pre> the hostname for the server
+</pre>
+
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_getAllAppConfs">getAllAppConfs</h3>
+  <pre>public array function &amp;<b>getAllAppConfs</b>()</pre>
+  <pre> Returns a reference to an array of all app configuration arrays, indexed by
+  app key. If this is the first time that this method has been called then it
+  will have to load the configurations and assign them to static variables.
+  If not, it will simply return a reference to the existing static variables
+</pre>
+ <hr />  <h3 id="method_getAppDb">getAppDb</h3>
+  <pre>public <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> function &amp;<b>getAppDb</b>(string $id=FALSE)</pre>
+  <pre> Returns a reference to the currently active app database connection if
+  it exists, otherwise, a sys db connection will be returned (if it exists)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the identifier of the database to return. this parameter  is optional. if not specified, the first database defined in the app
+  configuration will be returned</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSysDb">getSysDb</h3>
+  <pre>public <a href="sql.SRA_Database.html" target="contentFrame">SRA_Database</a> function &amp;<b>getSysDb</b>(string $id=FALSE)</pre>
+  <pre> This is the only method that can be referenced before init. It returns a
+  reference to the system database as is configured in the system etc file
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the identifier of the database to return. this parameter  is optional. if not specified, the first database defined in the
+  configuration will be returned</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppConf">getAppConf</h3>
+  <pre>public array function &amp;<b>getAppConf</b>(string $appKey=NULL)</pre>
+  <pre> Returns a reference to the active app&#039;s configuration array
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>appKey</td>
+      <td>string</td>
+      <td><pre>optional parameter that specifies which app config  array to return. If not specified, the currently initialized app config
+  will be returned.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSysConf">getSysConf</h3>
+  <pre>public array function &amp;<b>getSysConf</b>(boolean $resetCache=FALSE)</pre>
+  <pre> Returns a reference to the system configuration array. If this is the first
+  time that this method has been called then it will have to load the
+  configuration and assign it to a static variable. If not, it will simply
+  return a reference to the existing static variable
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>resetCache</td>
+      <td>boolean</td>
+      <td><pre>resets the system config cache</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppDir">getAppDir</h3>
+  <pre>public string function <b>getAppDir</b>()</pre>
+  <pre> Returns the path to the app base directory
+</pre>
+ <hr />  <h3 id="method_getSysDir">getSysDir</h3>
+  <pre>public string function <b>getSysDir</b>()</pre>
+  <pre> Returns the path to the sierra framework base directory
+</pre>
+ <hr />  <h3 id="method_getAppConfDir">getAppConfDir</h3>
+  <pre>public string function <b>getAppConfDir</b>()</pre>
+  <pre> Returns the path to the app configuration directory
+</pre>
+ <hr />  <h3 id="method_getSysConfDir">getSysConfDir</h3>
+  <pre>public string function <b>getSysConfDir</b>()</pre>
+  <pre> Returns the path to the sierra configuration directory
+</pre>
+ <hr />  <h3 id="method_getAppLibDir">getAppLibDir</h3>
+  <pre>public string function <b>getAppLibDir</b>()</pre>
+  <pre> Returns the path to the app base lib directory
+</pre>
+ <hr />  <h3 id="method_getSysLibDir">getSysLibDir</h3>
+  <pre>public string function <b>getSysLibDir</b>()</pre>
+  <pre> Returns the path to the system lib directory
+</pre>
+ <hr />  <h3 id="method_getAppName">getAppName</h3>
+  <pre>public string function <b>getAppName</b>()</pre>
+  <pre> Returns the name of the current initialized application. this is the app
+  identifier (key), or the string that maps to that identifer in the
+  application resources (app.properties)
+</pre>
+ <hr />  <h3 id="method_getAppParams">getAppParams</h3>
+  <pre>public mixed function <b>getAppParams</b>(string $id=NULL, string $type=NULL)</pre>
+  <pre> returns parameters specified in the app-config for the current running
+  application. if $id is specified, the return value will the value for
+  that param. if $type is specified, only params of that type will be
+  returned. if neither $id nor $type are specified, then the full
+  SRA_Params object will be returned
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>(optional) the id of the param to return</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>(optional) the type of the param(s) to return</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSysParams">getSysParams</h3>
+  <pre>public string function <b>getSysParams</b>(string $id=NULL, string $type=NULL)</pre>
+  <pre> returns parameters system wide parameters as specified in
+  sierra-config.xml. if $id is specified, the return value will the value
+  for that param. if $type is specified, only params of that type will be
+  returned. if neither $id nor $type are specified, then the full
+  SRA_Params object will be returned
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>(optional) the id of the param to return</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>(optional) the type of the param(s) to return</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppShortName">getAppShortName</h3>
+  <pre>public string function <b>getAppShortName</b>()</pre>
+  <pre> Returns the short name of the current initialized application. this is
+  the resource bundle value &#039;[app id].short&#039;, or SRA_Controller::getAppName
+  if that key value does not exist
+</pre>
+ <hr />  <h3 id="method_getAppHtmlDir">getAppHtmlDir</h3>
+  <pre>public string function <b>getAppHtmlDir</b>()</pre>
+  <pre> Returns the path to the current application&#039;s html directory
+</pre>
+ <hr />  <h3 id="method_getAppTplDir">getAppTplDir</h3>
+  <pre>public string function <b>getAppTplDir</b>()</pre>
+  <pre> Returns the templates directory for the current active app if
+  initialized, the framework otherwise
+</pre>
+ <hr />  <h3 id="method_getSysTplDir">getSysTplDir</h3>
+  <pre>public string function <b>getSysTplDir</b>()</pre>
+  <pre> Returns the templates directory for the system
+</pre>
+ <hr />  <h3 id="method_getAppErrorLogFile">getAppErrorLogFile</h3>
+  <pre>public string function <b>getAppErrorLogFile</b>()</pre>
+  <pre> Returns the path to the error log file that should be used currently.
+  this will be the system error-log-file unless a app is initialized
+  and a app specific log file has been specified
+</pre>
+ <hr />  <h3 id="method_getSysErrorLogFile">getSysErrorLogFile</h3>
+  <pre>public string function <b>getSysErrorLogFile</b>()</pre>
+  <pre> Returns the path to the framework wide error log file
+</pre>
+ <hr />  <h3 id="method_isAppInDebug">isAppInDebug</h3>
+  <pre>public boolean function <b>isAppInDebug</b>()</pre>
+  <pre> returns TRUE if &#039;debug&#039; is set in app-config,
+  SRA_Controller::isSysInDebug otherwise
+</pre>
+ <hr />  <h3 id="method_isSysInDebug">isSysInDebug</h3>
+  <pre>public boolean function <b>isSysInDebug</b>()</pre>
+  <pre> returns TRUE if &#039;debug&#039; is set in sierra-config, SRA_CONTROLLER_DEBUG
+  otherwise
+</pre>
+ <hr />  <h3 id="method_getCurrentAppId">getCurrentAppId</h3>
+  <pre>public String function <b>getCurrentAppId</b>()</pre>
+  <pre> Returns the app key (string identifier) of the currently initialized app
+</pre>
+ <hr />  <h3 id="method_getAppLocale">getAppLocale</h3>
+  <pre>public <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> function &amp;<b>getAppLocale</b>()</pre>
+  <pre> Returns the default SRA_Locale associated with the active app if one is
+  active, otherwise the sys locale
+</pre>
+ <hr />  <h3 id="method_getSysLocale">getSysLocale</h3>
+  <pre>public <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> function &amp;<b>getSysLocale</b>()</pre>
+  <pre> Returns the default SRA_Locale for the system
+ 
+</pre>
+ <hr />  <h3 id="method_getAppTemplate">getAppTemplate</h3>
+  <pre>public <a href="core.SRA_Template.html" target="contentFrame">SRA_Template</a> function &amp;<b>getAppTemplate</b>()</pre>
+  <pre> Returns a reference to an application specific SRA_Template object. If
+  this is the first time that this method has been called
+  then it will have to instantiate the SRA_Template object and assign it
+  to a static variable. If not, it will simply return a reference to
+  the existing static variable.
+ 
+  This method will automatically add the following template reference
+  variables:
+    Controller: a reference to an SRA_Controller instance
+    Date: a reference to a SRA_GregorianDate instance
+    Error: a reference to a SRA_Error instance
+    File: a reference to a SRA_File instance
+    Locale: a reference to the user&#039;s preferred SRA_Locale
+    Util: a reference to a SRA_Util instance
+    Template: a reference to the SRA_Template that is returned
+</pre>
+ <hr />  <h3 id="method_getSysTemplate">getSysTemplate</h3>
+  <pre>public <a href="core.SRA_Template.html" target="contentFrame">SRA_Template</a> function &amp;<b>getSysTemplate</b>()</pre>
+  <pre> Returns a reference to an system SRA_Template object. If this is the first
+  time that this method has been called then it will have to instantiate the
+  SRA_Template object and assign it to a static variable. If not, it will
+  simply return a reference to the existing static variable.
+ 
+  This method will automatically add the following template reference
+  variables:
+    Controller: a reference to an SRA_Controller instance
+    Date: a reference to a SRA_GregorianDate instance
+    Error: a reference to a SRA_Error instance
+    File: a reference to a SRA_File instance
+    Locale: a reference to the user&#039;s preferred SRA_Locale
+    Util: a reference to a SRA_Util instance
+    Template: a reference to the SRA_Template that is returned
+</pre>
+ <hr />  <h3 id="method_getAppTimeZone">getAppTimeZone</h3>
+  <pre>public <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> function &amp;<b>getAppTimeZone</b>(boolean $id=FALSE)</pre>
+  <pre> Returns the SRA_TimeZone for the current initialized app, if not app
+  is initialized, or a default timezone is not specified for the app,
+  SRA_Controller::getSysTimeZone will be returned
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>boolean</td>
+      <td><pre>whether or not to return the id of the timezone and not  the actual SRA_TimeZone instance</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSysTimeZone">getSysTimeZone</h3>
+  <pre>public <a href="util.SRA_TimeZone.html" target="contentFrame">SRA_TimeZone</a> function &amp;<b>getSysTimeZone</b>(boolean $id=FALSE)</pre>
+  <pre> Returns the temp directory for the system
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>boolean</td>
+      <td><pre>whether or not to return the id of the timezone and not  the actual SRA_TimeZone instance</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppLogDir">getAppLogDir</h3>
+  <pre>public string function <b>getAppLogDir</b>()</pre>
+  <pre> Returns the log directory for the current active app if initialized,
+  the framework otherwise
+</pre>
+ <hr />  <h3 id="method_getSysLogDir">getSysLogDir</h3>
+  <pre>public string function <b>getSysLogDir</b>()</pre>
+  <pre> Returns the log directory for the system
+</pre>
+ <hr />  <h3 id="method_getAppTmpDir">getAppTmpDir</h3>
+  <pre>public string function <b>getAppTmpDir</b>()</pre>
+  <pre> Returns the temp directory for the current active app if initialized, the
+  framework otherwise
+</pre>
+ <hr />  <h3 id="method_getSysTmpDir">getSysTmpDir</h3>
+  <pre>public string function <b>getSysTmpDir</b>()</pre>
+  <pre> Returns the temp directory for the system
+</pre>
+ <hr />  <h3 id="method_getAppConfAttr">getAppConfAttr</h3>
+  <pre>public string function <b>getAppConfAttr</b>($attr)</pre>
+  <pre> Returns a configuration attribute value for the currently initialized app
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSysConfAttr">getSysConfAttr</h3>
+  <pre>public string function <b>getSysConfAttr</b>($attr)</pre>
+  <pre> Returns a configuration attribute value for the system
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppDefaultCountry">getAppDefaultCountry</h3>
+  <pre>public string function <b>getAppDefaultCountry</b>()</pre>
+  <pre> Returns the default SRA_Locale country to use
+</pre>
+ <hr />  <h3 id="method_getSysDefaultCountry">getSysDefaultCountry</h3>
+  <pre>public string function <b>getSysDefaultCountry</b>()</pre>
+  <pre> Returns the default SRA_Locale country to use for the entire framework
+</pre>
+ <hr />  <h3 id="method_getAppDefaultCurrency">getAppDefaultCurrency</h3>
+  <pre>public string function <b>getAppDefaultCurrency</b>()</pre>
+  <pre> Returns the default currency to use
+</pre>
+ <hr />  <h3 id="method_getSysDefaultCurrency">getSysDefaultCurrency</h3>
+  <pre>public string function <b>getSysDefaultCurrency</b>()</pre>
+  <pre> Returns the default currency to use for the entire framework
+</pre>
+ <hr />  <h3 id="method_getAppDefaultLanguage">getAppDefaultLanguage</h3>
+  <pre>public string function <b>getAppDefaultLanguage</b>()</pre>
+  <pre> Returns the default SRA_Locale language to use
+</pre>
+ <hr />  <h3 id="method_getSysDefaultLanguage">getSysDefaultLanguage</h3>
+  <pre>public string function <b>getSysDefaultLanguage</b>()</pre>
+  <pre> Returns the default SRA_Locale language to use for the entire framework
+</pre>
+ <hr />  <h3 id="method_getAppErrorMask">getAppErrorMask</h3>
+  <pre>public string function <b>getAppErrorMask</b>()</pre>
+  <pre> Returns the app error-mask (if a app is initialized, otherwise
+  returns the framework error-mask)
+</pre>
+ <hr />  <h3 id="method_getSysErrorMask">getSysErrorMask</h3>
+  <pre>public string function <b>getSysErrorMask</b>()</pre>
+  <pre> Returns the framework error-mask if specified, SRA_DEFAULT_ERROR_MASK
+  otherwise
+</pre>
+ <hr />  <h3 id="method_getAppResources">getAppResources</h3>
+  <pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> function &amp;<b>getAppResources</b>()</pre>
+  <pre> Returns a reference to the SRA_ResourceBundle for the active app according
+  to the preferences specified in the app config
+</pre>
+ <hr />  <h3 id="method_getSysResources">getSysResources</h3>
+  <pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> function &amp;<b>getSysResources</b>()</pre>
+  <pre> Returns a reference to the global SRA_ResourceBundle according to the
+  preferences specified in sierra config
+</pre>
+ <hr />  <h3 id="method__getResources">_getResources</h3>
+  <pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> function &amp;<b>_getResources</b>($bundles, $locales=FALSE, $sysSpecific=FALSE)</pre>
+  <pre> Returns a reference to the global SRA_ResourceBundle according to the
+  preferences specified in sierra config
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>bundles</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>locales</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>sysSpecific</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppDateFormat">getAppDateFormat</h3>
+  <pre>public String function <b>getAppDateFormat</b>()</pre>
+  <pre> returns the &quot;date-format&quot; specified in the app-config for the current
+  active app. if no &quot;date-format&quot; was specified in app-config,
+  SRA_Controller::getSysDateFormat will be returned
+</pre>
+ <hr />  <h3 id="method_getAppDateOnlyFormat">getAppDateOnlyFormat</h3>
+  <pre>public String function <b>getAppDateOnlyFormat</b>()</pre>
+  <pre> returns the &quot;date-only-format&quot; specified in the app-config for the current
+  active app. if no &quot;date-only-format&quot; was specified in app-config,
+  SRA_Controller::getSysDateOnlyFormat will be returned
+</pre>
+ <hr />  <h3 id="method_getSysDateFormat">getSysDateFormat</h3>
+  <pre>public String function <b>getSysDateFormat</b>()</pre>
+  <pre> returns the &quot;date-format&quot; specified in the sierra-config. if no
+  &quot;date-format&quot; has been specified in sierra-config the constant
+  SRA_DEFAULT_DATE_FORMAT will be returned
+</pre>
+ <hr />  <h3 id="method_getSysDateOnlyFormat">getSysDateOnlyFormat</h3>
+  <pre>public String function <b>getSysDateOnlyFormat</b>()</pre>
+  <pre> returns the &quot;date-only-format&quot; specified in the sierra-config. if no
+  &quot;date-only-format&quot; has been specified in sierra-config the constant
+  SRA_DEFAULT_DATE_ONLY_FORMAT will be returned
+</pre>
+ <hr />  <h3 id="method_getAppEntityModel">getAppEntityModel</h3>
+  <pre>public array function &amp;<b>getAppEntityModel</b>(string $id)</pre>
+  <pre> returns an associative array with the keys: &#039;name&#039;, &#039;path&#039; for the
+  entity model specified by $id
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the entity model to return</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppEntityModels">getAppEntityModels</h3>
+  <pre>public array function &amp;<b>getAppEntityModels</b>()</pre>
+  <pre> returns the &quot;use-entity-model&quot; configuration for the current app. this will
+  be an associative array indexed by entity-model key and the value is an
+  associative array with the keys: &#039;name&#039;, &#039;path&#039;, &#039;resources&#039;, where
+  resources is the path to the resource bundle for this workflow
+</pre>
+ <hr />  <h3 id="method_getAppLatestVersion">getAppLatestVersion</h3>
+  <pre>public string function <b>getAppLatestVersion</b>()</pre>
+  <pre> returns the identifier of the latest version for the current application.
+  returns NULL if no version info is available
+</pre>
+ <hr />  <h3 id="method_getAppSvnInfo">getAppSvnInfo</h3>
+  <pre>public hash function <b>getAppSvnInfo</b>(boolean $checkin=FALSE)</pre>
+  <pre> returns the subversion repository information for the current application.
+  this value will be a hash with the following keys:
+    password: the subversion repository password (optional)
+    path:     the name of the framework/app subversion repository
+    url:      the url to the subversion repository containing the framework/app
+    user:     the subversion repository username (optional)
+  if this information has not been specified in SRA_VERSION_FILE, NULL will
+  be returned
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>checkin</td>
+      <td>boolean</td>
+      <td><pre>whether or not to return the checkin subversion  repository information (default is FALSE). for more information, see the
+  API documentation for the SRA_VERSION_FILE constant</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppVersion">getAppVersion</h3>
+  <pre>public string function <b>getAppVersion</b>()</pre>
+  <pre> returns the version identifier of the current application. returns NULL
+  if no version info is available
+</pre>
+ <hr />  <h3 id="method_getAppVersions">getAppVersions</h3>
+  <pre>public hash function <b>getAppVersions</b>()</pre>
+  <pre> returns an array of versions available for the application. the return
+  value is a hash indexed by version id where the value is a hash with the
+  following keys:
+    version: the version id
+    readme:  the path or uri to the readme file for this version (optional)
+    src:     the path or uri to the version source archive
+</pre>
+ <hr />  <h3 id="method_getAppVersionRb">getAppVersionRb</h3>
+  <pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> function <b>getAppVersionRb</b>()</pre>
+  <pre> returns a reference to the SRA_ResourceBundle instance representing the
+  application version file (SRA_VERSION_FILE). returns NULL if no version
+  file exists
+</pre>
+ <hr />  <h3 id="method_getSysLatestVersion">getSysLatestVersion</h3>
+  <pre>public string function <b>getSysLatestVersion</b>()</pre>
+  <pre> returns the identifier of the latest version for the framework
+</pre>
+ <hr />  <h3 id="method_getSysSvnInfo">getSysSvnInfo</h3>
+  <pre>public hash function <b>getSysSvnInfo</b>(boolean $checkin=FALSE)</pre>
+  <pre> returns the subversion repository information for the framework. this value
+  will be a hash with the following keys:
+    password: the subversion repository password (optional)
+    path:     the name of the framework/app subversion repository
+    url:      the url to the subversion repository containing the framework/app
+    user:     the subversion repository username (optional)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>checkin</td>
+      <td>boolean</td>
+      <td><pre>whether or not to return the checkin subversion  repository information (default is FALSE). for more information, see the
+  API documentation for the SRA_VERSION_FILE constant</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSysVersion">getSysVersion</h3>
+  <pre>public string function <b>getSysVersion</b>()</pre>
+  <pre> returns the version identifier of the framework. returns NULL if no version
+  info is available
+</pre>
+ <hr />  <h3 id="method_getSysVersions">getSysVersions</h3>
+  <pre>public hash function <b>getSysVersions</b>()</pre>
+  <pre> returns an array of versions available for the framework. the return
+  value is a hash indexed by version id where the value is a hash with the
+  following keys:
+    version: the version id
+    readme:  the path or uri to the readme file for this version (optional)
+    src:     the path or uri to the version source archive
+</pre>
+ <hr />  <h3 id="method_getSysVersionRb">getSysVersionRb</h3>
+  <pre>public <a href="util.l10n.SRA_ResourceBundle.html" target="contentFrame">SRA_ResourceBundle</a> function <b>getSysVersionRb</b>()</pre>
+  <pre> returns a reference to the SRA_ResourceBundle instance representing the
+  framework version file (SRA_VERSION_FILE)
+</pre>
+ <hr />  <h3 id="method_getAppWorkflow">getAppWorkflow</h3>
+  <pre>public array function &amp;<b>getAppWorkflow</b>(string $id)</pre>
+  <pre> returns an associative array with the keys: &#039;name&#039;, &#039;path&#039; for the workflow
+  specified by $id
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the workflow to return</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppWorkflows">getAppWorkflows</h3>
+  <pre>public array function &amp;<b>getAppWorkflows</b>()</pre>
+  <pre> returns the &quot;use-workflow&quot; configuration for the current app. this will
+  be an associative array indexed by entity-model key and the value is an
+  associative array with the keys: &#039;name&#039;, &#039;path&#039;, &#039;resources&#039;, where
+  resources is the path to the resource bundle for this workflow
+</pre>
+ <hr />  <h3 id="method_getUserLocale">getUserLocale</h3>
+  <pre>public <a href="util.l10n.SRA_Locale.html" target="contentFrame">SRA_Locale</a> function &amp;<b>getUserLocale</b>()</pre>
+  <pre> Returns the preferred user locale as determined from the
+  $_SERVER[&#039;HTTP_ACCEPT_LANGUAGE&#039;] global variable and the users&#039;
+  predefined browser language settings. if the locales cannot be determined
+  then the default app SRA_Locale will be returned. Only the first (the
+  highest priority) SRA_Locale specified in the user&#039;s browser settings will
+  be returned
+</pre>
+ <hr />  <h3 id="method_getUserLocales">getUserLocales</h3>
+  <pre>public SRA_Locale[] function &amp;<b>getUserLocales</b>()</pre>
+  <pre> Returns the preferred user locales as determined from the
+  $_SERVER[&#039;HTTP_ACCEPT_LANGUAGE&#039;] global variable and the users&#039;
+  predefined browser language settings. if the locales cannot be determined
+  then the default app SRA_Locale will be returned
+</pre>
+ <hr />  <h3 id="method_init">init</h3>
+  <pre>public boolean function <b>init</b>(string $appKey, $ignoreAuth=FALSE, $skipEntityModels=FALSE, boolean $skipLicensing=FALSE, boolean $skipBrowserCompatibility=FALSE)</pre>
+  <pre> This method should be called before any other app specific methods. It
+  requires a app identifier key that specifies which app config information
+  identified in the system etc file to use. If a valid key is not provided or
+  if any other errors occur this method will return an SRA_Error object.
+ 
+  Whenever the init method is called, any existing static _db or _template
+  references will be destroyed. This will allow the app object to be called
+  multiple times within one process for different apps. returns TRUE if the
+  application was initialized, FALSE if was already initialized, and an error
+  object if $appKey is not valid or another error occurs
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>appKey</td>
+      <td>string</td>
+      <td><pre>the name of the application to initialize OR the php  source file invoking the initialization (must exist within the application
+  directory)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>ignoreAuth</td>
+      <td>Not Specified</td>
+      <td><pre>boolean whether or not to ignore any authentication  constraints</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>skipEntityModels</td>
+      <td>Not Specified</td>
+      <td><pre>boolean whether or not to skip entity model  initialization</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>skipLicensing</td>
+      <td>boolean</td>
+      <td><pre>whether or not to skip the licensing step if  applicable</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>skipBrowserCompatibility</td>
+      <td>boolean</td>
+      <td><pre>whether or not to skip the browser  compatibility check</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isAppInitialized">isAppInitialized</h3>
+  <pre>public boolean function <b>isAppInitialized</b>(string $app=NULL)</pre>
+  <pre> returns TRUE if $app has been initialized, FALSE otherwise
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>app</td>
+      <td>string</td>
+      <td><pre>the app to check. if not specified, returns TRUE if ANY  app has been initialized</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_appKeyIsValid">appKeyIsValid</h3>
+  <pre>public boolean function <b>appKeyIsValid</b>($appKey)</pre>
+  <pre> This method returns true if the app key specified is a valid app key
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>appKey</td>
+      <td>Not Specified</td>
+      <td><pre>: String - The app key to validate.</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getRunTime">getRunTime</h3>
+  <pre>public float function <b>getRunTime</b>(int $decimalPrecision=2)</pre>
+  <pre> returns the runtime of the current php process in seconds
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>decimalPrecision</td>
+      <td>int</td>
+      <td><pre>the decimal precision for the microseconds  portion of the return value</pre></td>
+      <td>2</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getRequestUri">getRequestUri</h3>
+  <pre>public string function <b>getRequestUri</b>($includeProtocol=TRUE)</pre>
+  <pre> Returns the full request uri
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>includeProtocol</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getServerName">getServerName</h3>
+  <pre>public string function <b>getServerName</b>()</pre>
+  <pre> Returns the server name
+</pre>
+ <hr />  <h3 id="method_getServerUri">getServerUri</h3>
+  <pre>public string function <b>getServerUri</b>(boolean $includeProtocol=TRUE)</pre>
+  <pre> Returns the base server uri
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>includeProtocol</td>
+      <td>boolean</td>
+      <td><pre>whether or not to include the protocol  prefix as in (http:// or https://)</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_hasAppDb">hasAppDb</h3>
+  <pre>public boolean function <b>hasAppDb</b>()</pre>
+  <pre> returns TRUE if an application database has been defined
+</pre>
+ <hr />  <h3 id="method_hasSysDb">hasSysDb</h3>
+  <pre>public boolean function <b>hasSysDb</b>()</pre>
+  <pre> returns TRUE if a system database has been defined
+</pre>
+ <hr />  <h3 id="method_isSecure">isSecure</h3>
+  <pre>public boolean function <b>isSecure</b>()</pre>
+  <pre> Returns TRUE if the current connection is secure
+</pre>
+ <hr />  <h3 id="method_runningFromCli">runningFromCli</h3>
+  <pre>public boolean function <b>runningFromCli</b>()</pre>
+  <pre> returns TRUE when the framework is being from the the command line (not
+  running from an http request)
+</pre>
+ <hr />  <h3 id="method_runningFromConsole">runningFromConsole</h3>
+  <pre>public boolean function <b>runningFromConsole</b>()</pre>
+  <pre> returns TRUE when the framework is being from the the console
+  (bin/sra-console.php)
+</pre>
+ <hr />  <h3 id="method__compressOutput">_compressOutput</h3>
+  <pre>public void function <b>_compressOutput</b>()</pre>
+  <pre> starts output buffering and compression where supported. this will
+  result in the entire output being buffered until completion, and then
+  output in a compressed (gzip) format to the browser
+</pre>
+ <hr />  <h3 id="method__getSvnInfo">_getSvnInfo</h3>
+  <pre>public hash function <b>_getSvnInfo</b>($rb, boolean $checkin)</pre>
+  <pre> returns the subversion repository information for the $rb specified. this
+  value will be a hash with the following keys:
+    password: the subversion repository password (optional)
+    path:     the name of the framework/app subversion repository
+    url:      the url to the subversion repository containing the framework/app
+    user:     the subversion repository username (optional)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>rb</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>checkin</td>
+      <td>boolean</td>
+      <td><pre>whether or not to return the checkin subversion  repository information</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__populateDefaultDbConf">_populateDefaultDbConf</h3>
+  <pre>private void function &amp;<b>_populateDefaultDbConf</b>(array $conf)</pre>
+  <pre> Used to populate default etc values in a db etc element of a app
+  or system configuration
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>array</td>
+      <td><pre>the default etc to populate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_registerShutdownMethod">registerShutdownMethod</h3>
+  <pre>public void function <b>registerShutdownMethod</b>($obj, $methodName, $params=NULL, $shutdown=FALSE)</pre>
+  <pre> This method is used to register an object method that should be called when the end
+  of the current server process ends. This may be useful in order to perform any object
+  specific cleanup or shutdown operations such as closing a connection to a database or
+  an open file pointer. An SRA_Error will be returned if the method specified is not part
+  of the object.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>obj</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>methodName</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>Not Specified</td>
+      <td><pre>: Object[] - An optional array of method import parameters. Each element  within the array will be passed as a separate import parameter where the first element
+  in the array will be the first parameter. The array may contain scalar or non-scalar
+  parameters. If this parameter is not specified, no import parameters will be passed to
+  the method.</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>shutdown</td>
+      <td>Not Specified</td>
+      <td><pre>: boolean - Private attribute used to specify that the shutdown  methods should be called. This  parameter should NEVER be set except by the internal
+  app shutdown function</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/core/SRA_Controller.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

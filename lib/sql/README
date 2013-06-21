@@ -1,0 +1,3 @@
+This directory/package contains the database related classes of the SIERRA PHP deployment framework. All of these classes are accessible without requiring includes ONCE THE SRA_Controller.php class has been included. 
+
+Most classes are fairly self explanatory based on the file name. For more information, please review the class comments or the SIERRA api documentation. SRA_Database configuration directives are specified in the sierra-config.xml and app-config.xml files. For more information, please review the sample xml configurations, and the accompanying dtds.

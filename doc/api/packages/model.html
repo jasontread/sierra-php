@@ -1,0 +1,3307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_attribute_validator_phone_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX";
+  }
+  if ("sra_ws_gateway_key_api_css_uri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_KEY_API_CSS_URI'] = "SRA_WS_GATEWAY_KEY_API_CSS_URI";
+  }
+  if ("sra_dao_factory_register_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DAO_FACTORY_REGISTER_FILE'] = "SRA_DAO_FACTORY_REGISTER_FILE";
+  }
+  if ("sra_ws_gateway_key_rewrite".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_KEY_REWRITE'] = "SRA_WS_GATEWAY_KEY_REWRITE";
+  }
+  if ("sra_ws_gateway_key_uri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_KEY_URI'] = "SRA_WS_GATEWAY_KEY_URI";
+  }
+  if ("sra_ws_gateway_mapping_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_MAPPING_FILE'] = "SRA_WS_GATEWAY_MAPPING_FILE";
+  }
+  if ("sra_ws_gateway_buffer_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_BUFFER_PREFIX'] = "SRA_WS_GATEWAY_BUFFER_PREFIX";
+  }
+  if ("sra_list_lookup_processor_dyn_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX'] = "SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX";
+  }
+  if ("sra_ws_version_1_1".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VERSION_1_1'] = "SRA_WS_VERSION_1_1";
+  }
+  if ("sra_ws_version_1_2".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VERSION_1_2'] = "SRA_WS_VERSION_1_2";
+  }
+  if ("sra_entity_modeler_memory_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_MEMORY_LIMIT'] = "SRA_ENTITY_MODELER_MEMORY_LIMIT";
+  }
+  if ("sra_attribute_dtd_attr_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_DTD_ATTR_PREFIX'] = "SRA_ATTRIBUTE_DTD_ATTR_PREFIX";
+  }
+  if ("sra_entity_generator_dao_suffix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_GENERATOR_DAO_SUFFIX'] = "SRA_ENTITY_GENERATOR_DAO_SUFFIX";
+  }
+  if ("sra_list_lookup_processor_default_form_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME";
+  }
+  if ("sra_list_lookup_processor_default_tpl_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR";
+  }
+  if ("sra_query_builder_constraint_null".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_NULL'] = "SRA_QUERY_BUILDER_CONSTRAINT_NULL";
+  }
+  if ("sra_file_attribute_eid_remove_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX'] = "SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX";
+  }
+  if ("sra_entity_modeler_file_dtd_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_FILE_DTD_NAME'] = "SRA_ENTITY_MODELER_FILE_DTD_NAME";
+  }
+  if ("sra_entity_generator_vo_suffix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_GENERATOR_VO_SUFFIX'] = "SRA_ENTITY_GENERATOR_VO_SUFFIX";
+  }
+  if ("sra_entity_modeler_view_resources_dtd_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_DTD_NAME'] = "SRA_ENTITY_MODELER_VIEW_RESOURCES_DTD_NAME";
+  }
+  if ("sra_entity_modeler_view_resources_string_dtd_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_STRING_DTD_NAME'] = "SRA_ENTITY_MODELER_VIEW_RESOURCES_STRING_DTD_NAME";
+  }
+  if ("sra_attribute_validator_ipv6_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX";
+  }
+  if ("sra_attribute_validator_uri_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_URI_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_URI_REGEX";
+  }
+  if ("sra_attribute_validator_ipv4_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX";
+  }
+  if ("sra_attribute_validator_email_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX";
+  }
+  if ("sra_attribute_validator_mac_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX'] = "SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX";
+  }
+  if ("sra_ws_request_pk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_PK'] = "SRA_WS_REQUEST_PK";
+  }
+  if ("sra_ws_result_count_key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_RESULT_COUNT_KEY'] = "SRA_WS_RESULT_COUNT_KEY";
+  }
+  if ("sra_aop_aspect_when_after".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AOP_ASPECT_WHEN_AFTER'] = "SRA_AOP_ASPECT_WHEN_AFTER";
+  }
+  if ("sra_ws_constraint_group_connective_conjunctive".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE'] = "SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE";
+  }
+  if ("sra_ws_gateway_doc_type_api".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_DOC_TYPE_API'] = "SRA_WS_GATEWAY_DOC_TYPE_API";
+  }
+  if ("sra_list_lookup_processor_default_sort".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT";
+  }
+  if ("sra_query_builder_sort_asc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_SORT_ASC'] = "SRA_QUERY_BUILDER_SORT_ASC";
+  }
+  if ("sra_ws_value_type_attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_ATTR'] = "SRA_WS_VALUE_TYPE_ATTR";
+  }
+  if ("sra_aop_introduction_type_attribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AOP_INTRODUCTION_TYPE_ATTRIBUTE'] = "SRA_AOP_INTRODUCTION_TYPE_ATTRIBUTE";
+  }
+  if ("attribute_view_template_var_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_ATTRIBUTE_VIEW_TEMPLATE_VAR_NAME'] = "ATTRIBUTE_VIEW_TEMPLATE_VAR_NAME";
+  }
+  if ("sra_ws_request_status_auth_failed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_AUTH_FAILED'] = "SRA_WS_REQUEST_STATUS_AUTH_FAILED";
+  }
+  if ("sra_aop_aspect_when_before".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AOP_ASPECT_WHEN_BEFORE'] = "SRA_AOP_ASPECT_WHEN_BEFORE";
+  }
+  if ("sra_data_type_blob".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATA_TYPE_BLOB'] = "SRA_DATA_TYPE_BLOB";
+  }
+  if ("sra_data_type_boolean".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATA_TYPE_BOOLEAN'] = "SRA_DATA_TYPE_BOOLEAN";
+  }
+  if ("entity_view_code_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_ENTITY_VIEW_CODE_PREFIX'] = "ENTITY_VIEW_CODE_PREFIX";
+  }
+  if ("sra_ws_value_type_constant".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_CONSTANT'] = "SRA_WS_VALUE_TYPE_CONSTANT";
+  }
+  if ("sra_aop_introduction_type_constant".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AOP_INTRODUCTION_TYPE_CONSTANT'] = "SRA_AOP_INTRODUCTION_TYPE_CONSTANT";
+  }
+  if ("sra_file_attribute_image_magick_convert".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT'] = "SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT";
+  }
+  if ("sra_ws_request_create".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_CREATE'] = "SRA_WS_REQUEST_CREATE";
+  }
+  if ("sra_aop_class_dao".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AOP_CLASS_DAO'] = "SRA_AOP_CLASS_DAO";
+  }
+  if ("sra_data_type_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATA_TYPE_DATE'] = "SRA_DATA_TYPE_DATE";
+  }
+  if ("sra_file_attribute_type_db".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_TYPE_DB'] = "SRA_FILE_ATTRIBUTE_TYPE_DB";
+  }
+  if ("sra_ws_request_delete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_DELETE'] = "SRA_WS_REQUEST_DELETE";
+  }
+  if ("sra_query_builder_sort_desc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_SORT_DESC'] = "SRA_QUERY_BUILDER_SORT_DESC";
+  }
+  if ("sra_file_attribute_type_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_TYPE_DIR'] = "SRA_FILE_ATTRIBUTE_TYPE_DIR";
+  }
+  if ("sra_list_lookup_processor_dyn_str".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_STR'] = "SRA_LIST_LOOKUP_PROCESSOR_DYN_STR";
+  }
+  if ("entity_view_template_var_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_ENTITY_VIEW_TEMPLATE_VAR_NAME'] = "ENTITY_VIEW_TEMPLATE_VAR_NAME";
+  }
+  if ("sra_ws_gateway_doc_type_entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_DOC_TYPE_ENTITY'] = "SRA_WS_GATEWAY_DOC_TYPE_ENTITY";
+  }
+  if ("sra_entity_modeler_multiple_options_api_resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_MULTIPLE_OPTIONS_API_RESOURCE'] = "SRA_ENTITY_MODELER_MULTIPLE_OPTIONS_API_RESOURCE";
+  }
+  if ("sra_entity_modeler_path_tpl_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_PATH_TPL_VAR'] = "SRA_ENTITY_MODELER_PATH_TPL_VAR";
+  }
+  if ("sra_entity_modeler_default_sys_err_resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_DEFAULT_SYS_ERR_RESOURCE'] = "SRA_ENTITY_MODELER_DEFAULT_SYS_ERR_RESOURCE";
+  }
+  if ("sra_ws_request_status_failed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_FAILED'] = "SRA_WS_REQUEST_STATUS_FAILED";
+  }
+  if ("sra_ws_value_type_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_FILE'] = "SRA_WS_VALUE_TYPE_FILE";
+  }
+  if ("sra_data_type_float".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATA_TYPE_FLOAT'] = "SRA_DATA_TYPE_FLOAT";
+  }
+  if ("sra_list_lookup_processor_form_get".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_GET'] = "SRA_LIST_LOOKUP_PROCESSOR_FORM_GET";
+  }
+  if ("sra_ws_value_type_get".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_GET'] = "SRA_WS_VALUE_TYPE_GET";
+  }
+  if ("sra_ws_value_type_get_attr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_GET_ATTR'] = "SRA_WS_VALUE_TYPE_GET_ATTR";
+  }
+  if ("sra_attribute_thumbnail_formats".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_THUMBNAIL_FORMATS'] = "SRA_ATTRIBUTE_THUMBNAIL_FORMATS";
+  }
+  if ("sra_ws_value_type_global".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_GLOBAL'] = "SRA_WS_VALUE_TYPE_GLOBAL";
+  }
+  if ("sra_aop_introduction_type_include".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AOP_INTRODUCTION_TYPE_INCLUDE'] = "SRA_AOP_INTRODUCTION_TYPE_INCLUDE";
+  }
+  if ("sra_data_type_int".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATA_TYPE_INT'] = "SRA_DATA_TYPE_INT";
+  }
+  if ("sra_ws_request_status_invalid_app".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_APP'] = "SRA_WS_REQUEST_STATUS_INVALID_APP";
+  }
+  if ("sra_ws_request_status_invalid_attrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_ATTRS'] = "SRA_WS_REQUEST_STATUS_INVALID_ATTRS";
+  }
+  if ("sra_ws_request_status_invalid_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_FORMAT'] = "SRA_WS_REQUEST_STATUS_INVALID_FORMAT";
+  }
+  if ("sra_ws_request_status_invalid_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_LIMIT'] = "SRA_WS_REQUEST_STATUS_INVALID_LIMIT";
+  }
+  if ("sra_ws_request_status_invalid_meta_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT'] = "SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT";
+  }
+  if ("sra_ws_request_status_invalid_pk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_PK'] = "SRA_WS_REQUEST_STATUS_INVALID_PK";
+  }
+  if ("sra_ws_request_status_invalid_proto".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_PROTO'] = "SRA_WS_REQUEST_STATUS_INVALID_PROTO";
+  }
+  if ("sra_ws_request_status_invalid_request".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_REQUEST'] = "SRA_WS_REQUEST_STATUS_INVALID_REQUEST";
+  }
+  if ("sra_ws_request_status_invalid_service".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_SERVICE'] = "SRA_WS_REQUEST_STATUS_INVALID_SERVICE";
+  }
+  if ("sra_ws_request_status_ip_not_allowed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED'] = "SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED";
+  }
+  if ("sra_ws_meta_format_json".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_META_FORMAT_JSON'] = "SRA_WS_META_FORMAT_JSON";
+  }
+  if ("sra_ws_format_json".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_FORMAT_JSON'] = "SRA_WS_FORMAT_JSON";
+  }
+  if ("list_lookup_processor_data_template_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR'] = "LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR";
+  }
+  if ("sra_list_lookup_processor_dynamic_asc_sort_constraint_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX";
+  }
+  if ("sra_list_lookup_processor_dynamic_desc_sort_constraint_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX";
+  }
+  if ("sra_list_lookup_processor_dynamic_sort_order_field_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX";
+  }
+  if ("sra_list_lookup_processor_global_action_select_field_name_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX";
+  }
+  if ("sra_list_lookup_processor_global_action_select_all_field_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME";
+  }
+  if ("sra_list_lookup_processor_select_action_field_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME";
+  }
+  if ("sra_list_lookup_processor_select_action_global_field_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME";
+  }
+  if ("sra_list_lookup_processor_select_field_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME";
+  }
+  if ("sra_list_lookup_processor_update_field_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX";
+  }
+  if ("sra_aop_introduction_type_method".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AOP_INTRODUCTION_TYPE_METHOD'] = "SRA_AOP_INTRODUCTION_TYPE_METHOD";
+  }
+  if ("sra_ws_global_type_method".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GLOBAL_TYPE_METHOD'] = "SRA_WS_GLOBAL_TYPE_METHOD";
+  }
+  if ("sra_list_lookup_processor_new_pk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_NEW_PK'] = "SRA_LIST_LOOKUP_PROCESSOR_NEW_PK";
+  }
+  if ("sra_ws_meta_format_none".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_META_FORMAT_NONE'] = "SRA_WS_META_FORMAT_NONE";
+  }
+  if ("sra_ws_request_status_not_allowed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_NOT_ALLOWED'] = "SRA_WS_REQUEST_STATUS_NOT_ALLOWED";
+  }
+  if ("sra_ws_request_status_results_not_available".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE'] = "SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE";
+  }
+  if ("sra_ws_constraint_group_connective_disjunctive".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_DISJUNCTIVE'] = "SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_DISJUNCTIVE";
+  }
+  if ("sra_list_lookup_processor_default_page".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE";
+  }
+  if ("sra_attribute_thumbnail_default_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_THUMBNAIL_DEFAULT_FORMAT'] = "SRA_ATTRIBUTE_THUMBNAIL_DEFAULT_FORMAT";
+  }
+  if ("sra_list_lookup_processor_form_post".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_POST'] = "SRA_LIST_LOOKUP_PROCESSOR_FORM_POST";
+  }
+  if ("sra_ws_value_type_post".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_POST'] = "SRA_WS_VALUE_TYPE_POST";
+  }
+  if ("sra_ws_format_raw".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_FORMAT_RAW'] = "SRA_WS_FORMAT_RAW";
+  }
+  if ("sra_ws_global_type_rb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GLOBAL_TYPE_RB'] = "SRA_WS_GLOBAL_TYPE_RB";
+  }
+  if ("sra_attribute_generator_required".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_GENERATOR_REQUIRED'] = "SRA_ATTRIBUTE_GENERATOR_REQUIRED";
+  }
+  if ("sra_ws_request_retrieve".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_RETRIEVE'] = "SRA_WS_REQUEST_RETRIEVE";
+  }
+  if ("sra_ws_value_type_session".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_VALUE_TYPE_SESSION'] = "SRA_WS_VALUE_TYPE_SESSION";
+  }
+  if ("sra_file_attribute_eid_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_EID_PREFIX'] = "SRA_FILE_ATTRIBUTE_EID_PREFIX";
+  }
+  if ("sra_ws_global_type_sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GLOBAL_TYPE_SQL'] = "SRA_WS_GLOBAL_TYPE_SQL";
+  }
+  if ("sra_data_type_string".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATA_TYPE_STRING'] = "SRA_DATA_TYPE_STRING";
+  }
+  if ("sra_ws_request_status_success".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_SUCCESS'] = "SRA_WS_REQUEST_STATUS_SUCCESS";
+  }
+  if ("sra_data_type_time".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATA_TYPE_TIME'] = "SRA_DATA_TYPE_TIME";
+  }
+  if ("sra_ws_request_status_timeout".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_TIMEOUT'] = "SRA_WS_REQUEST_STATUS_TIMEOUT";
+  }
+  if ("sra_list_lookup_processor_ignore_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX";
+  }
+  if ("sra_attribute_type_msg_key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ATTRIBUTE_TYPE_MSG_KEY'] = "SRA_ATTRIBUTE_TYPE_MSG_KEY";
+  }
+  if ("sra_ws_request_update".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_UPDATE'] = "SRA_WS_REQUEST_UPDATE";
+  }
+  if ("sra_ws_request_status_invalid_input".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_INPUT'] = "SRA_WS_REQUEST_STATUS_INVALID_INPUT";
+  }
+  if ("sra_entity_modeler_view_resources_param_type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_PARAM_TYPE'] = "SRA_ENTITY_MODELER_VIEW_RESOURCES_PARAM_TYPE";
+  }
+  if ("sra_aop_class_vo".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AOP_CLASS_VO'] = "SRA_AOP_CLASS_VO";
+  }
+  if ("sra_ws_gateway_doc_type_wsdl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_DOC_TYPE_WSDL'] = "SRA_WS_GATEWAY_DOC_TYPE_WSDL";
+  }
+  if ("sra_ws_gateway_noop".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_NOOP'] = "SRA_WS_GATEWAY_NOOP";
+  }
+  if ("sra_ws_meta_format_xml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_META_FORMAT_XML'] = "SRA_WS_META_FORMAT_XML";
+  }
+  if ("sra_ws_format_xml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_FORMAT_XML'] = "SRA_WS_FORMAT_XML";
+  }
+  if ("sra_aggregate_cardinality_delim".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_AGGREGATE_CARDINALITY_DELIM'] = "SRA_AGGREGATE_CARDINALITY_DELIM";
+  }
+  if ("sra_list_lookup_processor_default_offset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET";
+  }
+  if ("sra_list_lookup_processor_action_type_update".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE";
+  }
+  if ("sra_query_builder_constraint_group_join_method_and".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_AND'] = "SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_AND";
+  }
+  if ("sra_query_builder_constraint_type_equal".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_EQUAL'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_EQUAL";
+  }
+  if ("sra_ws_gateway_buffer_file_remove".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_BUFFER_FILE_REMOVE'] = "SRA_WS_GATEWAY_BUFFER_FILE_REMOVE";
+  }
+  if ("sra_query_builder_constraint_group_join_method_or".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_OR'] = "SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_OR";
+  }
+  if ("sra_query_builder_constraint_type_greater".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_GREATER'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_GREATER";
+  }
+  if ("sra_file_attrubte_decimal_precision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRUBTE_DECIMAL_PRECISION'] = "SRA_FILE_ATTRUBTE_DECIMAL_PRECISION";
+  }
+  if ("sra_list_lookup_processor_action_type_delete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE";
+  }
+  if ("sra_query_builder_constraint_type_less".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_LESS'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_LESS";
+  }
+  if ("sra_list_lookup_processor_action_type_view".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW";
+  }
+  if ("sra_ws_gateway_async_request_timeout".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_GATEWAY_ASYNC_REQUEST_TIMEOUT'] = "SRA_WS_GATEWAY_ASYNC_REQUEST_TIMEOUT";
+  }
+  if ("sra_list_lookup_processor_action_type_new".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW";
+  }
+  if ("sra_query_builder_constraint_type_starts_with".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH";
+  }
+  if ("sra_list_lookup_processor_default_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT";
+  }
+  if ("sra_query_builder_constraint_type_ends_with".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH";
+  }
+  if ("sra_entity_generator_max_schema_recursion".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION'] = "SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION";
+  }
+  if ("sra_query_builder_constraint_type_in_str".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_IN_STR'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_IN_STR";
+  }
+  if ("sra_query_builder_constraint_type_sort_asc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_ASC'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_ASC";
+  }
+  if ("sra_query_builder_constraint_type_sort_desc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_DESC'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_DESC";
+  }
+  if ("sra_query_builder_constraint_type_not".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_NOT'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_NOT";
+  }
+  if ("sra_query_builder_constraint_type_all".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ALL'] = "SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ALL";
+  }
+  if ("sra_entity_modeler_build_lock".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_BUILD_LOCK'] = "SRA_ENTITY_MODELER_BUILD_LOCK";
+  }
+  if ("sra_entity_modeler_default_generate_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR'] = "SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR";
+  }
+  if ("sra_entity_modeler_base_dtd_tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_BASE_DTD_TPL'] = "SRA_ENTITY_MODELER_BASE_DTD_TPL";
+  }
+  if ("sra_entity_modeler_entity_dtd_tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_ENTITY_DTD_TPL'] = "SRA_ENTITY_MODELER_ENTITY_DTD_TPL";
+  }
+  if ("sra_list_lookup_processor_action_type_edit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT'] = "SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT";
+  }
+  if ("sra_list_lookup_processor_default_form_type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE";
+  }
+
+
+
+  // check classes
+  if ("sra_aopaspect".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_AopAspect'] = "SRA_AopAspect";
+  }
+  if ("sra_aopintroduction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_AopIntroduction'] = "SRA_AopIntroduction";
+  }
+  if ("sra_attrmapping".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_AttrMapping'] = "SRA_AttrMapping";
+  }
+  if ("sra_attributegenerator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_AttributeGenerator'] = "SRA_AttributeGenerator";
+  }
+  if ("sra_attributethumbnail".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_AttributeThumbnail'] = "SRA_AttributeThumbnail";
+  }
+  if ("sra_attributevalidator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_AttributeValidator'] = "SRA_AttributeValidator";
+  }
+  if ("sra_daofactory".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_DaoFactory'] = "SRA_DaoFactory";
+  }
+  if ("sra_entitygenerator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_EntityGenerator'] = "SRA_EntityGenerator";
+  }
+  if ("sra_entitymodeler".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_EntityModeler'] = "SRA_EntityModeler";
+  }
+  if ("sra_entityschema".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_EntitySchema'] = "SRA_EntitySchema";
+  }
+  if ("sra_entityview".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_EntityView'] = "SRA_EntityView";
+  }
+  if ("sra_entityviewprocessor".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_EntityViewProcessor'] = "SRA_EntityViewProcessor";
+  }
+  if ("sra_fileattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_FileAttribute'] = "SRA_FileAttribute";
+  }
+  if ("sra_generator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Generator'] = "SRA_Generator";
+  }
+  if ("sra_listlookupprocessor".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ListLookupProcessor'] = "SRA_ListLookupProcessor";
+  }
+  if ("sra_listlookupprocessoraction".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ListLookupProcessorAction'] = "SRA_ListLookupProcessorAction";
+  }
+  if ("sra_listlookupprocessordata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ListLookupProcessorData'] = "SRA_ListLookupProcessorData";
+  }
+  if ("sra_lookupprocessor".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_LookupProcessor'] = "SRA_LookupProcessor";
+  }
+  if ("sra_querybuilder".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_QueryBuilder'] = "SRA_QueryBuilder";
+  }
+  if ("sra_querybuilderconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_QueryBuilderConstraint'] = "SRA_QueryBuilderConstraint";
+  }
+  if ("sra_querybuilderconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_QueryBuilderConstraintGroup'] = "SRA_QueryBuilderConstraintGroup";
+  }
+  if ("sra_schemacolumn".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_SchemaColumn'] = "SRA_SchemaColumn";
+  }
+  if ("sra_schemaindex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_SchemaIndex'] = "SRA_SchemaIndex";
+  }
+  if ("sra_schematable".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_SchemaTable'] = "SRA_SchemaTable";
+  }
+  if ("sra_validategenerator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ValidateGenerator'] = "SRA_ValidateGenerator";
+  }
+  if ("sra_viewheader".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ViewHeader'] = "SRA_ViewHeader";
+  }
+  if ("sra_ws".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WS'] = "SRA_WS";
+  }
+  if ("sra_wsconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WSConstraint'] = "SRA_WSConstraint";
+  }
+  if ("sra_wsconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WSConstraintGroup'] = "SRA_WSConstraintGroup";
+  }
+  if ("sra_wsgateway".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WSGateway'] = "SRA_WSGateway";
+  }
+  if ("sra_wsglobal".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WSGlobal'] = "SRA_WSGlobal";
+  }
+  if ("sra_wsparam".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WSParam'] = "SRA_WSParam";
+  }
+  if ("sra_wsrequest".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WSRequest'] = "SRA_WSRequest";
+  }
+
+
+  // check dtds
+  if ("entity-model-ws.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_entity-model-ws.dtd'] = "entity-model-ws.dtd";
+  }
+  if ("entity-model.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_entity-model.dtd'] = "entity-model.dtd";
+  }
+  if ("ws-request.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_ws-request.dtd'] = "ws-request.dtd";
+  }
+  if ("ws-response.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_ws-response.dtd'] = "ws-response.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="package" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1>package model</h1>
+  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>Package Information</h2>
+  <ul>
+    <li><a href="#comments">Package Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#dtds">DTDs</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>The SRA_EntityModeler allows SIERRA framework applications to define their object model in xml including entities, entity relationships, validation, and o/r mappings. The SRA_EntityModeler is essentially a DAO/VO generator. No build is required as all initializations are performed automatically the first time that the entity model is used and thereafter only updated when changes are made to the entity model.<br /><br />For more information, see the app-config dtd and the entity-model dtd.<br /></pre>
+  
+  <h2 id="constants">Constant Summary</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX">SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating phone
+  numbers
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_KEY_API_CSS_URI">SRA_WS_GATEWAY_KEY_API_CSS_URI</a></pre>
+<pre> the identifier for the api css uri in the mapping file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DAO_FACTORY_REGISTER_FILE">SRA_DAO_FACTORY_REGISTER_FILE</a></pre>
+<pre> the file that should be used to register DAOs. the app key will be
+  appended to this file so each app has its own unique register file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_KEY_REWRITE">SRA_WS_GATEWAY_KEY_REWRITE</a></pre>
+<pre> the identifier for the gateway rewrite flag in the mapping file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_KEY_URI">SRA_WS_GATEWAY_KEY_URI</a></pre>
+<pre> the identifier for the gateway uri in the mapping file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_MAPPING_FILE">SRA_WS_GATEWAY_MAPPING_FILE</a></pre>
+<pre> the prefix of the name of the temp file containing the service mappings. this
+  file name will be followed by the app identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_BUFFER_PREFIX">SRA_WS_GATEWAY_BUFFER_PREFIX</a></pre>
+<pre> the prefix to use for silent buffer session variables and file names
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX">SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX</a></pre>
+<pre> regular expression used to parse field names for dyn attributes
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VERSION_1_1">SRA_WS_VERSION_1_1</a></pre>
+<pre> identifier for soap version 1.1
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VERSION_1_2">SRA_WS_VERSION_1_2</a></pre>
+<pre> identifier for soap version 1.2
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_MEMORY_LIMIT">SRA_ENTITY_MODELER_MEMORY_LIMIT</a></pre>
+<pre> the memory limit to apply when generating a model
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_DTD_ATTR_PREFIX">SRA_ATTRIBUTE_DTD_ATTR_PREFIX</a></pre>
+<pre> The prefix to use for attribute values within the dtd (this value follows
+  the entity name)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_GENERATOR_DAO_SUFFIX">SRA_ENTITY_GENERATOR_DAO_SUFFIX</a></pre>
+<pre> the class suffix to use for DAOs
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME</a></pre>
+<pre> the default form name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR</a></pre>
+<pre> the default name of the template variable to store the LLP results to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_NULL">SRA_QUERY_BUILDER_CONSTRAINT_NULL</a></pre>
+<pre> NULL string constant
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX">SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX</a></pre>
+<pre> prefix to identify files that have been reset (will be automatically deleted
+  when getInstanceFromEncryptedId is invoked (applies only when _fileHandling
+  is SRA_FILE_ATTRIBUTE_TYPE_DIR)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_FILE_DTD_NAME">SRA_ENTITY_MODELER_FILE_DTD_NAME</a></pre>
+<pre> the dtd element name to assign to the file element
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_GENERATOR_VO_SUFFIX">SRA_ENTITY_GENERATOR_VO_SUFFIX</a></pre>
+<pre> the class suffix to use for VOs
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_DTD_NAME">SRA_ENTITY_MODELER_VIEW_RESOURCES_DTD_NAME</a></pre>
+<pre> the dtd element name to assign to the view resources element
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_STRING_DTD_NAME">SRA_ENTITY_MODELER_VIEW_RESOURCES_STRING_DTD_NAME</a></pre>
+<pre> the dtd element name to assign to the view resources string element
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX">SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating an IPv6
+  address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_URI_REGEX">SRA_ATTRIBUTE_VALIDATOR_URI_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating a uri
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX">SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating an IPv4
+  address
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX">SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating email
+  addresses
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX">SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX</a></pre>
+<pre> Constant used to define the regular expression to use for validating mac
+  addresses
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_PK">SRA_WS_REQUEST_PK</a></pre>
+<pre> the identifier that can be used in &quot;include-attrs&quot; to identify the primary
+  key attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_RESULT_COUNT_KEY">SRA_WS_RESULT_COUNT_KEY</a></pre>
+<pre> identifies the key within the results produces by a service of type
+  SRA_WS_GLOBAL_TYPE_METHOD specifying the total count (count without
+  applying limit or offset)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AOP_ASPECT_WHEN_AFTER">SRA_AOP_ASPECT_WHEN_AFTER</a></pre>
+<pre> type identifying that advice should be attached at the end of a method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE">SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE</a></pre>
+<pre> constant identifying a conjunctive constraint group
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_DOC_TYPE_API">SRA_WS_GATEWAY_DOC_TYPE_API</a></pre>
+<pre> the identifier for the api doc type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT</a></pre>
+<pre> the default sort method if none is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_SORT_ASC">SRA_QUERY_BUILDER_SORT_ASC</a></pre>
+<pre> defines ascending sort order
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_ATTR">SRA_WS_VALUE_TYPE_ATTR</a></pre>
+<pre> specifies that an attr is the name of an attribute in the entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AOP_INTRODUCTION_TYPE_ATTRIBUTE">SRA_AOP_INTRODUCTION_TYPE_ATTRIBUTE</a></pre>
+<pre> defines an attribute type introduction. the value for this introduction type
+  will be the name of the attribute and an optional default value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_ATTRIBUTE_VIEW_TEMPLATE_VAR_NAME">ATTRIBUTE_VIEW_TEMPLATE_VAR_NAME</a></pre>
+<pre> default template variable name for attribute values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_AUTH_FAILED">SRA_WS_REQUEST_STATUS_AUTH_FAILED</a></pre>
+<pre> identifies that a request could not be performed because http authentication
+  failed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AOP_ASPECT_WHEN_BEFORE">SRA_AOP_ASPECT_WHEN_BEFORE</a></pre>
+<pre> type identifying that advice should be attached at the beginning of a method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATA_TYPE_BLOB">SRA_DATA_TYPE_BLOB</a></pre>
+<pre> Constant that identifies a blob data type (large binary object)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATA_TYPE_BOOLEAN">SRA_DATA_TYPE_BOOLEAN</a></pre>
+<pre> Constant that identifies a boolean data type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_ENTITY_VIEW_CODE_PREFIX">ENTITY_VIEW_CODE_PREFIX</a></pre>
+<pre> &quot;attrs&quot; prefix used to identify that the attributes should be determined
+  using a PHP code snippet
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_CONSTANT">SRA_WS_VALUE_TYPE_CONSTANT</a></pre>
+<pre> specifies that an attr/value is the name of a php constant
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AOP_INTRODUCTION_TYPE_CONSTANT">SRA_AOP_INTRODUCTION_TYPE_CONSTANT</a></pre>
+<pre> defines a constant type introduction. the value for this introduction type
+  will be the name of the constant and an equals sign followed by the value
+  (strings should be enclosed in quotes)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT">SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT</a></pre>
+<pre> the name of the ImageMagick &quot;convert&quot; cli utility used by the &quot;resizeImage&quot;
+  and &quot;toThumbnail&quot; methods. in order to use those methods, ImageMagick must
+  be installed and this utility must be present in the $PATH
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_CREATE">SRA_WS_REQUEST_CREATE</a></pre>
+<pre> identifies that the service request is to create a new entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AOP_CLASS_DAO">SRA_AOP_CLASS_DAO</a></pre>
+<pre> references the entity data access object for aop attachments
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATA_TYPE_DATE">SRA_DATA_TYPE_DATE</a></pre>
+<pre> Constant that identifies a date data type. This data type uses the
+  SRA_GregorianDate object to encapsulate its value (time is ignored)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_TYPE_DB">SRA_FILE_ATTRIBUTE_TYPE_DB</a></pre>
+<pre> identifies the &quot;db&quot; &quot;file-handling&quot; method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_DELETE">SRA_WS_REQUEST_DELETE</a></pre>
+<pre> identifies that the service request is to delete an existing entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_SORT_DESC">SRA_QUERY_BUILDER_SORT_DESC</a></pre>
+<pre> defines descending sort order
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_TYPE_DIR">SRA_FILE_ATTRIBUTE_TYPE_DIR</a></pre>
+<pre> identifies the &quot;dir&quot; &quot;file-handling&quot; method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_STR">SRA_LIST_LOOKUP_PROCESSOR_DYN_STR</a></pre>
+<pre> identifies dynamic attribute parameters
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_ENTITY_VIEW_TEMPLATE_VAR_NAME">ENTITY_VIEW_TEMPLATE_VAR_NAME</a></pre>
+<pre> default template variable name for entity values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_DOC_TYPE_ENTITY">SRA_WS_GATEWAY_DOC_TYPE_ENTITY</a></pre>
+<pre> the identifier for the entity doc type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_MULTIPLE_OPTIONS_API_RESOURCE">SRA_ENTITY_MODELER_MULTIPLE_OPTIONS_API_RESOURCE</a></pre>
+<pre> the key in the apps resource bundle containing the string identifying
+  that an attribute may have one or more of the options specified for it each
+  separated by a space
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_PATH_TPL_VAR">SRA_ENTITY_MODELER_PATH_TPL_VAR</a></pre>
+<pre> the template variable to assign the entity model path to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_DEFAULT_SYS_ERR_RESOURCE">SRA_ENTITY_MODELER_DEFAULT_SYS_ERR_RESOURCE</a></pre>
+<pre> the default system error resource
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_FAILED">SRA_WS_REQUEST_STATUS_FAILED</a></pre>
+<pre> identifies that a request could not be performed because of another
+  unspecified error. basically, anything else that can go wrong will fall under
+  this category. the server logs will provide more detail on the reason for
+  this error
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_FILE">SRA_WS_VALUE_TYPE_FILE</a></pre>
+<pre> specifies that an attr/value is the name of a file uploaded and located in
+  the global $_FILES array. this can only be used for value types not attrs
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATA_TYPE_FLOAT">SRA_DATA_TYPE_FLOAT</a></pre>
+<pre> Constant that identifies the a floating point data type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_GET">SRA_LIST_LOOKUP_PROCESSOR_FORM_GET</a></pre>
+<pre> identifies a GET form
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_GET">SRA_WS_VALUE_TYPE_GET</a></pre>
+<pre> specifies that an attr/value is the name of a value in the get headers
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_GET_ATTR">SRA_WS_VALUE_TYPE_GET_ATTR</a></pre>
+<pre> specifies that an attr/value is a &#039;getAttribute&#039; value for the entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_THUMBNAIL_FORMATS">SRA_ATTRIBUTE_THUMBNAIL_FORMATS</a></pre>
+<pre> the thumbnail image formats that are supported
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_GLOBAL">SRA_WS_VALUE_TYPE_GLOBAL</a></pre>
+<pre> specifies that an attr/value is the name of a php global variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AOP_INTRODUCTION_TYPE_INCLUDE">SRA_AOP_INTRODUCTION_TYPE_INCLUDE</a></pre>
+<pre> defines an include type introduction. the value for this introduction type
+  will be the relative or full path to the php source file to include
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATA_TYPE_INT">SRA_DATA_TYPE_INT</a></pre>
+<pre> Constant that identifies an integer data type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_APP">SRA_WS_REQUEST_STATUS_INVALID_APP</a></pre>
+<pre> identifies that a request could not be performed because the app specified
+  is not valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_ATTRS">SRA_WS_REQUEST_STATUS_INVALID_ATTRS</a></pre>
+<pre> identifies that a request could not be performed because attributes were set
+  that are not allowed to be set by the service or if attributes set do not
+  exist or if attributes set are read only
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_FORMAT">SRA_WS_REQUEST_STATUS_INVALID_FORMAT</a></pre>
+<pre> identifies that a request could not be performed because the output format
+  requested is not valid for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_LIMIT">SRA_WS_REQUEST_STATUS_INVALID_LIMIT</a></pre>
+<pre> identifies that a request could not be performed because the limit requested
+  is not allowed for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT">SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT</a></pre>
+<pre> identifies that a request could not be performed because the output
+  meta-format requested is not valid for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_PK">SRA_WS_REQUEST_STATUS_INVALID_PK</a></pre>
+<pre> identifies that an update/delete request that failed because the primary key
+  specified was not valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_PROTO">SRA_WS_REQUEST_STATUS_INVALID_PROTO</a></pre>
+<pre> identifies that a request could not be performed because the protocol used
+  to invoke it is not allowed (rest or soap)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_REQUEST">SRA_WS_REQUEST_STATUS_INVALID_REQUEST</a></pre>
+<pre> identifies that a request could not be performed because the request
+  specified was not valid. the server logs will provide more detail on the
+  reason for this error
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_SERVICE">SRA_WS_REQUEST_STATUS_INVALID_SERVICE</a></pre>
+<pre> identifies that a request could not be performed because a request was made
+  for an invalid service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED">SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED</a></pre>
+<pre> identifies that a request could not be performed because the client IP
+  address is not allowed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_META_FORMAT_JSON">SRA_WS_META_FORMAT_JSON</a></pre>
+<pre> the json meta format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_FORMAT_JSON">SRA_WS_FORMAT_JSON</a></pre>
+<pre> the json format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR">LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR</a></pre>
+<pre> the template variable under which this class instance will be accessible for
+  a given SRA_ListLookupProcessor::lookup invocations
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX</a></pre>
+<pre> form prefix used to identify a dynamic ascending sorting constraint. this
+  value will be followed by the attribute name in a multi-sort environment
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX</a></pre>
+<pre> form prefix used to identify a dynamic descending sorting constraint. this
+  value will be followed by the attribute name in a multi-sort environment
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX</a></pre>
+<pre> form prefix used to identify the sort order field. this value will be followed
+  by the attribute name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX</a></pre>
+<pre> prefix of the form field that identifies the name of the field containing the primary keys of the
+  selected entities for a global action
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME</a></pre>
+<pre> name of the select all form field checkbox
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME</a></pre>
+<pre> name of the hidden field to identify the action that was invoked
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME</a></pre>
+<pre> name of the hidden field to identify the action invoked was global
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME</a></pre>
+<pre> name of the hidden field to identify the pk id of the entity selected for an action
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX</a></pre>
+<pre> field name prefix identifying entity fields that should be updated
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AOP_INTRODUCTION_TYPE_METHOD">SRA_AOP_INTRODUCTION_TYPE_METHOD</a></pre>
+<pre> defines an method type introduction. the value for this introduction type
+  will be the method signature including the method name and parameters
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GLOBAL_TYPE_METHOD">SRA_WS_GLOBAL_TYPE_METHOD</a></pre>
+<pre> identifier for the method service type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_NEW_PK">SRA_LIST_LOOKUP_PROCESSOR_NEW_PK</a></pre>
+<pre> primary key value identifying that a new entity should be rendered
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_META_FORMAT_NONE">SRA_WS_META_FORMAT_NONE</a></pre>
+<pre> the none meta format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_NOT_ALLOWED">SRA_WS_REQUEST_STATUS_NOT_ALLOWED</a></pre>
+<pre> identifies that a request could not be performed because the action requested
+  (create, delete, retrieve or update) is not allowed via the web service
+  specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE">SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE</a></pre>
+<pre> identifies that a request to retrieve buffered results from a prior async
+  invocation could not be performed because the buffer result is not available
+  yet. if this response code is returned, you may wish to retry your request
+  again after a short interval
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_DISJUNCTIVE">SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_DISJUNCTIVE</a></pre>
+<pre> constant identifying a disjunctive constraint group
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE</a></pre>
+<pre> the default page field name if none is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_THUMBNAIL_DEFAULT_FORMAT">SRA_ATTRIBUTE_THUMBNAIL_DEFAULT_FORMAT</a></pre>
+<pre> the default thumbnail image format
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_POST">SRA_LIST_LOOKUP_PROCESSOR_FORM_POST</a></pre>
+<pre> identifies a POST form
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_POST">SRA_WS_VALUE_TYPE_POST</a></pre>
+<pre> specifies that an attr/value is the name of a value in the post headers
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_FORMAT_RAW">SRA_WS_FORMAT_RAW</a></pre>
+<pre> the raw format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GLOBAL_TYPE_RB">SRA_WS_GLOBAL_TYPE_RB</a></pre>
+<pre> identifier for the rb service type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_GENERATOR_REQUIRED">SRA_ATTRIBUTE_GENERATOR_REQUIRED</a></pre>
+<pre> The &#039;required&#039; validation constraint key
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_RETRIEVE">SRA_WS_REQUEST_RETRIEVE</a></pre>
+<pre> identifies that the service request is to retrieve existing entities
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_VALUE_TYPE_SESSION">SRA_WS_VALUE_TYPE_SESSION</a></pre>
+<pre> specifies that an attr/value is the name of a session variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_EID_PREFIX">SRA_FILE_ATTRIBUTE_EID_PREFIX</a></pre>
+<pre> prefix for encrypted ids
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GLOBAL_TYPE_SQL">SRA_WS_GLOBAL_TYPE_SQL</a></pre>
+<pre> identifier for the sql service type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATA_TYPE_STRING">SRA_DATA_TYPE_STRING</a></pre>
+<pre> Constant that identifies a text data type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_SUCCESS">SRA_WS_REQUEST_STATUS_SUCCESS</a></pre>
+<pre> identifies that a request was performed successfully
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATA_TYPE_TIME">SRA_DATA_TYPE_TIME</a></pre>
+<pre> Constant that identifies a timestamp data type. This data type uses the
+  SRA_GregorianDate object to encapsulate its value (time is used)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_TIMEOUT">SRA_WS_REQUEST_STATUS_TIMEOUT</a></pre>
+<pre> identifies that a request to retrieve buffered results from a prior async
+  invocation could not be performed because the
+  SRA_WS_GATEWAY_REQUEST_BUFFER_TIMEOUT theshold was reached
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX</a></pre>
+<pre> field name prefix identifying fields that should be removed from the $form when submitted
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ATTRIBUTE_TYPE_MSG_KEY">SRA_ATTRIBUTE_TYPE_MSG_KEY</a></pre>
+<pre> Identifies the &quot;msg&quot; &quot;key&quot; defining a global message for type validations
+  failures (boolean|date|integer|numeric)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_UPDATE">SRA_WS_REQUEST_UPDATE</a></pre>
+<pre> identifies that the service request is to update an existing entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_INPUT">SRA_WS_REQUEST_STATUS_INVALID_INPUT</a></pre>
+<pre> identifies that a request could not be performed because the input specified
+  for an update or create action did not pass validation. if this occurs, the
+  &quot;response&quot; will be populated with the error messages resulting from the
+  failed validation
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_PARAM_TYPE">SRA_ENTITY_MODELER_VIEW_RESOURCES_PARAM_TYPE</a></pre>
+<pre> the parameter type used to specify resource bundles for auto-inclusion into
+  a view
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AOP_CLASS_VO">SRA_AOP_CLASS_VO</a></pre>
+<pre> references the entity value object for aop attachments
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_DOC_TYPE_WSDL">SRA_WS_GATEWAY_DOC_TYPE_WSDL</a></pre>
+<pre> the identifier for the wsdl doc type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_NOOP">SRA_WS_GATEWAY_NOOP</a></pre>
+<pre> the name of the no-op web service. this is a generic service that can be used
+  to validate login credentials and start sessions
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_META_FORMAT_XML">SRA_WS_META_FORMAT_XML</a></pre>
+<pre> the xml meta format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_FORMAT_XML">SRA_WS_FORMAT_XML</a></pre>
+<pre> the xml format identifier
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_AGGREGATE_CARDINALITY_DELIM">SRA_AGGREGATE_CARDINALITY_DELIM</a></pre>
+<pre> the delimiter for scalar attributes with cardinality stored in the same table
+  as the entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET</a></pre>
+<pre> the default offset if none is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE</a></pre>
+<pre> identifies an update action, the LLP results will still be displayed with the
+  corresponding updated entities reflected
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_AND">SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_AND</a></pre>
+<pre> join multiple constraints using AND
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_EQUAL">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_EQUAL</a></pre>
+<pre> bit defining an equality match for a value constraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_BUFFER_FILE_REMOVE">SRA_WS_GATEWAY_BUFFER_FILE_REMOVE</a></pre>
+<pre> the number of minutes to keep an output buffer file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_OR">SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_OR</a></pre>
+<pre> join multiple constraints using OR. this is the default joint method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_GREATER">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_GREATER</a></pre>
+<pre> bit defining a greater than match for a value constraint. both GREATER and
+  LESS bits cannot be set
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRUBTE_DECIMAL_PRECISION">SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</a></pre>
+<pre> the default decimal precision for the getSize* methods
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE</a></pre>
+<pre> identifies a delete action, the LLP results will still be displayed with the
+  corresponding deleted entities removed. cannot be used in conjunction with
+  any of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* types
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_LESS">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_LESS</a></pre>
+<pre> bit defining a less than match for a value constraint
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW</a></pre>
+<pre> identifies a view action. the LLP results will not be displayed. ONLY 1
+  of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* constants should be
+  used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_GATEWAY_ASYNC_REQUEST_TIMEOUT">SRA_WS_GATEWAY_ASYNC_REQUEST_TIMEOUT</a></pre>
+<pre> the timeout threshold in minutes for an async request. when this threshold is
+  reached and an invocation is made to retrieve the results of that request the
+  status code SRA_WS_REQUEST_STATUS_TIMEOUT will be returned
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW</a></pre>
+<pre> identifies a new action. same as SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW,
+  but a new entity will be instantiated and rendered using the view specified.
+  If this action is associated to a specific entity, that entity will be copied
+  into the view specified for this action
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH</a></pre>
+<pre> bit defining a starts with than match for a value constraint. string matching
+  constraints cannot also have the equality matching (&gt;&lt;=) bits set
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT</a></pre>
+<pre> the default limit if none is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH</a></pre>
+<pre> bit defining a ends with than match for a value constraint. string matching
+  constraints cannot also have the equality matching (&gt;&lt;=) bits set
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION">SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION</a></pre>
+<pre> the max # of recursive hits that are allows to the getSchema method. if this
+  # is exceeded, an SRA_Error will be logged and the process will be killed using
+  the exit function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_IN_STR">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_IN_STR</a></pre>
+<pre> bit defining an in string match for a value constraint. string matching
+  constraints cannot also have the equality matching (&gt;&lt;=) bits set. has the
+  safe effect as setting both SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH
+  and SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH bits
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_ASC">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_ASC</a></pre>
+<pre> bit defining a sort ascending constraint. sorting constraints cannot have any
+  value constraint bits
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_DESC">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_DESC</a></pre>
+<pre> bit defining a sort descending constraint. sorting constraints cannot have any
+  value constraint bits
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_NOT">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_NOT</a></pre>
+<pre> bit used to negate any of the above mentioned constraints
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ALL">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ALL</a></pre>
+<pre> used to validate constraint types
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_BUILD_LOCK">SRA_ENTITY_MODELER_BUILD_LOCK</a></pre>
+<pre> a semaphore id used to guarantee that only one process rebuilds the entity
+  model at a time.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR">SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR</a></pre>
+<pre> Defines the default app relative location for generated DAOs and VOs
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_BASE_DTD_TPL">SRA_ENTITY_MODELER_BASE_DTD_TPL</a></pre>
+<pre> the base entity dtd file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_ENTITY_DTD_TPL">SRA_ENTITY_MODELER_ENTITY_DTD_TPL</a></pre>
+<pre> template to describe an entity using dtd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT</a></pre>
+<pre> identifies an action that involves editing the entity (updating, inserting,
+  deleting)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE</a></pre>
+<pre> the default form type
+</pre>      </td>
+    </tr>
+  </table>
+
+  
+  <h2 id="classes">Class Summary</h2>
+  <table border="1" width="100%">
+    <tr id="class_SRA_AopAspect">
+      <td><pre><a href="../classes/model.SRA_AopAspect.html" target="contentFrame">SRA_AopAspect</a></pre></td>
+      <td><pre> The glue between advice and pointcuts. it defines the code to be attached
+  (advice) as well as the location(s) where that code should be attached
+  (pointcut)
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_AopIntroduction">
+      <td><pre><a href="../classes/model.SRA_AopIntroduction.html" target="contentFrame">SRA_AopIntroduction</a></pre></td>
+      <td><pre> Defines an additional include, attribute or method that should be attached to
+  a class. for method introductions, the code for that method is also defined
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_AttrMapping">
+      <td><pre><a href="../classes/model.SRA_AttrMapping.html" target="contentFrame">SRA_AttrMapping</a></pre></td>
+      <td><pre> data associated with a column mapping
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_AttributeGenerator">
+      <td><pre><a href="../classes/model.SRA_AttributeGenerator.html" target="contentFrame">SRA_AttributeGenerator</a></pre></td>
+      <td><pre> Used to generate an entity model attribute
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_AttributeThumbnail">
+      <td><pre><a href="../classes/model.SRA_AttributeThumbnail.html" target="contentFrame">SRA_AttributeThumbnail</a></pre></td>
+      <td><pre> used in conjunction with file type attributes (where is-file is true) when
+  the model should automatically attempt to generate thumbnail (or thumbnails)
+  for that attribute and store those also as file type attributes using another
+  member attribute in the same entity. for more information on this
+  functionality, see the api for SRA_FileAttribute::toThumbnail. this attribute
+  may be used only with file attributes without cardinality. the value stored
+  in the referenced attribute will be a new SRA_FileAttribute instance
+  representing the thumbnail. at least 1 height or width (or both) MUST be
+  specified for all thumbnails. if both height and width are specified, and
+  preserveAspect is not true, the aspect ratio of the image may be affected
+  because that exact height/width will be used for the generated thumbnail. if
+  only one, height or width is specified, or if both are specified and
+  preserveAspect is true, those values will be the maximum height or width of
+  the generated thumbnail while the other dimension will be proportional to the
+  dimension that is used according to the image aspect ratio. thumbnails will
+  be generated to png format by default. gif and jpeg are also supported
+  formats and may be specified using the &quot;format&quot; attribute. if multiple
+  thumbnails are created as a result of the thumbnail generation process (i.e.
+  when file is pdf with multiple pages), the first page thumbnail will be used
+  UNLESS the thumbnail attribute referenced has cardinality in which case ALL
+  of the thumbnails will be set in the same order of the pages. thumbnails
+  cannot be generated for file attributes with cardinality
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_AttributeValidator">
+      <td><pre><a href="../classes/model.SRA_AttributeValidator.html" target="contentFrame">SRA_AttributeValidator</a></pre></td>
+      <td><pre> Contains static method used for validating entity attributes based on
+  validation constrains specified in the &#039;depends&#039; attribute of the
+  &#039;attribute&#039; definition. The value there will correspond directly with a
+  static method in this class
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_DaoFactory">
+      <td><pre><a href="../classes/model.SRA_DaoFactory.html" target="contentFrame">SRA_DaoFactory</a></pre></td>
+      <td><pre> Generalized DAO Factory allowing applications to retrieve app specified
+  DAOs. All methods are static.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_EntityGenerator">
+      <td><pre><a href="../classes/model.SRA_EntityGenerator.html" target="contentFrame">SRA_EntityGenerator</a></pre></td>
+      <td><pre> Used to generate an entity model entity
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_EntityModeler">
+      <td><pre><a href="../classes/model.SRA_EntityModeler.html" target="contentFrame">SRA_EntityModeler</a></pre></td>
+      <td><pre> Facade used to manage and initiate initialization of entity models
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_EntitySchema">
+      <td><pre><a href="../classes/model.SRA_EntitySchema.html" target="contentFrame">SRA_EntitySchema</a></pre></td>
+      <td><pre> Used to represent the schema associated with an entity. This is the structure
+  of tables and columns that constitute the entity&#039;s persistability
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_EntityView">
+      <td><pre><a href="../classes/model.SRA_EntityView.html" target="contentFrame">SRA_EntityView</a></pre></td>
+      <td><pre> Represents the data associated with a view
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_EntityViewProcessor">
+      <td><pre><a href="../classes/model.SRA_EntityViewProcessor.html" target="contentFrame">SRA_EntityViewProcessor</a></pre></td>
+      <td><pre> Represents the data associated with a view processor
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_FileAttribute">
+      <td><pre><a href="../classes/model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a></pre></td>
+      <td><pre> Used to represent an entity model &quot;is-file&quot; attribute. for more information,
+  see the &quot;entity-model_1_0.dtd&quot;.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Generator">
+      <td><pre><a href="../classes/model.SRA_Generator.html" target="contentFrame">SRA_Generator</a></pre></td>
+      <td><pre> Used to generate an entity model entity
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ListLookupProcessor">
+      <td><pre><a href="../classes/model.SRA_ListLookupProcessor.html" target="contentFrame">SRA_ListLookupProcessor</a></pre></td>
+      <td><pre> A powerful lookup processor that can be utilized to display lists of entities
+  in any format including the ability to segment the view into multiple pages.
+  The following lookup &quot;params&quot; are applicable to this SRA_LookupProcessor (see
+  constants section for default values for these params if applicable):
+ 
+                         ------ PARAMS ------
+  Name            Type                   Value          Description
+  {csv attrs}     llp-constraint-{mask}  {value*}       used to define attribute value constraints. the {mask} is a bit mask
+                                                        defining 1 or more of the SRA_QUERY_BUILDER_CONSTRAINT_TYPE_* bits
+                                                        that should apply to the constraint. to determine a bit value for
+                                                        multiple constraint types, simply | (bitwise or) the constraints
+                                                        which will result in the sum of the constraints. This constraint
+                                                        is for DEFAULT values, which can be overriden by the dynamic
+                                                        constraints (llp-dconstraint-{mask}). Review the SRA_QueryBuilderConstraint
+                                                        API documentation for more details on the different  types of
+                                                        constraints
+  limit           llp-constraint         {value}        default limit (max # of results)
+  offset          llp-constraint         {value}        default offset
+  {csv attrs*}    llp-fconstraint-{mask} {value}        FIXED constraints. cannot be overriden by the default or dynamic.
+                                                        should be used to enforce data security in order to avoid allowing
+                                                        invalid access to view and/or manipulate entities. for example,
+                                                        adding a user contraint as described below: ${user}
+  limit           llp-fconstraint        {value}        fixed limit (max # of results) - overrides both default and dynamic limits
+  {csv attrs|dynn}llp-dconstraint-{mask} {field name*}  DYNAMIC constraints. these will override identical DEFAULT constraints
+  limit           llp-dconstraint        {field name}   name of the form field specifying the limit
+                                                        (max # of results) - overrides default limit
+  page            llp-dconstraint        {field name}   name of the form field specifying the current page # - used
+                                                        to determine offset
+  name            llp-form               {form name}    the name that should be assigned to the form enclosing the result data
+  type            llp-form               (get|post)     form type for dynamic variables and actions. default is get
+  actionOrder     llp-form-action        {csv actions}  defines the order of the actions (select + any {actions}s defined) as
+                                                        they should be rendered if &quot;renderActions&quot; is invoked. this should
+                                                        be a comma separated value like &quot;view1,view2,delete,select&quot;. if not
+                                                        specified, the order will be the order in which the views are defined,
+                                                        followed by the global action selector if applicable
+  globalActionOrder llp-form-action      {csv actions}  if the order to display the global actions should be different (or
+                                                        include only a subset of the possible actions), that order/subset
+                                                        may be defined using this parameter
+  globalActions   llp-form-action        (1|0)          whether or global actions should be available to users. global actions
+                                                        are rendered using a checkbox next to each set of action links that the
+                                                        user may select in order to invoke an action for more than one selected
+                                                        entity
+  {action}        llp-form-action        {field name}   unique identifier for an action that can be invoked from the list
+                                                        view. actions can include such activities as deleting/updating/viewing
+                                                        of entities. what occurs when this action is invoked is determined by
+                                                        the {action}Type value which is a bitmask containing any of the
+                                                        SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_* constant values defined in
+                                                        SRA_ListLookupProcessorAction.php
+  {action}Type    llp-form-action        {type bitmask} one or more of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_* constant values
+                                                        represented as a bitmask identifying what should happen when this action
+                                                        is invoked
+  {action}Apost   llp-form-action        {html}         html code to render after the close &lt;/a&gt; tag
+  {action}Apre    llp-form-action        {html}         html code to render before the &lt;a... /&gt; tag
+  {action}Class   llp-form-action        {html class}   the html class to use in the &lt;a.../ &gt; tag generated for the view link
+  {action}Link    llp-form-action        {resource}     the resource to use as the text for the view link
+  {action}Btn     llp-form-action        (1|0)          whether or not to render the action link as a button. the default behavior
+                                                        is to render it as a link
+  {action}Img     llp-form-action        {img src}      the img src to use for the action link (only 1, {action}Img or
+                                                        {action}Link should be specified)
+  {action}ImgClass llp-form-action       {html class}   css class to assign to the {action}Img
+  {action}Alt     llp-form-action        {resource}     the resource to use action the alt/title attribute for {action}Img
+  {action}GlobalAlt llp-form-action      {resource}     {action}Alt for global links: optional - {action}Alt will be used if not specified
+  {action}MsgCmpl llp-form-action        {resource}     the resource to display when an action has been invoked successfully. if the {action} includes a view, this message will only be displayed once the ACTION has been processed successfully. for example, an insert completed, an update performed
+  {action}MsgCnfm llp-form-action        {resource}     the resource to display when the action is initiated (clicked) - single quotes, if used, must be prefixed by backslash
+  {action}GlobalMsgCmpl llp-form-action  {resource}     {action}MsgCmpl for global links: optional - {action}MsgCmpl will be used if not specified
+  {action}GlobalMsgCnfm llp-form-action  {resource}     {action}MsgCnfm for global links: optional - {action}MsgCnfm will be used if not specified
+  {action}Post    llp-form-action        {html}         html code to render before the close &lt;/a&gt; tag
+  {action}Pre     llp-form-action        {html}         html code to render after the &lt;a... /&gt; tag
+  {action}View    llp-form-action        {view id}      the id of the view that should be displayed if the {action}Type bitmask
+                                                        includes any of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* constants
+  {action}ViewFwd llp                    {view id}      the id of the view that should be displayed if an action has been invoked successfully
+  {action}NonGlobal llp-form-action      (1|0)          default: 0: whether or not this action cannot be applied globally (NOTE: it will still show up in the global actions links unless explicitely specified otherwise)
+  rowCycle        llp                    {cycle id}     optional cycle identifier for the classes below. if not specified, &quot;rowClass&quot; will be the identifier
+  rowClass        llp                    {html class}   comma separated values specifying the classes (in that order) that should be applied to rows in the resulting data table
+  rowClassTag     llp                    {html tr attr} an optional alternate &quot;tr&quot; attribute tag that should be used in place of &quot;class&quot; for &quot;rowClass&quot;
+  colCycle        llp                    {cycle id}     optional cycle identifier for the classes below. if not specified, &quot;colClass&quot; will be the identifier
+  colClass        llp                    {html class}   comma separated values specifying the classes (in that order) that should be applied to cols in the resulting data table
+  colClassTag     llp                    {html tr attr} an optional alternate &quot;td&quot; attribute tag that should be used in place of &quot;class&quot; for &quot;colClass&quot;
+  [attr]ColCycle  llp                    {cycle id}     the following 3 parameters are for attribute specific column formatting: an optional cycle identifier for the classes below. if not specified, &quot;[attr]ColClass&quot; will be the identifier
+  [attr]ColClass  llp                    {html class}   comma separated values specifying the classes (in that order) that should be applied to [attr] cols in the resulting data table
+  [attr]ColClassTag llp                  {html tr attr} an optional alternate &quot;td&quot; attribute tag that should be used in place of &quot;class&quot; for &quot;colClass&quot;
+  actionsPos      llp                    ([N]|L|R)      the position for the actions, either the leftmost (L) or rightmost (R),
+                                                        or a numbered column (column #s begin at 0) column
+  actionEncl      llp                    {html elem}    an html element to enclose the actions in
+  actionsColCycle llp                    {cycle id}     if actionsColClass is not specified, &quot;colClass&quot; will be used for the actions column: optional cycle identifier for the actions cell below. if not specified, &quot;actionsColClass&quot; will be the identifier
+  actionsColClass llp                    {html class}   comma separated values specifying the classes (in that order) that should be applied to action cols in the resulting data table
+  actionsColClassTag llp                 {html tr attr} an optional alternate &quot;td&quot; attribute tag that should be used in place of &quot;class&quot; for &quot;actionsColClass&quot;
+  resultsResource llp                    {string}       results resource string. the following strings will be replaced using SRA_ResourceBundle::getString():
+                                                         start      : start position of the results
+                                                         end        : end position of the results
+                                                         count      : total # of results
+                                                         page       : current page number
+                                                         pageCount  : total # of pages
+                                                        this string can be displayed in any of the following templates:
+                                                         sra-list-table-header.tpl
+                                                         sra-list-table-footer.tpl
+                                                         sra-list-table-cmds.tpl
+                                                        see the corresponding documentation in these template for details
+  sortLastSelPrec llp                     (1|0)         whether or not the last sort attribute should be given highest or lowest
+                                                        precedence in the sort order sequence. the default value for this parameter
+                                                        is FALSE, meaning the last attribute that the user selects to sort on will
+                                                        be the last sort column in the sql query that is generated. changing this
+                                                        parameter to TRUE (1), will result in that column being the first sort
+                                                        column in the sql query
+ 
+ 
+  a SRA_ListLookupProcessorData instance representing the results data will be
+  set in the template context under the variable name SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR
+  at the completion of the lookup method invocation
+ 
+  Comments:
+  JOINS:       multiple separate constraints are joined using AND. OR joins should
+               be specified in a single constraint with comma separated values
+  Dyn &amp; Def:   dynamic and default constraints work together as follows: if a matching
+               constraint type and attribute list is found between the two, the
+               default values applied for those dynamic constraints are those
+               specified for the default constraints. if there is no matching
+               dynamic constraint for a given default, the default constraint will
+               behave identical to a fixed constraint.
+  fixed:       Fixed constraints always take precedence over dynamic and default constraints
+  *csv attrs:  comma separated list of attribute names (no spaces should be used between values)
+  *value:      use commas to deliminate multiple possible values (OR join will be applied)
+               user id can be specified using the tag: &quot;${user}&quot; which will be
+               dynamically substituted for the actual user id as returned by
+               SRA_Authenticator::getUserId()
+  *field name: if the name specified is &quot;dyn[n]&quot; (where n is a sequential value used so that
+               no two &quot;dyn&quot; values are the same), the attributes will be dynamically
+               determined based on the field name value specified, where the tag
+               &quot;${attr}&quot; located in that value will be the name of the attribute
+               and multiple attribute names can be specified using repeating
+               attribute tags specified with &quot;${attr|{delim text}}&quot;, where
+               {delim text} should be the text used to separate each attribute
+               name. For example: &quot;attrs_${attr|-}&quot; would signify that attributes
+               should be determined for the constraint where the field name starts
+               with &quot;attrs_&quot; followed by a dash separated list of attribute names:
+               e.g. the value of &lt;input name=&quot;attrs_fname-mname-lname&quot; /&gt; would
+               be applied as a constraint against the 3 attributes named &quot;fname&quot;
+               &quot;mname&quot; and &quot;lname&quot;. If the field is an array (auto-cast to an
+               array if the end of the field name includes &quot;[]&quot; - e.g. name=&quot;fname[]&quot;),
+               or if multiple attributes are specified, the join method used
+               with the multiple values/attributes will be OR. Multiple separate
+               constraints are joined using AND
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ListLookupProcessorAction">
+      <td><pre><a href="../classes/model.SRA_ListLookupProcessorAction.html" target="contentFrame">SRA_ListLookupProcessorAction</a></pre></td>
+      <td><pre> Used to store all of the data associated with a list lookup processor action
+  see the SRA_ListLookupProcessor class header api for more details
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ListLookupProcessorData">
+      <td><pre><a href="../classes/model.SRA_ListLookupProcessorData.html" target="contentFrame">SRA_ListLookupProcessorData</a></pre></td>
+      <td><pre> Used to store all of the data associated with a particular SRA_ListLookupProcessor::lookup
+  invocation. The instance of this class representing that data is stored in the
+  SRA_Template using the key value
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_LookupProcessor">
+      <td><pre><a href="../classes/model.SRA_LookupProcessor.html" target="contentFrame">SRA_LookupProcessor</a></pre></td>
+      <td><pre> Base class for SRA_LookupProcessors as defined in the &quot;view&quot; &quot;lookup-processor&quot;
+  documentation in the entity-model dtd. A lookup processor is a simple class
+  with a single static method invoked when an entity view is rendered that
+  utilizes the SRA_LookupProcessor. This method, &quot;lookup&quot; returns an array of
+  entities each of which will be rendered utilizing that corresponding view.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_QueryBuilder">
+      <td><pre><a href="../classes/model.SRA_QueryBuilder.html" target="contentFrame">SRA_QueryBuilder</a></pre></td>
+      <td><pre>
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_QueryBuilderConstraint">
+      <td><pre><a href="../classes/model.SRA_QueryBuilderConstraint.html" target="contentFrame">SRA_QueryBuilderConstraint</a></pre></td>
+      <td><pre>
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_QueryBuilderConstraintGroup">
+      <td><pre><a href="../classes/model.SRA_QueryBuilderConstraintGroup.html" target="contentFrame">SRA_QueryBuilderConstraintGroup</a></pre></td>
+      <td><pre>
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_SchemaColumn">
+      <td><pre><a href="../classes/model.SRA_SchemaColumn.html" target="contentFrame">SRA_SchemaColumn</a></pre></td>
+      <td><pre> represents a single column in a schema table
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_SchemaIndex">
+      <td><pre><a href="../classes/model.SRA_SchemaIndex.html" target="contentFrame">SRA_SchemaIndex</a></pre></td>
+      <td><pre> represents a single index in a schema table
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_SchemaTable">
+      <td><pre><a href="../classes/model.SRA_SchemaTable.html" target="contentFrame">SRA_SchemaTable</a></pre></td>
+      <td><pre> represents a single table in a schema. a table contains one or more columns
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ValidateGenerator">
+      <td><pre><a href="../classes/model.SRA_ValidateGenerator.html" target="contentFrame">SRA_ValidateGenerator</a></pre></td>
+      <td><pre> Used to generate an entity model validation constraint
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ViewHeader">
+      <td><pre><a href="../classes/model.SRA_ViewHeader.html" target="contentFrame">SRA_ViewHeader</a></pre></td>
+      <td><pre> Represents a single view header
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_WS">
+      <td><pre><a href="../classes/model.SRA_WS.html" target="contentFrame">SRA_WS</a></pre></td>
+      <td><pre> define a single entity specific web service. for more information, review
+  the &quot;ws&quot; element documentation provided in entity-model.dtd
+</pre></td>
+    </tr>
+    <tr id="class_SRA_WSConstraint">
+      <td><pre><a href="../classes/model.SRA_WSConstraint.html" target="contentFrame">SRA_WSConstraint</a></pre></td>
+      <td><pre> used to add implicit security or filter related constraint to an web service
+</pre></td>
+    </tr>
+    <tr id="class_SRA_WSConstraintGroup">
+      <td><pre><a href="../classes/model.SRA_WSConstraintGroup.html" target="contentFrame">SRA_WSConstraintGroup</a></pre></td>
+      <td><pre> used to specify 1 or more ws-constraint sub-elements that will be evaluated
+  as a whole based on the &quot;_connective&quot; specified for the group
+</pre></td>
+    </tr>
+    <tr id="class_SRA_WSGateway">
+      <td><pre><a href="../classes/model.SRA_WSGateway.html" target="contentFrame">SRA_WSGateway</a></pre></td>
+      <td><pre>
+</pre></td>
+    </tr>
+    <tr id="class_SRA_WSGlobal">
+      <td><pre><a href="../classes/model.SRA_WSGlobal.html" target="contentFrame">SRA_WSGlobal</a></pre></td>
+      <td><pre> used to define a global (non entity specific) web service
+</pre></td>
+    </tr>
+    <tr id="class_SRA_WSParam">
+      <td><pre><a href="../classes/model.SRA_WSParam.html" target="contentFrame">SRA_WSParam</a></pre></td>
+      <td><pre> used to define a global web service param
+</pre></td>
+    </tr>
+    <tr id="class_SRA_WSRequest">
+      <td><pre><a href="../classes/model.SRA_WSRequest.html" target="contentFrame">SRA_WSRequest</a></pre></td>
+      <td><pre> This class is used to define an web service invocation
+</pre></td>
+    </tr>
+  </table>
+
+  <h2 id="dtds">DTD Summary</h2>
+  <table border="1" width="100%">
+    <tr id="dtd_entity-model-ws.dtd">
+      <td><pre><a href="../dtds/model.entity-model-ws.dtd.html" target="contentFrame">entity-model-ws.dtd</a></pre></td>
+      <td><pre>XML DTD for a SIERRA app entity model
+
+This file defines a app entity model.
+
+To support validation of your entity-model xml file, include the following
+DOCTYPE element at the beginning (after the &quot;xml&quot; declaration):
+
+&lt;!DOCTYPE entity-model PUBLIC &quot;-//SIERRA//DTD ENTITY MODEL//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/lib/model/entity-model.dtd&quot;&gt;
+</pre></td>
+    </tr>
+    <tr id="dtd_entity-model.dtd">
+      <td><pre><a href="../dtds/model.entity-model.dtd.html" target="contentFrame">entity-model.dtd</a></pre></td>
+      <td><pre>XML DTD for a SIERRA app entity model
+
+This file defines a app entity model.
+
+To support validation of your entity-model xml file, include the following
+DOCTYPE element at the beginning (after the &quot;xml&quot; declaration):
+
+&lt;!DOCTYPE entity-model PUBLIC &quot;-//SIERRA//DTD ENTITY MODEL//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/lib/model/entity-model.dtd&quot;&gt;
+</pre></td>
+    </tr>
+    <tr id="dtd_ws-request.dtd">
+      <td><pre><a href="../dtds/model.ws-request.dtd.html" target="contentFrame">ws-request.dtd</a></pre></td>
+      <td><pre>XML DTD for a sierra-php web service gateway service request
+
+this DTD defines the proper structure for invoking a web service. for more 
+information, see the documentation provided in sra-ws-gateway.php and 
+entity-model.dtd
+
+to support validation use the following header:
+
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE ws-request PUBLIC &quot;-//SIERRA//DTD AJAX SERVICE REQUEST//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/lib/model/ws-request.dtd&quot;&gt;
+</pre></td>
+    </tr>
+    <tr id="dtd_ws-response.dtd">
+      <td><pre><a href="../dtds/model.ws-response.dtd.html" target="contentFrame">ws-response.dtd</a></pre></td>
+      <td><pre>XML DTD for a sierra-php web service gateway service response
+
+this DTD defines the xml structure used for &quot;xml&quot; type &quot;meta-format&quot; responses
+
+to support validation use the following header:
+
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE ws-response PUBLIC &quot;-//SIERRA//DTD AJAX SERVICE RESPONSE//EN&quot; 
+  &quot;http://sierra-php.googlecode.com/svn/trunk/lib/model/ws-response.dtd&quot;&gt;
+</pre></td>
+    </tr>
+  </table>
+
+
+  <h2 id="constant_details">Constant Details</h2>
+  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX">SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_PHONE_REGEX</b> = '(([0-9]{3})|(([0-9]{3}).*.([0-9]{3}))).*.([0-9]{4}).*$'</pre>
+  <pre> Constant used to define the regular expression to use for validating phone
+  numbers
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeValidator.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_KEY_API_CSS_URI">SRA_WS_GATEWAY_KEY_API_CSS_URI</h3>
+  <pre>string <b>SRA_WS_GATEWAY_KEY_API_CSS_URI</b> = '.api-css-uri'</pre>
+  <pre> the identifier for the api css uri in the mapping file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_DAO_FACTORY_REGISTER_FILE">SRA_DAO_FACTORY_REGISTER_FILE</h3>
+  <pre><b>SRA_DAO_FACTORY_REGISTER_FILE</b> = '.daos-'</pre>
+  <pre> the file that should be used to register DAOs. the app key will be
+  appended to this file so each app has its own unique register file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_DaoFactory.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_KEY_REWRITE">SRA_WS_GATEWAY_KEY_REWRITE</h3>
+  <pre>string <b>SRA_WS_GATEWAY_KEY_REWRITE</b> = '.gateway-rewrite'</pre>
+  <pre> the identifier for the gateway rewrite flag in the mapping file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_KEY_URI">SRA_WS_GATEWAY_KEY_URI</h3>
+  <pre>string <b>SRA_WS_GATEWAY_KEY_URI</b> = '.gateway-uri'</pre>
+  <pre> the identifier for the gateway uri in the mapping file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_MAPPING_FILE">SRA_WS_GATEWAY_MAPPING_FILE</h3>
+  <pre>string <b>SRA_WS_GATEWAY_MAPPING_FILE</b> = '.ws-'</pre>
+  <pre> the prefix of the name of the temp file containing the service mappings. this
+  file name will be followed by the app identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_BUFFER_PREFIX">SRA_WS_GATEWAY_BUFFER_PREFIX</h3>
+  <pre>string <b>SRA_WS_GATEWAY_BUFFER_PREFIX</b> = '.wsBuffer'</pre>
+  <pre> the prefix to use for silent buffer session variables and file names
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX">SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX</b> = '/^(.*)\${attr(|.*)?}(.*)/i'</pre>
+  <pre> regular expression used to parse field names for dyn attributes
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VERSION_1_1">SRA_WS_VERSION_1_1</h3>
+  <pre>string <b>SRA_WS_VERSION_1_1</b> = '11'</pre>
+  <pre> identifier for soap version 1.1
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VERSION_1_2">SRA_WS_VERSION_1_2</h3>
+  <pre>string <b>SRA_WS_VERSION_1_2</b> = '12'</pre>
+  <pre> identifier for soap version 1.2
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_MEMORY_LIMIT">SRA_ENTITY_MODELER_MEMORY_LIMIT</h3>
+  <pre><b>SRA_ENTITY_MODELER_MEMORY_LIMIT</b> = '128M'</pre>
+  <pre> the memory limit to apply when generating a model
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_DTD_ATTR_PREFIX">SRA_ATTRIBUTE_DTD_ATTR_PREFIX</h3>
+  <pre>string <b>SRA_ATTRIBUTE_DTD_ATTR_PREFIX</b> = 'Attr'</pre>
+  <pre> The prefix to use for attribute values within the dtd (this value follows
+  the entity name)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeGenerator.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_GENERATOR_DAO_SUFFIX">SRA_ENTITY_GENERATOR_DAO_SUFFIX</h3>
+  <pre><b>SRA_ENTITY_GENERATOR_DAO_SUFFIX</b> = 'DAO'</pre>
+  <pre> the class suffix to use for DAOs
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityGenerator.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME</b> = 'LLP'</pre>
+  <pre> the default form name
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR</b> = 'LLP_DATA'</pre>
+  <pre> the default name of the template variable to store the LLP results to
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_NULL">SRA_QUERY_BUILDER_CONSTRAINT_NULL</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_NULL</b> = 'NULL'</pre>
+  <pre> NULL string constant
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX">SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX</b> = 'REMOVE'</pre>
+  <pre> prefix to identify files that have been reset (will be automatically deleted
+  when getInstanceFromEncryptedId is invoked (applies only when _fileHandling
+  is SRA_FILE_ATTRIBUTE_TYPE_DIR)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_FileAttribute.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_FILE_DTD_NAME">SRA_ENTITY_MODELER_FILE_DTD_NAME</h3>
+  <pre><b>SRA_ENTITY_MODELER_FILE_DTD_NAME</b> = 'SraFile'</pre>
+  <pre> the dtd element name to assign to the file element
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_GENERATOR_VO_SUFFIX">SRA_ENTITY_GENERATOR_VO_SUFFIX</h3>
+  <pre><b>SRA_ENTITY_GENERATOR_VO_SUFFIX</b> = 'VO'</pre>
+  <pre> the class suffix to use for VOs
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityGenerator.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_DTD_NAME">SRA_ENTITY_MODELER_VIEW_RESOURCES_DTD_NAME</h3>
+  <pre><b>SRA_ENTITY_MODELER_VIEW_RESOURCES_DTD_NAME</b> = 'ViewResources'</pre>
+  <pre> the dtd element name to assign to the view resources element
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_STRING_DTD_NAME">SRA_ENTITY_MODELER_VIEW_RESOURCES_STRING_DTD_NAME</h3>
+  <pre><b>SRA_ENTITY_MODELER_VIEW_RESOURCES_STRING_DTD_NAME</b> = 'ViewResourcesString'</pre>
+  <pre> the dtd element name to assign to the view resources string element
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX">SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_IPV6_REGEX</b> = '^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))(\/(1[0-1][0-9]|12[0-8]|[2-9][0-9]|1[6-9]))?$'</pre>
+  <pre> Constant used to define the regular expression to use for validating an IPv6
+  address
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeValidator.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_URI_REGEX">SRA_ATTRIBUTE_VALIDATOR_URI_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_URI_REGEX</b> = '^(((http(s?))|(ftp))\:\/\/)(www.|[a-zA-Z0-9].)[a-zA-Z0-9\-\.]+\.([0-9]{1}|[0-9]{2}|[0-9]{3}|[a-zA-Z]{2}|[a-zA-Z]{3}).*$'</pre>
+  <pre> Constant used to define the regular expression to use for validating a uri
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeValidator.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX">SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_IPV4_REGEX</b> = '^(([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\\.){3}([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])(\/(1[0-1][0-9]|12[0-8]|[2-9][0-9]|1[6-9]))?$'</pre>
+  <pre> Constant used to define the regular expression to use for validating an IPv4
+  address
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeValidator.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX">SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_EMAIL_REGEX</b> = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z0-9-]+)$'</pre>
+  <pre> Constant used to define the regular expression to use for validating email
+  addresses
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeValidator.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX">SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX</h3>
+  <pre><b>SRA_ATTRIBUTE_VALIDATOR_MAC_REGEX</b> = '^[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]$'</pre>
+  <pre> Constant used to define the regular expression to use for validating mac
+  addresses
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeValidator.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_PK">SRA_WS_REQUEST_PK</h3>
+  <pre>string <b>SRA_WS_REQUEST_PK</b> = '_pk_'</pre>
+  <pre> the identifier that can be used in &quot;include-attrs&quot; to identify the primary
+  key attribute
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_RESULT_COUNT_KEY">SRA_WS_RESULT_COUNT_KEY</h3>
+  <pre>string <b>SRA_WS_RESULT_COUNT_KEY</b> = '_resultCount'</pre>
+  <pre> identifies the key within the results produces by a service of type
+  SRA_WS_GLOBAL_TYPE_METHOD specifying the total count (count without
+  applying limit or offset)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_AOP_ASPECT_WHEN_AFTER">SRA_AOP_ASPECT_WHEN_AFTER</h3>
+  <pre>string <b>SRA_AOP_ASPECT_WHEN_AFTER</b> = 'after'</pre>
+  <pre> type identifying that advice should be attached at the end of a method
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AopAspect.php</p>
+ <hr />  <h3 id="constant_SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE">SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE</h3>
+  <pre>string <b>SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_CONJUNCTIVE</b> = 'and'</pre>
+  <pre> constant identifying a conjunctive constraint group
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSConstraintGroup.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_DOC_TYPE_API">SRA_WS_GATEWAY_DOC_TYPE_API</h3>
+  <pre>string <b>SRA_WS_GATEWAY_DOC_TYPE_API</b> = 'api'</pre>
+  <pre> the identifier for the api doc type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT</b> = 'asc'</pre>
+  <pre> the default sort method if none is specified
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_SORT_ASC">SRA_QUERY_BUILDER_SORT_ASC</h3>
+  <pre><b>SRA_QUERY_BUILDER_SORT_ASC</b> = 'asc'</pre>
+  <pre> defines ascending sort order
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilder.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_ATTR">SRA_WS_VALUE_TYPE_ATTR</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_ATTR</b> = 'attr'</pre>
+  <pre> specifies that an attr is the name of an attribute in the entity
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_AOP_INTRODUCTION_TYPE_ATTRIBUTE">SRA_AOP_INTRODUCTION_TYPE_ATTRIBUTE</h3>
+  <pre>string <b>SRA_AOP_INTRODUCTION_TYPE_ATTRIBUTE</b> = 'attribute'</pre>
+  <pre> defines an attribute type introduction. the value for this introduction type
+  will be the name of the attribute and an optional default value
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AopIntroduction.php</p>
+ <hr />  <h3 id="constant_ATTRIBUTE_VIEW_TEMPLATE_VAR_NAME">ATTRIBUTE_VIEW_TEMPLATE_VAR_NAME</h3>
+  <pre><b>ATTRIBUTE_VIEW_TEMPLATE_VAR_NAME</b> = 'attribute'</pre>
+  <pre> default template variable name for attribute values
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityView.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_AUTH_FAILED">SRA_WS_REQUEST_STATUS_AUTH_FAILED</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_AUTH_FAILED</b> = 'authentication-failed'</pre>
+  <pre> identifies that a request could not be performed because http authentication
+  failed
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_AOP_ASPECT_WHEN_BEFORE">SRA_AOP_ASPECT_WHEN_BEFORE</h3>
+  <pre>string <b>SRA_AOP_ASPECT_WHEN_BEFORE</b> = 'before'</pre>
+  <pre> type identifying that advice should be attached at the beginning of a method
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AopAspect.php</p>
+ <hr />  <h3 id="constant_SRA_DATA_TYPE_BLOB">SRA_DATA_TYPE_BLOB</h3>
+  <pre><b>SRA_DATA_TYPE_BLOB</b> = 'blob'</pre>
+  <pre> Constant that identifies a blob data type (large binary object)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_DATA_TYPE_BOOLEAN">SRA_DATA_TYPE_BOOLEAN</h3>
+  <pre><b>SRA_DATA_TYPE_BOOLEAN</b> = 'boolean'</pre>
+  <pre> Constant that identifies a boolean data type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_ENTITY_VIEW_CODE_PREFIX">ENTITY_VIEW_CODE_PREFIX</h3>
+  <pre><b>ENTITY_VIEW_CODE_PREFIX</b> = 'code:'</pre>
+  <pre> &quot;attrs&quot; prefix used to identify that the attributes should be determined
+  using a PHP code snippet
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityView.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_CONSTANT">SRA_WS_VALUE_TYPE_CONSTANT</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_CONSTANT</b> = 'constant'</pre>
+  <pre> specifies that an attr/value is the name of a php constant
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_AOP_INTRODUCTION_TYPE_CONSTANT">SRA_AOP_INTRODUCTION_TYPE_CONSTANT</h3>
+  <pre>string <b>SRA_AOP_INTRODUCTION_TYPE_CONSTANT</b> = 'constant'</pre>
+  <pre> defines a constant type introduction. the value for this introduction type
+  will be the name of the constant and an equals sign followed by the value
+  (strings should be enclosed in quotes)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AopIntroduction.php</p>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT">SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT</b> = 'convert'</pre>
+  <pre> the name of the ImageMagick &quot;convert&quot; cli utility used by the &quot;resizeImage&quot;
+  and &quot;toThumbnail&quot; methods. in order to use those methods, ImageMagick must
+  be installed and this utility must be present in the $PATH
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_FileAttribute.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_CREATE">SRA_WS_REQUEST_CREATE</h3>
+  <pre>string <b>SRA_WS_REQUEST_CREATE</b> = 'create'</pre>
+  <pre> identifies that the service request is to create a new entity
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_AOP_CLASS_DAO">SRA_AOP_CLASS_DAO</h3>
+  <pre>string <b>SRA_AOP_CLASS_DAO</b> = 'dao'</pre>
+  <pre> references the entity data access object for aop attachments
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AopAspect.php</p>
+ <hr />  <h3 id="constant_SRA_DATA_TYPE_DATE">SRA_DATA_TYPE_DATE</h3>
+  <pre><b>SRA_DATA_TYPE_DATE</b> = 'date'</pre>
+  <pre> Constant that identifies a date data type. This data type uses the
+  SRA_GregorianDate object to encapsulate its value (time is ignored)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_TYPE_DB">SRA_FILE_ATTRIBUTE_TYPE_DB</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_TYPE_DB</b> = 'db'</pre>
+  <pre> identifies the &quot;db&quot; &quot;file-handling&quot; method
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_FileAttribute.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_DELETE">SRA_WS_REQUEST_DELETE</h3>
+  <pre>string <b>SRA_WS_REQUEST_DELETE</b> = 'delete'</pre>
+  <pre> identifies that the service request is to delete an existing entity
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_SORT_DESC">SRA_QUERY_BUILDER_SORT_DESC</h3>
+  <pre><b>SRA_QUERY_BUILDER_SORT_DESC</b> = 'desc'</pre>
+  <pre> defines descending sort order
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilder.php</p>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_TYPE_DIR">SRA_FILE_ATTRIBUTE_TYPE_DIR</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_TYPE_DIR</b> = 'dir'</pre>
+  <pre> identifies the &quot;dir&quot; &quot;file-handling&quot; method
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_FileAttribute.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_STR">SRA_LIST_LOOKUP_PROCESSOR_DYN_STR</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYN_STR</b> = 'dyn'</pre>
+  <pre> identifies dynamic attribute parameters
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_ENTITY_VIEW_TEMPLATE_VAR_NAME">ENTITY_VIEW_TEMPLATE_VAR_NAME</h3>
+  <pre><b>ENTITY_VIEW_TEMPLATE_VAR_NAME</b> = 'entity'</pre>
+  <pre> default template variable name for entity values
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityView.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_DOC_TYPE_ENTITY">SRA_WS_GATEWAY_DOC_TYPE_ENTITY</h3>
+  <pre>string <b>SRA_WS_GATEWAY_DOC_TYPE_ENTITY</b> = 'entity'</pre>
+  <pre> the identifier for the entity doc type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_MULTIPLE_OPTIONS_API_RESOURCE">SRA_ENTITY_MODELER_MULTIPLE_OPTIONS_API_RESOURCE</h3>
+  <pre><b>SRA_ENTITY_MODELER_MULTIPLE_OPTIONS_API_RESOURCE</b> = 'entity-model.multiple_options_separated_by_a_space'</pre>
+  <pre> the key in the apps resource bundle containing the string identifying
+  that an attribute may have one or more of the options specified for it each
+  separated by a space
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_PATH_TPL_VAR">SRA_ENTITY_MODELER_PATH_TPL_VAR</h3>
+  <pre><b>SRA_ENTITY_MODELER_PATH_TPL_VAR</b> = 'entityModelPath'</pre>
+  <pre> the template variable to assign the entity model path to
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_DEFAULT_SYS_ERR_RESOURCE">SRA_ENTITY_MODELER_DEFAULT_SYS_ERR_RESOURCE</h3>
+  <pre><b>SRA_ENTITY_MODELER_DEFAULT_SYS_ERR_RESOURCE</b> = 'error.sys'</pre>
+  <pre> the default system error resource
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_FAILED">SRA_WS_REQUEST_STATUS_FAILED</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_FAILED</b> = 'failed'</pre>
+  <pre> identifies that a request could not be performed because of another
+  unspecified error. basically, anything else that can go wrong will fall under
+  this category. the server logs will provide more detail on the reason for
+  this error
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_FILE">SRA_WS_VALUE_TYPE_FILE</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_FILE</b> = 'file'</pre>
+  <pre> specifies that an attr/value is the name of a file uploaded and located in
+  the global $_FILES array. this can only be used for value types not attrs
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_DATA_TYPE_FLOAT">SRA_DATA_TYPE_FLOAT</h3>
+  <pre><b>SRA_DATA_TYPE_FLOAT</b> = 'float'</pre>
+  <pre> Constant that identifies the a floating point data type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_GET">SRA_LIST_LOOKUP_PROCESSOR_FORM_GET</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_FORM_GET</b> = 'get'</pre>
+  <pre> identifies a GET form
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_GET">SRA_WS_VALUE_TYPE_GET</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_GET</b> = 'get'</pre>
+  <pre> specifies that an attr/value is the name of a value in the get headers
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_GET_ATTR">SRA_WS_VALUE_TYPE_GET_ATTR</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_GET_ATTR</b> = 'getAttr'</pre>
+  <pre> specifies that an attr/value is a &#039;getAttribute&#039; value for the entity
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_THUMBNAIL_FORMATS">SRA_ATTRIBUTE_THUMBNAIL_FORMATS</h3>
+  <pre>string <b>SRA_ATTRIBUTE_THUMBNAIL_FORMATS</b> = 'gif jpg png'</pre>
+  <pre> the thumbnail image formats that are supported
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeThumbnail.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_GLOBAL">SRA_WS_VALUE_TYPE_GLOBAL</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_GLOBAL</b> = 'global'</pre>
+  <pre> specifies that an attr/value is the name of a php global variable
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_AOP_INTRODUCTION_TYPE_INCLUDE">SRA_AOP_INTRODUCTION_TYPE_INCLUDE</h3>
+  <pre>string <b>SRA_AOP_INTRODUCTION_TYPE_INCLUDE</b> = 'include'</pre>
+  <pre> defines an include type introduction. the value for this introduction type
+  will be the relative or full path to the php source file to include
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AopIntroduction.php</p>
+ <hr />  <h3 id="constant_SRA_DATA_TYPE_INT">SRA_DATA_TYPE_INT</h3>
+  <pre><b>SRA_DATA_TYPE_INT</b> = 'int'</pre>
+  <pre> Constant that identifies an integer data type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_APP">SRA_WS_REQUEST_STATUS_INVALID_APP</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_APP</b> = 'invalid-app'</pre>
+  <pre> identifies that a request could not be performed because the app specified
+  is not valid
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_ATTRS">SRA_WS_REQUEST_STATUS_INVALID_ATTRS</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_ATTRS</b> = 'invalid-attrs'</pre>
+  <pre> identifies that a request could not be performed because attributes were set
+  that are not allowed to be set by the service or if attributes set do not
+  exist or if attributes set are read only
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_FORMAT">SRA_WS_REQUEST_STATUS_INVALID_FORMAT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_FORMAT</b> = 'invalid-format'</pre>
+  <pre> identifies that a request could not be performed because the output format
+  requested is not valid for this service
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_LIMIT">SRA_WS_REQUEST_STATUS_INVALID_LIMIT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_LIMIT</b> = 'invalid-limit'</pre>
+  <pre> identifies that a request could not be performed because the limit requested
+  is not allowed for this service
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT">SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT</b> = 'invalid-meta-format'</pre>
+  <pre> identifies that a request could not be performed because the output
+  meta-format requested is not valid for this service
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_PK">SRA_WS_REQUEST_STATUS_INVALID_PK</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_PK</b> = 'invalid-pk'</pre>
+  <pre> identifies that an update/delete request that failed because the primary key
+  specified was not valid
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_PROTO">SRA_WS_REQUEST_STATUS_INVALID_PROTO</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_PROTO</b> = 'invalid-protocol'</pre>
+  <pre> identifies that a request could not be performed because the protocol used
+  to invoke it is not allowed (rest or soap)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_REQUEST">SRA_WS_REQUEST_STATUS_INVALID_REQUEST</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_REQUEST</b> = 'invalid-request'</pre>
+  <pre> identifies that a request could not be performed because the request
+  specified was not valid. the server logs will provide more detail on the
+  reason for this error
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_SERVICE">SRA_WS_REQUEST_STATUS_INVALID_SERVICE</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_SERVICE</b> = 'invalid-service'</pre>
+  <pre> identifies that a request could not be performed because a request was made
+  for an invalid service
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED">SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED</b> = 'ip-not-allowed'</pre>
+  <pre> identifies that a request could not be performed because the client IP
+  address is not allowed
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_META_FORMAT_JSON">SRA_WS_META_FORMAT_JSON</h3>
+  <pre>string <b>SRA_WS_META_FORMAT_JSON</b> = 'json'</pre>
+  <pre> the json meta format identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_WS_FORMAT_JSON">SRA_WS_FORMAT_JSON</h3>
+  <pre>string <b>SRA_WS_FORMAT_JSON</b> = 'json'</pre>
+  <pre> the json format identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR">LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR</h3>
+  <pre><b>LIST_LOOKUP_PROCESSOR_DATA_TEMPLATE_VAR</b> = 'listData'</pre>
+  <pre> the template variable under which this class instance will be accessible for
+  a given SRA_ListLookupProcessor::lookup invocations
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessorData.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX</b> = 'llp_dynamic_sort_asc'</pre>
+  <pre> form prefix used to identify a dynamic ascending sorting constraint. this
+  value will be followed by the attribute name in a multi-sort environment
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX</b> = 'llp_dynamic_sort_desc'</pre>
+  <pre> form prefix used to identify a dynamic descending sorting constraint. this
+  value will be followed by the attribute name in a multi-sort environment
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX</b> = 'llp_dynamic_sort_order'</pre>
+  <pre> form prefix used to identify the sort order field. this value will be followed
+  by the attribute name
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX</b> = 'llp_global_action_select_'</pre>
+  <pre> prefix of the form field that identifies the name of the field containing the primary keys of the
+  selected entities for a global action
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME</b> = 'llp_global_action_select_all'</pre>
+  <pre> name of the select all form field checkbox
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME</b> = 'llp_select_action'</pre>
+  <pre> name of the hidden field to identify the action that was invoked
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME</b> = 'llp_select_action_global'</pre>
+  <pre> name of the hidden field to identify the action invoked was global
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME</b> = 'llp_select_action_id'</pre>
+  <pre> name of the hidden field to identify the pk id of the entity selected for an action
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX</b> = 'llp_u'</pre>
+  <pre> field name prefix identifying entity fields that should be updated
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_AOP_INTRODUCTION_TYPE_METHOD">SRA_AOP_INTRODUCTION_TYPE_METHOD</h3>
+  <pre>string <b>SRA_AOP_INTRODUCTION_TYPE_METHOD</b> = 'method'</pre>
+  <pre> defines an method type introduction. the value for this introduction type
+  will be the method signature including the method name and parameters
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AopIntroduction.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GLOBAL_TYPE_METHOD">SRA_WS_GLOBAL_TYPE_METHOD</h3>
+  <pre>string <b>SRA_WS_GLOBAL_TYPE_METHOD</b> = 'method'</pre>
+  <pre> identifier for the method service type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGlobal.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_NEW_PK">SRA_LIST_LOOKUP_PROCESSOR_NEW_PK</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_NEW_PK</b> = 'new'</pre>
+  <pre> primary key value identifying that a new entity should be rendered
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_WS_META_FORMAT_NONE">SRA_WS_META_FORMAT_NONE</h3>
+  <pre>string <b>SRA_WS_META_FORMAT_NONE</b> = 'none'</pre>
+  <pre> the none meta format identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_NOT_ALLOWED">SRA_WS_REQUEST_STATUS_NOT_ALLOWED</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_NOT_ALLOWED</b> = 'not-allowed'</pre>
+  <pre> identifies that a request could not be performed because the action requested
+  (create, delete, retrieve or update) is not allowed via the web service
+  specified
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE">SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE</b> = 'not-available'</pre>
+  <pre> identifies that a request to retrieve buffered results from a prior async
+  invocation could not be performed because the buffer result is not available
+  yet. if this response code is returned, you may wish to retry your request
+  again after a short interval
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_DISJUNCTIVE">SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_DISJUNCTIVE</h3>
+  <pre>string <b>SRA_WS_CONSTRAINT_GROUP_CONNECTIVE_DISJUNCTIVE</b> = 'or'</pre>
+  <pre> constant identifying a disjunctive constraint group
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSConstraintGroup.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE</h3>
+  <pre>int <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE</b> = 'pg'</pre>
+  <pre> the default page field name if none is specified
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_THUMBNAIL_DEFAULT_FORMAT">SRA_ATTRIBUTE_THUMBNAIL_DEFAULT_FORMAT</h3>
+  <pre>string <b>SRA_ATTRIBUTE_THUMBNAIL_DEFAULT_FORMAT</b> = 'png'</pre>
+  <pre> the default thumbnail image format
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeThumbnail.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_POST">SRA_LIST_LOOKUP_PROCESSOR_FORM_POST</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_FORM_POST</b> = 'post'</pre>
+  <pre> identifies a POST form
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_POST">SRA_WS_VALUE_TYPE_POST</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_POST</b> = 'post'</pre>
+  <pre> specifies that an attr/value is the name of a value in the post headers
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_WS_FORMAT_RAW">SRA_WS_FORMAT_RAW</h3>
+  <pre>string <b>SRA_WS_FORMAT_RAW</b> = 'raw'</pre>
+  <pre> the raw format identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GLOBAL_TYPE_RB">SRA_WS_GLOBAL_TYPE_RB</h3>
+  <pre>string <b>SRA_WS_GLOBAL_TYPE_RB</b> = 'rb'</pre>
+  <pre> identifier for the rb service type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGlobal.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_GENERATOR_REQUIRED">SRA_ATTRIBUTE_GENERATOR_REQUIRED</h3>
+  <pre>string <b>SRA_ATTRIBUTE_GENERATOR_REQUIRED</b> = 'required'</pre>
+  <pre> The &#039;required&#039; validation constraint key
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeGenerator.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_RETRIEVE">SRA_WS_REQUEST_RETRIEVE</h3>
+  <pre>string <b>SRA_WS_REQUEST_RETRIEVE</b> = 'retrieve'</pre>
+  <pre> identifies that the service request is to retrieve existing entities
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_VALUE_TYPE_SESSION">SRA_WS_VALUE_TYPE_SESSION</h3>
+  <pre>string <b>SRA_WS_VALUE_TYPE_SESSION</b> = 'session'</pre>
+  <pre> specifies that an attr/value is the name of a session variable
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_EID_PREFIX">SRA_FILE_ATTRIBUTE_EID_PREFIX</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_EID_PREFIX</b> = 'sfa://'</pre>
+  <pre> prefix for encrypted ids
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_FileAttribute.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GLOBAL_TYPE_SQL">SRA_WS_GLOBAL_TYPE_SQL</h3>
+  <pre>string <b>SRA_WS_GLOBAL_TYPE_SQL</b> = 'sql'</pre>
+  <pre> identifier for the sql service type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGlobal.php</p>
+ <hr />  <h3 id="constant_SRA_DATA_TYPE_STRING">SRA_DATA_TYPE_STRING</h3>
+  <pre><b>SRA_DATA_TYPE_STRING</b> = 'string'</pre>
+  <pre> Constant that identifies a text data type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_SUCCESS">SRA_WS_REQUEST_STATUS_SUCCESS</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_SUCCESS</b> = 'success'</pre>
+  <pre> identifies that a request was performed successfully
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_DATA_TYPE_TIME">SRA_DATA_TYPE_TIME</h3>
+  <pre><b>SRA_DATA_TYPE_TIME</b> = 'time'</pre>
+  <pre> Constant that identifies a timestamp data type. This data type uses the
+  SRA_GregorianDate object to encapsulate its value (time is used)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_TIMEOUT">SRA_WS_REQUEST_STATUS_TIMEOUT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_TIMEOUT</b> = 'timeout'</pre>
+  <pre> identifies that a request to retrieve buffered results from a prior async
+  invocation could not be performed because the
+  SRA_WS_GATEWAY_REQUEST_BUFFER_TIMEOUT theshold was reached
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX</b> = 'tmp_'</pre>
+  <pre> field name prefix identifying fields that should be removed from the $form when submitted
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_ATTRIBUTE_TYPE_MSG_KEY">SRA_ATTRIBUTE_TYPE_MSG_KEY</h3>
+  <pre><b>SRA_ATTRIBUTE_TYPE_MSG_KEY</b> = 'type'</pre>
+  <pre> Identifies the &quot;msg&quot; &quot;key&quot; defining a global message for type validations
+  failures (boolean|date|integer|numeric)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AttributeValidator.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_UPDATE">SRA_WS_REQUEST_UPDATE</h3>
+  <pre>string <b>SRA_WS_REQUEST_UPDATE</b> = 'update'</pre>
+  <pre> identifies that the service request is to update an existing entity
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_INPUT">SRA_WS_REQUEST_STATUS_INVALID_INPUT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_INPUT</b> = 'validation-error'</pre>
+  <pre> identifies that a request could not be performed because the input specified
+  for an update or create action did not pass validation. if this occurs, the
+  &quot;response&quot; will be populated with the error messages resulting from the
+  failed validation
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSRequest.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_VIEW_RESOURCES_PARAM_TYPE">SRA_ENTITY_MODELER_VIEW_RESOURCES_PARAM_TYPE</h3>
+  <pre><b>SRA_ENTITY_MODELER_VIEW_RESOURCES_PARAM_TYPE</b> = 'view-resources'</pre>
+  <pre> the parameter type used to specify resource bundles for auto-inclusion into
+  a view
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_AOP_CLASS_VO">SRA_AOP_CLASS_VO</h3>
+  <pre>string <b>SRA_AOP_CLASS_VO</b> = 'vo'</pre>
+  <pre> references the entity value object for aop attachments
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_AopAspect.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_DOC_TYPE_WSDL">SRA_WS_GATEWAY_DOC_TYPE_WSDL</h3>
+  <pre>string <b>SRA_WS_GATEWAY_DOC_TYPE_WSDL</b> = 'wsdl'</pre>
+  <pre> the identifier for the wsdl doc type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_NOOP">SRA_WS_GATEWAY_NOOP</h3>
+  <pre>string <b>SRA_WS_GATEWAY_NOOP</b> = 'wsnoop'</pre>
+  <pre> the name of the no-op web service. this is a generic service that can be used
+  to validate login credentials and start sessions
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_WS_META_FORMAT_XML">SRA_WS_META_FORMAT_XML</h3>
+  <pre>string <b>SRA_WS_META_FORMAT_XML</b> = 'xml'</pre>
+  <pre> the xml meta format identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_WS_FORMAT_XML">SRA_WS_FORMAT_XML</h3>
+  <pre>string <b>SRA_WS_FORMAT_XML</b> = 'xml'</pre>
+  <pre> the xml format identifier
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WS.php</p>
+ <hr />  <h3 id="constant_SRA_AGGREGATE_CARDINALITY_DELIM">SRA_AGGREGATE_CARDINALITY_DELIM</h3>
+  <pre><b>SRA_AGGREGATE_CARDINALITY_DELIM</b> = '|#|'</pre>
+  <pre> the delimiter for scalar attributes with cardinality stored in the same table
+  as the entity
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET</h3>
+  <pre>int <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET</b></pre>
+  <pre> the default offset if none is specified
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE</b> = 1</pre>
+  <pre> identifies an update action, the LLP results will still be displayed with the
+  corresponding updated entities reflected
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessorAction.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_AND">SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_AND</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_AND</b> = 1</pre>
+  <pre> join multiple constraints using AND
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraintGroup.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_EQUAL">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_EQUAL</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_EQUAL</b> = 1</pre>
+  <pre> bit defining an equality match for a value constraint
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_BUFFER_FILE_REMOVE">SRA_WS_GATEWAY_BUFFER_FILE_REMOVE</h3>
+  <pre>int <b>SRA_WS_GATEWAY_BUFFER_FILE_REMOVE</b> = 1</pre>
+  <pre> the number of minutes to keep an output buffer file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_OR">SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_OR</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_GROUP_JOIN_METHOD_OR</b> = 2</pre>
+  <pre> join multiple constraints using OR. this is the default joint method
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraintGroup.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_GREATER">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_GREATER</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_GREATER</b> = 2</pre>
+  <pre> bit defining a greater than match for a value constraint. both GREATER and
+  LESS bits cannot be set
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRUBTE_DECIMAL_PRECISION">SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</h3>
+  <pre>int <b>SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</b> = 2</pre>
+  <pre> the default decimal precision for the getSize* methods
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_FileAttribute.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE</b> = 2</pre>
+  <pre> identifies a delete action, the LLP results will still be displayed with the
+  corresponding deleted entities removed. cannot be used in conjunction with
+  any of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* types
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessorAction.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_LESS">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_LESS</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_LESS</b> = 4</pre>
+  <pre> bit defining a less than match for a value constraint
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW</b> = 4</pre>
+  <pre> identifies a view action. the LLP results will not be displayed. ONLY 1
+  of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* constants should be
+  used
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessorAction.php</p>
+ <hr />  <h3 id="constant_SRA_WS_GATEWAY_ASYNC_REQUEST_TIMEOUT">SRA_WS_GATEWAY_ASYNC_REQUEST_TIMEOUT</h3>
+  <pre>int <b>SRA_WS_GATEWAY_ASYNC_REQUEST_TIMEOUT</b> = 5</pre>
+  <pre> the timeout threshold in minutes for an async request. when this threshold is
+  reached and an invocation is made to retrieve the results of that request the
+  status code SRA_WS_REQUEST_STATUS_TIMEOUT will be returned
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_WSGateway.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW</b> = 8</pre>
+  <pre> identifies a new action. same as SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW,
+  but a new entity will be instantiated and rendered using the view specified.
+  If this action is associated to a specific entity, that entity will be copied
+  into the view specified for this action
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessorAction.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH</b> = 8</pre>
+  <pre> bit defining a starts with than match for a value constraint. string matching
+  constraints cannot also have the equality matching (&gt;&lt;=) bits set
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT</h3>
+  <pre>int <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT</b> = 10</pre>
+  <pre> the default limit if none is specified
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH</b> = 16</pre>
+  <pre> bit defining a ends with than match for a value constraint. string matching
+  constraints cannot also have the equality matching (&gt;&lt;=) bits set
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION">SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION</h3>
+  <pre><b>SRA_ENTITY_GENERATOR_MAX_SCHEMA_RECURSION</b> = 20</pre>
+  <pre> the max # of recursive hits that are allows to the getSchema method. if this
+  # is exceeded, an SRA_Error will be logged and the process will be killed using
+  the exit function
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityGenerator.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_IN_STR">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_IN_STR</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_IN_STR</b> = 32</pre>
+  <pre> bit defining an in string match for a value constraint. string matching
+  constraints cannot also have the equality matching (&gt;&lt;=) bits set. has the
+  safe effect as setting both SRA_QUERY_BUILDER_CONSTRAINT_TYPE_STARTS_WITH
+  and SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ENDS_WITH bits
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_ASC">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_ASC</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_ASC</b> = 64</pre>
+  <pre> bit defining a sort ascending constraint. sorting constraints cannot have any
+  value constraint bits
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_DESC">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_DESC</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_SORT_DESC</b> = 128</pre>
+  <pre> bit defining a sort descending constraint. sorting constraints cannot have any
+  value constraint bits
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_NOT">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_NOT</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_NOT</b> = 256</pre>
+  <pre> bit used to negate any of the above mentioned constraints
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ALL">SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ALL</h3>
+  <pre><b>SRA_QUERY_BUILDER_CONSTRAINT_TYPE_ALL</b> = 511</pre>
+  <pre> used to validate constraint types
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_QueryBuilderConstraint.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_BUILD_LOCK">SRA_ENTITY_MODELER_BUILD_LOCK</h3>
+  <pre><b>SRA_ENTITY_MODELER_BUILD_LOCK</b> = 12345</pre>
+  <pre> a semaphore id used to guarantee that only one process rebuilds the entity
+  model at a time.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR">SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR</h3>
+  <pre><b>SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR</b> = SRA_DEFAULT_LIB_DIR . '/model'</pre>
+  <pre> Defines the default app relative location for generated DAOs and VOs
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_BASE_DTD_TPL">SRA_ENTITY_MODELER_BASE_DTD_TPL</h3>
+  <pre><b>SRA_ENTITY_MODELER_BASE_DTD_TPL</b> = SRA_LIB_DIR . '/model/base-entity-dtd.tpl'</pre>
+  <pre> the base entity dtd file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_ENTITY_DTD_TPL">SRA_ENTITY_MODELER_ENTITY_DTD_TPL</h3>
+  <pre><b>SRA_ENTITY_MODELER_ENTITY_DTD_TPL</b> = SRA_LIB_DIR . '/model/entity-dtd.tpl'</pre>
+  <pre> template to describe an entity using dtd
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_EntityModeler.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT">SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT</h3>
+  <pre><b>SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_EDIT</b> = SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_UPDATE + SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_DELETE + SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_NEW</pre>
+  <pre> identifies an action that involves editing the entity (updating, inserting,
+  deleting)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessorAction.php</p>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE</b> = SRA_LIST_LOOKUP_PROCESSOR_FORM_POST</pre>
+  <pre> the default form type
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</p>
+  </form>
+</body>
+</html>

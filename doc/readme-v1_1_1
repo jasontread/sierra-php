@@ -1,0 +1,16 @@
+This version of sierra-php includes primarily bugs fixes related to web services 
+and authentication as well as some new functionality for caching 
+(lib/util/SRA_Cache.php) and some additional utility functions (SRA_Util::stem, 
+SRA_Util::createThumbnail, SRA_Util::isPrivateNetworkIp, 
+SRA_Util::getServicePort, SRA_Util::getServiceName, 
+SRA_Util::normalizeMeasurement)
+
+CHANGELOG
+* REST and SOAP api bug fixes
+* SRA_Cache
+* SRA_Util additions
+* Multiple user authentication bug fix
+* Various other minor bug fixes
+
+KNOWN ISSUES
+None

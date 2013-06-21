@@ -1,0 +1,591 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>sql - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_db_bool_false_vals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_BOOL_FALSE_VALS'] = "SRA_DB_BOOL_FALSE_VALS";
+  }
+  if ("sra_db_bool_true_vals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_BOOL_TRUE_VALS'] = "SRA_DB_BOOL_TRUE_VALS";
+  }
+  if ("sra_db_default_host".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_DEFAULT_HOST'] = "SRA_DB_DEFAULT_HOST";
+  }
+  if ("sra_db_time_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TIME_FORMAT'] = "SRA_DB_TIME_FORMAT";
+  }
+  if ("sra_db_postgresql_time_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_POSTGRESQL_TIME_FORMAT'] = "SRA_DB_POSTGRESQL_TIME_FORMAT";
+  }
+  if ("sra_db_date_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_DATE_FORMAT'] = "SRA_DB_DATE_FORMAT";
+  }
+  if ("sra_db_type_mssql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TYPE_MSSQL'] = "SRA_DB_TYPE_MSSQL";
+  }
+  if ("sra_db_type_mysql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TYPE_MYSQL'] = "SRA_DB_TYPE_MYSQL";
+  }
+  if ("sra_db_type_postgresql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TYPE_POSTGRESQL'] = "SRA_DB_TYPE_POSTGRESQL";
+  }
+  if ("sra_db_type_sqlite".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_TYPE_SQLITE'] = "SRA_DB_TYPE_SQLITE";
+  }
+  if ("_sra_db_connection_closed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant__SRA_DB_CONNECTION_CLOSED'] = "_SRA_DB_CONNECTION_CLOSED";
+  }
+  if ("_sra_db_connection_error".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant__SRA_DB_CONNECTION_ERROR'] = "_SRA_DB_CONNECTION_ERROR";
+  }
+  if ("_sra_db_connection_open".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant__SRA_DB_CONNECTION_OPEN'] = "_SRA_DB_CONNECTION_OPEN";
+  }
+  if ("sra_database_mysql_use_char_max_len".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATABASE_MYSQL_USE_CHAR_MAX_LEN'] = "SRA_DATABASE_MYSQL_USE_CHAR_MAX_LEN";
+  }
+  if ("sra_db_bool_false".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_BOOL_FALSE'] = "SRA_DB_BOOL_FALSE";
+  }
+  if ("sra_db_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_DEBUG'] = "SRA_DB_DEBUG";
+  }
+  if ("sra_database_mssql_supports_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATABASE_MSSQL_SUPPORTS_LIMIT'] = "SRA_DATABASE_MSSQL_SUPPORTS_LIMIT";
+  }
+  if ("sra_database_mssql_freetds_conf".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DATABASE_MSSQL_FREETDS_CONF'] = "SRA_DATABASE_MSSQL_FREETDS_CONF";
+  }
+  if ("sra_db_bool_true".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DB_BOOL_TRUE'] = "SRA_DB_BOOL_TRUE";
+  }
+
+
+
+  // check classes
+  if ("sra_database".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Database'] = "SRA_Database";
+  }
+  if ("sra_databasemssql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_DatabaseMsSql'] = "SRA_DatabaseMsSql";
+  }
+  if ("sra_databasemysql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_DatabaseMySql'] = "SRA_DatabaseMySql";
+  }
+  if ("sra_databasepostgresql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_DatabasePostgreSql'] = "SRA_DatabasePostgreSql";
+  }
+  if ("sra_databasesqlite".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_DatabaseSqLite'] = "SRA_DatabaseSqLite";
+  }
+  if ("sra_executeset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ExecuteSet'] = "SRA_ExecuteSet";
+  }
+  if ("sra_resultset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_ResultSet'] = "SRA_ResultSet";
+  }
+
+
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="package" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1>package sql</h1>
+  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>Package Information</h2>
+  <ul>
+    <li><a href="#comments">Package Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#classes">Classes</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>This directory/package contains the database related classes of the SIERRA PHP deployment framework. All of these classes are accessible without requiring includes ONCE THE SRA_Controller.php class has been included. <br /><br />Most classes are fairly self explanatory based on the file name. For more information, please review the class comments or the SIERRA api documentation. SRA_Database configuration directives are specified in the sierra-config.xml and app-config.xml files. For more information, please review the sample xml configurations, and the accompanying dtds.<br /></pre>
+  
+  <h2 id="constants">Constant Summary</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_BOOL_FALSE_VALS">SRA_DB_BOOL_FALSE_VALS</a></pre>
+<pre> the default values for boolean FALSE data types (the first value is the value
+  that will be inserted into columns of that type. for more information, see
+  the &quot;db&quot; element &quot;boolean-false&quot; and &quot;boolean-true&quot; attribute definitions in
+  sierra-config*.dtd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_BOOL_TRUE_VALS">SRA_DB_BOOL_TRUE_VALS</a></pre>
+<pre> same as SRA_DB_BOOL_FALSE_VALS for TRUE
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_DEFAULT_HOST">SRA_DB_DEFAULT_HOST</a></pre>
+<pre> the default db host
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TIME_FORMAT">SRA_DB_TIME_FORMAT</a></pre>
+<pre> Constant that identifies the default date/time format that should be used
+  when inserting into timestamp type columns. Child SRA_Database* objects may or
+  may not use this same format. If they do not, they must have and use their
+  own constant identifying this value.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_POSTGRESQL_TIME_FORMAT">SRA_DB_POSTGRESQL_TIME_FORMAT</a></pre>
+<pre> Constant that identifies the default date/time format that should be used
+  when inserting into timestamp type columns
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_DATE_FORMAT">SRA_DB_DATE_FORMAT</a></pre>
+<pre> Constant that identifies the default date format that should be used
+  when inserting into date type columns. Child SRA_Database* objects may or
+  may not use this same format. If they do not, they must have and use their
+  own constant identifying this value.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TYPE_MSSQL">SRA_DB_TYPE_MSSQL</a></pre>
+<pre> Constant that identifies database objects of type mssql.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TYPE_MYSQL">SRA_DB_TYPE_MYSQL</a></pre>
+<pre> Constant that identifies database objects of type mysql.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TYPE_POSTGRESQL">SRA_DB_TYPE_POSTGRESQL</a></pre>
+<pre> Constant that identifies database objects of type postgresql.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_TYPE_SQLITE">SRA_DB_TYPE_SQLITE</a></pre>
+<pre> Constant that identifies database objects of type sqlite.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#constant__SRA_DB_CONNECTION_CLOSED">_SRA_DB_CONNECTION_CLOSED</a></pre>
+<pre> Identifies (for internal SRA_Database class use only) that an database
+  server&#039;s connection status is currently closed.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#constant__SRA_DB_CONNECTION_ERROR">_SRA_DB_CONNECTION_ERROR</a></pre>
+<pre> Identifies (for internal SRA_Database class use only) that a database server
+  is currently in an error status (cannot be used).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private int </pre></td>
+      <td>
+        <pre><a href="#constant__SRA_DB_CONNECTION_OPEN">_SRA_DB_CONNECTION_OPEN</a></pre>
+<pre> Identifies (for internal SRA_Database class use only) that an database
+  server&#039;s connection status is currently open.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATABASE_MYSQL_USE_CHAR_MAX_LEN">SRA_DATABASE_MYSQL_USE_CHAR_MAX_LEN</a></pre>
+<pre> the max # of characters allowed for a CHAR column to be used instead of
+  VARCHAR by default (in order to reduce table fragmentation caused by lots of
+  small varchar columns)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_BOOL_FALSE">SRA_DB_BOOL_FALSE</a></pre>
+<pre> the default PHP representation for boolean FALSE values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_DEBUG">SRA_DB_DEBUG</a></pre>
+<pre> Debug constant
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATABASE_MSSQL_SUPPORTS_LIMIT">SRA_DATABASE_MSSQL_SUPPORTS_LIMIT</a></pre>
+<pre> Whether or not the mssql server supports the LIMIT/OFFSET sql syntax
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DATABASE_MSSQL_FREETDS_CONF">SRA_DATABASE_MSSQL_FREETDS_CONF</a></pre>
+<pre> The location of the free tds etc file (&#039;/usr/local/freetds/etc/freetds.conf&#039;
+  or wherever the server&#039;s freetds etc file is installed). This file is required
+  for all implementations that utilize sql server tds connectivity. This file must
+  exist, and specify each server that is connected to by the SRA_DatabaseMsSql class
+  (see SRA_DatabaseMsSql::_openConn api for more details).
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DB_BOOL_TRUE">SRA_DB_BOOL_TRUE</a></pre>
+<pre> the default PHP representation for boolean TRUE values
+</pre>      </td>
+    </tr>
+  </table>
+
+  
+  <h2 id="classes">Class Summary</h2>
+  <table border="1" width="100%">
+    <tr id="class_SRA_Database">
+      <td><pre><a href="../classes/sql.SRA_Database.html" target="contentFrame">SRA_Database</a></pre></td>
+      <td><pre> This abstract class is used for DB abstraction.
+  A SRA_Database wrapper class used to encapsulate database specific
+  functions and methods. Because this is an abstract class it will never
+  be instantiated by itself, but rather child SRA_Database* objects will be
+  instantiated which contain specific functionality for one database
+  server type.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_DatabaseMsSql">
+      <td><pre><a href="../classes/sql.SRA_DatabaseMsSql.html" target="contentFrame">SRA_DatabaseMsSql</a></pre></td>
+      <td><pre> This class extends from the abstract SRA_Database class. It is utilized to
+  handle database interraction with a MS Sql server (SQL Server). In
+  order for sql server access to function tcp/ip connectivity must be
+  activated in MS SQL, using &quot;Server Network SRA_Utility&quot;.  This class
+  utilizes the TDS protocol (Tabular Data Stream) to connect to sql
+  server using the native php sql server functions.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_DatabaseMySql">
+      <td><pre><a href="../classes/sql.SRA_DatabaseMySql.html" target="contentFrame">SRA_DatabaseMySql</a></pre></td>
+      <td><pre> This class extends from the abstract SRA_Database class. It is utilized to
+  handle database interraction with a MySQL server.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_DatabasePostgreSql">
+      <td><pre><a href="../classes/sql.SRA_DatabasePostgreSql.html" target="contentFrame">SRA_DatabasePostgreSql</a></pre></td>
+      <td><pre> This class extends from the abstract SRA_Database class. It is utilized to
+  handle database interraction with a PostgreSql server.
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_DatabaseSqLite">
+      <td><pre><a href="../classes/sql.SRA_DatabaseSqLite.html" target="contentFrame">SRA_DatabaseSqLite</a></pre></td>
+      <td><pre> database class for interracting with an sqlite database. NOTE: this database
+  class works ONLY with PHP PDO currently
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ExecuteSet">
+      <td><pre><a href="../classes/sql.SRA_ExecuteSet.html" target="contentFrame">SRA_ExecuteSet</a></pre></td>
+      <td><pre> This class manages the results of performing an execute query. There are
+  two types of results that may be needed from an execute query. The
+  first is to know the number of records that were affected by the query,
+  and the second is to know the sequenced id that was used when dealing
+  with tables with incremented sequences or auto-increment fields
+ 
+</pre></td>
+    </tr>
+    <tr id="class_SRA_ResultSet">
+      <td><pre><a href="../classes/sql.SRA_ResultSet.html" target="contentFrame">SRA_ResultSet</a></pre></td>
+      <td><pre> Represents the results from performing a database query
+ 
+</pre></td>
+    </tr>
+  </table>
+
+
+
+  <h2 id="constant_details">Constant Details</h2>
+  <h3 id="constant_SRA_DB_BOOL_FALSE_VALS">SRA_DB_BOOL_FALSE_VALS</h3>
+  <pre>public string <b>SRA_DB_BOOL_FALSE_VALS</b> = "'0' 0"</pre>
+  <pre> the default values for boolean FALSE data types (the first value is the value
+  that will be inserted into columns of that type. for more information, see
+  the &quot;db&quot; element &quot;boolean-false&quot; and &quot;boolean-true&quot; attribute definitions in
+  sierra-config*.dtd
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_BOOL_TRUE_VALS">SRA_DB_BOOL_TRUE_VALS</h3>
+  <pre>public string <b>SRA_DB_BOOL_TRUE_VALS</b> = "'1' 1"</pre>
+  <pre> same as SRA_DB_BOOL_FALSE_VALS for TRUE
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_DEFAULT_HOST">SRA_DB_DEFAULT_HOST</h3>
+  <pre>string <b>SRA_DB_DEFAULT_HOST</b> = '127.0.0.1'</pre>
+  <pre> the default db host
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_TIME_FORMAT">SRA_DB_TIME_FORMAT</h3>
+  <pre>public string <b>SRA_DB_TIME_FORMAT</b> = 'Y-m-d H:i:s'</pre>
+  <pre> Constant that identifies the default date/time format that should be used
+  when inserting into timestamp type columns. Child SRA_Database* objects may or
+  may not use this same format. If they do not, they must have and use their
+  own constant identifying this value.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_POSTGRESQL_TIME_FORMAT">SRA_DB_POSTGRESQL_TIME_FORMAT</h3>
+  <pre>public String <b>SRA_DB_POSTGRESQL_TIME_FORMAT</b> = 'Y-m-d H:i:sP'</pre>
+  <pre> Constant that identifies the default date/time format that should be used
+  when inserting into timestamp type columns
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_DatabasePostgreSql.php</p>
+ <hr />  <h3 id="constant_SRA_DB_DATE_FORMAT">SRA_DB_DATE_FORMAT</h3>
+  <pre>public string <b>SRA_DB_DATE_FORMAT</b> = 'Y-m-d'</pre>
+  <pre> Constant that identifies the default date format that should be used
+  when inserting into date type columns. Child SRA_Database* objects may or
+  may not use this same format. If they do not, they must have and use their
+  own constant identifying this value.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_TYPE_MSSQL">SRA_DB_TYPE_MSSQL</h3>
+  <pre>public string <b>SRA_DB_TYPE_MSSQL</b> = 'mssql'</pre>
+  <pre> Constant that identifies database objects of type mssql.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_TYPE_MYSQL">SRA_DB_TYPE_MYSQL</h3>
+  <pre>public string <b>SRA_DB_TYPE_MYSQL</b> = 'mysql'</pre>
+  <pre> Constant that identifies database objects of type mysql.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_TYPE_POSTGRESQL">SRA_DB_TYPE_POSTGRESQL</h3>
+  <pre>public string <b>SRA_DB_TYPE_POSTGRESQL</b> = 'pgsql'</pre>
+  <pre> Constant that identifies database objects of type postgresql.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_TYPE_SQLITE">SRA_DB_TYPE_SQLITE</h3>
+  <pre>public string <b>SRA_DB_TYPE_SQLITE</b> = 'sqlite'</pre>
+  <pre> Constant that identifies database objects of type sqlite.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant__SRA_DB_CONNECTION_CLOSED">_SRA_DB_CONNECTION_CLOSED</h3>
+  <pre>private int <b>_SRA_DB_CONNECTION_CLOSED</b> = 1</pre>
+  <pre> Identifies (for internal SRA_Database class use only) that an database
+  server&#039;s connection status is currently closed.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant__SRA_DB_CONNECTION_ERROR">_SRA_DB_CONNECTION_ERROR</h3>
+  <pre>private int <b>_SRA_DB_CONNECTION_ERROR</b> = 2</pre>
+  <pre> Identifies (for internal SRA_Database class use only) that a database server
+  is currently in an error status (cannot be used).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant__SRA_DB_CONNECTION_OPEN">_SRA_DB_CONNECTION_OPEN</h3>
+  <pre>private int <b>_SRA_DB_CONNECTION_OPEN</b> = 4</pre>
+  <pre> Identifies (for internal SRA_Database class use only) that an database
+  server&#039;s connection status is currently open.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DATABASE_MYSQL_USE_CHAR_MAX_LEN">SRA_DATABASE_MYSQL_USE_CHAR_MAX_LEN</h3>
+  <pre><b>SRA_DATABASE_MYSQL_USE_CHAR_MAX_LEN</b> = 64</pre>
+  <pre> the max # of characters allowed for a CHAR column to be used instead of
+  VARCHAR by default (in order to reduce table fragmentation caused by lots of
+  small varchar columns)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_DatabaseMySql.php</p>
+ <hr />  <h3 id="constant_SRA_DB_BOOL_FALSE">SRA_DB_BOOL_FALSE</h3>
+  <pre>public mixed <b>SRA_DB_BOOL_FALSE</b> = FALSE</pre>
+  <pre> the default PHP representation for boolean FALSE values
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DB_DEBUG">SRA_DB_DEBUG</h3>
+  <pre>public boolean <b>SRA_DB_DEBUG</b> = FALSE</pre>
+  <pre> Debug constant
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+ <hr />  <h3 id="constant_SRA_DATABASE_MSSQL_SUPPORTS_LIMIT">SRA_DATABASE_MSSQL_SUPPORTS_LIMIT</h3>
+  <pre>public boolean <b>SRA_DATABASE_MSSQL_SUPPORTS_LIMIT</b> = FALSE</pre>
+  <pre> Whether or not the mssql server supports the LIMIT/OFFSET sql syntax
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_DatabaseMsSql.php</p>
+ <hr />  <h3 id="constant_SRA_DATABASE_MSSQL_FREETDS_CONF">SRA_DATABASE_MSSQL_FREETDS_CONF</h3>
+  <pre>public String <b>SRA_DATABASE_MSSQL_FREETDS_CONF</b> = SRA_DIR . '/etc/freetds.conf'</pre>
+  <pre> The location of the free tds etc file (&#039;/usr/local/freetds/etc/freetds.conf&#039;
+  or wherever the server&#039;s freetds etc file is installed). This file is required
+  for all implementations that utilize sql server tds connectivity. This file must
+  exist, and specify each server that is connected to by the SRA_DatabaseMsSql class
+  (see SRA_DatabaseMsSql::_openConn api for more details).
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_DatabaseMsSql.php</p>
+ <hr />  <h3 id="constant_SRA_DB_BOOL_TRUE">SRA_DB_BOOL_TRUE</h3>
+  <pre>public mixed <b>SRA_DB_BOOL_TRUE</b> = TRUE</pre>
+  <pre> the default PHP representation for boolean TRUE values
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/sql/SRA_Database.php</p>
+  </form>
+</body>
+</html>

@@ -1,0 +1,1398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_WSRequest - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_ws_request_create".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_CREATE'] = "SRA_WS_REQUEST_CREATE";
+  }
+  if ("sra_ws_request_delete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_DELETE'] = "SRA_WS_REQUEST_DELETE";
+  }
+  if ("sra_ws_request_pk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_PK'] = "SRA_WS_REQUEST_PK";
+  }
+  if ("sra_ws_request_retrieve".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_RETRIEVE'] = "SRA_WS_REQUEST_RETRIEVE";
+  }
+  if ("sra_ws_request_status_invalid_app".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_APP'] = "SRA_WS_REQUEST_STATUS_INVALID_APP";
+  }
+  if ("sra_ws_request_status_invalid_attrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_ATTRS'] = "SRA_WS_REQUEST_STATUS_INVALID_ATTRS";
+  }
+  if ("sra_ws_request_status_invalid_pk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_PK'] = "SRA_WS_REQUEST_STATUS_INVALID_PK";
+  }
+  if ("sra_ws_request_status_invalid_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_FORMAT'] = "SRA_WS_REQUEST_STATUS_INVALID_FORMAT";
+  }
+  if ("sra_ws_request_status_invalid_input".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_INPUT'] = "SRA_WS_REQUEST_STATUS_INVALID_INPUT";
+  }
+  if ("sra_ws_request_status_invalid_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_LIMIT'] = "SRA_WS_REQUEST_STATUS_INVALID_LIMIT";
+  }
+  if ("sra_ws_request_status_invalid_meta_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT'] = "SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT";
+  }
+  if ("sra_ws_request_status_invalid_proto".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_PROTO'] = "SRA_WS_REQUEST_STATUS_INVALID_PROTO";
+  }
+  if ("sra_ws_request_status_invalid_request".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_REQUEST'] = "SRA_WS_REQUEST_STATUS_INVALID_REQUEST";
+  }
+  if ("sra_ws_request_status_invalid_service".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_INVALID_SERVICE'] = "SRA_WS_REQUEST_STATUS_INVALID_SERVICE";
+  }
+  if ("sra_ws_request_status_ip_not_allowed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED'] = "SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED";
+  }
+  if ("sra_ws_request_status_failed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_FAILED'] = "SRA_WS_REQUEST_STATUS_FAILED";
+  }
+  if ("sra_ws_request_status_not_allowed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_NOT_ALLOWED'] = "SRA_WS_REQUEST_STATUS_NOT_ALLOWED";
+  }
+  if ("sra_ws_request_status_auth_failed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_AUTH_FAILED'] = "SRA_WS_REQUEST_STATUS_AUTH_FAILED";
+  }
+  if ("sra_ws_request_status_results_not_available".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE'] = "SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE";
+  }
+  if ("sra_ws_request_status_timeout".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_TIMEOUT'] = "SRA_WS_REQUEST_STATUS_TIMEOUT";
+  }
+  if ("sra_ws_request_status_success".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_STATUS_SUCCESS'] = "SRA_WS_REQUEST_STATUS_SUCCESS";
+  }
+  if ("sra_ws_request_update".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_REQUEST_UPDATE'] = "SRA_WS_REQUEST_UPDATE";
+  }
+  if ("sra_ws_result_count_key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WS_RESULT_COUNT_KEY'] = "SRA_WS_RESULT_COUNT_KEY";
+  }
+
+  // check attributes
+  if ("_id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__id'] = "_id";
+  }
+  if ("_action".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__action'] = "_action";
+  }
+  if ("_app".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__app'] = "_app";
+  }
+  if ("_asynchronous".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__asynchronous'] = "_asynchronous";
+  }
+  if ("_attrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__attrs'] = "_attrs";
+  }
+  if ("_constraintgroups".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__constraintGroups'] = "_constraintGroups";
+  }
+  if ("_dao".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dao'] = "_dao";
+  }
+  if ("_dateformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__dateFormat'] = "_dateFormat";
+  }
+  if ("_entities".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__entities'] = "_entities";
+  }
+  if ("_excludeattrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__excludeAttrs'] = "_excludeAttrs";
+  }
+  if ("_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__format'] = "_format";
+  }
+  if ("_global".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__global'] = "_global";
+  }
+  if ("_includeattrs".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__includeAttrs'] = "_includeAttrs";
+  }
+  if ("_issoap".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__isSoap'] = "_isSoap";
+  }
+  if ("_jsdates".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__jsDates'] = "_jsDates";
+  }
+  if ("_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__limit'] = "_limit";
+  }
+  if ("_metaformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__metaFormat'] = "_metaFormat";
+  }
+  if ("_offset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__offset'] = "_offset";
+  }
+  if ("_params".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__params'] = "_params";
+  }
+  if ("_password".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__password'] = "_password";
+  }
+  if ("_processed".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__processed'] = "_processed";
+  }
+  if ("_primarykey".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__primaryKey'] = "_primaryKey";
+  }
+  if ("_query".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__query'] = "_query";
+  }
+  if ("_queryconstraintgroups".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__queryConstraintGroups'] = "_queryConstraintGroups";
+  }
+  if ("_requestid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__requestId'] = "_requestId";
+  }
+  if ("_requestid1".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__requestId1'] = "_requestId1";
+  }
+  if ("_results".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__results'] = "_results";
+  }
+  if ("_resultcount".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__resultCount'] = "_resultCount";
+  }
+  if ("_service".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__service'] = "_service";
+  }
+  if ("_soapversion".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__soapVersion'] = "_soapVersion";
+  }
+  if ("_status".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__status'] = "_status";
+  }
+  if ("_sessionid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__sessionId'] = "_sessionId";
+  }
+  if ("_timeformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__timeFormat'] = "_timeFormat";
+  }
+  if ("_usesessions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__useSessions'] = "_useSessions";
+  }
+  if ("_user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__user'] = "_user";
+  }
+  if ("_validators".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__validators'] = "_validators";
+  }
+  if ("_workflowid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__workflowId'] = "_workflowId";
+  }
+
+  // check methods
+  if ("sra_wsrequest".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_WSRequest'] = "SRA_WSRequest";
+  }
+  if ("getservice".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getService'] = "getService";
+  }
+  if ("process".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_process'] = "process";
+  }
+  if ("printresponse".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_printResponse'] = "printResponse";
+  }
+  if ("validate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validate'] = "validate";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_WSRequest</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_WSRequest</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> This class is used to define an web service invocation
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_CREATE">SRA_WS_REQUEST_CREATE</a></pre>
+<pre> identifies that the service request is to create a new entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_DELETE">SRA_WS_REQUEST_DELETE</a></pre>
+<pre> identifies that the service request is to delete an existing entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_PK">SRA_WS_REQUEST_PK</a></pre>
+<pre> the identifier that can be used in &quot;include-attrs&quot; to identify the primary
+  key attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_RETRIEVE">SRA_WS_REQUEST_RETRIEVE</a></pre>
+<pre> identifies that the service request is to retrieve existing entities
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_APP">SRA_WS_REQUEST_STATUS_INVALID_APP</a></pre>
+<pre> identifies that a request could not be performed because the app specified
+  is not valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_ATTRS">SRA_WS_REQUEST_STATUS_INVALID_ATTRS</a></pre>
+<pre> identifies that a request could not be performed because attributes were set
+  that are not allowed to be set by the service or if attributes set do not
+  exist or if attributes set are read only
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_PK">SRA_WS_REQUEST_STATUS_INVALID_PK</a></pre>
+<pre> identifies that an update/delete request that failed because the primary key
+  specified was not valid
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_FORMAT">SRA_WS_REQUEST_STATUS_INVALID_FORMAT</a></pre>
+<pre> identifies that a request could not be performed because the output format
+  requested is not valid for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_INPUT">SRA_WS_REQUEST_STATUS_INVALID_INPUT</a></pre>
+<pre> identifies that a request could not be performed because the input specified
+  for an update or create action did not pass validation. if this occurs, the
+  &quot;response&quot; will be populated with the error messages resulting from the
+  failed validation
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_LIMIT">SRA_WS_REQUEST_STATUS_INVALID_LIMIT</a></pre>
+<pre> identifies that a request could not be performed because the limit requested
+  is not allowed for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT">SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT</a></pre>
+<pre> identifies that a request could not be performed because the output
+  meta-format requested is not valid for this service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_PROTO">SRA_WS_REQUEST_STATUS_INVALID_PROTO</a></pre>
+<pre> identifies that a request could not be performed because the protocol used
+  to invoke it is not allowed (rest or soap)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_REQUEST">SRA_WS_REQUEST_STATUS_INVALID_REQUEST</a></pre>
+<pre> identifies that a request could not be performed because the request
+  specified was not valid. the server logs will provide more detail on the
+  reason for this error
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_INVALID_SERVICE">SRA_WS_REQUEST_STATUS_INVALID_SERVICE</a></pre>
+<pre> identifies that a request could not be performed because a request was made
+  for an invalid service
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED">SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED</a></pre>
+<pre> identifies that a request could not be performed because the client IP
+  address is not allowed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_FAILED">SRA_WS_REQUEST_STATUS_FAILED</a></pre>
+<pre> identifies that a request could not be performed because of another
+  unspecified error. basically, anything else that can go wrong will fall under
+  this category. the server logs will provide more detail on the reason for
+  this error
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_NOT_ALLOWED">SRA_WS_REQUEST_STATUS_NOT_ALLOWED</a></pre>
+<pre> identifies that a request could not be performed because the action requested
+  (create, delete, retrieve or update) is not allowed via the web service
+  specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_AUTH_FAILED">SRA_WS_REQUEST_STATUS_AUTH_FAILED</a></pre>
+<pre> identifies that a request could not be performed because http authentication
+  failed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE">SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE</a></pre>
+<pre> identifies that a request to retrieve buffered results from a prior async
+  invocation could not be performed because the buffer result is not available
+  yet. if this response code is returned, you may wish to retry your request
+  again after a short interval
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_TIMEOUT">SRA_WS_REQUEST_STATUS_TIMEOUT</a></pre>
+<pre> identifies that a request to retrieve buffered results from a prior async
+  invocation could not be performed because the
+  SRA_WS_GATEWAY_REQUEST_BUFFER_TIMEOUT theshold was reached
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_STATUS_SUCCESS">SRA_WS_REQUEST_STATUS_SUCCESS</a></pre>
+<pre> identifies that a request was performed successfully
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_REQUEST_UPDATE">SRA_WS_REQUEST_UPDATE</a></pre>
+<pre> identifies that the service request is to update an existing entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WS_RESULT_COUNT_KEY">SRA_WS_RESULT_COUNT_KEY</a></pre>
+<pre> identifies the key within the results produces by a service of type
+  SRA_WS_GLOBAL_TYPE_METHOD specifying the total count (count without
+  applying limit or offset)
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__id">_id</a></pre>
+<pre> the web service name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__action">_action</a></pre>
+<pre> identifies the action to take place for this service request. will
+  correspond with one of the SRA_WS_REQUEST_* constants
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__app">_app</a></pre>
+<pre> the application for this request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__asynchronous">_asynchronous</a></pre>
+<pre> specifies whether or not the output of this request should be buffered to a
+  session variable instead of output to the client
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__attrs">_attrs</a></pre>
+<pre> defines the names and values of the attributes to set if the action is
+  SRA_WS_REQUEST_CREATE or SRA_WS_REQUEST_UPDATE. these will be subject to
+  validation according to the constraints specified for the service. equality
+  constraints will automatically be set and override any specified in the
+  request. if any constraint groups fail to validate an attribute attempting
+  to be set in the new entity, the gateway will return the status code
+  SRA_WS_REQUEST_STATUS_NOT_ALLOWED
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>SRA_WSConstraintGroup[] </pre></td>
+      <td>
+        <pre><a href="#attr__constraintGroups">_constraintGroups</a></pre>
+<pre> optional constraint groups that should be applied to this request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>DAO </pre></td>
+      <td>
+        <pre><a href="#attr__dao">_dao</a></pre>
+<pre> a reference to the dao for non-global services
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__dateFormat">_dateFormat</a></pre>
+<pre> the formatting string to use in the response for date values. if not
+  specified, the application date-only-format will be used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>object[] </pre></td>
+      <td>
+        <pre><a href="#attr__entities">_entities</a></pre>
+<pre> for non-global requests when the request pertains to multiple entities
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__excludeAttrs">_excludeAttrs</a></pre>
+<pre> the names of attributes that should be excluded for this request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__format">_format</a></pre>
+<pre> the desired response format for this request. either &quot;json&quot;, &quot;xml&quot; or &quot;raw&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__global">_global</a></pre>
+<pre> TRUE if this request is for a global server (_server will be an
+  SRA_WSGlobal instance)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__includeAttrs">_includeAttrs</a></pre>
+<pre> the names of attributes that should be included for this request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__isSoap">_isSoap</a></pre>
+<pre> whether or not this is a soap request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__jsDates">_jsDates</a></pre>
+<pre> if true and the &quot;format&quot; is &quot;json&quot;, date values will be encoded using the
+  javascript Date constructor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__limit">_limit</a></pre>
+<pre> the limit for this web service request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__metaFormat">_metaFormat</a></pre>
+<pre> the desired response metadata format. either &quot;json&quot;, &quot;xml&quot; or &quot;none&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__offset">_offset</a></pre>
+<pre> the request result set offset
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>SRA_WSParam[] </pre></td>
+      <td>
+        <pre><a href="#attr__params">_params</a></pre>
+<pre> the params associated with this web service request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__password">_password</a></pre>
+<pre> password for authentication. user and password can also be specified in the
+  http headers. however, if user or password are specified in the get
+  parameters or ws-request-xml, they will override the http header values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__processed">_processed</a></pre>
+<pre> used to store the results of invoking the process method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed </pre></td>
+      <td>
+        <pre><a href="#attr__primaryKey">_primaryKey</a></pre>
+<pre> primary key of the entity to retrieve, delete or update (only applies to
+  those actions)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__query">_query</a></pre>
+<pre> used in conjunction with a previous &quot;asynchronous&quot; request in order to
+  query for the results of that previous request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>SRA_QueryBuilderConstraintGroup[] </pre></td>
+      <td>
+        <pre><a href="#attr__queryConstraintGroups">_queryConstraintGroups</a></pre>
+<pre> the query constraint groups corresponding with this service request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__requestId">_requestId</a></pre>
+<pre> an optional identifier for the service request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__requestId1">_requestId1</a></pre>
+<pre> a second optional identifier for the service request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed </pre></td>
+      <td>
+        <pre><a href="#attr__results">_results</a></pre>
+<pre> the results of the service invocation
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__resultCount">_resultCount</a></pre>
+<pre> the total result count (without considering limit and offsets)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed </pre></td>
+      <td>
+        <pre><a href="#attr__service">_service</a></pre>
+<pre> the service that this request belongs to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__soapVersion">_soapVersion</a></pre>
+<pre> the soap version... one of the SRA_WS_SOAP_VERSION_* constant values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__status">_status</a></pre>
+<pre> used to set an error status code if an error exists in the request
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__sessionId">_sessionId</a></pre>
+<pre> the request session id (if $_useSessions is true)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__timeFormat">_timeFormat</a></pre>
+<pre> the formatting string to use in the response for time values. if not
+  specified, the application date-format will be used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr__useSessions">_useSessions</a></pre>
+<pre> sessions can be used to improve response times and eliminate the need to
+  send user and password information with each service request invocation.
+  when this attribute is true, a session-id will be returned in the response.
+  this session-id may them be used in future requests eliminating the need to
+  provide user and password authentication information for those requests
+  (assuming that authentication was successful in the original request, and
+  the application authenticators allow for session-based authentication)
+  NOTE: if your web service client supports cookies, this option will not
+  improve performance
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__user">_user</a></pre>
+<pre> user for authentication. user and password can also be specified in the
+  http headers. however, if user or password are specified in the get
+  parameters or ws-request-xml, they will override the http header values
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__validators">_validators</a></pre>
+<pre> an optional additional validators to invoke (applies only to entity
+  create/update requests)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__workflowId">_workflowId</a></pre>
+<pre> if the action is SRA_WS_REQUEST_RETRIEVE and the entity is stored
+  within a workflow instance (see lib/workflow for more info), this attribute
+  may be used to specify the workflow identifier
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_WSRequest">SRA_WSRequest</a>(mixed $conf, boolean $isSoap=FALSE, string $id=NULL)</pre>
+<pre> parses the service configuration data and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getService">getService</a>()</pre>
+<pre> prints the response of this request using the format and meta-format
+  specified. returns TRUE on success, FALSE otherwise. this method should be
+  invoked after &#039;process&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_process">process</a>()</pre>
+<pre> processes this request. returns TRUE on success, FALSE otherwise. if
+  unsuccessful, a corresponding SRA_WS_REQUEST_STATUS_* code will be set to
+  $this-&gt;_status
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_printResponse">printResponse</a>()</pre>
+<pre> prints the response of this request using the format and meta-format
+  specified. returns TRUE on success, FALSE otherwise. this method should be
+  invoked after &#039;process&#039;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_validate">validate</a>()</pre>
+<pre> returns TRUE if this request is valid, FALSE otherwise. if it is not valid,
+  a corresponding SRA_WS_REQUEST_STATUS_* code will be set to $this-&gt;_status
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(mixed $object)</pre>
+<pre> returns TRUE if $object is a SRA_WSRequest object
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_WS_REQUEST_CREATE">SRA_WS_REQUEST_CREATE</h3>
+  <pre>string <b>SRA_WS_REQUEST_CREATE</b> = 'create'</pre>
+  <pre> identifies that the service request is to create a new entity
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_DELETE">SRA_WS_REQUEST_DELETE</h3>
+  <pre>string <b>SRA_WS_REQUEST_DELETE</b> = 'delete'</pre>
+  <pre> identifies that the service request is to delete an existing entity
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_PK">SRA_WS_REQUEST_PK</h3>
+  <pre>string <b>SRA_WS_REQUEST_PK</b> = '_pk_'</pre>
+  <pre> the identifier that can be used in &quot;include-attrs&quot; to identify the primary
+  key attribute
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_RETRIEVE">SRA_WS_REQUEST_RETRIEVE</h3>
+  <pre>string <b>SRA_WS_REQUEST_RETRIEVE</b> = 'retrieve'</pre>
+  <pre> identifies that the service request is to retrieve existing entities
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_APP">SRA_WS_REQUEST_STATUS_INVALID_APP</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_APP</b> = 'invalid-app'</pre>
+  <pre> identifies that a request could not be performed because the app specified
+  is not valid
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_ATTRS">SRA_WS_REQUEST_STATUS_INVALID_ATTRS</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_ATTRS</b> = 'invalid-attrs'</pre>
+  <pre> identifies that a request could not be performed because attributes were set
+  that are not allowed to be set by the service or if attributes set do not
+  exist or if attributes set are read only
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_PK">SRA_WS_REQUEST_STATUS_INVALID_PK</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_PK</b> = 'invalid-pk'</pre>
+  <pre> identifies that an update/delete request that failed because the primary key
+  specified was not valid
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_FORMAT">SRA_WS_REQUEST_STATUS_INVALID_FORMAT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_FORMAT</b> = 'invalid-format'</pre>
+  <pre> identifies that a request could not be performed because the output format
+  requested is not valid for this service
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_INPUT">SRA_WS_REQUEST_STATUS_INVALID_INPUT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_INPUT</b> = 'validation-error'</pre>
+  <pre> identifies that a request could not be performed because the input specified
+  for an update or create action did not pass validation. if this occurs, the
+  &quot;response&quot; will be populated with the error messages resulting from the
+  failed validation
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_LIMIT">SRA_WS_REQUEST_STATUS_INVALID_LIMIT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_LIMIT</b> = 'invalid-limit'</pre>
+  <pre> identifies that a request could not be performed because the limit requested
+  is not allowed for this service
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT">SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_META_FORMAT</b> = 'invalid-meta-format'</pre>
+  <pre> identifies that a request could not be performed because the output
+  meta-format requested is not valid for this service
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_PROTO">SRA_WS_REQUEST_STATUS_INVALID_PROTO</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_PROTO</b> = 'invalid-protocol'</pre>
+  <pre> identifies that a request could not be performed because the protocol used
+  to invoke it is not allowed (rest or soap)
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_REQUEST">SRA_WS_REQUEST_STATUS_INVALID_REQUEST</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_REQUEST</b> = 'invalid-request'</pre>
+  <pre> identifies that a request could not be performed because the request
+  specified was not valid. the server logs will provide more detail on the
+  reason for this error
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_INVALID_SERVICE">SRA_WS_REQUEST_STATUS_INVALID_SERVICE</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_INVALID_SERVICE</b> = 'invalid-service'</pre>
+  <pre> identifies that a request could not be performed because a request was made
+  for an invalid service
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED">SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_IP_NOT_ALLOWED</b> = 'ip-not-allowed'</pre>
+  <pre> identifies that a request could not be performed because the client IP
+  address is not allowed
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_FAILED">SRA_WS_REQUEST_STATUS_FAILED</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_FAILED</b> = 'failed'</pre>
+  <pre> identifies that a request could not be performed because of another
+  unspecified error. basically, anything else that can go wrong will fall under
+  this category. the server logs will provide more detail on the reason for
+  this error
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_NOT_ALLOWED">SRA_WS_REQUEST_STATUS_NOT_ALLOWED</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_NOT_ALLOWED</b> = 'not-allowed'</pre>
+  <pre> identifies that a request could not be performed because the action requested
+  (create, delete, retrieve or update) is not allowed via the web service
+  specified
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_AUTH_FAILED">SRA_WS_REQUEST_STATUS_AUTH_FAILED</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_AUTH_FAILED</b> = 'authentication-failed'</pre>
+  <pre> identifies that a request could not be performed because http authentication
+  failed
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE">SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE</b> = 'not-available'</pre>
+  <pre> identifies that a request to retrieve buffered results from a prior async
+  invocation could not be performed because the buffer result is not available
+  yet. if this response code is returned, you may wish to retry your request
+  again after a short interval
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_TIMEOUT">SRA_WS_REQUEST_STATUS_TIMEOUT</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_TIMEOUT</b> = 'timeout'</pre>
+  <pre> identifies that a request to retrieve buffered results from a prior async
+  invocation could not be performed because the
+  SRA_WS_GATEWAY_REQUEST_BUFFER_TIMEOUT theshold was reached
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_STATUS_SUCCESS">SRA_WS_REQUEST_STATUS_SUCCESS</h3>
+  <pre>string <b>SRA_WS_REQUEST_STATUS_SUCCESS</b> = 'success'</pre>
+  <pre> identifies that a request was performed successfully
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_REQUEST_UPDATE">SRA_WS_REQUEST_UPDATE</h3>
+  <pre>string <b>SRA_WS_REQUEST_UPDATE</b> = 'update'</pre>
+  <pre> identifies that the service request is to update an existing entity
+</pre>
+ <hr />  <h3 id="constant_SRA_WS_RESULT_COUNT_KEY">SRA_WS_RESULT_COUNT_KEY</h3>
+  <pre>string <b>SRA_WS_RESULT_COUNT_KEY</b> = '_resultCount'</pre>
+  <pre> identifies the key within the results produces by a service of type
+  SRA_WS_GLOBAL_TYPE_METHOD specifying the total count (count without
+  applying limit or offset)
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__id">_id</h3>
+  <pre>string var <b>$_id</b></pre>
+  <pre> the web service name
+</pre>
+ <hr />  <h3 id="attr__action">_action</h3>
+  <pre>string var <b>$_action</b></pre>
+  <pre> identifies the action to take place for this service request. will
+  correspond with one of the SRA_WS_REQUEST_* constants
+</pre>
+ <hr />  <h3 id="attr__app">_app</h3>
+  <pre>string var <b>$_app</b></pre>
+  <pre> the application for this request
+</pre>
+ <hr />  <h3 id="attr__asynchronous">_asynchronous</h3>
+  <pre>boolean var <b>$_asynchronous</b></pre>
+  <pre> specifies whether or not the output of this request should be buffered to a
+  session variable instead of output to the client
+</pre>
+ <hr />  <h3 id="attr__attrs">_attrs</h3>
+  <pre>array var <b>$_attrs</b> = NULL</pre>
+  <pre> defines the names and values of the attributes to set if the action is
+  SRA_WS_REQUEST_CREATE or SRA_WS_REQUEST_UPDATE. these will be subject to
+  validation according to the constraints specified for the service. equality
+  constraints will automatically be set and override any specified in the
+  request. if any constraint groups fail to validate an attribute attempting
+  to be set in the new entity, the gateway will return the status code
+  SRA_WS_REQUEST_STATUS_NOT_ALLOWED
+</pre>
+ <hr />  <h3 id="attr__constraintGroups">_constraintGroups</h3>
+  <pre>SRA_WSConstraintGroup[] var <b>$_constraintGroups</b> = array()</pre>
+  <pre> optional constraint groups that should be applied to this request
+</pre>
+ <hr />  <h3 id="attr__dao">_dao</h3>
+  <pre>DAO var <b>$_dao</b></pre>
+  <pre> a reference to the dao for non-global services
+</pre>
+ <hr />  <h3 id="attr__dateFormat">_dateFormat</h3>
+  <pre>string var <b>$_dateFormat</b></pre>
+  <pre> the formatting string to use in the response for date values. if not
+  specified, the application date-only-format will be used
+</pre>
+ <hr />  <h3 id="attr__entities">_entities</h3>
+  <pre>object[] var <b>$_entities</b></pre>
+  <pre> for non-global requests when the request pertains to multiple entities
+</pre>
+ <hr />  <h3 id="attr__excludeAttrs">_excludeAttrs</h3>
+  <pre>array var <b>$_excludeAttrs</b></pre>
+  <pre> the names of attributes that should be excluded for this request
+</pre>
+ <hr />  <h3 id="attr__format">_format</h3>
+  <pre>string var <b>$_format</b></pre>
+  <pre> the desired response format for this request. either &quot;json&quot;, &quot;xml&quot; or &quot;raw&quot;
+</pre>
+ <hr />  <h3 id="attr__global">_global</h3>
+  <pre>boolean var <b>$_global</b> = FALSE</pre>
+  <pre> TRUE if this request is for a global server (_server will be an
+  SRA_WSGlobal instance)
+</pre>
+ <hr />  <h3 id="attr__includeAttrs">_includeAttrs</h3>
+  <pre>array var <b>$_includeAttrs</b></pre>
+  <pre> the names of attributes that should be included for this request
+</pre>
+ <hr />  <h3 id="attr__isSoap">_isSoap</h3>
+  <pre>boolean var <b>$_isSoap</b></pre>
+  <pre> whether or not this is a soap request
+</pre>
+ <hr />  <h3 id="attr__jsDates">_jsDates</h3>
+  <pre>boolean var <b>$_jsDates</b></pre>
+  <pre> if true and the &quot;format&quot; is &quot;json&quot;, date values will be encoded using the
+  javascript Date constructor
+</pre>
+ <hr />  <h3 id="attr__limit">_limit</h3>
+  <pre>int var <b>$_limit</b></pre>
+  <pre> the limit for this web service request
+</pre>
+ <hr />  <h3 id="attr__metaFormat">_metaFormat</h3>
+  <pre>string var <b>$_metaFormat</b></pre>
+  <pre> the desired response metadata format. either &quot;json&quot;, &quot;xml&quot; or &quot;none&quot;
+</pre>
+ <hr />  <h3 id="attr__offset">_offset</h3>
+  <pre>int var <b>$_offset</b></pre>
+  <pre> the request result set offset
+</pre>
+ <hr />  <h3 id="attr__params">_params</h3>
+  <pre>SRA_WSParam[] var <b>$_params</b> = array()</pre>
+  <pre> the params associated with this web service request
+</pre>
+ <hr />  <h3 id="attr__password">_password</h3>
+  <pre>string var <b>$_password</b></pre>
+  <pre> password for authentication. user and password can also be specified in the
+  http headers. however, if user or password are specified in the get
+  parameters or ws-request-xml, they will override the http header values
+</pre>
+ <hr />  <h3 id="attr__processed">_processed</h3>
+  <pre>boolean var <b>$_processed</b></pre>
+  <pre> used to store the results of invoking the process method
+</pre>
+ <hr />  <h3 id="attr__primaryKey">_primaryKey</h3>
+  <pre>mixed var <b>$_primaryKey</b></pre>
+  <pre> primary key of the entity to retrieve, delete or update (only applies to
+  those actions)
+</pre>
+ <hr />  <h3 id="attr__query">_query</h3>
+  <pre>boolean var <b>$_query</b></pre>
+  <pre> used in conjunction with a previous &quot;asynchronous&quot; request in order to
+  query for the results of that previous request
+</pre>
+ <hr />  <h3 id="attr__queryConstraintGroups">_queryConstraintGroups</h3>
+  <pre>SRA_QueryBuilderConstraintGroup[] var <b>$_queryConstraintGroups</b> = array()</pre>
+  <pre> the query constraint groups corresponding with this service request
+</pre>
+ <hr />  <h3 id="attr__requestId">_requestId</h3>
+  <pre>string var <b>$_requestId</b></pre>
+  <pre> an optional identifier for the service request
+</pre>
+ <hr />  <h3 id="attr__requestId1">_requestId1</h3>
+  <pre>string var <b>$_requestId1</b></pre>
+  <pre> a second optional identifier for the service request
+</pre>
+ <hr />  <h3 id="attr__results">_results</h3>
+  <pre>mixed var <b>$_results</b></pre>
+  <pre> the results of the service invocation
+</pre>
+ <hr />  <h3 id="attr__resultCount">_resultCount</h3>
+  <pre>int var <b>$_resultCount</b></pre>
+  <pre> the total result count (without considering limit and offsets)
+</pre>
+ <hr />  <h3 id="attr__service">_service</h3>
+  <pre>mixed var <b>$_service</b></pre>
+  <pre> the service that this request belongs to
+</pre>
+ <hr />  <h3 id="attr__soapVersion">_soapVersion</h3>
+  <pre>string var <b>$_soapVersion</b></pre>
+  <pre> the soap version... one of the SRA_WS_SOAP_VERSION_* constant values
+</pre>
+ <hr />  <h3 id="attr__status">_status</h3>
+  <pre>string var <b>$_status</b></pre>
+  <pre> used to set an error status code if an error exists in the request
+</pre>
+ <hr />  <h3 id="attr__sessionId">_sessionId</h3>
+  <pre>string var <b>$_sessionId</b></pre>
+  <pre> the request session id (if $_useSessions is true)
+</pre>
+ <hr />  <h3 id="attr__timeFormat">_timeFormat</h3>
+  <pre>string var <b>$_timeFormat</b></pre>
+  <pre> the formatting string to use in the response for time values. if not
+  specified, the application date-format will be used
+</pre>
+ <hr />  <h3 id="attr__useSessions">_useSessions</h3>
+  <pre>boolean var <b>$_useSessions</b></pre>
+  <pre> sessions can be used to improve response times and eliminate the need to
+  send user and password information with each service request invocation.
+  when this attribute is true, a session-id will be returned in the response.
+  this session-id may them be used in future requests eliminating the need to
+  provide user and password authentication information for those requests
+  (assuming that authentication was successful in the original request, and
+  the application authenticators allow for session-based authentication)
+  NOTE: if your web service client supports cookies, this option will not
+  improve performance
+</pre>
+ <hr />  <h3 id="attr__user">_user</h3>
+  <pre>string var <b>$_user</b></pre>
+  <pre> user for authentication. user and password can also be specified in the
+  http headers. however, if user or password are specified in the get
+  parameters or ws-request-xml, they will override the http header values
+</pre>
+ <hr />  <h3 id="attr__validators">_validators</h3>
+  <pre>array var <b>$_validators</b></pre>
+  <pre> an optional additional validators to invoke (applies only to entity
+  create/update requests)
+</pre>
+ <hr />  <h3 id="attr__workflowId">_workflowId</h3>
+  <pre>int var <b>$_workflowId</b></pre>
+  <pre> if the action is SRA_WS_REQUEST_RETRIEVE and the entity is stored
+  within a workflow instance (see lib/workflow for more info), this attribute
+  may be used to specify the workflow identifier
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_WSRequest">SRA_WSRequest</h3>
+  <pre>public void function <b>SRA_WSRequest</b>(mixed $conf, boolean $isSoap=FALSE, string $id=NULL)</pre>
+  <pre> parses the service configuration data and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>mixed</td>
+      <td><pre>the xml configuration to parse</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>isSoap</td>
+      <td>boolean</td>
+      <td><pre>whether or not this is a soap request</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the id of the service (optional)  1.2)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getService">getService</h3>
+  <pre>public void function &amp;<b>getService</b>()</pre>
+  <pre> prints the response of this request using the format and meta-format
+  specified. returns TRUE on success, FALSE otherwise. this method should be
+  invoked after &#039;process&#039;
+</pre>
+ <hr />  <h3 id="method_process">process</h3>
+  <pre>public boolean function <b>process</b>()</pre>
+  <pre> processes this request. returns TRUE on success, FALSE otherwise. if
+  unsuccessful, a corresponding SRA_WS_REQUEST_STATUS_* code will be set to
+  $this-&gt;_status
+</pre>
+ <hr />  <h3 id="method_printResponse">printResponse</h3>
+  <pre>public void function <b>printResponse</b>()</pre>
+  <pre> prints the response of this request using the format and meta-format
+  specified. returns TRUE on success, FALSE otherwise. this method should be
+  invoked after &#039;process&#039;
+</pre>
+ <hr />  <h3 id="method_validate">validate</h3>
+  <pre>public boolean function <b>validate</b>()</pre>
+  <pre> returns TRUE if this request is valid, FALSE otherwise. if it is not valid,
+  a corresponding SRA_WS_REQUEST_STATUS_* code will be set to $this-&gt;_status
+</pre>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(mixed $object)</pre>
+  <pre> returns TRUE if $object is a SRA_WSRequest object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>mixed</td>
+      <td><pre>The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_WSRequest.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

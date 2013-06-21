@@ -1,0 +1,1059 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>workflow.SRA_WorkflowTask - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_workflow_task_due_date_rel_cur".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR";
+  }
+  if ("sra_workflow_task_due_date_rel_wf_start".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START";
+  }
+  if ("sra_workflow_task_due_date_rel_wf_due_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE";
+  }
+  if ("sra_workflow_task_due_date_rel_step_due_date".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE'] = "SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE";
+  }
+
+  // check attributes
+  if ("commit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_commit'] = "commit";
+  }
+  if ("connectto".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_connectTo'] = "connectTo";
+  }
+  if ("constraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_constraintGroup'] = "constraintGroup";
+  }
+  if ("desciption".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_desciption'] = "desciption";
+  }
+  if ("duedate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_dueDate'] = "dueDate";
+  }
+  if ("duedaterel".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_dueDateRel'] = "dueDateRel";
+  }
+  if ("entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_entity'] = "entity";
+  }
+  if ("entityid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_entityId'] = "entityId";
+  }
+  if ("entitypk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_entityPk'] = "entityPk";
+  }
+  if ("evalafter".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_evalAfter'] = "evalAfter";
+  }
+  if ("evalbefore".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_evalBefore'] = "evalBefore";
+  }
+  if ("interactive".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_interactive'] = "interactive";
+  }
+  if ("name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_name'] = "name";
+  }
+  if ("notify".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notify'] = "notify";
+  }
+  if ("notifyall".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyAll'] = "notifyAll";
+  }
+  if ("notifyalways".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyAlways'] = "notifyAlways";
+  }
+  if ("notifyattachname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyAttachName'] = "notifyAttachName";
+  }
+  if ("notifyattachview".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyAttachView'] = "notifyAttachView";
+  }
+  if ("notifybcc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyBcc'] = "notifyBcc";
+  }
+  if ("notifycc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyCc'] = "notifyCc";
+  }
+  if ("notifyfrom".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyFrom'] = "notifyFrom";
+  }
+  if ("notifyrecipients".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyRecipients'] = "notifyRecipients";
+  }
+  if ("notifyrecipientsonly".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyRecipientsOnly'] = "notifyRecipientsOnly";
+  }
+  if ("notifysubject".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifySubject'] = "notifySubject";
+  }
+  if ("notifytpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyTpl'] = "notifyTpl";
+  }
+  if ("notifytplhtml".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_notifyTplHtml'] = "notifyTplHtml";
+  }
+  if ("resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_resource'] = "resource";
+  }
+  if ("resourcedesc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_resourceDesc'] = "resourceDesc";
+  }
+  if ("role".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_role'] = "role";
+  }
+  if ("user".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_user'] = "user";
+  }
+  if ("validate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_validate'] = "validate";
+  }
+  if ("validateignore".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_validateIgnore'] = "validateIgnore";
+  }
+  if ("view".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_view'] = "view";
+  }
+
+  // check methods
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_WorkflowTask</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/workflow.html" target="contentFrame">workflow</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_WorkflowTask</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> defines a unit of work within a workflow. tasks are created within the
+  context of a workflow &quot;step&quot;. tasks can be either interactive or
+  auto-completed. auto-completed tasks do not require any user intervention in
+  order to complete while interactive tasks do. interactive tasks are those
+  tasks containing a &quot;view&quot; and those flagged as &quot;interactive&quot;. the unit of
+  work performed by a task is either the &quot;eval*&quot; PHP code or the &quot;view&quot; or
+  the user &quot;check off&quot; when it is designated &quot;interactive&quot;. therefore, at least
+  one of those values must exist for each task
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR">SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR</a></pre>
+<pre> identifies that the task due date should be relative to the current date
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START">SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START</a></pre>
+<pre> identifies that the task due date should be relative to the wf start date
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE">SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE</a></pre>
+<pre> identifies that the task due date should be relative to the wf due date
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE">SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE</a></pre>
+<pre> identifies that the task due date should be relative to the step due date
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_commit">commit</a></pre>
+<pre> if an entity pertains to this task, setting this flag to true will result
+  in that entity being inserted/updated upon successful completion of the
+  task (if interactive, otherwise performed when the task is initialized)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_connectTo">connectTo</a></pre>
+<pre> the identifier of another workflow to connect to when this task is
+  completed. NOTE: the connect-to workflow will be initialized using the same
+  params as this task
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="workflow.SRA_WorkflowConstraintGroup.html" target="contentFrame">SRA_WorkflowConstraintGroup</a> </pre></td>
+      <td>
+        <pre><a href="#attr_constraintGroup">constraintGroup</a></pre>
+<pre> constraint group for this task. used to determine whether or not this task
+  is added to its step at the time that it is created
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_desciption">desciption</a></pre>
+<pre> the description of this task as determined by the config &quot;resource-descr&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_dueDate">dueDate</a></pre>
+<pre> an explicit date or relative due-date expression. explicit dates should be
+  entered in the format &quot;YYYY-MM-DD HH:MM:SS&quot; (time is optional). relative
+  expressions utilize the same format except that any of the date values
+  (YYYY, MM, DD, HH, MM, or SS) may be replaced with a relative modifier in
+  the format &quot;+n&quot; where n is the increase from the current timestamp. For
+  example, to specify the 1st of the following month, the dueDate would be:
+  &quot;+0-+1-01&quot; - where +0 signifies the current year, and +1 signifies the
+  following month. if the current month was december (12), the following
+  month will be January and the year will be incremented automatically.
+  Another example: to specify exactly one week from the current time,
+  dueDate would be &quot;+0-+0-+7&quot; - where the first +0 signifies the current
+  year, the second +0 signifies the current month, and +7 signifies 7 days
+  from the current date. month and year rollovers resulting in the 1 week
+  jump will be automatically applied (for example, if the action was created
+  on 12/28). negative increments can be applied by enclosing the increment
+  value &quot;n&quot; in parenthesis. for example, to specify 1 month minus 1 week from
+  the current date, dueDate would be: &quot;+0-+1-+(7)&quot;. the increment value &quot;n&quot;
+  may also be an action or workflow parameter using the format &quot;${param name}
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr_dueDateRel">dueDateRel</a></pre>
+<pre> if the task dueDate is relative, this attribute determines what it is
+  relative to. the following options are available:
+   0: the date/time when the task was invoked (default)
+   1: the workflow start date
+   2: the workflow due date (should not be greater)
+   3: the task step due date (should not be greater)
+  the SRA_WORKFLOW_TASK_DUE_DATE_REL_* constants are defined for these
+  options
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_entity">entity</a></pre>
+<pre> see SRA_WorkflowStep::entity - when the task pertains to a step, this will
+  override the step entity. when the task pertains to the workflow, this
+  attribute is required if the task involves an entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_entityId">entityId</a></pre>
+<pre> see SRA_WorkflowStep::entityId
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_entityPk">entityPk</a></pre>
+<pre> see SRA_WorkflowStep::entityPk
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_evalAfter">evalAfter</a></pre>
+<pre> a PHP code block that should be invoked for a particular task. this code
+  segment will have access to any current workflow entities using the
+  entityId as the variable name as well as to the SraWorkflow,
+  SraWorkflowStep and SraWorkflowTask instances using the variable names
+  $workflow, $step (when applicable) and $task. This code block MUST return
+  TRUE, or the workflow will enter an error state. this code is invoked AFTER
+  the task is completed successfully (if a &quot;view&quot; is defined for the task,
+  this would be when that view is completed/confirmed)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_evalBefore">evalBefore</a></pre>
+<pre> Like &quot;evalAfter&quot;, &quot;evalBefore&quot; also specifies a PHP code block that should
+  be invoked for a particular task. however, this code is invoked at the same
+  time that the task is created. the difference between &quot;evalBefore&quot; and
+  &quot;evalAfter&quot; is only applicable to interractive tasks (tasks with associated
+  views)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_interactive">interactive</a></pre>
+<pre> is this task interactive? use this to create a &quot;check-off&quot; task... a task
+  that a user must simply check of having completed. tasks with a &quot;view&quot; are
+  interactive but in a different way because the view must be displayed and
+  entity optionally validated (when &quot;validate&quot; is specified) in order for
+  them to be considered completed. only the owner of this task, or the owner
+  of the enclosing step, or the owner of the enclosing workflow may
+  &quot;check off&quot; a task. this attribute will be automatically set to TRUE if a
+  &quot;view&quot; is assigned to this task
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_name">name</a></pre>
+<pre> the name of this task as determined by the config &quot;resource&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_notify">notify</a></pre>
+<pre> should notifications be sent for this task? this value overrides the
+  enclosing workflow or step &#039;notify&#039; flag
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_notifyAll">notifyAll</a></pre>
+<pre> whether or not all participants in this workflow (past and present) should
+  be notified (using the &quot;notify-tpl&quot;) when this task is created. the default
+  behavior is to only notify the new owner(s) of the task
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_notifyAlways">notifyAlways</a></pre>
+<pre> whether or not notifications should be sent when this task is created
+  regardless of whether or not it is interactive. the default value for this
+  attribute is FALSE, meaning notifications will only be sent for the task if
+  it is interactive
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_notifyAttachName">notifyAttachName</a></pre>
+<pre> if &quot;notifyAttachView&quot; is specified, this attribute must also be provided
+  specifying what to name the attached file. this value may contain
+  workflow/step parameters in the format ${param name}. it may also contain
+  entity attributes in the format attribute name (after being parsed for
+  parameter names, it will be passed through the VO parseString method of
+  the enclosing step entity)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_notifyAttachView">notifyAttachView</a></pre>
+<pre> an entity view that should be attached to the email notification sent when
+  this task is invoked. this view may be either text, pdf or some other
+  output format. it will be output directly to a file, renamed to
+  &quot;notifyAttachName&quot; and attached to the email notification(s)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_notifyBcc">notifyBcc</a></pre>
+<pre> overrides the default step/workflow value for this attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_notifyCc">notifyCc</a></pre>
+<pre> overrides the default step/workflow value for this attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_notifyFrom">notifyFrom</a></pre>
+<pre> overrides the default step/workflow value for this attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr_notifyRecipients">notifyRecipients</a></pre>
+<pre> additional email addresses that should be notified when this task is
+  created. these will be notified regardless of whether or not other
+  notifications are being sent. the $wfUser template variable will NOT be
+  present for these recipients. if the task is not interactive,
+  &quot;notifyAlways&quot; MUST be true in order for notifications to be sent to these
+  recipients
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#attr_notifyRecipientsOnly">notifyRecipientsOnly</a></pre>
+<pre> whether or not ONLY the &quot;notifyRecipients&quot; should be sent notifications for
+  this task
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_notifySubject">notifySubject</a></pre>
+<pre> overrides the default step/workflow value for this attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_notifyTpl">notifyTpl</a></pre>
+<pre> overrides the default step/workflow value for this attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_notifyTplHtml">notifyTplHtml</a></pre>
+<pre> overrides the default step/workflow value for this attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_resource">resource</a></pre>
+<pre> the label resource for this task
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_resourceDesc">resourceDesc</a></pre>
+<pre> the resources used to provide a description for this task
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_role">role</a></pre>
+<pre> if this task is the responsibility of a user other than the owner of the
+  enclosing step, this attribute may specify a &quot;role&quot; or group of users that
+  it should be assigned to. all users within that role will be notified, be
+  assigned responsibility for and have equal access to complete the task.
+  this attribute may also reference a workflow parameter using the format
+  ${param name}
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>mixed </pre></td>
+      <td>
+        <pre><a href="#attr_user">user</a></pre>
+<pre> if this task is the responsibility of a user other than the owner of the
+  enclosing step, this attribute may specify the identifier of that user.
+  this user will be notified and given responsibility to complete this task
+  when it is created. this attribute may also reference a workflow parameter
+  using the format ${param name}
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_validate">validate</a></pre>
+<pre> if this task includes a &quot;view&quot; requiring user input, this attribute may be
+  specified identifying a validation constraint that should be applied to the
+  entity after the &quot;view&quot; has been processed. if this validation passes
+  successfully, the task will be considered completed, otherwise, the task
+  will loop back on itself with the validation errors assigned to it. if this
+  attribute is set to &quot;1&quot;, then the entity validation will be invoked
+  (without a specific validation identifier)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr_validateIgnore">validateIgnore</a></pre>
+<pre> a space separated list of names of attributes that should be excluded from
+  the entity validation. if a validation error is returned for one of these
+  attributes, validation failure will not be triggered
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_view">view</a></pre>
+<pre> if the enclosing step has an entity assigned (based on the &quot;entityId&quot;
+  attribute) this attribute may be specified identifying the entity view that
+  this task should display to the user. if this view requires input from the
+  user, a &quot;validate&quot; identifier may also be specified determining the
+  validation on that input that should occur prior to the task being
+  completed. tasks with a &quot;view&quot; assigned are always interactive. multiple
+  views can be specified each separated by a space (each view will be
+  rendered an concatenated starting with the first)
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_WorkflowTask">SRA_WorkflowTask</a>(array $conf, <a href="workflow.SRA_Workflow.html" target="contentFrame">SRA_Workflow</a> $workflow, <a href="workflow.SRA_WorkflowStep.html" target="contentFrame">SRA_WorkflowStep</a> $step)</pre>
+<pre> parses the workflow configuration data and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_WorkflowTask object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR">SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR</h3>
+  <pre>int <b>SRA_WORKFLOW_TASK_DUE_DATE_REL_CUR</b></pre>
+  <pre> identifies that the task due date should be relative to the current date
+</pre>
+ <hr />  <h3 id="constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START">SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START</h3>
+  <pre>int <b>SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_START</b> = 1</pre>
+  <pre> identifies that the task due date should be relative to the wf start date
+</pre>
+ <hr />  <h3 id="constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE">SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE</h3>
+  <pre>int <b>SRA_WORKFLOW_TASK_DUE_DATE_REL_WF_DUE_DATE</b> = 2</pre>
+  <pre> identifies that the task due date should be relative to the wf due date
+</pre>
+ <hr />  <h3 id="constant_SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE">SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE</h3>
+  <pre>int <b>SRA_WORKFLOW_TASK_DUE_DATE_REL_STEP_DUE_DATE</b> = 3</pre>
+  <pre> identifies that the task due date should be relative to the step due date
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_commit">commit</h3>
+  <pre>boolean var <b>$commit</b></pre>
+  <pre> if an entity pertains to this task, setting this flag to true will result
+  in that entity being inserted/updated upon successful completion of the
+  task (if interactive, otherwise performed when the task is initialized)
+</pre>
+ <hr />  <h3 id="attr_connectTo">connectTo</h3>
+  <pre>string var <b>$connectTo</b></pre>
+  <pre> the identifier of another workflow to connect to when this task is
+  completed. NOTE: the connect-to workflow will be initialized using the same
+  params as this task
+</pre>
+ <hr />  <h3 id="attr_constraintGroup">constraintGroup</h3>
+  <pre><a href="workflow.SRA_WorkflowConstraintGroup.html" target="contentFrame">SRA_WorkflowConstraintGroup</a> var <b>$constraintGroup</b></pre>
+  <pre> constraint group for this task. used to determine whether or not this task
+  is added to its step at the time that it is created
+</pre>
+ <hr />  <h3 id="attr_desciption">desciption</h3>
+  <pre>string var <b>$desciption</b></pre>
+  <pre> the description of this task as determined by the config &quot;resource-descr&quot;
+</pre>
+ <hr />  <h3 id="attr_dueDate">dueDate</h3>
+  <pre>string var <b>$dueDate</b></pre>
+  <pre> an explicit date or relative due-date expression. explicit dates should be
+  entered in the format &quot;YYYY-MM-DD HH:MM:SS&quot; (time is optional). relative
+  expressions utilize the same format except that any of the date values
+  (YYYY, MM, DD, HH, MM, or SS) may be replaced with a relative modifier in
+  the format &quot;+n&quot; where n is the increase from the current timestamp. For
+  example, to specify the 1st of the following month, the dueDate would be:
+  &quot;+0-+1-01&quot; - where +0 signifies the current year, and +1 signifies the
+  following month. if the current month was december (12), the following
+  month will be January and the year will be incremented automatically.
+  Another example: to specify exactly one week from the current time,
+  dueDate would be &quot;+0-+0-+7&quot; - where the first +0 signifies the current
+  year, the second +0 signifies the current month, and +7 signifies 7 days
+  from the current date. month and year rollovers resulting in the 1 week
+  jump will be automatically applied (for example, if the action was created
+  on 12/28). negative increments can be applied by enclosing the increment
+  value &quot;n&quot; in parenthesis. for example, to specify 1 month minus 1 week from
+  the current date, dueDate would be: &quot;+0-+1-+(7)&quot;. the increment value &quot;n&quot;
+  may also be an action or workflow parameter using the format &quot;${param name}
+</pre>
+ <hr />  <h3 id="attr_dueDateRel">dueDateRel</h3>
+  <pre>int var <b>$dueDateRel</b></pre>
+  <pre> if the task dueDate is relative, this attribute determines what it is
+  relative to. the following options are available:
+   0: the date/time when the task was invoked (default)
+   1: the workflow start date
+   2: the workflow due date (should not be greater)
+   3: the task step due date (should not be greater)
+  the SRA_WORKFLOW_TASK_DUE_DATE_REL_* constants are defined for these
+  options
+</pre>
+ <hr />  <h3 id="attr_entity">entity</h3>
+  <pre>string var <b>$entity</b></pre>
+  <pre> see SRA_WorkflowStep::entity - when the task pertains to a step, this will
+  override the step entity. when the task pertains to the workflow, this
+  attribute is required if the task involves an entity
+</pre>
+ <hr />  <h3 id="attr_entityId">entityId</h3>
+  <pre>string var <b>$entityId</b></pre>
+  <pre> see SRA_WorkflowStep::entityId
+</pre>
+ <hr />  <h3 id="attr_entityPk">entityPk</h3>
+  <pre>string var <b>$entityPk</b></pre>
+  <pre> see SRA_WorkflowStep::entityPk
+</pre>
+ <hr />  <h3 id="attr_evalAfter">evalAfter</h3>
+  <pre>string var <b>$evalAfter</b></pre>
+  <pre> a PHP code block that should be invoked for a particular task. this code
+  segment will have access to any current workflow entities using the
+  entityId as the variable name as well as to the SraWorkflow,
+  SraWorkflowStep and SraWorkflowTask instances using the variable names
+  $workflow, $step (when applicable) and $task. This code block MUST return
+  TRUE, or the workflow will enter an error state. this code is invoked AFTER
+  the task is completed successfully (if a &quot;view&quot; is defined for the task,
+  this would be when that view is completed/confirmed)
+</pre>
+ <hr />  <h3 id="attr_evalBefore">evalBefore</h3>
+  <pre>string var <b>$evalBefore</b></pre>
+  <pre> Like &quot;evalAfter&quot;, &quot;evalBefore&quot; also specifies a PHP code block that should
+  be invoked for a particular task. however, this code is invoked at the same
+  time that the task is created. the difference between &quot;evalBefore&quot; and
+  &quot;evalAfter&quot; is only applicable to interractive tasks (tasks with associated
+  views)
+</pre>
+ <hr />  <h3 id="attr_interactive">interactive</h3>
+  <pre>boolean var <b>$interactive</b></pre>
+  <pre> is this task interactive? use this to create a &quot;check-off&quot; task... a task
+  that a user must simply check of having completed. tasks with a &quot;view&quot; are
+  interactive but in a different way because the view must be displayed and
+  entity optionally validated (when &quot;validate&quot; is specified) in order for
+  them to be considered completed. only the owner of this task, or the owner
+  of the enclosing step, or the owner of the enclosing workflow may
+  &quot;check off&quot; a task. this attribute will be automatically set to TRUE if a
+  &quot;view&quot; is assigned to this task
+</pre>
+ <hr />  <h3 id="attr_name">name</h3>
+  <pre>string var <b>$name</b></pre>
+  <pre> the name of this task as determined by the config &quot;resource&quot;
+</pre>
+ <hr />  <h3 id="attr_notify">notify</h3>
+  <pre>boolean var <b>$notify</b></pre>
+  <pre> should notifications be sent for this task? this value overrides the
+  enclosing workflow or step &#039;notify&#039; flag
+</pre>
+ <hr />  <h3 id="attr_notifyAll">notifyAll</h3>
+  <pre>boolean var <b>$notifyAll</b></pre>
+  <pre> whether or not all participants in this workflow (past and present) should
+  be notified (using the &quot;notify-tpl&quot;) when this task is created. the default
+  behavior is to only notify the new owner(s) of the task
+</pre>
+ <hr />  <h3 id="attr_notifyAlways">notifyAlways</h3>
+  <pre>boolean var <b>$notifyAlways</b></pre>
+  <pre> whether or not notifications should be sent when this task is created
+  regardless of whether or not it is interactive. the default value for this
+  attribute is FALSE, meaning notifications will only be sent for the task if
+  it is interactive
+</pre>
+ <hr />  <h3 id="attr_notifyAttachName">notifyAttachName</h3>
+  <pre>string var <b>$notifyAttachName</b></pre>
+  <pre> if &quot;notifyAttachView&quot; is specified, this attribute must also be provided
+  specifying what to name the attached file. this value may contain
+  workflow/step parameters in the format ${param name}. it may also contain
+  entity attributes in the format attribute name (after being parsed for
+  parameter names, it will be passed through the VO parseString method of
+  the enclosing step entity)
+</pre>
+ <hr />  <h3 id="attr_notifyAttachView">notifyAttachView</h3>
+  <pre>string var <b>$notifyAttachView</b></pre>
+  <pre> an entity view that should be attached to the email notification sent when
+  this task is invoked. this view may be either text, pdf or some other
+  output format. it will be output directly to a file, renamed to
+  &quot;notifyAttachName&quot; and attached to the email notification(s)
+</pre>
+ <hr />  <h3 id="attr_notifyBcc">notifyBcc</h3>
+  <pre>string var <b>$notifyBcc</b></pre>
+  <pre> overrides the default step/workflow value for this attribute
+</pre>
+ <hr />  <h3 id="attr_notifyCc">notifyCc</h3>
+  <pre>string var <b>$notifyCc</b></pre>
+  <pre> overrides the default step/workflow value for this attribute
+</pre>
+ <hr />  <h3 id="attr_notifyFrom">notifyFrom</h3>
+  <pre>string var <b>$notifyFrom</b></pre>
+  <pre> overrides the default step/workflow value for this attribute
+</pre>
+ <hr />  <h3 id="attr_notifyRecipients">notifyRecipients</h3>
+  <pre>array var <b>$notifyRecipients</b></pre>
+  <pre> additional email addresses that should be notified when this task is
+  created. these will be notified regardless of whether or not other
+  notifications are being sent. the $wfUser template variable will NOT be
+  present for these recipients. if the task is not interactive,
+  &quot;notifyAlways&quot; MUST be true in order for notifications to be sent to these
+  recipients
+</pre>
+ <hr />  <h3 id="attr_notifyRecipientsOnly">notifyRecipientsOnly</h3>
+  <pre>boolean var <b>$notifyRecipientsOnly</b></pre>
+  <pre> whether or not ONLY the &quot;notifyRecipients&quot; should be sent notifications for
+  this task
+</pre>
+ <hr />  <h3 id="attr_notifySubject">notifySubject</h3>
+  <pre>string var <b>$notifySubject</b></pre>
+  <pre> overrides the default step/workflow value for this attribute
+</pre>
+ <hr />  <h3 id="attr_notifyTpl">notifyTpl</h3>
+  <pre>string var <b>$notifyTpl</b></pre>
+  <pre> overrides the default step/workflow value for this attribute
+</pre>
+ <hr />  <h3 id="attr_notifyTplHtml">notifyTplHtml</h3>
+  <pre>string var <b>$notifyTplHtml</b></pre>
+  <pre> overrides the default step/workflow value for this attribute
+</pre>
+ <hr />  <h3 id="attr_resource">resource</h3>
+  <pre>string var <b>$resource</b></pre>
+  <pre> the label resource for this task
+</pre>
+ <hr />  <h3 id="attr_resourceDesc">resourceDesc</h3>
+  <pre>string var <b>$resourceDesc</b></pre>
+  <pre> the resources used to provide a description for this task
+</pre>
+ <hr />  <h3 id="attr_role">role</h3>
+  <pre>string var <b>$role</b></pre>
+  <pre> if this task is the responsibility of a user other than the owner of the
+  enclosing step, this attribute may specify a &quot;role&quot; or group of users that
+  it should be assigned to. all users within that role will be notified, be
+  assigned responsibility for and have equal access to complete the task.
+  this attribute may also reference a workflow parameter using the format
+  ${param name}
+</pre>
+ <hr />  <h3 id="attr_user">user</h3>
+  <pre>mixed var <b>$user</b></pre>
+  <pre> if this task is the responsibility of a user other than the owner of the
+  enclosing step, this attribute may specify the identifier of that user.
+  this user will be notified and given responsibility to complete this task
+  when it is created. this attribute may also reference a workflow parameter
+  using the format ${param name}
+</pre>
+ <hr />  <h3 id="attr_validate">validate</h3>
+  <pre>string var <b>$validate</b></pre>
+  <pre> if this task includes a &quot;view&quot; requiring user input, this attribute may be
+  specified identifying a validation constraint that should be applied to the
+  entity after the &quot;view&quot; has been processed. if this validation passes
+  successfully, the task will be considered completed, otherwise, the task
+  will loop back on itself with the validation errors assigned to it. if this
+  attribute is set to &quot;1&quot;, then the entity validation will be invoked
+  (without a specific validation identifier)
+</pre>
+ <hr />  <h3 id="attr_validateIgnore">validateIgnore</h3>
+  <pre>array var <b>$validateIgnore</b></pre>
+  <pre> a space separated list of names of attributes that should be excluded from
+  the entity validation. if a validation error is returned for one of these
+  attributes, validation failure will not be triggered
+</pre>
+ <hr />  <h3 id="attr_view">view</h3>
+  <pre>string var <b>$view</b></pre>
+  <pre> if the enclosing step has an entity assigned (based on the &quot;entityId&quot;
+  attribute) this attribute may be specified identifying the entity view that
+  this task should display to the user. if this view requires input from the
+  user, a &quot;validate&quot; identifier may also be specified determining the
+  validation on that input that should occur prior to the task being
+  completed. tasks with a &quot;view&quot; assigned are always interactive. multiple
+  views can be specified each separated by a space (each view will be
+  rendered an concatenated starting with the first)
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_WorkflowTask">SRA_WorkflowTask</h3>
+  <pre>public void function <b>SRA_WorkflowTask</b>(array $conf, <a href="workflow.SRA_Workflow.html" target="contentFrame">SRA_Workflow</a> $workflow, <a href="workflow.SRA_WorkflowStep.html" target="contentFrame">SRA_WorkflowStep</a> $step)</pre>
+  <pre> parses the workflow configuration data and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>array</td>
+      <td><pre>the configuration to parse</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>workflow</td>
+      <td>SRA_Workflow</td>
+      <td><pre>$workflow the workflow this task pertains to</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>step</td>
+      <td>SRA_WorkflowStep</td>
+      <td><pre>$step the step that this task pertains to (if  applicable)</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_WorkflowTask object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/workflow/SRA_WorkflowTask.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

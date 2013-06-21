@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE address-formats PUBLIC "-//SIERRA//DTD ADDRESS FORMATS//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/etc/l10n/address-formats.dtd">
+<!-- 
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+
+this file is used by the installer as the default address format configuration 
+file
+-->
+<address-formats>
+  <!-- Argentina, Kuwait, Oman -->
+  <address-format key="ar kw om">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="province" bundle="provinces-{$country}" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- Austria, Bahrain, Belgium, Bosnia and Herzegowina, Bulgaria, Croatia, 
+       Czech Republic, Egypt, Finland, France, Germany, Greece, Iceland, Israel, 
+       Jordan, Lebanon, Luxembourg, Netherlands, Norway, Qatar, Romania, 
+       Saudi Arabia, Slovakia, Slovenia, Sweden, Switzerland, Syrian Arab Republic, 
+       Turkey, United Arab Emirates, Yemen, others -->
+  <address-format key="at bh be ba bg hr cz eg fi fr de gr is il jo lb lu nl no qa ro sa sk si se ch sy tr ae ye *">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Australia -->
+  <address-format key="au">
+    <field key="street" />
+    <field key="suburb" row="2" />
+    <field key="state" col="2" bundle="provinces-{$country}" row="2" />
+    <field key="postalCode" col="3" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Brazil -->
+  <address-format key="br">
+    <field key="street" />
+    <field key="zip" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="state" bundle="provinces-{$country}" col="3" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Canada -->
+  <address-format key="ca">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="province" bundle="provinces-{$country}" col="2" row="2" />
+    <field key="postalCode" col="3" regex="/^\s*[a-ceghj-npr-tvxy]\d[a-z](\s)?\d[a-z]\d\s*$/i" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- China, Spain -->
+  <address-format key="cn es">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="province" bundle="provinces-{$country}" col="3" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Denmark -->
+  <address-format key="dk">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="village" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- Greenland -->
+  <address-format key="gl">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="postalDistrict" col="2" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Hong Kong -->
+  <address-format key="hk">
+    <field key="street" />
+    <field key="districtTown" row="2" />
+    <field key="province" col="2" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Hungary -->
+  <address-format key="hu">
+    <field key="postalCode" />
+    <field key="city" col="2" />
+    <field key="street" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- India -->
+  <address-format key="in">
+    <field key="street" />
+    <field key="province" bundle="provinces-{$country}" row="2" />
+    <field key="city" row="3" />
+    <field key="pinCode" col="2" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- Indonesia -->
+  <address-format key="id">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="province" bundle="provinces-{$country}" row="3" />
+    <field key="postalCode" col="2" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- Ireland -->
+  <address-format key="ie">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="county" bundle="provinces-{$country}" row="2" />
+    <field key="postalCode" col="2" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Italy -->
+  <address-format key="it">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="province" bundle="provinces-{$country}" col="3" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Japan -->
+  <address-format key="jp">
+    <field key="postalCode" />
+    <field key="prefecture" row="2" />
+    <field key="countyCity" col="2" row="2" />
+    <field key="furtherDivisions" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- Macedonia, Singapore -->
+  <address-format key="mk sg">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="postalCode" col="2" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Mexico, Poland -->
+  <address-format key="mx pl">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="state" bundle="provinces-{$country}" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- New Zealand -->
+  <address-format key="nz">
+    <field key="street" />
+    <field key="suburb" row="2" />
+    <field key="city" row="3" />
+    <field key="postalCode" col="2" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- Portugal -->
+  <address-format key="pt">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="districtRegion" bundle="provinces-{$country}" col="3" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Russian Federation -->
+  <address-format key="ru">
+    <field key="country" />
+    <field key="postalCode" col="2" />
+    <field key="federalSubject" bundle="provinces-{$country}" row="2" />
+    <field key="cityRegion" col="2" row="2" />
+    <field key="street" row="3" />
+  </address-format>
+  <!-- Serbia and Montenegro -->
+  <address-format key="cs">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="city" col="2" row="2" />
+    <field key="state" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- South Africa -->
+  <address-format key="za">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="province" bundle="provinces-{$country}" row="3" />
+    <field key="postalCode" row="4" />
+    <field key="country" row="5" />
+  </address-format>
+  <!-- South Korea -->
+  <address-format key="kr">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="province" bundle="provinces-{$country}" col="2" row="2" />
+    <field key="postalCode" row="3" />
+    <field key="country" row="4" />
+  </address-format>
+  <!-- Taiwan -->
+  <address-format key="tw">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="province" bundle="provinces-{$country}" col="2" row="2" />
+    <field key="zip" col="3" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- Ukraine -->
+  <address-format key="ua">
+    <field key="street" />
+    <field key="postalCode" row="2" />
+    <field key="postalDistrict" col="2" row="2" />
+    <field key="province" bundle="provinces-{$country}" col="3" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+  <!-- United Kingdom -->
+  <address-format key="gb">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="county" row="3" />
+    <field key="postalCode" row="4" />
+    <field key="country" row="5" />
+  </address-format>
+  <!-- United States -->
+  <address-format key="us">
+    <field key="street" />
+    <field key="city" row="2" />
+    <field key="state" bundle="provinces-{$country}" col="2" row="2" show-key="1" />
+    <field key="zip" col="3" regex="/^[0-9]{5}(\-[0-9]{4})?$/" row="2" />
+    <field key="country" row="3" />
+  </address-format>
+</address-formats>

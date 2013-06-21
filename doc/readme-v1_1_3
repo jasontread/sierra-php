@@ -1,0 +1,11 @@
+CHANGELOG
+* Unit testing bugs fixes and improved output formatting and localized strings
+* Added setDb to SRA_DatabaseMySql so database can be changed in realtime
+* Web service bug fixes
+* Double authenticator authentication bug fix
+* Templates pre-caching (added to SRA_Template)
+* Log entry bug fix (illegal reference to $this)
+* Complete SRA_TimeZone rewrite to include better efficiency
+
+KNOWN ISSUES
+None

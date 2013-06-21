@@ -1,0 +1,2775 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_FileAttribute - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_file_attrubte_decimal_precision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRUBTE_DECIMAL_PRECISION'] = "SRA_FILE_ATTRUBTE_DECIMAL_PRECISION";
+  }
+  if ("sra_file_attribute_type_db".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_TYPE_DB'] = "SRA_FILE_ATTRIBUTE_TYPE_DB";
+  }
+  if ("sra_file_attribute_type_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_TYPE_DIR'] = "SRA_FILE_ATTRIBUTE_TYPE_DIR";
+  }
+  if ("sra_file_attribute_eid_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_EID_PREFIX'] = "SRA_FILE_ATTRIBUTE_EID_PREFIX";
+  }
+  if ("sra_file_attribute_eid_remove_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX'] = "SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX";
+  }
+  if ("sra_file_attribute_image_magick_convert".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT'] = "SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT";
+  }
+
+  // check attributes
+  if ("_app".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__app'] = "_app";
+  }
+  if ("_attribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__attribute'] = "_attribute";
+  }
+  if ("_attributeindex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__attributeIndex'] = "_attributeIndex";
+  }
+  if ("_bytes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__bytes'] = "_bytes";
+  }
+  if ("_customuri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__customUri'] = "_customUri";
+  }
+  if ("_entity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__entity'] = "_entity";
+  }
+  if ("_entityid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__entityId'] = "_entityId";
+  }
+  if ("_filedir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileDir'] = "_fileDir";
+  }
+  if ("_filediruri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileDirUri'] = "_fileDirUri";
+  }
+  if ("_filehandling".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileHandling'] = "_fileHandling";
+  }
+  if ("_filescriptrewrite".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileScriptRewrite'] = "_fileScriptRewrite";
+  }
+  if ("_filescripturi".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileScriptUri'] = "_fileScriptUri";
+  }
+  if ("_filename".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__fileName'] = "_fileName";
+  }
+  if ("_hardpath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__hardPath'] = "_hardPath";
+  }
+  if ("_initialized".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__initialized'] = "_initialized";
+  }
+  if ("_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__name'] = "_name";
+  }
+  if ("_new".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__new'] = "_new";
+  }
+  if ("_size".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__size'] = "_size";
+  }
+  if ("_sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__sql'] = "_sql";
+  }
+  if ("_type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__type'] = "_type";
+  }
+
+  // check methods
+  if ("sra_fileattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_FileAttribute'] = "SRA_FileAttribute";
+  }
+  if ("copy".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_copy'] = "copy";
+  }
+  if ("delete".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_delete'] = "delete";
+  }
+  if ("equals".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_equals'] = "equals";
+  }
+  if ("getapp".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getApp'] = "getApp";
+  }
+  if ("getattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAttribute'] = "getAttribute";
+  }
+  if ("getattributeindex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAttributeIndex'] = "getAttributeIndex";
+  }
+  if ("getbytes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getBytes'] = "getBytes";
+  }
+  if ("getdata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getData'] = "getData";
+  }
+  if ("getappdbdata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDbData'] = "getAppDbData";
+  }
+  if ("getappdbdatatype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppDbDataType'] = "getAppDbDataType";
+  }
+  if ("getencryptedid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getEncryptedId'] = "getEncryptedId";
+  }
+  if ("getentity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getEntity'] = "getEntity";
+  }
+  if ("getentityid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getEntityId'] = "getEntityId";
+  }
+  if ("getfileextension".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFileExtension'] = "getFileExtension";
+  }
+  if ("getfiledir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFileDir'] = "getFileDir";
+  }
+  if ("getfilediruri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFileDirUri'] = "getFileDirUri";
+  }
+  if ("getfilehandling".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFileHandling'] = "getFileHandling";
+  }
+  if ("getfilescripturi".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFileScriptUri'] = "getFileScriptUri";
+  }
+  if ("getfilename".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFileName'] = "getFileName";
+  }
+  if ("gethardpath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getHardPath'] = "getHardPath";
+  }
+  if ("geticon".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getIcon'] = "getIcon";
+  }
+  if ("getname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getName'] = "getName";
+  }
+  if ("getsize".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSize'] = "getSize";
+  }
+  if ("getsizekb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSizeKb'] = "getSizeKb";
+  }
+  if ("getsizelabel".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSizeLabel'] = "getSizeLabel";
+  }
+  if ("getsizemb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSizeMb'] = "getSizeMb";
+  }
+  if ("getsizegb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSizeGb'] = "getSizeGb";
+  }
+  if ("getsql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSql'] = "getSql";
+  }
+  if ("gettype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getType'] = "getType";
+  }
+  if ("geturi".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getUri'] = "getUri";
+  }
+  if ("isfilescriptrewrite".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isFileScriptRewrite'] = "isFileScriptRewrite";
+  }
+  if ("isimage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isImage'] = "isImage";
+  }
+  if ("isnew".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isNew'] = "isNew";
+  }
+  if ("istext".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isText'] = "isText";
+  }
+  if ("resizeimage".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_resizeImage'] = "resizeImage";
+  }
+  if ("setbytes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setBytes'] = "setBytes";
+  }
+  if ("setcustomuri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setCustomUri'] = "setCustomUri";
+  }
+  if ("setfilename".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setFileName'] = "setFileName";
+  }
+  if ("sethardpath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setHardPath'] = "setHardPath";
+  }
+  if ("setname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setName'] = "setName";
+  }
+  if ("setsize".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setSize'] = "setSize";
+  }
+  if ("settype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_setType'] = "setType";
+  }
+  if ("totext".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toText'] = "toText";
+  }
+  if ("tothumbnail".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toThumbnail'] = "toThumbnail";
+  }
+  if ("toxmlarray".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toXmlArray'] = "toXmlArray";
+  }
+  if ("writetofile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_writeToFile'] = "writeToFile";
+  }
+  if ("_init".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__init'] = "_init";
+  }
+  if ("_initdata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__initData'] = "_initData";
+  }
+  if ("_setattribute".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setAttribute'] = "_setAttribute";
+  }
+  if ("_setattributeindex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setAttributeIndex'] = "_setAttributeIndex";
+  }
+  if ("_setentity".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setEntity'] = "_setEntity";
+  }
+  if ("_setentityid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setEntityId'] = "_setEntityId";
+  }
+  if ("_setfiledir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setFileDir'] = "_setFileDir";
+  }
+  if ("_setfilediruri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setFileDirUri'] = "_setFileDirUri";
+  }
+  if ("_setfilehandling".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setFileHandling'] = "_setFileHandling";
+  }
+  if ("_setfilescriptrewrite".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setFileScriptRewrite'] = "_setFileScriptRewrite";
+  }
+  if ("_setfilescripturi".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setFileScriptUri'] = "_setFileScriptUri";
+  }
+  if ("_setinitialized".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setInitialized'] = "_setInitialized";
+  }
+  if ("_setnew".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setNew'] = "_setNew";
+  }
+  if ("_setapp".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setApp'] = "_setApp";
+  }
+  if ("getinstancefromdb".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getInstanceFromDb'] = "getInstanceFromDb";
+  }
+  if ("getinstancefromdata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getInstanceFromData'] = "getInstanceFromData";
+  }
+  if ("getinstancefromencryptedid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getInstanceFromEncryptedId'] = "getInstanceFromEncryptedId";
+  }
+  if ("getinstancefromupload".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getInstanceFromUpload'] = "getInstanceFromUpload";
+  }
+  if ("filehandlingmethodisvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_fileHandlingMethodIsValid'] = "fileHandlingMethodIsValid";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_FileAttribute</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_FileAttribute</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> Used to represent an entity model &quot;is-file&quot; attribute. for more information,
+  see the &quot;entity-model_1_0.dtd&quot;.
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRUBTE_DECIMAL_PRECISION">SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</a></pre>
+<pre> the default decimal precision for the getSize* methods
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_TYPE_DB">SRA_FILE_ATTRIBUTE_TYPE_DB</a></pre>
+<pre> identifies the &quot;db&quot; &quot;file-handling&quot; method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_TYPE_DIR">SRA_FILE_ATTRIBUTE_TYPE_DIR</a></pre>
+<pre> identifies the &quot;dir&quot; &quot;file-handling&quot; method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_EID_PREFIX">SRA_FILE_ATTRIBUTE_EID_PREFIX</a></pre>
+<pre> prefix for encrypted ids
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX">SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX</a></pre>
+<pre> prefix to identify files that have been reset (will be automatically deleted
+  when getInstanceFromEncryptedId is invoked (applies only when _fileHandling
+  is SRA_FILE_ATTRIBUTE_TYPE_DIR)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT">SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT</a></pre>
+<pre> the name of the ImageMagick &quot;convert&quot; cli utility used by the &quot;resizeImage&quot;
+  and &quot;toThumbnail&quot; methods. in order to use those methods, ImageMagick must
+  be installed and this utility must be present in the $PATH
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__app">_app</a></pre>
+<pre> the app key that this SRA_FileAttribute belongs to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__attribute">_attribute</a></pre>
+<pre> the name of the attribute that this SRA_FileAttribute belongs to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__attributeIndex">_attributeIndex</a></pre>
+<pre> the attribute index for this SRA_FileAttribute (only applicable if the
+  attribute is an array)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private byte[] </pre></td>
+      <td>
+        <pre><a href="#attr__bytes">_bytes</a></pre>
+<pre> byte array representation of the file (only appies to files that are stored
+  in the database). cannot be set through instantiation.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__customUri">_customUri</a></pre>
+<pre> an optional custom uri for this file (use setCustomUri to set)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__entity">_entity</a></pre>
+<pre> the name of the entity that this SRA_FileAttribute belongs to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__entityId">_entityId</a></pre>
+<pre> the id of the entity that this SRA_FileAttribute belongs to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__fileDir">_fileDir</a></pre>
+<pre> if the SRA_FILE_ATTRIBUTE_TYPE_DIR file handling method is used,
+  specifies the directory where files should be stored
+  for more information, see the documentation provided in entity-model_1_0.dtd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__fileDirUri">_fileDirUri</a></pre>
+<pre> if the SRA_FILE_ATTRIBUTE_TYPE_DIR file handling method is used,
+  specifies the uri where files should be referenced from the web server
+  for more information, see the documentation provided in entity-model_1_0.dtd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__fileHandling">_fileHandling</a></pre>
+<pre> determines how this file attribute will be stored. will correspond with
+  one of the SRA_FILE_ATTRIBUTE_TYPE_* constants for more information, see
+  the documentation provided in entity-model_1_0.dtd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__fileScriptRewrite">_fileScriptRewrite</a></pre>
+<pre> whether or not the _fileScriptUri should be rendered as an Apache RewriteRule
+  for more information, see the documentation provided in entity-model_1_0.dtd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__fileScriptUri">_fileScriptUri</a></pre>
+<pre> if the SRA_FILE_ATTRIBUTE_TYPE_DB file handling method is used,
+  specifies the Uri to the file-renderer.php script
+  for more information, see the documentation provided in entity-model_1_0.dtd
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__fileName">_fileName</a></pre>
+<pre> the actual name of the file if the SRA_FILE_ATTRIBUTE_TYPE_DIR
+  file handling method is used, or a browser friendly name if the
+  SRA_FILE_ATTRIBUTE_TYPE_DB file handling method is used.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__hardPath">_hardPath</a></pre>
+<pre> set this attribute to force this file attribute to use this file path to
+  retrieve the file bytes (may be remote)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean </pre></td>
+      <td>
+        <pre><a href="#attr__initialized">_initialized</a></pre>
+<pre> whether or not existing database SRA_FileAttribute properties have been
+  initialized
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__name">_name</a></pre>
+<pre> the original name of the file that was uploaded (if file was added from an
+  uploaded form)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean </pre></td>
+      <td>
+        <pre><a href="#attr__new">_new</a></pre>
+<pre> whether or not the SRA_FileAttribute is new (new SRA_FileAttributes have not been
+  committed to the database or file system)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__size">_size</a></pre>
+<pre> the size, in bytes, of the file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__sql">_sql</a></pre>
+<pre> the sql that can be performed on the $_db to return the attributes
+  associated with this SRA_FileAttribute. this query will be executed the
+  first time that the $_bytes, $_fileName, $_name, or $_size attributes
+  are requested through their corresponding getter methods
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string </pre></td>
+      <td>
+        <pre><a href="#attr__type">_type</a></pre>
+<pre> the mime type of the file if the browser provided this information in the
+  original file upload
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_FileAttribute">SRA_FileAttribute</a>($fileName=NULL, $name=NULL, $size=NULL, $type=NULL, $new=NULL)</pre>
+<pre> Instantiates a new instance of this object with the initial given
+  attributes
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_copy">copy</a>()</pre>
+<pre> copies this file attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean TRUE on success, FALSE otherwise</pre></td>
+      <td>
+        <pre><a href="#method_delete">delete</a>()</pre>
+<pre> deletes the file represented by this SRA_FileAttribute instance IF the
+  _fileHandling is SRA_FILE_ATTRIBUTE_TYPE_DIR and the _fileName exists
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_equals">equals</a>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $fileAttr)</pre>
+<pre> Returns TRUE if this SRA_FileAttribute references the same file as the
+  $fileAttr parameter
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getApp">getApp</a>()</pre>
+<pre> Returns the _app attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAttribute">getAttribute</a>()</pre>
+<pre> Returns the _attribute attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAttributeIndex">getAttributeIndex</a>()</pre>
+<pre> Returns the _attributeIndex attributeIndex
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public byte[]</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getBytes">getBytes</a>()</pre>
+<pre> Returns the _bytes attribute (returned by reference)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getData">getData</a>(string $fileHandling=FALSE, string $fileDir=FALSE)</pre>
+<pre> Returns an appropriately serialized version of this SRA_FileAttribute which
+  can be stored in the database column for the attribute that it pertains to.
+  Returns an SRA_Error object, if unsuccessful
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getAppDbData">getAppDbData</a>($db)</pre>
+<pre> Returns the data for this SRA_FileAttribute properly converted for insertion
+  into the current app database
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getAppDbDataType">getAppDbDataType</a>()</pre>
+<pre> Returns the correct database data type for this SRA_FileAttribute. This is
+  SRA_DATA_TYPE_BLOB if the _fileHandling is SRA_FILE_ATTRIBUTE_TYPE_DB
+  and SRA_DATA_TYPE_STRING if the _fileHandling is
+  SRA_FILE_ATTRIBUTE_TYPE_DIR
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getEncryptedId">getEncryptedId</a>(boolean $encode=TRUE)</pre>
+<pre> Returns a unique encrypted identifier for this file attribute if the
+  SRA_FILE_ATTRIBUTE_TYPE_DB file handling method is used
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getEntity">getEntity</a>()</pre>
+<pre> Returns the _entity entity
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getEntityId">getEntityId</a>()</pre>
+<pre> Returns the _entityId entityId
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getFileExtension">getFileExtension</a>()</pre>
+<pre> Returns the file extension for this file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getFileDir">getFileDir</a>()</pre>
+<pre> Returns the file extension for this file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getFileDirUri">getFileDirUri</a>()</pre>
+<pre> Returns the file extension for this file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getFileHandling">getFileHandling</a>()</pre>
+<pre> Returns the file extension for this file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getFileScriptUri">getFileScriptUri</a>()</pre>
+<pre> Returns the file extension for this file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getFileName">getFileName</a>()</pre>
+<pre> Returns the _fileName attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getHardPath">getHardPath</a>()</pre>
+<pre> Returns the _hardPath attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getIcon">getIcon</a>(string $baseDir)</pre>
+<pre> returns the full path to the icon to use for this file based on it&#039;s mime
+  type if found in $baseDir. this algorithm uses the following search order:
+   1) check for [file extension].(png|jpg|gif)
+   2) explode mimeType on &#039;/&#039;, lowercase both pieces and remove leading &#039;x-&#039;
+   3) check for mimeType[1].(png|jpg|gif)
+   4) check for mimeType[0].(png|jpg|gif)
+   5) check for source_[file extension].(png|jpg|gif)
+   6) remove trailing &#039;s&#039; from extension if applicable and check for source_[file extension].(png|jpg|gif)
+   6) return NULL
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getName">getName</a>()</pre>
+<pre> Returns the _name attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_getSize">getSize</a>()</pre>
+<pre> Returns the _size attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_getSizeKb">getSizeKb</a>(int $decimalPrecision=SRA_FILE_ATTRUBTE_DECIMAL_PRECISION, float $size=NULL)</pre>
+<pre> Returns the size of the file in KB
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSizeLabel">getSizeLabel</a>(int $decimalPrecision=SRA_FILE_ATTRUBTE_DECIMAL_PRECISION, float $size=NULL)</pre>
+<pre> returns the size label to use for this file attribute (or for $size if size
+  is specified). this label will be in gigabytes if &gt; 1 gigabytes, megabytes
+  if &gt; 1 megabytes, kilobytes if &gt; 1 kilobytes or bytes otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_getSizeMb">getSizeMb</a>(int $decimalPrecision=SRA_FILE_ATTRUBTE_DECIMAL_PRECISION, float $size=NULL)</pre>
+<pre> Returns the size of the file in MB
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public float</pre></td>
+      <td>
+        <pre><a href="#method_getSizeGb">getSizeGb</a>(int $decimalPrecision=SRA_FILE_ATTRUBTE_DECIMAL_PRECISION, float $size=NULL)</pre>
+<pre> Returns the size of the file in GB
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSql">getSql</a>()</pre>
+<pre> Returns the _sql attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getType">getType</a>()</pre>
+<pre> Returns the _type attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getUri">getUri</a>()</pre>
+<pre> Returns the _uri attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isFileScriptRewrite">isFileScriptRewrite</a>()</pre>
+<pre> Returns the _fileScriptRewrite attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isImage">isImage</a>()</pre>
+<pre> Returns true if this file has an image mime type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isNew">isNew</a>()</pre>
+<pre> Returns the _new attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isText">isText</a>()</pre>
+<pre> Returns true if this file has a text mime type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_resizeImage">resizeImage</a>(int $height, int $width, boolean $preserveAspect=TRUE)</pre>
+<pre> if this file attribute represents an image, this method may be used to
+  resize that image. in order to use this functionality, ImageMagick must be
+  installed and executable (see SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT
+  constant). at least 1, $height or $width must be specified. the return
+  value will be the path to a temp file stored the resized image
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setBytes">setBytes</a>(string $bytes)</pre>
+<pre> Sets the _bytes attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setCustomUri">setCustomUri</a>(string $uri)</pre>
+<pre> this method can be used to set a custom uri for this file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setFileName">setFileName</a>(string $fileName)</pre>
+<pre> Sets the _fileName attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setHardPath">setHardPath</a>(string $hardPath)</pre>
+<pre> sets a custom hard path for this file attribute. when set, this file will
+  be used when the bytes are retrieved
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setName">setName</a>(string $name)</pre>
+<pre> Sets the _name attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setSize">setSize</a>(int $size)</pre>
+<pre> Sets the _size attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_setType">setType</a>(string $type)</pre>
+<pre> Sets the _type attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_toText">toText</a>()</pre>
+<pre> this method is used to convert this file attribute to an indexable text
+  representation when it is possible to do so. if a file uses a &quot;text/*&quot;
+  mime-type (and that mime-type does not have a custom converter defined) the
+  contents of that file will be returned directly. other mime-types require
+  custom text converters. these can be defined in sierra-config.xml using the
+  &quot;param&quot; element where the type is &quot;file-converter&quot;, the id is a space
+  separated list of mime-types supported by that converter (as defined in
+  /etc/mime.types), and the value is the cli command for invoking that
+  converter containing 2 tokens. the first is &quot;${input}&quot; which is the name of
+  the file being input (STDIN is not supported) to the converter (a temp file
+  created when this method is invoked), and the second is &quot;${output}&quot; which
+  is the name of a temporary output file that the text will be written to
+  (STDOUT is not supported, use &gt; if the converter application does not
+  support direct file output). When this method is invoked and a valid
+  converter is found, the file will first be written to a temp file, an
+  output file will be created, the converter will be invoked, and the output
+  of that converter will be returned (both temp files are also deleted).
+  these are a few examples of text converters defined in sierra-config.xml:
+   &lt;!-- PDF conversion using Xpdf (http://www.foolabs.com/xpdf/) --&gt;
+   &lt;param id=&quot;application/pdf&quot; type=&quot;file-converter&quot; value=&quot;/usr/local/bin/pdftotext ${input} ${output}&quot; /&gt;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_toThumbnail">toThumbnail</a>(int $height, int $width, string $format='png', boolean $preserveAspect=TRUE, array $includeTypes=NULL, array $skipTypes=NULL)</pre>
+<pre> used to create a thumbnail image representation of this file where
+  supported. in order to use this method, the ImageMagick utility
+  SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT must be found in the path.
+  Additionally, the file mime-type must be supported for conversion. the
+  supported types include the image formats listed at
+  http://www.imagemagick.org/script/formats.php as well as any other formats
+  that can be converted to a supported format by a custom converter. These
+  converters can be defined in sierra-config.xml using the &quot;param&quot; element
+  where the type is &quot;thumbnail-converter&quot;, the id is a space separated list
+  of mime-types supported by that converter (as defined in /etc/mime.types),
+  and the value is the cli command for invoking that converter containing 2
+  tokens. the first is &quot;${input}&quot; which is the name of the original file
+  (STDIN is not supported) for the converter (a temp file created when this
+  method is invoked), and the second is &quot;${output}&quot; which is the name of a
+  temporary output file that the new file will be written to (STDOUT is not
+  supported, use &gt; if the converter application does not support direct file
+  output). if both height and width are specific, the aspect ratio of the
+  source file may be changed as the resulting thumbnail will be generated
+  using those exact dimensions. if either $height or $width or specified,
+  then that will be the exact size for that dimension while the opposite
+  dimension will be proportional according to the aspect ratio. at least 1,
+  $height or $width MUST be provided. if multiple thumbnails are generated
+  (i.e. if the file is a pdf will multiple pages), then the return value
+  will be an array of file paths. otherwise, when successful a single file
+  path will be returned. if a thumbnail could not be created, NULL will be
+  returned
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_toXmlArray">toXmlArray</a>()</pre>
+<pre> returns this file attribute in the form of an associative array containing
+  2 nested values: &#039;attributes&#039;: an array containing 3 sub-keys: &#039;name&#039;,
+  &#039;size&#039; and &#039;type&#039;, and $fileKey containing the base64 encoding of the bytes
+  representing this file. this value will be preceded by &quot;&lt;![CDATA[&quot; and
+  postceded by &quot;]]&gt;&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_writeToFile">writeToFile</a>(string $file)</pre>
+<pre> this method writes the bytes of this file to the new file name specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean</pre></td>
+      <td>
+        <pre><a href="#method__init">_init</a>()</pre>
+<pre> Initializes the basic SRA_FileAttribute properties $_bytes (if applicable),
+  $_fileName, $_name, $_size and $_type based on the database query ($_sql)
+  specified when this SRA_FileAttribute was initialized. Returns TRUE if
+  successful, FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean</pre></td>
+      <td>
+        <pre><a href="#method__initData">_initData</a>(byte[] $data)</pre>
+<pre> Initializes the basic SRA_FileAttribute properties $_bytes (if applicable),
+  $_fileName, $_name, $_size and $_type from the given $data extracted from
+  the corresponding database column for the file. returns TRUE if successful
+  FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setAttribute">_setAttribute</a>(string $attribute)</pre>
+<pre> Sets the _attribute attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setAttributeIndex">_setAttributeIndex</a>(string $attributeIndex)</pre>
+<pre> Sets the _attributeIndex attributeIndex
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setEntity">_setEntity</a>(string $entity)</pre>
+<pre> Sets the _entity attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setEntityId">_setEntityId</a>(string $entityId)</pre>
+<pre> Sets the _entityId attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setFileDir">_setFileDir</a>(string $fileDir)</pre>
+<pre> Sets the _fileDir attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setFileDirUri">_setFileDirUri</a>(string $fileDirUri)</pre>
+<pre> Sets the _fileDirUri attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setFileHandling">_setFileHandling</a>(string $fileHandling)</pre>
+<pre> Sets the _fileHandling attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setFileScriptRewrite">_setFileScriptRewrite</a>(string $fileScriptRewrite)</pre>
+<pre> Sets the _fileScriptRewrite attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setFileScriptUri">_setFileScriptUri</a>(string $fileScriptUri)</pre>
+<pre> Sets the _fileScriptUri attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setInitialized">_setInitialized</a>(string $initialized)</pre>
+<pre> Sets the _initialized attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setNew">_setNew</a>(string $new)</pre>
+<pre> Sets the _new attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setApp">_setApp</a>(string $app)</pre>
+<pre> Sets the _app attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_FileAttribute or SRA_Error</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getInstanceFromDb">getInstanceFromDb</a>(byte[] $data, string $attribute, string $attributeIndex, string $entity, string $entityId, string $fileDir, string $fileDirUri, string $fileHandling, string $fileScriptRewrite, string $fileScriptUri)</pre>
+<pre> Creates a new instance of SRA_FileAttribute given the following database
+  instance criteria
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getInstanceFromData">getInstanceFromData</a>(byte[] $data)</pre>
+<pre> Initializes and returns a SRA_FileAttribute object from serialized data.
+  returns an FALSE if the serialized data is not a SRA_FileAttribute
+  instance
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_FileAttribute, FALSE or SRA_Error</pre></td>
+      <td>
+        <pre><a href="#method_getInstanceFromEncryptedId">getInstanceFromEncryptedId</a>(string $id, string $fileDir=FALSE)</pre>
+<pre> Creates a new instance of SRA_FileAttribute based on an encrypted id generated
+  by the getEncryptedId method. Returns FALSE if the file was removed
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public SRA_FileAttribute or SRA_Error</pre></td>
+      <td>
+        <pre><a href="#method_getInstanceFromUpload">getInstanceFromUpload</a>($data, string $attribute=FALSE, string $attributeIndex=FALSE, string $entity=FALSE, string $entityId=FALSE, string $fileDir=FALSE, string $fileDirUri=FALSE, string $fileHandling=FALSE, string $fileScriptRewrite=FALSE, string $fileScriptUri=FALSE, $fileProcessor=FALSE)</pre>
+<pre> Creates a new instance of SRA_FileAttribute for a field from the current
+  $_FILES PHP global. Returns an FALSE if the $name is not present in that
+  variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_fileHandlingMethodIsValid">fileHandlingMethodIsValid</a>(string $method)</pre>
+<pre> Static method that returns TRUE if a given file handling method is valid
+  (if it corresponds with one of the SRA_FILE_ATTRIBUTE_TYPE_* constants)
+ 
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_FileAttribute object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_FILE_ATTRUBTE_DECIMAL_PRECISION">SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</h3>
+  <pre>int <b>SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</b> = 2</pre>
+  <pre> the default decimal precision for the getSize* methods
+</pre>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_TYPE_DB">SRA_FILE_ATTRIBUTE_TYPE_DB</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_TYPE_DB</b> = 'db'</pre>
+  <pre> identifies the &quot;db&quot; &quot;file-handling&quot; method
+</pre>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_TYPE_DIR">SRA_FILE_ATTRIBUTE_TYPE_DIR</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_TYPE_DIR</b> = 'dir'</pre>
+  <pre> identifies the &quot;dir&quot; &quot;file-handling&quot; method
+</pre>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_EID_PREFIX">SRA_FILE_ATTRIBUTE_EID_PREFIX</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_EID_PREFIX</b> = 'sfa://'</pre>
+  <pre> prefix for encrypted ids
+</pre>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX">SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_EID_REMOVE_PREFIX</b> = 'REMOVE'</pre>
+  <pre> prefix to identify files that have been reset (will be automatically deleted
+  when getInstanceFromEncryptedId is invoked (applies only when _fileHandling
+  is SRA_FILE_ATTRIBUTE_TYPE_DIR)
+</pre>
+ <hr />  <h3 id="constant_SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT">SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT</h3>
+  <pre>string <b>SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT</b> = 'convert'</pre>
+  <pre> the name of the ImageMagick &quot;convert&quot; cli utility used by the &quot;resizeImage&quot;
+  and &quot;toThumbnail&quot; methods. in order to use those methods, ImageMagick must
+  be installed and this utility must be present in the $PATH
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__app">_app</h3>
+  <pre>private string var <b>$_app</b></pre>
+  <pre> the app key that this SRA_FileAttribute belongs to
+</pre>
+ <hr />  <h3 id="attr__attribute">_attribute</h3>
+  <pre>private string var <b>$_attribute</b></pre>
+  <pre> the name of the attribute that this SRA_FileAttribute belongs to
+</pre>
+ <hr />  <h3 id="attr__attributeIndex">_attributeIndex</h3>
+  <pre>private string var <b>$_attributeIndex</b></pre>
+  <pre> the attribute index for this SRA_FileAttribute (only applicable if the
+  attribute is an array)
+</pre>
+ <hr />  <h3 id="attr__bytes">_bytes</h3>
+  <pre>private byte[] var <b>$_bytes</b></pre>
+  <pre> byte array representation of the file (only appies to files that are stored
+  in the database). cannot be set through instantiation.
+</pre>
+ <hr />  <h3 id="attr__customUri">_customUri</h3>
+  <pre>private string var <b>$_customUri</b></pre>
+  <pre> an optional custom uri for this file (use setCustomUri to set)
+</pre>
+ <hr />  <h3 id="attr__entity">_entity</h3>
+  <pre>private string var <b>$_entity</b></pre>
+  <pre> the name of the entity that this SRA_FileAttribute belongs to
+</pre>
+ <hr />  <h3 id="attr__entityId">_entityId</h3>
+  <pre>private string var <b>$_entityId</b></pre>
+  <pre> the id of the entity that this SRA_FileAttribute belongs to
+</pre>
+ <hr />  <h3 id="attr__fileDir">_fileDir</h3>
+  <pre>private string var <b>$_fileDir</b></pre>
+  <pre> if the SRA_FILE_ATTRIBUTE_TYPE_DIR file handling method is used,
+  specifies the directory where files should be stored
+  for more information, see the documentation provided in entity-model_1_0.dtd
+</pre>
+ <hr />  <h3 id="attr__fileDirUri">_fileDirUri</h3>
+  <pre>private string var <b>$_fileDirUri</b></pre>
+  <pre> if the SRA_FILE_ATTRIBUTE_TYPE_DIR file handling method is used,
+  specifies the uri where files should be referenced from the web server
+  for more information, see the documentation provided in entity-model_1_0.dtd
+</pre>
+ <hr />  <h3 id="attr__fileHandling">_fileHandling</h3>
+  <pre>private string var <b>$_fileHandling</b></pre>
+  <pre> determines how this file attribute will be stored. will correspond with
+  one of the SRA_FILE_ATTRIBUTE_TYPE_* constants for more information, see
+  the documentation provided in entity-model_1_0.dtd
+</pre>
+ <hr />  <h3 id="attr__fileScriptRewrite">_fileScriptRewrite</h3>
+  <pre>private string var <b>$_fileScriptRewrite</b></pre>
+  <pre> whether or not the _fileScriptUri should be rendered as an Apache RewriteRule
+  for more information, see the documentation provided in entity-model_1_0.dtd
+</pre>
+ <hr />  <h3 id="attr__fileScriptUri">_fileScriptUri</h3>
+  <pre>private string var <b>$_fileScriptUri</b></pre>
+  <pre> if the SRA_FILE_ATTRIBUTE_TYPE_DB file handling method is used,
+  specifies the Uri to the file-renderer.php script
+  for more information, see the documentation provided in entity-model_1_0.dtd
+</pre>
+ <hr />  <h3 id="attr__fileName">_fileName</h3>
+  <pre>private string var <b>$_fileName</b></pre>
+  <pre> the actual name of the file if the SRA_FILE_ATTRIBUTE_TYPE_DIR
+  file handling method is used, or a browser friendly name if the
+  SRA_FILE_ATTRIBUTE_TYPE_DB file handling method is used.
+</pre>
+ <hr />  <h3 id="attr__hardPath">_hardPath</h3>
+  <pre>private string var <b>$_hardPath</b></pre>
+  <pre> set this attribute to force this file attribute to use this file path to
+  retrieve the file bytes (may be remote)
+</pre>
+ <hr />  <h3 id="attr__initialized">_initialized</h3>
+  <pre>private boolean var <b>$_initialized</b> = FALSE</pre>
+  <pre> whether or not existing database SRA_FileAttribute properties have been
+  initialized
+</pre>
+ <hr />  <h3 id="attr__name">_name</h3>
+  <pre>private string var <b>$_name</b></pre>
+  <pre> the original name of the file that was uploaded (if file was added from an
+  uploaded form)
+</pre>
+ <hr />  <h3 id="attr__new">_new</h3>
+  <pre>private boolean var <b>$_new</b> = FALSE</pre>
+  <pre> whether or not the SRA_FileAttribute is new (new SRA_FileAttributes have not been
+  committed to the database or file system)
+</pre>
+ <hr />  <h3 id="attr__size">_size</h3>
+  <pre>private string var <b>$_size</b></pre>
+  <pre> the size, in bytes, of the file
+</pre>
+ <hr />  <h3 id="attr__sql">_sql</h3>
+  <pre>private string var <b>$_sql</b></pre>
+  <pre> the sql that can be performed on the $_db to return the attributes
+  associated with this SRA_FileAttribute. this query will be executed the
+  first time that the $_bytes, $_fileName, $_name, or $_size attributes
+  are requested through their corresponding getter methods
+</pre>
+ <hr />  <h3 id="attr__type">_type</h3>
+  <pre>private string var <b>$_type</b></pre>
+  <pre> the mime type of the file if the browser provided this information in the
+  original file upload
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_FileAttribute">SRA_FileAttribute</h3>
+  <pre>public void function <b>SRA_FileAttribute</b>($fileName=NULL, $name=NULL, $size=NULL, $type=NULL, $new=NULL)</pre>
+  <pre> Instantiates a new instance of this object with the initial given
+  attributes
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>new</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_copy">copy</h3>
+  <pre>public <a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> function &amp;<b>copy</b>()</pre>
+  <pre> copies this file attribute
+</pre>
+ <hr />  <h3 id="method_delete">delete</h3>
+  <pre>public boolean TRUE on success, FALSE otherwise function <b>delete</b>()</pre>
+  <pre> deletes the file represented by this SRA_FileAttribute instance IF the
+  _fileHandling is SRA_FILE_ATTRIBUTE_TYPE_DIR and the _fileName exists
+</pre>
+ <hr />  <h3 id="method_equals">equals</h3>
+  <pre>public string function <b>equals</b>(<a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> $fileAttr)</pre>
+  <pre> Returns TRUE if this SRA_FileAttribute references the same file as the
+  $fileAttr parameter
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileAttr</td>
+      <td>SRA_FileAttribute</td>
+      <td><pre>ibute $fileAttr</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getApp">getApp</h3>
+  <pre>public string function <b>getApp</b>()</pre>
+  <pre> Returns the _app attribute
+</pre>
+ <hr />  <h3 id="method_getAttribute">getAttribute</h3>
+  <pre>public string function <b>getAttribute</b>()</pre>
+  <pre> Returns the _attribute attribute
+</pre>
+ <hr />  <h3 id="method_getAttributeIndex">getAttributeIndex</h3>
+  <pre>public string function <b>getAttributeIndex</b>()</pre>
+  <pre> Returns the _attributeIndex attributeIndex
+</pre>
+ <hr />  <h3 id="method_getBytes">getBytes</h3>
+  <pre>public byte[] function &amp;<b>getBytes</b>()</pre>
+  <pre> Returns the _bytes attribute (returned by reference)
+</pre>
+ <hr />  <h3 id="method_getData">getData</h3>
+  <pre>public void function &amp;<b>getData</b>(string $fileHandling=FALSE, string $fileDir=FALSE)</pre>
+  <pre> Returns an appropriately serialized version of this SRA_FileAttribute which
+  can be stored in the database column for the attribute that it pertains to.
+  Returns an SRA_Error object, if unsuccessful
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileHandling</td>
+      <td>string</td>
+      <td><pre>see the $_fileHandling api comments (REQUIRED  if not already set)</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileDir</td>
+      <td>string</td>
+      <td><pre>see the $_fileDir api comments (REQUIRED for  SRA_FILE_ATTRIBUTE_TYPE_DIR type SRA_FileAttribute instances if not already
+  set)</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppDbData">getAppDbData</h3>
+  <pre>public string function &amp;<b>getAppDbData</b>($db)</pre>
+  <pre> Returns the data for this SRA_FileAttribute properly converted for insertion
+  into the current app database
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>db</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getAppDbDataType">getAppDbDataType</h3>
+  <pre>public string function <b>getAppDbDataType</b>()</pre>
+  <pre> Returns the correct database data type for this SRA_FileAttribute. This is
+  SRA_DATA_TYPE_BLOB if the _fileHandling is SRA_FILE_ATTRIBUTE_TYPE_DB
+  and SRA_DATA_TYPE_STRING if the _fileHandling is
+  SRA_FILE_ATTRIBUTE_TYPE_DIR
+</pre>
+ <hr />  <h3 id="method_getEncryptedId">getEncryptedId</h3>
+  <pre>public string function <b>getEncryptedId</b>(boolean $encode=TRUE)</pre>
+  <pre> Returns a unique encrypted identifier for this file attribute if the
+  SRA_FILE_ATTRIBUTE_TYPE_DB file handling method is used
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>encode</td>
+      <td>boolean</td>
+      <td><pre>whether or not to url encode the ecrypted id</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getEntity">getEntity</h3>
+  <pre>public string function <b>getEntity</b>()</pre>
+  <pre> Returns the _entity entity
+</pre>
+ <hr />  <h3 id="method_getEntityId">getEntityId</h3>
+  <pre>public string function <b>getEntityId</b>()</pre>
+  <pre> Returns the _entityId entityId
+</pre>
+ <hr />  <h3 id="method_getFileExtension">getFileExtension</h3>
+  <pre>public string function <b>getFileExtension</b>()</pre>
+  <pre> Returns the file extension for this file
+</pre>
+ <hr />  <h3 id="method_getFileDir">getFileDir</h3>
+  <pre>public string function <b>getFileDir</b>()</pre>
+  <pre> Returns the file extension for this file
+</pre>
+ <hr />  <h3 id="method_getFileDirUri">getFileDirUri</h3>
+  <pre>public string function <b>getFileDirUri</b>()</pre>
+  <pre> Returns the file extension for this file
+</pre>
+ <hr />  <h3 id="method_getFileHandling">getFileHandling</h3>
+  <pre>public string function <b>getFileHandling</b>()</pre>
+  <pre> Returns the file extension for this file
+</pre>
+ <hr />  <h3 id="method_getFileScriptUri">getFileScriptUri</h3>
+  <pre>public string function <b>getFileScriptUri</b>()</pre>
+  <pre> Returns the file extension for this file
+</pre>
+ <hr />  <h3 id="method_getFileName">getFileName</h3>
+  <pre>public string function <b>getFileName</b>()</pre>
+  <pre> Returns the _fileName attribute
+</pre>
+ <hr />  <h3 id="method_getHardPath">getHardPath</h3>
+  <pre>public string function <b>getHardPath</b>()</pre>
+  <pre> Returns the _hardPath attribute
+</pre>
+ <hr />  <h3 id="method_getIcon">getIcon</h3>
+  <pre>public string function <b>getIcon</b>(string $baseDir)</pre>
+  <pre> returns the full path to the icon to use for this file based on it&#039;s mime
+  type if found in $baseDir. this algorithm uses the following search order:
+   1) check for [file extension].(png|jpg|gif)
+   2) explode mimeType on &#039;/&#039;, lowercase both pieces and remove leading &#039;x-&#039;
+   3) check for mimeType[1].(png|jpg|gif)
+   4) check for mimeType[0].(png|jpg|gif)
+   5) check for source_[file extension].(png|jpg|gif)
+   6) remove trailing &#039;s&#039; from extension if applicable and check for source_[file extension].(png|jpg|gif)
+   6) return NULL
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>baseDir</td>
+      <td>string</td>
+      <td><pre>the base directory containing the icon images. this  directory may be either absolute or app relative</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getName">getName</h3>
+  <pre>public string function <b>getName</b>()</pre>
+  <pre> Returns the _name attribute
+</pre>
+ <hr />  <h3 id="method_getSize">getSize</h3>
+  <pre>public int function <b>getSize</b>()</pre>
+  <pre> Returns the _size attribute
+</pre>
+ <hr />  <h3 id="method_getSizeKb">getSizeKb</h3>
+  <pre>public float function <b>getSizeKb</b>(int $decimalPrecision=SRA_FILE_ATTRUBTE_DECIMAL_PRECISION, float $size=NULL)</pre>
+  <pre> Returns the size of the file in KB
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>decimalPrecision</td>
+      <td>int</td>
+      <td><pre>the decimal precision for the return value</pre></td>
+      <td>SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>float</td>
+      <td><pre>this method can be invoked statically by specifying this  parameter which is the size in bytes</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSizeLabel">getSizeLabel</h3>
+  <pre>public string function <b>getSizeLabel</b>(int $decimalPrecision=SRA_FILE_ATTRUBTE_DECIMAL_PRECISION, float $size=NULL)</pre>
+  <pre> returns the size label to use for this file attribute (or for $size if size
+  is specified). this label will be in gigabytes if &gt; 1 gigabytes, megabytes
+  if &gt; 1 megabytes, kilobytes if &gt; 1 kilobytes or bytes otherwise
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>decimalPrecision</td>
+      <td>int</td>
+      <td><pre>the decimal precision for the return value</pre></td>
+      <td>SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>float</td>
+      <td><pre>this method can be invoked statically by specifying this  parameter which is the size in bytes</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSizeMb">getSizeMb</h3>
+  <pre>public float function <b>getSizeMb</b>(int $decimalPrecision=SRA_FILE_ATTRUBTE_DECIMAL_PRECISION, float $size=NULL)</pre>
+  <pre> Returns the size of the file in MB
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>decimalPrecision</td>
+      <td>int</td>
+      <td><pre>the decimal precision for the return value</pre></td>
+      <td>SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>float</td>
+      <td><pre>this method can be invoked statically by specifying this  parameter which is the size in bytes</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSizeGb">getSizeGb</h3>
+  <pre>public float function <b>getSizeGb</b>(int $decimalPrecision=SRA_FILE_ATTRUBTE_DECIMAL_PRECISION, float $size=NULL)</pre>
+  <pre> Returns the size of the file in GB
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>decimalPrecision</td>
+      <td>int</td>
+      <td><pre>the decimal precision for the return value</pre></td>
+      <td>SRA_FILE_ATTRUBTE_DECIMAL_PRECISION</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>float</td>
+      <td><pre>this method can be invoked statically by specifying this  parameter which is the size in bytes</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSql">getSql</h3>
+  <pre>public string function <b>getSql</b>()</pre>
+  <pre> Returns the _sql attribute
+</pre>
+ <hr />  <h3 id="method_getType">getType</h3>
+  <pre>public string function <b>getType</b>()</pre>
+  <pre> Returns the _type attribute
+</pre>
+ <hr />  <h3 id="method_getUri">getUri</h3>
+  <pre>public string function <b>getUri</b>()</pre>
+  <pre> Returns the _uri attribute
+</pre>
+ <hr />  <h3 id="method_isFileScriptRewrite">isFileScriptRewrite</h3>
+  <pre>public boolean function <b>isFileScriptRewrite</b>()</pre>
+  <pre> Returns the _fileScriptRewrite attribute
+</pre>
+ <hr />  <h3 id="method_isImage">isImage</h3>
+  <pre>public boolean function <b>isImage</b>()</pre>
+  <pre> Returns true if this file has an image mime type
+</pre>
+ <hr />  <h3 id="method_isNew">isNew</h3>
+  <pre>public boolean function <b>isNew</b>()</pre>
+  <pre> Returns the _new attribute
+</pre>
+ <hr />  <h3 id="method_isText">isText</h3>
+  <pre>public boolean function <b>isText</b>()</pre>
+  <pre> Returns true if this file has a text mime type
+</pre>
+ <hr />  <h3 id="method_resizeImage">resizeImage</h3>
+  <pre>public string function <b>resizeImage</b>(int $height, int $width, boolean $preserveAspect=TRUE)</pre>
+  <pre> if this file attribute represents an image, this method may be used to
+  resize that image. in order to use this functionality, ImageMagick must be
+  installed and executable (see SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT
+  constant). at least 1, $height or $width must be specified. the return
+  value will be the path to a temp file stored the resized image
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>height</td>
+      <td>int</td>
+      <td><pre>the height of the thumbnail to generate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>width</td>
+      <td>int</td>
+      <td><pre>the width of the thumbnail to generate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>preserveAspect</td>
+      <td>boolean</td>
+      <td><pre>whether or not to preserve the aspect ratio  when the resized image is created. if false, and both height and width are
+  specified, the resized image will be modified in such a way to create the
+  aspect ratio prescribed by those dimensions</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setBytes">setBytes</h3>
+  <pre>public void function <b>setBytes</b>(string $bytes)</pre>
+  <pre> Sets the _bytes attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>bytes</td>
+      <td>string</td>
+      <td><pre>the bytes attribute to set (passed by reference)</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setCustomUri">setCustomUri</h3>
+  <pre>public void function <b>setCustomUri</b>(string $uri)</pre>
+  <pre> this method can be used to set a custom uri for this file
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>uri</td>
+      <td>string</td>
+      <td><pre>ng $uri the uri to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setFileName">setFileName</h3>
+  <pre>public void function <b>setFileName</b>(string $fileName)</pre>
+  <pre> Sets the _fileName attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>string</td>
+      <td><pre>the fileName attribute to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setHardPath">setHardPath</h3>
+  <pre>public void function <b>setHardPath</b>(string $hardPath)</pre>
+  <pre> sets a custom hard path for this file attribute. when set, this file will
+  be used when the bytes are retrieved
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>hardPath</td>
+      <td>string</td>
+      <td><pre>the path to set - may be remote</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setName">setName</h3>
+  <pre>public void function <b>setName</b>(string $name)</pre>
+  <pre> Sets the _name attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>string</td>
+      <td><pre>the name attribute to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setSize">setSize</h3>
+  <pre>public void function <b>setSize</b>(int $size)</pre>
+  <pre> Sets the _size attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>int</td>
+      <td><pre>the size attribute to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_setType">setType</h3>
+  <pre>public void function <b>setType</b>(string $type)</pre>
+  <pre> Sets the _type attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>string</td>
+      <td><pre>the type attribute to set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_toText">toText</h3>
+  <pre>public string function &amp;<b>toText</b>()</pre>
+  <pre> this method is used to convert this file attribute to an indexable text
+  representation when it is possible to do so. if a file uses a &quot;text/*&quot;
+  mime-type (and that mime-type does not have a custom converter defined) the
+  contents of that file will be returned directly. other mime-types require
+  custom text converters. these can be defined in sierra-config.xml using the
+  &quot;param&quot; element where the type is &quot;file-converter&quot;, the id is a space
+  separated list of mime-types supported by that converter (as defined in
+  /etc/mime.types), and the value is the cli command for invoking that
+  converter containing 2 tokens. the first is &quot;${input}&quot; which is the name of
+  the file being input (STDIN is not supported) to the converter (a temp file
+  created when this method is invoked), and the second is &quot;${output}&quot; which
+  is the name of a temporary output file that the text will be written to
+  (STDOUT is not supported, use &gt; if the converter application does not
+  support direct file output). When this method is invoked and a valid
+  converter is found, the file will first be written to a temp file, an
+  output file will be created, the converter will be invoked, and the output
+  of that converter will be returned (both temp files are also deleted).
+  these are a few examples of text converters defined in sierra-config.xml:
+   &lt;!-- PDF conversion using Xpdf (http://www.foolabs.com/xpdf/) --&gt;
+   &lt;param id=&quot;application/pdf&quot; type=&quot;file-converter&quot; value=&quot;/usr/local/bin/pdftotext ${input} ${output}&quot; /&gt;
+</pre>
+ <hr />  <h3 id="method_toThumbnail">toThumbnail</h3>
+  <pre>public mixed function <b>toThumbnail</b>(int $height, int $width, string $format='png', boolean $preserveAspect=TRUE, array $includeTypes=NULL, array $skipTypes=NULL)</pre>
+  <pre> used to create a thumbnail image representation of this file where
+  supported. in order to use this method, the ImageMagick utility
+  SRA_FILE_ATTRIBUTE_IMAGE_MAGICK_CONVERT must be found in the path.
+  Additionally, the file mime-type must be supported for conversion. the
+  supported types include the image formats listed at
+  http://www.imagemagick.org/script/formats.php as well as any other formats
+  that can be converted to a supported format by a custom converter. These
+  converters can be defined in sierra-config.xml using the &quot;param&quot; element
+  where the type is &quot;thumbnail-converter&quot;, the id is a space separated list
+  of mime-types supported by that converter (as defined in /etc/mime.types),
+  and the value is the cli command for invoking that converter containing 2
+  tokens. the first is &quot;${input}&quot; which is the name of the original file
+  (STDIN is not supported) for the converter (a temp file created when this
+  method is invoked), and the second is &quot;${output}&quot; which is the name of a
+  temporary output file that the new file will be written to (STDOUT is not
+  supported, use &gt; if the converter application does not support direct file
+  output). if both height and width are specific, the aspect ratio of the
+  source file may be changed as the resulting thumbnail will be generated
+  using those exact dimensions. if either $height or $width or specified,
+  then that will be the exact size for that dimension while the opposite
+  dimension will be proportional according to the aspect ratio. at least 1,
+  $height or $width MUST be provided. if multiple thumbnails are generated
+  (i.e. if the file is a pdf will multiple pages), then the return value
+  will be an array of file paths. otherwise, when successful a single file
+  path will be returned. if a thumbnail could not be created, NULL will be
+  returned
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>height</td>
+      <td>int</td>
+      <td><pre>the height of the thumbnail to generate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>width</td>
+      <td>int</td>
+      <td><pre>the width of the thumbnail to generate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>format</td>
+      <td>string</td>
+      <td><pre>the format of the thumbnail to create. the default  format is &#039;png&#039;. alternate formats include &#039;gif&#039;, &#039;jpg&#039; and any other
+  output format (identified by it&#039;s file extension) supported by ImageMagick</pre></td>
+      <td>'png'</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>preserveAspect</td>
+      <td>boolean</td>
+      <td><pre>whether or not to preserve the aspect ratio  when the thumbnail is created. if false, and both height and width are
+  specified, the thumbnail image will be modified in such a way to create the
+  aspect ratio prescribed by those dimensions</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>includeTypes</td>
+      <td>array</td>
+      <td><pre>an array of regular expressions defining the  mime-types for which thumbnails are allowed. if this file mime-type is not
+  in that array, no thumbnail will be created</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>skipTypes</td>
+      <td>array</td>
+      <td><pre>an array of regular expressions defining the  mime-types for which thumbnails are NOT allowed. if this file mime-type is
+  in that array, no thumbnail will be created</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_toXmlArray">toXmlArray</h3>
+  <pre>public array function <b>toXmlArray</b>()</pre>
+  <pre> returns this file attribute in the form of an associative array containing
+  2 nested values: &#039;attributes&#039;: an array containing 3 sub-keys: &#039;name&#039;,
+  &#039;size&#039; and &#039;type&#039;, and $fileKey containing the base64 encoding of the bytes
+  representing this file. this value will be preceded by &quot;&lt;![CDATA[&quot; and
+  postceded by &quot;]]&gt;&quot;
+</pre>
+ <hr />  <h3 id="method_writeToFile">writeToFile</h3>
+  <pre>public void function <b>writeToFile</b>(string $file)</pre>
+  <pre> this method writes the bytes of this file to the new file name specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>file</td>
+      <td>string</td>
+      <td><pre>the full path to the file to write to</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__init">_init</h3>
+  <pre>private boolean function <b>_init</b>()</pre>
+  <pre> Initializes the basic SRA_FileAttribute properties $_bytes (if applicable),
+  $_fileName, $_name, $_size and $_type based on the database query ($_sql)
+  specified when this SRA_FileAttribute was initialized. Returns TRUE if
+  successful, FALSE otherwise
+</pre>
+ <hr />  <h3 id="method__initData">_initData</h3>
+  <pre>private boolean function <b>_initData</b>(byte[] $data)</pre>
+  <pre> Initializes the basic SRA_FileAttribute properties $_bytes (if applicable),
+  $_fileName, $_name, $_size and $_type from the given $data extracted from
+  the corresponding database column for the file. returns TRUE if successful
+  FALSE otherwise
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>byte[]</td>
+      <td><pre>the data containing those properties</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setAttribute">_setAttribute</h3>
+  <pre>private void function <b>_setAttribute</b>(string $attribute)</pre>
+  <pre> Sets the _attribute attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>string</td>
+      <td><pre>see the $_attribute api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setAttributeIndex">_setAttributeIndex</h3>
+  <pre>private void function <b>_setAttributeIndex</b>(string $attributeIndex)</pre>
+  <pre> Sets the _attributeIndex attributeIndex
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>attributeIndex</td>
+      <td>string</td>
+      <td><pre>see the $_attributeIndex api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setEntity">_setEntity</h3>
+  <pre>private void function <b>_setEntity</b>(string $entity)</pre>
+  <pre> Sets the _entity attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>string</td>
+      <td><pre>see the $_entity api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setEntityId">_setEntityId</h3>
+  <pre>private void function <b>_setEntityId</b>(string $entityId)</pre>
+  <pre> Sets the _entityId attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>entityId</td>
+      <td>string</td>
+      <td><pre>see the $_entityId api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setFileDir">_setFileDir</h3>
+  <pre>private void function <b>_setFileDir</b>(string $fileDir)</pre>
+  <pre> Sets the _fileDir attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileDir</td>
+      <td>string</td>
+      <td><pre>the fileDir attribute to _set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setFileDirUri">_setFileDirUri</h3>
+  <pre>private void function <b>_setFileDirUri</b>(string $fileDirUri)</pre>
+  <pre> Sets the _fileDirUri attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileDirUri</td>
+      <td>string</td>
+      <td><pre>the fileDirUri attribute to _set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setFileHandling">_setFileHandling</h3>
+  <pre>private void function <b>_setFileHandling</b>(string $fileHandling)</pre>
+  <pre> Sets the _fileHandling attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileHandling</td>
+      <td>string</td>
+      <td><pre>see the $_fileHandling api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setFileScriptRewrite">_setFileScriptRewrite</h3>
+  <pre>private void function <b>_setFileScriptRewrite</b>(string $fileScriptRewrite)</pre>
+  <pre> Sets the _fileScriptRewrite attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileScriptRewrite</td>
+      <td>string</td>
+      <td><pre>the fileScriptRewrite attribute to _set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setFileScriptUri">_setFileScriptUri</h3>
+  <pre>private void function <b>_setFileScriptUri</b>(string $fileScriptUri)</pre>
+  <pre> Sets the _fileScriptUri attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileScriptUri</td>
+      <td>string</td>
+      <td><pre>the fileScriptUri attribute to _set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setInitialized">_setInitialized</h3>
+  <pre>private void function <b>_setInitialized</b>(string $initialized)</pre>
+  <pre> Sets the _initialized attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>initialized</td>
+      <td>string</td>
+      <td><pre>the initialized attribute to _set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setNew">_setNew</h3>
+  <pre>private void function <b>_setNew</b>(string $new)</pre>
+  <pre> Sets the _new attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>new</td>
+      <td>string</td>
+      <td><pre>the new attribute to _set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setApp">_setApp</h3>
+  <pre>private void function <b>_setApp</b>(string $app)</pre>
+  <pre> Sets the _app attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>app</td>
+      <td>string</td>
+      <td><pre>the app attribute to _set</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getInstanceFromDb">getInstanceFromDb</h3>
+  <pre>public SRA_FileAttribute or SRA_Error function &amp;<b>getInstanceFromDb</b>(byte[] $data, string $attribute, string $attributeIndex, string $entity, string $entityId, string $fileDir, string $fileDirUri, string $fileHandling, string $fileScriptRewrite, string $fileScriptUri)</pre>
+  <pre> Creates a new instance of SRA_FileAttribute given the following database
+  instance criteria
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>byte[]</td>
+      <td><pre>can be either an sql query (beginning with SELECT) that  can be used to retrieve the actual properties of this SRA_FileAttribute, or the
+  actual data from the database column itself for the SRA_FileAttribute</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>string</td>
+      <td><pre>see the $_attribute api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>attributeIndex</td>
+      <td>string</td>
+      <td><pre>see the $_attributeIndex api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>string</td>
+      <td><pre>see the $_entity api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>entityId</td>
+      <td>string</td>
+      <td><pre>see the $_entityId api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileDir</td>
+      <td>string</td>
+      <td><pre>see the $_fileDir api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileDirUri</td>
+      <td>string</td>
+      <td><pre>see the $_fileDirUri api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileHandling</td>
+      <td>string</td>
+      <td><pre>see the $_fileHandling api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileScriptRewrite</td>
+      <td>string</td>
+      <td><pre>see the $_fileScriptRewrite api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileScriptUri</td>
+      <td>string</td>
+      <td><pre>see the $_fileScriptUri api comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getInstanceFromData">getInstanceFromData</h3>
+  <pre>public <a href="model.SRA_FileAttribute.html" target="contentFrame">SRA_FileAttribute</a> function &amp;<b>getInstanceFromData</b>(byte[] $data)</pre>
+  <pre> Initializes and returns a SRA_FileAttribute object from serialized data.
+  returns an FALSE if the serialized data is not a SRA_FileAttribute
+  instance
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>byte[]</td>
+      <td><pre>the serialized SRA_FileAttribute instance</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getInstanceFromEncryptedId">getInstanceFromEncryptedId</h3>
+  <pre>public SRA_FileAttribute, FALSE or SRA_Error function <b>getInstanceFromEncryptedId</b>(string $id, string $fileDir=FALSE)</pre>
+  <pre> Creates a new instance of SRA_FileAttribute based on an encrypted id generated
+  by the getEncryptedId method. Returns FALSE if the file was removed
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the encrypted id to evaluate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileDir</td>
+      <td>string</td>
+      <td><pre>the directory where this file SHOULD exist. this  parameter should be specified if SRA_FILE_ATTRIBUTE_TYPE_DIR file handling
+  is used to avoid potential security risks. ONLY files in that directory
+  will be instantiated or removed</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getInstanceFromUpload">getInstanceFromUpload</h3>
+  <pre>public SRA_FileAttribute or SRA_Error function <b>getInstanceFromUpload</b>($data, string $attribute=FALSE, string $attributeIndex=FALSE, string $entity=FALSE, string $entityId=FALSE, string $fileDir=FALSE, string $fileDirUri=FALSE, string $fileHandling=FALSE, string $fileScriptRewrite=FALSE, string $fileScriptUri=FALSE, $fileProcessor=FALSE)</pre>
+  <pre> Creates a new instance of SRA_FileAttribute for a field from the current
+  $_FILES PHP global. Returns an FALSE if the $name is not present in that
+  variable
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>attribute</td>
+      <td>string</td>
+      <td><pre>see the $_attribute api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>attributeIndex</td>
+      <td>string</td>
+      <td><pre>see the $_attributeIndex api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>string</td>
+      <td><pre>see the $_entity api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>entityId</td>
+      <td>string</td>
+      <td><pre>see the $_entityId api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileDir</td>
+      <td>string</td>
+      <td><pre>see the $_fileDir api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileDirUri</td>
+      <td>string</td>
+      <td><pre>see the $_fileDirUri api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileHandling</td>
+      <td>string</td>
+      <td><pre>see the $_fileHandling api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileScriptRewrite</td>
+      <td>string</td>
+      <td><pre>see the $_fileScriptRewrite api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileScriptUri</td>
+      <td>string</td>
+      <td><pre>see the $_fileScriptUri api comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fileProcessor</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_fileHandlingMethodIsValid">fileHandlingMethodIsValid</h3>
+  <pre>public boolean function <b>fileHandlingMethodIsValid</b>(string $method)</pre>
+  <pre> Static method that returns TRUE if a given file handling method is valid
+  (if it corresponds with one of the SRA_FILE_ATTRIBUTE_TYPE_* constants)
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>method</td>
+      <td>string</td>
+      <td><pre>the method to validate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_FileAttribute object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_FileAttribute.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

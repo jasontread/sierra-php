@@ -1,0 +1,8 @@
+This is a maintenance update
+
+CHANGELOG
+* Added use of readline in sra-console and other locations for stdin input
+* Various minor bug fixes for PHP5 compatibility
+
+KNOWN ISSUES
+None

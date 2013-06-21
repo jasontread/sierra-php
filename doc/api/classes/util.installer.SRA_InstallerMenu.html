@@ -1,0 +1,458 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>util.installer.SRA_InstallerMenu - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+
+  // check attributes
+  if ("id".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_id'] = "id";
+  }
+  if ("defaultitem".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr_defaultItem'] = "defaultItem";
+  }
+  if ("_installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__installer'] = "_installer";
+  }
+  if ("_items".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__items'] = "_items";
+  }
+  if ("_resource".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__resource'] = "_resource";
+  }
+  if ("_resourcekeys".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__resourceKeys'] = "_resourceKeys";
+  }
+
+  // check methods
+  if ("sra_installermenu".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_InstallerMenu'] = "SRA_InstallerMenu";
+  }
+  if ("getmenuitem".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getMenuItem'] = "getMenuItem";
+  }
+  if ("getmenuoptions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getMenuOptions'] = "getMenuOptions";
+  }
+  if ("gettitle".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTitle'] = "getTitle";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_InstallerMenu</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/util.installer.html" target="contentFrame">util.installer</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_InstallerMenu</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> defines a single installer menu. an installer menu displays options available
+  to the user in that menu. the installer uses a hierarchical navigation model
+  and will automatically add a menu option to return to the parent menu (in a
+  nested menu) or exit the installer (from the top-level menu)
+</pre>
+  
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr_id">id</a></pre>
+<pre> the unique identifier for this menu
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="util.installer.SRA_InstallerMenuItem.html" target="contentFrame">SRA_InstallerMenuItem</a> </pre></td>
+      <td>
+        <pre><a href="#attr_defaultItem">defaultItem</a></pre>
+<pre> the default menu item for this menu (if applicable)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="util.installer.SRA_Installer.html" target="contentFrame">SRA_Installer</a> </pre></td>
+      <td>
+        <pre><a href="#attr__installer">_installer</a></pre>
+<pre> the installer instance this menu belongs to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>SRA_InstallerMenuItem[] </pre></td>
+      <td>
+        <pre><a href="#attr__items">_items</a></pre>
+<pre> the menu items belonging to this menu indexed by menu item &quot;key&quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__resource">_resource</a></pre>
+<pre> the resource identifier for this menu&#039;s title. use the &quot;getTitle&quot; method to
+  get the localized value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#attr__resourceKeys">_resourceKeys</a></pre>
+<pre> the name of a method in the installer that should be invoked to retrieve
+  custom resource keys to include in &quot;resource&quot; whenever the title for this
+  menu is rendered
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_InstallerMenu">SRA_InstallerMenu</a>(array $conf, <a href="util.installer.SRA_Installer.html" target="contentFrame">SRA_Installer</a> $installer)</pre>
+<pre> parses the menu configuration data and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="util.installer.SRA_InstallerMenuItem.html" target="contentFrame">SRA_InstallerMenuItem</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getMenuItem">getMenuItem</a>(string $id)</pre>
+<pre> returns the menu item identified by $id
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public hash</pre></td>
+      <td>
+        <pre><a href="#method_getMenuOptions">getMenuOptions</a>()</pre>
+<pre> returns a hash of menu options where the key is the menu-item identifier
+  and the value is the menu-item title
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getTitle">getTitle</a>()</pre>
+<pre> returns the localized title for this menu
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(object $object)</pre>
+<pre> Static method that returns true if the object parameter is a
+  SRA_InstallerMenu object
+</pre>      </td>
+    </tr>
+  </table>
+
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr_id">id</h3>
+  <pre>string var <b>$id</b></pre>
+  <pre> the unique identifier for this menu
+</pre>
+ <hr />  <h3 id="attr_defaultItem">defaultItem</h3>
+  <pre><a href="util.installer.SRA_InstallerMenuItem.html" target="contentFrame">SRA_InstallerMenuItem</a> var <b>$defaultItem</b></pre>
+  <pre> the default menu item for this menu (if applicable)
+</pre>
+ <hr />  <h3 id="attr__installer">_installer</h3>
+  <pre><a href="util.installer.SRA_Installer.html" target="contentFrame">SRA_Installer</a> var <b>$_installer</b></pre>
+  <pre> the installer instance this menu belongs to
+</pre>
+ <hr />  <h3 id="attr__items">_items</h3>
+  <pre>SRA_InstallerMenuItem[] var <b>$_items</b> = array()</pre>
+  <pre> the menu items belonging to this menu indexed by menu item &quot;key&quot;
+</pre>
+ <hr />  <h3 id="attr__resource">_resource</h3>
+  <pre>string var <b>$_resource</b></pre>
+  <pre> the resource identifier for this menu&#039;s title. use the &quot;getTitle&quot; method to
+  get the localized value
+</pre>
+ <hr />  <h3 id="attr__resourceKeys">_resourceKeys</h3>
+  <pre>string var <b>$_resourceKeys</b></pre>
+  <pre> the name of a method in the installer that should be invoked to retrieve
+  custom resource keys to include in &quot;resource&quot; whenever the title for this
+  menu is rendered
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_InstallerMenu">SRA_InstallerMenu</h3>
+  <pre>public void function <b>SRA_InstallerMenu</b>(array $conf, <a href="util.installer.SRA_Installer.html" target="contentFrame">SRA_Installer</a> $installer)</pre>
+  <pre> parses the menu configuration data and sets the appropriate instance
+  variables. if there is a problem with the configuration, the instance
+  variable &quot;err&quot; will be assigned to an appropriate error object (the error
+  will be logged)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>array</td>
+      <td><pre>the configuration to parse</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>installer</td>
+      <td>SRA_Installer</td>
+      <td><pre>$installer the installer instance this menu belongs to</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getMenuItem">getMenuItem</h3>
+  <pre>public <a href="util.installer.SRA_InstallerMenuItem.html" target="contentFrame">SRA_InstallerMenuItem</a> function &amp;<b>getMenuItem</b>(string $id)</pre>
+  <pre> returns the menu item identified by $id
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>string</td>
+      <td><pre>the identifier of the menu item to return</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getMenuOptions">getMenuOptions</h3>
+  <pre>public hash function <b>getMenuOptions</b>()</pre>
+  <pre> returns a hash of menu options where the key is the menu-item identifier
+  and the value is the menu-item title
+</pre>
+ <hr />  <h3 id="method_getTitle">getTitle</h3>
+  <pre>public string function <b>getTitle</b>()</pre>
+  <pre> returns the localized title for this menu
+</pre>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a
+  SRA_InstallerMenu object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>object</td>
+      <td><pre>$object the object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/util/installer/SRA_InstallerMenu.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

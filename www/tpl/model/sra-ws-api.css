@@ -1,0 +1,104 @@
+/* 
+the default css used by sra-ws-api-service.tpl and sra-ws-api-overview.tpl
+*/
+
+body {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+  padding: 0 30px 30px 30px;
+	margin: 0;
+}
+
+a:link, a:visited {
+	padding-bottom: 0;
+	color: #0066CC;
+	text-decoration: none;
+	border-bottom: 1px solid #D5DFE4;
+	overflow: hidden;
+	}
+a:hover {
+	padding-bottom: 0;
+	color: #993300;
+	border-bottom: 1px solid #996600;
+	outline: none;
+	}
+
+h1 {
+	padding: 20px 0 0 0;
+	margin: 0 0 .7em 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 28px;
+  font-weight: normal;
+	color: #862D32;
+	}
+h2 {
+	margin: 1em 0 .5em 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+  font-weight: bold;
+	color: #333;
+	}
+h3 {
+	margin: 1.2em 0 .5em 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+  font-weight: bold;
+	color: #333;
+	}
+	
+#wsDetail #wsApi, .wsExample {
+  background-color: white;
+  border: 1px solid #333;
+  padding: 10px;
+}
+
+#wsDetail #wsOverview {
+  position: absolute;
+  right: 30px;
+  top: 9px;
+	_top: 22px; /* IE 6-7 Hack */
+}
+
+.wsAppName, .wsParamDataType, .wsEntityName, .wsAttrName, .serviceName, .wsUri, .wsParam, .wsParamSoap, .wsParamXml, .wsPrimaryKeyName, .wsOutputJson, .wsOutputXml, .wsOutputSoap, .wsOutputDataType, .wsExample {
+  font-family: courier;
+  white-space: nowrap;
+}
+
+.wsUri {
+	padding: 3px 5px 3px 5px;
+	background-color: #FFF7C4;	
+}
+
+.wsParamRequired {
+  font-weight: bold;
+}
+
+table {
+  background-color: white;
+  border-collapse: collapse;
+  border-color: #333;
+  border-spacing: 0;
+  border-width: 0 0 1px 1px;
+  border-style: solid;
+  margin: 10px
+}
+
+table td, table th {
+  border-color: #333;
+  border-width: 1px 1px 0 0;
+  border-style: solid;
+  margin: 0;
+  padding: 6px;
+	font-size: 13px;
+}
+
+table th {
+  text-align: left;
+  white-space: nowrap;
+	background-color: #E9ECE3;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+}

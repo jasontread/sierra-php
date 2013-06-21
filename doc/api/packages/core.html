@@ -1,0 +1,942 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>core - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_license_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LICENSE_PREFIX'] = "SRA_LICENSE_PREFIX";
+  }
+  if ("sra_template_default_ext".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEMPLATE_DEFAULT_EXT'] = "SRA_TEMPLATE_DEFAULT_EXT";
+  }
+  if ("sra_version_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_VERSION_FILE'] = "SRA_VERSION_FILE";
+  }
+  if ("sra_path_separator".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_PATH_SEPARATOR'] = "SRA_PATH_SEPARATOR";
+  }
+  if ("sra_default_date_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_DATE_FORMAT'] = "SRA_DEFAULT_DATE_FORMAT";
+  }
+  if ("sra_default_date_only_format".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_DATE_ONLY_FORMAT'] = "SRA_DEFAULT_DATE_ONLY_FORMAT";
+  }
+  if ("sra_template_render_open_sub_val".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEMPLATE_RENDER_OPEN_SUB_VAL'] = "SRA_TEMPLATE_RENDER_OPEN_SUB_VAL";
+  }
+  if ("sra_app_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_APP_DIR_NAME'] = "SRA_APP_DIR_NAME";
+  }
+  if ("sra_bin_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_BIN_DIR_NAME'] = "SRA_BIN_DIR_NAME";
+  }
+  if ("sra_conf_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CONF_DIR_NAME'] = "SRA_CONF_DIR_NAME";
+  }
+  if ("sra_default_lib_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_LIB_DIR'] = "SRA_DEFAULT_LIB_DIR";
+  }
+  if ("sra_license_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LICENSE_VAR'] = "SRA_LICENSE_VAR";
+  }
+  if ("sra_default_log_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_LOG_DIR'] = "SRA_DEFAULT_LOG_DIR";
+  }
+  if ("sra_sys_php_extension".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SYS_PHP_EXTENSION'] = "SRA_SYS_PHP_EXTENSION";
+  }
+  if ("sra_ps_path".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_PS_PATH'] = "SRA_PS_PATH";
+  }
+  if ("sra_app_rb_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_APP_RB_NAME'] = "SRA_APP_RB_NAME";
+  }
+  if ("sra_default_error_log_file".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_ERROR_LOG_FILE'] = "SRA_DEFAULT_ERROR_LOG_FILE";
+  }
+  if ("sra_tmp_dir_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TMP_DIR_NAME'] = "SRA_TMP_DIR_NAME";
+  }
+  if ("sra_entity_modeler_config_key".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ENTITY_MODELER_CONFIG_KEY'] = "SRA_ENTITY_MODELER_CONFIG_KEY";
+  }
+  if ("sra_default_html_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_HTML_DIR'] = "SRA_DEFAULT_HTML_DIR";
+  }
+  if ("sra_default_templates_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_TEMPLATES_DIR'] = "SRA_DEFAULT_TEMPLATES_DIR";
+  }
+  if ("sra_sys_xml_extension".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SYS_XML_EXTENSION'] = "SRA_SYS_XML_EXTENSION";
+  }
+  if ("sra_template_type_system_admin".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEMPLATE_TYPE_SYSTEM_ADMIN'] = "SRA_TEMPLATE_TYPE_SYSTEM_ADMIN";
+  }
+  if ("sra_template_type_system_www".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEMPLATE_TYPE_SYSTEM_WWW'] = "SRA_TEMPLATE_TYPE_SYSTEM_WWW";
+  }
+  if ("sra_max_int_val".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_MAX_INT_VAL'] = "SRA_MAX_INT_VAL";
+  }
+  if ("sra_error_shutdown".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ERROR_SHUTDOWN'] = "SRA_ERROR_SHUTDOWN";
+  }
+  if ("sra_error_operational".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ERROR_OPERATIONAL'] = "SRA_ERROR_OPERATIONAL";
+  }
+  if ("sra_error_all".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ERROR_ALL'] = "SRA_ERROR_ALL";
+  }
+  if ("sra_error_problem".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_ERROR_PROBLEM'] = "SRA_ERROR_PROBLEM";
+  }
+  if ("sra_default_error_mask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DEFAULT_ERROR_MASK'] = "SRA_DEFAULT_ERROR_MASK";
+  }
+  if ("sra_controller_debug".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CONTROLLER_DEBUG'] = "SRA_CONTROLLER_DEBUG";
+  }
+  if ("sra_app_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_APP_CONFIG'] = "SRA_APP_CONFIG";
+  }
+  if ("sra_sys_config".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_SYS_CONFIG'] = "SRA_SYS_CONFIG";
+  }
+  if ("sra_conf_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_CONF_DIR'] = "SRA_CONF_DIR";
+  }
+  if ("sra_tmp_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TMP_DIR'] = "SRA_TMP_DIR";
+  }
+  if ("sra_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_DIR'] = "SRA_DIR";
+  }
+  if ("sra_lib_dir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIB_DIR'] = "SRA_LIB_DIR";
+  }
+  if ("sra_start_time".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_START_TIME'] = "SRA_START_TIME";
+  }
+  if ("sra_hostname".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_HOSTNAME'] = "SRA_HOSTNAME";
+  }
+
+
+
+  // check classes
+  if ("sra_controller".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Controller'] = "SRA_Controller";
+  }
+  if ("sra_error".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Error'] = "SRA_Error";
+  }
+  if ("sra_template".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Template'] = "SRA_Template";
+  }
+
+  // check functions
+  if ("app__shutdownapp__".indexOf(str) != -1) {
+    match = true;
+    matches['qs_function_app__shutdownApp__'] = "app__shutdownApp__";
+  }
+  if ("error_handler".indexOf(str) != -1) {
+    match = true;
+    matches['qs_function_error_handler'] = "error_handler";
+  }
+
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="package" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1>package core</h1>
+  <hr />
+  
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <h2>Package Information</h2>
+  <ul>
+    <li><a href="#comments">Package Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#functions">Functions</a></li>
+    <li><a href="#classes">Classes</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre>Contains the core framework classes, SRA_Controller being the foremost of them all. SRA_Controller MUST be included in each PHP source file that utilizes the framework. For more information, see app/sra-app/www/html/index.php <br /></pre>
+  
+  <h2 id="constants">Constant Summary</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LICENSE_PREFIX">SRA_LICENSE_PREFIX</a></pre>
+<pre> the file name prefix used to store license acceptance files (see
+  app-config.dtd &quot;license&quot; attribute documentation for more information)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEMPLATE_DEFAULT_EXT">SRA_TEMPLATE_DEFAULT_EXT</a></pre>
+<pre> The default file extension for templates
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_VERSION_FILE">SRA_VERSION_FILE</a></pre>
+<pre> the name of the version information file (stored in the framework and app
+  &quot;etc&quot; directory). this file contains the following values:
+    svn-ci-password=[overrides svn-password for checkin operations]
+    svn-ci-path=[overrides svn-path for checkin operations]
+    svn-ci-url=[overrides svn-url for checkin operations]
+    svn-ci-user=[overrides svn-user for checkin operations]
+    svn-password=[the subversion repository password]
+    svn-path=[the name of the framework/app subversion repository]
+    svn-url=[the url to the subversion repository containing the framework/app]
+    svn-user=[the subversion repository username]
+    version=[current version identifier]
+    versions-info=[path or uri to the versions info file]
+    versions-readme=[path or uri to the versions readme file]
+  the versions-info file contains a list of all of the available versions in
+  the format (where the topmost entry is considered the latest version):
+    [version id]=[path or uri to source archive]
+  the versions-readme file contains a list of the readme notes for each version
+  in the format:
+    [version id]=[path or uri to change info notes]
+  use the SRA_Controller::getAppSvnInfo, SRA_Controller::getSysSvnInfo,
+  SRA_Controller::getAppVersion, SRA_Controller::getSysVersion,
+  SRA_Controller::getAppVersionRb, SRA_Controller::getSysVersionRb,
+  SRA_Controller::getAppVersions, SRA_Controller::getSysVersions,
+  SRA_Controller::getAppLatestVersion, and SRA_Controller::getSysLatestVersion
+  methods to retrieve and use the data provided in these files
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_PATH_SEPARATOR">SRA_PATH_SEPARATOR</a></pre>
+<pre> used to separate directories in the include_path environment variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_DATE_FORMAT">SRA_DEFAULT_DATE_FORMAT</a></pre>
+<pre> the default SRA_GregorianDate::toString display format as specified in the
+  sierra-config dtd for date-format
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_DATE_ONLY_FORMAT">SRA_DEFAULT_DATE_ONLY_FORMAT</a></pre>
+<pre> the default SRA_GregorianDate::toString display format as specified in the
+  sierra-config dtd for date-only-format
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEMPLATE_RENDER_OPEN_SUB_VAL">SRA_TEMPLATE_RENDER_OPEN_SUB_VAL</a></pre>
+<pre> string identifying that an attribute value should be substituted in the
+  renderOpen method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_APP_DIR_NAME">SRA_APP_DIR_NAME</a></pre>
+<pre> the default name of the applications directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_BIN_DIR_NAME">SRA_BIN_DIR_NAME</a></pre>
+<pre> the name of the sierra and app bin directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CONF_DIR_NAME">SRA_CONF_DIR_NAME</a></pre>
+<pre> The base name of the sierra and app configuration directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_LIB_DIR">SRA_DEFAULT_LIB_DIR</a></pre>
+<pre> the default app lib-dir
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LICENSE_VAR">SRA_LICENSE_VAR</a></pre>
+<pre> the default license acceptance field name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_LOG_DIR">SRA_DEFAULT_LOG_DIR</a></pre>
+<pre> the default log-dir
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SYS_PHP_EXTENSION">SRA_SYS_PHP_EXTENSION</a></pre>
+<pre> The default PHP extension to use
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_PS_PATH">SRA_PS_PATH</a></pre>
+<pre> name of the ps cli program
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_APP_RB_NAME">SRA_APP_RB_NAME</a></pre>
+<pre> The default name of the SRA_Template context variable to assign the app
+  SRA_ResourceBundle reference to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_ERROR_LOG_FILE">SRA_DEFAULT_ERROR_LOG_FILE</a></pre>
+<pre> the default error-log-file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TMP_DIR_NAME">SRA_TMP_DIR_NAME</a></pre>
+<pre> The base name of the sierra and app temp directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre></pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ENTITY_MODELER_CONFIG_KEY">SRA_ENTITY_MODELER_CONFIG_KEY</a></pre>
+<pre> Defines the app-conf attribute name used to specify whether or not to
+  use the SRA_EntityModeler
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_HTML_DIR">SRA_DEFAULT_HTML_DIR</a></pre>
+<pre> the default application html directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_TEMPLATES_DIR">SRA_DEFAULT_TEMPLATES_DIR</a></pre>
+<pre> the default templates directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SYS_XML_EXTENSION">SRA_SYS_XML_EXTENSION</a></pre>
+<pre> The default XML extension to use
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEMPLATE_TYPE_SYSTEM_ADMIN">SRA_TEMPLATE_TYPE_SYSTEM_ADMIN</a></pre>
+<pre> Identifies that a template should be instantiated for the system www admin files. This
+  constant is used to specify a template directory (see _templateDir api) of
+  SRA_DIR . &#039;/www/admin/tpl&#039; in the SRA_Template::SRA_Template method through the type parameter.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEMPLATE_TYPE_SYSTEM_WWW">SRA_TEMPLATE_TYPE_SYSTEM_WWW</a></pre>
+<pre> Identifies that a template should be instantiated for the system www files. This constant is
+  used to specify a template directory (see _templateDir api) of
+  SRA_DIR . &#039;/www/tpl&#039; in the SRA_Template::SRA_Template method through the type parameter.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_MAX_INT_VAL">SRA_MAX_INT_VAL</a></pre>
+<pre> the maximum integer value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ERROR_SHUTDOWN">SRA_ERROR_SHUTDOWN</a></pre>
+<pre> This constant defines a critical problem that will not allow the system to continue
+  operating. When in this status the SRA_Template engine will display an error message to
+  any user that attempts to access any page.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ERROR_OPERATIONAL">SRA_ERROR_OPERATIONAL</a></pre>
+<pre> A constant that defines an OPERATIONAL status, meaning there are no problems.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ERROR_ALL">SRA_ERROR_ALL</a></pre>
+<pre> Constant that defines any system status.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_ERROR_PROBLEM">SRA_ERROR_PROBLEM</a></pre>
+<pre> A constant that defines PROBLEM status. This status occurs when there is some
+  form of problem, but that the system can continue responding to page requests.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DEFAULT_ERROR_MASK">SRA_DEFAULT_ERROR_MASK</a></pre>
+<pre> the default error-mask
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>boolean </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CONTROLLER_DEBUG">SRA_CONTROLLER_DEBUG</a></pre>
+<pre> This constant specifies whether or not the system should run in debug mode.
+  This mode enables any debug messages to be sent to the active console.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_APP_CONFIG">SRA_APP_CONFIG</a></pre>
+<pre> The app base directory relative path to the app config file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_SYS_CONFIG">SRA_SYS_CONFIG</a></pre>
+<pre> The SRA_DIR relative path to the system config file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_CONF_DIR">SRA_CONF_DIR</a></pre>
+<pre> The base name of the sierra and app configuration directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TMP_DIR">SRA_TMP_DIR</a></pre>
+<pre> The base name of the sierra and app configuration directory
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_DIR">SRA_DIR</a></pre>
+<pre> The base directory of the system.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIB_DIR">SRA_LIB_DIR</a></pre>
+<pre> The base directory of the system library (does not include trailing /).
+  This constant is used by many of the class files to import dependent class files.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>float </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_START_TIME">SRA_START_TIME</a></pre>
+<pre> the time that this file was initially included into the current running
+  PHP process
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_HOSTNAME">SRA_HOSTNAME</a></pre>
+<pre> the hostname for the server
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="functions">Function Summary</h2>
+  <table border="1" width="100%">
+    <tr id="function_app__shutdownApp__">
+      <td><pre><a href="../functions/core.app__shutdownApp__.html" target="contentFrame">app__shutdownApp__</a></pre></td>
+      <td><pre> registers the PHP shutdown function SRA_Controller::registerShutdownMethod
+</pre></td>
+    </tr>
+    <tr id="function_error_handler">
+      <td><pre><a href="../functions/core.error_handler.html" target="contentFrame">error_handler</a></pre></td>
+      <td><pre> This function can be used as the error handler for php files in a
+  production environment. It contains the logic for deciding whether or not
+  to proceed should a very severe error be thrown.
+ 
+  This is a function because set_error_handler() doesn&#039;t like static methods.
+  As of PHP 4.1.2.
+ 
+  PHP error_reporting() bit values:
+  1    E_ERROR
+  2    E_WARNING
+  4    E_PARSE
+  8    E_NOTICE
+  16   E_CORE_ERROR
+  32   E_CORE_WARNING
+  64   E_COMPILE_ERROR
+  128  E_COMPILE_WARNING
+  256  E_USER_ERROR
+  512  E_USER_WARNING
+  1024 E_USER_NOTICE
+ 
+</pre></td>
+    </tr>
+  </table>
+  
+  <h2 id="classes">Class Summary</h2>
+  <table border="1" width="100%">
+    <tr id="class_SRA_Controller">
+      <td><pre><a href="../classes/core.SRA_Controller.html" target="contentFrame">SRA_Controller</a></pre></td>
+      <td><pre> This class provides static methods that may be used to initialize
+  applications, retrieve references to application and system objects such as
+  SRA_Template and SRA_Database instances, configuration information, and more
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Error">
+      <td><pre><a href="../classes/core.SRA_Error.html" target="contentFrame">SRA_Error</a></pre></td>
+      <td><pre> SRA_Error description here.
+</pre></td>
+    </tr>
+    <tr id="class_SRA_Template">
+      <td><pre><a href="../classes/core.SRA_Template.html" target="contentFrame">SRA_Template</a></pre></td>
+      <td><pre> The SRA_Template class is used to control presentation and display logic.
+  Through it php files will have the ability to specify the values for
+  tags embedded into the template files. The SRA_Template class serve as an
+  abstraction layer to the template system.
+ 
+</pre></td>
+    </tr>
+  </table>
+
+
+
+  <h2 id="constant_details">Constant Details</h2>
+  <h3 id="constant_SRA_LICENSE_PREFIX">SRA_LICENSE_PREFIX</h3>
+  <pre>string <b>SRA_LICENSE_PREFIX</b> = '.sra-license-'</pre>
+  <pre> the file name prefix used to store license acceptance files (see
+  app-config.dtd &quot;license&quot; attribute documentation for more information)
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_TEMPLATE_DEFAULT_EXT">SRA_TEMPLATE_DEFAULT_EXT</h3>
+  <pre>public String <b>SRA_TEMPLATE_DEFAULT_EXT</b> = '.tpl'</pre>
+  <pre> The default file extension for templates
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Template.php</p>
+ <hr />  <h3 id="constant_SRA_VERSION_FILE">SRA_VERSION_FILE</h3>
+  <pre>string <b>SRA_VERSION_FILE</b> = '.version'</pre>
+  <pre> the name of the version information file (stored in the framework and app
+  &quot;etc&quot; directory). this file contains the following values:
+    svn-ci-password=[overrides svn-password for checkin operations]
+    svn-ci-path=[overrides svn-path for checkin operations]
+    svn-ci-url=[overrides svn-url for checkin operations]
+    svn-ci-user=[overrides svn-user for checkin operations]
+    svn-password=[the subversion repository password]
+    svn-path=[the name of the framework/app subversion repository]
+    svn-url=[the url to the subversion repository containing the framework/app]
+    svn-user=[the subversion repository username]
+    version=[current version identifier]
+    versions-info=[path or uri to the versions info file]
+    versions-readme=[path or uri to the versions readme file]
+  the versions-info file contains a list of all of the available versions in
+  the format (where the topmost entry is considered the latest version):
+    [version id]=[path or uri to source archive]
+  the versions-readme file contains a list of the readme notes for each version
+  in the format:
+    [version id]=[path or uri to change info notes]
+  use the SRA_Controller::getAppSvnInfo, SRA_Controller::getSysSvnInfo,
+  SRA_Controller::getAppVersion, SRA_Controller::getSysVersion,
+  SRA_Controller::getAppVersionRb, SRA_Controller::getSysVersionRb,
+  SRA_Controller::getAppVersions, SRA_Controller::getSysVersions,
+  SRA_Controller::getAppLatestVersion, and SRA_Controller::getSysLatestVersion
+  methods to retrieve and use the data provided in these files
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_PATH_SEPARATOR">SRA_PATH_SEPARATOR</h3>
+  <pre>string <b>SRA_PATH_SEPARATOR</b> = ':'</pre>
+  <pre> used to separate directories in the include_path environment variable
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_DEFAULT_DATE_FORMAT">SRA_DEFAULT_DATE_FORMAT</h3>
+  <pre>string <b>SRA_DEFAULT_DATE_FORMAT</b> = 'Y-m-d H:i:s'</pre>
+  <pre> the default SRA_GregorianDate::toString display format as specified in the
+  sierra-config dtd for date-format
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_DEFAULT_DATE_ONLY_FORMAT">SRA_DEFAULT_DATE_ONLY_FORMAT</h3>
+  <pre>string <b>SRA_DEFAULT_DATE_ONLY_FORMAT</b> = 'Y-m-d'</pre>
+  <pre> the default SRA_GregorianDate::toString display format as specified in the
+  sierra-config dtd for date-only-format
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_TEMPLATE_RENDER_OPEN_SUB_VAL">SRA_TEMPLATE_RENDER_OPEN_SUB_VAL</h3>
+  <pre>public string <b>SRA_TEMPLATE_RENDER_OPEN_SUB_VAL</b> = '[$VAL]'</pre>
+  <pre> string identifying that an attribute value should be substituted in the
+  renderOpen method
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Template.php</p>
+ <hr />  <h3 id="constant_SRA_APP_DIR_NAME">SRA_APP_DIR_NAME</h3>
+  <pre>string <b>SRA_APP_DIR_NAME</b> = 'app'</pre>
+  <pre> the default name of the applications directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_BIN_DIR_NAME">SRA_BIN_DIR_NAME</h3>
+  <pre>string <b>SRA_BIN_DIR_NAME</b> = 'bin'</pre>
+  <pre> the name of the sierra and app bin directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_CONF_DIR_NAME">SRA_CONF_DIR_NAME</h3>
+  <pre>string <b>SRA_CONF_DIR_NAME</b> = 'etc'</pre>
+  <pre> The base name of the sierra and app configuration directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_DEFAULT_LIB_DIR">SRA_DEFAULT_LIB_DIR</h3>
+  <pre>string <b>SRA_DEFAULT_LIB_DIR</b> = 'lib'</pre>
+  <pre> the default app lib-dir
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_LICENSE_VAR">SRA_LICENSE_VAR</h3>
+  <pre>string <b>SRA_LICENSE_VAR</b> = 'licenseAccepted'</pre>
+  <pre> the default license acceptance field name
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_DEFAULT_LOG_DIR">SRA_DEFAULT_LOG_DIR</h3>
+  <pre>string <b>SRA_DEFAULT_LOG_DIR</b> = 'log'</pre>
+  <pre> the default log-dir
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_SYS_PHP_EXTENSION">SRA_SYS_PHP_EXTENSION</h3>
+  <pre>string <b>SRA_SYS_PHP_EXTENSION</b> = 'php'</pre>
+  <pre> The default PHP extension to use
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_PS_PATH">SRA_PS_PATH</h3>
+  <pre>string <b>SRA_PS_PATH</b> = 'ps'</pre>
+  <pre> name of the ps cli program
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_APP_RB_NAME">SRA_APP_RB_NAME</h3>
+  <pre>string <b>SRA_APP_RB_NAME</b> = 'resources'</pre>
+  <pre> The default name of the SRA_Template context variable to assign the app
+  SRA_ResourceBundle reference to
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_DEFAULT_ERROR_LOG_FILE">SRA_DEFAULT_ERROR_LOG_FILE</h3>
+  <pre>string <b>SRA_DEFAULT_ERROR_LOG_FILE</b> = 'sra-err.log'</pre>
+  <pre> the default error-log-file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_TMP_DIR_NAME">SRA_TMP_DIR_NAME</h3>
+  <pre>string <b>SRA_TMP_DIR_NAME</b> = 'tmp'</pre>
+  <pre> The base name of the sierra and app temp directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_ENTITY_MODELER_CONFIG_KEY">SRA_ENTITY_MODELER_CONFIG_KEY</h3>
+  <pre><b>SRA_ENTITY_MODELER_CONFIG_KEY</b> = 'use-entity-model'</pre>
+  <pre> Defines the app-conf attribute name used to specify whether or not to
+  use the SRA_EntityModeler
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_DEFAULT_HTML_DIR">SRA_DEFAULT_HTML_DIR</h3>
+  <pre>string <b>SRA_DEFAULT_HTML_DIR</b> = 'www/html'</pre>
+  <pre> the default application html directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_DEFAULT_TEMPLATES_DIR">SRA_DEFAULT_TEMPLATES_DIR</h3>
+  <pre>string <b>SRA_DEFAULT_TEMPLATES_DIR</b> = 'www/tpl'</pre>
+  <pre> the default templates directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_SYS_XML_EXTENSION">SRA_SYS_XML_EXTENSION</h3>
+  <pre>string <b>SRA_SYS_XML_EXTENSION</b> = 'xml'</pre>
+  <pre> The default XML extension to use
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_TEMPLATE_TYPE_SYSTEM_ADMIN">SRA_TEMPLATE_TYPE_SYSTEM_ADMIN</h3>
+  <pre>public int <b>SRA_TEMPLATE_TYPE_SYSTEM_ADMIN</b> = 4</pre>
+  <pre> Identifies that a template should be instantiated for the system www admin files. This
+  constant is used to specify a template directory (see _templateDir api) of
+  SRA_DIR . &#039;/www/admin/tpl&#039; in the SRA_Template::SRA_Template method through the type parameter.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Template.php</p>
+ <hr />  <h3 id="constant_SRA_TEMPLATE_TYPE_SYSTEM_WWW">SRA_TEMPLATE_TYPE_SYSTEM_WWW</h3>
+  <pre>public int <b>SRA_TEMPLATE_TYPE_SYSTEM_WWW</b> = 8</pre>
+  <pre> Identifies that a template should be instantiated for the system www files. This constant is
+  used to specify a template directory (see _templateDir api) of
+  SRA_DIR . &#039;/www/tpl&#039; in the SRA_Template::SRA_Template method through the type parameter.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Template.php</p>
+ <hr />  <h3 id="constant_SRA_MAX_INT_VAL">SRA_MAX_INT_VAL</h3>
+  <pre>int <b>SRA_MAX_INT_VAL</b> = 2147483647</pre>
+  <pre> the maximum integer value
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_ERROR_SHUTDOWN">SRA_ERROR_SHUTDOWN</h3>
+  <pre>public int <b>SRA_ERROR_SHUTDOWN</b> = E_USER_ERROR</pre>
+  <pre> This constant defines a critical problem that will not allow the system to continue
+  operating. When in this status the SRA_Template engine will display an error message to
+  any user that attempts to access any page.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Error.php</p>
+ <hr />  <h3 id="constant_SRA_ERROR_OPERATIONAL">SRA_ERROR_OPERATIONAL</h3>
+  <pre>public int <b>SRA_ERROR_OPERATIONAL</b> = E_USER_NOTICE</pre>
+  <pre> A constant that defines an OPERATIONAL status, meaning there are no problems.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Error.php</p>
+ <hr />  <h3 id="constant_SRA_ERROR_ALL">SRA_ERROR_ALL</h3>
+  <pre>public int <b>SRA_ERROR_ALL</b> = E_USER_NOTICE | E_USER_WARNING | E_USER_ERROR</pre>
+  <pre> Constant that defines any system status.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Error.php</p>
+ <hr />  <h3 id="constant_SRA_ERROR_PROBLEM">SRA_ERROR_PROBLEM</h3>
+  <pre>public int <b>SRA_ERROR_PROBLEM</b> = E_USER_WARNING</pre>
+  <pre> A constant that defines PROBLEM status. This status occurs when there is some
+  form of problem, but that the system can continue responding to page requests.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Error.php</p>
+ <hr />  <h3 id="constant_SRA_DEFAULT_ERROR_MASK">SRA_DEFAULT_ERROR_MASK</h3>
+  <pre>public int <b>SRA_DEFAULT_ERROR_MASK</b> = E_USER_WARNING | E_USER_ERROR</pre>
+  <pre> the default error-mask
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Error.php</p>
+ <hr />  <h3 id="constant_SRA_CONTROLLER_DEBUG">SRA_CONTROLLER_DEBUG</h3>
+  <pre>boolean <b>SRA_CONTROLLER_DEBUG</b> = FALSE</pre>
+  <pre> This constant specifies whether or not the system should run in debug mode.
+  This mode enables any debug messages to be sent to the active console.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_APP_CONFIG">SRA_APP_CONFIG</h3>
+  <pre>string <b>SRA_APP_CONFIG</b> = SRA_CONF_DIR_NAME . '/app-config.xml'</pre>
+  <pre> The app base directory relative path to the app config file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_SYS_CONFIG">SRA_SYS_CONFIG</h3>
+  <pre>string <b>SRA_SYS_CONFIG</b> = SRA_CONF_DIR_NAME . '/sierra-config.xml'</pre>
+  <pre> The SRA_DIR relative path to the system config file
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_CONF_DIR">SRA_CONF_DIR</h3>
+  <pre>string <b>SRA_CONF_DIR</b> = SRA_DIR . '/' . SRA_CONF_DIR_NAME</pre>
+  <pre> The base name of the sierra and app configuration directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_TMP_DIR">SRA_TMP_DIR</h3>
+  <pre>string <b>SRA_TMP_DIR</b> = SRA_DIR . '/' . SRA_TMP_DIR_NAME</pre>
+  <pre> The base name of the sierra and app configuration directory
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_DIR">SRA_DIR</h3>
+  <pre>string <b>SRA_DIR</b> = dirname(SRA_LIB_DIR)</pre>
+  <pre> The base directory of the system.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_LIB_DIR">SRA_LIB_DIR</h3>
+  <pre>string <b>SRA_LIB_DIR</b> = dirname(dirname(realpath(__FILE__)))</pre>
+  <pre> The base directory of the system library (does not include trailing /).
+  This constant is used by many of the class files to import dependent class files.
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_START_TIME">SRA_START_TIME</h3>
+  <pre>float <b>SRA_START_TIME</b> = microtime(TRUE)</pre>
+  <pre> the time that this file was initially included into the current running
+  PHP process
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+ <hr />  <h3 id="constant_SRA_HOSTNAME">SRA_HOSTNAME</h3>
+  <pre>string <b>SRA_HOSTNAME</b> = trim(shell_exec('/bin/hostname'))</pre>
+  <pre> the hostname for the server
+</pre>
+  <p><b>File</b>: /home/jread/www/sierra/lib/core/SRA_Controller.php</p>
+  </form>
+</body>
+</html>

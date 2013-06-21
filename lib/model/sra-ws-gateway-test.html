@@ -1,0 +1,116 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+this html document contains a form that may be used to test your sra-ws-gateway
+-->
+
+<html>
+<head>
+  <title>SIERRA Web Service Gateway Test</title>
+  <script>
+  var xmlHttp;
+  function submitTest() {
+    var frm = document.forms[0];
+    var method = frm.formMethod.options[frm.formMethod.options.selectedIndex].value;
+    var url = frm.gatewayUri.value;
+    var params = "ws-request-xml=" + encode(frm.request.value);
+    if (frm.formRaw.value == "1") {
+      window.open (url + "?" + params,"wsRawOutput");
+    }
+    else {
+      document.getElementById("results").innerHTML = "Processing";
+      xmlHttp=GetXmlHttpObject(handleResults);
+      if (method == "POST") {
+        xmlHttp.open(method, url , true);
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader("Content-length", params.length);
+        xmlHttp.setRequestHeader("Connection", "close");
+        xmlHttp.send(params);
+      }
+      else {
+        xmlHttp.open(method, url + "?" + params , true);
+        xmlHttp.send(null);
+      }
+    }
+  }
+  function handleResults() {
+    if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete") {
+      document.getElementById("results").innerHTML = '';
+      document.getElementById("response").value=xmlHttp.responseText; 
+    }
+  }
+  function GetXmlHttpObject(handler) { 
+    var objXmlHttp=null;
+    
+    if (navigator.userAgent.indexOf("Opera")>=0) {
+      alert("This example doesn't work in Opera") ;
+      return;
+    }
+    if (navigator.userAgent.indexOf("MSIE")>=0) { 
+      var strName="Msxml2.XMLHTTP";
+      if (navigator.appVersion.indexOf("MSIE 5.5")>=0) {
+        strName="Microsoft.XMLHTTP";
+      } 
+      try { 
+        objXmlHttp=new ActiveXObject(strName);
+        objXmlHttp.onreadystatechange=handler;
+        return objXmlHttp;
+      } 
+      catch(e) { 
+      alert("Error. Scripting for ActiveX might be disabled");
+      return;
+      } 
+    } 
+    if (navigator.userAgent.indexOf("Mozilla")>=0) {
+      objXmlHttp=new XMLHttpRequest();
+      objXmlHttp.onload=handler;
+      objXmlHttp.onerror=handler;
+      return objXmlHttp;
+    }
+  }
+  function encode(str) {
+    var result = "";
+    
+    for (i = 0; i < str.length; i++) {
+      if (str.charAt(i) == " ") result += "+";
+      else result += str.charAt(i);
+    }
+    
+    return escape(result);
+  }
+  </script>
+</head>
+<body>
+<div id="results" style="color: navy; font-size: 11px; padding: 3px;"></div>
+<form>
+Gateway URI: <input name="gatewayUri" type="text" /><br />
+Method: <select name="formMethod" size="1"><option value="GET">GET</option><option value="POST">POST</option></select><br />
+Raw: <select name="formRaw" size="1"><option value="0">No</option><option value="1">Yes</option></select><br />
+Request XML:<br /><textarea name="request" cols="90" rows="10"></textarea>
+<hr />
+<input onclick="submitTest()" type="button" value="Submit" />
+<p />
+<textarea id="response" cols="90" rows="10"></textarea><br />
+<input onclick="eval('var val=' + document.getElementById('response').value); alert(val)" type="button" value="Eval" />
+</form>
+</body>
+</html>

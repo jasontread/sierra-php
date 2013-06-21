@@ -1,0 +1,371 @@
+<!--
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | SIERRA : PHP Application Framework  http://code.google.com/p/sierra-php |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+ | Copyright 2005 Jason Read                                               |
+ |                                                                         |
+ | Licensed under the Apache License, Version 2.0 (the "License");         |
+ | you may not use this file except in compliance with the License.        |
+ | You may obtain a copy of the License at                                 |
+ |                                                                         |
+ |     http://www.apache.org/licenses/LICENSE-2.0                          |
+ |                                                                         |
+ | Unless required by applicable law or agreed to in writing, software     |
+ | distributed under the License is distributed on an "AS IS" BASIS,       |
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.|
+ | See the License for the specific language governing permissions and     |
+ | limitations under the License.                                          |
+ +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+
+
+<!--
+XML DTD for a sierra-php web service gateway service request
+
+this DTD defines the proper structure for invoking a web service. for more 
+information, see the documentation provided in sra-ws-gateway.php and 
+entity-model.dtd
+
+to support validation use the following header:
+
+<?xml version="1.0"?>
+<!DOCTYPE ws-request PUBLIC "-//SIERRA//DTD AJAX SERVICE REQUEST//EN" 
+  "http://sierra-php.googlecode.com/svn/trunk/lib/model/ws-request.dtd">
+-->
+
+
+<!--
+the "ws-request" element is the root tag of an web service invocation the 
+service name ("key") MUST match an web service ("ws" or "ws-global") defined in 
+the entity model of the application
+
+key           the name of the web service to invoke. this is the "ws" or 
+              "ws-global" "key" value
+              
+app           the identifier of the app that this request pertains to
+
+asynchronous  specifies whether or not the output of this request should be 
+              buffered to a session variable instead of output to the client. 
+              asynchronous responses can be retrieved through subsequent 
+              invocations specifying the same request-id parameters and 
+              query="1". the status codes 
+              SRA_WS_REQUEST_STATUS_RESULTS_NOT_AVAILABLE and 
+              SRA_WS_REQUEST_STATUS_TIMEOUT are utilized to indicate a status 
+              for subsequent requests attempting to obtain the buffer results. 
+              the response from asynchronous requests must be retrieved within 
+              SRA_WS_GATEWAY_BUFFER_FILE_REMOVE minutes
+              
+callback      an optional jsonp callback function name to wrap the results in
+              (applies only to json responses)
+              
+date-format   the formatting string to use in the response for date values. if 
+              not specified, time-format will be used or the application 
+              date-only-format if time-format is not specified
+              
+exclude-attrs space or comma separated list of attributes to exclude. these will 
+              be added to those defined in the entity model (if there are any). 
+              use "_pk_" to specify the primary key. applies to entity web 
+              services only
+              
+format        the desired response format: either "json", "xml" or "raw". the 
+              allowed response formats are determined by the service definition
+              if an invalid format is specified, the response "ws-status" will 
+              be SRA_WS_REQUEST_STATUS_INVALID_FORMAT. the default format is 
+              "xml" for soap requests and "json" for rest
+
+include-attrs space or comma separated list of a restricted set of attributes 
+              that should be included in the output of the service request. 
+              these attributes can ONLY be those already permitted in the 
+              service definition (a sub-set of the allowed attributes). use 
+              "_pk_" to specify the primary key. applies to entity web 
+              services only
+              
+js-dates      if true and the "format" is "json", date values will be encoded 
+              using the javascript Date constructor
+
+limit         the result limit for this service request. this CANNOT be greater 
+              than the limit defined for the service request if "limit-fixed" is 
+              true for in the service definition
+              
+meta-format   the desired response metadata format. metadata includes such data 
+              as the "ws-time", "ws-limit", "ws-status", etc. for more 
+              information regarding metadata, see the documentation provided in 
+              sra-ws-gateway.php and ws-response.dtd. metadata for a ws request 
+              can be represented using json or xml. additionally, if "none", 
+              the metadata will not be included in the response output. if not 
+              specified, the default format will be the same as "format" unless 
+              "format" is "raw" in which case the default "meta-format" will be 
+              "none". if the format is not allowed because of the web service 
+              definition the response "ws-status" will be 
+              SRA_WS_REQUEST_STATUS_INVALID_FORMAT. NOTE: for soap service 
+              invocations, the meta-format is ALWAYS xml
+
+offset        the request result set offset
+
+password      password for authentication. user and password can also be 
+              specified in the http headers. however, if user or password are 
+              specified in the get parameters or ws-request-xml, they will 
+              override the http header values
+
+query         used in conjunction with a previous "asynchronous" request in 
+              order to query for the results of that previous request. if true, 
+              the "request-id" parameters must also be specified as the same 
+              values submitted for the asynchronous request. this is NOT an 
+              option for soap requests
+
+request-id    an optional identifier for the service request
+
+request-id1   a second optional identifier for the service request
+
+session-id    if a session id has been obtained from a previous service request
+              invocation, this attribute may be used to specify that session id
+              
+time-format   the formatting string to use in the response for time values. if 
+              not specified, the application date-format will be used
+
+use-sessions  sessions can be used to improve response times and eliminate the 
+              need to send user and password information with each service 
+              request invocation. when this attribute is true, a session-id will 
+              be returned in the response. this session-id may them be used in 
+              future requests eliminating the need to provide user and password 
+              authentication information for those requests (assuming that 
+              authentication was successful in the original request, and the 
+              application authenticators allow for session-based authentication)
+              NOTE: if your web service client supports cookies, this option 
+              will not improve performance
+
+user          user name for authentication. user and password can also be 
+              specified in the http headers. however, if user or password are 
+              specified in the get parameters or ws-request-xml, they will 
+              override the http header values
+              
+validators    space or comma separated list of additional validation methods 
+              that should be invoked when an update or create request is invoked
+
+
+Used in:  NA
+--> 
+<!ELEMENT ws-request (ws-constraint-group*, (ws-create|ws-delete|ws-retrieve|ws-update)?, ws-param*)>
+<!ATTLIST ws-request 
+          key           ID              #REQUIRED
+          app           CDATA           #REQUIRED
+          asynchronous  (1|0)           "0"
+          callback      CDATA           #IMPLIED
+          date-format   CDATA           #IMPLIED
+          exclude-attrs CDATA           #IMPLIED
+          format        (json|xml|raw)  #IMPLIED
+          include-attrs CDATA           #IMPLIED
+          js-dates      (1|0)           "0"
+          limit         CDATA           #IMPLIED
+          password      CDATA           #IMPLIED
+          meta-format   (json|xml|none) #IMPLIED
+          offset        CDATA           "0"
+          query         (1|0)           "0"
+          request-id    CDATA           #IMPLIED
+          request-id1   CDATA           #IMPLIED
+          session-id    CDATA           #IMPLIED
+          time-format   CDATA           #IMPLIED
+          use-sessions  (1|0)           "0"
+          user          CDATA           #IMPLIED
+          validators    CDATA           #IMPLIED>
+
+
+<!--
+The "ws-constraint-group" is used for non-global requests only. it is used to 
+specify 1 or more ws-constraint sub-elements that will be evaluated as a whole 
+based on the "connective" specified for the group (either conjunction or 
+disjunction). the evaluation includes short-circuiting for conjunction join 
+types (and). any constraint groups defined for a service request will be ADDED 
+to those defined for the service. Thus, all of the service defined constraint 
+groups must match AND those defined for the service request
+              
+connective    whether the connective between constraints of this group should be 
+              conjunctively or disjunctively joined
+
+
+Used in:  ws-request
+-->
+<!ELEMENT ws-constraint-group (ws-constraint+)>
+<!ATTLIST ws-constraint-group 
+          connective (and|or) "and">
+
+
+<!--
+The "ws-constraint" element is used to add a service request filtering 
+constraint
+
+attr          the constraint attribute identifier (see attr-type for more info). 
+              if attr-type is specified, and the attr desired is part of an 
+              entity within that type, then the key and attribute can be 
+              separated by a '_'. for example, if the attr-type was "global" and 
+              there existed an User object within the globals indexed under the 
+              key "user", and the actual attr desired was the "uid" attribute of 
+              that object, the key would be "user_uid". the "uid" portion will 
+              then be passed to the "getAttribute" method of the global $user 
+              object instance
+
+attr-type     defines where the attribute to be constrained exists. only entity 
+              instances that exist where this constraint is true will be 
+              included in the service output. following is a definition of the 
+              applicable types:
+              
+               attr:    attr is the name of an attribute/sub attribute
+               constant:attr is the name of a php constant (or other php code)
+               get:     attr is the name of a value in the get headers
+               getAttr: attr is a 'getAttribute' value for the entity. used only 
+                        for 'retrieve' service. when used limit/offset should 
+                        not be used when using the service
+               global:  attr is the name of a php global variable
+               post:    attr is the name of a value in the post headers
+               session: attr is the name of a session variable
+
+operator      a bitmask containing one or more of the following operator 
+              values. these define how "attr" and "value" should be compared:
+               
+               EQUALITY CONSTRAINTS
+               1:    attr and value must be equal
+               2:    attr is greater than value
+               4:    attr is less than value
+               
+               STRING CONSTRAINTS (only 1 constraint allowed if used)
+               8:    attr starts with value
+               16:   attr ends with value
+               32:   attr is a sub-string of value (full text search)
+               
+               SORTING CONSTRAINTS
+               64:   sort the results by attr in ascending order
+               128:  sort the results by attr in descending order
+               
+               NEGATE BIT
+               256:  negate the results of any of the above operator constraints
+
+value         the constraint value (or value identifier if value-type is 
+              specified). if value-type is specified, and the value desired is 
+              part of an entity within that type, then the key and attribute 
+              can be separated by a '_'. for example, if the value-type was 
+              "global" and there existed an User object within the globals 
+              indexed under the key "user", and the actual value desired was the 
+              "uid" attribute of that object, the value would be "user_uid". the 
+              "uid" portion will then be passed to the "getAttribute" method of 
+              the global $user object instance. if the value is an array then 
+              the constraint will be applied for each array value using the 
+              enclosing constraint group connective
+
+value-type    if the value for this constraint is not provided explicitely in 
+              the "value" attribute above (the default behavior), then this 
+              attribute defines where the value exists. must be one of the 
+              following values:
+               
+               constant:value is the name of a php constant (or other php code)
+               get:     value is the name of a value in the get headers
+               global:  value is the name of a php global variable
+               post:    value is the name of a value in the post headers
+               session: value is the name of a session variable
+
+
+Used in:  ws-constraint-group
+-->
+<!ELEMENT ws-constraint EMPTY>
+<!ATTLIST ws-constraint   
+          attr       CDATA                          #REQUIRED
+          attr-type  (attr|constant|get|getAttr|global|post|session) "attr"
+          operator   CDATA                          "1"
+          value      CDATA                          #REQUIRED
+          value-type (constant|get|global|post|session)      #IMPLIED>
+
+
+<!--
+The "ws-create" element is used to create a new entity instance. the nested 
+params define the names (key) and values of the attributes to update. these will 
+be subject to validation according to the constraints specified for the service. 
+equality constraints will automatically be set and override any specified in the 
+request. if any constraint groups fail to validate an attribute attempting to be 
+set in the new entity, the response "ws-status" will be 
+SRA_AJAX_GATEWAY_STATUS_INVALID_PERMISSIONS
+
+
+Used in:  ws-request
+-->
+<!ELEMENT ws-create (ws-param+)>
+
+
+<!--
+The "ws-delete" element is used to specify that an existing entity instance 
+should be deleted. only entity instances that the service allows the user to 
+retrieve can be deleted (the gateway will first attempt to retrieve the entity 
+using the primary key value specified as a service request constraint)
+
+key           primary key of the entity to delete
+
+
+Used in:  ws-request
+-->
+<!ELEMENT ws-delete EMPTY>
+<!ATTLIST ws-delete key CDATA #REQUIRED>
+
+
+<!--
+The "ws-retrieve" element is used to retrieve a specific entity instance based 
+on the primary key value provided. the "retrieve" flag must be set to true in 
+order to utilize this request type
+
+key           primary key of the entity to retrieve
+
+workflow-id   if the entity is stored within a workflow instance (see 
+              lib/workflow for more info), this attribute may be used to specify 
+              the workflow identifier. if this attribute is specified, 'key' 
+              MUST be the identifier for that entity within the workflow
+
+
+Used in:  ws-request
+-->
+<!ELEMENT ws-retrieve EMPTY>
+<!ATTLIST ws-retrieve
+          key         CDATA #REQUIRED
+          workflow-id CDATA #IMPLIED>
+
+
+<!--
+The "ws-update" element is used to specify that an existing entity instance 
+should be updated. only entity instances the the service allows the user to 
+retrieve can be updated (the gateway will first attempt to retrieve the entity 
+using the primary key value specified as a service request constraint). the 
+nested params define the names (key) and values of the attributes to update. 
+these will be subject to validation according to the constraints specified 
+for the service. equality constraints will automatically be set and override any 
+specified in the request. if any constraint groups fail to validate an attribute 
+attempting to be set in the updating entity, the response "ws-status" will be
+SRA_AJAX_GATEWAY_STATUS_INVALID_PERMISSIONS
+
+key           primary key of the entity to update
+
+
+Used in:  ws-request
+-->
+<!ELEMENT ws-update (ws-param+)>
+<!ATTLIST ws-update key CDATA #REQUIRED>
+
+
+<!-- 
+"ws-param" is used to specify attributes for create/update service requests and 
+method parameters for global service requests. the value can be imbedded 
+between the open and close tags of this element (use <![CDATA[]]> to avoid 
+having escape special characters) or using the "value" attribute
+
+name              the name of the entity attribute or method parameter
+                  
+value             if the value is simple, it may be embedded using a value 
+                  attribute instead of between the open and close tags
+
+value-type        the value type (see usage documentation for ws-constraint 
+                  value-type above). an additional value type "file" is also 
+                  supported meaning that "value" is the name of an uploaded file
+                  (present in the $_FILES super global)
+
+Used in:   ws-request, create, update
+-->
+<!ELEMENT ws-param (#PCDATA)>
+<!ATTLIST ws-param 
+          name       CDATA                          #REQUIRED
+          value      CDATA                          #IMPLIED
+          value-type (constant|get|global|post|session|file) #IMPLIED>

@@ -1,0 +1,2447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>core.SRA_Template - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_template_default_ext".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEMPLATE_DEFAULT_EXT'] = "SRA_TEMPLATE_DEFAULT_EXT";
+  }
+  if ("sra_template_type_system_admin".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEMPLATE_TYPE_SYSTEM_ADMIN'] = "SRA_TEMPLATE_TYPE_SYSTEM_ADMIN";
+  }
+  if ("sra_template_type_system_www".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEMPLATE_TYPE_SYSTEM_WWW'] = "SRA_TEMPLATE_TYPE_SYSTEM_WWW";
+  }
+  if ("sra_template_render_open_sub_val".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_TEMPLATE_RENDER_OPEN_SUB_VAL'] = "SRA_TEMPLATE_RENDER_OPEN_SUB_VAL";
+  }
+
+  // check attributes
+  if ("_buffering".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__buffering'] = "_buffering";
+  }
+  if ("_compiledir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__compileDir'] = "_compileDir";
+  }
+  if ("_templatedir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__templateDir'] = "_templateDir";
+  }
+  if ("_tpl".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__tpl'] = "_tpl";
+  }
+
+  // check methods
+  if ("sra_template".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_Template'] = "SRA_Template";
+  }
+  if ("append".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_append'] = "append";
+  }
+  if ("arraypush".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_arrayPush'] = "arrayPush";
+  }
+  if ("assign".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assign'] = "assign";
+  }
+  if ("assignbyref".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_assignByRef'] = "assignByRef";
+  }
+  if ("ceil".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_ceil'] = "ceil";
+  }
+  if ("compile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_compile'] = "compile";
+  }
+  if ("compileall".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_compileAll'] = "compileAll";
+  }
+  if ("removecache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_removeCache'] = "removeCache";
+  }
+  if ("removeallcache".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_removeAllCache'] = "removeAllCache";
+  }
+  if ("define".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_define'] = "define";
+  }
+  if ("display".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_display'] = "display";
+  }
+  if ("displaytoemail".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_displayToEmail'] = "displayToEmail";
+  }
+  if ("displaytofile".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_displayToFile'] = "displayToFile";
+  }
+  if ("escapehtmlchars".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_escapeHtmlChars'] = "escapeHtmlChars";
+  }
+  if ("escapedoublequotes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_escapeDoubleQuotes'] = "escapeDoubleQuotes";
+  }
+  if ("escapehtmldoublequotes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_escapeHtmlDoubleQuotes'] = "escapeHtmlDoubleQuotes";
+  }
+  if ("escapehtmlquotes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_escapeHtmlQuotes'] = "escapeHtmlQuotes";
+  }
+  if ("escapesinglequotes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_escapeSingleQuotes'] = "escapeSingleQuotes";
+  }
+  if ("escapehtmlsinglequotes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_escapeHtmlSingleQuotes'] = "escapeHtmlSingleQuotes";
+  }
+  if ("escapequotes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_escapeQuotes'] = "escapeQuotes";
+  }
+  if ("explode".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_explode'] = "explode";
+  }
+  if ("fetch".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_fetch'] = "fetch";
+  }
+  if ("floor".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_floor'] = "floor";
+  }
+  if ("getwsgatewayuri".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getWSGatewayUri'] = "getWSGatewayUri";
+  }
+  if ("getapptemplatevar".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getAppTemplateVar'] = "getAppTemplateVar";
+  }
+  if ("getarraylength".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getArrayLength'] = "getArrayLength";
+  }
+  if ("getclassinstance".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getClassInstance'] = "getClassInstance";
+  }
+  if ("getformvalue".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getFormValue'] = "getFormValue";
+  }
+  if ("getsessionvar".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSessionVar'] = "getSessionVar";
+  }
+  if ("gettype".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getType'] = "getType";
+  }
+  if ("implode".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_implode'] = "implode";
+  }
+  if ("linebreakstobr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_lineBreaksToBr'] = "lineBreaksToBr";
+  }
+  if ("validatetemplate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validateTemplate'] = "validateTemplate";
+  }
+  if ("getvar".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getVar'] = "getVar";
+  }
+  if ("getvarbyref".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getVarByRef'] = "getVarByRef";
+  }
+  if ("getuniqueseq".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getUniqueSeq'] = "getUniqueSeq";
+  }
+  if ("inittemplate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_initTemplate'] = "initTemplate";
+  }
+  if ("isarray".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isArray'] = "isArray";
+  }
+  if ("isobject".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isObject'] = "isObject";
+  }
+  if ("numberformat".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_numberFormat'] = "numberFormat";
+  }
+  if ("renderopen".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_renderOpen'] = "renderOpen";
+  }
+  if ("includeonce".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_includeOnce'] = "includeOnce";
+  }
+  if ("serialize".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_serialize'] = "serialize";
+  }
+  if ("startbuffering".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_startBuffering'] = "startBuffering";
+  }
+  if ("stopbuffering".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_stopBuffering'] = "stopBuffering";
+  }
+  if ("strlen".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_strlen'] = "strlen";
+  }
+  if ("strreplace".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_strReplace'] = "strReplace";
+  }
+  if ("substr".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_substr'] = "substr";
+  }
+  if ("trim".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_trim'] = "trim";
+  }
+  if ("validate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_validate'] = "validate";
+  }
+  if ("_setparams".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setParams'] = "_setParams";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+  if ("getsmarty".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getSmarty'] = "getSmarty";
+  }
+  if ("registerobject".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_registerObject'] = "registerObject";
+  }
+  if ("gettemplatedir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTemplateDir'] = "getTemplateDir";
+  }
+  if ("_getfilepath".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getFilePath'] = "_getFilePath";
+  }
+  if ("_settemplatedir".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__setTemplateDir'] = "_setTemplateDir";
+  }
+  if ("gettemplate".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_getTemplate'] = "getTemplate";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_Template</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/core.html" target="contentFrame">core</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_Template</pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> The SRA_Template class is used to control presentation and display logic.
+  Through it php files will have the ability to specify the values for
+  tags embedded into the template files. The SRA_Template class serve as an
+  abstraction layer to the template system.
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public String </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEMPLATE_DEFAULT_EXT">SRA_TEMPLATE_DEFAULT_EXT</a></pre>
+<pre> The default file extension for templates
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEMPLATE_TYPE_SYSTEM_ADMIN">SRA_TEMPLATE_TYPE_SYSTEM_ADMIN</a></pre>
+<pre> Identifies that a template should be instantiated for the system www admin files. This
+  constant is used to specify a template directory (see _templateDir api) of
+  SRA_DIR . &#039;/www/admin/tpl&#039; in the SRA_Template::SRA_Template method through the type parameter.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEMPLATE_TYPE_SYSTEM_WWW">SRA_TEMPLATE_TYPE_SYSTEM_WWW</a></pre>
+<pre> Identifies that a template should be instantiated for the system www files. This constant is
+  used to specify a template directory (see _templateDir api) of
+  SRA_DIR . &#039;/www/tpl&#039; in the SRA_Template::SRA_Template method through the type parameter.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_TEMPLATE_RENDER_OPEN_SUB_VAL">SRA_TEMPLATE_RENDER_OPEN_SUB_VAL</a></pre>
+<pre> string identifying that an attribute value should be substituted in the
+  renderOpen method
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private boolean </pre></td>
+      <td>
+        <pre><a href="#attr__buffering">_buffering</a></pre>
+<pre> whether or not output buffering has been started using the &#039;startBuffering&#039;
+  method and is still currently in progress
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__compileDir">_compileDir</a></pre>
+<pre> The directory where the compiled template files exist or should be
+  created.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private String </pre></td>
+      <td>
+        <pre><a href="#attr__templateDir">_templateDir</a></pre>
+<pre> The directory where the template files exist.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private Object </pre></td>
+      <td>
+        <pre><a href="#attr__tpl">_tpl</a></pre>
+<pre> The smarty template object that the SRA_Template instance will be a
+  wrapper for.
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_Template">SRA_Template</a>()</pre>
+<pre> The template constructor. should never be called from outside of this
+  class. instead, use the SRA_Template::getTemplate singleton method
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_append">append</a>(string $tag, string $value='')</pre>
+<pre> Method used to append values to tags embedded into the template
+  files
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_arrayPush">arrayPush</a>(array $arr, string $val, string $idx)</pre>
+<pre> used to push a value onto an array from within a smarty template
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assign">assign</a>(string $tag, string $value='')</pre>
+<pre> Method used to assign values to tags embedded into the template
+  files
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_assignByRef">assignByRef</a>(string $tag, mixed $value)</pre>
+<pre> Method used to assign values to tags embedded into the template
+  files where the value will be a reference
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static void</pre></td>
+      <td>
+        <pre><a href="#method_ceil">ceil</a>(float $val)</pre>
+<pre> helper math function for use within templates
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_compile">compile</a>(string $template, boolean $overwrite=TRUE)</pre>
+<pre> used to compile a template. may be beneficial in order to increase
+  application performance by pre-compiling the templates. returns TRUE if the
+  template was compiled
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_compileAll">compileAll</a>(boolean $overwrite=TRUE)</pre>
+<pre> this method compiles all smarty templates for this template instance
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_removeCache">removeCache</a>(string $template)</pre>
+<pre> removes the compile cache for $template. returns TRUE if the cache existed
+  and was deleted
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_removeAllCache">removeAllCache</a>()</pre>
+<pre> this method removes all of the compile cache for this template instance
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static void</pre></td>
+      <td>
+        <pre><a href="#method_define">define</a>(string $const, mixed $val)</pre>
+<pre> helper function used to define a constant. the constant will be defined
+  ONLY if it is not already defined
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_display">display</a>(string $fileName)</pre>
+<pre> This method displays the template file given as its argument with the
+  custom tags embedded as specified prior to calling this method.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static void</pre></td>
+      <td>
+        <pre><a href="#method_displayToEmail">displayToEmail</a>(mixed $to, string $subject, string $messageTpl, string $messageHtmlTpl=NULL, string $from=NULL, string $fromName=NULL, mixed $toName=NULL, string $cc=NULL, string $bcc=NULL, mixed $attachments)</pre>
+<pre> used to render the content of a template and send the results via email
+  this is basically just a wrapper to the SRA_Util::sendEmail and
+  SRA_Template::fetch methods
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_displayToFile">displayToFile</a>(string $tpl, string $file)</pre>
+<pre> displays the template $tpl and writes the output to a file. returns TRUE on
+  success, FALSE otherwise
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_escapeHtmlChars">escapeHtmlChars</a>(string $str)</pre>
+<pre> this method convert special characters to HTML entities
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_escapeDoubleQuotes">escapeDoubleQuotes</a>(string $str)</pre>
+<pre> this method escapes double quotes within a string
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_escapeHtmlDoubleQuotes">escapeHtmlDoubleQuotes</a>(string $str)</pre>
+<pre> this method escapes double quotes within a string. these are replaced
+  with the html equivalent &amp;quot;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_escapeHtmlQuotes">escapeHtmlQuotes</a>(string $str)</pre>
+<pre> this method escapes both double and single quotes within a string. these
+  are replaced with the html equivalents &amp;quot; and &amp;#39;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_escapeSingleQuotes">escapeSingleQuotes</a>(string $str)</pre>
+<pre> this method escapes double quotes within a string
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_escapeHtmlSingleQuotes">escapeHtmlSingleQuotes</a>(string $str)</pre>
+<pre> this method escapes single quotes within a string. these are replaced
+  with the html equivalent &amp;#39;
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_escapeQuotes">escapeQuotes</a>(string $str)</pre>
+<pre> this method escapes both single and double quotes within a string
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_explode">explode</a>(string $delim, string $str)</pre>
+<pre> pass-thru to the PHP explode function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_fetch">fetch</a>(string $fileName)</pre>
+<pre> Same as display(), except that this returns its output as a string
+  instead of displaying it.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static void</pre></td>
+      <td>
+        <pre><a href="#method_floor">floor</a>(float $val)</pre>
+<pre> helper math function for use within templates
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getWSGatewayUri">getWSGatewayUri</a>()</pre>
+<pre> returns the gateway uri for the active application
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static array</pre></td>
+      <td>
+        <pre><a href="#method_getAppTemplateVar">getAppTemplateVar</a>(string $key)</pre>
+<pre> returns the template variable value associated with the specified $key
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static int</pre></td>
+      <td>
+        <pre><a href="#method_getArrayLength">getArrayLength</a>(array $arr)</pre>
+<pre> returns the # of items in $arr
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public object</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getClassInstance">getClassInstance</a>(string $className, mixed $params=NULL)</pre>
+<pre> returns a new instance of $className
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getFormValue">getFormValue</a>(string $name)</pre>
+<pre> the value of a $_GET or $_POST variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getSessionVar">getSessionVar</a>(string $name)</pre>
+<pre> returns the value of a session variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_getType">getType</a>(mixed $val)</pre>
+<pre> pass-thru to the PHP gettype function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_implode">implode</a>(string $glue, array $pieces)</pre>
+<pre> pass-thru to the PHP implode function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_lineBreaksToBr">lineBreaksToBr</a>(string $str, string $element='br')</pre>
+<pre> this replaces line breaks in $str to html &lt;br /&gt; tags
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_validateTemplate">validateTemplate</a>(string $fileName)</pre>
+<pre> validates a template file
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public mixed</pre></td>
+      <td>
+        <pre><a href="#method_getVar">getVar</a>(string $tag)</pre>
+<pre> returns a template variable value
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getVarByRef">getVarByRef</a>(string $tag)</pre>
+<pre> returns a reference to a template variable
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static int</pre></td>
+      <td>
+        <pre><a href="#method_getUniqueSeq">getUniqueSeq</a>()</pre>
+<pre> returns a numeric sequence that is unique for the entire current PHP
+  process. each time this method is called, the sequence will be incremented
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static void</pre></td>
+      <td>
+        <pre><a href="#method_initTemplate">initTemplate</a>(string $tplName, string $check=FALSE)</pre>
+<pre> initializes a template allowing for future references to #renderOpen.
+  this will reset any cycles for that template that were previously
+  utilized
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static boolean</pre></td>
+      <td>
+        <pre><a href="#method_isArray">isArray</a>(mixed $arr)</pre>
+<pre> returns TRUE if $arr is an array
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static boolean</pre></td>
+      <td>
+        <pre><a href="#method_isObject">isObject</a>(mixed $obj)</pre>
+<pre> returns TRUE if $obj is an object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static string</pre></td>
+      <td>
+        <pre><a href="#method_numberFormat">numberFormat</a>(float $num, int $decimals, char $decPoint='.', char $thousandsSep=', $')</pre>
+<pre> formats a number. identical to the PHP number_format function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static void</pre></td>
+      <td>
+        <pre><a href="#method_renderOpen">renderOpen</a>(string $tplName, string $tag, <a href="util.SRA_Params.html" target="contentFrame">SRA_Params</a> $params, string $tagType='', boolean $close=TRUE, string $subVal=FALSE, boolean $refresh=FALSE)</pre>
+<pre> renders an html/xml open element using the $params specified to
+  determine what attributes of that element to render
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static void</pre></td>
+      <td>
+        <pre><a href="#method_includeOnce">includeOnce</a>(string $path)</pre>
+<pre> includes a php source file using the &#039;include_once&#039; directive
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static void</pre></td>
+      <td>
+        <pre><a href="#method_serialize">serialize</a>(object $obj)</pre>
+<pre> used to serialize an object from within a template
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static boolean</pre></td>
+      <td>
+        <pre><a href="#method_startBuffering">startBuffering</a>()</pre>
+<pre> starts output buffering if it is not already started
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static string</pre></td>
+      <td>
+        <pre><a href="#method_stopBuffering">stopBuffering</a>(boolean $stripNewlines=FALSE)</pre>
+<pre> stops output buffering and returns the current contents of the output buffer
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public int</pre></td>
+      <td>
+        <pre><a href="#method_strlen">strlen</a>(string $str)</pre>
+<pre> pass-thru to the PHP strlen function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_strReplace">strReplace</a>(string $str, string $replace, string $subject)</pre>
+<pre> pass-thru to the PHP str_replace function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public array</pre></td>
+      <td>
+        <pre><a href="#method_substr">substr</a>(string $str, int $start, int $length=NULL)</pre>
+<pre> pass-thru to the PHP substr function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public string</pre></td>
+      <td>
+        <pre><a href="#method_trim">trim</a>(string $str)</pre>
+<pre> pass-thru to the PHP trim function
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private boolean</pre></td>
+      <td>
+        <pre><a href="#method_validate">validate</a>(string $fileName)</pre>
+<pre> returns TRUE if the $fileName specified is a valid template
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public the template identifier - params</pre></td>
+      <td>
+        <pre><a href="#method__setParams">_setParams</a>(string $fileName)</pre>
+<pre> Used to set dynamic parameters specified in the template filename in
+  standard HTTP GET format:
+  	e.g. mytemplate.tpl?param1=val1&amp;param2=val2&amp; ... &amp; paramN=valN
+  the return value will be the filename minus any parameters specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(object $object)</pre>
+<pre> Static method used to validate an SRA_Template object.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getSmarty">getSmarty</a>()</pre>
+<pre> Returns a reference to the Smarty SRA_Template object.
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_registerObject">registerObject</a>($name, $obj)</pre>
+<pre> Registers an object in the template context
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method_getTemplateDir">getTemplateDir</a>()</pre>
+<pre> returns the directory where the current template exists
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__getFilePath">_getFilePath</a>($fileName)</pre>
+<pre> returns the absolute path to the file specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__setTemplateDir">_setTemplateDir</a>($dir)</pre>
+<pre> sets the template dir
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public <a href="core.SRA_Template.html" target="contentFrame">SRA_Template</a></pre></td>
+      <td>
+        <pre>&amp;<a href="#method_getTemplate">getTemplate</a>(string $appId)</pre>
+<pre> static singleton method for retrieving a reference to a template
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_TEMPLATE_DEFAULT_EXT">SRA_TEMPLATE_DEFAULT_EXT</h3>
+  <pre>public String <b>SRA_TEMPLATE_DEFAULT_EXT</b> = '.tpl'</pre>
+  <pre> The default file extension for templates
+</pre>
+ <hr />  <h3 id="constant_SRA_TEMPLATE_TYPE_SYSTEM_ADMIN">SRA_TEMPLATE_TYPE_SYSTEM_ADMIN</h3>
+  <pre>public int <b>SRA_TEMPLATE_TYPE_SYSTEM_ADMIN</b> = 4</pre>
+  <pre> Identifies that a template should be instantiated for the system www admin files. This
+  constant is used to specify a template directory (see _templateDir api) of
+  SRA_DIR . &#039;/www/admin/tpl&#039; in the SRA_Template::SRA_Template method through the type parameter.
+</pre>
+ <hr />  <h3 id="constant_SRA_TEMPLATE_TYPE_SYSTEM_WWW">SRA_TEMPLATE_TYPE_SYSTEM_WWW</h3>
+  <pre>public int <b>SRA_TEMPLATE_TYPE_SYSTEM_WWW</b> = 8</pre>
+  <pre> Identifies that a template should be instantiated for the system www files. This constant is
+  used to specify a template directory (see _templateDir api) of
+  SRA_DIR . &#039;/www/tpl&#039; in the SRA_Template::SRA_Template method through the type parameter.
+</pre>
+ <hr />  <h3 id="constant_SRA_TEMPLATE_RENDER_OPEN_SUB_VAL">SRA_TEMPLATE_RENDER_OPEN_SUB_VAL</h3>
+  <pre>public string <b>SRA_TEMPLATE_RENDER_OPEN_SUB_VAL</b> = '[$VAL]'</pre>
+  <pre> string identifying that an attribute value should be substituted in the
+  renderOpen method
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__buffering">_buffering</h3>
+  <pre>private boolean var <b>$_buffering</b></pre>
+  <pre> whether or not output buffering has been started using the &#039;startBuffering&#039;
+  method and is still currently in progress
+</pre>
+ <hr />  <h3 id="attr__compileDir">_compileDir</h3>
+  <pre>private String var <b>$_compileDir</b></pre>
+  <pre> The directory where the compiled template files exist or should be
+  created.
+</pre>
+ <hr />  <h3 id="attr__templateDir">_templateDir</h3>
+  <pre>private String var <b>$_templateDir</b></pre>
+  <pre> The directory where the template files exist.
+</pre>
+ <hr />  <h3 id="attr__tpl">_tpl</h3>
+  <pre>private Object var <b>$_tpl</b></pre>
+  <pre> The smarty template object that the SRA_Template instance will be a
+  wrapper for.
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_Template">SRA_Template</h3>
+  <pre>private void function <b>SRA_Template</b>()</pre>
+  <pre> The template constructor. should never be called from outside of this
+  class. instead, use the SRA_Template::getTemplate singleton method
+</pre>
+ <hr />  <h3 id="method_append">append</h3>
+  <pre>public void function <b>append</b>(string $tag, string $value='')</pre>
+  <pre> Method used to append values to tags embedded into the template
+  files
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tag</td>
+      <td>string</td>
+      <td><pre>the name of the template identifier to append to or an  array of key =&gt; value pairs (in which case value parameter is unecessary)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the value to append if tag is a key name (i.e. not an  array)</pre></td>
+      <td>''</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_arrayPush">arrayPush</h3>
+  <pre>public void function <b>arrayPush</b>(array $arr, string $val, string $idx)</pre>
+  <pre> used to push a value onto an array from within a smarty template
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>arr</td>
+      <td>array</td>
+      <td><pre>ay $arr the array to push to</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>val</td>
+      <td>string</td>
+      <td><pre>the value to push</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>idx</td>
+      <td>string</td>
+      <td><pre>an optional array index to use (for associative  arrays only)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assign">assign</h3>
+  <pre>public void function <b>assign</b>(string $tag, string $value='')</pre>
+  <pre> Method used to assign values to tags embedded into the template
+  files
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tag</td>
+      <td>string</td>
+      <td><pre>the name of the template identifier to assign the  value to, or an array of key =&gt; value pairs (in which case value
+  parameter is unecessary).</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>string</td>
+      <td><pre>the value to assign if tag is a key name (i.e. not  an array).</pre></td>
+      <td>''</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_assignByRef">assignByRef</h3>
+  <pre>public void function <b>assignByRef</b>(string $tag, mixed $value)</pre>
+  <pre> Method used to assign values to tags embedded into the template
+  files where the value will be a reference
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tag</td>
+      <td>string</td>
+      <td><pre>The name of the template identifier to assign the  value to</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>mixed</td>
+      <td><pre>a reference to the data to store</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_ceil">ceil</h3>
+  <pre>public static void function <b>ceil</b>(float $val)</pre>
+  <pre> helper math function for use within templates
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>val</td>
+      <td>float</td>
+      <td><pre>the fraction to return the ceil for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_compile">compile</h3>
+  <pre>public boolean function <b>compile</b>(string $template, boolean $overwrite=TRUE)</pre>
+  <pre> used to compile a template. may be beneficial in order to increase
+  application performance by pre-compiling the templates. returns TRUE if the
+  template was compiled
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>template</td>
+      <td>string</td>
+      <td><pre>the template to compile</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>overwrite</td>
+      <td>boolean</td>
+      <td><pre>whether or not to overwrite the existing compiled  file if it exists</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_compileAll">compileAll</h3>
+  <pre>public void function <b>compileAll</b>(boolean $overwrite=TRUE)</pre>
+  <pre> this method compiles all smarty templates for this template instance
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>overwrite</td>
+      <td>boolean</td>
+      <td><pre>whether or not to overwrite the existing compiled  file if it exists</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_removeCache">removeCache</h3>
+  <pre>public boolean function <b>removeCache</b>(string $template)</pre>
+  <pre> removes the compile cache for $template. returns TRUE if the cache existed
+  and was deleted
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>template</td>
+      <td>string</td>
+      <td><pre>the template to remove the compile cache for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_removeAllCache">removeAllCache</h3>
+  <pre>public void function <b>removeAllCache</b>()</pre>
+  <pre> this method removes all of the compile cache for this template instance
+</pre>
+ <hr />  <h3 id="method_define">define</h3>
+  <pre>public static void function <b>define</b>(string $const, mixed $val)</pre>
+  <pre> helper function used to define a constant. the constant will be defined
+  ONLY if it is not already defined
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>const</td>
+      <td>string</td>
+      <td><pre>the name of the constant to define</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>val</td>
+      <td>mixed</td>
+      <td><pre>the constant value</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_display">display</h3>
+  <pre>public void function <b>display</b>(string $fileName)</pre>
+  <pre> This method displays the template file given as its argument with the
+  custom tags embedded as specified prior to calling this method.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>string</td>
+      <td><pre>relative or fixed app path (with or without  default template extension) of the template to display</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_displayToEmail">displayToEmail</h3>
+  <pre>public static void function <b>displayToEmail</b>(mixed $to, string $subject, string $messageTpl, string $messageHtmlTpl=NULL, string $from=NULL, string $fromName=NULL, mixed $toName=NULL, string $cc=NULL, string $bcc=NULL, mixed $attachments)</pre>
+  <pre> used to render the content of a template and send the results via email
+  this is basically just a wrapper to the SRA_Util::sendEmail and
+  SRA_Template::fetch methods
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>to</td>
+      <td>mixed</td>
+      <td><pre>the recipient email address. if $to is an array, 1  message will be sent to each recipient. multiple messages can be sent to
+  in the same message instance by separating each recipient with a comma
+  (i.e. &quot;john@john.com, Jason &lt;jason@jason.com&gt;&quot;)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>subject</td>
+      <td>string</td>
+      <td><pre>the email subject</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>messageTpl</td>
+      <td>string</td>
+      <td><pre>the template containing the text version of the  email message. either $messageTpl or $messageHtmlTpl MUST be specified.
+  if both are specified, the message will be sent with both content types.
+  otherwise, only the content type specified will be sent</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>messageHtmlTpl</td>
+      <td>string</td>
+      <td><pre>the template containing the html version of  the email message</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>from</td>
+      <td>string</td>
+      <td><pre>the sender email address. if not specified, the  default from address will be used ([process user]@[server domain])</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>fromName</td>
+      <td>string</td>
+      <td><pre>the sender name (optional). can also be specified  in $from using the syntax &quot;[email] &lt;[name]&gt;&quot;</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>toName</td>
+      <td>mixed</td>
+      <td><pre>the recipient name (optional). if $to is an array,  and $toName is specified, it much also be an array with the same # of
+  values. can also be specified in $from using the syntax
+  &quot;[email] &lt;[name]&gt;&quot;</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>cc</td>
+      <td>string</td>
+      <td><pre>c optional comma separated list of carbon copy recipients</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>bcc</td>
+      <td>string</td>
+      <td><pre>optional comma separated list of blind carbon copy  recipients</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>attachments</td>
+      <td>mixed</td>
+      <td><pre>a single absolute path or array of absolute  paths to files that should be attached to this email. the names assigned
+  to these attachments will be the names of the files themselves</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_displayToFile">displayToFile</h3>
+  <pre>public boolean function <b>displayToFile</b>(string $tpl, string $file)</pre>
+  <pre> displays the template $tpl and writes the output to a file. returns TRUE on
+  success, FALSE otherwise
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tpl</td>
+      <td>string</td>
+      <td><pre>relative or fixed app path (with or without default  template extension) of the template to display</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>file</td>
+      <td>string</td>
+      <td><pre>absolute path to the file that $tpl should be rendered  to</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_escapeHtmlChars">escapeHtmlChars</h3>
+  <pre>public array function <b>escapeHtmlChars</b>(string $str)</pre>
+  <pre> this method convert special characters to HTML entities
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to escape</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_escapeDoubleQuotes">escapeDoubleQuotes</h3>
+  <pre>public array function <b>escapeDoubleQuotes</b>(string $str)</pre>
+  <pre> this method escapes double quotes within a string
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to escape</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_escapeHtmlDoubleQuotes">escapeHtmlDoubleQuotes</h3>
+  <pre>public array function <b>escapeHtmlDoubleQuotes</b>(string $str)</pre>
+  <pre> this method escapes double quotes within a string. these are replaced
+  with the html equivalent &amp;quot;
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to escape</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_escapeHtmlQuotes">escapeHtmlQuotes</h3>
+  <pre>public array function <b>escapeHtmlQuotes</b>(string $str)</pre>
+  <pre> this method escapes both double and single quotes within a string. these
+  are replaced with the html equivalents &amp;quot; and &amp;#39;
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to escape</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_escapeSingleQuotes">escapeSingleQuotes</h3>
+  <pre>public array function <b>escapeSingleQuotes</b>(string $str)</pre>
+  <pre> this method escapes double quotes within a string
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to escape</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_escapeHtmlSingleQuotes">escapeHtmlSingleQuotes</h3>
+  <pre>public array function <b>escapeHtmlSingleQuotes</b>(string $str)</pre>
+  <pre> this method escapes single quotes within a string. these are replaced
+  with the html equivalent &amp;#39;
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to escape</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_escapeQuotes">escapeQuotes</h3>
+  <pre>public array function <b>escapeQuotes</b>(string $str)</pre>
+  <pre> this method escapes both single and double quotes within a string
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to escape</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_explode">explode</h3>
+  <pre>public array function <b>explode</b>(string $delim, string $str)</pre>
+  <pre> pass-thru to the PHP explode function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>delim</td>
+      <td>string</td>
+      <td><pre>the delimiter to explode on</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to explode</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_fetch">fetch</h3>
+  <pre>public string function &amp;<b>fetch</b>(string $fileName)</pre>
+  <pre> Same as display(), except that this returns its output as a string
+  instead of displaying it.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>string</td>
+      <td><pre>relative or fixed app path to the template</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_floor">floor</h3>
+  <pre>public static void function <b>floor</b>(float $val)</pre>
+  <pre> helper math function for use within templates
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>val</td>
+      <td>float</td>
+      <td><pre>the fraction to return the floor for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getWSGatewayUri">getWSGatewayUri</h3>
+  <pre>public string function <b>getWSGatewayUri</b>()</pre>
+  <pre> returns the gateway uri for the active application
+</pre>
+ <hr />  <h3 id="method_getAppTemplateVar">getAppTemplateVar</h3>
+  <pre>public static array function <b>getAppTemplateVar</b>(string $key)</pre>
+  <pre> returns the template variable value associated with the specified $key
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>string</td>
+      <td><pre>the identifier for the template variable to return</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getArrayLength">getArrayLength</h3>
+  <pre>public static int function <b>getArrayLength</b>(array $arr)</pre>
+  <pre> returns the # of items in $arr
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>arr</td>
+      <td>array</td>
+      <td><pre>ay $arr the array to check</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getClassInstance">getClassInstance</h3>
+  <pre>public object function &amp;<b>getClassInstance</b>(string $className, mixed $params=NULL)</pre>
+  <pre> returns a new instance of $className
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>string</td>
+      <td><pre>the name of the class to instantiate</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>mixed</td>
+      <td><pre>optional constructor parameters</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getFormValue">getFormValue</h3>
+  <pre>public string function <b>getFormValue</b>(string $name)</pre>
+  <pre> the value of a $_GET or $_POST variable
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>string</td>
+      <td><pre>the name of the variable to return. first $_POST is  searched, followed by $_GET</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSessionVar">getSessionVar</h3>
+  <pre>public string function <b>getSessionVar</b>(string $name)</pre>
+  <pre> returns the value of a session variable
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>string</td>
+      <td><pre>the name of the session variable to get</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getType">getType</h3>
+  <pre>public string function <b>getType</b>(mixed $val)</pre>
+  <pre> pass-thru to the PHP gettype function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>val</td>
+      <td>mixed</td>
+      <td><pre>the value to return the type for</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_implode">implode</h3>
+  <pre>public string function <b>implode</b>(string $glue, array $pieces)</pre>
+  <pre> pass-thru to the PHP implode function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>glue</td>
+      <td>string</td>
+      <td><pre>the join string</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>pieces</td>
+      <td>array</td>
+      <td><pre>the array</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_lineBreaksToBr">lineBreaksToBr</h3>
+  <pre>public string function <b>lineBreaksToBr</b>(string $str, string $element='br')</pre>
+  <pre> this replaces line breaks in $str to html &lt;br /&gt; tags
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to replace the line breaks in</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>element</td>
+      <td>string</td>
+      <td><pre>the element to use for the tags. default is &#039;br&#039;</pre></td>
+      <td>'br'</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_validateTemplate">validateTemplate</h3>
+  <pre>public boolean function &amp;<b>validateTemplate</b>(string $fileName)</pre>
+  <pre> validates a template file
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>string</td>
+      <td><pre>relative or fixed app path (with or without default  template extension)</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getVar">getVar</h3>
+  <pre>public mixed function <b>getVar</b>(string $tag)</pre>
+  <pre> returns a template variable value
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tag</td>
+      <td>string</td>
+      <td><pre>The name of the template variable to return</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getVarByRef">getVarByRef</h3>
+  <pre>public void function &amp;<b>getVarByRef</b>(string $tag)</pre>
+  <pre> returns a reference to a template variable
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tag</td>
+      <td>string</td>
+      <td><pre>The name of the template variable to return</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getUniqueSeq">getUniqueSeq</h3>
+  <pre>public static int function <b>getUniqueSeq</b>()</pre>
+  <pre> returns a numeric sequence that is unique for the entire current PHP
+  process. each time this method is called, the sequence will be incremented
+</pre>
+ <hr />  <h3 id="method_initTemplate">initTemplate</h3>
+  <pre>public static void function <b>initTemplate</b>(string $tplName, string $check=FALSE)</pre>
+  <pre> initializes a template allowing for future references to #renderOpen.
+  this will reset any cycles for that template that were previously
+  utilized
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tplName</td>
+      <td>string</td>
+      <td><pre>the name of the template to initialize</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>check</td>
+      <td>string</td>
+      <td><pre>INTERNAL USE ONLY</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isArray">isArray</h3>
+  <pre>public static boolean function <b>isArray</b>(mixed $arr)</pre>
+  <pre> returns TRUE if $arr is an array
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>arr</td>
+      <td>mixed</td>
+      <td><pre>the array to check</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isObject">isObject</h3>
+  <pre>public static boolean function <b>isObject</b>(mixed $obj)</pre>
+  <pre> returns TRUE if $obj is an object
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>obj</td>
+      <td>mixed</td>
+      <td><pre>the object to check</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_numberFormat">numberFormat</h3>
+  <pre>public static string function <b>numberFormat</b>(float $num, int $decimals, char $decPoint='.', char $thousandsSep=', $')</pre>
+  <pre> formats a number. identical to the PHP number_format function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>num</td>
+      <td>float</td>
+      <td><pre>the number to format</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>decimals</td>
+      <td>int</td>
+      <td><pre>the decimal precision</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>decPoint</td>
+      <td>char</td>
+      <td><pre>the decimal separator character</pre></td>
+      <td>'.'</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>thousandsSep</td>
+      <td>char</td>
+      <td><pre>the thousands separator character</pre></td>
+      <td>'</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>'</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_renderOpen">renderOpen</h3>
+  <pre>public static void function <b>renderOpen</b>(string $tplName, string $tag, <a href="util.SRA_Params.html" target="contentFrame">SRA_Params</a> $params, string $tagType='', boolean $close=TRUE, string $subVal=FALSE, boolean $refresh=FALSE)</pre>
+  <pre> renders an html/xml open element using the $params specified to
+  determine what attributes of that element to render
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>tplName</td>
+      <td>string</td>
+      <td><pre>the name of the template</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>tag</td>
+      <td>string</td>
+      <td><pre>the html/xml tag to render</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>SRA_Params</td>
+      <td><pre>$params the SRA_Params for the template</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>tagType</td>
+      <td>string</td>
+      <td><pre>optional tag type identifier. used to distinguish  between different cycles for the same $tag</pre></td>
+      <td>''</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>close</td>
+      <td>boolean</td>
+      <td><pre>whether or not to close the tag</pre></td>
+      <td>TRUE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>subVal</td>
+      <td>string</td>
+      <td><pre>if the value for the $tag specified is equal to  SRA_TEMPLATE_RENDER_OPEN_SUB_VAL, then the value for that attribute
+  will be substituted with $subVal</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>refresh</td>
+      <td>boolean</td>
+      <td><pre>whether or not to refresh the $tagAttrs</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_includeOnce">includeOnce</h3>
+  <pre>public static void function <b>includeOnce</b>(string $path)</pre>
+  <pre> includes a php source file using the &#039;include_once&#039; directive
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>string</td>
+      <td><pre>the absolute or relative path of the file to include</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_serialize">serialize</h3>
+  <pre>public static void function <b>serialize</b>(object $obj)</pre>
+  <pre> used to serialize an object from within a template
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>obj</td>
+      <td>object</td>
+      <td><pre>ect $obj the object to serialize</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_startBuffering">startBuffering</h3>
+  <pre>public static boolean function <b>startBuffering</b>()</pre>
+  <pre> starts output buffering if it is not already started
+</pre>
+ <hr />  <h3 id="method_stopBuffering">stopBuffering</h3>
+  <pre>public static string function <b>stopBuffering</b>(boolean $stripNewlines=FALSE)</pre>
+  <pre> stops output buffering and returns the current contents of the output buffer
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>stripNewlines</td>
+      <td>boolean</td>
+      <td><pre>whether or not to strip newline characters  from the buffer output</pre></td>
+      <td>FALSE</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_strlen">strlen</h3>
+  <pre>public int function <b>strlen</b>(string $str)</pre>
+  <pre> pass-thru to the PHP strlen function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to return the length of</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_strReplace">strReplace</h3>
+  <pre>public array function <b>strReplace</b>(string $str, string $replace, string $subject)</pre>
+  <pre> pass-thru to the PHP str_replace function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to replace</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>replace</td>
+      <td>string</td>
+      <td><pre>the string to replace it with</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>subject</td>
+      <td>string</td>
+      <td><pre>the string</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_substr">substr</h3>
+  <pre>public array function <b>substr</b>(string $str, int $start, int $length=NULL)</pre>
+  <pre> pass-thru to the PHP substr function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>start</td>
+      <td>int</td>
+      <td><pre>the starting location</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td>int</td>
+      <td><pre>the length (optional)</pre></td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_trim">trim</h3>
+  <pre>public string function <b>trim</b>(string $str)</pre>
+  <pre> pass-thru to the PHP trim function
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>str</td>
+      <td>string</td>
+      <td><pre>ing $str the string to trim</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_validate">validate</h3>
+  <pre>private boolean function <b>validate</b>(string $fileName)</pre>
+  <pre> returns TRUE if the $fileName specified is a valid template
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>string</td>
+      <td><pre>the template to check</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setParams">_setParams</h3>
+  <pre>public the template identifier - params function <b>_setParams</b>(string $fileName)</pre>
+  <pre> Used to set dynamic parameters specified in the template filename in
+  standard HTTP GET format:
+  	e.g. mytemplate.tpl?param1=val1&amp;param2=val2&amp; ... &amp; paramN=valN
+  the return value will be the filename minus any parameters specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>string</td>
+      <td><pre>the template identifier + params</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(object $object)</pre>
+  <pre> Static method used to validate an SRA_Template object.
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>object</td>
+      <td><pre>$object the object to validate.</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getSmarty">getSmarty</h3>
+  <pre>public void function &amp;<b>getSmarty</b>()</pre>
+  <pre> Returns a reference to the Smarty SRA_Template object.
+</pre>
+ <hr />  <h3 id="method_registerObject">registerObject</h3>
+  <pre>public void function <b>registerObject</b>($name, $obj)</pre>
+  <pre> Registers an object in the template context
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>obj</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getTemplateDir">getTemplateDir</h3>
+  <pre>private void function <b>getTemplateDir</b>()</pre>
+  <pre> returns the directory where the current template exists
+</pre>
+ <hr />  <h3 id="method__getFilePath">_getFilePath</h3>
+  <pre>private void function <b>_getFilePath</b>($fileName)</pre>
+  <pre> returns the absolute path to the file specified
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>fileName</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__setTemplateDir">_setTemplateDir</h3>
+  <pre>private void function <b>_setTemplateDir</b>($dir)</pre>
+  <pre> sets the template dir
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>dir</td>
+      <td>Not Specified</td>
+      <td><pre>No API comments</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_getTemplate">getTemplate</h3>
+  <pre>public <a href="core.SRA_Template.html" target="contentFrame">SRA_Template</a> function &amp;<b>getTemplate</b>(string $appId)</pre>
+  <pre> static singleton method for retrieving a reference to a template
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>appId</td>
+      <td>string</td>
+      <td><pre>the identifier of the app to return the template for  if not specified, the system template will be returned</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/core/SRA_Template.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>

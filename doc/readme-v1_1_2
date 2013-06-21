@@ -1,0 +1,9 @@
+CHANGELOG
+* Added entity documentation to web services api
+* Fixed CLI authentication bug
+* Moved parameter to the top of the web service API documentation
+* Fixed output buffering bug in SRA_Template
+* Fixed int type case problem in database classes
+
+KNOWN ISSUES
+None

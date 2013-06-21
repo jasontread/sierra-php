@@ -1,0 +1,1148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>model.SRA_ListLookupProcessor - sierra-php v1.1.3</title>
+<script type="text/javascript">
+<!--
+var _qsAbortNext = false;
+var _tipsIdx = 0;
+var _tipIds;
+
+function clearQsTips() {
+  document.getElementById('quicksearch_tips').innerHTML = '';
+}
+function hideQsTips() {
+  setTimeout("document.getElementById('quicksearch_tips').style.display = 'none'", 100);
+}
+function showQsTips() {
+  document.getElementById('quicksearch_tips').style.display = '';
+}
+function qsTipsVisible() {
+  return document.getElementById('quicksearch_tips').style.display != 'none';
+}
+function updateQsTips(evt) {
+  if (qsTipsVisible() && evt && (evt.keyCode == 40 || evt.keyCode == 38 || evt.keyCode == 13)) {
+    switch(evt.keyCode) {
+      // up
+      case 38:
+      // down
+      case 40:
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '';
+        evt.keyCode == 38 ? _tipsIdx-- : _tipsIdx++;
+        if (_tipsIdx > _tipIds.length) _tipsIdx = 0;
+        if (_tipsIdx < 0) _tipsIdx = _tipIds.length - 1;
+        if (_tipsIdx >= 0) document.getElementById(_tipIds[_tipsIdx]).style.backgroundColor = '#ddd';
+        break;
+      // enter
+      case 13:
+        if (_tipsIdx >= 0 && _tipIds[_tipsIdx]) {
+          document.location.replace('#' + _tipIds[_tipsIdx].substr(3));
+        }
+        break;
+    }
+    return;
+  }
+  
+  _tipsIdx = -1;
+  _tipIds = [];
+  var str = document.getElementById('quicksearch').value.toLowerCase();
+  var matches = {}
+  var match = false;
+  
+  if (str) {
+  // check constants
+  if ("sra_list_lookup_processor_default_form_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME";
+  }
+  if ("sra_list_lookup_processor_form_get".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_GET'] = "SRA_LIST_LOOKUP_PROCESSOR_FORM_GET";
+  }
+  if ("sra_list_lookup_processor_form_post".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_POST'] = "SRA_LIST_LOOKUP_PROCESSOR_FORM_POST";
+  }
+  if ("sra_list_lookup_processor_default_form_type".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE";
+  }
+  if ("sra_list_lookup_processor_default_limit".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT";
+  }
+  if ("sra_list_lookup_processor_default_offset".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET";
+  }
+  if ("sra_list_lookup_processor_default_page".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE";
+  }
+  if ("sra_list_lookup_processor_default_sort".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT";
+  }
+  if ("sra_list_lookup_processor_default_tpl_var".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR'] = "SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR";
+  }
+  if ("sra_list_lookup_processor_dyn_str".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_STR'] = "SRA_LIST_LOOKUP_PROCESSOR_DYN_STR";
+  }
+  if ("sra_list_lookup_processor_new_pk".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_NEW_PK'] = "SRA_LIST_LOOKUP_PROCESSOR_NEW_PK";
+  }
+  if ("sra_list_lookup_processor_dyn_regex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX'] = "SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX";
+  }
+  if ("sra_list_lookup_processor_dynamic_asc_sort_constraint_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX";
+  }
+  if ("sra_list_lookup_processor_dynamic_desc_sort_constraint_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX";
+  }
+  if ("sra_list_lookup_processor_dynamic_sort_order_field_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX";
+  }
+  if ("sra_list_lookup_processor_global_action_select_field_name_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX";
+  }
+  if ("sra_list_lookup_processor_global_action_select_all_field_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME";
+  }
+  if ("sra_list_lookup_processor_select_field_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME";
+  }
+  if ("sra_list_lookup_processor_select_action_field_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME";
+  }
+  if ("sra_list_lookup_processor_select_action_global_field_name".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME'] = "SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME";
+  }
+  if ("sra_list_lookup_processor_update_field_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX";
+  }
+  if ("sra_list_lookup_processor_ignore_prefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_constant_SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX'] = "SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX";
+  }
+
+  // check attributes
+  if ("_colindex".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__colIndex'] = "_colIndex";
+  }
+  if ("_classcycles".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__classCycles'] = "_classCycles";
+  }
+  if ("_llpdata".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__llpData'] = "_llpData";
+  }
+  if ("_newprefixes".indexOf(str) != -1) {
+    match = true;
+    matches['qs_attr__newPrefixes'] = "_newPrefixes";
+  }
+
+  // check methods
+  if ("sra_listlookupprocessor".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_SRA_ListLookupProcessor'] = "SRA_ListLookupProcessor";
+  }
+  if ("lookup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_lookup'] = "lookup";
+  }
+  if ("renderheader".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_renderHeader'] = "renderHeader";
+  }
+  if ("renderfooter".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_renderFooter'] = "renderFooter";
+  }
+  if ("renderentitypostfix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_renderEntityPostfix'] = "renderEntityPostfix";
+  }
+  if ("renderentityprefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_renderEntityPrefix'] = "renderEntityPrefix";
+  }
+  if ("renderattributepostfix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_renderAttributePostfix'] = "renderAttributePostfix";
+  }
+  if ("renderattributeprefix".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_renderAttributePrefix'] = "renderAttributePrefix";
+  }
+  if ("_displaymsg".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__displayMsg'] = "_displayMsg";
+  }
+  if ("_getclasstag".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__getClassTag'] = "_getClassTag";
+  }
+  if ("_renderactions".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method__renderActions'] = "_renderActions";
+  }
+  if ("tostring".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_toString'] = "toString";
+  }
+  if ("isvalid".indexOf(str) != -1) {
+    match = true;
+    matches['qs_method_isValid'] = "isValid";
+  }
+
+  // check classes
+  if ("sra_workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_Workflow'] = "SRA_Workflow";
+  }
+  if ("sra_workflowconstraint".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraint'] = "SRA_WorkflowConstraint";
+  }
+  if ("sra_workflowconstraintgroup".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowConstraintGroup'] = "SRA_WorkflowConstraintGroup";
+  }
+  if ("sra_workflowdecision".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowDecision'] = "SRA_WorkflowDecision";
+  }
+  if ("sra_workflowmanager".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowManager'] = "SRA_WorkflowManager";
+  }
+  if ("sra_workflowstep".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowStep'] = "SRA_WorkflowStep";
+  }
+  if ("sra_workflowtask".indexOf(str) != -1) {
+    match = true;
+    matches['qs_class_SRA_WorkflowTask'] = "SRA_WorkflowTask";
+  }
+
+
+  // check dtds
+  if ("workflow.dtd".indexOf(str) != -1) {
+    match = true;
+    matches['qs_dtd_workflow.dtd'] = "workflow.dtd";
+  }
+
+  // check packages
+  if ("etc".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc'] = "etc";
+  }
+  if ("etc.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_etc.l10n'] = "etc.l10n";
+  }
+  if ("auth".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_auth'] = "auth";
+  }
+  if ("core".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_core'] = "core";
+  }
+  if ("model".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_model'] = "model";
+  }
+  if ("sql".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_sql'] = "sql";
+  }
+  if ("test".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_test'] = "test";
+  }
+  if ("util".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util'] = "util";
+  }
+  if ("util.installer".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.installer'] = "util.installer";
+  }
+  if ("util.l10n".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_util.l10n'] = "util.l10n";
+  }
+  if ("workflow".indexOf(str) != -1) {
+    match = true;
+    matches['qs_package_workflow'] = "workflow";
+  }
+
+
+  }
+  
+  if (match) {
+    var html = '';
+    for(var i in matches) {
+      _tipIds.push(i);
+      html += '<div id="' + i + '" style="background-color: white; cursor: pointer;" onclick="document.location.replace(\'#\' + this.id.substr(3))">' + matches[i] + '</div>\n';
+    }
+    document.getElementById('quicksearch_tips').innerHTML = html;
+    showQsTips();
+  }
+  else {
+    hideQsTips();
+  }
+}
+-->
+</script></head>
+<body id="class" onload="document.getElementById('quicksearch').onkeyup = updateQsTips; document.getElementById('quicksearch').focus()">
+  <h1 id="top">class SRA_ListLookupProcessor</h1>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;package <a href="../packages/model.html" target="contentFrame">model</a></p><br /><p>&nbsp;&nbsp;&nbsp;&nbsp;extends <a href="model.SRA_LookupProcessor.html" target="contentFrame">SRA_LookupProcessor</a></p>  <hr />
+  <form onsubmit="return false">
+  
+  <div style="float:right">
+    <b><label for="quicksearch">Quick Search:</label></b><br />
+    <input id="quicksearch" type="text" onfocus="clearQsTips()" onblur="hideQsTips()" autocomplete="off" onclick="this.select()" /><br />
+    <div id="quicksearch_tips" style="border: 1px solid #333; position:absolute; display:none"></div>
+  </div>
+  
+  <pre>class SRA_ListLookupProcessor extends <a href="model.SRA_LookupProcessor.html" target="contentFrame">SRA_LookupProcessor</a></pre>
+  
+  <h2>Class Information</h2>
+  <ul>
+    <li><a href="#comments">Class Comments</a></li>
+    <li><a href="#constants">Constants</a></li>
+    <li><a href="#constant_details">Constant Details</a></li>
+    <li><a href="#attrs">Attributes</a></li>
+    <li><a href="#attr_details">Attribute Details</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#method_details">Method Details</a></li>
+    <li><a href="#other">Other</a></li>
+  </ul>
+  
+  <h2 id="comments">Comment</h2>
+  <pre> A powerful lookup processor that can be utilized to display lists of entities
+  in any format including the ability to segment the view into multiple pages.
+  The following lookup &quot;params&quot; are applicable to this SRA_LookupProcessor (see
+  constants section for default values for these params if applicable):
+ 
+                         ------ PARAMS ------
+  Name            Type                   Value          Description
+  {csv attrs}     llp-constraint-{mask}  {value*}       used to define attribute value constraints. the {mask} is a bit mask
+                                                        defining 1 or more of the SRA_QUERY_BUILDER_CONSTRAINT_TYPE_* bits
+                                                        that should apply to the constraint. to determine a bit value for
+                                                        multiple constraint types, simply | (bitwise or) the constraints
+                                                        which will result in the sum of the constraints. This constraint
+                                                        is for DEFAULT values, which can be overriden by the dynamic
+                                                        constraints (llp-dconstraint-{mask}). Review the SRA_QueryBuilderConstraint
+                                                        API documentation for more details on the different  types of
+                                                        constraints
+  limit           llp-constraint         {value}        default limit (max # of results)
+  offset          llp-constraint         {value}        default offset
+  {csv attrs*}    llp-fconstraint-{mask} {value}        FIXED constraints. cannot be overriden by the default or dynamic.
+                                                        should be used to enforce data security in order to avoid allowing
+                                                        invalid access to view and/or manipulate entities. for example,
+                                                        adding a user contraint as described below: ${user}
+  limit           llp-fconstraint        {value}        fixed limit (max # of results) - overrides both default and dynamic limits
+  {csv attrs|dynn}llp-dconstraint-{mask} {field name*}  DYNAMIC constraints. these will override identical DEFAULT constraints
+  limit           llp-dconstraint        {field name}   name of the form field specifying the limit
+                                                        (max # of results) - overrides default limit
+  page            llp-dconstraint        {field name}   name of the form field specifying the current page # - used
+                                                        to determine offset
+  name            llp-form               {form name}    the name that should be assigned to the form enclosing the result data
+  type            llp-form               (get|post)     form type for dynamic variables and actions. default is get
+  actionOrder     llp-form-action        {csv actions}  defines the order of the actions (select + any {actions}s defined) as
+                                                        they should be rendered if &quot;renderActions&quot; is invoked. this should
+                                                        be a comma separated value like &quot;view1,view2,delete,select&quot;. if not
+                                                        specified, the order will be the order in which the views are defined,
+                                                        followed by the global action selector if applicable
+  globalActionOrder llp-form-action      {csv actions}  if the order to display the global actions should be different (or
+                                                        include only a subset of the possible actions), that order/subset
+                                                        may be defined using this parameter
+  globalActions   llp-form-action        (1|0)          whether or global actions should be available to users. global actions
+                                                        are rendered using a checkbox next to each set of action links that the
+                                                        user may select in order to invoke an action for more than one selected
+                                                        entity
+  {action}        llp-form-action        {field name}   unique identifier for an action that can be invoked from the list
+                                                        view. actions can include such activities as deleting/updating/viewing
+                                                        of entities. what occurs when this action is invoked is determined by
+                                                        the {action}Type value which is a bitmask containing any of the
+                                                        SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_* constant values defined in
+                                                        SRA_ListLookupProcessorAction.php
+  {action}Type    llp-form-action        {type bitmask} one or more of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_* constant values
+                                                        represented as a bitmask identifying what should happen when this action
+                                                        is invoked
+  {action}Apost   llp-form-action        {html}         html code to render after the close &lt;/a&gt; tag
+  {action}Apre    llp-form-action        {html}         html code to render before the &lt;a... /&gt; tag
+  {action}Class   llp-form-action        {html class}   the html class to use in the &lt;a.../ &gt; tag generated for the view link
+  {action}Link    llp-form-action        {resource}     the resource to use as the text for the view link
+  {action}Btn     llp-form-action        (1|0)          whether or not to render the action link as a button. the default behavior
+                                                        is to render it as a link
+  {action}Img     llp-form-action        {img src}      the img src to use for the action link (only 1, {action}Img or
+                                                        {action}Link should be specified)
+  {action}ImgClass llp-form-action       {html class}   css class to assign to the {action}Img
+  {action}Alt     llp-form-action        {resource}     the resource to use action the alt/title attribute for {action}Img
+  {action}GlobalAlt llp-form-action      {resource}     {action}Alt for global links: optional - {action}Alt will be used if not specified
+  {action}MsgCmpl llp-form-action        {resource}     the resource to display when an action has been invoked successfully. if the {action} includes a view, this message will only be displayed once the ACTION has been processed successfully. for example, an insert completed, an update performed
+  {action}MsgCnfm llp-form-action        {resource}     the resource to display when the action is initiated (clicked) - single quotes, if used, must be prefixed by backslash
+  {action}GlobalMsgCmpl llp-form-action  {resource}     {action}MsgCmpl for global links: optional - {action}MsgCmpl will be used if not specified
+  {action}GlobalMsgCnfm llp-form-action  {resource}     {action}MsgCnfm for global links: optional - {action}MsgCnfm will be used if not specified
+  {action}Post    llp-form-action        {html}         html code to render before the close &lt;/a&gt; tag
+  {action}Pre     llp-form-action        {html}         html code to render after the &lt;a... /&gt; tag
+  {action}View    llp-form-action        {view id}      the id of the view that should be displayed if the {action}Type bitmask
+                                                        includes any of the SRA_LIST_LOOKUP_PROCESSOR_ACTION_TYPE_VIEW* constants
+  {action}ViewFwd llp                    {view id}      the id of the view that should be displayed if an action has been invoked successfully
+  {action}NonGlobal llp-form-action      (1|0)          default: 0: whether or not this action cannot be applied globally (NOTE: it will still show up in the global actions links unless explicitely specified otherwise)
+  rowCycle        llp                    {cycle id}     optional cycle identifier for the classes below. if not specified, &quot;rowClass&quot; will be the identifier
+  rowClass        llp                    {html class}   comma separated values specifying the classes (in that order) that should be applied to rows in the resulting data table
+  rowClassTag     llp                    {html tr attr} an optional alternate &quot;tr&quot; attribute tag that should be used in place of &quot;class&quot; for &quot;rowClass&quot;
+  colCycle        llp                    {cycle id}     optional cycle identifier for the classes below. if not specified, &quot;colClass&quot; will be the identifier
+  colClass        llp                    {html class}   comma separated values specifying the classes (in that order) that should be applied to cols in the resulting data table
+  colClassTag     llp                    {html tr attr} an optional alternate &quot;td&quot; attribute tag that should be used in place of &quot;class&quot; for &quot;colClass&quot;
+  [attr]ColCycle  llp                    {cycle id}     the following 3 parameters are for attribute specific column formatting: an optional cycle identifier for the classes below. if not specified, &quot;[attr]ColClass&quot; will be the identifier
+  [attr]ColClass  llp                    {html class}   comma separated values specifying the classes (in that order) that should be applied to [attr] cols in the resulting data table
+  [attr]ColClassTag llp                  {html tr attr} an optional alternate &quot;td&quot; attribute tag that should be used in place of &quot;class&quot; for &quot;colClass&quot;
+  actionsPos      llp                    ([N]|L|R)      the position for the actions, either the leftmost (L) or rightmost (R),
+                                                        or a numbered column (column #s begin at 0) column
+  actionEncl      llp                    {html elem}    an html element to enclose the actions in
+  actionsColCycle llp                    {cycle id}     if actionsColClass is not specified, &quot;colClass&quot; will be used for the actions column: optional cycle identifier for the actions cell below. if not specified, &quot;actionsColClass&quot; will be the identifier
+  actionsColClass llp                    {html class}   comma separated values specifying the classes (in that order) that should be applied to action cols in the resulting data table
+  actionsColClassTag llp                 {html tr attr} an optional alternate &quot;td&quot; attribute tag that should be used in place of &quot;class&quot; for &quot;actionsColClass&quot;
+  resultsResource llp                    {string}       results resource string. the following strings will be replaced using SRA_ResourceBundle::getString():
+                                                         start      : start position of the results
+                                                         end        : end position of the results
+                                                         count      : total # of results
+                                                         page       : current page number
+                                                         pageCount  : total # of pages
+                                                        this string can be displayed in any of the following templates:
+                                                         sra-list-table-header.tpl
+                                                         sra-list-table-footer.tpl
+                                                         sra-list-table-cmds.tpl
+                                                        see the corresponding documentation in these template for details
+  sortLastSelPrec llp                     (1|0)         whether or not the last sort attribute should be given highest or lowest
+                                                        precedence in the sort order sequence. the default value for this parameter
+                                                        is FALSE, meaning the last attribute that the user selects to sort on will
+                                                        be the last sort column in the sql query that is generated. changing this
+                                                        parameter to TRUE (1), will result in that column being the first sort
+                                                        column in the sql query
+ 
+ 
+  a SRA_ListLookupProcessorData instance representing the results data will be
+  set in the template context under the variable name SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR
+  at the completion of the lookup method invocation
+ 
+  Comments:
+  JOINS:       multiple separate constraints are joined using AND. OR joins should
+               be specified in a single constraint with comma separated values
+  Dyn &amp; Def:   dynamic and default constraints work together as follows: if a matching
+               constraint type and attribute list is found between the two, the
+               default values applied for those dynamic constraints are those
+               specified for the default constraints. if there is no matching
+               dynamic constraint for a given default, the default constraint will
+               behave identical to a fixed constraint.
+  fixed:       Fixed constraints always take precedence over dynamic and default constraints
+  *csv attrs:  comma separated list of attribute names (no spaces should be used between values)
+  *value:      use commas to deliminate multiple possible values (OR join will be applied)
+               user id can be specified using the tag: &quot;${user}&quot; which will be
+               dynamically substituted for the actual user id as returned by
+               SRA_Authenticator::getUserId()
+  *field name: if the name specified is &quot;dyn[n]&quot; (where n is a sequential value used so that
+               no two &quot;dyn&quot; values are the same), the attributes will be dynamically
+               determined based on the field name value specified, where the tag
+               &quot;${attr}&quot; located in that value will be the name of the attribute
+               and multiple attribute names can be specified using repeating
+               attribute tags specified with &quot;${attr|{delim text}}&quot;, where
+               {delim text} should be the text used to separate each attribute
+               name. For example: &quot;attrs_${attr|-}&quot; would signify that attributes
+               should be determined for the constraint where the field name starts
+               with &quot;attrs_&quot; followed by a dash separated list of attribute names:
+               e.g. the value of &lt;input name=&quot;attrs_fname-mname-lname&quot; /&gt; would
+               be applied as a constraint against the 3 attributes named &quot;fname&quot;
+               &quot;mname&quot; and &quot;lname&quot;. If the field is an array (auto-cast to an
+               array if the end of the field name includes &quot;[]&quot; - e.g. name=&quot;fname[]&quot;),
+               or if multiple attributes are specified, the join method used
+               with the multiple values/attributes will be OR. Multiple separate
+               constraints are joined using AND
+ 
+</pre>
+  
+  <h2 id="constants">Class Constants</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME</a></pre>
+<pre> the default form name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_GET">SRA_LIST_LOOKUP_PROCESSOR_FORM_GET</a></pre>
+<pre> identifies a GET form
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_POST">SRA_LIST_LOOKUP_PROCESSOR_FORM_POST</a></pre>
+<pre> identifies a POST form
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE</a></pre>
+<pre> the default form type
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT</a></pre>
+<pre> the default limit if none is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET</a></pre>
+<pre> the default offset if none is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE</a></pre>
+<pre> the default page field name if none is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT</a></pre>
+<pre> the default sort method if none is specified
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR</a></pre>
+<pre> the default name of the template variable to store the LLP results to
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_STR">SRA_LIST_LOOKUP_PROCESSOR_DYN_STR</a></pre>
+<pre> identifies dynamic attribute parameters
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_NEW_PK">SRA_LIST_LOOKUP_PROCESSOR_NEW_PK</a></pre>
+<pre> primary key value identifying that a new entity should be rendered
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX">SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX</a></pre>
+<pre> regular expression used to parse field names for dyn attributes
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX</a></pre>
+<pre> form prefix used to identify a dynamic ascending sorting constraint. this
+  value will be followed by the attribute name in a multi-sort environment
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX</a></pre>
+<pre> form prefix used to identify a dynamic descending sorting constraint. this
+  value will be followed by the attribute name in a multi-sort environment
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX</a></pre>
+<pre> form prefix used to identify the sort order field. this value will be followed
+  by the attribute name
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX</a></pre>
+<pre> prefix of the form field that identifies the name of the field containing the primary keys of the
+  selected entities for a global action
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME</a></pre>
+<pre> name of the select all form field checkbox
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME</a></pre>
+<pre> name of the hidden field to identify the pk id of the entity selected for an action
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME</a></pre>
+<pre> name of the hidden field to identify the action that was invoked
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME</a></pre>
+<pre> name of the hidden field to identify the action invoked was global
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX</a></pre>
+<pre> field name prefix identifying entity fields that should be updated
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>string </pre></td>
+      <td>
+        <pre><a href="#constant_SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX</a></pre>
+<pre> field name prefix identifying fields that should be removed from the $form when submitted
+</pre>      </td>
+    </tr>
+  </table>
+  
+  <h2 id="attrs">Class Attributes</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__colIndex">_colIndex</a></pre>
+<pre> the current column index
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>array </pre></td>
+      <td>
+        <pre><a href="#attr__classCycles">_classCycles</a></pre>
+<pre> used to cycle through classes
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre><a href="model.SRA_ListLookupProcessorData.html" target="contentFrame">SRA_ListLookupProcessorData</a> </pre></td>
+      <td>
+        <pre><a href="#attr__llpData">_llpData</a></pre>
+<pre> used to store the data associated with the lookup
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>int </pre></td>
+      <td>
+        <pre><a href="#attr__newPrefixes">_newPrefixes</a></pre>
+<pre> used to store unique prefixes for new entities
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="methods">Class Methods</h2>
+  <table border="1" width="100%">
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_SRA_ListLookupProcessor">SRA_ListLookupProcessor</a>(util/SRA_Params $params, string $entityName)</pre>
+<pre> invoked parent constructor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public static {$entityName}[]</pre></td>
+      <td>
+        <pre><a href="#method_lookup">lookup</a>()</pre>
+<pre> Returns all of the entities of type entityName applicable to the current
+  list view as configured and determined by the values specified in $params
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_renderHeader">renderHeader</a>()</pre>
+<pre> Renders html that should be output before any entities
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method_renderFooter">renderFooter</a>()</pre>
+<pre> Renders html that should be output after all entities
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_renderEntityPostfix">renderEntityPostfix</a>(Object $entity)</pre>
+<pre> Renders html that should be output after each entity returned by this processor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_renderEntityPrefix">renderEntityPrefix</a>(Object $entity)</pre>
+<pre> Renders html that should be output before each entity returned by this processor
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_renderAttributePostfix">renderAttributePostfix</a>(Object $entity, mixed $attr, string $attrName)</pre>
+<pre> Renders html that should be output after each entity attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_renderAttributePrefix">renderAttributePrefix</a>(Object $entity, mixed $attr, string $attrName)</pre>
+<pre> Renders html that should be output before each entity attribute
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private void</pre></td>
+      <td>
+        <pre><a href="#method__displayMsg">_displayMsg</a>(string $msg)</pre>
+<pre> used to display a message in a javascript popup
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>private string</pre></td>
+      <td>
+        <pre><a href="#method__getClassTag">_getClassTag</a>(string $key, string $prefix, string $attr='')</pre>
+<pre> returns the class tag (or empty string if not applicable)
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public void</pre></td>
+      <td>
+        <pre><a href="#method__renderActions">_renderActions</a>()</pre>
+<pre> Renders html for an entity actions
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public String</pre></td>
+      <td>
+        <pre><a href="#method_toString">toString</a>()</pre>
+<pre> Returns a string representation of this object
+</pre>      </td>
+    </tr>
+    <tr>
+      <td><pre>public boolean</pre></td>
+      <td>
+        <pre><a href="#method_isValid">isValid</a>(Object $object)</pre>
+<pre> Static method that returns true if the object parameter is a SRA_ListLookupProcessor object.
+ 
+</pre>      </td>
+    </tr>
+  </table>
+
+  <h2 id="constant_details">Constant Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_NAME</b> = 'LLP'</pre>
+  <pre> the default form name
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_GET">SRA_LIST_LOOKUP_PROCESSOR_FORM_GET</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_FORM_GET</b> = 'get'</pre>
+  <pre> identifies a GET form
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_FORM_POST">SRA_LIST_LOOKUP_PROCESSOR_FORM_POST</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_FORM_POST</b> = 'post'</pre>
+  <pre> identifies a POST form
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_FORM_TYPE</b> = SRA_LIST_LOOKUP_PROCESSOR_FORM_POST</pre>
+  <pre> the default form type
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT</h3>
+  <pre>int <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_LIMIT</b> = 10</pre>
+  <pre> the default limit if none is specified
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET</h3>
+  <pre>int <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_OFFSET</b></pre>
+  <pre> the default offset if none is specified
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE</h3>
+  <pre>int <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_PAGE</b> = 'pg'</pre>
+  <pre> the default page field name if none is specified
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_SORT</b> = 'asc'</pre>
+  <pre> the default sort method if none is specified
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR">SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DEFAULT_TPL_VAR</b> = 'LLP_DATA'</pre>
+  <pre> the default name of the template variable to store the LLP results to
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_STR">SRA_LIST_LOOKUP_PROCESSOR_DYN_STR</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYN_STR</b> = 'dyn'</pre>
+  <pre> identifies dynamic attribute parameters
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_NEW_PK">SRA_LIST_LOOKUP_PROCESSOR_NEW_PK</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_NEW_PK</b> = 'new'</pre>
+  <pre> primary key value identifying that a new entity should be rendered
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX">SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYN_REGEX</b> = '/^(.*)\${attr(|.*)?}(.*)/i'</pre>
+  <pre> regular expression used to parse field names for dyn attributes
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_ASC_SORT_CONSTRAINT_PREFIX</b> = 'llp_dynamic_sort_asc'</pre>
+  <pre> form prefix used to identify a dynamic ascending sorting constraint. this
+  value will be followed by the attribute name in a multi-sort environment
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_DESC_SORT_CONSTRAINT_PREFIX</b> = 'llp_dynamic_sort_desc'</pre>
+  <pre> form prefix used to identify a dynamic descending sorting constraint. this
+  value will be followed by the attribute name in a multi-sort environment
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_DYNAMIC_SORT_ORDER_FIELD_PREFIX</b> = 'llp_dynamic_sort_order'</pre>
+  <pre> form prefix used to identify the sort order field. this value will be followed
+  by the attribute name
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_FIELD_NAME_PREFIX</b> = 'llp_global_action_select_'</pre>
+  <pre> prefix of the form field that identifies the name of the field containing the primary keys of the
+  selected entities for a global action
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_GLOBAL_ACTION_SELECT_ALL_FIELD_NAME</b> = 'llp_global_action_select_all'</pre>
+  <pre> name of the select all form field checkbox
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_SELECT_FIELD_NAME</b> = 'llp_select_action_id'</pre>
+  <pre> name of the hidden field to identify the pk id of the entity selected for an action
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_FIELD_NAME</b> = 'llp_select_action'</pre>
+  <pre> name of the hidden field to identify the action that was invoked
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME">SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_SELECT_ACTION_GLOBAL_FIELD_NAME</b> = 'llp_select_action_global'</pre>
+  <pre> name of the hidden field to identify the action invoked was global
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_UPDATE_FIELD_PREFIX</b> = 'llp_u'</pre>
+  <pre> field name prefix identifying entity fields that should be updated
+</pre>
+ <hr />  <h3 id="constant_SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX">SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX</h3>
+  <pre>string <b>SRA_LIST_LOOKUP_PROCESSOR_IGNORE_PREFIX</b> = 'tmp_'</pre>
+  <pre> field name prefix identifying fields that should be removed from the $form when submitted
+</pre>
+
+  <h2 id="attr_details">Attribute Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="attr__colIndex">_colIndex</h3>
+  <pre>int var <b>$_colIndex</b></pre>
+  <pre> the current column index
+</pre>
+ <hr />  <h3 id="attr__classCycles">_classCycles</h3>
+  <pre>array var <b>$_classCycles</b> = array()</pre>
+  <pre> used to cycle through classes
+</pre>
+ <hr />  <h3 id="attr__llpData">_llpData</h3>
+  <pre><a href="model.SRA_ListLookupProcessorData.html" target="contentFrame">SRA_ListLookupProcessorData</a> var <b>$_llpData</b></pre>
+  <pre> used to store the data associated with the lookup
+</pre>
+ <hr />  <h3 id="attr__newPrefixes">_newPrefixes</h3>
+  <pre>int var <b>$_newPrefixes</b> = 1</pre>
+  <pre> used to store unique prefixes for new entities
+</pre>
+
+  <h2 id="method_details">Method Details</h2>
+  <a href="#top" style="float:right">Top</a>
+  <h3 id="method_SRA_ListLookupProcessor">SRA_ListLookupProcessor</h3>
+  <pre>public void function <b>SRA_ListLookupProcessor</b>(util/SRA_Params $params, string $entityName)</pre>
+  <pre> invoked parent constructor
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>params</td>
+      <td>util/SRA_Params</td>
+      <td><pre>$params see SRA_LookupProcessor api</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>entityName</td>
+      <td>string</td>
+      <td><pre>see SRA_LookupProcessor api</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_lookup">lookup</h3>
+  <pre>public static {$entityName}[] function <b>lookup</b>()</pre>
+  <pre> Returns all of the entities of type entityName applicable to the current
+  list view as configured and determined by the values specified in $params
+</pre>
+ <hr />  <h3 id="method_renderHeader">renderHeader</h3>
+  <pre>public void function <b>renderHeader</b>()</pre>
+  <pre> Renders html that should be output before any entities
+</pre>
+ <hr />  <h3 id="method_renderFooter">renderFooter</h3>
+  <pre>public void function <b>renderFooter</b>()</pre>
+  <pre> Renders html that should be output after all entities
+</pre>
+ <hr />  <h3 id="method_renderEntityPostfix">renderEntityPostfix</h3>
+  <pre>public String function <b>renderEntityPostfix</b>(Object $entity)</pre>
+  <pre> Renders html that should be output after each entity returned by this processor
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>Object</td>
+      <td><pre>a reference to the entity being rendered</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_renderEntityPrefix">renderEntityPrefix</h3>
+  <pre>public String function <b>renderEntityPrefix</b>(Object $entity)</pre>
+  <pre> Renders html that should be output before each entity returned by this processor
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>Object</td>
+      <td><pre>a reference to the entity being rendered</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_renderAttributePostfix">renderAttributePostfix</h3>
+  <pre>public String function <b>renderAttributePostfix</b>(Object $entity, mixed $attr, string $attrName)</pre>
+  <pre> Renders html that should be output after each entity attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>Object</td>
+      <td><pre>a reference to the entity being rendered</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>mixed</td>
+      <td><pre>a reference to the attribute being rendered</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>attrName</td>
+      <td>string</td>
+      <td><pre>the name of the attribute being rendered</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method_renderAttributePrefix">renderAttributePrefix</h3>
+  <pre>public String function <b>renderAttributePrefix</b>(Object $entity, mixed $attr, string $attrName)</pre>
+  <pre> Renders html that should be output before each entity attribute
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>entity</td>
+      <td>Object</td>
+      <td><pre>a reference to the entity being rendered</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>mixed</td>
+      <td><pre>a reference to the attribute being rendered</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>attrName</td>
+      <td>string</td>
+      <td><pre>the name of the attribute being rendered</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__displayMsg">_displayMsg</h3>
+  <pre>private void function <b>_displayMsg</b>(string $msg)</pre>
+  <pre> used to display a message in a javascript popup
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>msg</td>
+      <td>string</td>
+      <td><pre>the message to display. if FALSE, no message will be displayed</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__getClassTag">_getClassTag</h3>
+  <pre>private string function <b>_getClassTag</b>(string $key, string $prefix, string $attr='')</pre>
+  <pre> returns the class tag (or empty string if not applicable)
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>string</td>
+      <td><pre>class key</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>prefix</td>
+      <td>string</td>
+      <td><pre>key prefix</pre></td>
+      <td>None</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>attr</td>
+      <td>string</td>
+      <td><pre>optional attr name</pre></td>
+      <td>''</td>
+      <td>No</td>
+    </tr>
+  </table>
+ <hr />  <h3 id="method__renderActions">_renderActions</h3>
+  <pre>public void function <b>_renderActions</b>()</pre>
+  <pre> Renders html for an entity actions
+</pre>
+ <hr />  <h3 id="method_toString">toString</h3>
+  <pre>public String function <b>toString</b>()</pre>
+  <pre> Returns a string representation of this object
+</pre>
+ <hr />  <h3 id="method_isValid">isValid</h3>
+  <pre>public boolean function <b>isValid</b>(Object $object)</pre>
+  <pre> Static method that returns true if the object parameter is a SRA_ListLookupProcessor object.
+ 
+</pre>
+  <h2>Method Parameters</h2>
+  <table border="1" width="100%">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Comment</th>
+      <th>Default Value</th>
+      <th>By Reference?</th>
+    </tr>
+    <tr>
+      <td>object</td>
+      <td>Object</td>
+      <td><pre>$object The object to validate</pre></td>
+      <td>None</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+  
+  <h2>Other Information</h2>
+  <table id="other" border="1" width="100%">
+  <tr>
+    <th>Source File</th>
+    <td>/home/jread/www/sierra/lib/model/SRA_ListLookupProcessor.php</td>
+  </tr>
+  <tr>
+    <th>author</th>
+    <td>Jason Read &lt;jason@idir.org&gt;</td>
+  </tr>
+  </table>
+  </form>
+</body>
+</html>
