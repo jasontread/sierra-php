@@ -183,7 +183,7 @@ class SRA_ArrayManager {
      * @return  SRA_ArrayManager
      * @author  Jason Read <jason@idir.org>
      */
-    function & merge(& $primary, & $secondary)
+    function & merge(& $primary, $secondary)
     {
 		// Validate parameters
 		if ((!is_array($primary) && !SRA_ArrayManager::isValid($primary)) || 
