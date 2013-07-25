@@ -855,22 +855,12 @@ class SRA_EntityModeler {
 	 * @return mixed
 	 */
 	function findEntityModelXml($conf) {
-    static $priorDirs = array();
-		$conf = SRA_Util::endsWith($conf, '.xml') ? $conf : $conf . '.xml';
-    for($i = count($priorDirs) - 1; $i >= 0; $i--) {
-      $dir = $priorDirs[$i];
-      if (file_exists("${dir}/${conf}")) {
-        $conf = "${dir}/${conf}";
-        break;
-      }
-    }
-		if ($dir = SRA_File::getRelativePath('etc', $conf)) {
-      $priorDirs[] = dirname($dir);
-    }
-    else if ($dir = SRA_File::getRelativePath(NULL, $conf)) {
-      $priorDirs[] = dirname($dir);
-    }
-    return is_file($dir) ? $dir : NULL;
+		if (!preg_match('/\.xml$/i', $conf)) $conf .= '.xml';
+		if (!file_exists($xml = $conf)) $xml = SRA_Controller::getAppConfDir() . '/' . $conf;
+		if (!file_exists($xml)) $xml = SRA_Controller::getAppDir() . '/' . $conf;
+		if (!file_exists($xml)) $xml = SRA_CONF_DIR . '/' . $conf;
+		if (!file_exists($xml)) $xml = SRA_DIR . '/' . $conf;
+    return file_exists($xml) ? $xml : NULL;
 	}
 	// }}}
 	
@@ -1018,7 +1008,8 @@ class SRA_EntityModeler {
     $entityModels = $entityModel ? (is_array($entityModel) ? $entityModel : array($entityModel)) : SRA_EntityModeler::getAppEntityModels();
     $entityIds = array();
     foreach($entityModels as $entityModel) {
-      if (!$conf = SRA_EntityModeler::findEntityModelXml(SRA_Controller::getAppConfAttr(array(SRA_ENTITY_MODELER_CONFIG_KEY, $entityModel, 'attributes', 'path')))) {
+			$path = SRA_Controller::getAppConfAttr(array(SRA_ENTITY_MODELER_CONFIG_KEY, $entityModel, 'attributes', 'path'));
+      if (!($conf = SRA_EntityModeler::findEntityModelXml($path))) {
         $msg = "SRA_EntityModeler::getAppEntityModelEntityIds: Failed - Unable to locate entity model ${entityModel} for app ${appKey}";
         return SRA_Error::logError($msg, __FILE__, __LINE__);
       }
