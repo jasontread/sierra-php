@@ -15,7 +15,7 @@ it.
 reusable object-oriented code for Linux based PHP software.
 
 ## Quickstart
-        git pull https://github.com/cloudharmony/sierra-php.git
+        git clone https://github.com/cloudharmony/sierra-php.git
         php sierra-php/bin/sra-quick-install.php
         php sierra-php/bin/sra-installer.php
 
