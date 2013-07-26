@@ -3766,16 +3766,20 @@ class SRA_Util {
    *     value:       the constant value
    *     [other]:     other metadata (metadata value keys are prefixed with @)
    *   classes:       array of hashes (indexed by name) with the following keys:
+   *     access:      the class access - if specified (e.g. public, private)
    *     comment:     the class comment
    *     extends:     the name of another class extended by this class
    *     name:        the class name
    *     [other]:     other metadata (metadata value keys are prefixed with @)
    *     attrs:       array of hashes (indexed by name) with the following keys:
+   *       access:    attribute access - if specified (e.g. public, private)
    *       comment:   the attribute comment
    *       name:      the name of the attribute
+   *       static:    TRUE if attribute is static
    *       value:     the attribute value
    *       [other]:   other metadata (metadata value keys are prefixed with @)
    *     methods:     array of hashes (indexed by name) with the following keys:
+   *       access:    method access - if specified (e.g. public, private)
    *       comment:   the method comment
    *       name:      the name of the method
    *       params:    array of hashes (indexed by name) with the following keys:
@@ -3785,6 +3789,7 @@ class SRA_Util {
    *         type:    the parameter data type
    *         value:   the default parameter value (if applicable)
    *       returnRef: whether or not this method returns value by reference
+   *       static:    TRUE if method is static
    *       [other]:   other metadata (metadata value keys are prefixed with @)
    *    functions:    same as 'methods' documented above, but for non-class 
    *                  defined functions
@@ -3801,9 +3806,7 @@ class SRA_Util {
     $ckey = 'sra_parse_php_source_' . str_replace('/', '.', $file);
     if ($cache) include_once('SRA_Cache.php');
     
-    if ($cache && ($modtime = SRA_Cache::cacheIsset($ckey, TRUE)) && $modtime > filemtime($file)) {
-      return SRA_Cache::getCache($ckey);
-    }
+    if ($cache && ($modtime = SRA_Cache::cacheIsset($ckey, TRUE)) && $modtime > filemtime($file)) return SRA_Cache::getCache($ckey);
     
     $resources =& SRA_Controller::getAppResources();
     $inClass = NULL;
@@ -3826,7 +3829,7 @@ class SRA_Util {
         $pline = substr($line, strpos($line, '*') + 1);
         
         if (SRA_Util::beginsWith($line, '*')) { $line = $pline . "\n"; }
-        if (SRA_Util::beginsWith(trim($line), '@') && preg_match('/@[A-Za-z]+/', trim($line), $m)) { 
+        if (SRA_Util::beginsWith(trim($line), '@') && preg_match('/@[\S]+/', trim($line), $m)) { 
           $apiIdx = substr($m[0], 1);
           $line = trim(substr(trim($line), strlen($apiIdx) + 1));
           if (isset($api[$apiIdx])) { 
@@ -3852,32 +3855,40 @@ class SRA_Util {
         $mergePoint = array('constants', "'$name'");
       }
       // class
-      else if (!$inComment && SRA_Util::beginsWith($line, 'class') && (preg_match('/class\s(.*)\sextends\s(.*)\s?/', $line, $m) || preg_match('/class\s(.*)\s/', $line, $m))) {
+      else if (!$inComment && (preg_match('/class\s(.*)\sextends\s(.*)\s?/', $line, $m) || preg_match('/class\s(.*)\s/', $line, $m))) {
+				$access = preg_match('/([a-z]+)\s+function/', $line, $m1) ? $m1[1] : NULL;
         if (!isset($metadata['classes'])) { $metadata['classes'] = array(); }
         $className = trim($m[1]);
         $metadata['classes'][$className] = array('name' => $className);
+				if ($access) $metadata['classes'][$className]['access'] = $access;
         if (isset($m[2]) && trim($m[2])) { $metadata['classes'][$className]['extends'] = trim(str_replace('{', '', $m[2])); }
         $mergeComment = TRUE;
         $mergePoint = array('classes', "'$className'");
       }
       // attributes
-      else if (!$inComment && $className && SRA_Util::beginsWith($line, 'var') && (preg_match('/var (.*)\s?=\s?(.*)\s?;/', $line, $m) || preg_match('/var (.*)\s?;/', $line, $m))) {
+      else if (!$inComment && $className && (preg_match('/var (.*)\s?=\s?(.*)\s?;/', $line, $m) || preg_match('/var (.*)\s?;/', $line, $m))) {
+				if ($isStatic = preg_match('/static.*function/', $line) ? TRUE : FALSE) $line = str_replace('static ', '', $line);
+				$access = preg_match('/([a-z]+)\s+function/', $line, $m1) ? $m1[1] : NULL;
         if (!isset($metadata['classes'][$className]['attrs'])) { $metadata['classes'][$className]['attrs'] = array(); }
         $m[1] = trim(str_replace('$', '', $m[1]));
         $metadata['classes'][$className]['attrs'][$m[1]] = array('name' => $m[1]);
+				if ($access) $metadata['classes'][$className]['attrs'][$m[1]]['access'] = $access;
+				if ($isStatic) $metadata['classes'][$className]['attrs'][$m[1]]['static'] = TRUE;
         if (isset($m[2]) && trim($m[2])) { $metadata['classes'][$className]['attrs'][$m[1]]['value'] = trim($m[2]); }
         $mergeComment = TRUE;
         $mergePoint = array('classes', "'$className'", 'attrs', "'$m[1]'");
       }
       // methods/functions
-      else if (!$inComment && SRA_Util::beginsWith($line, 'function') && preg_match('/function\s(.*)\((.*)\)/', $line, $m)) {
+      else if (!$inComment && preg_match('/function\s+([\S]+)\((.*)\)/', $line, $m)) {
+				if ($isStatic = preg_match('/static.*function/', $line) ? TRUE : FALSE) $line = str_replace('static ', '', $line);
+				$access = preg_match('/([a-z]+)\s+function/', $line, $m1) ? $m1[1] : NULL;
         $code = '$metadata' . ($className ? "['classes']['$className']['methods']" : "['functions']");
         eval("if (!isset($code)) $code = array();");
         $returnRef = SRA_Util::beginsWith(trim($m[1]), '&') ? '1' : '0';
         if ($returnRef) $m[1] = trim(substr(trim($m[1]), 1));
         $idx = $m[1];
         
-        eval($code . '["' . $idx . '"] = array("name" => $m[1], "returnRef" => $returnRef);');
+        eval($code . '["' . $idx . '"] = array("name" => $m[1]' . ($access ? ', "access" => "' . $access . '"' : '') . ', "returnRef" => $returnRef' . ($isStatic ? ', "static" => TRUE' : '') . ');');
         if (trim($m[2])) {
           $papi = NULL;
           for($n=$i-1; $n>0; $n--) {
@@ -3938,10 +3949,10 @@ class SRA_Util {
       }
     }
     
-    if ($cache) {
-      SRA_Cache::setCache($ckey, $metadata);
-    }
+    if ($cache) SRA_Cache::setCache($ckey, $metadata);
     
+		// print_r($metadata);
+		// exit;
     return $metadata;
 	}
 	// }}}
