@@ -345,10 +345,11 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
    * when TRUE, any nested entity attributes will also be copied. otherwise, 
    * the copy will contain references to the same entities
    * @param boolean $includePrimaryKey whether or not to include the primary key
+   * @param boolean $includeNull whether or not to include NULL values
    * @access public
 	 * @return boolean
 	 */
-	function &copyInto(&$obj, $recursive=FALSE, $dirtyOnly=FALSE, $includePrimaryKey=FALSE) {ldelim}
+	function &copyInto(&$obj, $recursive=FALSE, $dirtyOnly=FALSE, $includePrimaryKey=FALSE, $includeNull=TRUE) {ldelim}
 	  if (!is_object($obj) || !method_exists($obj, 'setAttribute')) return FALSE;
 	  
 	  $result = FALSE;
@@ -367,7 +368,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 {if $primaryKey->_name eq $attribute->_name}
     if ($includePrimaryKey) {ldelim}
 {/if}
-    if ({if $attribute->_cardinality}count{/if}($attr ={if $attribute->_useReference}&{/if} $this->get{$attribute->getMethodName()}()){if !$attribute->_cardinality} !== NULL{/if}) {ldelim}
+    if ({if $attribute->_cardinality}count{/if}($attr ={if $attribute->_useReference}&{/if} $this->get{$attribute->getMethodName()}()){if !$attribute->_cardinality} !== NULL || $includeNull{/if}) {ldelim}
 {if $attribute->_cardinality}
       $initVals['{$attribute->_name}'] = array();
       $keys = array_keys($attr);
