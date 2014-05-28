@@ -3472,6 +3472,7 @@ class SRA_Util {
                                  SRA_UTIL_DATA_UNIT_KILOBIT => array('op' => '*', 'val' => $base2 ? 8589934592 : 8000000000),
                                  SRA_UTIL_DATA_UNIT_BYTE => array('op' => '*', 'val' => $base2 ? 1099511627776 : 1000000000000),
                                  SRA_UTIL_DATA_UNIT_BIT => array('op' => '*', 'val' => $base2 ? 8796093022208 : 8000000000000));
+            break;
           case SRA_UTIL_DATA_UNIT_PETABIT:
             $conversions = array(SRA_UTIL_DATA_UNIT_PETABYTE => array('op' => '/', 'val' => 8),
                                  SRA_UTIL_DATA_UNIT_PETABIT => array('op' => '*', 'val' => 1),
