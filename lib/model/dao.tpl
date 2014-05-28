@@ -1643,7 +1643,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
     $firstCol = FALSE;
 {foreach from=$primaryTable->getColumns() item=column}
 {if !$entity->isFile($column->getBaseAttribute()) && $column->isWritable(1)}
-    if ($record->isDirty('{$column->getBaseAttribute()}') || $record->getAttribute('{$column->getBaseAttribute()}') != NULL) {ldelim}
+    if ($record->isDirty('{$column->getBaseAttribute()}') || $record->getAttribute('{$column->getBaseAttribute()}') != NULL || $record->getAttributeType('{$column->getBaseAttribute()}') == 'boolean') {ldelim}
       $colConstraint .= $started ? ', ' : '';
       $colConstraint .= '{$column->getName()}';
       $valConstraint .= $started ? ', ' : '';
