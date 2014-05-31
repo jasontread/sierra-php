@@ -1600,7 +1600,7 @@ class SRA_Util {
       
       if (is_array($exclude)) {
         foreach($exclude as $id) {
-          if ($attr == $id || strpos($id, $attr . '_') === 0) { return FALSE; }
+          if ($attr == $id) { return FALSE; }
         }
       }
       return TRUE;

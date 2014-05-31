@@ -2950,7 +2950,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
     $js = '{ldelim} "type": "{$entity->_name}"';
 {foreach from=$entity->getAttributes() item=attribute}
 {if !$attribute->_setOnly && !$entity->excludeAttrFromRender($attribute->_name)}
-    if (SRA_Util::includeAttributeInOutput('{$attribute->_name}', $includeAttributes, $skipAttributes, $javascriptDate)) {ldelim}
+    if (SRA_Util::includeAttributeInOutput('{$attribute->_name}', $includeAttributes, $skipAttributes)) {ldelim}
       // add {$attribute->_name}
 {if $attribute->_jsonView}
       $js .= ', "{$attribute->_name}": ' . SRA_Util::toJson($this->renderToVar('{$attribute->_jsonView}', '{$attribute->_name}'), NULL, NULL, $javascriptDate);
