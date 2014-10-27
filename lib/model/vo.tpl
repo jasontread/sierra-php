@@ -5273,23 +5273,18 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return	SRA_ResourceBundle
 	 */
 	function &getEntityResources( ) {ldelim}
-		static $resources = FALSE;
-    
     {$Template->assign('aopMethodName', "getEntityResources")}
     {include file="entity-aspect-before.tpl"}
+    if (!isset($this->__resources)) {ldelim}
+      $this->__resources =& SRA_Controller::getAppResources();
 {if $entity->_resources}
-		
-		if (!$resources) {ldelim}
-			$resources =& SRA_Controller::getAppResources();
 {foreach from=$entity->_resources item=res}
-			$resources =& SRA_ResourceBundle::merge($resources, SRA_ResourceBundle::getBundle('{$res}'));
+			$this->__resources =& SRA_ResourceBundle::merge($this->__resources, SRA_ResourceBundle::getBundle('{$res}'));
 {/foreach}
-		{rdelim}
-{else}
-    if (!$resources) $resources =& SRA_Controller::getAppResources();
 {/if}
+		{rdelim}
     {include file="entity-aspect-after.tpl"}
-    return $resources;
+    return $this->__resources;
 	{rdelim}
 	// {rdelim}{rdelim}{rdelim}
   
