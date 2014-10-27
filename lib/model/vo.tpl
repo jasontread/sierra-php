@@ -5285,12 +5285,11 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 			$resources =& SRA_ResourceBundle::merge($resources, SRA_ResourceBundle::getBundle('{$res}'));
 {/foreach}
 		{rdelim}
-		{include file="entity-aspect-after.tpl"}
-		return $resources;
 {else}
-    {include file="entity-aspect-after.tpl"}
-		return SRA_Controller::getAppResources();
+    if (!$resources) $resources =& SRA_Controller::getAppResources();
 {/if}
+    {include file="entity-aspect-after.tpl"}
+    return $resources;
 	{rdelim}
 	// {rdelim}{rdelim}{rdelim}
   
