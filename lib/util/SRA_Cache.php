@@ -303,7 +303,7 @@ class SRA_Cache {
     $name = SRA_Controller::isAppInitialized() ? SRA_Controller::getCurrentAppId() . '-' . $name : $name;
     
     if ($ttl === TRUE) {
-      if ($files = SRA_File::getFileList(SRA_Controller::getSysTmpDir(), '/' . SRA_CACHE_PREFIX . $name . '/')) {
+      if ($files = SRA_File::getFileList(SRA_Controller::getSysTmpDir(), '/' . SRA_CACHE_PREFIX . $name . '\-[0-9]{10}/')) {
         return $files[0];
       }
     }
