@@ -76,7 +76,9 @@ $_sraCache = array();
  * complex/object variables. the variables are cached as a serialized value. 
  * when used in conjunction with sierra/tmp mounted as a ramdisk, the cache will 
  * essentially be stored in memory and thus very quickly accessible. this class 
- * also manages periodic cache garbage collection
+ * also manages periodic cache garbage collection. If the PHP apc module is 
+ * present, it's caching logic will be used - otherwise, the application's 
+ * temp directory will be used
  * @author  Jason Read <jason@idir.org>
  * @package sierra.util
  */
@@ -93,6 +95,9 @@ class SRA_Cache {
 	 */
   function cacheIsset($name, $modtime=FALSE) {
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::cacheIsset - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use APC if present
+    if (function_exists('apc_exists')) return apc_exists($name);
     
     SRA_Cache::_garbageCollector();
     
@@ -121,6 +126,9 @@ class SRA_Cache {
 	 */
   function deleteCache($name) {
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::deleteCache - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use APC if present
+    if (function_exists('apc_delete')) return apc_delete($name);
     
     SRA_Cache::_garbageCollector();
     
@@ -152,6 +160,9 @@ class SRA_Cache {
 	 */
   function &getCache($name) {
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use APC if present
+    if (function_exists('apc_fetch')) return apc_fetch($name);
     
     SRA_Cache::_garbageCollector();
     
@@ -190,6 +201,9 @@ class SRA_Cache {
 	 */
   function setCache($name, &$val, $ttl=NULL) {
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
+    
+    // use APC if present
+    if (function_exists('apc_store')) return apc_store($name, $val, $ttl);
     
     SRA_Cache::_garbageCollector();
     
