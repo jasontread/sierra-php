@@ -94,6 +94,7 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function cacheIsset($name, $modtime=FALSE) {
+    global $argc;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::cacheIsset - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use APC if present
@@ -125,6 +126,7 @@ class SRA_Cache {
 	 * @return boolean
 	 */
   function deleteCache($name) {
+    global $argc;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::deleteCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use APC if present
@@ -159,6 +161,7 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function &getCache($name) {
+    global $argc;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use APC if present
@@ -200,6 +203,7 @@ class SRA_Cache {
 	 * @return boolean
 	 */
   function setCache($name, &$val, $ttl=NULL) {
+    global $argc;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
     
     // use APC if present
