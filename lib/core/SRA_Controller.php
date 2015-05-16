@@ -493,7 +493,7 @@ class SRA_Controller {
    * @access public
    * @return 	array
    */
-  function &getSysConf($resetCache=FALSE) {
+  static function &getSysConf($resetCache=FALSE) {
     static $_sraCachedSysConf;
 
     if (!isset($_sraCachedSysConf) || $resetCache) {
