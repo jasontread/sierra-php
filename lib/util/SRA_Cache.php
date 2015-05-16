@@ -94,8 +94,14 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function cacheIsset($name, $modtime=FALSE) {
-    global $argc;
+    global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::cacheIsset - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use memcached if global variable $memcached exists
+    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') {
+      $memcached->get($name);
+      return $memcached->getResultCode() != Memcached::RES_NOTFOUND;
+    }
     
     // use APC if present
     if (!isset($argc) && function_exists('apc_exists')) return apc_exists($name);
@@ -128,6 +134,9 @@ class SRA_Cache {
   function deleteCache($name) {
     global $argc;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::deleteCache - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use memcached if global variable $memcached exists
+    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') return $memcached->delete($name);
     
     // use APC if present
     if (!isset($argc) && function_exists('apc_delete')) return apc_delete($name);
@@ -163,6 +172,9 @@ class SRA_Cache {
   function &getCache($name) {
     global $argc;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use memcached if global variable $memcached exists
+    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') return $memcached->get($name);
     
     // use APC if present
     if (!isset($argc) && function_exists('apc_fetch')) return apc_fetch($name);
@@ -205,6 +217,9 @@ class SRA_Cache {
   function setCache($name, &$val, $ttl=NULL) {
     global $argc;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
+    
+    // use memcached if global variable $memcached exists
+    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') return $memcached->set($name, $val, $ttl);
     
     // use APC if present
     if (!isset($argc) && function_exists('apc_store')) return apc_store($name, $val, $ttl);
