@@ -422,7 +422,7 @@ class SRA_Error {
      * @access public
      * @return boolean
      */
-    function writeLog($errorMessage, $file, $lineNumber, $severity) {
+    static function writeLog($errorMessage, $file, $lineNumber, $severity) {
 			
 			if (!($severity & SRA_Controller::getAppErrorMask())) {
 				// Mask doesn't want us to log this message.

@@ -1251,7 +1251,7 @@ class SRA_Controller {
    * @access public
    * @return 	string
    */
-  function getAppErrorMask() {
+  static function getAppErrorMask() {
     global $_sraCurrentAppKey;
     static $_sraCachedAppErrorMasks = array();
     
@@ -1270,7 +1270,7 @@ class SRA_Controller {
    * @access public
    * @return 	string
    */
-  function getSysErrorMask() {
+  static function getSysErrorMask() {
     static $_sraCachedSysErrorMask;
     
     if (!isset($_sraCachedSysErrorMask)) {
