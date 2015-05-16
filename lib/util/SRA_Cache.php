@@ -132,7 +132,7 @@ class SRA_Cache {
 	 * @return boolean
 	 */
   function deleteCache($name) {
-    global $argc;
+    global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::deleteCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use memcached if global variable $memcached exists
@@ -170,7 +170,7 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function &getCache($name) {
-    global $argc;
+    global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use memcached if global variable $memcached exists
@@ -215,7 +215,7 @@ class SRA_Cache {
 	 * @return boolean
 	 */
   function setCache($name, &$val, $ttl=NULL) {
-    global $argc;
+    global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
     
     // use memcached if global variable $memcached exists
