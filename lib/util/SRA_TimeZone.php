@@ -451,8 +451,11 @@ class SRA_TimeZone {
    * @return hash
    */
   function getRange(&$date) {
+    static $_cachedRanged = array();
+    
     if (!$date) { $date = new SRA_GregorianDate(); }
     $compare = $date->format('YmdHis');
+    if (isset($_cachedRanged[$compare])) return $_cachedRanged[$compare] ? $_cachedRanged[$compare] : NULL;
     
     if ($ranges =& $this->getRanges()) {
       foreach(array_keys($ranges) as $key) {
@@ -463,11 +466,13 @@ class SRA_TimeZone {
             $next = TRUE;
           }
           else {
+            $_cachedRanged[$compare] = $ranges[$key];
             return $ranges[$key];
           }
         }
       }
     }
+    $_cachedRanged[$compare] = FALSE;
     return NULL;
   }
   // }}}
