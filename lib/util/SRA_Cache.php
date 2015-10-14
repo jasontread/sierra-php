@@ -211,15 +211,24 @@ class SRA_Cache {
    * @param mixed $val the cache value
    * @param int $ttl an optional ttl for this cache value (# of seconds this 
    * cache should remain valid)
+   * @param int $maxAttempts the max attempts to set the cache when memcached 
+   * is in use
 	 * @access public
 	 * @return boolean
 	 */
-  function setCache($name, &$val, $ttl=NULL) {
+  function setCache($name, &$val, $ttl=NULL, $maxAttempts=5) {
     global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
     
     // use memcached if global variable $memcached exists
-    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') return $memcached->set($name, $val, $ttl);
+    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') {
+      // cache does not always set on the first try
+      for($i=0; $i<$maxAttempts; $i++) {
+        $memcached->set($name, $val, $ttl);
+        if (SRA_Cache::cacheIsset($sleep)) break;
+        sleep(1);
+      }
+    }
     
     // use APC if present
     if (!isset($argc) && function_exists('apc_store')) return apc_store($name, $val, $ttl);
