@@ -225,7 +225,8 @@ class SRA_Cache {
       // cache does not always set on the first try
       for($i=0; $i<$maxAttempts; $i++) {
         $memcached->set($name, $val, $ttl);
-        if (SRA_Cache::cacheIsset($sleep)) break;
+        $memcached->get($name);
+        if ($memcached->getResultCode() != Memcached::RES_NOTFOUND) break;
         sleep(1);
       }
     }
