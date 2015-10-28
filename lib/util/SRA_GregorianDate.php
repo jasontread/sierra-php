@@ -2232,7 +2232,6 @@ class SRA_GregorianDate {
     if (!$this->isDateOnly() && SRA_TimeZone::isValid($tz) && !$tz->equals($this->_tz)) {
       if ($convert && SRA_TimeZone::isValid($this->_tz)) {
         $offset = $tz->getGmtOffset($this) - $this->_tz->getGmtOffset($this);
-        if (!$offset) $offset = $tz->getGmtOffset($this) - $this->_tz->getGmtOffset();
         $this->jump(SRA_GREGORIAN_DATE_UNIT_MINUTE, $offset);
       }
       $this->_tz =& $tz;
