@@ -223,17 +223,17 @@ class SRA_Cache {
     // use memcached if global variable $memcached exists
     if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') {
       // cache does not always set on the first try
-      $set = FALSE;
+      $cacheSet = FALSE;
       for($i=0; $i<$maxAttempts; $i++) {
         $memcached->set($name, $val, $ttl);
         $memcached->get($name);
         if ($memcached->getResultCode() != Memcached::RES_NOTFOUND) {
-          $set = TRUE;
+          $cacheSet = TRUE;
           break;
         }
         sleep(1);
       }
-      return $set;
+      return $cacheSet;
     }
     
     // use APC if present
