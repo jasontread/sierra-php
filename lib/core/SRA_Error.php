@@ -181,7 +181,14 @@ function error_handler($errNo, $errStr, $errFile, $errLine, $errContext=FALSE) {
 					 break;
 
 			default:
-          if (phpversion() >= 5) { return; }
+          if (phpversion() >= 5) {
+            // PHP 5 recoverable error - treat as problem level error
+            if ($errNo == 4096) {
+              $err_msg = $s_start."E_RECOVERABLE_ERROR:$s_end $errStr";
+              $err_no = SRA_ERROR_PROBLEM;
+            }
+            else return; 
+          }
 					$err_msg = $s_start."Unknown Type:$s_end $errStr";
 					$err_no = SRA_ERROR_PROBLEM;
 	} // end switch
