@@ -101,12 +101,12 @@ class SRA_DaoFactory {
 			SRA_Util::printDebug("SRA_DaoFactory::getDao - accessing DAO for app ${app}, entity type ${entity}", SRA_Controller::isSysInDebug(), __FILE__, __LINE__);
 			$file = SRA_DaoFactory::_getRegisterFile($app);
 			$parser =& SRA_XmlParser::getXmlParser($file);
-			if ($entity && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
+			if ($entity && SRA_XmlParser::isValid($parser) && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
 				require_once($data['file']);
 				$daos[$app . $entity] = new ${data}['class']($entity);
 			}
 			else {
-				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${app} or entity ${entity}";
+				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${app}, entity ${entity} or file ${file}";
 				return SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel );
 			}
 		}
