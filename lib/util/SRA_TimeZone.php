@@ -886,6 +886,7 @@ class SRA_TimeZone {
   function setTzEnvVar(&$tz) {
     if (is_string($tz)) { $tz =& SRA_TimeZone::getTimeZone($tz); }
     if (SRA_TimeZone::isValid($tz)) {
+      if (function_exists('date_default_timezone_set')) date_default_timezone_set($tz->getId());
       return putenv('TZ=' . $tz->getId());
     }
     else {
