@@ -184,7 +184,7 @@ class SRA_Template {
   function assignByRef($tag, & $value) {
     if ($tag == '') { return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__); }
     if (isset($this->_tpl->_tpl_vars[$tag])) { unset($this->_tpl->_tpl_vars[$tag]); }
-    $this->_tpl->_tpl_vars[$tag] =& $value;
+    $this->_tpl->_tpl_vars[$tag] = $value;
   }
   // }}}
   
