@@ -17,7 +17,7 @@
  entity model source file: {$entityModelPath}
  */
 // {rdelim}{rdelim}{rdelim}
-{$Template->assign("aopClassType", $smarty.const.SRA_AOP_CLASS_DAO)}
+{assign var="aopClassType", $smarty.const.SRA_AOP_CLASS_DAO}
 // {ldelim}{ldelim}{ldelim} Imports
 require_once('model/SRA_WS.php');
 {if $entity->_daoExtendsFile}
@@ -96,7 +96,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @access  package
    */
   function {$className}($entity) {ldelim} 
-    {$Template->assign('aopMethodName', $className)}
+    {assign var='aopMethodName', $className}
     {include file="entity-aspect-before.tpl"}
     if (!SRA_Database::isValid($this->_db =& SRA_Controller::getAppDb({if $entity->_db}'{$entity->_db}'{/if}))) {ldelim}
       $msg = "{$className}::{$className}: Failed to obtain reference to a SRA_Database object instance";
@@ -122,7 +122,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function convertAttribute($value, $attribute = NULL) {ldelim}
-    {$Template->assign('aopMethodName', "convertAttribute")}
+    {assign var='aopMethodName', "convertAttribute"}
     {include file="entity-aspect-before.tpl"}
     // base entity table
     if (!$attribute) {ldelim} $attribute = '{$primaryKey->_name}'; {rdelim}
@@ -149,7 +149,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function convertPk($id) {ldelim}
-    {$Template->assign('aopMethodName', "convertPk")}
+    {assign var='aopMethodName', "convertPk"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->_db->{$primaryKey->getConvertMethodName()}($id);
@@ -166,7 +166,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return void
    */
   function delete(& $record) {ldelim}
-    {$Template->assign('aopMethodName', "delete")}
+    {assign var='aopMethodName', "delete"}
     {include file="entity-aspect-before.tpl"}
     static $deletingRecord = array();
     
@@ -367,7 +367,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findAll($limit=NULL, $offset=NULL) {ldelim}
-    {$Template->assign('aopMethodName', "findAll")}
+    {assign var='aopMethodName', "findAll"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->_find(FALSE, $limit, $offset);
@@ -394,7 +394,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findByConstraints($constraints, $sqlConstraint=FALSE, $sqlOrderConstraint=FALSE, $limit=NULL, $offset=NULL) {ldelim}
-    {$Template->assign('aopMethodName', "findByConstraints")}
+    {assign var='aopMethodName', "findByConstraints"}
     {include file="entity-aspect-before.tpl"}
     
     // check if param is a valid {$voClassName} instance
@@ -425,7 +425,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}
    */
   function &findByPk($id, $reload=FALSE) {ldelim}
-    {$Template->assign('aopMethodName', "findByPk")}
+    {assign var='aopMethodName', "findByPk"}
     {include file="entity-aspect-before.tpl"}
     // check if id is valid
     if (!$id || !is_scalar($id)) {ldelim}
@@ -459,7 +459,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findByPks($ids, $limit=NULL, $offset=NULL, $altModel=FALSE, $altModelInitVals=FALSE) {ldelim}
-    {$Template->assign('aopMethodName', "findByPks")}
+    {assign var='aopMethodName', "findByPks"}
     {include file="entity-aspect-before.tpl"}
     // validate altModelInitVals
     if (is_array($altModelInitVals) && count($altModelInitVals) != count($ids)) {ldelim}
@@ -500,7 +500,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findByQuery($query, $limit=NULL, $offset=NULL, $leftJoin=FALSE) {ldelim}
-    {$Template->assign('aopMethodName', "findByQuery")}
+    {assign var='aopMethodName', "findByQuery"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->_find($query, $limit, $offset, $leftJoin);
@@ -526,7 +526,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findBySqlConstraints($constraints, $sqlConstraint=FALSE, $sqlOrderConstraint=FALSE, $limit=NULL, $offset=NULL) {ldelim}
-    {$Template->assign('aopMethodName', "findBySqlConstraints")}
+    {assign var='aopMethodName', "findBySqlConstraints"}
     {include file="entity-aspect-before.tpl"}
     
     // check if param is a valid {$voClassName} instance
@@ -570,7 +570,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findEqual(& $record, $limit=NULL, $offset=NULL) {ldelim}
-    {$Template->assign('aopMethodName', "findEqual")}
+    {assign var='aopMethodName', "findEqual"}
     {include file="entity-aspect-before.tpl"}
     // check if param is a valid {$voClassName} instance
     if (!{$voClassName}::isValid($record)) {ldelim}
@@ -616,7 +616,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findLike(& $record, $matchSubstrings=TRUE, $limit=NULL, $offset=NULL) {ldelim}
-    {$Template->assign('aopMethodName', "findLike")}
+    {assign var='aopMethodName', "findLike"}
     {include file="entity-aspect-before.tpl"}
     // check if param is a valid {$voClassName} instance
     if (!{$voClassName}::isValid($record)) {ldelim}
@@ -662,7 +662,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return int
    */
   function getRecordCount($constraint=NULL) {ldelim}
-    {$Template->assign('aopMethodName', "getRecordCount")}
+    {assign var='aopMethodName', "getRecordCount"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return SRA_Database::getQueryValue($this->_db, 'SELECT count(*) FROM ' . $this->getTableName() . ($constraint ? " WHERE $constraint" : ''), SRA_DATA_TYPE_INT);
@@ -691,7 +691,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}
    */
   function &_find($context, $limit=NULL, $offset=NULL, $leftJoin=FALSE, $altModel=FALSE, $altModelInitVals=FALSE, $reload=FALSE) {ldelim}
-    {$Template->assign('aopMethodName', "_find")}
+    {assign var='aopMethodName', "_find"}
     {include file="entity-aspect-before.tpl"}
     // check if altModel class is valid
     if ($altModel && !class_exists($altModel)) {ldelim}
@@ -1027,7 +1027,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return array
    */
   function &getAppDbEntityKeys(& $record) {ldelim}
-    {$Template->assign('aopMethodName', "getAppDbEntityKeys")}
+    {assign var='aopMethodName', "getAppDbEntityKeys"}
     {include file="entity-aspect-before.tpl"}
     $dbEntityKeys = array();
 {foreach from=$entity->getAttributes() item=attribute}
@@ -1063,7 +1063,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return DataAccessObject[]
    */
   function &getDaos() {ldelim}
-    {$Template->assign('aopMethodName', "getDaos")}
+    {assign var='aopMethodName', "getDaos"}
     {include file="entity-aspect-before.tpl"}
     
     if (!isset($this->_daos)) {ldelim}
@@ -1096,7 +1096,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getPkColumn() {ldelim}
-    {$Template->assign('aopMethodName', "getPkColumn")}
+    {assign var='aopMethodName', "getPkColumn"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return '{$primaryKey->_column}';
@@ -1112,7 +1112,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getPkName() {ldelim}
-    {$Template->assign('aopMethodName', "getPkName")}
+    {assign var='aopMethodName', "getPkName"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return '{$primaryKey->_name}';
@@ -1129,7 +1129,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getPkType() {ldelim}
-    {$Template->assign('aopMethodName', "getPkType")}
+    {assign var='aopMethodName', "getPkType"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return '{$primaryKey->_type}';
@@ -1146,7 +1146,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function convertAttributeValue($attribute, $value) {ldelim}
-    {$Template->assign('aopMethodName', "convertAttributeValue")}
+    {assign var='aopMethodName', "convertAttributeValue"}
     {include file="entity-aspect-before.tpl"}
     $db =& SRA_Controller::getAppDb({if $entity->_db}'{$entity->_db}'{/if});
     $daos =& $this->getDaos();
@@ -1195,7 +1195,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getColumnName($attribute = FALSE) {ldelim}
-    {$Template->assign('aopMethodName', "getColumnName")}
+    {assign var='aopMethodName', "getColumnName"}
     {include file="entity-aspect-before.tpl"}
     // base entity table
     if (!$attribute) {ldelim}
@@ -1251,7 +1251,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getSortColumnName($attribute = FALSE, $tableName = FALSE) {ldelim}
-    {$Template->assign('aopMethodName', "getSortColumnName")}
+    {assign var='aopMethodName', "getSortColumnName"}
     {include file="entity-aspect-before.tpl"}
     $sortColumns = FALSE;
     $daos =& $this->getDaos();
@@ -1332,7 +1332,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getTableName($attribute = FALSE) {ldelim}
-    {$Template->assign('aopMethodName', "getTableName")}
+    {assign var='aopMethodName', "getTableName"}
     {include file="entity-aspect-before.tpl"}
     // attribute specific table
 {foreach from=$entity->getAttributes() item=attribute}
@@ -1366,7 +1366,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    */
   function {if $attribute->_useReference}&{/if}{$methodName}(& $record{if $attribute->_cardinality && $attribute->isEntity()}, $pk = FALSE{/if}) {ldelim}
     
-    {$Template->assign('aopMethodName', $methodName)}
+    {assign var='aopMethodName', $methodName)}
     {include file="entity-aspect-before.tpl"}
 {if !$attribute->_table}
     $daos =& $this->getDaos();
@@ -1588,7 +1588,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return void
    */
   function insert(& $record, $insertSubEntities) {ldelim}
-    {$Template->assign('aopMethodName', "insert")}
+    {assign var='aopMethodName', "insert"}
     {include file="entity-aspect-before.tpl"}
     // check if param is a valid {$voClassName} instance
     if (!{$voClassName}::isValid($record)) {ldelim}
@@ -1934,7 +1934,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return void
    */
   function &newInstance($params=NULL) {ldelim}
-    {$Template->assign('aopMethodName', "newInstance")}
+    {assign var='aopMethodName', "newInstance"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return new {$entity->_name}{$entity->_voSuffix}($params);
@@ -1956,7 +1956,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return boolean
    */
   function update(& $record, $updateSubEntities = FALSE) {ldelim}
-    {$Template->assign('aopMethodName', "update")}
+    {assign var='aopMethodName', "update"}
     {include file="entity-aspect-before.tpl"}
     // check if param is a valid {$voClassName} instance
     if (!{$voClassName}::isValid($record)) {ldelim}
@@ -2308,7 +2308,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$entity->_name}{$entity->_voSuffix}
    */
   function &reload(& ${$entity->_name}) {ldelim}
-    {$Template->assign('aopMethodName', "reload")}
+    {assign var='aopMethodName', "reload"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->findByPk(${$entity->_name}->getPrimaryKey(), TRUE);
@@ -2369,7 +2369,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return String
    */
   function toString() {ldelim}
-    {$Template->assign('aopMethodName', "toString")}
+    {assign var='aopMethodName', "toString"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return SRA_Util::objectToString($this);
@@ -2391,7 +2391,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return  boolean
    */
   function isValid( & $object ) {ldelim}
-    {$Template->assign('aopMethodName', "isValid")}
+    {assign var='aopMethodName', "isValid"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return (is_object($object) && (!isset($object->err) || !SRA_Error::isError($object->err)) && strtolower(get_class($object)) == '{$className|lower}' || is_subclass_of($object, '{$className|lower}'));

@@ -165,9 +165,7 @@ class SRA_Template {
     else {
       if (isset($this->_tpl->tpl_vars)) {
         if (isset($this->_tpl->tpl_vars[$tag])) unset($this->_tpl->tpl_vars[$tag]);
-        $obj = new stdClass();
-        $obj->value = $value;
-        $this->_tpl->tpl_vars[$tag] =& $obj;
+        $this->_tpl->assign($tag, $value);
       }
       else {
         if (isset($this->_tpl->_tpl_vars[$tag])) unset($this->_tpl->_tpl_vars[$tag]);
@@ -192,9 +190,7 @@ class SRA_Template {
     else {
       if (isset($this->_tpl->tpl_vars)) {
         if (isset($this->_tpl->tpl_vars[$tag])) unset($this->_tpl->tpl_vars[$tag]);
-        $obj = new stdClass();
-        $obj->value =& $value;
-        $this->_tpl->tpl_vars[$tag] =& $obj;
+        $this->_tpl->assignByRef($tag, $value);
       }
       else {
         if (isset($this->_tpl->_tpl_vars[$tag])) unset($this->_tpl->_tpl_vars[$tag]);

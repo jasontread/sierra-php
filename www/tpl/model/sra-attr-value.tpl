@@ -62,7 +62,7 @@ attribute values
 
 {* display using template *}
 {if $tplParams->getParam('arrayVal')}
-{$Template->assignByRef('attribute', $arrayVal)}
+{assign var='attribute', $arrayVal}
 {include file=$tplParams->getParam('arrayVal')}
 
 {* display using entity parseString call *}
@@ -72,7 +72,7 @@ attribute values
 {* display in raw form *}
 {else}
 {if $Template->isObject($arrayVal) || $Template->isArray($arrayVal)}
-{$Template->assignByRef('sraAttrVal', $arrayVal)}
+{assign var='sraAttrVal', $arrayVal}
 {include file='sra-attr-value.tpl'}
 {else}
 

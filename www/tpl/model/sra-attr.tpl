@@ -287,7 +287,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {assign var="displayVal" value=$attribute}
 {if $invokeParams->getParams()}
 {foreach from=$invokeParams->getParams() key=method item=p}
-{$Template->assign("displayVal", $Util->invokeMethod($displayVal, $method, $p))}
+{assign var="displayVal", $Util->invokeMethod($displayVal, $method, $p)}
 {/foreach}
 {/if}
 {/if}
@@ -351,7 +351,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {assign var="formatString" value=$formatStrParams->getParam($property)}
 
 {* display using template *}
-{if $tplParams->getParam($property)}{$Template->assign('displayVal', $displayVal)}{$Template->display($tplParams->getParam($property))}
+{if $tplParams->getParam($property)}{assign var='displayVal', $displayVal}{$Template->display($tplParams->getParam($property))}
 
 {* display using entity parseString call *}
 {elseif $displayedNull eq "0" && $formatString}{$entity->parseString($formatString)}
@@ -394,6 +394,6 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {* post output templates, text/html *}
 {$postParams->getParam('output')}
 {if $postTplParams->getParam('output')}{$Template->display($postTplParams->getParam('output'))}{/if}
-{$Template->assign('fieldNamePre', '')}
-{$Template->assign('fieldNamePost', '')}
+{assign var='fieldNamePre', ''}
+{assign var='fieldNamePost', ''}
 {if $outputBuffered}{$Template->stopBuffering(1)}{/if}
