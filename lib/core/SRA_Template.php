@@ -1059,7 +1059,7 @@ class SRA_Template {
     $appId = $appId ? $appId : '_sys_';
     if (!isset($cachedTemplates[$appId])) {
       $cachedTemplates[$appId] = new SRA_Template();
-      if (!$cachedTemplates[$appId]->_tpl = new Smarty()) {
+      if (!$cachedTemplates[$appId]->_tpl = (preg_match('/^7/', phpversion()) ? new SmartyBC() : new Smarty())) {
         return SRA_Error::logError('SRA_Template::getTemplate: Failed - Could not create new Smarty template object', __FILE__, __LINE__, SRA_ERROR_SHUTDOWN);
       }
       $cachedTemplates[$appId]->_compileDir = $appId ? SRA_Controller::getAppTmpDir() : SRA_Controller::getSysTmpDir();
