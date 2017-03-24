@@ -1366,7 +1366,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    */
   function {if $attribute->_useReference}&{/if}{$methodName}(& $record{if $attribute->_cardinality && $attribute->isEntity()}, $pk = FALSE{/if}) {ldelim}
     
-    {assign var='aopMethodName' value=$methodName)}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
 {if !$attribute->_table}
     $daos =& $this->getDaos();
