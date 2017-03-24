@@ -145,7 +145,7 @@ class SRA_AopAspect {
 	 * returns TRUE if this aspect applies to the given criteria
    * @access  public
 	 */
-	function appliesTo($class, $method, $when) {
+	function appliesTo($classType, $method, $when) {
     $applies = FALSE;
     if ($this->_when == $when) {
       foreach($this->_joinPoints as $pointcut) {
@@ -159,7 +159,7 @@ class SRA_AopAspect {
             $pointClass = 'vo';
             $pointcut = substr($pointcut, strlen(SRA_AOP_CLASS_VO . '.'));
           }
-          if ((!$pointClass || $pointClass == $class) && ($pointcut == $method || (!SRA_Util::beginsWith($method, $pointcut) && preg_match('/' . $pointcut . '/', $class . '.' . $method)))) {
+          if ((!$pointClass || $pointClass == $classType) && ($pointcut == $method || (!SRA_Util::beginsWith($method, $pointcut) && preg_match('/' . $pointcut . '/', $classType . '.' . $method)))) {
             $applies = TRUE;
             break;
           }

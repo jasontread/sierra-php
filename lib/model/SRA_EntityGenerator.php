@@ -687,17 +687,17 @@ class SRA_EntityGenerator extends SRA_Generator {
 	/**
 	 * Returns all of the SRA_AopAspects for the specified class, method and 
    * when
-   * @param string $class the class to return the aspects for (one of the SRA_AOP_CLASS_* constants)
+   * @param string $classType the class to return the aspects for (one of the SRA_AOP_CLASS_* constants)
    * @param string $method the name of the method to return the aspects for (w/o parameters or parens)
    * @param string $when the aspect when flag. one of the SRA_AOP_ASPECT_WHEN_* constants
    * @access  public
 	 * @return String
 	 */
-	function getAopAspects($class, $method, $when) {
+	function getAopAspects($classType, $method, $when) {
 		$aspects = array();
     $keys = array_keys($this->_aopAspects);
     foreach ($keys as $key) {
-      if ($this->_aopAspects[$key]->appliesTo($class, $method, $when)) {
+      if ($this->_aopAspects[$key]->appliesTo($classType, $method, $when)) {
         $aspects[] = $this->_aopAspects[$key];
       }
     }
@@ -712,17 +712,17 @@ class SRA_EntityGenerator extends SRA_Generator {
    * @param string $type a type limiter. if not specified, all introductions 
    * of any type will be returned. must correspond with one of the 
    * SRA_AOP_INTRODUCTION_TYPE_* constants
-   * @param string $class a class limiter. if not specified, all introductions 
+   * @param string $classType a class limiter. if not specified, all introductions 
    * for any class will be returned. must correspond with one of the 
    * SRA_AOP_CLASS_* constants
    * @access  public
 	 * @return String
 	 */
-	function getAopIntroductions($type=FALSE, $class=FALSE) {
+	function getAopIntroductions($type=FALSE, $classType=FALSE) {
 		$introductions = array();
     $keys = array_keys($this->_aopIntroductions);
     foreach ($keys as $key) {
-      if ($this->_aopIntroductions[$key]->appliesTo($type, $class)) {
+      if ($this->_aopIntroductions[$key]->appliesTo($type, $classType)) {
         $introductions[] = $this->_aopIntroductions[$key];
       }
     }
