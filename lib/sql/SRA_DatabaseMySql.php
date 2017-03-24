@@ -148,7 +148,7 @@ class SRA_DatabaseMySql extends SRA_Database {
     function &convertBlob(&$blob) {
 			if (!isset($blob)) { return 'NULL'; }
         // NOTE: This assumes the  blob or text datatype is being used.
-				return "'" . (function_exists('mysqli_connect') ? mysqli_escape_string($blob) : mysql_escape_string($blob)) . "'";
+				return "'" . (function_exists('mysqli_connect') ? mysqli_escape_string($this->_getAppDbConnection(), $blob) : mysql_escape_string($blob)) . "'";
     }
     // }}}
     
@@ -243,7 +243,7 @@ class SRA_DatabaseMySql extends SRA_Database {
             return(SRA_Error::logError($msg, __FILE__, __LINE__));
         }
 
-        return("'". (function_exists('mysqli_connect') ? mysqli_escape_string($text) : mysql_escape_string($text)) . "'");
+        return("'". (function_exists('mysqli_connect') ? mysqli_escape_string($this->_getAppDbConnection(), $text) : mysql_escape_string($text)) . "'");
     }
     // }}}
     
