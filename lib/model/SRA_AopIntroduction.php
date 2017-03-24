@@ -148,8 +148,8 @@ class SRA_AopIntroduction {
 	 * returns TRUE if this aspect applies to the given criteria
    * @access  public
 	 */
-	function appliesTo($type, $class) {
-    return (!$type || $this->_type == $type) && (!$class || $this->_class == $class);
+	function appliesTo($type, $classType) {
+    return (!$type || $this->_type == $type) && (!$classType || $this->_class == $classType);
 	}
 	// }}}
   
