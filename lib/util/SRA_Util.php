@@ -2210,7 +2210,7 @@ class SRA_Util {
    * @return	boolean
    */
   function validateEmail($email) {
-      return ereg("^([0-9,a-z,A-Z]+)([.,_]([0-9,a-z,A-Z]+))*[@]([0-9,a-z,A-Z]+)([.,_,-]([0-9,a-z,A-Z]+))*[.]([0-9,a-z,A-Z]){2}([0-9,a-z,A-Z])?$",$email);
+      return preg_match("/^([0-9,a-z,A-Z]+)([.,_]([0-9,a-z,A-Z]+))*[@]([0-9,a-z,A-Z]+)([.,_,-]([0-9,a-z,A-Z]+))*[.]([0-9,a-z,A-Z]){2}([0-9,a-z,A-Z])?$/",$email);
   }
   // }}}
   
@@ -3182,7 +3182,7 @@ class SRA_Util {
 	 * @return boolean
 	 */
 	function isAlphaNumeric($str) {
-    return ereg('[^A-Za-z0-9]', $str) ? FALSE : TRUE;
+    return preg_match('/[^A-Za-z0-9]/', $str) ? FALSE : TRUE;
 	}
 	// }}}
   
@@ -4519,7 +4519,7 @@ class SRA_Util {
     #Step 1b
     if (preg_match("/eed$/", $word)) {
       $stem=preg_replace("/eed$/", '', $word);
-      if (ereg("$mgr0", $stem)) {
+      if (preg_match("/$mgr0/", $stem)) {
         $word=preg_replace("/.$/", '', $word);
       }
     }

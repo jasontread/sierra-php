@@ -159,7 +159,7 @@ class SRA_AopAspect {
             $pointClass = 'vo';
             $pointcut = substr($pointcut, strlen(SRA_AOP_CLASS_VO . '.'));
           }
-          if ((!$pointClass || $pointClass == $class) && ($pointcut == $method || (!SRA_Util::beginsWith($method, $pointcut) && ereg($pointcut, $class . '.' . $method)))) {
+          if ((!$pointClass || $pointClass == $class) && ($pointcut == $method || (!SRA_Util::beginsWith($method, $pointcut) && preg_match('/' . $pointcut . '/', $class . '.' . $method)))) {
             $applies = TRUE;
             break;
           }

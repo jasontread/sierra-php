@@ -531,7 +531,7 @@ class SRA_AttributeValidator {
       if (!SRA_AttributeValidator::isValidValidator('mask', $params)) {
         return FALSE;
       }
-      return preg_match($params['mask'], $value) || ereg($params['mask'], $value) ? TRUE : FALSE;
+      return preg_match($params['mask'], $value) || preg_match($params['mask'], $value) || preg_match('/' . $params['mask'] . '/', $value) ? TRUE : FALSE;
     }
 	}
 	// }}}
