@@ -75,7 +75,7 @@ class SRA_DatabaseMySql extends SRA_Database {
      * @return  void
      */
     function _closeConn($conn) {
-        mysql_close($conn);
+        function_exists('mysqli_connect') ? mysqli_close($conn) : mysql_close($conn);
     }
     // }}}
 
@@ -123,12 +123,12 @@ class SRA_DatabaseMySql extends SRA_Database {
             // currently in a transaction.
             // Meaning this query has no effect unless the db is currently
             // in a transaction.
-            $result = mysql_query('COMMIT', $conn);
+            $result = function_exists('mysqli_connect') ? mysqli_query($conn, 'COMMIT') : mysql_query('COMMIT', $conn);
 
             if ($result === FALSE)
             {
                 // SRA_Error.
-                $msg = "SRA_DatabaseMySql::commit(): SRA_Error: ". mysql_error($conn);
+                $msg = "SRA_DatabaseMySql::commit(): SRA_Error: ". (function_exists('mysqli_connect') ? mysqli_error($conn) : mysql_error($conn));
                 return(SRA_Error::logError($msg, __FILE__, __LINE__));
             }
         }
@@ -148,7 +148,7 @@ class SRA_DatabaseMySql extends SRA_Database {
     function &convertBlob(&$blob) {
 			if (!isset($blob)) { return 'NULL'; }
         // NOTE: This assumes the  blob or text datatype is being used.
-				return "'" . mysql_escape_string($blob) . "'";
+				return "'" . (function_exists('mysqli_connect') ? mysqli_escape_string($blob) : mysql_escape_string($blob)) . "'";
     }
     // }}}
     
@@ -243,7 +243,7 @@ class SRA_DatabaseMySql extends SRA_Database {
             return(SRA_Error::logError($msg, __FILE__, __LINE__));
         }
 
-        return("'". mysql_escape_string($text) . "'");
+        return("'". (function_exists('mysqli_connect') ? mysqli_escape_string($text) : mysql_escape_string($text)) . "'");
     }
     // }}}
     
@@ -308,19 +308,19 @@ class SRA_DatabaseMySql extends SRA_Database {
             // There's a $conn. Execute query.
 						// echo "$query<br />\n";
             //return new SRA_ExecuteSet(1);
-						mysql_select_db($this->_dbName, $conn);
-            $result = mysql_query($query, $conn);
+						function_exists('mysqli_connect') ? mysqli_select_db($conn, $this->_dbName): mysql_select_db($this->_dbName, $conn);
+            $result = function_exists('mysqli_connect') ? mysqli_query($conn, $query) : mysql_query($query, $conn);
 
             if ($result === FALSE)
             {
                 // SRA_Error.
-                $msg = "SRA_DatabaseMySql::execute(): ".mysql_error($conn)." $query";
+                $msg = "SRA_DatabaseMySql::execute(): ".(function_exists('mysqli_connect') ? mysqli_error($conn) : mysql_error($conn))." $query";
                 // NOTE: This SRA_Error uses $errorLevel.
                 return(SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel));
             }
 
             // Create an SRA_ExecuteSet.
-            $xs = new SRA_ExecuteSet(mysql_affected_rows($conn));
+            $xs = new SRA_ExecuteSet(function_exists('mysqli_connect') ? mysqli_affected_rows($conn) : mysql_affected_rows($conn));
 
             // Check for incCol and INSERT
             if ($incCol)
@@ -328,7 +328,7 @@ class SRA_DatabaseMySql extends SRA_Database {
                 // Retrieve auto generated id from the last query and add
                 // it to the SRA_ExecuteSet.
 
-                $xs->setSequenceValue(mysql_insert_id($conn));
+                $xs->setSequenceValue(function_exists('mysqli_connect') ? mysqli_insert_id($conn) : mysql_insert_id($conn));
             }
             // echo "$query " . mysql_affected_rows($conn) . "<br />\n";
             return($xs);
@@ -360,7 +360,7 @@ class SRA_DatabaseMySql extends SRA_Database {
 				}
 
         $conn = $this->_getAppDbConnection($query, TRUE);
-        mysql_select_db($this->_dbName, $this->_getAppDbConnection(NULL, TRUE));
+        function_exists('mysqli_connect') ? mysqli_select_db($this->_getAppDbConnection(NULL, TRUE), $this->_dbName) : mysql_select_db($this->_dbName, $this->_getAppDbConnection(NULL, TRUE));
 
         if (SRA_Error::isError($conn))
         {
@@ -383,12 +383,12 @@ class SRA_DatabaseMySql extends SRA_Database {
 				// echo "$query<br />\n";
 				$query = SRA_Database::applyLimitAndOffset($query, $limit, $offset);
         // Perform query.
-        $result = mysql_unbuffered_query($query, $conn);
+        $result = function_exists('mysqli_connect') ? mysqli_query($conn, $query, MYSQLI_USE_RESULT) : mysql_unbuffered_query($query, $conn);
 
         if (!$result)
         {
             // SRA_Error.
-            $msg = "SRA_DatabaseMySql::fetch: ". mysql_error($conn)." Query: $query";
+            $msg = "SRA_DatabaseMySql::fetch: ". (function_exists('mysqli_connect') ? mysqli_error($conn) : mysql_error($conn))." Query: $query";
             // NOTE: This SRA_Error uses $errorLevel.
             return(SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel));
         }
@@ -406,9 +406,9 @@ class SRA_DatabaseMySql extends SRA_Database {
         $fs = new SRA_ResultSet($this, $query, $baseQuery, $limit, $offset);
 
         // Cast results.
-        $num_cols = mysql_num_fields($result);
+        $num_cols = function_exists('mysqli_connect') ? mysqli_num_fields($result) : mysql_num_fields($result);
 
-        while ($row = mysql_fetch_row($result))
+        while ($row = function_exists('mysqli_connect') ? mysqli_fetch_row($result) : mysql_fetch_row($result))
         {
             // Switch on each col.
             for ($j = 0; $j < $num_cols; ++$j)
@@ -456,7 +456,8 @@ class SRA_DatabaseMySql extends SRA_Database {
             }
             $fs->add($row);
         }
-
+        if (function_exists('mysqli_connect')) mysqli_free_result($result);
+        
 				// add to cache
 				$this->_addFetchToCache($query, $fs);
 				
@@ -510,17 +511,17 @@ class SRA_DatabaseMySql extends SRA_Database {
         {
             // Step 3:
             // There's a $conn. Execute query.
-            $result = mysql_query("INSERT INTO $sequence VALUES (0)", $conn);
+            $result = function_exists('mysqli_connect') ? mysqli_query($conn, "INSERT INTO $sequence VALUES (0)") : mysql_query("INSERT INTO $sequence VALUES (0)", $conn);
 
             if (!$result)
             {
                 // SRA_Error.
-                $msg = "SRA_DatabaseMySql::getNextSequence: Failed - ". mysql_error($conn).", $sequence";
+                $msg = "SRA_DatabaseMySql::getNextSequence: Failed - ". (function_exists('mysqli_connect') ? mysqli_error($conn) : mysql_error($conn)) .", $sequence";
                 // NOTE: This SRA_Error uses $errorLevel.
                 return(SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel));
             }
 
-            return(mysql_insert_id($conn));
+            return(function_exists('mysqli_connect') ? mysqli_insert_id($conn) : mysql_insert_id($conn));
         }
     }
     // }}}
@@ -567,8 +568,10 @@ class SRA_DatabaseMySql extends SRA_Database {
      */
     function selectDb($newDb) {
       $this->_dbName = $newDb;
-      mysql_select_db($this->_dbName, $this->_getAppDbConnection());
-      if ($this->_readOnlyDb) mysql_select_db($this->_dbName, $this->_getAppDbConnection(NULL, TRUE));
+      function_exists('mysqli_connect') ? mysqli_select_db($this->_getAppDbConnection(), $this->_dbName) : mysql_select_db($this->_dbName, $this->_getAppDbConnection());
+      if ($this->_readOnlyDb) {
+        function_exists('mysqli_connect') ? mysqli_select_db($this->_getAppDbConnection(NULL, TRUE), $this->_dbName) : mysql_select_db($this->_dbName, $this->_getAppDbConnection(NULL, TRUE));
+      }
       return TRUE;
     }
     // }}}
@@ -587,7 +590,10 @@ class SRA_DatabaseMySql extends SRA_Database {
      */
     function _openConn($config)
     {
-        if (SRA_DATABASE_MYSQL_USE_PCONNECT) {
+        if (function_exists('mysqli_connect')) {
+          $conn = mysqli_connect($config['server'] . ($config['port'] ? ':' . $config['port'] : ''), $config['user'], $config['password']);
+        }
+        else if (SRA_DATABASE_MYSQL_USE_PCONNECT) {
           $conn = mysql_pconnect($config['server'] . ($config['port'] ? ':' . $config['port'] : ''), $config['user'], $config['password']);
         }
         else {
@@ -600,7 +606,7 @@ class SRA_DatabaseMySql extends SRA_Database {
             $msg = 'SRA_DatabaseMySql::_openConn(): mysql_connect() failed - server: ' . $config['server'] . ' user: ' . $config['user'] . ' password: ' . $config['password'];
             return(SRA_Error::logError($msg, __FILE__, __LINE__));
         }
-        if (!mysql_select_db($config['name'], $conn))
+        if (!(function_exists('mysqli_connect') ? mysqli_select_db($conn, $config['name']) : mysql_select_db($config['name'], $conn)))
         {
             // SRA_Error.
             $msg = "SRA_DatabaseMySql::_openConn(): mysql_select_db() failed select db, {$config['name']}.";
@@ -658,12 +664,12 @@ class SRA_DatabaseMySql extends SRA_Database {
             // Meaning this query has no effect unless the db is currently
             // in a transaction.
 
-            $result = mysql_query('ROLLBACK', $conn);
+            $result = function_exists('mysqli_connect') ? mysqli_query($conn, 'ROLLBACK') : mysql_query('ROLLBACK', $conn);
 
             if ($result === FALSE)
             {
                 // SRA_Error.
-                $msg = "SRA_DatabaseMySql::rollback(): SRA_Error: ". mysql_error($conn);
+                $msg = "SRA_DatabaseMySql::rollback(): SRA_Error: ". (function_exists('mysqli_connect') ? mysqli_error($conn) : mysql_error($conn));
                 return(SRA_Error::logError($msg, __FILE__, __LINE__));
             }
         }
@@ -720,12 +726,12 @@ class SRA_DatabaseMySql extends SRA_Database {
             // queries beginnig from the first startTransaction() call are
             // committed.
 
-            $result = mysql_query('BEGIN', $conn);
+            $result = function_exists('mysqli_connect') ? mysqli_query($conn, 'BEGIN') : mysql_query('BEGIN', $conn);
 
             if ($result === FALSE)
             {
                 // SRA_Error.
-                $msg = "SRA_DatabaseMySql::startTransaction(): SRA_Error: ". mysql_error($conn);
+                $msg = "SRA_DatabaseMySql::startTransaction(): SRA_Error: ". (function_exists('mysqli_connect') ? mysqli_error($conn) : mysql_error($conn));
                 return(SRA_Error::logError($msg, __FILE__, __LINE__));
             }
         }

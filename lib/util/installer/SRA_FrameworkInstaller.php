@@ -1559,7 +1559,7 @@ class SRA_FrameworkInstaller {
     $ret = TRUE;
     switch($id) {
       case 'type':
-        if (((!$val || $val == SRA_DB_TYPE_MYSQL) && !function_exists('mysql_connect')) || ($val == SRA_DB_TYPE_POSTGRESQL && !function_exists('pg_connect')) || ($val == SRA_DB_TYPE_MSSQL && !function_exists('mssql_connect'))) $ret = FALSE;
+        if (((!$val || $val == SRA_DB_TYPE_MYSQL) && !function_exists('mysql_connect') && !function_exists('mysqli_connect')) || ($val == SRA_DB_TYPE_POSTGRESQL && !function_exists('pg_connect')) || ($val == SRA_DB_TYPE_MSSQL && !function_exists('mssql_connect'))) $ret = FALSE;
         break;
     }
     return $ret;
@@ -1738,8 +1738,10 @@ class SRA_FrameworkInstaller {
         if ($conn) mssql_close($conn);
         break;
       default:
-        ($conn = mysql_connect($config['host'] . ':' . $config['port'], $config['user'], $config['password'])) ? (!mysql_select_db($config['name'], $conn) ? $ret = FALSE : $ret = TRUE) : $ret = FALSE;
-        if ($conn) mysql_close($conn);
+        ($conn = (function_exists('mysqli_connect') ? mysqli_connect($config['host'] . ':' . $config['port'], $config['user'], $config['password']) : mysql_connect($config['host'] . ':' . $config['port'], $config['user'], $config['password']))) ? (!(function_exists('mysqli_connect') ? mysqli_select_db($conn, $config['name']) : mysql_select_db($config['name'], $conn)) ? $ret = FALSE : $ret = TRUE) : $ret = FALSE;
+        if ($conn) {
+          function_exists('mysqli_connect') ? mysqli_close($conn) : mysql_close($conn);
+        }
     }
     return $ret;
   }
