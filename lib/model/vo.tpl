@@ -17,7 +17,7 @@
  entity model source file: {$entityModelPath}
  */
 // {rdelim}{rdelim}{rdelim}
-{assign var="aopClassType" value=$smarty.const.SRA_AOP_CLASS_VO)}
+{assign var="aopClassType" value=$smarty.const.SRA_AOP_CLASS_VO}
 // {ldelim}{ldelim}{ldelim} Imports
 {if $entity->_voExtendsFile}
 require_once('{$entity->_voExtendsFile}');
