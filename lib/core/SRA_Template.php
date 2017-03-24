@@ -58,7 +58,7 @@ define('SRA_TEMPLATE_RENDER_OPEN_SUB_VAL', '[$VAL]');
 // }}}
 
 // {{{ Includes
-require_once(SRA_LIB_DIR . '/ext/smarty/libs/Smarty.class.php');
+require_once(SRA_LIB_DIR . sprintf('/ext/smarty/%s/Smarty.class.php', preg_match('/^7/', phpversion()) ? 'v3' : 'v2'));
 // }}}
 
 // {{{ SRA_Template
