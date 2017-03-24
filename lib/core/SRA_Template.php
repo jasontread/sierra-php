@@ -58,7 +58,7 @@ define('SRA_TEMPLATE_RENDER_OPEN_SUB_VAL', '[$VAL]');
 // }}}
 
 // {{{ Includes
-require_once(SRA_LIB_DIR . sprintf('/ext/smarty/%s/Smarty.class.php', preg_match('/^7/', phpversion()) ? 'v3' : 'v2'));
+require_once(SRA_LIB_DIR . sprintf('/ext/smarty/%s/Smarty%s.class.php', preg_match('/^7/', phpversion()) ? 'v3' : 'v2', preg_match('/^7/', phpversion()) ? 'BC' : ''));
 // }}}
 
 // {{{ SRA_Template
@@ -161,14 +161,8 @@ class SRA_Template {
    * @return void
    */
   function assign($tag, $value='') {
-    if (!$tag) {  
-      return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__);
-    }
-    else {
-      if (isset($this->_tpl->_tpl_vars[$tag])) unset($this->_tpl->_tpl_vars[$tag]);
-      else if (isset($this->_tpl->tpl_vars[$tag])) unset($this->_tpl->tpl_vars[$tag]);
-      isset($this->_tpl->tpl_vars) ? $this->_tpl->tpl_vars[$tag] = $value : $this->_tpl->_tpl_vars[$tag] = $value;
-    }
+    if (!$tag) return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__);
+    else $this->_tpl->assign($tag, $value);
   }
   // }}}
   
@@ -183,10 +177,8 @@ class SRA_Template {
    * @return void
    */
   function assignByRef($tag, & $value) {
-    if ($tag == '') { return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__); }
-    if (isset($this->_tpl->_tpl_vars[$tag])) unset($this->_tpl->_tpl_vars[$tag]);
-    else if (isset($this->_tpl->tpl_vars[$tag])) unset($this->_tpl->tpl_vars[$tag]);
-    isset($this->_tpl->tpl_vars) ? $this->_tpl->tpl_vars[$tag] =& $value : $this->_tpl->_tpl_vars[$tag] =& $value;
+    if ($tag == '') return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__);
+    else $this->_tpl->assign_by_ref($tag, $value);
   }
   // }}}
   
