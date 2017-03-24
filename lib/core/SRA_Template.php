@@ -162,7 +162,18 @@ class SRA_Template {
    */
   function assign($tag, $value='') {
     if (!$tag) return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__);
-    else $this->_tpl->assign($tag, $value);
+    else {
+      if (isset($this->_tpl->tpl_vars)) {
+        if (isset($this->_tpl->tpl_vars[$tag])) unset($this->_tpl->tpl_vars[$tag]);
+        $obj = new stdClass();
+        $obj->value = $value;
+        $this->_tpl->tpl_vars[$tag] =& $obj;
+      }
+      else {
+        if (isset($this->_tpl->_tpl_vars[$tag])) unset($this->_tpl->_tpl_vars[$tag]);
+        $this->_tpl->_tpl_vars[$tag] = $value;
+      }
+    }
   }
   // }}}
   
@@ -178,7 +189,18 @@ class SRA_Template {
    */
   function assignByRef($tag, & $value) {
     if ($tag == '') return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__);
-    else $this->_tpl->assign_by_ref($tag, $value);
+    else {
+      if (isset($this->_tpl->tpl_vars)) {
+        if (isset($this->_tpl->tpl_vars[$tag])) unset($this->_tpl->tpl_vars[$tag]);
+        $obj = new stdClass();
+        $obj->value =& $value;
+        $this->_tpl->tpl_vars[$tag] =& $obj;
+      }
+      else {
+        if (isset($this->_tpl->_tpl_vars[$tag])) unset($this->_tpl->_tpl_vars[$tag]);
+        $this->_tpl->_tpl_vars[$tag] =& $value;
+      }
+    }
   }
   // }}}
   
