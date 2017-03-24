@@ -17,7 +17,7 @@
  entity model source file: {$entityModelPath}
  */
 // {rdelim}{rdelim}{rdelim}
-{assign var="aopClassType", $smarty.const.SRA_AOP_CLASS_DAO}
+{assign var="aopClassType" value=$smarty.const.SRA_AOP_CLASS_DAO}
 // {ldelim}{ldelim}{ldelim} Imports
 require_once('model/SRA_WS.php');
 require_once('model/SRA_WSRequest.php');
@@ -107,7 +107,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @access  package
    */
   function {$className}() {ldelim} 
-    {assign var='aopMethodName', $className}
+    {assign var='aopMethodName' value=$className}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
   {rdelim}
@@ -126,7 +126,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return void
    */
   function delete(& $record) {ldelim}
-    {assign var='aopMethodName', "delete"}
+    {assign var='aopMethodName' value="delete"}
     {include file="entity-aspect-before.tpl"}
     static $deletingRecord = array();
     
@@ -188,7 +188,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findAll($limit=NULL, $offset=NULL) {ldelim}
-    {assign var='aopMethodName', "findAll"}
+    {assign var='aopMethodName' value="findAll"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->findByConstraints(array(), $limit, $offset);
@@ -216,7 +216,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findByConstraints($constraints, $limit=NULL, $offset=NULL, $connective = 'and', $operator = 1) {ldelim}
-    {assign var='aopMethodName', "findByConstraints"}
+    {assign var='aopMethodName' value="findByConstraints"}
     {include file="entity-aspect-before.tpl"}
     
     // check if param is a valid {$voClassName} instance
@@ -287,7 +287,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}
    */
   function &findByPk($id, $reload=FALSE) {ldelim}
-    {assign var='aopMethodName', "findByPk"}
+    {assign var='aopMethodName' value="findByPk"}
     {include file="entity-aspect-before.tpl"}
     
     // check for cached
@@ -346,7 +346,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$voClassName}[]
    */
   function &findByPks($ids, $limit=NULL, $offset=NULL, $reload=FALSE) {ldelim}
-    {assign var='aopMethodName', "findByPks"}
+    {assign var='aopMethodName' value="findByPks"}
     {include file="entity-aspect-before.tpl"}
     
     $records = array();
@@ -382,7 +382,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getPkName() {ldelim}
-    {assign var='aopMethodName', "getPkName"}
+    {assign var='aopMethodName' value="getPkName"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return '{$primaryKey->_name}';
@@ -399,7 +399,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getPkType() {ldelim}
-    {assign var='aopMethodName', "getPkType"}
+    {assign var='aopMethodName' value="getPkType"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return '{$primaryKey->_type}';
@@ -426,7 +426,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    */
   function {if $attribute->_useReference}&{/if}{$methodName}(& $record{if $attribute->_cardinality && $attribute->isEntity() && !$attribute->isEntitySkipPersistence()}, $pk = FALSE{/if}) {ldelim}
     
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     
 {if $attribute->_cardinality && $attribute->isEntity() && !$attribute->isEntitySkipPersistence()}
@@ -516,7 +516,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return void
    */
   function insert(& $record) {ldelim}
-    {assign var='aopMethodName', "insert"}
+    {assign var='aopMethodName' value="insert"}
     {include file="entity-aspect-before.tpl"}
     // check if param is a valid {$voClassName} instance
     if (!{$voClassName}::isValid($record)) {ldelim}
@@ -590,7 +590,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return void
    */
   function &newInstance($params=NULL) {ldelim}
-    {assign var='aopMethodName', "newInstance"}
+    {assign var='aopMethodName' value="newInstance"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return new {$entity->_name}{$entity->_voSuffix}($params);
@@ -610,7 +610,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return boolean
    */
   function update(& $record) {ldelim}
-    {assign var='aopMethodName', "update"}
+    {assign var='aopMethodName' value="update"}
     {include file="entity-aspect-before.tpl"}
     // check if param is a valid {$voClassName} instance
     if (!{$voClassName}::isValid($record)) {ldelim}
@@ -661,7 +661,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return {$entity->_name}{$entity->_voSuffix}
    */
   function &reload(& ${$entity->_name}) {ldelim}
-    {assign var='aopMethodName', "reload"}
+    {assign var='aopMethodName' value="reload"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->findByPk(${$entity->_name}->getPrimaryKey(), TRUE);
@@ -676,7 +676,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return String
    */
   function toString() {ldelim}
-    {assign var='aopMethodName', "toString"}
+    {assign var='aopMethodName' value="toString"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return SRA_Util::objectToString($this);
@@ -691,7 +691,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getWsDb() {ldelim}
-    {assign var='aopMethodName', "getWsDb"}
+    {assign var='aopMethodName' value="getWsDb"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->_wsDb;
@@ -706,7 +706,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function getWsDbName() {ldelim}
-    {assign var='aopMethodName', "getWsDbName"}
+    {assign var='aopMethodName' value="getWsDbName"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->_wsDbName;
@@ -723,7 +723,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function setWsDb($wsDb) {ldelim}
-    {assign var='aopMethodName', "setWsDb"}
+    {assign var='aopMethodName' value="setWsDb"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     $this->_wsDb = $wsDb;
@@ -740,7 +740,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return string
    */
   function setWsDbName($wsDbName) {ldelim}
-    {assign var='aopMethodName', "setWsDbName"}
+    {assign var='aopMethodName' value="setWsDbName"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     $this->_wsDbName = $wsDbName;
@@ -755,7 +755,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return boolean
    */
   function validateWsDb() {ldelim}
-    {assign var='aopMethodName', "validateWsDb"}
+    {assign var='aopMethodName' value="validateWsDb"}
     {include file="entity-aspect-before.tpl"}
     $this->_parsedWsDb = SRA_Util::parseUri($this->_wsDb);
     {include file="entity-aspect-after.tpl"}
@@ -929,7 +929,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @return  boolean
    */
   function isValid( & $object ) {ldelim}
-    {assign var='aopMethodName', "isValid"}
+    {assign var='aopMethodName' value="isValid"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return (is_object($object) && (!isset($object->err) || !SRA_Error::isError($object->err)) && strtolower(get_class($object)) == '{$className|lower}' || is_subclass_of($object, '{$className|lower}'));

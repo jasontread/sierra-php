@@ -17,7 +17,7 @@
  entity model source file: {$entityModelPath}
  */
 // {rdelim}{rdelim}{rdelim}
-{assign var="aopClassType", $smarty.const.SRA_AOP_CLASS_VO)}
+{assign var="aopClassType" value=$smarty.const.SRA_AOP_CLASS_VO)}
 // {ldelim}{ldelim}{ldelim} Imports
 {if $entity->_voExtendsFile}
 require_once('{$entity->_voExtendsFile}');
@@ -213,7 +213,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
    * @access public
 	 */
 	function {$className}($initVals = FALSE, $appendDirty = TRUE, $recordExists = FALSE) {ldelim}
-    {assign var='aopMethodName', $className}
+    {assign var='aopMethodName' value=$className}
     {include file="entity-aspect-before.tpl"}
     
     // unserialize
@@ -418,7 +418,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return String
 	 */
 	function equals(& $object) {ldelim}
-    {assign var='aopMethodName', "equals"}
+    {assign var='aopMethodName' value="equals"}
     {include file="entity-aspect-before.tpl"}
     $ret = FALSE;
 		if (!is_array($object)) {ldelim}
@@ -454,7 +454,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &getAttribute($name, $clean=FALSE, $pk=NULL) {ldelim}
-    {assign var='aopMethodName', "getAttribute"}
+    {assign var='aopMethodName' value="getAttribute"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
 		return $this->_getAttribute($name, $clean, $pk);
@@ -478,7 +478,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getAttributeCardinality($name, $bound=NULL, $useWildcard=TRUE) {ldelim}
-    {assign var='aopMethodName', "getAttributeCardinality"}
+    {assign var='aopMethodName' value="getAttributeCardinality"}
     {include file="entity-aspect-before.tpl"}
     $cardinality = NULL;
 {foreach from=$entity->getAttributes() item=attribute}
@@ -560,7 +560,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getAttributeType($name) {ldelim}
-    {assign var='aopMethodName', "getAttributeType"}
+    {assign var='aopMethodName' value="getAttributeType"}
     {include file="entity-aspect-before.tpl"}
     $type = NULL;
 {foreach from=$entity->getAttributes() item=attribute}
@@ -582,7 +582,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getAttributeTypesUsed($type=NULL) {ldelim}
-    {assign var='aopMethodName', "usesAttributeType"}
+    {assign var='aopMethodName' value="usesAttributeType"}
     {include file="entity-aspect-before.tpl"}
     
     static $_{$entity->_name}TypesUsed;
@@ -605,7 +605,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function attributeIsEntity($name) {ldelim}
-    {assign var='aopMethodName', "attributeIsEntity"}
+    {assign var='aopMethodName' value="attributeIsEntity"}
     {include file="entity-aspect-before.tpl"}
     
     $isEntity = FALSE;
@@ -629,7 +629,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function attributesUseFiles() {ldelim}
-    {assign var='aopMethodName', "attributesUseFiles"}
+    {assign var='aopMethodName' value="attributesUseFiles"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return {if $entity->usesFiles()}TRUE{else}FALSE{/if};
@@ -644,7 +644,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function isAttribute($attr) {ldelim}
-    {assign var='aopMethodName', "isAttribute"}
+    {assign var='aopMethodName' value="isAttribute"}
     {include file="entity-aspect-before.tpl"}
     $found = FALSE;
 {foreach from=$entity->getAttributes() item=attribute}
@@ -673,7 +673,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &_getAttribute($name, $clean=FALSE, $pk=NULL) {ldelim}
-    {assign var='aopMethodName', "_getAttribute"}
+    {assign var='aopMethodName' value="_getAttribute"}
     {include file="entity-aspect-before.tpl"}
     
     $guessedPk = FALSE;
@@ -773,7 +773,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &getUnitTestInstance() {ldelim}
-    {assign var='aopMethodName', "getUnitTestInstance"}
+    {assign var='aopMethodName' value="getUnitTestInstance"}
     {include file="entity-aspect-before.tpl"}
     $ret = NULL;
 {if $entity->_unitTest}
@@ -824,7 +824,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {if $attribute->_useReference}&{/if}{$methodName}({if $attribute->_cardinality && $attribute->isEntity()}$pk = NULL, {/if}$clean=FALSE{if $attribute->_cardinality}, $index=NULL{/if}{if !$attribute->_cardinality && ($attribute->_type eq $smarty.const.SRA_DATA_TYPE_DATE || $attribute->_type eq $smarty.const.SRA_DATA_TYPE_TIME)}, $format=NULL{/if}{if $attribute->hasOptions()}, $optionLabel=FALSE{/if}{if $attribute->_recursiveLink || $attribute->_unionLink}, $unlinkedOnly = FALSE{/if}) {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     
 {if $attribute->_matchUserId}
@@ -1087,7 +1087,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$isMethodName}($clean=FALSE) {ldelim}
-    {assign var='aopMethodName', $isMethodName}
+    {assign var='aopMethodName' value=$isMethodName}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->{$methodName}($clean);
@@ -1107,7 +1107,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$countMethodName}($clean=FALSE) {ldelim}
-    {assign var='aopMethodName', $countMethodName}
+    {assign var='aopMethodName' value=$countMethodName}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     $attrs =& $this->{$methodName}($clean);
@@ -1132,7 +1132,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function{if $attr->_useReference} &{/if} {$methodName}({if $attr->_cardinality && $attr->isEntity()}$pk = FALSE, {/if}$clean=FALSE) {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     require_once('{$attribute->_type}{$entity->_voSuffix}.{$smarty.const.SRA_SYS_PHP_EXTENSION}');
     if (!{$attribute->_type}{$entity->_voSuffix}::isValid($this->get{$attribute->getMethodName()}())) {ldelim}
@@ -1158,7 +1158,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$isMethodName}($clean=FALSE) {ldelim}
-    {assign var='aopMethodName', $isMethodName}
+    {assign var='aopMethodName' value=$isMethodName}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->{$methodName}($clean);
@@ -1188,7 +1188,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getAttrDbValue($attr=FALSE, $value=FALSE, $clean=FALSE) {ldelim}
-    {assign var='aopMethodName', "getAttrDbValue"}
+    {assign var='aopMethodName' value="getAttrDbValue"}
     {include file="entity-aspect-before.tpl"}
 		$db =& SRA_Controller::getAppDb({if $entity->_db}'{$entity->_db}'{/if});
 		$attrPieces = explode('_', $attr);
@@ -1260,7 +1260,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getPrimaryKey() {ldelim}
-    {assign var='aopMethodName', "getPrimaryKey"}
+    {assign var='aopMethodName' value="getPrimaryKey"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return $this->get{$primaryKey->getMethodName()}();
@@ -1317,7 +1317,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getAppDbPrimaryKey() {ldelim}
-    {assign var='aopMethodName', "getAppDbPrimaryKey"}
+    {assign var='aopMethodName' value="getAppDbPrimaryKey"}
     {include file="entity-aspect-before.tpl"}
 		$db =& SRA_Controller::getAppDb({if $entity->_db}'{$entity->_db}'{/if});
     {include file="entity-aspect-after.tpl"}
@@ -1338,7 +1338,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getEntityLabel($attr=FALSE) {ldelim}
-    {assign var='aopMethodName', "getEntityLabel"}
+    {assign var='aopMethodName' value="getEntityLabel"}
     {include file="entity-aspect-before.tpl"}
 		if ($attr) {ldelim}
 {foreach from=$entity->getAttributes() item=attribute}
@@ -1392,7 +1392,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$methodName}() {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
 		$rb =& {$className}::getEntityResources();
     {include file="entity-aspect-after.tpl"}
@@ -1412,7 +1412,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$methodName}() {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
 		return {$attribute->_type}{$entity->_voSuffix}::get{$attr->getMethodName(0, 1)}Label();
@@ -1433,7 +1433,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getHelpContent($attr=FALSE) {ldelim}
-    {assign var='aopMethodName', "getHelpContent"}
+    {assign var='aopMethodName' value="getHelpContent"}
     {include file="entity-aspect-before.tpl"}
 		if ($attr) {ldelim}
 			$methodName = 'get' . strtoupper(substr($attr, 0, 1)) . substr($attr, 1) . 'HelpContent';
@@ -1469,7 +1469,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$methodName}() {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
 {if $attribute->_resourceHelp}
@@ -1493,7 +1493,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$methodName}() {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return {$attribute->_type}{$entity->_voSuffix}::get{$attr->getMethodName(0, 1)}HelpContent();
@@ -1516,7 +1516,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &getAddedVals($attr) {ldelim}
-    {assign var='aopMethodName', "getAddedVals"}
+    {assign var='aopMethodName' value="getAddedVals"}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if $attribute->_cardinality}
@@ -1566,7 +1566,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &getChangedVals($attr = FALSE) {ldelim}
-    {assign var='aopMethodName', "getChangedVals"}
+    {assign var='aopMethodName' value="getChangedVals"}
     {include file="entity-aspect-before.tpl"}
 		$results = array();
 {foreach from=$entity->getAttributes() item=attribute}
@@ -1611,7 +1611,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 */
 	function getDefaultAttributeValue($attr) {ldelim}
     $default = NULL;
-    {assign var='aopMethodName', 'getDefaultAttributeValue'}
+    {assign var='aopMethodName' value='getDefaultAttributeValue'}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if $attribute->_default !== $smarty.const.NULL}
@@ -1675,7 +1675,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	function &getOptionsMap($attr, $convertLabels=FALSE, $onlyEntityAttrs=FALSE) {ldelim}
     $options = NULL;
     
-    {assign var='aopMethodName', "getOptionsMap"}
+    {assign var='aopMethodName' value="getOptionsMap"}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if $attribute->hasOptions()}
@@ -1765,7 +1765,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getOptionsBundle($attr) {ldelim}
-    {assign var='aopMethodName', 'getOptionsBundle'}
+    {assign var='aopMethodName' value='getOptionsBundle'}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if $attribute->hasOptions() && !$attribute->isEntity() && $attribute->hasRbOptions()}
@@ -1804,7 +1804,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &getRemovedVals($attr) {ldelim}
-    {assign var='aopMethodName', "getRemovedVals"}
+    {assign var='aopMethodName' value="getRemovedVals"}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if $attribute->_cardinality || ($attribute->isEntity() && $attribute->_onRemoveDelete)}
@@ -1857,7 +1857,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function isDirty($attr = FALSE, $baseAttrsOnly = FALSE{if $entity->_parentEntity}, $ignoreParent = FALSE{/if}) {ldelim}
-    {assign var='aopMethodName', "isDirty"}
+    {assign var='aopMethodName' value="isDirty"}
     {include file="entity-aspect-before.tpl"}
 		if ($baseAttrsOnly) {ldelim}
 {foreach from=$entity->getAttributes() item=attribute}
@@ -1950,7 +1950,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function hasBeenSet($attr) {ldelim}
-    {assign var='aopMethodName', "hasBeenSet"}
+    {assign var='aopMethodName' value="hasBeenSet"}
     {include file="entity-aspect-before.tpl"}
 {assign var="started" value="0"}
 {foreach from=$entity->getAttributes() item=attribute}
@@ -1981,7 +1981,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &getEntityFiles() {ldelim}
-    {assign var='aopMethodName', "getFiles"}
+    {assign var='aopMethodName' value="getFiles"}
     {include file="entity-aspect-before.tpl"}
 		$files = array();
 {foreach from=$entity->getAttributes() item=attribute}
@@ -2013,7 +2013,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getGlobalGetMethod($globalId) {ldelim}
-    {assign var='aopMethodName', "getGlobalGetMethod"}
+    {assign var='aopMethodName' value="getGlobalGetMethod"}
     {include file="entity-aspect-before.tpl"}
 {assign var="started" value="0"}
 {foreach from=$entity->getAttributes() item=attribute}
@@ -2053,7 +2053,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function mergeGlobals(& $entities) {ldelim}
-    {assign var='aopMethodName', "mergeGlobals"}
+    {assign var='aopMethodName' value="mergeGlobals"}
     {include file="entity-aspect-before.tpl"}
 		if (!is_array($entities)) {ldelim}
 			$globalEntities = array($entities);
@@ -2132,7 +2132,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return void on success or SRA_Error object otherwises
 	 */
 	function render($viewKey = FALSE, $attributes = FALSE, $skipAttributes = FALSE, $viewLabels = FALSE, $viewValues = FALSE, $skipLookup = FALSE, $suppressHeaders=FALSE) {ldelim}
-    {assign var='aopMethodName', "render"}
+    {assign var='aopMethodName' value="render"}
     {include file="entity-aspect-before.tpl"}
 		static $lp;
     
@@ -2500,7 +2500,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function renderAttribute($attribute, $viewKey = FALSE, $attributes = FALSE, $skipAttributes = FALSE, $viewLabels = FALSE, $viewValues = FALSE) {ldelim}
-    {assign var='aopMethodName', "renderAttribute"}
+    {assign var='aopMethodName' value="renderAttribute"}
     {include file="entity-aspect-before.tpl"}
     
 		global $renderAttribute_nestedAttributes;
@@ -2765,7 +2765,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return boolean
 	 */
 	function renderToFile($viewKey, $file, $attribute=NULL) {ldelim}
-    {assign var='aopMethodName', "renderToFile"}
+    {assign var='aopMethodName' value="renderToFile"}
     {include file="entity-aspect-before.tpl"}
     $results = FALSE;
     if (SRA_File::touch($file)) {ldelim}
@@ -2792,7 +2792,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return string
 	 */
 	function &renderToVar($viewKey, $attribute=NULL) {ldelim}
-    {assign var='aopMethodName', "renderToVar"}
+    {assign var='aopMethodName' value="renderToVar"}
     {include file="entity-aspect-before.tpl"}
 		ob_start();
     $attribute ? $this->renderAttribute($attribute, $viewKey) : $this->render($viewKey, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE);
@@ -2828,7 +2828,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return void
 	 */
 	function renderXml($includeAttributes=FALSE, $skipAttributes=FALSE, $viewResources=NULL, $usePrimaryKeys=FALSE) {ldelim}
-    {assign var='aopMethodName', "renderXml"}
+    {assign var='aopMethodName' value="renderXml"}
     {include file="entity-aspect-before.tpl"}
 		$tpl =& SRA_Controller::getAppTemplate();
 {if $docType}
@@ -2878,7 +2878,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return mixed
 	 */
 	function serialize($file=NULL) {ldelim}
-    {assign var='aopMethodName', "serialize"}
+    {assign var='aopMethodName' value="serialize"}
     {include file="entity-aspect-before.tpl"}
     $xml = $this->toXmlArray(NULL, NULL, TRUE);
     if (!is_array($xml['{$entity->getDtdName()}']['attributes'])) $xml['{$entity->getDtdName()}']['attributes'] = array();
@@ -2927,7 +2927,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return void
 	 */
 	function toJson($includeAttributes=FALSE, $skipAttributes=FALSE, $viewResources=NULL, $javascriptDate=FALSE) {ldelim}
-    {assign var='aopMethodName', "toJson"}
+    {assign var='aopMethodName' value="toJson"}
     {include file="entity-aspect-before.tpl"}
     if ($includeAttributes && !is_array($includeAttributes)) {ldelim} $includeAttributes = explode(' ', $includeAttributes); {rdelim}
     if ($skipAttributes && !is_array($skipAttributes)) {ldelim} $skipAttributes = explode(' ', $skipAttributes); {rdelim}
@@ -3094,7 +3094,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return array
 	 */
 	function toXmlArray($includeAttributes=FALSE, $skipAttributes=FALSE, $usePrimaryKeys=FALSE, $camelCase=FALSE) {ldelim}
-    {assign var='aopMethodName', "toXmlArray"}
+    {assign var='aopMethodName' value="toXmlArray"}
     {include file="entity-aspect-before.tpl"}
     if ($includeAttributes && !is_array($includeAttributes)) {ldelim} $includeAttributes = explode(' ', $includeAttributes); {rdelim}
     if ($skipAttributes && !is_array($skipAttributes)) {ldelim} $skipAttributes = explode(' ', $skipAttributes); {rdelim}
@@ -3274,7 +3274,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return string
 	 */
 	function getDtdName() {ldelim}
-    {assign var='aopMethodName', "getDtdName"}
+    {assign var='aopMethodName' value="getDtdName"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return '{$entity->getDtdName()}';
@@ -3290,7 +3290,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return array
 	 */
 	function getWsAttributes() {ldelim}
-    {assign var='aopMethodName', "getWsAttributes"}
+    {assign var='aopMethodName' value="getWsAttributes"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     {assign var=started value=0}
@@ -3307,7 +3307,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return boolean
 	 */
 	function isAttributeReadOnly($attr) {ldelim}
-    {assign var='aopMethodName', "isAttributeReadOnly"}
+    {assign var='aopMethodName' value="isAttributeReadOnly"}
     {include file="entity-aspect-before.tpl"}
     switch ($attr) {ldelim}
 {foreach from=$entity->getAttributes() item=attribute}
@@ -3337,7 +3337,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return boolean
 	 */
 	function isAttributeSetOnly($attr) {ldelim}
-    {assign var='aopMethodName', "isAttributeSetOnly"}
+    {assign var='aopMethodName' value="isAttributeSetOnly"}
     {include file="entity-aspect-before.tpl"}
     switch ($attr) {ldelim}
 {foreach from=$entity->getAttributes() item=attribute}
@@ -3371,7 +3371,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 {if $entity->_skipWsdl}
     return '';
 {else}
-    {assign var='aopMethodName', "getWsdl"}
+    {assign var='aopMethodName' value="getWsdl"}
     {include file="entity-aspect-before.tpl"}
     if ($includeAttributes && !is_array($includeAttributes)) {ldelim} $includeAttributes = explode(' ', $includeAttributes); {rdelim}
     if ($skipAttributes && !is_array($skipAttributes)) {ldelim} $skipAttributes = explode(' ', $skipAttributes); {rdelim}
@@ -3424,7 +3424,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return boolean
 	 */
 	function skipWsdl() {ldelim}
-    {assign var='aopMethodName', "skipWsdl"}
+    {assign var='aopMethodName' value="skipWsdl"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
     return {if $entity->_skipWsdl}TRUE{else}FALSE{/if};
@@ -3449,7 +3449,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return void on success or SRA_Error object otherwises
 	 */
 	function _writeRenderOutput($msg, $file, $mode, $finish=FALSE) {ldelim}
-    {assign var='aopMethodName', "_writeRenderOutput"}
+    {assign var='aopMethodName' value="_writeRenderOutput"}
     {include file="entity-aspect-before.tpl"}
 		static $openFps = array();
 		if ($file && !isset($openFps[$file])) {ldelim}
@@ -3482,7 +3482,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function hasView($viewKey = FALSE, $attribute = FALSE) {ldelim}
-    {assign var='aopMethodName', "hasView"}
+    {assign var='aopMethodName' value="hasView"}
     {include file="entity-aspect-before.tpl"}
 		if ($attribute) {ldelim}
 {foreach from=$entity->getAttributes() item=attribute}
@@ -3532,7 +3532,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function parseString($str, $checkPrefix=FALSE) {ldelim}
-    {assign var='aopMethodName', "parseString"}
+    {assign var='aopMethodName' value="parseString"}
     {include file="entity-aspect-before.tpl"}
 		if ($checkPrefix && !SRA_Util::beginsWith($str, 'parse:')) {ldelim}
 			return $str;
@@ -3660,7 +3660,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function setAttributes(&$attrs, $appendDirty = TRUE) {ldelim}
-    {assign var='aopMethodName', "setAttributes"}
+    {assign var='aopMethodName' value="setAttributes"}
     {include file="entity-aspect-before.tpl"}
     $nl = NULL;
 		if (is_array($attrs)) {ldelim}
@@ -3857,7 +3857,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function setAttribute($name, $val, $appendDirty = TRUE) {ldelim}
-    {assign var='aopMethodName', "setAttribute"}
+    {assign var='aopMethodName' value="setAttribute"}
     {include file="entity-aspect-before.tpl"}
 		if (method_exists($this, $name)) {ldelim}
       {include file="entity-aspect-after.tpl"}
@@ -3923,7 +3923,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$methodName}( {if $attribute->_useReference}& {/if}${$attribute->_name}, $appendDirty = TRUE ) {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     $ret = FALSE;
 {if $attribute->_matchUserId}
@@ -4233,7 +4233,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function{if $attr->_useReference} &{/if} {$methodName}({if $attr->_useReference}& {/if}${$attr->_name}, $appendDirty = TRUE) {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     if (!{$attribute->_type}{$entity->_voSuffix}::isValid($this->get{$attribute->getMethodName()}())) {ldelim}
       $this->set{$attribute->getMethodName(0, 1)}(new {$attribute->_type}{$entity->_voSuffix}());
@@ -4264,7 +4264,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function setColumnValue($column, $value, $table=FALSE, $appendDirty = TRUE) {ldelim}
-    {assign var='aopMethodName', "setColumnValue"}
+    {assign var='aopMethodName' value="setColumnValue"}
     {include file="entity-aspect-before.tpl"}
     $ret = FALSE;
 {foreach from=$schema->getTables() item=table}
@@ -4296,7 +4296,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function addAttribute($name, $val, $appendDirty = TRUE) {ldelim}
-    {assign var='aopMethodName', "addAttribute"}
+    {assign var='aopMethodName' value="addAttribute"}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if !$attribute->_readOnly && $attribute->_cardinality}
@@ -4330,7 +4330,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$methodName}( {if $attribute->_useReference}& {/if}${$attribute->_name}, $appendDirty = TRUE ) {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     $added = 0;
 {if $attribute->_matchUserId}
@@ -4583,7 +4583,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function{if $attr->_useReference} &{/if} {$methodName}({if $attr->_useReference}& {/if}${$attr->_name}, $appendDirty = TRUE) {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     if (!{$attribute->_type}{$entity->_voSuffix}::isValid($this->get{$attribute->getMethodName()}())) {ldelim}
       $this->set{$attribute->getMethodName()}(new {$attribute->_type}{$entity->_voSuffix}(array()));
@@ -4612,7 +4612,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function removeAttribute($name, $val, $appendDirty = TRUE) {ldelim}
-    {assign var='aopMethodName', "removeAttribute"}
+    {assign var='aopMethodName' value="removeAttribute"}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if !$attribute->_readOnly && $attribute->_cardinality}
@@ -4644,7 +4644,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$methodName}( {if $attribute->_useReference}& {/if}${$attribute->_name}, $appendDirty = TRUE ) {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     
 {if $attribute->_matchUserId}
@@ -4737,7 +4737,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function {$methodName}({if $attr->_useReference}& {/if}${$attr->_name}, $appendDirty = TRUE) {ldelim}
-    {assign var='aopMethodName', $methodName}
+    {assign var='aopMethodName' value=$methodName}
     {include file="entity-aspect-before.tpl"}
     if (!{$attribute->_type}{$entity->_voSuffix}::isValid($this->get{$attribute->getMethodName()}())) {ldelim}
       $this->set{$attribute->getMethodName()}(new {$attribute->_type}{$entity->_voSuffix}(array()));
@@ -4761,7 +4761,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return boolean
 	 */
 	function resetAttribute($attr) {ldelim}
-    {assign var='aopMethodName', "resetAttribute"}
+    {assign var='aopMethodName' value="resetAttribute"}
     {include file="entity-aspect-before.tpl"}
     $ret = FALSE;
     if (isset($this->_dirty[$attr])) {ldelim}
@@ -4790,7 +4790,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return void
 	 */
 	function resetDirtyFlags($skip = NULL) {ldelim}
-    {assign var='aopMethodName', "resetDirtyFlags"}
+    {assign var='aopMethodName' value="resetDirtyFlags"}
     {include file="entity-aspect-before.tpl"}
     if ($skip) {ldelim}
       $keys = array_keys($this->_dirty);
@@ -4815,7 +4815,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return	boolean
 	 */
 	function setDirty($attr) {ldelim}
-    {assign var='aopMethodName', "setDirty"}
+    {assign var='aopMethodName' value="setDirty"}
     {include file="entity-aspect-before.tpl"}
     $ret = FALSE;
     if (!isset($this->_clean[$attr])) {ldelim}
@@ -4841,7 +4841,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return	TRUE on success, FALSE otherwise
 	 */
 	function setDirtyAdd($attr) {ldelim}
-    {assign var='aopMethodName', "setDirtyAdd"}
+    {assign var='aopMethodName' value="setDirtyAdd"}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if $attribute->_cardinality}
@@ -4874,7 +4874,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return	boolean
 	 */
 	function setDirtyRemove($attr) {ldelim}
-    {assign var='aopMethodName', "setDirtyRemove"}
+    {assign var='aopMethodName' value="setDirtyRemove"}
     {include file="entity-aspect-before.tpl"}
 {foreach from=$entity->getAttributes() item=attribute}
 {if $attribute->_cardinality}
@@ -4906,7 +4906,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return array
 	 */
 	function getEntityValidators() {ldelim}
-    {assign var='aopMethodName', "getEntityValidators"}
+    {assign var='aopMethodName' value="getEntityValidators"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
 {if $entity->_validateGenerators}
@@ -4928,7 +4928,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return boolean
 	 */
 	function isValidatorMandatory($validator) {ldelim}
-    {assign var='aopMethodName', "isValidatorMandatory"}
+    {assign var='aopMethodName' value="isValidatorMandatory"}
     {include file="entity-aspect-before.tpl"}
     $mandatory = NULL;
 {if $entity->_validateGenerators}
@@ -4953,7 +4953,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return boolean
 	 */
 	function hasNonMandatoryValidator() {ldelim}
-    {assign var='aopMethodName', "hasNonMandatoryValidator"}
+    {assign var='aopMethodName' value="hasNonMandatoryValidator"}
     {include file="entity-aspect-before.tpl"}
 {assign var=hasNonMandatoryValidator value=0}
 {if $entity->_validateGenerators}
@@ -4974,7 +4974,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return boolean
 	 */
 	function isAttributeRequired($attr, $excludeIfHasDefaultValue=FALSE) {ldelim}
-    {assign var='aopMethodName', "isAttributeRequired"}
+    {assign var='aopMethodName' value="isAttributeRequired"}
     {include file="entity-aspect-before.tpl"}
     $required = NULL;
 {foreach from=$entity->getAttributes() item=attribute}
@@ -5007,7 +5007,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function validate($_id = FALSE, $reset = TRUE, $evenIfNotDirty = FALSE) {ldelim}
-    {assign var='aopMethodName', "validate"}
+    {assign var='aopMethodName' value="validate"}
     {include file="entity-aspect-before.tpl"}
     require_once('model/SRA_AttributeValidator.php');
     
@@ -5093,7 +5093,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function validateDelete($reset=TRUE, $mergeErrors=TRUE) {ldelim}
-    {assign var='aopMethodName', "validateDelete"}
+    {assign var='aopMethodName' value="validateDelete"}
     {include file="entity-aspect-before.tpl"}
 		if ($reset) {ldelim} $this->validateErrors = array(); {rdelim}
 		$rb =& {$className}::getEntityResources();
@@ -5237,7 +5237,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
       return TRUE;
     {rdelim}
     
-    {assign var='aopMethodName', "_matchUserId"}
+    {assign var='aopMethodName' value="_matchUserId"}
     {include file="entity-aspect-before.tpl"}
     $userId = class_exists('SRA_Authenticator') ? SRA_Authenticator::getUserId() : NULL;
     $attr = $this->getAttribute($attrId);
@@ -5273,7 +5273,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return	SRA_ResourceBundle
 	 */
 	function &getEntityResources( ) {ldelim}
-    {assign var='aopMethodName', "getEntityResources"}
+    {assign var='aopMethodName' value="getEntityResources"}
     {include file="entity-aspect-before.tpl"}
     if (!isset($this->__resources)) {ldelim}
       $this->__resources =& SRA_Controller::getAppResources();
@@ -5313,7 +5313,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return void on success or SRA_Error object otherwises
 	 */
 	function getEntityViews() {ldelim}
-    {assign var='aopMethodName', "getEntityViews"}
+    {assign var='aopMethodName' value="getEntityViews"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
 		return array({foreach from=$entity->_views item=view}'{$view->_id}', {/foreach});
@@ -5331,7 +5331,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getSysErrorString() {ldelim}
-    {assign var='aopMethodName', "getSysErrorString"}
+    {assign var='aopMethodName' value="getSysErrorString"}
     {include file="entity-aspect-before.tpl"}
 		$rb =& {$className}::getEntityResources();
     {include file="entity-aspect-after.tpl"}
@@ -5352,7 +5352,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &getDao($fresh = FALSE) {ldelim}
-    {assign var='aopMethodName', "getDao"}
+    {assign var='aopMethodName' value="getDao"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
 		return SRA_DaoFactory::getDao('{$entity->_name}', $fresh);
@@ -5368,7 +5368,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function reload() {ldelim}
-    {assign var='aopMethodName', "reload"}
+    {assign var='aopMethodName' value="reload"}
     {include file="entity-aspect-before.tpl"}
     $ret = NULL;
     if ($this->getPrimaryKey()) {ldelim}
@@ -5408,7 +5408,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function insert($insertSubEntities) {ldelim}
-    {assign var='aopMethodName', "insert"}
+    {assign var='aopMethodName' value="insert"}
     {include file="entity-aspect-before.tpl"}
     $dao =& $this->getDao();
     if (method_exists($dao, 'insert')) {ldelim} 
@@ -5432,7 +5432,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function update($updateSubEntities = FALSE) {ldelim}
-    {assign var='aopMethodName', "update"}
+    {assign var='aopMethodName' value="update"}
     {include file="entity-aspect-before.tpl"}
     $dao =& $this->getDao();
     if (method_exists($dao, 'update')) {ldelim} 
@@ -5454,7 +5454,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function delete() {ldelim}
-    {assign var='aopMethodName', "delete"}
+    {assign var='aopMethodName' value="delete"}
     {include file="entity-aspect-before.tpl"}
     $dao =& $this->getDao();
     if (method_exists($dao, 'delete')) {ldelim} 
@@ -5478,7 +5478,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function getEntityType() {ldelim}
-    {assign var='aopMethodName', "getEntityType"}
+    {assign var='aopMethodName' value="getEntityType"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
 		return '{$entity->_name}';
@@ -5495,7 +5495,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return	boolean
 	 */
 	function isValid( & $object ) {ldelim}
-    {assign var='aopMethodName', "isValid"}
+    {assign var='aopMethodName' value="isValid"}
     {include file="entity-aspect-before.tpl"}
     {include file="entity-aspect-after.tpl"}
 		return (is_object($object) && (!isset($object->err) || !SRA_Error::isError($object->err)) && strtolower(get_class($object)) == '{$className|lower}' || is_subclass_of($object, '{$className|lower}'));
@@ -5536,7 +5536,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function &newInstanceFromForm($submitType = SRA_ENTITY_VO_POST_FORM, $view = NULL, $prefix = NULL, $postfix = NULL) {ldelim}
-    {assign var='aopMethodName', "newInstanceFromForm"}
+    {assign var='aopMethodName' value="newInstanceFromForm"}
     {include file="entity-aspect-before.tpl"}
 		if ($submitType == SRA_ENTITY_VO_POST_FORM) {ldelim}
 			$evalVar =& array_merge($_POST, $_FILES);
