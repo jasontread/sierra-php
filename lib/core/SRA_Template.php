@@ -165,8 +165,9 @@ class SRA_Template {
       return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__);
     }
     else {
-      if (isset($this->_tpl->_tpl_vars[$tag])) { unset($this->_tpl->_tpl_vars[$tag]); }
-      $this->_tpl->_tpl_vars[$tag] = $value;
+      if (isset($this->_tpl->_tpl_vars[$tag])) unset($this->_tpl->_tpl_vars[$tag]);
+      else if (isset($this->_tpl->tpl_vars[$tag])) unset($this->_tpl->tpl_vars[$tag]);
+      isset($this->_tpl->tpl_vars) ? $this->_tpl->tpl_vars[$tag] = $value : $this->_tpl->_tpl_vars[$tag] = $value;
     }
   }
   // }}}
@@ -183,8 +184,9 @@ class SRA_Template {
    */
   function assignByRef($tag, & $value) {
     if ($tag == '') { return SRA_Error::logError('SRA_Template::assign - tag parameter not specified.', __FILE__, __LINE__); }
-    if (isset($this->_tpl->_tpl_vars[$tag])) { unset($this->_tpl->_tpl_vars[$tag]); }
-    $this->_tpl->_tpl_vars[$tag] = $value;
+    if (isset($this->_tpl->_tpl_vars[$tag])) unset($this->_tpl->_tpl_vars[$tag]);
+    else if (isset($this->_tpl->tpl_vars[$tag])) unset($this->_tpl->tpl_vars[$tag]);
+    isset($this->_tpl->tpl_vars) ? $this->_tpl->tpl_vars[$tag] =& $value : $this->_tpl->_tpl_vars[$tag] =& $value;
   }
   // }}}
   
@@ -522,7 +524,7 @@ class SRA_Template {
    */
   function getAppTemplateVar($key) {
     $tpl =& SRA_Controller::getAppTemplate();
-    return SRA_Util::getNestedAttr($tpl->_tpl->_tpl_vars, $key);
+    return SRA_Util::getNestedAttr(isset($this->_tpl->tpl_vars) ? $this->_tpl->tpl_vars : $tpl->_tpl->_tpl_vars, $key);
   }
   // }}}
   
@@ -637,7 +639,7 @@ class SRA_Template {
    * @return mixed
    */
   function getVar($tag) {
-    return isset($this->_tpl->_tpl_vars[$tag]) ? $this->_tpl->_tpl_vars[$tag] : FALSE;
+    return isset($this->_tpl->_tpl_vars[$tag]) ? $this->_tpl->_tpl_vars[$tag] : (isset($this->_tpl->tpl_vars[$tag]) ? $this->_tpl->tpl_vars[$tag] : FALSE);
   }
   // }}}
   
@@ -649,7 +651,7 @@ class SRA_Template {
    * @return void
    */
   function &getVarByRef($tag) {
-    return isset($this->_tpl->_tpl_vars[$tag]) ? $this->_tpl->_tpl_vars[$tag] : FALSE;
+    return isset($this->_tpl->_tpl_vars[$tag]) ? $this->_tpl->_tpl_vars[$tag] : (isset($this->_tpl->tpl_vars[$tag]) ? $this->_tpl->tpl_vars[$tag] : FALSE);
   }
   // }}}
   
