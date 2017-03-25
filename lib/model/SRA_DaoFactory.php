@@ -116,21 +116,22 @@ class SRA_DaoFactory {
 		  if ($app != $currentApp) SRA_Controller::init($app);
   		if (!isset($daos[$app . $entity]) || $fresh) {
   			SRA_Util::printDebug("SRA_DaoFactory::getDao - accessing DAO for app ${app}, entity type ${entity}", SRA_Controller::isSysInDebug(), __FILE__, __LINE__);
-			  $file = SRA_DaoFactory::_getRegisterFile($app);
-  			if (SRA_XmlParser::isValid($parser =& SRA_XmlParser::getXmlParser($file))) {
-    			if ($entity && SRA_XmlParser::isValid($parser) && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
-    				require_once($data['file']);
-    				$daos[$app . $entity] = new ${data}['class']($entity);
+			  if (file_exists($file = SRA_DaoFactory::_getRegisterFile($app))) {
+    			if (SRA_XmlParser::isValid($parser =& SRA_XmlParser::getXmlParser($file))) {
+      			if ($entity && SRA_XmlParser::isValid($parser) && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
+      				require_once($data['file']);
+      				$daos[$app . $entity] = new ${data}['class']($entity);
+      			}
+      			else if ($app == $lastApp) {
+      				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${app}, entity ${entity} or file ${file}";
+      				$dao =& SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel );
+      			}
     			}
-    			else if ($app == $lastApp) {
-    				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${app}, entity ${entity} or file ${file}";
+    			else {
+    				$msg = "SRA_DaoFactory::getDao: Failed - unable to get xml parser for file ${file}";
     				$dao =& SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel );
     			}
-  			}
-  			else {
-  				$msg = "SRA_DaoFactory::getDao: Failed - unable to get xml parser for file ${file}";
-  				$dao =& SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel );
-  			}
+			  }
   		}
   		else $dao =& $daos[$app . $entity];
   		
