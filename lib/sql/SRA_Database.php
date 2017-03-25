@@ -845,7 +845,7 @@ class SRA_Database {
       if ($this->_readOnlyDb && $fetch && SRA_Database::isValid($db =& SRA_Controller::getAppDb($this->_readOnlyDb)) && (is_resource($conn = $db->_getAppDbConnection($query)) || (get_class($conn) && strtolower(get_class($conn)) != 'sra_error'))) {
         return $conn;
       }
-			else if (!is_resource($this->_dbs) && (!get_class($conn) || strtolower(get_class($conn)) == 'sra_error')) {
+			else if (!is_resource($this->_dbs) && (!get_class($this->_dbs) || strtolower(get_class($this->_dbs)) == 'sra_error')) {
 				$config=array();
 				$config['host'] = $this->_config['host'];
 				$config['server'] = $this->_config['host'];
