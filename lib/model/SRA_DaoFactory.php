@@ -86,7 +86,9 @@ class SRA_DaoFactory {
 	function &getDao($entity, $fresh = FALSE, $app = FALSE, $debug = FALSE, $errorLevel = SRA_ERROR_PROBLEM) {
 	  $dao = NULL;
 	  
-    $app = $app ? $app : SRA_Controller::getCurrentAppId();
+	  $currentApp = SRA_Controller::getCurrentAppId();
+	  $explicitApp = $app ? TRUE : FALSE;
+    $app = $app ? $app : $currentApp;
 		
     // application is not initialized
     if (!$app) {
@@ -99,16 +101,19 @@ class SRA_DaoFactory {
     }
     
     $checkApps = array($app);
-    foreach(SRA_Controller::getAllAppIds() as $id) {
-      if (!in_array($id, $checkApps)) {
-        $checkApps[] = $id;
-        $lastApp = $id;
+    if (!$explicitApp) {
+      foreach(SRA_Controller::getAllAppIds() as $id) {
+        if (!in_array($id, $checkApps)) {
+          $checkApps[] = $id;
+          $lastApp = $id;
+        }
       }
     }
 		
 		// static cached DAOs
 		static $daos = array();
 		foreach($checkApps as $app) {
+		  if ($app != $currentApp) SRA_Controller::init($app);
   		if (!isset($daos[$app . $entity]) || $fresh) {
   			SRA_Util::printDebug("SRA_DaoFactory::getDao - accessing DAO for app ${app}, entity type ${entity}", SRA_Controller::isSysInDebug(), __FILE__, __LINE__);
   			$file = SRA_DaoFactory::_getRegisterFile($app);
@@ -126,6 +131,7 @@ class SRA_DaoFactory {
   		
   		if ($dao) break; 
 		}
+		if ($app != $currentApp) SRA_Controller::init($currentApp);
 		
 		return $dao;
 	}
