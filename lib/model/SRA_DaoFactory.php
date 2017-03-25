@@ -76,13 +76,16 @@ class SRA_DaoFactory {
    * be returned. by default, a cached version will be returned if available in 
    * order to take advantage of query caching
 	 * @param string $app the app to return the DAO for. if not 
-	 * specified, the current active app will be used 
+	 * specified, the current active app will be used. If not found in the active
+	 * app, other apps will be checked
    * @param int $errorLevel the error level to apply if a dao for $entity is not 
    * found
    * @access  public
 	 * @return DAO
 	 */
 	function &getDao($entity, $fresh = FALSE, $app = FALSE, $debug = FALSE, $errorLevel = SRA_ERROR_PROBLEM) {
+	  $dao = NULL;
+	  
     $app = $app ? $app : SRA_Controller::getCurrentAppId();
 		
     // application is not initialized
@@ -94,24 +97,37 @@ class SRA_DaoFactory {
     if (is_object($entity) && method_exists($entity, 'gettype')) {
       $entity = $entity->getType();
     }
+    
+    $checkApps = array($app);
+    foreach(SRA_Controller::getAllAppIds() as $id) {
+      if (!in_array($id, $checkApps)) {
+        $checkApps[] = $id;
+        $lastApp = $id;
+      }
+    }
 		
 		// static cached DAOs
 		static $daos = array();
-		if (!isset($daos[$app . $entity]) || $fresh) {
-			SRA_Util::printDebug("SRA_DaoFactory::getDao - accessing DAO for app ${app}, entity type ${entity}", SRA_Controller::isSysInDebug(), __FILE__, __LINE__);
-			$file = SRA_DaoFactory::_getRegisterFile($app);
-			$parser =& SRA_XmlParser::getXmlParser($file);
-			if ($entity && SRA_XmlParser::isValid($parser) && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
-				require_once($data['file']);
-				$daos[$app . $entity] = new ${data}['class']($entity);
-			}
-			else {
-				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${app}, entity ${entity} or file ${file}";
-				return SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel );
-			}
+		foreach($checkApps as $app) {
+  		if (!isset($daos[$app . $entity]) || $fresh) {
+  			SRA_Util::printDebug("SRA_DaoFactory::getDao - accessing DAO for app ${app}, entity type ${entity}", SRA_Controller::isSysInDebug(), __FILE__, __LINE__);
+  			$file = SRA_DaoFactory::_getRegisterFile($app);
+  			$parser =& SRA_XmlParser::getXmlParser($file);
+  			if ($entity && SRA_XmlParser::isValid($parser) && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
+  				require_once($data['file']);
+  				$daos[$app . $entity] = new ${data}['class']($entity);
+  			}
+  			else if ($app == $lastApp) {
+  				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${app}, entity ${entity} or file ${file}";
+  				$dao =& SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel );
+  			}
+  		}
+  		else $dao =& $daos[$app . $entity];
+  		
+  		if ($dao) break; 
 		}
 		
-		return $daos[$app . $entity];
+		return $dao;
 	}
 	// }}}
 	

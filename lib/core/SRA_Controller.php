@@ -334,6 +334,25 @@ class SRA_Controller {
     return $_sraCachedAllAppConfs;
   }
   // }}}
+  
+  // {{{ getAllAppgetAllAppIdsConfs
+  /**
+   * Returns an array containing all configured application IDs
+   * @access public
+   * @return array
+   */
+  function getAllAppIds() {
+    static $_sraCachedAllAppIds;
+    
+    if (!isset($_sraCachedAllAppIds)) {
+      $_sraCachedAllAppIds = array();
+      if (!SRA_Error::isError($sysConf =& SRA_Controller::getSysConf()) && isset($sysConf['app'])) {
+        foreach (array_keys($sysConf['app']) as $app) $_sraCachedAllAppIds[] = $app;
+      }
+    }
+    return $_sraCachedAllAppIds;
+  }
+  // }}}
 
   // {{{ getAppDb
   /**
