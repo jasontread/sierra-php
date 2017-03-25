@@ -121,6 +121,7 @@ class SRA_DaoFactory {
       			if ($entity && SRA_XmlParser::isValid($parser) && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
       				require_once($data['file']);
       				$daos[$app . $entity] = new ${data}['class']($entity);
+      				$dao =& $daos[$app . $entity];
       			}
       			else if ($app == $lastApp) {
       				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${app}, entity ${entity} or file ${file}";
