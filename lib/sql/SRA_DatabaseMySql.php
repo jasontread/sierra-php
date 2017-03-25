@@ -614,7 +614,7 @@ class SRA_DatabaseMySql extends SRA_Database {
         }
         $this->_dbName = $config['name'];
         
-        return($conn);
+        return $conn;
     }
     // }}}
 
