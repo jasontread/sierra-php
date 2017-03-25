@@ -684,7 +684,7 @@ class SRA_Database {
 				$def .= $column->getType() == SRA_DATA_TYPE_INT ? $default : "'" . str_replace("'", "\'", SRA_Util::stripQuotes(SRA_Util::stripQuotes($default), "'", "'")) . "'";
 			}
 			else if (!$column->hasValidator('required') && !$column->isSequence() && !$table->isPrimaryKey($column->getName())) {
-				$def .= ' DEFAULT ' . ($column->getType() == SRA_DATA_TYPE_DATE || $column->getType() == SRA_DATA_TYPE_TIME ? '0' : 'NULL');
+				$def .= ' DEFAULT NULL');
 			}
 			$def .= $column->hasValidator('required') || $table->isPrimaryKey($column->getName()) ? ' NOT NULL' : '';
 			if ($column->isSequence()) {
