@@ -1978,7 +1978,7 @@ class SRA_File {
 			foreach ($lines as $line)
 			{
 				$line = trim($line);
-				if (substr($line, 0, 1) != '#' && strstr($line, '='))
+				if (substr($line, 0, 1) != '#' && substr($line, 0, 1) != ';' && strstr($line, '='))
 				{
 					$line = str_replace("\n", '', $line);
 					$pair = explode('=', $line);

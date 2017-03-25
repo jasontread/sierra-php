@@ -3154,7 +3154,7 @@ class SRA_Util {
     $hash = array();
     $lines = explode("\n", $str);
     foreach($lines as $line) {
-      if (substr($line, 0, 1) != '#' && strstr($line, '=')) {
+      if (substr($line, 0, 1) != '#' && substr($line, 0, 1) != ';' && strstr($line, '=')) {
         $pair = explode('=', $line);
         $pkey = trim($pair[0]);
         $pvalue = substr(strstr($line, '='), 1);
