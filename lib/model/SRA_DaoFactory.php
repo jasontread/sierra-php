@@ -140,6 +140,12 @@ class SRA_DaoFactory {
 		}
 		if ($app != $currentApp) SRA_Controller::init($currentApp);
 		
+		// DAO was not found
+		if (!$dao) {
+			$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${currentApp}, entity ${entity}";
+			$dao =& SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel);
+		}
+		
 		return $dao;
 	}
 	// }}}
