@@ -591,7 +591,7 @@ class SRA_DatabaseMySql extends SRA_Database {
     function _openConn($config)
     {
         if (!function_exists('mysql_pconnect')) {
-          $conn = mysqli_connect((SRA_DATABASE_MYSQL_USE_PCONNECT ? 'p:' : '') . $config['server'], $config['user'], $config['password'], NULL, $config['port'] ? ':' . $config['port'] : '');
+          $conn = mysqli_connect((SRA_DATABASE_MYSQL_USE_PCONNECT ? 'p:' : '') . $config['server'], $config['user'], $config['password'], NULL, $config['port'] ? ':' . $config['port'] : NULL);
         }
         else if (SRA_DATABASE_MYSQL_USE_PCONNECT) {
           $conn = mysql_pconnect($config['server'] . ($config['port'] ? ':' . $config['port'] : ''), $config['user'], $config['password']);
