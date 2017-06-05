@@ -1738,7 +1738,7 @@ class SRA_FrameworkInstaller {
         if ($conn) mssql_close($conn);
         break;
       default:
-        ($conn = (!function_exists('mysql_pconnect') ? mysqli_connect($config['host'] . ':' . $config['port'], $config['user'], $config['password']) : mysql_connect($config['host'] . ':' . $config['port'], $config['user'], $config['password']))) ? (!(!function_exists('mysql_pconnect') ? mysqli_select_db($conn, $config['name']) : mysql_select_db($config['name'], $conn)) ? $ret = FALSE : $ret = TRUE) : $ret = FALSE;
+        ($conn = (!function_exists('mysql_pconnect') ? mysqli_connect($config['host'], $config['user'], $config['password'], NULL, $config['port']) : mysql_connect($config['host'] . ':' . $config['port'], $config['user'], $config['password']))) ? (!(!function_exists('mysql_pconnect') ? mysqli_select_db($conn, $config['name']) : mysql_select_db($config['name'], $conn)) ? $ret = FALSE : $ret = TRUE) : $ret = FALSE;
         if ($conn) {
           !function_exists('mysql_pconnect') ? mysqli_close($conn) : mysql_close($conn);
         }
