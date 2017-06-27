@@ -1400,7 +1400,7 @@ class Smarty extends Smarty_Internal_TemplateBase
         } elseif (in_array($name, $this->obsoleteProperties)) {
             return null;
         } else {
-            trigger_error('Undefined property: ' . get_class($this) . '::$' . $name, E_USER_NOTICE);
+            //trigger_error('Undefined property: ' . get_class($this) . '::$' . $name, E_USER_NOTICE);
         }
         return null;
     }
