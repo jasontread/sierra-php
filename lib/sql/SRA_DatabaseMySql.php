@@ -390,7 +390,7 @@ class SRA_DatabaseMySql extends SRA_Database {
             // SRA_Error.
             $msg = "SRA_DatabaseMySql::fetch: ". (!function_exists('mysql_pconnect') ? mysqli_error($conn) : mysql_error($conn))." Query: $query";
             // NOTE: This SRA_Error uses $errorLevel.
-            return(SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel));
+            return(SRA_Error::logError($msg, __FILE__, __LINE__, $query ? $errorLevel : SRA_ERROR_OPERATIONAL));
         }
 
         // Lowercase the types. Used in switch().
