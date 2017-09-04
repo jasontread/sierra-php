@@ -49,7 +49,7 @@ define('SRA_API_ROUTER_CACHE_PREFIX', 'sra_api_cache_');
 /**
  * This class is used to quickly create, deploy and document APIs.
  * Full usage documentation is provided in 
- * https://github.com/cloudharmony/cloudharmony/wiki/Creating-and-Deploying-an-API
+ * https://github.com/cloudharmony/sierra-php/wiki/Creating-and-Deploying-an-API
  */
 class SRA_ApiRouter {
   
