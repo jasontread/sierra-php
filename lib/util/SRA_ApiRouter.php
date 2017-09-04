@@ -378,7 +378,7 @@ class SRA_ApiRouter {
    * [app]/etc/l10n/app.properties
    * @return SRA_ResourceBundle
    */
-  private function &getResources() {
+  public function &getResources() {
     if (!isset($this->_resources)) {
       $this->_resources =& SRA_ResourceBundle::getBundle(dirname(dirname(dirname(__FILE__))) . '/etc/l10n/api-router');
       $appResources =& SRA_Controller::getAppResources();
