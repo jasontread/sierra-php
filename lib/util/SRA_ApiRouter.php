@@ -372,6 +372,21 @@ class SRA_ApiRouter {
 	}
   
   /**
+   * returns the active protocol - http or https
+   * @return string
+   */
+  private function getProto() {
+    global $_api_proto;
+  
+    if (!$_api_proto) {
+      $headers = function_exists('getallheaders') ? getallheaders() : array();
+      $_api_proto = (isset($headers['CloudFront-Forwarded-Proto']) || isset($_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO']) ? strtolower(isset($_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO']) ? $_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO'] : $headers['CloudFront-Forwarded-Proto']) : (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http'));
+    }
+  
+    return $_api_proto;
+  }
+  
+  /**
    * Returns the resource bundle to use for API related strings. Generic API 
    * strings are defined in sierra-php/etc/l10n/api-router.properties. These 
    * strings may be overriden by an application in 
@@ -390,6 +405,26 @@ class SRA_ApiRouter {
       $this->_resources->_data =& $data;
     }
     return $this->_resources;
+  }
+  
+  /**
+   * returns the server URI (e.g. https://oakley.bamp.io) - if request is proxied 
+   * from CloudFront, correct hostname is determined
+   * @param boolean $includePath include the URL path
+   * @param boolean $includeQueryString if $includePath is TRUE, whether or not 
+   * to include query strings in the url
+   * @return string
+   */
+  private function getServerUri($includePath=FALSE, $includeQueryString=TRUE) {
+    global $_api_server_uri;
+  
+    if (!$_api_server_uri) {
+      $headers = function_exists('getallheaders') ? getallheaders() : array();
+      $_api_server_uri = isset($headers['Host']) ? $headers['Host'] : SRA_Controller::getServerName();
+      if ($_api_server_uri && !preg_match('/^http:/', $_api_server_uri)) $_api_server_uri = $thihs->getProto() . '://' . $_api_server_uri;
+    }
+  
+    return $_api_server_uri . ($includePath && isset($_SERVER['REQUEST_URI']) ? ($includeQueryString ? $_SERVER['REQUEST_URI'] : strtok($_SERVER['REQUEST_URI'], '?')) : '');
   }
 	
 	/**
@@ -964,14 +999,14 @@ class SRA_ApiRouter {
 				}
 				else {
 				  $appId = SRA_Controller::getCurrentAppId();
-          $url = ch_get_server_uri(TRUE);
-				  $settings['url'] =  SRA_ApiRouter::formatUrl(ch_get_server_uri(FALSE, TRUE, TRUE) . '/' . $appId . '/api');
+          $url = $this->getServerUri(TRUE);
+				  $settings['url'] =  SRA_ApiRouter::formatUrl($this->getServerUri(FALSE, TRUE) . '/' . $appId . '/api');
 			  }
-				if (!preg_match('/^http/i', $settings['url'])) $settings['url'] = SRA_ApiRouter::formatUrl(ch_get_server_uri() . '/' . $settings['url']);
+				if (!preg_match('/^http/i', $settings['url'])) $settings['url'] = SRA_ApiRouter::formatUrl($this->getServerUri() . '/' . $settings['url']);
 				if (preg_match('/:\/[a-z]/', $settings['url'])) $settings['url'] = str_replace(':/', '://', $settings['url']);
 				preg_match('/^(https?:\/\/[^\/]+)(.*)$/', $settings['url'], $m);
 				$settings['url_base'] = $m[1];
-				$settings['url_base_actual'] = ch_get_server_uri();
+				$settings['url_base_actual'] = $this->getServerUri();
 				$settings['url_resource'] = $m[2];
 				// entity examples
 				$settings['entity-example'] = array();
@@ -1323,9 +1358,8 @@ class SRA_ApiRouter {
 					}
 				}
 			}
-			$ckey .= '_gtp' . ch_is_gtp_url();
 			// base64 encode cache key
-			if ($ckey) $ckey = md5(ch_encrypt($ckey));
+			if ($ckey) $ckey = md5($ckey);
 			
 			// response is in cache
 			if (SRA_API_ROUTER_CONTROLLER_USE_CACHE && strtolower($_SERVER['REQUEST_METHOD']) == 'get' && $ckey && SRA_Cache::cacheIsset($ckey)) {
@@ -1550,7 +1584,7 @@ class SRA_ApiRouter {
 				// use redirect header
 				if ($fstatus >= 300 && $fstatus < 400 && $uri) {
 					// append request variables to the URI
-					$url = ch_get_server_uri() . '/' . str_replace('?' . $_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']) . '/' . $uri;
+					$url = $this->getServerUri() . '/' . str_replace('?' . $_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']) . '/' . $uri;
 					foreach($_GET as $k => $v) if (!is_array($exclude) || !in_array($k, $exclude)) $url .= (strpos($url, '?') ? '&' : '?') . $k . '=' . urlencode($v);
 					$url = SRA_ApiRouter::formatUrl($url);
 					header("Location: $url");
@@ -1664,7 +1698,7 @@ class SRA_ApiRouter {
 				}
 				
 				// Cache-Control
-				if ($condition == 'ok' && is_numeric($cacheTtl = $config['cache-ttl' . ($doc ? '-doc' : '')])) ch_set_cache_headers($cacheTtl);
+				if ($condition == 'ok' && is_numeric($cacheTtl = $config['cache-ttl' . ($doc ? '-doc' : '')])) $this->setCacheHeaders($cacheTtl);
 				
 				if ($method && isset($response) && !$scalar) {
 					global $_utilDateFormat;
@@ -1828,6 +1862,36 @@ class SRA_ApiRouter {
 		}
 		return $routed;
 	}
+  
+  
+  /**
+   * sets the Cache-Control response header to $ttl if it has not already been set
+   * @param int $ttl the TTL (time-to-live) in seconds
+   * @return boolean
+   */
+  function setCacheHeaders($ttl) {
+    $isSet = FALSE;
+    $cacheSent = FALSE;
+    foreach(headers_list() as $cheader) {
+      if (preg_match('/cache/i', $cheader)) {
+        $cacheSent = TRUE;
+        break;
+      }
+    }
+    if (!$cacheSent && is_numeric($ttl) && $ttl >= 0) {
+      if ($ttl === 0) {
+        header('Cache-Control: no-cache, must-revalidate');
+    		header('Pragma: no-cache');
+    		header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+      }
+      else {
+        header('Cache-Control: ' . $ttl);
+    		header(sprintf('Expires: %s', gmdate('D, j M Y H:i:s', time() + $ttl) . ' GMT'));
+      }
+      $isSet = TRUE;
+    }
+    return $isSet;
+  }
 	
 	
 	// static methods
