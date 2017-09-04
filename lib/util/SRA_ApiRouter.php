@@ -581,7 +581,7 @@ class SRA_ApiRouter {
 			
 			// status codes
 			$customStatuses = array();
-			$resources =& SRA_ResourceBundle::getBundle(dirname(dirname(__FILE__)) . '/etc/l10n/app');
+			$resources =& $this->getResources();
 			$settings['status-codes'] = array();
 			if (isset($api['status'])) {
 				foreach(is_array($api['status']) ? $api['status'] : array($api['status']) as $status) {
@@ -1921,7 +1921,7 @@ class SRA_ApiRouter {
 	 */
 	private static function getMessages($status=NULL) {
 		static $_messages;
-		if (!isset($_messages) && ($bundle =& SRA_ResourceBundle::getBundle(dirname(dirname(__FILE__)) . '/etc/l10n/http-status-codes'))) $_messages = $bundle->getData();
+		if (!isset($_messages) && ($bundle =& SRA_ResourceBundle::getBundle(dirname(dirname(dirname(__FILE__))) . '/etc/l10n/http-status-codes'))) $_messages = $bundle->getData();
 		return $status ? (isset($_messages[$status]) ? $_messages[$status] : NULL) : $_messages;
 	}
 	

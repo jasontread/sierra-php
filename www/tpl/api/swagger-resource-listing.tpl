@@ -15,7 +15,7 @@
     "api-key": {ldelim}
       "type": "apiKey",
       "passAs": "header",
-      "keyname": "api-key"
+      "keyname": "Authorization"
     {rdelim}
   {rdelim},
   "info": {ldelim}
