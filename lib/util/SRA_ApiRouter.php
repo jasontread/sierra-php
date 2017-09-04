@@ -1336,7 +1336,14 @@ class SRA_ApiRouter {
             else $condition = 'unauthorized';
           }
         }
-        if (!$found) $condition = 'invalid'; 
+        if (!$found) {
+          if (isset($this->_settings['api-key-redirect'])) {
+            header('HTTP/1.1 302 Found');
+            header(sprintf('Location: %s', $this->_settings['api-key-redirect']));
+            exit;
+          }
+          else $condition = 'invalid';
+        }
 		  }
 		  else {
 				$msg = sprintf('SRA_ApiRouter::method - Error: api-key-validation function %s does not exist', $func);
