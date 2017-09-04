@@ -38,7 +38,7 @@ define('SRA_API_ROUTER_CONTROLLER_USE_CACHE', TRUE);
 /**
  * default value for @api-key-name
  */
-define('SRA_API_ROUTER_DEFAULT_API_KEY_NAME', 'Authorization');
+define('SRA_API_ROUTER_DEFAULT_API_KEY_NAME', 'api-key');
 
 /**
  * API router cache key prefix
@@ -1824,7 +1824,7 @@ class SRA_ApiRouter {
 						$tpl =& SRA_Controller::getAppTemplate();
 						$tpl->assignByRef('router', $this);
 						$tpl->assignByRef('api_resources', $this->getResources());
-						$response =& $tpl->fetch(dirname(dirname(__FILE__)) . "/www/tpl/api/${doc}.tpl");
+						$response =& $tpl->fetch(dirname(dirname(dirname(__FILE__))) . "/www/tpl/api/${doc}.tpl");
 						if ($ckey) {
 						  SRA_Cache::setCache($ckey, $response, $this->_settings['cache-ttl-doc']);
 						  $this->addCacheKey($ckey, $this->_settings['cache-ttl-doc']);
