@@ -387,7 +387,7 @@ class SRA_ApiRouter {
       foreach(array_keys($data) as $key) {
         if (isset($appData[$key])) $data[$key] = $appData[$key];
       }
-      $this->_resources->setData($data);
+      $this->_resources->_data =& $data;
     }
     return $this->_resources;
   }
