@@ -421,7 +421,7 @@ class SRA_ApiRouter {
     if (!$_api_server_uri) {
       $headers = function_exists('getallheaders') ? getallheaders() : array();
       $_api_server_uri = isset($headers['Host']) ? $headers['Host'] : SRA_Controller::getServerName();
-      if ($_api_server_uri && !preg_match('/^http:/', $_api_server_uri)) $_api_server_uri = $thihs->getProto() . '://' . $_api_server_uri;
+      if ($_api_server_uri && !preg_match('/^http:/', $_api_server_uri)) $_api_server_uri = $this->getProto() . '://' . $_api_server_uri;
     }
   
     return $_api_server_uri . ($includePath && isset($_SERVER['REQUEST_URI']) ? ($includeQueryString ? $_SERVER['REQUEST_URI'] : strtok($_SERVER['REQUEST_URI'], '?')) : '');
