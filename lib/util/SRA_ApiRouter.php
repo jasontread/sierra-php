@@ -994,6 +994,7 @@ class SRA_ApiRouter {
 				$settings['memory-limit'] = isset($api['memory-limit']) && preg_match('/^[0-9]+[bkmg]$/', $api['memory-limit']) ? $api['memory-limit'] : NULL;
 				$settings['name'] = isset($api['name']) ? (is_array($api['name']) ? $api['name'][0] : $api['name']) : $this->_class;
 				$settings['singleton'] = isset($api['singleton']) ? (is_array($api['singleton']) ? $api['singleton'][0] : $api['singleton']) : NULL;
+				$settings['uri-prefix'] = isset($api['uri-prefix']) ? $api['uri-prefix'] : NULL;
 				// explicit URL
 				if (isset($api['url']) && ((is_array($api['url']) && $api['url'][0]) || $api['url'])) {
 				  $settings['url'] = is_array($api['url']) ? $api['url'][0] : $api['url'];
@@ -1001,7 +1002,7 @@ class SRA_ApiRouter {
 				else {
 				  $appId = SRA_Controller::getCurrentAppId();
           $url = $this->getServerUri(TRUE);
-				  $settings['url'] =  SRA_ApiRouter::formatUrl($this->getServerUri(FALSE, TRUE) . '/' . $appId . '/api');
+				  $settings['url'] =  SRA_ApiRouter::formatUrl($this->getServerUri(FALSE, TRUE) . ($settings['uri-prefix'] ? '/' . $settings['uri-prefix'] : '') . '/api');
 			  }
 				if (!preg_match('/^http/i', $settings['url'])) $settings['url'] = SRA_ApiRouter::formatUrl($this->getServerUri() . '/' . $settings['url']);
 				if (preg_match('/:\/[a-z]/', $settings['url'])) $settings['url'] = str_replace(':/', '://', $settings['url']);
