@@ -406,7 +406,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
     // convert to sql constraints
     $sqlConstraints = array();
     foreach($constraints as $attr => $val) {ldelim}
-      $sqlConstraints[$this->getColumnName($attr)] = $this->convertAttribute($val, $attr);
+      if ($col = $this->getColumnName($attr)) $sqlConstraints[$col] = $this->convertAttribute($val, $attr);
     {rdelim}
     
     {include file="entity-aspect-after.tpl"}
