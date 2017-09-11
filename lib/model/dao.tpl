@@ -406,7 +406,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
     // convert to sql constraints
     $sqlConstraints = array();
     foreach($constraints as $attr => $val) {ldelim}
-      if ($col = $this->getColumnName($attr)) $sqlConstraints[$col] = $this->convertAttribute($val, $attr);
+      if ($col = $this->getColumnName($attr)) $sqlConstraints[$col] = $attr !== NULL ? $this->convertAttribute($val, $attr) : NULL;
     {rdelim}
     
     {include file="entity-aspect-after.tpl"}
@@ -537,7 +537,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
     
     $sql = "SELECT {$primaryKey->_column} FROM $this->_table WHERE 1=1"{if $entity->_constraint} . " AND {$entity->_constraint}"{/if};
     foreach ($constraints as $col => $val) {ldelim}
-      if ($val === NULL || $val === 'NULL') {ldelim}
+      if ($val === NULL) {ldelim}
         $sql .= " AND $col IS NULL";
       {rdelim}
       else {ldelim}
