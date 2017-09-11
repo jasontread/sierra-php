@@ -537,7 +537,12 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
     
     $sql = "SELECT {$primaryKey->_column} FROM $this->_table WHERE 1=1"{if $entity->_constraint} . " AND {$entity->_constraint}"{/if};
     foreach ($constraints as $col => $val) {ldelim}
-      $sql .= " AND $col=$val";
+      if ($val === NULL || $val === 'NULL') {ldelim}
+        $sql .= " AND $col IS NULL";
+      {rdelim}
+      else {ldelim}
+        $sql .= " AND $col=$val";
+      {rdelim}
     {rdelim}
     if ($sqlConstraint) {ldelim}
       $sql .= ' AND (' . $sqlConstraint . ')';
