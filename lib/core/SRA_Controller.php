@@ -2010,7 +2010,7 @@ class SRA_Controller {
    */
   function getServerName() {
     // look for HTTP_X_FORWARDED_HOST header (from apigee)
-    return isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : $_SERVER['SERVER_NAME'];
+    return isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : SRA_HOSTNAME);
   }
   // }}}
     
