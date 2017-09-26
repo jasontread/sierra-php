@@ -1036,7 +1036,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
     {include file="entity-aspect-before.tpl"}
     $dbEntityKeys = array();
 {foreach from=$entity->getAttributes() item=attribute}
-{if !$attribute->_table && $attribute->isEntity() && !$attribute->getMappedAttributes()}
+{if !$attribute->_table && $attribute->isEntity() && !$attribute->getMappedAttributes() && !$attribute->isEntitySkipPersistence()}
     if (${$attribute->_name} = $record->get{$attribute->getMethodName()}()) {ldelim}
 {if $attribute->_typeExtends}
       $dao =& SRA_DaoFactory::getDao('{$attribute->_typeExtends}');
@@ -1074,7 +1074,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
     if (!isset($this->_daos)) {ldelim}
       $this->_daos = array();
 {foreach from=$entity->getAttributes() item=attribute}
-{if $attribute->isEntity() && !$attribute->getMappedAttributes()}
+{if $attribute->isEntity() && !$attribute->getMappedAttributes() && !$attribute->isEntitySkipPersistence()}
 {if $attribute->_typeExtends}{assign var='aType' value=$attribute->_typeExtends}{else}{assign var='aType' value=$attribute->_type}{/if}
       $this->_daos['{$attribute->_name}'] =& {if $aType eq $entity->_name}$this{else}SRA_DaoFactory::getDao('{$aType}', TRUE){/if};
 {if $attribute->_nestedType}
