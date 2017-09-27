@@ -464,6 +464,15 @@ class SRA_ApiRouter {
 	 *   doc-tag-primary    => the primary API documentation endoint tag (the 
 	 *                         first tag specified)
 	 *   doc-swagger        => NULL if documentation should be disabled
+   *   docs               => URI for API documentation (e.g. /docs). If set,
+   *                         the 'docs-template' will be displayed when invoked
+   *   docs-template      => Template to display when the (optional) 'docs' URI 
+   *                         if invoked. Default is 'api-docs.tpl'. The 
+   *                         template environment will contain a '$router' 
+   *                         variable referencing the `SRA_ApiRouter` instance 
+   *                         and an 'api_resources' variable referencing an 
+   *                         'SRA_ResourceBundle' with the strings in 
+   *                         '/etc/l10n/api-router.properties'
 	 *   entity-example     => array of example settings for entities (indexed by 
 	 *                         entity name)
 	 *   entity-exclude:    => array of attributes that should be excluded from 
@@ -982,10 +991,15 @@ class SRA_ApiRouter {
 				$settings['bool-true'] = isset($api['bool-true']) ? (is_array($api['bool-true']) ? $api['bool-true'][0] : $api['bool-true']) : 'true';
 				$settings['cache-ttl'] = isset($api['cache-ttl']) && is_numeric($api['cache-ttl']) && $api['cache-ttl'] >= 0 ? $api['cache-ttl']*1 : NULL;
 				$settings['cache-ttl-doc'] = isset($api['cache-ttl-doc']) && is_numeric($api['cache-ttl-doc']) && $api['cache-ttl-doc'] >= 0 ? $api['cache-ttl-doc']*1 : 60*60;
-				$settings['doc-swagger'] = isset($api['doc-swagger']) ? (trim($doc = is_array($api['doc-swagger']) ? $api['doc-swagger'][0] : $api['doc-swagger']) ? $api['doc-swagger'] : NULL) : '/api-docs';
+				$settings['doc-swagger'] = isset($api['doc-swagger']) ? trim(is_array($api['doc-swagger']) ? $api['doc-swagger'][0] : $api['doc-swagger']) : '/swagger.json';
+        if (!$settings['doc-swagger']) $settings['doc-swagger'] = NULL;
 				$settings['doc_swagger'] = $settings['doc-swagger'];
-				$settings['doc-mashape'] = isset($api['doc-mashape']) ? (trim($doc = is_array($api['doc-mashape']) ? $api['doc-mashape'][0] : $api['doc-mashape']) ? $api['doc-mashape'] : NULL) : '/mashape.xml';
+				$settings['doc-mashape'] = isset($api['doc-mashape']) ? trim(is_array($api['doc-mashape']) ? $api['doc-mashape'][0] : $api['doc-mashape']) : '/mashape.xml';
+        if (!$settings['doc-mashape']) $settings['doc-mashape'] = NULL;
 				$settings['doc_mashape'] = $settings['doc-mashape'];
+				$settings['docs'] = isset($api['docs']) ? trim(is_array($api['docs']) ? $api['docs'][0] : $api['docs']) : NULL;
+        if (!$settings['docs']) $settings['docs'] = NULL;
+				$settings['docs-template'] = isset($api['docs-template']) ? trim(is_array($api['docs-template']) ? $api['docs-template'][0] : $api['docs-template']) : 'api-docs.tpl';
 				$settings['format-date'] = isset($api['format-date']) ? (is_array($api['format-date']) ? $api['format-date'][0] : $api['format-date']) : SRA_Controller::getAppDateOnlyFormat();
 				$settings['format_date'] = $settings['format-date'];
 				$settings['format-time'] = isset($api['format-time']) ? (is_array($api['format-time']) ? $api['format-time'][0] : $api['format-time']) : SRA_Controller::getAppDateFormat();
@@ -1799,8 +1813,10 @@ class SRA_ApiRouter {
 			if (substr($uri, 0, 1) != '/') $uri = '/' . $uri;
 			
 			// check if URI is for API documentation
-			foreach(array('doc-swagger', 'doc-mashape') as $doc) {
+			foreach(array('docs', 'doc-swagger', 'doc-mashape') as $doc) {
 				$docUri = isset($this->_settings[$doc]) ? $this->_settings[$doc] : NULL;
+        if (!trim($docUri)) continue;
+        $docUri = trim($docUri);
 				if (substr($docUri, 0, 1) != '/') $docUri = '/' . $docUri;
 				if (strpos($uri, $docUri) === 0) {
 					// max-execution-time and memory-limit
@@ -1825,14 +1841,14 @@ class SRA_ApiRouter {
 						$tpl =& SRA_Controller::getAppTemplate();
 						$tpl->assignByRef('router', $this);
 						$tpl->assignByRef('api_resources', $this->getResources());
-						$response =& $tpl->fetch(dirname(dirname(dirname(__FILE__))) . "/www/tpl/api/${doc}.tpl");
+						$response =& $tpl->fetch($doc == 'docs' ? $this->_settings['docs-template'] : dirname(dirname(dirname(__FILE__))) . "/www/tpl/api/${doc}.tpl");
 						if ($ckey) {
 						  SRA_Cache::setCache($ckey, $response, $this->_settings['cache-ttl-doc']);
 						  $this->addCacheKey($ckey, $this->_settings['cache-ttl-doc']);
 					  }
 					}
 					if (!in_array($header = 'sierra-api-cached', $this->_settings['headers-remove'])) $this->_settings['headers-add'][$header] = $cached ? 'true' : 'false';
-					$this->response('ok', NULL, preg_match('/swagger/', $doc) ? 'text/x-markdown' : 'text/xml', $nl = NULL, TRUE);
+					$this->response('ok', NULL, $doc == 'docs' ? NULL : (preg_match('/swagger/', $doc) ? 'text/x-markdown' : 'text/xml'), $nl = NULL, TRUE);
 					print($response);
 					$routed = TRUE;
 					break;
