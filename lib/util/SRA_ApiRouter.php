@@ -466,6 +466,12 @@ class SRA_ApiRouter {
 	 *   doc-swagger        => NULL if documentation should be disabled
    *   docs               => URI for API documentation (e.g. /docs). If set,
    *                         the 'docs-template' will be displayed when invoked
+   *   docs-function      => Optional global function to invoke prior to 
+   *                         rendering 'docs-template'. If set, the function 
+   *                         should return some value the result of which will 
+   *                         be set to the template variable $docsFunc. If the 
+   *                         function does not return a value, a 403 response 
+   *                         will be generated.
    *   docs-template      => Template to display when the (optional) 'docs' URI 
    *                         if invoked. Default is 'api-docs.tpl'. The 
    *                         template environment will contain a '$router' 
@@ -999,6 +1005,7 @@ class SRA_ApiRouter {
 				$settings['doc_mashape'] = $settings['doc-mashape'];
 				$settings['docs'] = isset($api['docs']) ? trim(is_array($api['docs']) ? $api['docs'][0] : $api['docs']) : NULL;
         if (!$settings['docs']) $settings['docs'] = NULL;
+				$settings['docs-function'] = isset($api['docs-function']) ? trim(is_array($api['docs-function']) ? $api['docs-function'][0] : $api['docs-function']) : NULL;
 				$settings['docs-template'] = isset($api['docs-template']) ? trim(is_array($api['docs-template']) ? $api['docs-template'][0] : $api['docs-template']) : 'api-docs.tpl';
 				$settings['format-date'] = isset($api['format-date']) ? (is_array($api['format-date']) ? $api['format-date'][0] : $api['format-date']) : SRA_Controller::getAppDateOnlyFormat();
 				$settings['format_date'] = $settings['format-date'];
@@ -1828,7 +1835,7 @@ class SRA_ApiRouter {
 					$cached = FALSE;
 					$ckey = NULL;
 					$response = NULL;
-					if (SRA_API_ROUTER_CONTROLLER_USE_CACHE && strtolower($_SERVER['REQUEST_METHOD']) == 'get' && is_numeric($this->_settings['cache-ttl-doc']) && $this->_settings['cache-ttl-doc'] > 0) {
+					if ($doc != 'docs' && SRA_API_ROUTER_CONTROLLER_USE_CACHE && strtolower($_SERVER['REQUEST_METHOD']) == 'get' && is_numeric($this->_settings['cache-ttl-doc']) && $this->_settings['cache-ttl-doc'] > 0) {
 						require_once('util/SRA_Cache.php');
 						$ckey = md5(SRA_API_ROUTER_CACHE_PREFIX . SRA_Controller::getAppName() . '_' . $this->_settings['api'] . '_' . $doc);
 						$cacheTime = SRA_Cache::cacheIsset($ckey, TRUE);
@@ -1839,6 +1846,14 @@ class SRA_ApiRouter {
 					}
 					if (!$response) {
 						$tpl =& SRA_Controller::getAppTemplate();
+            if ($doc == 'docs' && $this->_settings['docs-function'] && function_exists($func = $this->_settings['docs-function'])) {
+              if ($docsFunc = ${func}()) $tpl->assign('docsFunc', $docsFunc);
+              else {
+      					$this->response('invalid', NULL, NULL, $nl=NULL, TRUE);
+      					$routed = TRUE;
+      					break;
+              }
+            }
 						$tpl->assignByRef('router', $this);
 						$tpl->assignByRef('api_resources', $this->getResources());
 						$response =& $tpl->fetch($doc == 'docs' ? $this->_settings['docs-template'] : dirname(dirname(dirname(__FILE__))) . "/www/tpl/api/${doc}.tpl");
