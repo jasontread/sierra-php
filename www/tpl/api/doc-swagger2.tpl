@@ -142,6 +142,7 @@
               {rdelim}
 {/if}
             {rdelim},
+{/if}
             "description": "{if $description}{$description}{else}{$api_resources->getString('api.noErrorDescription')}{/if}"
           {rdelim}{if $code neq $last_code},{/if}
 {/if}
@@ -152,6 +153,7 @@
   {rdelim}{if $method.name neq $last_method},{/if}
 {/if}
 {/foreach}
+  {rdelim},
   "definitions": {ldelim}
 {foreach from=$router->getEntities() key=type item=entity}{assign var=last_entity value=$entity.type_label}{/foreach}
 {foreach from=$router->getEntities() key=type item=entity}
