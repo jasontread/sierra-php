@@ -11,13 +11,11 @@
       {if $router->_settings.contact_email}{if $started}, {/if}"email": "{$router->_settings.contact_email}"{assign var=started value=1}{/if}
       {if $router->_settings.contact_url}{if $started}, {/if}"url": "{$router->_settings.contact_url}"{/if}
     {rdelim},
-    {if}
     {if $router->_settings.license_name || $router->_settings.license_url}
     "license": {ldelim}
       {if $router->_settings.license_name}"name": "{$router->_settings.license_name}"/if}
       {if $router->_settings.license_url}{if $router->_settings.license_name}, {/if}"url": "{$router->_settings.license_url}"{/if}
     {rdelim},
-    {if}
     "version": "{if $router->_settings.api_version}{$router->_settings.api_version}{else}1.0{/if}"
   {rdelim},
   {if $router->_settings.external_docs_url}
