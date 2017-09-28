@@ -414,9 +414,11 @@ class SRA_ApiRouter {
    * @param boolean $includePath include the URL path
    * @param boolean $includeQueryString if $includePath is TRUE, whether or not 
    * to include query strings in the url
+   * @param boolean $includeProto whether or not to include the protocol 
+   * (default is TRUE)
    * @return string
    */
-  private function getServerUri($includePath=FALSE, $includeQueryString=TRUE) {
+  private function getServerUri($includePath=FALSE, $includeQueryString=TRUE, $includeProto=TRUE) {
     global $_api_server_uri;
   
     if (!$_api_server_uri) {
@@ -425,7 +427,9 @@ class SRA_ApiRouter {
       if ($_api_server_uri && !preg_match('/^http:/', $_api_server_uri)) $_api_server_uri = $this->getProto() . '://' . $_api_server_uri;
     }
   
-    return $_api_server_uri . ($includePath && isset($_SERVER['REQUEST_URI']) ? ($includeQueryString ? $_SERVER['REQUEST_URI'] : strtok($_SERVER['REQUEST_URI'], '?')) : '');
+    $uri = $_api_server_uri . ($includePath && isset($_SERVER['REQUEST_URI']) ? ($includeQueryString ? $_SERVER['REQUEST_URI'] : strtok($_SERVER['REQUEST_URI'], '?')) : '');
+    if (!$includeProto) $uri = str_replace('http://', '', str_replace('https://', '', $uri));
+    return $uri;
   }
 	
 	/**
@@ -456,6 +460,9 @@ class SRA_ApiRouter {
 	 *   api-key-validate   => TRUE for methods that require API key validation
 	 *   cache-scope-params => an array of cookie or request params (when 
 	 *                         cache-scope is 'cookie' or 'request')
+   *   contact-email      =>  optional contact email address for the API
+   *   contact-name       =>  optional contact name address for the API
+   *   contact-url        =>  optional contact URL address for the API
 	 *   description        => description for the API or API method
 	 *   doc-hidden         => TRUE if a method should be excluded in API docs
 	 *   doc-mashape        => NULL if documentation should be disabled
@@ -464,6 +471,7 @@ class SRA_ApiRouter {
 	 *   doc-tag-primary    => the primary API documentation endoint tag (the 
 	 *                         first tag specified)
 	 *   doc-swagger        => NULL if documentation should be disabled
+   *   doc-swagger2       => NULL if documentation should be disabled
    *   docs               => URI for API documentation (e.g. /docs). If set,
    *                         the 'docs-template' will be displayed when invoked
    *   docs-function      => Optional global function to invoke prior to 
@@ -490,6 +498,9 @@ class SRA_ApiRouter {
 	 *   error-codes        => a hash containing method response value/status 
 	 *                         pairs - where the status value is a hash with 2 
 	 *                         keys: code and description
+   *   external-docs-description => optional description for the 
+   *                         'external-docs-url'
+   *   external-docs-url  => optional external documentation URL
 	 *   headers-add        => key/value pairs defining headers that should be
 	 *                         appended to the response
 	 *   headers-remove     => array of header names that should be removed 
@@ -555,6 +566,8 @@ class SRA_ApiRouter {
 	 *                         and the value is the description
 	 *   tags               => array of tags for the API/method (or empty array)
 	 *   tag-primary        => the primary tag (the first tag specified)
+   *   terms-of-service   => optional URL to a terms of service page for the 
+   *                         API
 	 * @param array $api the api hash to return the settings from
 	 * @param string $method the name of the method this is being invoked for 
 	 * (NULL for class settings)
@@ -997,9 +1010,18 @@ class SRA_ApiRouter {
 				$settings['bool-true'] = isset($api['bool-true']) ? (is_array($api['bool-true']) ? $api['bool-true'][0] : $api['bool-true']) : 'true';
 				$settings['cache-ttl'] = isset($api['cache-ttl']) && is_numeric($api['cache-ttl']) && $api['cache-ttl'] >= 0 ? $api['cache-ttl']*1 : NULL;
 				$settings['cache-ttl-doc'] = isset($api['cache-ttl-doc']) && is_numeric($api['cache-ttl-doc']) && $api['cache-ttl-doc'] >= 0 ? $api['cache-ttl-doc']*1 : 60*60;
+        $settings['contact-email'] = isset($api['contact-email']) ? $api['contact-email'] : NULL;
+        $settings['contact_email'] = $settings['contact-email'];
+        $settings['contact-name'] = isset($api['contact-name']) ? $api['contact-name'] : NULL;
+        $settings['contact_name'] = $settings['contact-name'];
+        $settings['contact-url'] = isset($api['contact-url']) ? $api['contact-url'] : NULL;
+        $settings['contact_url'] = $settings['contact-url'];
 				$settings['doc-swagger'] = isset($api['doc-swagger']) ? trim(is_array($api['doc-swagger']) ? $api['doc-swagger'][0] : $api['doc-swagger']) : '/swagger.json';
         if (!$settings['doc-swagger']) $settings['doc-swagger'] = NULL;
 				$settings['doc_swagger'] = $settings['doc-swagger'];
+				$settings['doc-swagger2'] = isset($api['doc-swagger2']) ? trim(is_array($api['doc-swagger2']) ? $api['doc-swagger2'][0] : $api['doc-swagger2']) : '/swagger2.json';
+        if (!$settings['doc-swagger2']) $settings['doc-swagger2'] = NULL;
+				$settings['doc_swagger2'] = $settings['doc-swagger2'];
 				$settings['doc-mashape'] = isset($api['doc-mashape']) ? trim(is_array($api['doc-mashape']) ? $api['doc-mashape'][0] : $api['doc-mashape']) : '/mashape.xml';
         if (!$settings['doc-mashape']) $settings['doc-mashape'] = NULL;
 				$settings['doc_mashape'] = $settings['doc-mashape'];
@@ -1007,14 +1029,24 @@ class SRA_ApiRouter {
         if (!$settings['docs']) $settings['docs'] = NULL;
 				$settings['docs-function'] = isset($api['docs-function']) ? trim(is_array($api['docs-function']) ? $api['docs-function'][0] : $api['docs-function']) : NULL;
 				$settings['docs-template'] = isset($api['docs-template']) ? trim(is_array($api['docs-template']) ? $api['docs-template'][0] : $api['docs-template']) : 'api-docs.tpl';
+        $settings['external-docs-description'] = isset($api['external-docs-description']) ? $api['external-docs-description'] : NULL;
+        $settings['external_docs_description'] = $settings['external-docs-description'];
+        $settings['external-docs-url'] = isset($api['external-docs-url']) ? $api['external-docs-url'] : NULL;
+        $settings['external_docs_url'] = $settings['external-docs-url'];
 				$settings['format-date'] = isset($api['format-date']) ? (is_array($api['format-date']) ? $api['format-date'][0] : $api['format-date']) : SRA_Controller::getAppDateOnlyFormat();
 				$settings['format_date'] = $settings['format-date'];
 				$settings['format-time'] = isset($api['format-time']) ? (is_array($api['format-time']) ? $api['format-time'][0] : $api['format-time']) : SRA_Controller::getAppDateFormat();
 				$settings['format_time'] = $settings['format-time'];
+        $settings['license-name'] = isset($api['license-name']) ? $api['license-name'] : NULL;
+        $settings['license_name'] = $settings['license-name'];
+        $settings['license-url'] = isset($api['license-url']) ? $api['license-url'] : NULL;
+        $settings['license_url'] = $settings['license-url'];
 				$settings['max-execution-time'] = isset($api['max-execution-time']) && is_numeric($api['max-execution-time']) && $api['max-execution-time'] > 0 ? $api['max-execution-time'] : NULL;
 				$settings['memory-limit'] = isset($api['memory-limit']) && preg_match('/^[0-9]+[bkmg]$/', $api['memory-limit']) ? $api['memory-limit'] : NULL;
 				$settings['name'] = isset($api['name']) ? (is_array($api['name']) ? $api['name'][0] : $api['name']) : $this->_class;
 				$settings['singleton'] = isset($api['singleton']) ? (is_array($api['singleton']) ? $api['singleton'][0] : $api['singleton']) : NULL;
+        $settings['terms-of-service'] = isset($api['terms-of-service']) ? $api['terms-of-service'] : NULL;
+        $settings['terms_of_service'] = $settings['terms-of-service'];
 				$settings['uri-prefix'] = isset($api['uri-prefix']) ? $api['uri-prefix'] : NULL;
 				// explicit URL
 				if (isset($api['url']) && ((is_array($api['url']) && $api['url'][0]) || $api['url'])) {
@@ -1030,6 +1062,8 @@ class SRA_ApiRouter {
 				preg_match('/^(https?:\/\/[^\/]+)(.*)$/', $settings['url'], $m);
 				$settings['url_base'] = $m[1];
 				$settings['url_base_actual'] = $this->getServerUri();
+        $settings['url_hostname'] = $this->getServerUri(FALSE, FALSE, FALSE);
+        $settings['url_proto'] = $this->getProto();
 				$settings['url_resource'] = $m[2];
 				// entity examples
 				$settings['entity-example'] = array();
@@ -1820,7 +1854,7 @@ class SRA_ApiRouter {
 			if (substr($uri, 0, 1) != '/') $uri = '/' . $uri;
 			
 			// check if URI is for API documentation
-			foreach(array('docs', 'doc-swagger', 'doc-mashape') as $doc) {
+			foreach(array('docs', 'doc-swagger', 'doc-swagger2', 'doc-mashape') as $doc) {
 				$docUri = isset($this->_settings[$doc]) ? $this->_settings[$doc] : NULL;
         if (!trim($docUri)) continue;
         $docUri = trim($docUri);
