@@ -137,7 +137,7 @@
           "{$code}": {ldelim}
 {if $code lt 300}
             "schema": {ldelim}
-              "{if $method.return.array || !$method.return.entity}type{else}$ref{/if}": "{if $method.return.array}array{else}{if $method.return.entity}#/definitions/{$method.return.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
+              "{if $method.return.array || !$method.return.entity}type{else}$ref{/if}": "{if $method.return.array}array{elseif $method.return.entity#/definitions/{$method.return.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
 {if $method.return.array}
               "items": {ldelim}
                 "{if $method.return.entity}$ref{else}type{/if}": "{if $method.return.entity}#/definitions/{$method.return.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
@@ -192,10 +192,10 @@
           "enum": [{foreach from=$attribute.options key=option item=label}"{$option}"{if $option neq $last_option}, {/if}{/foreach}],
 {/if}
 {if $attribute.array || !$attribute.entity}
-          "type": "{if $attribute.array}array{else}{if $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{elseif !$attribute.entity}string{/if}{/if}"
+          "type": "{if $attribute.array}array{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{elseif !$attribute.entity}string{/if}"
 {if $attribute.array}
           "items": {ldelim}
-            "{if $attribute.entity}$ref{else}type{/if}": "{if $attribute.entity}{$attribute.type_label}{else}{if $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}{/if}"
+            "{if $attribute.entity}$ref{else}type{/if}": "{if $attribute.entity}{$attribute.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
           {rdelim}
 {/if}
 {else}
