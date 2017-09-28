@@ -160,6 +160,8 @@
       {rdelim}{if $http neq $last_http},{/if}
 {/foreach}
   {rdelim}{if $method.name neq $last_method},{/if}
+{/if}
+{/foreach}
   "definitions": {ldelim}
 {foreach from=$router->getEntities() key=type item=entity}{assign var=last_entity value=$entity.type_label}{/foreach}
 {foreach from=$router->getEntities() key=type item=entity}
