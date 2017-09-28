@@ -41,12 +41,7 @@
 {if $hasCsv}
     "text/csv",
 {/if}
-{if $router->_settings.beautify}
-    "application/json",
-    "text/json"
-{else}
     "application/json"
-{/if}
   ],
   "paths": {ldelim}
 {foreach from=$router->_methods item=method}{if !$method.doc_hidden}{assign var=last_method value=$method.name}{/if}{/foreach}
