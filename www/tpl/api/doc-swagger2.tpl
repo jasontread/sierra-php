@@ -158,6 +158,7 @@
       {rdelim}{if $http neq $last_http},{/if}
 {/if}
 {/foreach}
+{/foreach}
   {rdelim}{if $method.name neq $last_method},{/if}
 {/if}
 {/foreach}
