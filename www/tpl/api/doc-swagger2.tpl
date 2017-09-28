@@ -129,11 +129,9 @@
 {assign var=started value=0}
 {assign var=type value=$method.return.type}
 {foreach from=$method.status_codes_num key=code item=description}{if !$method.status_doc_skip[$code]}{assign var=last_code value=$code}{/if}{/foreach}
+        "responses": {ldelim}
 {foreach from=$method.status_codes_num key=code item=description}
 {if !$method.status_doc_skip[$code]}
-{if !$started}
-        "responses": {ldelim}
-{/if}
           "{$code}": {ldelim}
 {if $code lt 300}
             "schema": {ldelim}
@@ -148,9 +146,7 @@
           {rdelim}{if $code neq $last_code},{/if}
 {/if}
 {/foreach}
-{if $started}
         {rdelim}
-{/if}
       {rdelim}{if $http neq $last_http},{/if}
 {/foreach}
   {rdelim}{if $method.name neq $last_method},{/if}
