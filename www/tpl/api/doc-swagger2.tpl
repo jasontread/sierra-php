@@ -18,6 +18,7 @@
       {if $router->_settings.license_url}{if $router->_settings.license_name}, {/if}"url": "{$router->_settings.license_url}"{/if}
     {rdelim},
     {/if}
+
     "version": "{if $router->_settings.api_version}{$router->_settings.api_version}{else}1.0{/if}"
   {rdelim},
   {if $router->_settings.external_docs_url}
@@ -54,13 +55,13 @@
 {foreach from=$method.http_methods key=i item=http}{assign var=last_http value=$http}{/foreach}
     "{$router->_settings.url_resource}{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}
 {foreach from=$method.http_methods key=i item=http}
-      "{$http}": {ldelim}
+      "{$http|lower}": {ldelim}
 {if $method.tags}
         "tags": [{foreach from=$method.tags item=tag}{assign var=last_tag value=$tag}{/foreach}{foreach from=$method.tags item=tag}"{$tag}"{if $tag neq $last_tag}, {/if}{/foreach}],
 {/if}
         "summary": "{if $method.http_method_summaries[$i]}{$method.http_method_summaries[$i]}{else}{$method.name}{/if}",
         "description": "{$method.name}{if $method.description}: {$method.description|replace:'"':'\"'}{/if}",
-        "nickname": "{$method.http_method_nicknames[$i]}",
+        "operationId": "{$method.http_method_nicknames[$i]}",
 {if $method.return.entity && $method.return.csv_method}
         "produces": [
           "text/csv"
@@ -178,7 +179,6 @@
 {if $attribute.description}
           "description": "{$attribute.description|replace:'"':'\"'}",
 {/if}
-          "required": {if $attribute.required}true{else}false{/if},
 {if $type eq 'date' || $type eq 'timestamp'}
           "format": "{if $type eq 'date'}date{else}dateTime{/if}",
 {/if}
