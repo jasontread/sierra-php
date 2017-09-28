@@ -131,8 +131,27 @@
 {foreach from=$method.status_codes_num key=code item=description}{if !$method.status_doc_skip[$code]}{assign var=last_code value=$code}{/if}{/foreach}
 {foreach from=$method.status_codes_num key=code item=description}
 {if !$method.status_doc_skip[$code]}
-
+{if !$started}
+        "responses": {ldelim}
 {/if}
+          "{$code}": {ldelim}
+{if $code lt 300}
+            "schema": {ldelim}
+              "{if $method.return.array || !$method.return.entity}type{else}$ref{/if}": "{if $method.return.array}array{else}{if $method.return.entity}#/definitions/{$method.return.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
+{if $method.return.array}
+              "items": {ldelim}
+                "{if $method.return.entity}$ref{else}type{/if}": "{if $method.return.entity}#/definitions/{$method.return.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
+              {rdelim}
+{/if}
+            {rdelim},
+            "description": "{if $description}{$description}{else}{$api_resources->getString('api.noErrorDescription')}{/if}"
+          {rdelim}{if $code neq $last_code},{/if}
+{/if}
+{/foreach}
+{if $started}
+        {rdelim}
+{/if}
+      {rdelim}{if $http neq $last_http},{/if}
 {/foreach}
   {rdelim}{if $method.name neq $last_method},{/if}
 {/if}
