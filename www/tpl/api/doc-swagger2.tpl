@@ -152,12 +152,11 @@
             "description": "{if $description}{$description}{else}{$api_resources->getString('api.noErrorDescription')}{/if}"
           {rdelim}{if $code neq $last_code},{/if}
 {/if}
-{/foreach}
-{/foreach}
 {if $started}
         {rdelim}
 {/if}
       {rdelim}{if $http neq $last_http},{/if}
+{/if}
 {/foreach}
   {rdelim}{if $method.name neq $last_method},{/if}
 {/if}
