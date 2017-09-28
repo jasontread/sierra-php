@@ -53,7 +53,7 @@
 {foreach from=$router->_methods item=method}
 {if !$method.doc_hidden}
 {foreach from=$method.http_methods key=i item=http}{assign var=last_http value=$http}{/foreach}
-    "{$router->_settings.url_resource}{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}
+    "{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}
 {foreach from=$method.http_methods key=i item=http}
       "{$http|lower}": {ldelim}
 {if $method.tags}
