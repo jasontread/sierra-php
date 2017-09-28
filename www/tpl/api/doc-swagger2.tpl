@@ -14,7 +14,7 @@
     {/if}
     {if $router->_settings.license_name || $router->_settings.license_url}
     "license": {ldelim}
-      {if $router->_settings.license_name}"name": "{$router->_settings.license_name}"/if}
+      {if $router->_settings.license_name}"name": "{$router->_settings.license_name}"{/if}
       {if $router->_settings.license_url}{if $router->_settings.license_name}, {/if}"url": "{$router->_settings.license_url}"{/if}
     {rdelim},
     {/if}
@@ -47,7 +47,6 @@
     "application/json"
 {/if}
   ],
-  "authorizations": {ldelim} {if $router->_settings.swagger_auth}"{$router->_settings.swagger_auth}": []{/if} {rdelim},
   "paths": {ldelim}
 {foreach from=$router->_methods item=method}{if !$method.doc_hidden}{assign var=last_method value=$method.name}{/if}{/foreach}
 {foreach from=$router->_methods item=method}
@@ -70,7 +69,8 @@
         "parameters": [
 {assign var=last_param value=0}
 {foreach from=$method.params key=name item=param}{assign var=last_param value=$name}{/foreach}
-{if $method.return.entity}{assign var=entity value=$router->getEntities($method.return.type)}
+{if $method.return.entity}
+{assign var=entity value=$router->getEntities($method.return.type)}
 {if $entity.hasDate}
           {ldelim}
             "name": "format-date",
