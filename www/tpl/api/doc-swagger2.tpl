@@ -131,7 +131,7 @@
           "{$code}": {ldelim}
 {if $code lt 300}
             "schema": {ldelim}
-              "{if $method.return.array || !$method.return.entity}type{else}$ref{/if}": "{if $method.return.array}array{elseif $method.return.entity}#/definitions/{$method.return.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
+              "{if $method.return.array || !$method.return.entity}type{else}$ref{/if}": "{if $method.return.array}array{elseif $method.return.entity}#/definitions/{$method.return.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"{if $method.return.array},{/if}
 {if $method.return.array}
               "items": {ldelim}
                 "{if $method.return.entity}$ref{else}type{/if}": "{if $method.return.entity}#/definitions/{$method.return.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
@@ -158,8 +158,10 @@
 {if $entity.description}
       "description": "{$entity.description|replace:'"':'\"'}",
 {/if}
-      "required": [
+{assign var=last_required value=0}
 {foreach from=$entity.attributes key=name item=attribute}{if $attribute.required}{assign var=last_required value=$name}{/if}{assign var=last_attribute value=$name}{/foreach}
+{if $last_required}
+      "required": [
 {foreach from=$entity.attributes key=name item=attribute}
 {if $attribute.required}
         "{$name}"{if $name neq $last_required},{/if}
@@ -167,6 +169,7 @@
 {/if}
 {/foreach}
       ],
+{/if}
       "properties": {ldelim}
 {foreach from=$entity.attributes key=name item=attribute}
 {assign var=type value=$attribute.type}
@@ -185,7 +188,7 @@
           "enum": [{foreach from=$attribute.options key=option item=label}"{$option}"{if $option neq $last_option}, {/if}{/foreach}],
 {/if}
 {if $attribute.array || !$attribute.entity}
-          "type": "{if $attribute.array}array{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{elseif !$attribute.entity}string{/if}"
+          "type": "{if $attribute.array}array{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{elseif !$attribute.entity}string{/if}"{if $attribute.array},{/if}
 {if $attribute.array}
           "items": {ldelim}
             "{if $attribute.entity}$ref{else}type{/if}": "{if $attribute.entity}#/definitions/{$attribute.type_label}{elseif $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{elseif $type eq 'void'}void{else}string{/if}"
