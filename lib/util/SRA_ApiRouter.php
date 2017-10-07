@@ -1897,7 +1897,7 @@ class SRA_ApiRouter {
 					  }
 					}
 					if (!in_array($header = 'sierra-api-cached', $this->_settings['headers-remove'])) $this->_settings['headers-add'][$header] = $cached ? 'true' : 'false';
-					$this->response('ok', NULL, $doc == 'docs' ? NULL : (preg_match('/swagger/', $doc) ? 'text/x-markdown' : 'text/xml'), $nl = NULL, TRUE);
+					$this->response('ok', NULL, $doc == 'docs' ? NULL : (preg_match('/swagger/', $doc) ? 'application/json' : 'text/xml'), $nl = NULL, TRUE);
 					print($response);
 					$routed = TRUE;
 					break;
