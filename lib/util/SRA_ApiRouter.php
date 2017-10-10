@@ -1382,7 +1382,11 @@ class SRA_ApiRouter {
           else if (isset($headers[$k1 = str_replace('-', '_', $k)])) $apiKey = $headers[$k1];
           else if ($requestParams[$k]) $apiKey = $requestParams[$k];
           else if ($_COOKIE[$k]) $apiKey = $_COOKIE[$k];
-          else if (isset($headers['Authorization'])) $apiKey = $headers['Authorization'];
+          else if (isset($headers['Authorization']) || isset($headers['authorization'])) {
+            $apiKey = isset($headers['Authorization']) ? $headers['Authorization'] : $headers['authorization'];
+            $pieces = explode(' ', $apiKey);
+            $apiKey = trim($pieces[count($pieces) - 1]);
+          }
           if ($apiKey) {
             $found = TRUE;
             if ($func($apiKey, $this->_settings['api'], $method['method'], $args)) {
