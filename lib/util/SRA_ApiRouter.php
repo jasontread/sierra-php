@@ -1767,6 +1767,7 @@ class SRA_ApiRouter {
 				
 				// Cache-Control
 				if ($condition == 'ok' && is_numeric($cacheTtl = $config['cache-ttl' . ($doc ? '-doc' : '')])) $this->setCacheHeaders($cacheTtl);
+        else if ($code >= 400) $this->setCacheHeaders(0);
 				
 				if ($method && isset($response) && !$scalar) {
 					global $_utilDateFormat;
