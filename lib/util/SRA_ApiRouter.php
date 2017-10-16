@@ -31,9 +31,9 @@ define('SRA_API_ROUTER_CONTROLLER_SOURCE_FILE_REGEX', '/controller.*\.php/i');
 define('SRA_API_ROUTER_CONTROLLER_VERSION_DIR_REGEX', '/^[vV]([0-9\.]+)([a-zA-Z]?[a-zA-Z0-9]*)$/');
 
 /**
- * whether or not to enable caching of method responses (turn off during debugging)
+ * whether or not to enable caching of method responses (override and turn off for debugging)
  */
-define('SRA_API_ROUTER_CONTROLLER_USE_CACHE', TRUE);
+if (!defined('SRA_API_ROUTER_CONTROLLER_USE_CACHE')) define('SRA_API_ROUTER_CONTROLLER_USE_CACHE', TRUE);
 
 /**
  * default value for @api-key-name
