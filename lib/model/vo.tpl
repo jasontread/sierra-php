@@ -5007,6 +5007,8 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @access public
 	 */
 	function validate($_id = FALSE, $reset = TRUE, $evenIfNotDirty = FALSE) {ldelim}
+    global $__sra_obj_validate;
+    $__sra_obj_validate = $this;
     {assign var='aopMethodName' value="validate"}
     {include file="entity-aspect-before.tpl"}
     require_once('model/SRA_AttributeValidator.php');
@@ -5019,7 +5021,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 		if (($evenIfNotDirty || $this->isDirty('{$attribute->_name}'){if $attribute->isRequired()} || !$this->recordExists{/if}) && (!$_id || in_array('{$attribute->_name}', $_id))) {ldelim}
 {if $attribute->_validators}
 			// validate {$attribute->_name}
-			$params = array('attr' => $rb->getString('{$attribute->getResourceName()}'), 'attribute'=> '{$attribute->_name}'{if $attribute->_vars}{foreach from=$attribute->_vars key=key item=item}, '{$key}' => '{$Template->strReplace("'", "\\'", $item)}' {/foreach}{/if});
+			$params = array('attr' => $rb->getString('{$attribute->getResourceName()}'), 'attribute'=> '{$attribute->_name}'{if $attribute->_vars}{foreach from=$attribute->_vars key=key item=item}, '{$key}' => {if $key eq 'code'}str_replace('$this', '$__sra_obj_validate', {/if}'{$Template->strReplace("'", "\\'", $item)}'{if $key eq 'code'}){/if} {/foreach}{/if});
 			${$attribute->_name} ={if $attribute->_useReference || $attribute->_cardinality}& {/if}$this->get{if $attribute->_cardinality}AddedVals('{$attribute->_name}'){else}{$attribute->getMethodName()}(){/if};
 			if (is_scalar(${$attribute->_name})) {ldelim}
   			$params['value'] = ${$attribute->_name};

@@ -947,6 +947,7 @@ class SRA_AttributeValidator {
         
 				// 'code' var
 				else if (isset($params['code'])) {
+          global $__sra_obj_validate;
           eval($params['code']);
 					return isset($options) && is_array($options) && isset($options[$value[$key]]);
 				}
