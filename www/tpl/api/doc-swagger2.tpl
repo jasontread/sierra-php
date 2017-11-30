@@ -119,6 +119,7 @@
 {foreach from=$param.options item=option}{assign var=last_option value=$option}{/foreach}
 {if $param.array}  {/if}            "enum": [{foreach from=$param.options item=option}"{$option}"{if $option neq $last_option}, {/if}{/foreach}]{if !$param.array},{/if}
 {if $param.array}
+
             {rdelim},
 {/if}
 {/if}
