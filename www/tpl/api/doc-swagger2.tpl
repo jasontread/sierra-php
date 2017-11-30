@@ -113,8 +113,15 @@
             "default": {if $type eq 'string'}"{$param.default}"{elseif $type eq 'boolean' || $type eq 'bool'}{if $param.default}true{else}false{/if}{elseif $param.default}{$param.default}{else}null{/if},
 {/if}
 {if $param.options}
+{if $param.array}
+            "items": {ldelim}
+              "type": "string",
+{/if}
 {foreach from=$param.options item=option}{assign var=last_option value=$option}{/foreach}
             "enum": [{foreach from=$param.options item=option}"{$option}"{if $option neq $last_option}, {/if}{/foreach}],
+{if $param.array}
+            {rdelim}
+{/if}
 {/if}
             "in": "{if $param.placeholder}path{elseif $http eq 'GET'}query{else}formData{/if}"
 
