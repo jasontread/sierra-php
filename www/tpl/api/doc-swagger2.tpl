@@ -115,12 +115,11 @@
 {if $param.options}
 {if $param.array}
             "items": {ldelim}
-              "type": "string",
-{/if}
+              "type": "string",{/if}
 {foreach from=$param.options item=option}{assign var=last_option value=$option}{/foreach}
-            "enum": [{foreach from=$param.options item=option}"{$option}"{if $option neq $last_option}, {/if}{/foreach}],
+{if $param.array}  {/if}            "enum": [{foreach from=$param.options item=option}"{$option}"{if $option neq $last_option}, {/if}{/foreach}]{if !$param.array},{/if}
 {if $param.array}
-            {rdelim}
+            {rdelim},
 {/if}
 {/if}
             "in": "{if $param.placeholder}path{elseif $http eq 'GET'}query{else}formData{/if}"
