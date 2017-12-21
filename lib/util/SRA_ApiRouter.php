@@ -719,6 +719,8 @@ class SRA_ApiRouter {
 				$settings['async'] = isset($api['async']) ? TRUE : $this->_settings['async'];
 				$settings['skip-callback-param'] = isset($api['skip-callback-param']) ? TRUE : $this->_settings['skip-callback-param'];
 				$settings['skip_callback_param'] = $settings['skip-callback-param'];
+				$settings['skip-date-params'] = isset($api['skip-date-params']) ? TRUE : $this->_settings['skip-date-params'];
+				$settings['skip_date_params'] = $settings['skip-date-params'];
 				$settings['beautify'] = isset($api['beautify']) ? TRUE : $this->_settings['beautify'];
 				$settings['beautify-round'] = isset($api['beautify-round']) && is_numeric($api['beautify-round']) && $api['beautify-round'] >= 0 ? $api['beautify-round'] : $this->_settings['beautify-round'];
 				$settings['bool-false'] = isset($api['bool-false']) ? (is_array($api['bool-false']) ? $api['bool-false'][0] : $api['bool-false']) : $this->_settings['bool-false'];
@@ -1004,6 +1006,8 @@ class SRA_ApiRouter {
 				$settings['async'] = isset($api['async']) ? TRUE : FALSE;
 				$settings['skip-callback-param'] = isset($api['skip-callback-param']) ? TRUE : FALSE;
 				$settings['skip_callback_param'] = $settings['skip-callback-param'];
+				$settings['skip-date-params'] = isset($api['skip-date-params']) ? TRUE : FALSE;
+				$settings['skip_date_params'] = $settings['skip-date-params'];
 				$settings['beautify'] = isset($api['beautify']) ? TRUE : FALSE;
 				$settings['beautify-round'] = isset($api['beautify-round']) && is_numeric($api['beautify-round']) && $api['beautify-round'] >= 0 ? $api['beautify-round'] : 2;
 				$settings['bool-false'] = isset($api['bool-false']) ? (is_array($api['bool-false']) ? $api['bool-false'][0] : $api['bool-false']) : 'false';

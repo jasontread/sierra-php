@@ -43,7 +43,7 @@
         <description><![CDATA[{$api_resources->getString('api.callback')}]]></description>
         <example><![CDATA[my_callback_function]]></example>
       </parameter>
-{if $entity.hasDate}
+{if $entity.hasDate && !$method.skip_date_params}
       <parameter type="string" optional="true" name="format-date" default="{$method.format_time}">
         <description><![CDATA[{$api_resources->getString('api.formatDate')}]]></description>
         <example><![CDATA[{$method.format_time}]]></example>

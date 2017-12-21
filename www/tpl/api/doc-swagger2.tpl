@@ -67,7 +67,7 @@
 {foreach from=$method.params key=name item=param}{assign var=last_param value=$name}{/foreach}
 {if $method.return.entity}
 {assign var=entity value=$router->getEntities($method.return.type)}
-{if $entity.hasDate}
+{if $entity.hasDate && !$method.skip_date_params}
           {ldelim}
             "name": "format-date",
             "in": "{if $http eq 'GET'}query{else}formData{/if}",
