@@ -45,11 +45,12 @@
   ],
   "paths": {ldelim}
 {foreach from=$router->_methods item=method}{if !$method.doc_hidden}{assign var=last_method value=$method.name}{/if}{/foreach}
-{foreach from=$router->_methods key=matchNum item=match}
-{foreach from=$router->_methods item=method}{if !$method.doc_hidden && $method.route.full eq $match.route.full && $methodNum ge $matchNum}{foreach from=$method.http_methods key=i item=http}{assign var=last_match value=$http}{/foreach}{/if}{/foreach}
+{assign var=added_methods value=' '}
+{foreach from=$router->_methods item=match}
+{foreach from=$router->_methods item=method}{if !$method.doc_hidden && $method.route.full eq $match.route.full}{foreach from=$method.http_methods key=i item=http}{assign var=last_match value=$http}{/foreach}{/if}{/foreach}
 {assign var=started value=0}
-{foreach from=$router->_methods key=methodNum item=method}
-{if !$method.doc_hidden && $method.route.full eq $match.route.full && $methodNum ge $matchNum}
+{foreach from=$router->_methods item=method}
+{if !$method.doc_hidden && $method.route.full eq $match.route.full && !$added_methods|strpos:$method.route.full}
 {foreach from=$method.http_methods key=i item=http}{assign var=last_http value=$http}{/foreach}
     {if $started}, {else}"{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}{/if}
 
@@ -161,6 +162,7 @@
 {assign var=started value=1}
 {/if}
 {/foreach}
+{assign var=added_methods value=$added_methods|cat:$match.route.full}
 {/foreach}
   {rdelim},
   "definitions": {ldelim}
