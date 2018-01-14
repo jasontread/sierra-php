@@ -163,6 +163,9 @@
 {/if}
 {/foreach}
 {assign var=added_methods value=$added_methods|cat:$match.route.full}
+{if $started}
+  {rdelim}{if $method.name neq $last_method},{/if}
+{/if}
 {/foreach}
   {rdelim},
   "definitions": {ldelim}
