@@ -735,6 +735,7 @@ class SRA_ApiRouter {
 				$settings['content-type-other'] = isset($api['content-type-other']) ? (is_array($api['content-type-other']) ? $api['content-type-other'][0] : $api['content-type-other']) : 'text/plain';
 				$settings['doc-hidden'] = isset($api['doc-hidden']) ? TRUE : FALSE;
 				$settings['doc_hidden'] = $settings['doc-hidden'];
+        $settings['docs-function-conditional'] = isset($api['docs-function-conditional']) ? trim(is_array($api['docs-function-conditional']) ? $api['docs-function-conditional'][0] : $api['docs-function-conditional']) : NULL;
 				$settings['error-codes'] = array();
 				if (isset($api['error'])) {
 					foreach(is_array($api['error']) ? $api['error'] : array($api['error']) as $error) {
@@ -1038,7 +1039,6 @@ class SRA_ApiRouter {
 				$settings['docs'] = isset($api['docs']) ? trim(is_array($api['docs']) ? $api['docs'][0] : $api['docs']) : NULL;
         if (!$settings['docs']) $settings['docs'] = NULL;
 				$settings['docs-function'] = isset($api['docs-function']) ? trim(is_array($api['docs-function']) ? $api['docs-function'][0] : $api['docs-function']) : NULL;
-				$settings['docs-function-conditional'] = isset($api['docs-function-conditional']) ? trim(is_array($api['docs-function-conditional']) ? $api['docs-function-conditional'][0] : $api['docs-function-conditional']) : NULL;
 				$settings['docs-template'] = isset($api['docs-template']) ? trim(is_array($api['docs-template']) ? $api['docs-template'][0] : $api['docs-template']) : 'api-docs.tpl';
         $settings['external-docs-description'] = isset($api['external-docs-description']) ? $api['external-docs-description'] : NULL;
         $settings['external_docs_description'] = $settings['external-docs-description'];
