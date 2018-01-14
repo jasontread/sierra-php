@@ -1896,7 +1896,7 @@ class SRA_ApiRouter {
 					}
 					if (!$response) {
 						$tpl =& SRA_Controller::getAppTemplate();
-            if ($doc == 'docs' && $this->_settings['docs-function'] && function_exists($func = $this->_settings['docs-function'])) {
+            if ($this->_settings['docs-function'] && function_exists($func = $this->_settings['docs-function'])) {
               if ($docsFunc = ${func}()) {
                 $tpl->assign('docsFunc', $docsFunc);
                 if (is_object($docsFunc)) {
