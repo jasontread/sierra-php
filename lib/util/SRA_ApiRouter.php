@@ -480,6 +480,12 @@ class SRA_ApiRouter {
    *                         be set to the template variable $docsFunc. If the 
    *                         function does not return a value, a 403 response 
    *                         will be generated.
+   *   docs-function-conditional => Optional If the API includes a 
+   *                         @docs-function annotation, and that function 
+   *                         returns an object, this annotation can be set to 
+   *                         an attribute or function of that object the value 
+   *                         of which must evaluation to TRUE in order for this 
+   *                         API method to be included in the documentation
    *   docs-template      => Template to display when the (optional) 'docs' URI 
    *                         if invoked. Default is 'api-docs.tpl'. The 
    *                         template environment will contain a '$router' 
@@ -1032,6 +1038,7 @@ class SRA_ApiRouter {
 				$settings['docs'] = isset($api['docs']) ? trim(is_array($api['docs']) ? $api['docs'][0] : $api['docs']) : NULL;
         if (!$settings['docs']) $settings['docs'] = NULL;
 				$settings['docs-function'] = isset($api['docs-function']) ? trim(is_array($api['docs-function']) ? $api['docs-function'][0] : $api['docs-function']) : NULL;
+				$settings['docs-function-conditional'] = isset($api['docs-function-conditional']) ? trim(is_array($api['docs-function-conditional']) ? $api['docs-function-conditional'][0] : $api['docs-function-conditional']) : NULL;
 				$settings['docs-template'] = isset($api['docs-template']) ? trim(is_array($api['docs-template']) ? $api['docs-template'][0] : $api['docs-template']) : 'api-docs.tpl';
         $settings['external-docs-description'] = isset($api['external-docs-description']) ? $api['external-docs-description'] : NULL;
         $settings['external_docs_description'] = $settings['external-docs-description'];
@@ -1890,7 +1897,18 @@ class SRA_ApiRouter {
 					if (!$response) {
 						$tpl =& SRA_Controller::getAppTemplate();
             if ($doc == 'docs' && $this->_settings['docs-function'] && function_exists($func = $this->_settings['docs-function'])) {
-              if ($docsFunc = ${func}()) $tpl->assign('docsFunc', $docsFunc);
+              if ($docsFunc = ${func}()) {
+                $tpl->assign('docsFunc', $docsFunc);
+                if (is_object($docsFunc)) {
+                  // check for conditional methods
+                  foreach(array_keys($this->_methods) as $key) {
+                    if (isset($this->_methods[$key]['docs-function-conditional'])) {
+                      $check = $this->_methods[$key]['docs-function-conditional'];
+                      if (!(method_exists($docsFunc, $check) ? $docsFunc->${check}() : $docsFunc->${check})) unset($this->_methods[$key]);
+                    }
+                  }
+                }
+              }
               else {
       					$this->response('invalid', NULL, NULL, $nl=NULL, TRUE);
       					$routed = TRUE;
