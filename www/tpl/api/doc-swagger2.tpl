@@ -48,8 +48,9 @@
 {foreach from=$router->_methods item=match}
 {foreach from=$router->_methods item=method}{if !$method.doc_hidden && $method.route.full eq $match.route.full}{foreach from=$method.http_methods key=i item=http}{assign var=last_match value=$http}{/foreach}{/if}{/foreach}
 {assign var=started value=0}
+{assign var=prior_method value=$method.route.full}
 {foreach from=$router->_methods item=method}
-{if !$method.doc_hidden && $method.route.full eq $match.route.full}
+{if !$method.doc_hidden && $method.route.full eq $match.route.full && $method.route.full ne $prior_method}
 {foreach from=$method.http_methods key=i item=http}{assign var=last_http value=$http}{/foreach}
     {if $started}, {else}"{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}{/if}
 
