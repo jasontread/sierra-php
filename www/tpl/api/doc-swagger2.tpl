@@ -48,7 +48,7 @@
 {foreach from=$router->_methods item=match}
 {assign var=started value=0}
 {foreach from=$router->_methods item=method}
-{if !$method.doc_hidden && $method.route.full eq match.route.full}
+{if !$method.doc_hidden && $method.route.full eq $match.route.full}
 {foreach from=$method.http_methods key=i item=http}{assign var=last_http value=$http}{/foreach}
     {if $started}, {/if}"{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}
 {foreach from=$method.http_methods key=i item=http}
