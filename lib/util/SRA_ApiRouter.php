@@ -984,7 +984,7 @@ class SRA_ApiRouter {
 					else if (!count($placeholders)) $fixed .= '/' . $pieces[$i];
 				}
 				
-				$settings['route'] = array('fixed' => $fixed, 'parts' => count($pieces), 'placeholders' => $placeholders);
+				$settings['route'] = array('fixed' => $fixed, 'parts' => count($pieces), 'placeholders' => $placeholders, 'full' => $fixed . ($placeholders ? '/' . implode('/', $placeholders) : ''));
 				foreach($placeholders as $name) $settings['params'][$name]['placeholder'] = TRUE;
 			}
 			

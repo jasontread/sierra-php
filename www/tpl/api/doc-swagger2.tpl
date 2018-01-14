@@ -45,10 +45,12 @@
   ],
   "paths": {ldelim}
 {foreach from=$router->_methods item=method}{if !$method.doc_hidden}{assign var=last_method value=$method.name}{/if}{/foreach}
+{foreach from=$router->_methods item=match}
+{assign var=started value=0}
 {foreach from=$router->_methods item=method}
-{if !$method.doc_hidden}
+{if !$method.doc_hidden && $method.route.full eq match.route.full}
 {foreach from=$method.http_methods key=i item=http}{assign var=last_http value=$http}{/foreach}
-    "{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}
+    {if $started}, {/if}"{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}
 {foreach from=$method.http_methods key=i item=http}
       "{$http|lower}": {ldelim}
 {if $method.tags}
@@ -154,7 +156,9 @@
       {rdelim}{if $http neq $last_http},{/if}
 {/foreach}
   {rdelim}{if $method.name neq $last_method},{/if}
+{assign var=started value=1}
 {/if}
+{/foreach}
 {/foreach}
   {rdelim},
   "definitions": {ldelim}
