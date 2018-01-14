@@ -158,14 +158,11 @@
         {rdelim}
       {rdelim}{if $http neq $last_http},{/if}
 {/foreach}
-  {if $http eq $last_match}{rdelim}{if $method.name neq $last_method},{/if}{/if}
 {assign var=started value=1}
 {/if}
 {/foreach}
 {assign var=added_methods value=$added_methods|cat:$match.route.full}
-{if $started}
-  {rdelim}{if $match.name neq $last_method},{/if}
-{/if}
+  {if $started}{rdelim}{if $match.name neq $last_method},{/if}{/if}
 {/foreach}
   {rdelim},
   "definitions": {ldelim}
