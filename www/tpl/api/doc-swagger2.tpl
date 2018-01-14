@@ -55,6 +55,7 @@
     {if $started}, {else}"{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}{/if}
 
 {foreach from=$method.http_methods key=i item=http}
+{assign var=consumesFormData value=0}
       "{$http|lower}": {ldelim}
 {if $method.tags}
         "tags": [{foreach from=$method.tags item=tag}{assign var=last_tag value=$tag}{/foreach}{foreach from=$method.tags item=tag}"{$tag}"{if $tag neq $last_tag}, {/if}{/foreach}],
@@ -128,12 +129,18 @@
             {rdelim},
 {/if}
 {/if}
-            "in": "{if $param.placeholder}path{elseif $http eq 'GET'}query{else}formData{/if}"
+            "in": "{if $param.placeholder}path{elseif $http eq 'GET'}query{else}{assign var=consumesFormData value=1}formData{/if}"
 
           {rdelim}{if $name neq $last_param},{/if}
 
 {/foreach}
         ],
+{if $consumesFormData}
+        "consumes": [
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+{/if}
 {assign var=started value=0}
 {assign var=type value=$method.return.type}
 {foreach from=$method.status_codes_num key=code item=description}{if !$method.status_doc_skip[$code]}{assign var=last_code value=$code}{/if}{/foreach}
