@@ -50,8 +50,8 @@
 {foreach from=$router->_methods item=method}{if !$method.doc_hidden && $method.route.full eq $match.route.full}{foreach from=$method.http_methods key=i item=http}{assign var=last_match value=$http}{/foreach}{/if}{/foreach}
 {assign var=started value=0}
 {foreach from=$router->_methods item=method}
-{assign var=check value='-'|cat:$method.route.full|cat:'-'}
-{if !$method.doc_hidden && $method.route.full eq $match.route.full && !$added_methods|strpos:$check}
+{assign var=routeKey value=$method.route.full|cat:'|'}
+{if !$method.doc_hidden && $method.route.full eq $match.route.full && !$added_methods|strpos:$routeKey}
 {foreach from=$method.http_methods key=i item=http}{assign var=last_http value=$http}{/foreach}
     {if $started}, {else}"{$method.route.fixed}{foreach from=$method.route.placeholders item=placeholder}/{ldelim}{$placeholder}{rdelim}{/foreach}": {ldelim}{/if}
 
@@ -169,7 +169,7 @@
 {assign var=started value=1}
 {/if}
 {/foreach}
-{assign var=added_methods value=$added_methods|cat:$check}
+{assign var=added_methods value=$added_methods|cat:$routeKey}
   {if $started}{rdelim}{if $match.name neq $last_method},{/if}{/if}
 {/foreach}
   {rdelim},
