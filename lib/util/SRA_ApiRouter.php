@@ -871,6 +871,7 @@ class SRA_ApiRouter {
 							    file_exists($file = SRA_Controller::getAppDir() . "/l10n/${options}") || 
 							    file_exists($file = SRA_Controller::getAppDir() . "/${options}") || 
 							    file_exists($file = SRA_Controller::getAppConfDir() . "/l10n/${options}.properties") || 
+							    file_exists($file = SRA_Controller::getSysConfDir() . "/l10n/${options}.properties") || 
 							    file_exists($file = "${options}") || file_exists($file = "${options}.properties")) && 
 							    ($bundle =& SRA_ResourceBundle::getBundle($file))) {
 								$options = array_keys($bundle->getData());
