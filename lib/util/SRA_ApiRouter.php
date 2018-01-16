@@ -1937,23 +1937,26 @@ class SRA_ApiRouter {
 				$response = NULL;
 				$csv = FALSE;
 				$allowMethods = array();
+        $invokeMethod = NULL;
 				foreach(array_keys($this->_methods) as $m) {
 					if (strpos($uri, $f = $this->_methods[$m]['route']['fixed']) === 0 && 
 					    ($uri == $f || in_array(substr(str_replace($f, '', $uri), 0, 1), array('/', '?'))) && 
 					    ($_SERVER['REQUEST_METHOD'] == 'OPTIONS' || in_array($_SERVER['REQUEST_METHOD'], $this->_methods[$m]['http-methods']))) {
-						$routed = TRUE;
-						$method = $m;					  
-				    foreach($this->_methods[$m]['http-methods'] as $httpMethod) $allowMethods[$httpMethod] = TRUE;
-				    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-				      $condition = 'ok';
-				      $response = '';
-			      }
-				    else {
-					    $response =& $this->method($uri, $m, $condition, $csv);
-						  break;
-				    }
-					}
+            $pieces = explode('/', $f);
+            if (!$invokeMethod || count(explode('/', $invokeMethod)) < count($pieces)) $invokeMethod = $m;
+          }
 				}
+        if ($invokeMethod) {
+          $m = $invokeMethod;
+					$routed = TRUE;
+					$method = $m;					  
+			    foreach($this->_methods[$m]['http-methods'] as $httpMethod) $allowMethods[$httpMethod] = TRUE;
+			    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+			      $condition = 'ok';
+			      $response = '';
+		      }
+			    else $response =& $this->method($uri, $m, $condition, $csv);
+        }
 		    if ($allowMethods) {
 		      $this->_accessControlAllowMethodsSent = TRUE;
 		      header('Access-Control-Allow-Methods: ' . implode(', ', array_keys($allowMethods)));
