@@ -1156,7 +1156,6 @@ class SRA_ApiRouter {
             if ((!isset($props['default']) || !$props['default']) && ($v = $obj->getAttribute($attr)) !== NULL) $props['default'] = $v;
             if ((!isset($props['description']) || !trim($props['description'])) && ($v = $obj->getHelpContent($attr))) $props['description'] = $v;
             if ((!isset($props['options']) || !$props['options']) && ($v = $obj->getOptionsMap($attr))) $props['options'] = array_keys($v);
-            if ((!isset($props['required']) || !$props['required']) && ($v = $obj->isAttributeRequired($attr))) $props['required'] = TRUE;
             if ((!isset($props['type']) || !$props['type'] || $props['type'] == 'var') && in_array($v = $obj->getAttributeType($attr), array('blob', 'boolean', 'date', 'float', 'int', 'string', 'time'))) $props['type'] = $v == 'boolean' ? 'bool' : ($v == 'time' ? 'timestamp' : ($v == 'blob' ? 'string' : $v));
             $settings['params'][$attr] = $props;
           }
