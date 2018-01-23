@@ -1136,6 +1136,32 @@ class SRA_ApiRouter {
 					$settings['oauth_scope'] = $settings['oauth-scope'];
 				}
 			}
+      
+      // Populate method parameter settings that match with attributes in the 
+      // method response when that response is an entity
+      if ($method && 
+          isset($settings['params']) && 
+          is_array($settings['params']) && 
+          isset($settings['return']) && 
+          isset($settings['return']['entity']) && 
+          isset($settings['return']['type']) && 
+          $settings['return']['entity'] && 
+          ($dao =& SRA_DaoFactory::getDao($settings['return']['type'], FALSE, FALSE, FALSE, SRA_ERROR_OPERATIONAL)) && 
+          !SRA_Error::isError($dao) &&
+          ($obj =& $dao->newInstance()) && 
+          ($attrs = $obj->getAttributeNames())) {
+        foreach($settings['params'] as $attr => $props) {
+          if (in_array($attr, $attrs)) {
+            if ((!isset($props['array']) || !$props['array']) && $obj->getAttributeCardinality($attr)) $props['array'] = TRUE;
+            if ((!isset($props['default']) || !$props['default']) && ($v = $obj->getAttribute($attr)) !== NULL) $props['default'] = $v;
+            if ((!isset($props['description']) || !trim($props['description'])) && ($v = $obj->getHelpContent($attr))) $props['description'] = $v;
+            if ((!isset($props['options']) || !$props['options']) && ($v = $obj->getOptionsMap($attr))) $props['options'] = $v;
+            if ((!isset($props['required']) || !$props['required']) && ($v = $obj->isAttributeRequired($attr))) $props['required'] = TRUE;
+            if ((!isset($props['type']) || !$props['type'] || $props['type'] == 'string') && in_array($v = $obj->getAttributeType($attr), array('blob', 'boolean', 'date', 'float', 'int', 'string', 'time'))) $props['type'] = $v == 'boolean' ? 'bool' : ($v == 'time' ? 'timestamp' : ($v == 'blob' ? 'string' : $v));
+            $settings['params'][$attr] = $props;
+          }
+        }
+      }
 			
 			if ($settings) ksort($settings);
 			if ($debug && $settings) {
