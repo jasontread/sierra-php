@@ -841,7 +841,7 @@ class SRA_ApiRouter {
 						
 						if ($settings['params'][$name]['type'] == 'integer') $settings['params'][$name]['type'] = 'int';
 						else if ($settings['params'][$name]['type'] == 'boolean') $settings['params'][$name]['type'] = 'bool';
-						if (!in_array($settings['params'][$name]['type'], array('string', 'float', 'int', 'bool', 'date', 'timestamp'))) {
+						if (!in_array($settings['params'][$name]['type'], array('string', 'float', 'int', 'bool', 'date', 'timestamp', 'var'))) {
 							$msg = "SRA_ApiRouter::getSettings - Error: @param " . $settings['params'][$name]['type'] . " ${name} is not a valid type (check documentation for valid datatypes)." . ($method ? " Method: ${method}" : '');
 							SRA_Error::logError($msg, __FILE__, __LINE__);
 							if ($debug) print("${msg}\n");
@@ -1155,11 +1155,18 @@ class SRA_ApiRouter {
             if ((!isset($props['array']) || !$props['array']) && $obj->getAttributeCardinality($attr)) $props['array'] = TRUE;
             if ((!isset($props['default']) || !$props['default']) && ($v = $obj->getAttribute($attr)) !== NULL) $props['default'] = $v;
             if ((!isset($props['description']) || !trim($props['description'])) && ($v = $obj->getHelpContent($attr))) $props['description'] = $v;
-            if ((!isset($props['options']) || !$props['options']) && ($v = $obj->getOptionsMap($attr))) $props['options'] = $v;
+            if ((!isset($props['options']) || !$props['options']) && ($v = $obj->getOptionsMap($attr))) $props['options'] = array_keys($v);
             if ((!isset($props['required']) || !$props['required']) && ($v = $obj->isAttributeRequired($attr))) $props['required'] = TRUE;
-            if ((!isset($props['type']) || !$props['type'] || $props['type'] == 'string') && in_array($v = $obj->getAttributeType($attr), array('blob', 'boolean', 'date', 'float', 'int', 'string', 'time'))) $props['type'] = $v == 'boolean' ? 'bool' : ($v == 'time' ? 'timestamp' : ($v == 'blob' ? 'string' : $v));
+            if ((!isset($props['type']) || !$props['type'] || $props['type'] == 'var') && in_array($v = $obj->getAttributeType($attr), array('blob', 'boolean', 'date', 'float', 'int', 'string', 'time'))) $props['type'] = $v == 'boolean' ? 'bool' : ($v == 'time' ? 'timestamp' : ($v == 'blob' ? 'string' : $v));
             $settings['params'][$attr] = $props;
           }
+        }
+      }
+      
+      // convert var types to string
+      if ($method && isset($settings['params']) && is_array($settings['params'])) {
+        foreach(array_keys($settings['params']) as $attr) {
+          if (isset($settings['params'][$attr]['type']) && $settings['params'][$attr]['type'] == 'var') $settings['params'][$attr]['type'] = 'string';
         }
       }
 			
