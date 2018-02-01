@@ -1353,9 +1353,12 @@ class SRA_ApiRouter {
 		  
 		  // create array type parameters
 		  if (isset($args[$name]) && isset($param['array']) && $param['array'] && !is_array($args[$name])) {
-		    $vals = explode(',', $args[$name]);
-		    $args[$name] = array();
-		    foreach($vals as $val) $args[$name][] = trim($val);
+        if (isset($args[$name]) && trim($args[$name])) {
+  		    $vals = explode(',', $args[$name]);
+  		    $args[$name] = array();
+  		    foreach($vals as $val) $args[$name][] = trim($val);
+        }
+        else $args[$name] = NULL;
 		  }
 	  }
 		
