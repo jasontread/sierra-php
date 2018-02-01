@@ -549,7 +549,7 @@ class SRA_Util {
       $js .= $numeric ? ']' : '}';
     }
     else {
-      if ((is_numeric($attr) && !SRA_Util::beginsWith($attr, '+') && (substr($attr, 0, 2) == '0.' || !SRA_Util::beginsWith($attr, '0'))) || preg_match('/new Date\((.*)\)/', $attr)) {
+      if ((is_numeric($attr) && (($attr*1) . '') == ($attr . '') && !SRA_Util::beginsWith($attr, '+') && (substr($attr, 0, 2) == '0.' || !SRA_Util::beginsWith($attr, '0'))) || preg_match('/new Date\((.*)\)/', $attr)) {
         $js .= $attr;
       }
       else if (is_bool($attr)) {
