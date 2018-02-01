@@ -129,6 +129,10 @@
 
             {rdelim},
 {/if}
+{elseif $param.array}
+            "items": {ldelim}
+              "type": "string"
+            {rdelim},
 {/if}
             "in": "{if $param.placeholder}path{elseif $http eq 'GET'}query{else}{assign var=consumesFormData value=1}formData{/if}"
 
