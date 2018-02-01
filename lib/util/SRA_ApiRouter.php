@@ -1755,7 +1755,7 @@ class SRA_ApiRouter {
 			if ($condition == 'ok' && $method && $this->_methods[$method]['return']['type'] && $this->_methods[$method]['return']['type'] != 'void' && $response === NULL) $condition = 'null';
 			
 			// invalid parameter
-			if (is_array($config) && isset($config['params']) && $response && preg_match('/^invalid\-(.*)$/', $response, $m) && ($pieces = explode('-', $m[1])) && isset($config['params'][$pieces[0]])) {
+			if (is_array($config) && isset($config['params']) && $response && preg_match('/^invalid\-(.*)$/', $response, $m) && ($pieces = explode('-', $m[1]))) {
 				$condition = 'invalid';
 				$config['headers-add']['sierra-api-invalid'] = $m[1];
 				$response = NULL;
