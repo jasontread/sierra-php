@@ -1637,7 +1637,7 @@ class SRA_ApiRouter {
             }
           }
           catch (Exception $e) {
-            $msg = "SRA_ApiRouter::method - Error: uncaught exception when invoking ${code}";
+            $msg = sprintf('SRA_ApiRouter::method - Error: uncaught exception when invoking %s: %s', $code, $e->getMessage());
             SRA_Error::logError($msg, __FILE__, __LINE__);
             $condition = 'exception';
           } 
