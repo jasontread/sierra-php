@@ -117,7 +117,7 @@
             "format": "{if $type eq 'date'}date{else}dateTime{/if}",
 {/if}
 {if $type eq 'boolean' || $type eq 'bool' || ($param.default && $param.default neq 'NULL' && $param.default neq 'null')}
-            "default": {if $type eq 'string'}"{$param.default}"{elseif $type eq 'boolean' || $type eq 'bool'}{if $param.default}true{else}false{/if}{elseif $param.default}{$param.default}{else}null{/if},
+            "default": {if $type eq 'string'}"{$param.default}"{elseif $type eq 'boolean' || $type eq 'bool'}{if $param.default}true{else}false{/if}{elseif !is_object($param.default)}{$param.default}{else}null{/if},
 {/if}
 {if $param.options}
 {if $param.array}
@@ -208,7 +208,7 @@
           "format": "{if $type eq 'date'}date{else}dateTime{/if}",
 {/if}
 {if $attribute.default || $type eq 'boolean' || $type eq 'bool'}
-          "default": {if $type eq 'string'}"{$attribute.default}"{elseif $type eq 'boolean' || $type eq 'bool'}{if $attribute.default}true{else}false{/if}{elseif $attribute.default}{$attribute.default}{else}null{/if},
+          "default": {if $type eq 'string'}"{$attribute.default}"{elseif $type eq 'boolean' || $type eq 'bool'}{if $attribute.default}true{else}false{/if}{elseif !is_object($attribute.default)}{$attribute.default}{else}null{/if},
 {/if}
 {if $attribute.options}
 {foreach from=$attribute.options key=option item=label}{assign var=last_option value=$option}{/foreach}
