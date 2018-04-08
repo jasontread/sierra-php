@@ -116,7 +116,7 @@
 {if $type eq 'date' || $type eq 'timestamp'}
             "format": "{if $type eq 'date'}date{else}dateTime{/if}",
 {/if}
-{if $type eq 'boolean' || $type eq 'bool' || ($param.default && $param.default neq 'NULL' && $param.default neq 'null')}
+{if $type eq 'boolean' || $type eq 'bool' || (!$param.options && $param.default && $param.default neq 'NULL' && $param.default neq 'null')}
             "default": {if $type eq 'string'}"{$param.default}"{elseif $type eq 'boolean' || $type eq 'bool'}{if $param.default}true{else}false{/if}{elseif !is_object($param.default)}{$param.default}{else}null{/if},
 {/if}
 {if $param.options}
