@@ -1977,8 +1977,7 @@ class SRA_ApiRouter {
 					if (strpos($uri, $f = $this->_methods[$m]['route']['fixed']) === 0 && 
 					    ($uri == $f || in_array(substr(str_replace($f, '', $uri), 0, 1), array('/', '?'))) && 
 					    ($_SERVER['REQUEST_METHOD'] == 'OPTIONS' || in_array($_SERVER['REQUEST_METHOD'], $this->_methods[$m]['http-methods']))) {
-            $pieces = explode('/', $f);
-            if (!$invokeMethod || count(explode('/', $invokeMethod)) < count($pieces)) $invokeMethod = $m;
+            if (!$invokeMethod || count(explode('/', $invokeMethod)) < count(explode('/', $m))) $invokeMethod = $m;
           }
 				}
         if ($invokeMethod) {
