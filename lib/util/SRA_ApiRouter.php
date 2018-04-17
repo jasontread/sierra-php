@@ -1981,15 +1981,18 @@ class SRA_ApiRouter {
           }
 				}
         if ($invokeMethod) {
-          $m = $invokeMethod;
 					$routed = TRUE;
-					$method = $m;					  
-			    foreach($this->_methods[$m]['http-methods'] as $httpMethod) $allowMethods[$httpMethod] = TRUE;
+					$method = $invokeMethod;
+          foreach(array_keys($this->_methods) as $m) {
+            if ($this->_methods[$m]['full'] == $this->_methods[$invokeMethod]['full']) {
+              foreach($this->_methods[$m]['http-methods'] as $httpMethod) $allowMethods[$httpMethod] = TRUE;
+            }
+          }
 			    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 			      $condition = 'ok';
 			      $response = '';
 		      }
-			    else $response =& $this->method($uri, $m, $condition, $csv);
+			    else $response =& $this->method($uri, $invokeMethod, $condition, $csv);
         }
 		    if ($allowMethods) {
 		      $this->_accessControlAllowMethodsSent = TRUE;
