@@ -328,7 +328,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 */
 	function &copy($recursive=FALSE, $dirtyOnly=FALSE, $includePrimaryKey=FALSE) {ldelim}
 	  $obj = new {$className}();
-	  if ($this->copyInto($obj, $dirtyOnly, $recursive)) {ldelim}
+	  if ($this->copyInto($obj, $recursive, $dirtyOnly)) {ldelim}
 	    return $obj;
 	  {rdelim}
 	  return $nl = NULL;
