@@ -112,7 +112,7 @@
             "description": "{$param.description|replace:'"':'\"'}",
 {/if}
             "required": {if $param.required || $param.placeholder}true{else}false{/if},
-            "type": "{if $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{else}{if $param.array}array{else}string{/if}{/if}",
+            "type": "{if $param.array}array{else}{if $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{else}string{/if}{/if}",
 {if $type eq 'date' || $type eq 'timestamp'}
             "format": "{if $type eq 'date'}date{else}dateTime{/if}",
 {/if}
@@ -122,7 +122,7 @@
 {if $param.options}
 {if $param.array}
             "items": {ldelim}
-              "type": "string",{/if}
+              "type": "{if $type eq 'int'}integer{elseif $type eq 'float'}number{else}string{/if}",{/if}
 {foreach from=$param.options item=option}{assign var=last_option value=$option}{/foreach}
 {if $param.array}  {/if}            "enum": [{foreach from=$param.options item=option}"{$option}"{if $option neq $last_option}, {/if}{/foreach}]{if !$param.array},{/if}
 {if $param.array}
@@ -131,7 +131,7 @@
 {/if}
 {elseif $param.array}
             "items": {ldelim}
-              "type": "string"
+              "type": "{if $type eq 'int'}integer{elseif $type eq 'float'}number{else}string{/if}"
             {rdelim},
 {/if}
             "in": "{if $param.placeholder}path{elseif $http eq 'GET'}query{else}{assign var=consumesFormData value=1}formData{/if}"
