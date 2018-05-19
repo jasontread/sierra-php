@@ -357,7 +357,7 @@ class SRA_ApiRouter {
 					                                              'example' => preg_match("/example:\s*'(.*)'/msU", $obj->getHelpContent($name), $m) ? $m[1] : NULL,
 					                                              'name' => $obj->getEntityLabel($name),
 					                                              'options' => $obj->getOptionsMap($name),
-					                                              'required' => $obj->isAttributeRequired($name) && !$obj->getAttribute($name),
+					                                              'required' => $obj->isAttributeRequired($name) && !isset($obj->getAttribute($name)),
 					                                              'type' => $type = $obj->getAttributeType($name),
 					                                              'type_label' => $isEntity && isset($this->_settings['entity-ref'][$type]) ? $this->_settings['entity-ref'][$type] : $type);
 					if (in_array($config[$entity]['attributes'][$name]['type'], array('date', 'time'))) $config[$entity]['hasDate'] = TRUE;
