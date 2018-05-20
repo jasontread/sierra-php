@@ -360,7 +360,7 @@ class SRA_ApiRouter {
 					                                              'required' => $obj->isAttributeRequired($name, TRUE),
 					                                              'type' => $type = $obj->getAttributeType($name),
 					                                              'type_label' => $isEntity && isset($this->_settings['entity-ref'][$type]) ? $this->_settings['entity-ref'][$type] : $type);
-					if (in_array($config[$entity]['attributes'][$name]['type'], array('date', 'time'))) $config[$entity]['hasDate'] = TRUE;
+          if (in_array($config[$entity]['attributes'][$name]['type'], array('date', 'time'))) $config[$entity]['hasDate'] = TRUE;
 				}
 				ksort($config[$entity]['attributes']);
 				foreach($obj->getAttributeNames() as $name) {
@@ -1382,13 +1382,13 @@ class SRA_ApiRouter {
   					case 'int':
   						if ($val && !is_numeric($val)) $invalid = 'not-numeric-' . gettype($val);
   						else if (is_array($args[$name])) $args[$name][$i] *= 1;
-  						else $args[$name] *= 1;
+  						else if (isset($args[$name])) $args[$name] *= 1;
   						break;
   					case 'bool':
   						$b = SRA_Util::convertBoolean($val);
   						if ($val !== NULL && $b === NULL) $invalid = 'not-boolean-' . gettype($val);
   						else if (is_array($args[$name])) $args[$name][$i] = $b;
-  						else $args[$name] = $b;
+  						else if (isset($args[$name])) $args[$name] = $b;
   						break;
   					case 'date':
   					case 'timestamp':
