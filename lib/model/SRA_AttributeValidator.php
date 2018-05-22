@@ -949,13 +949,13 @@ class SRA_AttributeValidator {
 				else if (isset($params['code'])) {
           global $__sra_obj_validate;
           eval($params['code']);
-					return isset($options) && is_array($options) && isset($options[$value[$key]]);
+					return isset($options) && is_array($options) && (isset($options[$value[$key]]) || isset($options[$value[$key] . '']));
 				}
 				
 				// 'resources' var
 				else if (isset($params['resources'])) {
 					if (SRA_ResourceBundle::isValid($rb =& SRA_ResourceBundle::getBundle($params['resources'])) && 
-							$rb->containsKey($value[$key])) {
+							($rb->containsKey($value[$key]) || $rb->containsKey($value[$key] . ''))) {
 						$matched = TRUE;
 					}
 				}
