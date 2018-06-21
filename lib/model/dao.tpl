@@ -1592,7 +1592,7 @@ class {$className}{if $entity->_daoExtends} extends {$entity->_daoExtends}{/if} 
    * @access  public
    * @return void
    */
-  function insert(& $record, $insertSubEntities) {ldelim}
+  function insert(& $record, $insertSubEntities=FALSE) {ldelim}
     {assign var='aopMethodName' value="insert"}
     {include file="entity-aspect-before.tpl"}
     // check if param is a valid {$voClassName} instance
