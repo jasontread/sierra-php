@@ -455,13 +455,17 @@ class SRA_TimeZone {
     
     if (!$date) { $date = new SRA_GregorianDate(); }
     $compare = $date->format('YmdHis');
+    $timeStamp = $date->format('YmdHis');
     if (isset($_cachedRanged[$compare])) return $_cachedRanged[$compare] ? $_cachedRanged[$compare] : NULL;
     
     if ($ranges =& $this->getRanges()) {
       foreach(array_keys($ranges) as $key) {
-        if ($next) { return $ranges[$key]; }
+        if ($next) { 
+          $_cachedRanged[$compare] = $ranges[$key];
+          return $ranges[$key]; 
+        }
         
-        if ($compare >= $ranges[$key]['start'] && $compare <= $ranges[$key]['end']) {
+        if (($compare >= $ranges[$key]['start'] && $compare <= $ranges[$key]['end']) || ($timeStamp >= $ranges[$key]['start'] && $timeStamp <= $ranges[$key]['end'])) {
           if ($ranges[$key]['dst'] && $date->format('YmdH') == substr($ranges[$key]['end'], 0, 10) && $date->_dstOverlap) {
             $next = TRUE;
           }
