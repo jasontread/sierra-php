@@ -373,7 +373,7 @@ class SRA_Error {
      * @access	public
      * @return	SRA_Error
      */
-    function &logError($errorMessage, $file, $lineNumber, $severity=SRA_ERROR_PROBLEM, $debug = SRA_UTIL_USE_SYS_CONFIG_DEBUG) {
+    function &logError($errorMessage, $file=NULL, $lineNumber=NULL, $severity=SRA_ERROR_PROBLEM, $debug=SRA_UTIL_USE_SYS_CONFIG_DEBUG) {
       if (is_array($errorMessage) || is_object($errorMessage)) {
         ob_start();
         print_r($errorMessage);
