@@ -251,7 +251,7 @@ while(TRUE) {
 if (!$_readline) fclose($_stdin); 
 echo $_resources->getString('console.end', $_attrs = array('time' => SRA_Controller::getRunTime())) . "\n";
 
-function _autoComplete($str, $pos, $mp, $tmp) {
+function _autoComplete($str, $pos, $mp) {
   $tmp = readline_info();
   $tmp = explode(' ', $tmp['line_buffer']);
   $cmd = $tmp[count($tmp) - 1];
