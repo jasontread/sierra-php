@@ -450,12 +450,12 @@ class SRA_TimeZone {
    * @access public
    * @return hash
    */
-  function getRange(&$date) {
+  function getRange(&$date=NULL) {
     static $_cachedRanged = array();
     
     if (!$date) { $date = new SRA_GregorianDate(); }
     $compare = $date->format('YmdHis');
-    $timeStamp = $date->format('YmdHis');
+    $timeStamp = $date->getUnixTimestamp();
     if (isset($_cachedRanged[$compare])) return $_cachedRanged[$compare] ? $_cachedRanged[$compare] : NULL;
     
     if ($ranges =& $this->getRanges()) {
