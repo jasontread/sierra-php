@@ -455,12 +455,13 @@ class SRA_TimeZone {
     
     if (!$date) { $date = new SRA_GregorianDate(); }
     $compare = $date->format('YmdHis')*1;
-    if (isset($_cachedRanged[$compare])) return $_cachedRanged[$compare] ? $_cachedRanged[$compare] : NULL;
+    $ckey = md5(sprintf('%s-%s', $this->_id, $compare));
+    if (isset($_cachedRanged[$ckey])) return $_cachedRanged[$ckey] ? $_cachedRanged[$ckey] : NULL;
     
     if ($ranges =& $this->getRanges()) {
       foreach(array_keys($ranges) as $key) {
         if ($next) {
-          $_cachedRanged[$compare] = $ranges[$key];
+          $_cachedRanged[$ckey] = $ranges[$key];
           return $ranges[$key]; 
         }
         
@@ -469,13 +470,13 @@ class SRA_TimeZone {
             $next = TRUE;
           }
           else {
-            $_cachedRanged[$compare] = $ranges[$key];
+            $_cachedRanged[$ckey] = $ranges[$key];
             return $ranges[$key];
           }
         }
       }
     }
-    $_cachedRanged[$compare] = FALSE;
+    $_cachedRanged[$ckey] = FALSE;
     return NULL;
   }
   // }}}
