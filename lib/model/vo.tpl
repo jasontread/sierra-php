@@ -5409,7 +5409,7 @@ class {$className}{if $entity->_voExtends} extends {$entity->_voExtends}{/if} {l
 	 * @return void
 	 * @access public
 	 */
-	function insert($insertSubEntities) {ldelim}
+	function insert($insertSubEntities = FALSE) {ldelim}
     {assign var='aopMethodName' value="insert"}
     {include file="entity-aspect-before.tpl"}
     $dao =& $this->getDao();
