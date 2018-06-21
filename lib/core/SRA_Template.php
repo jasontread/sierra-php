@@ -534,7 +534,8 @@ class SRA_Template {
    */
   function getAppTemplateVar($key) {
     $tpl =& SRA_Controller::getAppTemplate();
-    return SRA_Util::getNestedAttr(isset($this->_tpl->tpl_vars) ? $this->_tpl->tpl_vars : $tpl->_tpl->_tpl_vars, $key);
+    $var = isset($this->_tpl->tpl_vars) ? $this->_tpl->tpl_vars : $tpl->_tpl->_tpl_vars;
+    return SRA_Util::getNestedAttr($var, $key);
   }
   // }}}
   
