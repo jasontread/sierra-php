@@ -450,22 +450,21 @@ class SRA_TimeZone {
    * @access public
    * @return hash
    */
-  function getRange(&$date=NULL) {
+  function getRange(&$date) {
     static $_cachedRanged = array();
     
     if (!$date) { $date = new SRA_GregorianDate(); }
-    $compare = $date->format('YmdHis');
-    $timeStamp = $date->getUnixTimestamp();
+    $compare = $date->format('YmdHis')*1;
     if (isset($_cachedRanged[$compare])) return $_cachedRanged[$compare] ? $_cachedRanged[$compare] : NULL;
     
     if ($ranges =& $this->getRanges()) {
       foreach(array_keys($ranges) as $key) {
-        if ($next) { 
+        if ($next) {
           $_cachedRanged[$compare] = $ranges[$key];
           return $ranges[$key]; 
         }
         
-        if (($compare >= $ranges[$key]['start'] && $compare <= $ranges[$key]['end']) || ($timeStamp >= $ranges[$key]['start'] && $timeStamp <= $ranges[$key]['end'])) {
+        if ($compare >= $ranges[$key]['start'] && $compare <= $ranges[$key]['end']) {
           if ($ranges[$key]['dst'] && $date->format('YmdH') == substr($ranges[$key]['end'], 0, 10) && $date->_dstOverlap) {
             $next = TRUE;
           }
