@@ -94,13 +94,13 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function cacheIsset($name, $modtime=FALSE) {
-    global $argc, $memcached;
+    global $argc, $memcached, $memcachedKeys;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::cacheIsset - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use memcached if global variable $memcached exists
     if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') {
-      $memcached->get($name);
-      return $memcached->getResultCode() != Memcached::RES_NOTFOUND;
+      if (!is_array($memcachedKeys)) $memcachedKeys = $memcached->getAllKeys();
+      return in_array($name, $memcachedKeys) || $memcached->get($name) ? TRUE : FALSE;
     }
     
     // use APC if present
@@ -132,11 +132,14 @@ class SRA_Cache {
 	 * @return boolean
 	 */
   function deleteCache($name) {
-    global $argc, $memcached;
+    global $argc, $memcached, $memcachedKeys;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::deleteCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use memcached if global variable $memcached exists
-    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') return $memcached->delete($name);
+    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') {
+      if (is_array($memcachedKeys) && in_array($name, $memcachedKeys)) unset($memcachedKeys[array_search($name, $memcachedKeys)]);
+      return $memcached->delete($name);
+    }
     
     // use APC if present
     if (!isset($argc) && function_exists('apc_delete')) return apc_delete($name);
@@ -174,7 +177,9 @@ class SRA_Cache {
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use memcached if global variable $memcached exists
-    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') return $memcached->get($name);
+    if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') {
+      return $memcached->get($name);
+    }
     
     // use APC if present
     if (!isset($argc) && function_exists('apc_fetch')) return apc_fetch($name);
@@ -217,7 +222,7 @@ class SRA_Cache {
 	 * @return boolean
 	 */
   function setCache($name, &$val, $ttl=NULL, $maxAttempts=5) {
-    global $argc, $memcached;
+    global $argc, $memcached, $memcachedKeys;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
     
     // use memcached if global variable $memcached exists
@@ -225,11 +230,10 @@ class SRA_Cache {
       // cache does not always set on the first try
       $cacheSet = FALSE;
       for($i=0; $i<$maxAttempts; $i++) {
-        $memcached->set($name, $val, $ttl);
-        $memcached->get($name);
-        if ($memcached->getResultCode() != Memcached::RES_NOTFOUND) {
+        if ($memcached->set($name, $val, $ttl)) {
           $cacheSet = TRUE;
-          break;
+          if (is_array($memcachedKeys)) $memcachedKeys[] = $name;
+          break;          
         }
         sleep(1);
       }
