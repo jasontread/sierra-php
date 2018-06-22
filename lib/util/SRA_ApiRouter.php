@@ -45,6 +45,11 @@ define('SRA_API_ROUTER_DEFAULT_API_KEY_NAME', 'api-key');
  */
 define('SRA_API_ROUTER_CACHE_PREFIX', 'sra_api_cache_');
 
+/**
+ * Cache TTL for API initialization details
+ */
+define('SRA_API_ROUTER_INIT_CACHE_TTL', 86400);
+
 
 /**
  * This class is used to quickly create, deploy and document APIs.
@@ -115,6 +120,7 @@ class SRA_ApiRouter {
 	 */
 	private function SRA_ApiRouter($controller=NULL) {
 		$this->_source = $controller;
+    require_once('util/SRA_Cache.php');
 	}
 	
 	/**
@@ -1181,10 +1187,42 @@ class SRA_ApiRouter {
 	 * Initializes the API controller (if specified) - returns TRUE if the 
 	 * controller was initializes and is valid, FALSE otherwise
 	 * @param boolean $debug whether or not to enable debug output
+   * @param boolean $noCache don't allow for caching of API initialization 
+   * details
 	 * @return boolean
 	 */
-	private function initController($debug=FALSE) {
-		if ($this->_initialized === NULL && file_exists($this->_source) && 
+	private function initController($debug=FALSE, $noCache=FALSE) {
+    $ckey = md5(sprintf('%s%s', SRA_API_ROUTER_CACHE_PREFIX, $this->_source));
+    // check for cached API initialization details
+    if ($this->_initialized === NULL && 
+       file_exists($this->_source) && 
+       !$noCache && 
+       SRA_API_ROUTER_CONTROLLER_USE_CACHE && 
+       is_array($cached =& SRA_Cache::getCache($ckey)) && 
+       isset($cached['methods']) && 
+       is_array($cached['methods']) && 
+       count($cached['methods']) && 
+       isset($cached['filemtime']) && 
+       is_numeric($cached['filemtime']) && 
+       $cached['filemtime'] == filemtime($this->_source)) {
+      require_once($this->_source);
+      $this->_initialized = FALSE;
+      $this->_class = $cached['class'];
+      $this->_settings = $cached['settings'];
+      eval($cached['controller']);
+			if (!is_object($this->_controller)) {
+				$msg = sprintf('SRA_ApiRouter::initController - Error: unable to instantiate controller %s using %s', $this->_class, $cached['controller']);
+				SRA_Error::logError($msg, __FILE__, __LINE__);
+				if ($debug) print("${msg}\n");					
+			}
+			else {
+        if ($debug) print("SRA_ApiRouter::initController - Debug: API controller ${clas} instantiated successfully using" . (isset($this->_settings['singleton']) ? ' singleton ' . $this->_settings['singleton'] : ' new operator') . "\n");
+        $this->_initialized = TRUE;
+        $this->_controllerIncludes = $cached['controllerIncludes'];
+        $this->_methods = $cached['methods'];
+      }
+    }
+		else if ($this->_initialized === NULL && file_exists($this->_source) && 
 		    is_array($api =& SRA_Util::parsePhpSource($this->_source, FALSE))) {
 			$this->_initialized = FALSE;
 			if ($debug) print("SRA_ApiRouter::initController - Initializing API routering using controller " . $this->_source . "\n");
@@ -1201,7 +1239,6 @@ class SRA_ApiRouter {
 				SRA_Error::logError($msg, __FILE__, __LINE__);
 				if ($debug) print("${msg}\n");
 			}
-			
 			// attempt to instantiate the controller
 			if ($this->_class && is_array($this->_settings = $this->getSettings($api['classes'][$this->_class], FALSE, $debug))) {
 				// instantiate the controller
@@ -1209,7 +1246,8 @@ class SRA_ApiRouter {
 					if ($debug) print("SRA_ApiRouter::initController - Debug: Attempting to instantiate ${clas} from source " . $this->_source . "\n");
 					require_once($this->_source);
 					if (class_exists($this->_class) && (!isset($this->_settings['singleton']) || method_exists($this->_class, $this->_settings['singleton']))) {
-						eval('$this->_controller =' . (isset($this->_settings['singleton']) ? "& ${clas}::" . $this->_settings['singleton'] : " new ${clas}") . '($this);');
+            $controllerInit = '$this->_controller =' . (isset($this->_settings['singleton']) ? "& ${clas}::" . $this->_settings['singleton'] : " new ${clas}") . '($this);';
+						eval($controllerInit);
 						if (!is_object($this->_controller)) {
 							$msg = 'SRA_ApiRouter::initController - Error: unable to instantiate controller ' . $this->_class;
 							SRA_Error::logError($msg, __FILE__, __LINE__);
@@ -1234,7 +1272,6 @@ class SRA_ApiRouter {
 				SRA_Error::logError($msg, __FILE__, __LINE__);
 				if ($debug) print("${msg}\n");
 			}
-			
 			if (is_object($this->_controller)) {
 				// determine what source files the controller is using
 				$reflection = new ReflectionClass($this->_controller);
@@ -1262,6 +1299,14 @@ class SRA_ApiRouter {
 				}
 				if (count($this->_methods)) {
 					$this->_initialized = TRUE;
+          $cache = array();
+          $cache['filemtime'] = filemtime($this->_source);
+          $cache['class'] = $this->_class;
+          $cache['settings'] = $this->_settings;
+          $cache['controller'] = $controllerInit;
+          $cache['controllerIncludes'] = $this->_controllerIncludes;
+          $cache['methods'] = $this->_methods;
+          SRA_Cache::setCache($ckey, $cache, SRA_API_ROUTER_INIT_CACHE_TTL);
 					if ($debug) print('SRA_ApiRouter::initController - Debug: successfully initialized controller with ' . count($this->_methods) . " methods\n");
 				}
 				else {
@@ -1462,7 +1507,6 @@ class SRA_ApiRouter {
 		if ($condition == 'ok') {
 			$ckey = NULL;
 			if (is_numeric($method['cache-ttl']) && $method['cache-ttl'] > 0 && $method['cache-scope'] != 'none') {
-				require_once('util/SRA_Cache.php');
 				$ckey = SRA_API_ROUTER_CACHE_PREFIX . SRA_Controller::getAppName() . '_' . $this->_settings['api'] . '_' . $method['method'];
 				foreach($args as $arg) $ckey .= '_' . (is_array($arg) ? implode('_', $arg) : $arg);
 				if ($method['cache-scope-params'] && ($method['cache-scope'] == 'cookie' || $method['cache-scope'] == 'request')) {
@@ -1474,6 +1518,16 @@ class SRA_ApiRouter {
 			}
 			// base64 encode cache key
 			if ($ckey) $ckey = md5($ckey);
+      
+      // include entity class file if applicable
+      if (isset($method['return']['entity']) && $method['return']['entity'] && !class_exists($method['return']['type'])) {
+        $entity = $method['return']['type'];
+        $dao =& SRA_DaoFactory::getDao($entity, FALSE, FALSE, FALSE, SRA_ERROR_OPERATIONAL);
+        $efile = SRA_Controller::getAppLibDir() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php";
+        if (!class_exists($entity) && file_exists($efile)) {
+          require_once($efile);
+        } 
+      }
 			
 			// response is in cache
 			if (SRA_API_ROUTER_CONTROLLER_USE_CACHE && strtolower($_SERVER['REQUEST_METHOD']) == 'get' && $ckey && SRA_Cache::cacheIsset($ckey)) {
@@ -1871,6 +1925,7 @@ class SRA_ApiRouter {
   						  } 
 						  }
 						}
+            
 						$json = method_exists($response, 'toJson') ? $response->toJson($include, $exclude, NULL, $useJsDates) : SRA_Util::toJson($response, $include, $exclude, $useJsDates);
 						$json =& $this->cleanJson($json, $beautify, $this->_methods[$method]['beautify-round']);
 						$callback = isset($requestParams['callback']) ? $requestParams['callback'] : (isset($requestParams['jsonp']) ? $requestParams['jsonp'] : NULL);
@@ -1903,7 +1958,6 @@ class SRA_ApiRouter {
 			else if (preg_match('/^(.*)\.php$/', $_SERVER['SCRIPT_NAME'], $m) && strpos($uri, $m[1]) === 0) $uri = substr($uri, strlen($m[1]));
 			
 			if (substr($uri, 0, 1) != '/') $uri = '/' . $uri;
-			
 			// check if URI is for API documentation
 			foreach(array('docs', 'doc-swagger', 'doc-swagger2', 'doc-mashape') as $doc) {
 				$docUri = isset($this->_settings[$doc]) ? $this->_settings[$doc] : NULL;
@@ -1921,7 +1975,6 @@ class SRA_ApiRouter {
 					$ckey = NULL;
 					$response = NULL;
 					if ($doc != 'docs' && SRA_API_ROUTER_CONTROLLER_USE_CACHE && strtolower($_SERVER['REQUEST_METHOD']) == 'get' && is_numeric($this->_settings['cache-ttl-doc']) && $this->_settings['cache-ttl-doc'] > 0) {
-						require_once('util/SRA_Cache.php');
 						$ckey = md5(SRA_API_ROUTER_CACHE_PREFIX . SRA_Controller::getAppName() . '_' . $this->_settings['api'] . '_' . $doc);
 						$cacheTime = SRA_Cache::cacheIsset($ckey, TRUE);
 						if ($cacheTime && $cacheTime > filemtime($this->_source) && $cacheTime > filemtime(__FILE__)) {
