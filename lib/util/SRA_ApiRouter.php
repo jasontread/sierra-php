@@ -2067,7 +2067,7 @@ class SRA_ApiRouter {
     $isSet = FALSE;
     $cacheSent = FALSE;
     foreach(headers_list() as $cheader) {
-      if (preg_match('/cache/i', $cheader)) {
+      if (preg_match('/cache\-control/i', $cheader)) {
         $cacheSent = TRUE;
         break;
       }
