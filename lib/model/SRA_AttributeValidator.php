@@ -123,7 +123,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function boolean($value, &$params) {
+	function boolean($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::boolean($val, $params)) {
@@ -162,7 +162,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function creditCard($value, &$params) {
+	function creditCard($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::creditCard($val, $params)) {
@@ -213,7 +213,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function date($value, &$params) {
+	function date($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::date($val, $params)) {
@@ -242,7 +242,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function domain($value, &$params) {
+	function domain($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::domain($val, $params)) {
@@ -305,7 +305,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function fileExtension(& $value, &$params) {
+	function fileExtension(& $value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::fileExtension($val, $params)) {
@@ -345,7 +345,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function integer($value, &$params) {
+	function integer($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::integer($val, $params)) {
@@ -376,7 +376,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function ip($value, &$params) {
+	function ip($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::ip($val, $params)) {
@@ -405,7 +405,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function ipv4($value, &$params) {
+	function ipv4($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::ipv4($val, $params)) {
@@ -445,7 +445,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function ipv6($value, &$params) {
+	function ipv6($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::ipv6($val, $params)) {
@@ -487,7 +487,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function mac($value, $params) {
+	function mac($value, $params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::mac($val, $params)) {
@@ -518,7 +518,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function mask($value, &$params) {
+	function mask($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::mask($val, $params)) {
@@ -548,7 +548,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function max($value, &$params) {
+	function max($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::max($val, $params)) {
@@ -578,7 +578,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function maxFileSize(& $value, &$params) {
+	function maxFileSize(& $value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::maxFileSize($val, $params)) {
@@ -608,7 +608,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function maxLength($value, &$params) {
+	function maxLength($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::maxLength($val, $params)) {
@@ -640,7 +640,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function mimeType(& $value, &$params) {
+	function mimeType(& $value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::mimeType($val, $params)) {
@@ -685,7 +685,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function min($value, &$params) {
+	function min($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::min($val, $params)) {
@@ -715,7 +715,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function minFileSize(& $value, &$params) {
+	function minFileSize(& $value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::minFileSize($val, $params)) {
@@ -745,7 +745,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function minLength($value, &$params) {
+	function minLength($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::minLength($val, $params)) {
@@ -774,7 +774,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function numeric($value, &$params) {
+	function numeric($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::numeric($val, $params)) {
@@ -843,7 +843,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function option($value, &$params) {
+	function option($value, &$params=NULL) {
 		if (!SRA_AttributeValidator::isValidValidator('option', $params)) {
 			return FALSE;
 		}
@@ -906,7 +906,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function options($value, &$params) {
+	function options($value, &$params=NULL) {
 		if (!SRA_AttributeValidator::isValidValidator('options', $params)) {
 			return FALSE;
 		}
@@ -988,7 +988,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function phone($value, &$params) {
+	function phone($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::phone($val, $params)) {
@@ -1020,7 +1020,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function range($value, &$params) {
+	function range($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::range($val, $params)) {
@@ -1049,7 +1049,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function required($value, &$params) {
+	function required($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::required($val, $params)) {
@@ -1078,7 +1078,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function timezone($value, &$params) {
+	function timezone($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::timezone($val, $params)) {
@@ -1104,7 +1104,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function unique($value, &$params) {
+	function unique($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::unique($val, $params)) {
@@ -1134,7 +1134,7 @@ class SRA_AttributeValidator {
    * @access  public
 	 * @return boolean TRUE if the attribute value does validate, FALSE otherwise
 	 */
-	function uri($value, &$params) {
+	function uri($value, &$params=NULL) {
     if (is_array($value)) {
       foreach($value as $val) {
         if (!SRA_AttributeValidator::uri($val, $params)) {
