@@ -2,8 +2,8 @@
 
 This is a framework I created initially in 2001, in the days of PHP 4 and prior
 to the advent of the many great PHP frameworks in existence today. I've 
-continued to develop it through the years, but I'm no longer actively supporting 
-it.
+continued to develop it through the years, but there are now better framework 
+choices for greenfield projects.
 
 ## Links
 * [API Docs](http://api.sierra-php.org)
@@ -11,7 +11,7 @@ it.
 * [Prior Hosting - Google Code](http://code.google.com/p/sierra-php)
 
 ## Description
-*sierra-php* is a PHP 4 and 5 compatible framework. It provides a foundation of 
+*sierra-php* is a PHP 4, 5 and 7 compatible framework. It provides a foundation of 
 reusable object-oriented code for Linux based PHP software.
 
 ## Quickstart
