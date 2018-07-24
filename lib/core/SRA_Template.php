@@ -360,7 +360,7 @@ class SRA_Template {
    * @access 	public static
    * @return 	void
    */
-  function displayToEmail($to, $subject, $messageTpl, $messageHtmlTpl=NULL, $from=NULL, $fromName=NULL, $toName=NULL, $cc=NULL, $bcc=NULL, &$attachments) {
+  function displayToEmail($to, $subject, $messageTpl, $messageHtmlTpl=NULL, $from=NULL, $fromName=NULL, $toName=NULL, $cc=NULL, $bcc=NULL, &$attachments=NULL) {
     SRA_Util::sendEmail($to, $subject, $messageTpl ? $this->fetch($messageTpl) : NULL, $messageHtmlTpl ? $this->fetch($messageHtmlTpl) : NULL, $from, $fromName, $toName, $cc, $bcc, $attachments);
   }
   // }}}
