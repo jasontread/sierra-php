@@ -1946,12 +1946,14 @@ class SRA_ApiRouter {
 	 * attempts to route the current http request to the appropriate API method 
 	 * or documentation endpoint - the not-found response code will be rendered 
 	 * otherwise
+   * @param string $uri optional explicit URI to route for (overrides 
+   * REQUEST_URI)
 	 * @return boolean
 	 */
-	public function route() {
+	public function route($uri=NULL) {
 		$routed = FALSE;
 		if ($this->_settings && $this->_methods) {
-			$uri = $_SERVER['REQUEST_URI'];
+			$uri = $uri ? $uri : $_SERVER['REQUEST_URI'];
 			
 			// remove script and directory name prefixes
 			if (strpos($uri, $_SERVER['SCRIPT_NAME']) === 0) $uri = substr($uri, strlen($_SERVER['SCRIPT_NAME']));
