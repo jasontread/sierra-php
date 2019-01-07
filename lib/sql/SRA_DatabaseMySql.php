@@ -393,6 +393,7 @@ class SRA_DatabaseMySql extends SRA_Database {
               // Attempt to re-establish database connection
               $this->_dbs = NULL;
               $conn = $this->_getAppDbConnection($query, TRUE);
+              !function_exists('mysql_pconnect') ? mysqli_select_db($this->_getAppDbConnection(NULL, TRUE), $this->_dbName) : mysql_select_db($this->_dbName, $this->_getAppDbConnection(NULL, TRUE));
               $result = !function_exists('mysql_pconnect') ? mysqli_query($conn, $query, MYSQLI_USE_RESULT) : mysql_unbuffered_query($query, $conn);
             }
             // NOTE: This SRA_Error uses $errorLevel.
