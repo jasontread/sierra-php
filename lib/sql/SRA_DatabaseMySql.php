@@ -389,15 +389,8 @@ class SRA_DatabaseMySql extends SRA_Database {
         {
             // SRA_Error.
             $msg = "SRA_DatabaseMySql::fetch: ". (!function_exists('mysql_pconnect') ? mysqli_error($conn) : mysql_error($conn))." Query: $query";
-            if (preg_match('/gone away/', $msg)) {
-              // Attempt to re-establish database connection
-              $this->_dbs = NULL;
-              $conn = $this->_getAppDbConnection($query, TRUE);
-              !function_exists('mysql_pconnect') ? mysqli_select_db($this->_getAppDbConnection(NULL, TRUE), $this->_dbName) : mysql_select_db($this->_dbName, $this->_getAppDbConnection(NULL, TRUE));
-              $result = !function_exists('mysql_pconnect') ? mysqli_query($conn, $query, MYSQLI_USE_RESULT) : mysql_unbuffered_query($query, $conn);
-            }
             // NOTE: This SRA_Error uses $errorLevel.
-            if (!$result) return(SRA_Error::logError($msg, __FILE__, __LINE__, $query ? $errorLevel : SRA_ERROR_OPERATIONAL));
+            return(SRA_Error::logError($msg, __FILE__, __LINE__, $query ? $errorLevel : SRA_ERROR_OPERATIONAL));
         }
 
         // Lowercase the types. Used in switch().
