@@ -679,7 +679,7 @@ class SRA_ApiRouter {
 			if (!isset($settings['status-codes']['invalid']) && !isset($customStatuses[400])) $settings['status-codes']['invalid'] = $method ? $this->_settings['status-codes']['invalid'] : array('code' => 400, 'description' => $resources->getString('api.status.400'));
 			if (!isset($settings['status-codes']['not-found']) && !isset($customStatuses[404])) $settings['status-codes']['not-found'] = $method ? $this->_settings['status-codes']['not-found'] : array('code' => 404, 'description' => $resources->getString('api.status.404'));
 			if (!isset($settings['status-codes']['null']) && !isset($customStatuses[503])) $settings['status-codes']['null'] = $method ? $this->_settings['status-codes']['null'] : array('code' => 503, 'description' => $resources->getString('api.status.503'));
-			if (!isset($settings['status-codes']['unauthorized']) && !isset($customStatuses[401])) $settings['status-codes']['unauthorized'] = $method ? $this->_settings['status-codes']['unauthorized'] : array('code' => 401, 'description' => $resources->getString('api.status.401'));
+			if (!isset($settings['status-codes']['unauthorized']) && !isset($customStatuses[401])) $settings['status-codes']['unauthorized'] = $method ? $this->_settings['status-codes']['unauthorized'] : array('code' => 401, 'description' => $resources->getString('api.status.401', array('apiKeyName' => $settings['api-key-name'])));
 			if (!isset($settings['status-codes']['ok']) && !isset($customStatuses[200])) $settings['status-codes']['ok'] = $method ? $this->_settings['status-codes']['ok'] : array('code' => 200, 'description' => $resources->getString('api.status.200'));
 			$settings['status_codes'] = $settings['status-codes'];
 			
