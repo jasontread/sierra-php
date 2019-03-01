@@ -320,7 +320,7 @@ class SRA_ApiRouter {
 			if (method_exists($dao, 'newInstance')) $obj =& $dao->newInstance();
 			else if (file_exists($efile)) {
 				require_once($efile);
-				$obj = new ${entity}();
+				if (class_exists($entity)) $obj = new ${entity}();
 			}
 			
 			if (is_object($obj) && method_exists($obj, 'getAttributeNames')) {
@@ -955,7 +955,7 @@ class SRA_ApiRouter {
 						if (method_exists($dao, 'newInstance')) $obj =& $dao->newInstance();
 						else if (file_exists($efile)) {
 							require_once($efile);
-							$obj = new ${entity}();
+							if (class_exists($entity)) $obj = new ${entity}();
 						}
 						if (!class_exists($entity) || !is_object($obj) || !count($attributes = $obj->getAttributeNames())) {
 							$msg = "SRA_ApiRouter::getSettings - Error: @return " . $settings['return']['type'] . " is not a valid entity type." . ($method ? " Method: ${method}" : '');
@@ -1151,18 +1151,26 @@ class SRA_ApiRouter {
           isset($settings['return']) && 
           isset($settings['return']['entity']) && 
           isset($settings['return']['type']) && 
-          $settings['return']['entity'] && 
-          ($dao =& SRA_DaoFactory::getDao($settings['return']['type'], FALSE, FALSE, FALSE, SRA_ERROR_OPERATIONAL)) && 
-          !SRA_Error::isError($dao) &&
-          ($obj =& $dao->newInstance()) && 
-          ($attrs = $obj->getAttributeNames())) {
-        foreach($settings['params'] as $attr => $props) {
-          if (in_array($attr, $attrs)) {
-            if ((!isset($props['array']) || !$props['array']) && $obj->getAttributeCardinality($attr)) $props['array'] = TRUE;
-            if ((!isset($props['description']) || !trim($props['description'])) && ($v = $obj->getHelpContent($attr))) $props['description'] = $v;
-            if ((!isset($props['options']) || !$props['options']) && ($v = $obj->getOptionsMap($attr))) $props['options'] = array_keys($v);
-            if ((!isset($props['type']) || !$props['type'] || $props['type'] == 'var') && in_array($v = $obj->getAttributeType($attr), array('blob', 'boolean', 'date', 'float', 'int', 'string', 'time'))) $props['type'] = $v == 'boolean' ? 'bool' : ($v == 'time' ? 'timestamp' : ($v == 'blob' ? 'string' : $v));
-            $settings['params'][$attr] = $props;
+          $settings['return']['entity']) {
+        $entity = $settings['return']['type'];
+        $dao =& SRA_DaoFactory::getDao($entity, FALSE, FALSE, FALSE, SRA_ERROR_OPERATIONAL);
+				$efile = SRA_Controller::getAppLibDir() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php";
+				$obj = NULL;
+
+				if (method_exists($dao, 'newInstance')) $obj =& $dao->newInstance();
+				else if (file_exists($efile)) {
+					require_once($efile);
+					if (class_exists($entity)) $obj = new ${entity}();
+				}
+        if (is_object($obj) && count($attrs = $obj->getAttributeNames())) {
+          foreach($settings['params'] as $attr => $props) {
+            if (in_array($attr, $attrs)) {
+              if ((!isset($props['array']) || !$props['array']) && $obj->getAttributeCardinality($attr)) $props['array'] = TRUE;
+              if ((!isset($props['description']) || !trim($props['description'])) && ($v = $obj->getHelpContent($attr))) $props['description'] = $v;
+              if ((!isset($props['options']) || !$props['options']) && ($v = $obj->getOptionsMap($attr))) $props['options'] = array_keys($v);
+              if ((!isset($props['type']) || !$props['type'] || $props['type'] == 'var') && in_array($v = $obj->getAttributeType($attr), array('blob', 'boolean', 'date', 'float', 'int', 'string', 'time'))) $props['type'] = $v == 'boolean' ? 'bool' : ($v == 'time' ? 'timestamp' : ($v == 'blob' ? 'string' : $v));
+              $settings['params'][$attr] = $props;
+            }
           }
         }
       }
