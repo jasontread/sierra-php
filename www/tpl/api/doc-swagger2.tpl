@@ -23,7 +23,7 @@
   {rdelim},
   {if $router->_settings.external_docs_url}
   "externalDocs": {ldelim}
-    {if $router->_settings.external_docs_description}"description": "{$router->_settings.external_docs_description|replace:'"':'\"'}",{/if}
+    {if $router->_settings.external_docs_description}"description": "{$router->_settings.external_docs_description|replace:'\':'\\'|replace:'"':'\"'}",{/if}
     "url": "{$router->_settings.external_docs_url}"
   {rdelim},
   {/if}
@@ -62,7 +62,7 @@
         "tags": [{foreach from=$method.tags item=tag}{assign var=last_tag value=$tag}{/foreach}{foreach from=$method.tags item=tag}"{$tag}"{if $tag neq $last_tag}, {/if}{/foreach}],
 {/if}
         "summary": "{if $method.http_method_summaries[$i]}{$method.http_method_summaries[$i]}{else}{$method.name}{/if}",
-        "description": "{$method.name}{if $method.description}: {$method.description|replace:'"':'\"'}{/if}",
+        "description": "{$method.name}{if $method.description}: {$method.description|replace:'\':'\\'|replace:'"':'\"'}{/if}",
         "operationId": "{$method.http_method_nicknames[$i]}",
 {if $method.return.entity && $method.return.csv_method}
         "produces": [
@@ -109,7 +109,7 @@
           {ldelim}
             "name": "{$name}",
 {if $param.description}
-            "description": "{$param.description|replace:'"':'\"'}",
+            "description": "{$param.description|replace:'\':'\\'|replace:'"':'\"'}",
 {/if}
             "required": {if $param.required || $param.placeholder}true{else}false{/if},
             "type": "{if $param.array}array{else}{if $type eq 'int'}integer{elseif $type eq 'float'}number{elseif $type eq 'boolean' || $type eq 'bool'}boolean{else}string{/if}{/if}",
@@ -183,7 +183,7 @@
     "{$entity.type_label}": {ldelim}
       "type": "object",
 {if $entity.description}
-      "description": "{$entity.description|replace:'"':'\"'}",
+      "description": "{$entity.description|replace:'\':'\\'|replace:'"':'\"'}",
 {/if}
 {assign var=last_required value=0}
 {foreach from=$entity.attributes key=name item=attribute}{if $attribute.required}{assign var=last_required value=$name}{/if}{assign var=last_attribute value=$name}{/foreach}
@@ -202,7 +202,7 @@
 {assign var=type value=$attribute.type}
         "{$name}": {ldelim}
 {if $attribute.description}
-          "description": "{$attribute.description|replace:'"':'\"'}",
+          "description": "{$attribute.description|replace:'\':'\\'|replace:'"':'\"'}",
 {/if}
 {if $type eq 'date' || $type eq 'timestamp'}
           "format": "{if $type eq 'date'}date{else}dateTime{/if}",
