@@ -439,6 +439,10 @@ class SRA_EntityGenerator extends SRA_Generator {
 		}
     
 		// merge aop aspects
+    if (isset($conf['aop'][0]['advice'])) {
+			if (!isset($conf['aop']['advice'])) $conf['aop']['advice'] = array();
+      foreach (array_keys($conf['aop'][0]['advice']) as $key) $conf['aop']['advice'][$key] = $conf['aop'][0]['advice'][$key];
+    }
     if (isset($conf['aop'][0]['aspect'])) {
 			if (!isset($conf['aop']['aspect'])) $conf['aop']['aspect'] = array();
       foreach (array_keys($conf['aop'][0]['aspect']) as $key) $conf['aop']['aspect'][$key] = $conf['aop'][0]['aspect'][$key];
