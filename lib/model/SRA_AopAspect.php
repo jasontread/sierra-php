@@ -124,7 +124,7 @@ class SRA_AopAspect {
 	 */
 	function SRA_AopAspect($id, & $conf) {
     $this->_id = $id;
-    $this->_advice = isset($conf['advice'][$conf['aspect'][$id]['attributes']['advice']]['xml_value']) ? $conf['advice'][$conf['aspect'][$id]['attributes']['advice']]['xml_value'] : $conf['aspect'][$id]['xml_value'];
+    $this->_advice = isset($conf['advice'][$conf['aspect'][$id]['attributes']['advice']]['xml_value']) ? $conf['advice'][$conf['aspect'][$id]['attributes']['advice']]['xml_value'] : (isset($conf['aspect'][$id]['xml_value']) ? $conf['aspect'][$id]['xml_value'] : $conf['aspect'][$id]['attributes']['advice']);
     $this->_comment = isset($conf['aspect'][$id]['attributes']['comment']) ? $conf['aspect'][$id]['attributes']['comment'] : NULL;
     $this->_joinPoints = explode(' ', (isset($conf['pointcut'][$conf['aspect'][$id]['attributes']['pointcut']]['attributes']['joinpoints']) ? $conf['pointcut'][$conf['aspect'][$id]['attributes']['pointcut']]['attributes']['joinpoints'] : $conf['aspect'][$id]['attributes']['pointcut']));
     $this->_when = isset($conf['advice'][$conf['aspect'][$id]['attributes']['advice']]['attributes']['when']) ? $conf['advice'][$conf['aspect'][$id]['attributes']['advice']]['attributes']['when'] : (isset($conf['aspect'][$id]['attributes']['when']) ? $conf['aspect'][$id]['attributes']['when']: $this->_when);
