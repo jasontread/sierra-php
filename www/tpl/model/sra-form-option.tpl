@@ -131,7 +131,6 @@ useLabels                     (1|0)/0           whether or not to use labels if 
 																								which option is selected
 *}
 
-{assign var="myParams" value=$Template->getVar('params')}
 {assign var="tplName" value="sra-form-option"}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}
@@ -150,11 +149,11 @@ useLabels                     (1|0)/0           whether or not to use labels if 
 {/if}
 
 {assign var="useOtherOption" value="0"}
-{if $myParams->getParam('includeOtherOption') && !$myParams->getParam('type', 0, 'checkbox')}
-{assign var="otherOptionLabel" value=$myParams->getParam('otherOptionLabel')}
+{if $params->getParam('includeOtherOption') && !$params->getParam('type', 0, 'checkbox')}
+{assign var="otherOptionLabel" value=$params->getParam('otherOptionLabel')}
 {if $otherOptionLabel}{assign var="otherOptionLabel" value=$entity->getEntityResourcesString($otherOptionLabel)}{else}{assign var="otherOptionLabel" value=$resources->getString('model.form-option.other-label')}{/if}
 {assign var="otherOptionLabelEscaped" value=$Template->escapeHtmlQuotes($otherOptionLabel)}
-{assign var="otherOptionPrompt" value=$myParams->getParam('otherOptionPrompt')}
+{assign var="otherOptionPrompt" value=$params->getParam('otherOptionPrompt')}
 {if $otherOptionPrompt}{assign var="otherOptionPrompt" value=$entity->getEntityResourcesString($otherOptionPrompt)}{else}{assign var="otherOptionPrompt" value=$resources->getString('model.form-option.other-prompt')}{/if}
 {assign var="otherOptionPrompt" value=$Template->escapeHtmlQuotes($otherOptionPrompt)}
 {assign var="otherOptionAttr" value="_OTHER_OPTION_"}
@@ -163,24 +162,24 @@ useLabels                     (1|0)/0           whether or not to use labels if 
 {/if}
 
 {* select input field *}
-{if $myParams->getParam('useSelect', 1)}
-{assign var="useLabels" value=$myParams->getParam('useLabels', 1)}
-{if $myParams->getParam('includeOtherOption')}
+{if $params->getParam('useSelect', 1)}
+{assign var="useLabels" value=$params->getParam('useLabels', 1)}
+{if $params->getParam('includeOtherOption')}
 {assign var='onchange' value="var otherIdx=this.options.length-1; if (this.selectedIndex==otherIdx) "|cat:$smarty.ldelim|cat:" var other = prompt('"|cat:$otherOptionPrompt|cat:"', this.options[otherIdx].value); if (other != null) "|cat:$smarty.ldelim|cat:" this.options[otherIdx].value=other; this.options[otherIdx].text=other ? other : '"|cat:$otherOptionLabelEscaped|cat:"'; "}
-{assign var='otherOptionCallback' value=$myParams->getParam('otherOptionCallback')}
+{assign var='otherOptionCallback' value=$params->getParam('otherOptionCallback')}
 {if $otherOptionCallback}{assign var='onchange' value=$onchange|cat:$otherOptionCallback|cat:"(this, other, other ? other : '"|cat:$otherOptionLabelEscaped|cat:"')"}{/if}
 {assign var='onchange' value=$onchange|cat:$smarty.rdelim|cat:$smarty.rdelim}
-{$myParams->concat('onchange', $onchange, 'select-attrs')}
+{$params->concat('onchange', $onchange, 'select-attrs')}
 {/if}
-{$Template->renderOpen($tplName, 'select', $myParams, '', 0)} name="{$fieldName}">
-{if $params->getParam('firstOption')}{$Template->renderOpen($tplName, 'option', $myParams, '', 0)} value="">{$resources->getString($params->getParam('firstOption'))}</option>{/if}
+{$Template->renderOpen($tplName, 'select', $params, '', 0)} name="{$fieldName}">
+{if $params->getParam('firstOption')}{$Template->renderOpen($tplName, 'option', $params, '', 0)} value="">{$resources->getString($params->getParam('firstOption'))}</option>{/if}
 
 {assign var="optionSet" value="0"}
 {assign var="foundAttr" value="0"}
 {foreach from=$options key=attr item=label}
 {assign var="optionSet" value="1"}
 {if $lookupVals}{assign var="label" value=$resources->getString($label)}{/if}
-{$Template->renderOpen($tplName, 'option', $myParams, 'option', 0, 0, 1)}{if ($useOtherOption && $attr eq $otherOptionAttr && !$foundAttr && $attribute) || $Util->equal($evalAttribute, $attr)} selected="selected"{/if} value="{if $useOtherOption && $attr eq $otherOptionAttr}{if !$foundAttr && $attribute}{$Template->escapeHtmlQuotes($attribute)}{/if}{else}{$Template->escapeHtmlQuotes($attr)}{/if}">{if $useOtherOption && $attr eq $otherOptionAttr && !$foundAttr && $attribute}{$attribute}{else}{$label}{/if}</option>
+{$Template->renderOpen($tplName, 'option', $params, 'option', 0, 0, 1)}{if ($useOtherOption && $attr eq $otherOptionAttr && !$foundAttr && $attribute) || $Util->equal($evalAttribute, $attr)} selected="selected"{/if} value="{if $useOtherOption && $attr eq $otherOptionAttr}{if !$foundAttr && $attribute}{$Template->escapeHtmlQuotes($attribute)}{/if}{else}{$Template->escapeHtmlQuotes($attr)}{/if}">{if $useOtherOption && $attr eq $otherOptionAttr && !$foundAttr && $attribute}{$attribute}{else}{$label}{/if}</option>
 {if $Util->equal($evalAttribute, $attr)}{assign var="foundAttr" value="1"}{/if}
 {/foreach}
 </select>
@@ -203,7 +202,7 @@ useLabels                     (1|0)/0           whether or not to use labels if 
 {assign var="foundAttr" value="0"}
 
 {foreach from=$options key=attr item=label}
-{if $useLabels}{$Template->renderOpen($tplName, 'label', $myParams, $property, 1, 0, 1)}{/if}
+{if $useLabels}{$Template->renderOpen($tplName, 'label', $params, $property, 1, 0, 1)}{/if}
 {if $lookupVals}{assign var="label" value=$resources->getString($label)}{/if}
 {if $Util->equal($evalAttribute, $attr)}{assign var="foundAttr" value="1"}{/if}
 
@@ -227,7 +226,7 @@ useLabels                     (1|0)/0           whether or not to use labels if 
 {/foreach}
 
 {if $property eq "label"}{if $useOtherOption && $attr eq $otherOptionAttr}<span id="{$fieldName}OtherLabel">{if $useOtherOption && $attr eq $otherOptionAttr && !$foundAttr && $attribute}{$attribute}{else}{$label}{/if}</span>{else}{$label}{/if}
-{else}{$Template->renderOpen($tplName, 'input', $myParams, $property, 0, 0, 1)} name="{$fieldName}{if $myParams->getParam('type', 0, 'checkbox')}_{$Template->escapeHtmlQuotes($attr)}{/if}"{if (($useOtherOption && $attr eq $otherOptionAttr && !$foundAttr && $attribute) || $Util->equal($evalAttribute, $attr) || ($entity->getAttributeType($attributeName) eq $smarty.const.SRA_DATA_TYPE_BOOLEAN && $myParams->getParam('type', 0, 'radio') && !$attribute && !$attr && $attribute !== $smarty.const.NULL))} checked="checked"{/if} value="{if $useOtherOption && $attr eq $otherOptionAttr}{if !$foundAttr && $attribute}{$Template->escapeHtmlQuotes($attribute)}{/if}{else}{$Template->escapeHtmlQuotes($attr)}{/if}"{if $useOtherOption && $attr eq $otherOptionAttr} onchange="if (this.checked) {ldelim} var other = prompt('{$otherOptionPrompt}', this.value); this.value=other; document.getElementById('{$fieldName}OtherLabel').innerHTML=other ? other : '{$otherOptionLabelEscaped}';{if $myParams->getParam('type', 0, 'checkbox')} this.name='{$fieldName}_'+other;{/if} {rdelim}"{/if} />{/if}
+{else}{$Template->renderOpen($tplName, 'input', $params, $property, 0, 0, 1)} name="{$fieldName}{if $params->getParam('type', 0, 'checkbox')}_{$Template->escapeHtmlQuotes($attr)}{/if}"{if (($useOtherOption && $attr eq $otherOptionAttr && !$foundAttr && $attribute) || $Util->equal($evalAttribute, $attr) || ($entity->getAttributeType($attributeName) eq $smarty.const.SRA_DATA_TYPE_BOOLEAN && $params->getParam('type', 0, 'radio') && !$attribute && !$attr && $attribute !== $smarty.const.NULL))} checked="checked"{/if} value="{if $useOtherOption && $attr eq $otherOptionAttr}{if !$foundAttr && $attribute}{$Template->escapeHtmlQuotes($attribute)}{/if}{else}{$Template->escapeHtmlQuotes($attr)}{/if}"{if $useOtherOption && $attr eq $otherOptionAttr} onchange="if (this.checked) {ldelim} var other = prompt('{$otherOptionPrompt}', this.value); this.value=other; document.getElementById('{$fieldName}OtherLabel').innerHTML=other ? other : '{$otherOptionLabelEscaped}';{if $params->getParam('type', 0, 'checkbox')} this.name='{$fieldName}_'+other;{/if} {rdelim}"{/if} />{/if}
 
 {* option enclose element *}
 {foreach from=$Util->getArrayReverse($maxEnclElems,0) item=enclIdx}
