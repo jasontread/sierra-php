@@ -287,7 +287,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {assign var="displayVal" value=$attribute}
 {if $invokeParams->getParams()}
 {foreach from=$invokeParams->getParams() key=method item=p}
-{assign var="displayVal", $Util->invokeMethod($displayVal, $method, $p)}
+{assign var="displayVal" value=$Util->invokeMethod($displayVal, $method, $p)}
 {/foreach}
 {/if}
 {/if}
