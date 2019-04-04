@@ -67,7 +67,7 @@ useButton                    (1|0)/0           whether or not to display the sho
                                                be set when a reset is invoked (the dom ids)
 *}
 
-{assign var="myParams" value=$Template->getVarByRef('params')}
+{assign var="myParams" value=$Template->getVar('params')}
 {assign var="fieldName" value=$myParams->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$myParams->getParam('fieldNamePre', '')}
 {assign var="fieldNamePost" value=$myParams->getParam('fieldNamePost', '')}

@@ -71,7 +71,7 @@ syncValue                    (0|1)/0           if this view is being used to tog
                                                occur if the field is disabled
 *}
 
-{assign var='myParams' value=$Template->getVarByRef('params')}
+{assign var='myParams' value=$Template->getVar('params')}
 {assign var='view' value=$myParams->getParam('view')}
 {assign var='ciView' value=$myParams->getParam('ciView')}
 {assign var='hideMSecs' value=$myParams->getParam('hideMSecs', 1000)}

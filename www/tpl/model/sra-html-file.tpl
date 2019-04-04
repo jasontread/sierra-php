@@ -45,7 +45,7 @@ link                         [resource]        if the file exists and this value
                                                linked
 
 *}
-{assign var="myParams" value=$Template->getVarByRef('params')}
+{assign var="myParams" value=$Template->getVar('params')}
 {if $Util->isObject($attribute, 'SRA_FileAttribute')}
 {assign var="fileLink" value=$entity->parseString($myParams->getParam('link'))}
 {if $Util->beginsWith($fileLink, '[name')}

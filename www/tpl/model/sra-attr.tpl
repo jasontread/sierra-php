@@ -225,7 +225,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 
 *}
 
-{assign var="attrParams" value=$Template->getVarByRef('params')}
+{assign var="attrParams" value=$Template->getVar('params')}
 {assign var="attrTplName" value="sra-attr"}
 {$Template->initTemplate($attrTplName)}
 

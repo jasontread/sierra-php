@@ -637,7 +637,7 @@ ajaxTipsAddSelector = function(input, limit, minSize, offset, service, servicePa
 
 
 {if !$skipFields}
-{assign var="myParams" value=$Template->getVarByRef('params')}
+{assign var="myParams" value=$Template->getVar('params')}
 {assign var="ajaxTipParams" value=$myParams->getTypeSubset('ajaxTips')}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}

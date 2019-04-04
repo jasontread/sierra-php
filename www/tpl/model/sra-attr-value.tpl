@@ -23,18 +23,18 @@ This is a helper template for sra-attr.tpl. It is used to recursively display
 attribute values
 *}
 
-{assign var="myParams" value=$Template->getVarByRef('sraAttrParams')}
+{assign var="myParams" value=$Template->getVar('sraAttrParams')}
 {assign var="tplName" value="sra-attr"}
 {assign var="displayCondsParams" value=$params->getTypeSubset('displayConds')}
-{assign var="formatStrParams" value=$Template->getVarByRef('formatStrParams')}
-{assign var="enclParams" value=$Template->getVarByRef('enclParams')}
-{assign var="posParams" value=$Template->getVarByRef('posParams')}
-{assign var="postParams" value=$Template->getVarByRef('postParams')}
-{assign var="postTplParams" value=$Template->getVarByRef('postTplParams')}
-{assign var="preParams" value=$Template->getVarByRef('preParams')}
-{assign var="preTplParams" value=$Template->getVarByRef('preTplParams')}
-{assign var="tplParams" value=$Template->getVarByRef('tplParams')}
-{assign var="attrVal" value=$Template->getVarByRef('sraAttrVal')}
+{assign var="formatStrParams" value=$Template->getVar('formatStrParams')}
+{assign var="enclParams" value=$Template->getVar('enclParams')}
+{assign var="posParams" value=$Template->getVar('posParams')}
+{assign var="postParams" value=$Template->getVar('postParams')}
+{assign var="postTplParams" value=$Template->getVar('postTplParams')}
+{assign var="preParams" value=$Template->getVar('preParams')}
+{assign var="preTplParams" value=$Template->getVar('preTplParams')}
+{assign var="tplParams" value=$Template->getVar('tplParams')}
+{assign var="attrVal" value=$Template->getVar('sraAttrVal')}
 {assign var="maxEnclElems" value=$enclParams->getParam('maxEnclElems', 5)}
 {if $myParams->getParam('useOptionsLabel')}{assign var="options" value=$entity->getOptionsMap($attributeName, 1)}{/if}
 

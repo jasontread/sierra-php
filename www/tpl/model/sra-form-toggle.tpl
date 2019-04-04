@@ -82,7 +82,7 @@ deleteConfirm                 [resource]        resource identifier to display i
 
 *}
 
-{assign var="myParams" value=$Template->getVarByRef('params')}
+{assign var="myParams" value=$Template->getVar('params')}
 {assign var="tplName" value="sra-form-toggle"}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}

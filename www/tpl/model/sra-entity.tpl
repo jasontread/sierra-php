@@ -117,7 +117,7 @@ maxEnclElems    encl          (1-N)/5          the max # of possible "encl" para
 
 *}
 
-{assign var="myParams" value=$Template->getVarByRef('params')}
+{assign var="myParams" value=$Template->getVar('params')}
 {assign var="tplName" value="sra-entity"}
 {$Template->initTemplate($tplName)}
 {assign var="attrsParams" value=$params-getTypeSubset('attrs')}

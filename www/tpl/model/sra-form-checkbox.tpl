@@ -44,7 +44,7 @@ fieldNamePost                                  postfix to add to the input field
 
 *}
 
-{assign var="myParams" value=$Template->getVarByRef('params')}
+{assign var="myParams" value=$Template->getVar('params')}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}
 {assign var="fieldNamePost" value=$params->getParam('fieldNamePost', '')}

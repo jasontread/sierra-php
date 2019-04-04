@@ -93,7 +93,7 @@ label. 'inputCiFieldClass', 'inputCiLabelClass', 'inputCiFieldStyle' and
 class(es)/style(s)
 *}
 
-{assign var="myParams" value=$Template->getVarByRef('params')}
+{assign var="myParams" value=$Template->getVar('params')}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', $Template->getVar('fieldNamePre'))}
 {assign var="fieldNamePost" value=$params->getParam('fieldNamePost', $Template->getVar('fieldNamePost'))}

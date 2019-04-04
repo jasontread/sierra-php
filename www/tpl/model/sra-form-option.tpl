@@ -131,7 +131,7 @@ useLabels                     (1|0)/0           whether or not to use labels if 
 																								which option is selected
 *}
 
-{assign var="myParams" value=$Template->getVarByRef('params')}
+{assign var="myParams" value=$Template->getVar('params')}
 {assign var="tplName" value="sra-form-option"}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}
