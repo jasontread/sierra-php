@@ -129,24 +129,23 @@ maxEnclElems    encl          (1-N)/5          the max # of possible "encl" para
 
 *}
 
-{assign var="myParams" value=$Template->getVar('params')}
 {assign var="tplName" value="sra-form-date"}
 {$Template->initTemplate($tplName)}
 
 {assign var="baseFieldName" value=$fieldName}
-{assign var="fieldName" value=$myParams->getParam('fieldName', $fieldName)}
-{assign var="fieldNamePre" value=$myParams->getParam('fieldNamePre', '')}
-{assign var="fieldNamePost" value=$myParams->getParam('fieldNamePost', '')}
+{assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
+{assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}
+{assign var="fieldNamePost" value=$params->getParam('fieldNamePost', '')}
 {assign var="fieldName" value=$fieldNamePre|cat:$fieldName|cat:$fieldNamePost}
-{assign var="enclParams" value=$myParams->getTypeSubset('encl')}
-{assign var="firstOptionParams" value=$myParams->getTypeSubset('firstOption')}
-{assign var="formatStrParams" value=$myParams->getTypeSubset('formatStr')}
-{assign var="posParams" value=$myParams->getTypeSubset('pos')}
-{assign var="postParams" value=$myParams->getTypeSubset('post')}
-{assign var="postTplParams" value=$myParams->getTypeSubset('postTpl')}
-{assign var="preParams" value=$myParams->getTypeSubset('pre')}
-{assign var="preTplParams" value=$myParams->getTypeSubset('preTpl')}
-{assign var="rangeParams" value=$myParams->getTypeSubset('range')}
+{assign var="enclParams" value=$params->getTypeSubset('encl')}
+{assign var="firstOptionParams" value=$params->getTypeSubset('firstOption')}
+{assign var="formatStrParams" value=$params->getTypeSubset('formatStr')}
+{assign var="posParams" value=$params->getTypeSubset('pos')}
+{assign var="postParams" value=$params->getTypeSubset('post')}
+{assign var="postTplParams" value=$params->getTypeSubset('postTpl')}
+{assign var="preParams" value=$params->getTypeSubset('pre')}
+{assign var="preTplParams" value=$params->getTypeSubset('preTpl')}
+{assign var="rangeParams" value=$params->getTypeSubset('range')}
 {assign var="maxEnclElems" value=$enclParams->getParam('maxEnclElems', 5)}
 {assign var="dayStartIdx" value="0"}
 {assign var="hourStartIdx" value="0"}
@@ -180,15 +179,15 @@ maxEnclElems    encl          (1-N)/5          the max # of possible "encl" para
 {if $enclIdx eq 0}{assign var="enclIdx" value=""}{/if}
 {assign var="tmp" value=$property|cat:$enclIdx}
 {assign var="encl" value=$enclParams->getParam($tmp)}
-{if $encl}{$Template->renderOpen($tplName, $encl, $myParams, $property, 1, $displayVal)}{/if}
+{if $encl}{$Template->renderOpen($tplName, $encl, $params, $property, 1, $displayVal)}{/if}
 {/foreach}
 
-{$Template->renderOpen($tplName, 'select', $myParams, $property, 0)} name="tmp_{$property|cat:$seq}" onchange="{$functionName}(this)">
-{if $firstOptionParams->getParam($property)}{$Template->renderOpen($tplName, 'option', $myParams, $property, 0)} value="0">{$resources->getString($firstOptionParams->getParam($property))}</option>{/if}
+{$Template->renderOpen($tplName, 'select', $params, $property, 0)} name="tmp_{$property|cat:$seq}" onchange="{$functionName}(this)">
+{if $firstOptionParams->getParam($property)}{$Template->renderOpen($tplName, 'option', $params, $property, 0)} value="0">{$resources->getString($firstOptionParams->getParam($property))}</option>{/if}
 {assign var="prop" value=$property}
 {if $property eq 'hour' && $posParams->getParam('meridiem')}{assign var="prop" value='hour12'}{/if}
 {foreach from=$Date->getPropertyRange($prop, $rangeParams->getParam($property), $formatStrParams->getParam($property)) key=val item=displ}
-{$Template->renderOpen($tplName, 'option', $myParams, $property, 0)} value="{$val}"{if $attribute && ($attribute->get($property) eq $val || ($prop eq 'hour12' && ($attribute->get($property) - 12) eq $val))} selected="selected"{/if}>{$displ}</option>
+{$Template->renderOpen($tplName, 'option', $params, $property, 0)} value="{$val}"{if $attribute && ($attribute->get($property) eq $val || ($prop eq 'hour12' && ($attribute->get($property) - 12) eq $val))} selected="selected"{/if}>{$displ}</option>
 {/foreach}
 </select>
 

@@ -35,6 +35,6 @@ Key            Type          Value/Default     Description
 showLabel                    (1|0)/0           whether or not to show the attribute label above this image followed by a newline
 
 *}
-{assign var="myParams" value=$Template->getVar('params')}
-{if $myParams->getParam('showLabel')}{$entity->getEntityLabel($attributeName)}<br />{/if}
-{if $Util->isObject($attribute, 'SRA_FileAttribute')}{$Template->renderOpen($tplName, 'img', $myParams, '', 0)} src="{$attribute->getUri()}" />{/if}
+
+{if $params->getParam('showLabel')}{$entity->getEntityLabel($attributeName)}<br />{/if}
+{if $Util->isObject($attribute, 'SRA_FileAttribute')}{$Template->renderOpen($tplName, 'img', $params, '', 0)} src="{$attribute->getUri()}" />{/if}

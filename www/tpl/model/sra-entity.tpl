@@ -117,7 +117,6 @@ maxEnclElems    encl          (1-N)/5          the max # of possible "encl" para
 
 *}
 
-{assign var="myParams" value=$Template->getVar('params')}
 {assign var="tplName" value="sra-entity"}
 {$Template->initTemplate($tplName)}
 {assign var="attrsParams" value=$params-getTypeSubset('attrs')}
@@ -139,7 +138,7 @@ maxEnclElems    encl          (1-N)/5          the max # of possible "encl" para
 {if $enclIdx eq 0}{assign var="enclIdx" value=""}{/if}
 {assign var="tmp" value="output"|cat:$enclIdx}
 {assign var="encl" value=$enclParams->getParam($tmp)}
-{if $encl}{$Template->renderOpen($tplName, $encl, $myParams, "output")}{/if}
+{if $encl}{$Template->renderOpen($tplName, $encl, $params, "output")}{/if}
 {/foreach}
 
 
@@ -161,7 +160,7 @@ maxEnclElems    encl          (1-N)/5          the max # of possible "encl" para
 {if $enclIdx eq 0}{assign var="enclIdx" value=""}{/if}
 {assign var="tmp" value=$property|cat:$enclIdx}
 {assign var="encl" value=$enclParams->getParam($tmp)}
-{if $encl}{$Template->renderOpen($tplName, $encl, $myParams, $property, 1, $displayVal)}{/if}
+{if $encl}{$Template->renderOpen($tplName, $encl, $params, $property, 1, $displayVal)}{/if}
 {/foreach}
 
 {* property value *}
@@ -186,7 +185,7 @@ maxEnclElems    encl          (1-N)/5          the max # of possible "encl" para
 {if $enclIdx eq 0}{assign var="enclIdx" value=""}{/if}
 {assign var="tmp" value=$attr|cat:$enclIdx}
 {assign var="encl" value=$enclParams->getParam($tmp)}
-{if $encl}{$Template->renderOpen($tplName, $encl, $myParams, $attr, 1, $attrVal)}{/if}
+{if $encl}{$Template->renderOpen($tplName, $encl, $params, $attr, 1, $attrVal)}{/if}
 {/foreach}
 
 {* attribute value *}

@@ -57,7 +57,6 @@ useTextArea                  (1|0)/0           whether or not to render the
 																							 an "input" element
 *}
 
-{assign var="myParams" value=$Template->getVar('params')}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', $Template->getVar('fieldNamePre'))}
 {assign var="fieldNamePost" value=$params->getParam('fieldNamePost', $Template->getVar('fieldNamePost'))}
@@ -67,8 +66,8 @@ useTextArea                  (1|0)/0           whether or not to render the
 {if $Util->isObject($attribute) && $Util->methodExists($attribute, 'toString')}{assign var="attribute" value=$attribute->format()}{/if}
 
 {* textarea *}
-{if $myParams->getParam('useTextArea')}
-{$Template->renderOpen($tplName, 'textarea', $myParams, '', 0)} name="{$fieldName}" rows="{$myParams->getParam('rows', 5)}" cols="{$myParams->getParam('cols', 20)}">{if $myParams->getParam('imbedValue', '1')}{$attribute}{/if}</textarea>
+{if $params->getParam('useTextArea')}
+{$Template->renderOpen($tplName, 'textarea', $params, '', 0)} name="{$fieldName}" rows="{$params->getParam('rows', 5)}" cols="{$params->getParam('cols', 20)}">{if $params->getParam('imbedValue', '1')}{$attribute}{/if}</textarea>
 {else}
-{$Template->renderOpen($tplName, 'input', $myParams, '', 0)} name="{$fieldName}"{if $myParams->getParam('imbedValue', '1')} value="{if $attributeType eq 'boolean'}{if $attribute}1{else if $attribute === $smarty.const.FALSE}0{/if}{else}{$Template->escapeHtmlQuotes($attribute)}{/if}"{/if} />
+{$Template->renderOpen($tplName, 'input', $params, '', 0)} name="{$fieldName}"{if $params->getParam('imbedValue', '1')} value="{if $attributeType eq 'boolean'}{if $attribute}1{else if $attribute === $smarty.const.FALSE}0{/if}{else}{$Template->escapeHtmlQuotes($attribute)}{/if}"{/if} />
 {/if}

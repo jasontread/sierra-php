@@ -93,56 +93,55 @@ label. 'inputCiFieldClass', 'inputCiLabelClass', 'inputCiFieldStyle' and
 class(es)/style(s)
 *}
 
-{assign var="myParams" value=$Template->getVar('params')}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', $Template->getVar('fieldNamePre'))}
 {assign var="fieldNamePost" value=$params->getParam('fieldNamePost', $Template->getVar('fieldNamePost'))}
 {assign var="fieldName" value=$fieldNamePre|cat:$fieldName|cat:$fieldNamePost}
 {if ($Util->isObject($attribute) && $displayVal)}{assign var="attribute" value=$displayVal}{/if}
 {if $Util->methodExists($attribute, 'getPrimaryKey')}{assign var="attribute" value=$attribute->getPrimaryKey()}{/if}
-{if $myParams->getParam('useTextArea')}{assign var='ptype' value='textarea-attrs'}{else}{assign var='ptype' value='input-attrs'}{/if}
+{if $params->getParam('useTextArea')}{assign var='ptype' value='textarea-attrs'}{else}{assign var='ptype' value='input-attrs'}{/if}
 
-{assign var='labelClass' value=$myParams->getParam('labelClass')}
-{if $labelClass}{$myParams->concat('class', $labelClass, 'span-attrs')}{/if}
-{if $inputCiClass}{$myParams->concat('class', $inputCiClass, $ptype)}{$myParams->concat('class', $inputCiClass, 'span-attrs')}{/if}
-{if $inputCiStyle}{$myParams->concat('style', $inputCiStyle, $ptype)}{$myParams->concat('style', $inputCiStyle, 'span-attrs')}{/if}
-{if $inputCiFieldClass}{$myParams->concat('class', $inputCiFieldClass, $ptype)}{/if}
-{if $inputCiFieldStyle}{$myParams->concat('style', $inputCiFieldStyle, $ptype)}{/if}
-{if $inputCiLabelClass}{$myParams->concat('class', $inputCiLabelClass, 'span-attrs')}{/if}
-{if $inputCiLabelStyle}{$myParams->concat('style', $inputCiLabelStyle, 'span-attrs')}{/if}
-{assign var='inputBaseClass' value=$myParams->getParam1('class', $ptype)}
-{assign var='spanBaseClass' value=$myParams->getParam1('class', 'span-attrs')}
-{assign var='noValueClass' value=$myParams->getParam('noValueClass')}
-{assign var='noValueResource' value=$myParams->getParam('noValueResource')}
+{assign var='labelClass' value=$params->getParam('labelClass')}
+{if $labelClass}{$params->concat('class', $labelClass, 'span-attrs')}{/if}
+{if $inputCiClass}{$params->concat('class', $inputCiClass, $ptype)}{$params->concat('class', $inputCiClass, 'span-attrs')}{/if}
+{if $inputCiStyle}{$params->concat('style', $inputCiStyle, $ptype)}{$params->concat('style', $inputCiStyle, 'span-attrs')}{/if}
+{if $inputCiFieldClass}{$params->concat('class', $inputCiFieldClass, $ptype)}{/if}
+{if $inputCiFieldStyle}{$params->concat('style', $inputCiFieldStyle, $ptype)}{/if}
+{if $inputCiLabelClass}{$params->concat('class', $inputCiLabelClass, 'span-attrs')}{/if}
+{if $inputCiLabelStyle}{$params->concat('style', $inputCiLabelStyle, 'span-attrs')}{/if}
+{assign var='inputBaseClass' value=$params->getParam1('class', $ptype)}
+{assign var='spanBaseClass' value=$params->getParam1('class', 'span-attrs')}
+{assign var='noValueClass' value=$params->getParam('noValueClass')}
+{assign var='noValueResource' value=$params->getParam('noValueResource')}
 {if $noValueResource}{assign var='noValueStr' value=$entity->getEntityResourcesString($noValueResource)}{else}{assign var='noValueStr' value=$attributeLabel}{/if}
 {if !$attribute}{assign var='attribute' value=$noValueStr}{/if}
-{if $noValueClass && $attribute eq $noValueStr}{$myParams->concat('class', $noValueClass, $ptype)}{$myParams->concat('class', $noValueClass, 'span-attrs')}{/if}
-{assign var='inputNoValueClass' value=$myParams->getParam1('class', $ptype)}
-{assign var='spanNoValueClass' value=$myParams->getParam1('class', 'span-attrs')}
-{$myParams->concat('style', 'cursor:pointer;', $ptype)}
-{$myParams->concat('style', 'cursor:pointer;', 'span-attrs')}
+{if $noValueClass && $attribute eq $noValueStr}{$params->concat('class', $noValueClass, $ptype)}{$params->concat('class', $noValueClass, 'span-attrs')}{/if}
+{assign var='inputNoValueClass' value=$params->getParam1('class', $ptype)}
+{assign var='spanNoValueClass' value=$params->getParam1('class', 'span-attrs')}
+{$params->concat('style', 'cursor:pointer;', $ptype)}
+{$params->concat('style', 'cursor:pointer;', 'span-attrs')}
 {if $noValueClass}{assign var='inputNoValueClass' value=$inputNoValueClass|cat:' '|cat:$noValueClass}{assign var='spanNoValueClass' value=$spanNoValueClass|cat:' '|cat:$noValueClass}{/if}
 {assign var='escapedLabel' value=$Template->escapeSingleQuotes($noValueStr)}
-{if $myParams->getParam('useTextArea')}{assign var='hideCss' value="display='none'"}{assign var='showCss' value="display=''"}{assign var='hideCss' value="this.style.display='none'"}{else}{assign var='hideCss' value="this.style.position='absolute'; this.style.opacity=0"}{assign var='showCss' value="opacity=1"}{/if}
-{if $myParams->getParam('useTextArea')}{$myParams->concat('style', 'display:none', $ptype)}{else}{$myParams->concat('style', 'position:absolute; opacity:0; overflow:hidden;', $ptype)}{/if}
+{if $params->getParam('useTextArea')}{assign var='hideCss' value="display='none'"}{assign var='showCss' value="display=''"}{assign var='hideCss' value="this.style.display='none'"}{else}{assign var='hideCss' value="this.style.position='absolute'; this.style.opacity=0"}{assign var='showCss' value="opacity=1"}{/if}
+{if $params->getParam('useTextArea')}{$params->concat('style', 'display:none', $ptype)}{else}{$params->concat('style', 'position:absolute; opacity:0; overflow:hidden;', $ptype)}{/if}
 {assign var='onfocus' value="this.style.cursor='auto'; this.style.position='static'; this.style."|cat:$showCss|cat:"; this.onkeyup(); var label=this.nextSibling.nextSibling; label.style.position='absolute'; label.style.visibility='hidden'; this.select();"}
 {assign var='onblur' value="this.style.cursor='pointer';"|cat:$hideCss|cat:"; var label=this.nextSibling.nextSibling; label.style.position='static'; label.style.visibility='inherit'; this.onkeyup(); if (this.value == '"|cat:$escapedLabel|cat:"') this.value='';"}
 {assign var='valueCode' value='this.value'}
-{if $myParams->getParam('useTextArea')}{assign var='valueCode' value=$valueCode|cat:".replace(String.fromCharCode(10), '<br />').replace(String.fromCharCode(13), '<br />')"}{/if}
+{if $params->getParam('useTextArea')}{assign var='valueCode' value=$valueCode|cat:".replace(String.fromCharCode(10), '<br />').replace(String.fromCharCode(13), '<br />')"}{/if}
 {assign var='onkeyup' value="var label=this.nextSibling.nextSibling; label.innerHTML="|cat:$valueCode|cat:"; var empty=this.value=='' || this.value.replace(' ', '')==''; var ciClass=empty || this.value=='"|cat:$escapedLabel|cat:"' ? '"|cat:$inputNoValueClass|cat:"' : '"|cat:$inputBaseClass|cat:"'; var ciSpanClass=empty || this.value=='"|cat:$escapedLabel|cat:"' ? '"|cat:$spanNoValueClass|cat:"' : '"|cat:$spanBaseClass|cat:"'; ciClass=ciClass?ciClass:null; ciSpanClass=ciSpanClass?ciSpanClass:null; this.className=ciClass; label.className=ciSpanClass; if (empty) this.value='"|cat:$escapedLabel|cat:"'; if (empty) label.innerHTML='"|cat:$escapedLabel|cat:"'; if (empty) this.select();"}
-{if $myParams->getParam('dynamicResize') && !$myParams->getParam('useTextArea')}{$myParams->concat('style', 'overflow:hidden;', $ptype)}{assign var='onkeyup' value=$onkeyup|cat:"this.style.width=(label.offsetWidth+4)+'px';"}{/if}
-{if $myParams->getParam('useTextArea')}{assign var='onfocus' value=$onfocus|cat:" this.select();"}{/if}
-{$myParams->concat('onblur', $onblur, $ptype)}
-{$myParams->concat('onfocus', $onfocus, $ptype)}
-{$myParams->concat('onkeyup', $onkeyup, $ptype)}
+{if $params->getParam('dynamicResize') && !$params->getParam('useTextArea')}{$params->concat('style', 'overflow:hidden;', $ptype)}{assign var='onkeyup' value=$onkeyup|cat:"this.style.width=(label.offsetWidth+4)+'px';"}{/if}
+{if $params->getParam('useTextArea')}{assign var='onfocus' value=$onfocus|cat:" this.select();"}{/if}
+{$params->concat('onblur', $onblur, $ptype)}
+{$params->concat('onfocus', $onfocus, $ptype)}
+{$params->concat('onkeyup', $onkeyup, $ptype)}
 
 {* textarea *}
-{if $myParams->getParam('useTextArea')}
-{$Template->renderOpen($tplName, 'textarea', $myParams, '', 0)} name="{$fieldName}" cols="{$myParams->getParam('cols', 20)}" rows="{$myParams->getParam('rows', 5)}">{if $attribute neq $noValueStr}{$attribute}{/if}</textarea>
+{if $params->getParam('useTextArea')}
+{$Template->renderOpen($tplName, 'textarea', $params, '', 0)} name="{$fieldName}" cols="{$params->getParam('cols', 20)}" rows="{$params->getParam('rows', 5)}">{if $attribute neq $noValueStr}{$attribute}{/if}</textarea>
 {* input field *}
 {else}
-{$Template->renderOpen($tplName, 'input', $myParams, '', 0)} name="{$fieldName}" value="{if $attribute neq $noValueStr}{$Template->escapeHtmlQuotes($attribute)}{/if}" />
+{$Template->renderOpen($tplName, 'input', $params, '', 0)} name="{$fieldName}" value="{if $attribute neq $noValueStr}{$Template->escapeHtmlQuotes($attribute)}{/if}" />
 {/if}
 
 {* label *}
-{$Template->renderOpen($tplName, 'span', $myParams, '', 0)} onclick="var field=this.previousSibling.previousSibling;{if $myParams->getParam('useTextArea')} field.style.display='';{/if} field.focus();">{if $myParams->getParam('useTextArea')}{$Template->lineBreaksToBr($attribute)}{else}{$attribute}{/if}</span>
+{$Template->renderOpen($tplName, 'span', $params, '', 0)} onclick="var field=this.previousSibling.previousSibling;{if $params->getParam('useTextArea')} field.style.display='';{/if} field.focus();">{if $params->getParam('useTextArea')}{$Template->lineBreaksToBr($attribute)}{else}{$attribute}{/if}</span>

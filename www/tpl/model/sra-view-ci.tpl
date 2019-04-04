@@ -71,17 +71,16 @@ syncValue                    (0|1)/0           if this view is being used to tog
                                                occur if the field is disabled
 *}
 
-{assign var='myParams' value=$Template->getVar('params')}
-{assign var='view' value=$myParams->getParam('view')}
-{assign var='ciView' value=$myParams->getParam('ciView')}
-{assign var='hideMSecs' value=$myParams->getParam('hideMSecs', 1000)}
-{assign var='labelClass' value=$myParams->getParam('labelClass')}
-{assign var='noValueClass' value=$myParams->getParam('noValueClass')}
+{assign var='view' value=$params->getParam('view')}
+{assign var='ciView' value=$params->getParam('ciView')}
+{assign var='hideMSecs' value=$params->getParam('hideMSecs', 1000)}
+{assign var='labelClass' value=$params->getParam('labelClass')}
+{assign var='noValueClass' value=$params->getParam('noValueClass')}
 {if $labelClass && $noValueClass}{assign var='noValueClass' value=$noValueClass|cat:' '|cat:$labelClass}{/if}
-{assign var='noValueResource' value=$myParams->getParam('noValueResource')}
+{assign var='noValueResource' value=$params->getParam('noValueResource')}
 {if $noValueResource}{assign var='noValueStr' value=$entity->getEntityResourcesString($noValueResource)}{else}{assign var='noValueStr' value=$attributeLabel}{/if}
-{assign var='showLabel' value=$myParams->getParam('showLabel', 1)}
-{assign var='syncValue' value=$myParams->getParam('syncValue')}
+{assign var='showLabel' value=$params->getParam('showLabel', 1)}
+{assign var='syncValue' value=$params->getParam('syncValue')}
 
 {if $ciView}
 <span onmouseover="if (this._hideTimer) {ldelim} clearTimeout(this._hideTimer); this._hideTimer=null; {rdelim}" onmouseout="if (this._hideTimer) this.onmouseover(); document._ciLabel=this.nextSibling.nextSibling; this._hideTimer=setTimeout('document._ciLabel._showCi(true)', {$hideMSecs});" style="position:absolute; visibility:hidden;">{$entity->renderAttribute($attributeName, $ciView)}</span>

@@ -82,7 +82,6 @@ deleteConfirm                 [resource]        resource identifier to display i
 
 *}
 
-{assign var="myParams" value=$Template->getVar('params')}
 {assign var="tplName" value="sra-form-toggle"}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}
@@ -90,34 +89,34 @@ deleteConfirm                 [resource]        resource identifier to display i
 {assign var="fieldName" value=$fieldNamePre|cat:$fieldName|cat:$fieldNamePost}
 {assign var="evalAttribute" value=$Template->getFormValue($fieldName)}
 {assign var="options" value=$entity->getOptionsMap($attributeName, 1, 1)}
-{if !$myParams->getParam('firstOption')}{assign var="evalAttribute" value=$options[0]}{/if}
+{if !$params->getParam('firstOption')}{assign var="evalAttribute" value=$options[0]}{/if}
 
-{$Template->renderOpen($tplName, 'select', $myParams, '', 0)} name="{$fieldName}">
-{if $params->getParam('firstOption')}{$Template->renderOpen($tplName, 'option', $myParams, 0, 0)} value="">{$resources->getString($params->getParam('firstOption'))}</option>{/if}
+{$Template->renderOpen($tplName, 'select', $params, '', 0)} name="{$fieldName}">
+{if $params->getParam('firstOption')}{$Template->renderOpen($tplName, 'option', $params, 0, 0)} value="">{$resources->getString($params->getParam('firstOption'))}</option>{/if}
 
 {foreach from=$options key=attr item=label}
-{$Template->renderOpen($tplName, 'option', $myParams, 'option', 0)}{if $Util->equal($evalAttribute, $attr)} selected="selected"{/if} value="{$Template->escapeHtmlQuotes($attr)}">{$resources->getString($label)}</option>
+{$Template->renderOpen($tplName, 'option', $params, 'option', 0)}{if $Util->equal($evalAttribute, $attr)} selected="selected"{/if} value="{$Template->escapeHtmlQuotes($attr)}">{$resources->getString($label)}</option>
 {/foreach}
-{if $myParams->getParam('canCreate') && $evalAttribute eq 'NEW'}
-{$Template->renderOpen($tplName, 'option', $myParams, 'option', 0)} selected="selected" value="">{$resources->getString($myParams->getParam('canCreate'))}</option>
+{if $params->getParam('canCreate') && $evalAttribute eq 'NEW'}
+{$Template->renderOpen($tplName, 'option', $params, 'option', 0)} selected="selected" value="">{$resources->getString($params->getParam('canCreate'))}</option>
 {/if}
 </select>
 
-{if $myParams->getParam('canView')}
-{assign var="viewFields" value=$myParams->getTypeSubset('viewFields')}
-<input onclick="{foreach from=$viewFields->getParams() key=field item=value}this.form.{$field}.value='{$value}'; {/foreach}this.form.submit()" type="button" value="{$resources->getString($myParams->getParam('canView'))}" />
+{if $params->getParam('canView')}
+{assign var="viewFields" value=$params->getTypeSubset('viewFields')}
+<input onclick="{foreach from=$viewFields->getParams() key=field item=value}this.form.{$field}.value='{$value}'; {/foreach}this.form.submit()" type="button" value="{$resources->getString($params->getParam('canView'))}" />
 {/if}
 
-{if $myParams->getParam('canDelete')}
-{assign var="deleteFields" value=$myParams->getTypeSubset('deleteFields')}
+{if $params->getParam('canDelete')}
+{assign var="deleteFields" value=$params->getTypeSubset('deleteFields')}
 {foreach from=$options key=attr item=label}
 <input name="{$attributeName}_{$attr}_remove" type="hidden" value="0" />
 {/foreach}
-<input onclick="{if $myParams->getParam('deleteConfirm')}if (confirm('{$resources->getString($myParams->getParam('deleteConfirm'))}')) {ldelim} {/if}this.form['{$attributeName}_' + this.form.{$fieldName}.options[this.form.{$fieldName}.selectedIndex].value + '_remove'].value='1'; {foreach from=$deleteFields->getParams() key=field item=value}this.form.{$field}.value='{$value}'; {/foreach}this.form.submit();{if $myParams->getParam('deleteConfirm')} {rdelim}{/if}" type="button" value="{$resources->getString($myParams->getParam('canDelete'))}" />
+<input onclick="{if $params->getParam('deleteConfirm')}if (confirm('{$resources->getString($params->getParam('deleteConfirm'))}')) {ldelim} {/if}this.form['{$attributeName}_' + this.form.{$fieldName}.options[this.form.{$fieldName}.selectedIndex].value + '_remove'].value='1'; {foreach from=$deleteFields->getParams() key=field item=value}this.form.{$field}.value='{$value}'; {/foreach}this.form.submit();{if $params->getParam('deleteConfirm')} {rdelim}{/if}" type="button" value="{$resources->getString($params->getParam('canDelete'))}" />
 {/if}
 
-{if $myParams->getParam('canCreate')}
-{assign var="createFields" value=$myParams->getTypeSubset('createFields')}
-<input onclick="this.form.{$fieldName}.options[this.form.{$fieldName}.selectedIndex].value='NEW'; {foreach from=$createFields->getParams() key=field item=value}this.form.{$field}.value='{$value}'; {/foreach}this.form.submit();" type="button" value="{$resources->getString($myParams->getParam('canCreate'))}" />
+{if $params->getParam('canCreate')}
+{assign var="createFields" value=$params->getTypeSubset('createFields')}
+<input onclick="this.form.{$fieldName}.options[this.form.{$fieldName}.selectedIndex].value='NEW'; {foreach from=$createFields->getParams() key=field item=value}this.form.{$field}.value='{$value}'; {/foreach}this.form.submit();" type="button" value="{$resources->getString($params->getParam('canCreate'))}" />
 {/if}
 

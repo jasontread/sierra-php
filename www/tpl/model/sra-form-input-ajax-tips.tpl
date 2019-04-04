@@ -637,16 +637,15 @@ ajaxTipsAddSelector = function(input, limit, minSize, offset, service, servicePa
 
 
 {if !$skipFields}
-{assign var="myParams" value=$Template->getVar('params')}
-{assign var="ajaxTipParams" value=$myParams->getTypeSubset('ajaxTips')}
+{assign var="ajaxTipParams" value=$params->getTypeSubset('ajaxTips')}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}
 {assign var="fieldNamePost" value=$params->getParam('fieldNamePost', '')}
 {assign var="fieldName" value=$fieldNamePre|cat:$fieldName|cat:$fieldNamePost}
 {if ($Util->isObject($attribute) && $displayVal)}{assign var="attribute" value=$displayVal}{/if}
 {if $Util->methodExists($attribute, 'getPrimaryKey')}{assign var="attribute" value=$attribute->getPrimaryKey()}{/if}
-<input id="{$fieldName}" name="{$fieldName}" type="hidden"{if $myParams->getParam('imbedValue', '1')} value="{$Template->escapeHtmlQuotes($attribute)}"{/if} />
-{$Template->renderOpen($tplName, 'input', $myParams, '', 0)} id="{$fieldName}Displ" autocomplete="off" name="{$fieldName}Displ"{if $myParams->getParam('imbedValue', '1')} value="{$Template->escapeHtmlQuotes($attribute)}"{/if} />
+<input id="{$fieldName}" name="{$fieldName}" type="hidden"{if $params->getParam('imbedValue', '1')} value="{$Template->escapeHtmlQuotes($attribute)}"{/if} />
+{$Template->renderOpen($tplName, 'input', $params, '', 0)} id="{$fieldName}Displ" autocomplete="off" name="{$fieldName}Displ"{if $params->getParam('imbedValue', '1')} value="{$Template->escapeHtmlQuotes($attribute)}"{/if} />
 <div id="{$fieldName}Tips" {if $ajaxTipParams->getParam('tipsClass')}class="{$ajaxTipParams->getParam('tipsClass')}"{else}style="background: #eee; border: 1px solid #656565; cursor: pointer; margin: 0; padding: 1px; position: absolute; visibility: hidden;"{/if}></div>
 {if !$ajaxTipParams->getParam('manualLoad')}<script type="text/javascript">ajaxTipsAddSelector("{$fieldName}Displ", {if $ajaxTipParams->getParam("invokeLimit")}{$ajaxTipParams->getParam("invokeLimit")}{else}20{/if}, {if $ajaxTipParams->getParams("minLength")}{$ajaxTipParams->getParams("minLength")}{else}1{/if}, {if $ajaxTipParams->getParam("invokeOffset")}{$ajaxTipParams->getParam("invokeOffset")}{else}null{/if}, "{$ajaxTipParams->getParam("ajaxService")}", {if $ajaxTipParams->getParam("serviceParam")}"{$ajaxTipParams->getParam("serviceParam")}"{else}null{/if}, {if $ajaxTipParams->getParam("tipsClass")}"{$ajaxTipParams->getParam("tipsClass")}"{else}null{/if}, {if $ajaxTipParams->getParam("tipsSelClass")}"{$ajaxTipParams->getParam("tipsSelClass")}"{else}null{/if}, "{$fieldName}Tips", "{$fieldName}");</script>{/if}
 {/if}

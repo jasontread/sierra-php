@@ -67,20 +67,19 @@ useButton                    (1|0)/0           whether or not to display the sho
                                                be set when a reset is invoked (the dom ids)
 *}
 
-{assign var="myParams" value=$Template->getVar('params')}
-{assign var="fieldName" value=$myParams->getParam('fieldName', $fieldName)}
-{assign var="fieldNamePre" value=$myParams->getParam('fieldNamePre', '')}
-{assign var="fieldNamePost" value=$myParams->getParam('fieldNamePost', '')}
+{assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
+{assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}
+{assign var="fieldNamePost" value=$params->getParam('fieldNamePost', '')}
 {assign var="fieldName" value=$fieldNamePre|cat:$fieldName|cat:$fieldNamePost}
-{assign var="resetFields" value=$myParams->getTypeSubset('resetFields')}
+{assign var="resetFields" value=$params->getTypeSubset('resetFields')}
 
 {assign var="fileFieldId" value=$Util->rand(10000, 1000000)}
 {assign var="fileFieldId" value='fid'|cat:$fileFieldId}
-{$Template->renderOpen($tplName, 'input', $myParams, '', 0)} name="{$fieldName}" type="file" />
-{if $Util->isObject($attribute, 'SRA_FileAttribute') && ($myParams->getParam('showViewLink') || $myParams->getParam('showResetLink'))}
+{$Template->renderOpen($tplName, 'input', $params, '', 0)} name="{$fieldName}" type="file" />
+{if $Util->isObject($attribute, 'SRA_FileAttribute') && ($params->getParam('showViewLink') || $params->getParam('showResetLink'))}
 <div id="{$fileFieldId}">
-{if $myParams->getParam('showViewLink')}
-{assign var="fileLink" value=$entity->parseString($myParams->getParam('showViewLink'))}
+{if $params->getParam('showViewLink')}
+{assign var="fileLink" value=$entity->parseString($params->getParam('showViewLink'))}
 {if $Util->beginsWith($fileLink, '[name')}
 {assign var="newFileLink" value=$attribute->getName()}
 {assign var="newFileLinkPostfix" value=0}
@@ -93,17 +92,17 @@ useButton                    (1|0)/0           whether or not to display the sho
 {/if}
 {if !$attribute->getEntityId()}
 {$fileLink}
-{elseif !$myParams->getParam('useButton')}
+{elseif !$params->getParam('useButton')}
 <a href="{$attribute->getUri()}" target="_blank">{$fileLink}</a>
 {else}
 <input onclick="document.location.replace('{$attribute->getUri()}')" type="button" value="{$fileLink}" />
 {/if}
 {/if}
-{if $myParams->getParam('showResetLink')}
-{if !$myParams->getParam('useButton')}
-<a href="javascript:{ldelim}{rdelim}" onclick="document.getElementById('{$fileFieldId}').innerHTML = ''; document.getElementById('{$fileFieldId}Remove').value='1'; {foreach from=$resetFields->getParams() key=field item=value}document.getElementById('{$field}').value='{$value}'; {/foreach}">{$entity->getEntityResourcesString($myParams->getParam('showResetLink'))}</a>
+{if $params->getParam('showResetLink')}
+{if !$params->getParam('useButton')}
+<a href="javascript:{ldelim}{rdelim}" onclick="document.getElementById('{$fileFieldId}').innerHTML = ''; document.getElementById('{$fileFieldId}Remove').value='1'; {foreach from=$resetFields->getParams() key=field item=value}document.getElementById('{$field}').value='{$value}'; {/foreach}">{$entity->getEntityResourcesString($params->getParam('showResetLink'))}</a>
 {else}
-<input onclick="document.getElementById('{$fileFieldId}').innerHTML = ''; document.getElementById('{$fileFieldId}Remove').value='1'; {foreach from=$resetFields->getParams() key=field item=value}document.getElementById('{$field}').value='{$value}'; {/foreach}" type="button" value="{$entity->getEntityResourcesString($myParams->getParam('showResetLink'))}" />
+<input onclick="document.getElementById('{$fileFieldId}').innerHTML = ''; document.getElementById('{$fileFieldId}Remove').value='1'; {foreach from=$resetFields->getParams() key=field item=value}document.getElementById('{$field}').value='{$value}'; {/foreach}" type="button" value="{$entity->getEntityResourcesString($params->getParam('showResetLink'))}" />
 {/if}
 </div>
 <input id="{$fileFieldId}Remove" name="{$fieldName}_remove" type="hidden" value="0" />

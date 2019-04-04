@@ -44,12 +44,11 @@ fieldNamePost                                  postfix to add to the input field
 
 *}
 
-{assign var="myParams" value=$Template->getVar('params')}
 {assign var="fieldName" value=$params->getParam('fieldName', $fieldName)}
 {assign var="fieldNamePre" value=$params->getParam('fieldNamePre', '')}
 {assign var="fieldNamePost" value=$params->getParam('fieldNamePost', '')}
 {assign var="fieldName" value=$fieldNamePre|cat:$fieldName|cat:$fieldNamePost}
 {assign var="onchange" value="this.previousSibling.value=this.checked ? '1' : '0';"}
-{$myParams->concat('onchange', $onchange, 'input-attrs', 0)}
+{$params->concat('onchange', $onchange, 'input-attrs', 0)}
 
-<input name="{$fieldName}" type="hidden" value="{if $attribute}1{else}0{/if}" />{$Template->renderOpen($tplName, 'input', $myParams, '', 0)}{if $attribute} checked="checked"{/if} name="{$fieldName}Tmp" type="checkbox" />
+<input name="{$fieldName}" type="hidden" value="{if $attribute}1{else}0{/if}" />{$Template->renderOpen($tplName, 'input', $params, '', 0)}{if $attribute} checked="checked"{/if} name="{$fieldName}Tmp" type="checkbox" />

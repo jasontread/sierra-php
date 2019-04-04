@@ -23,7 +23,6 @@ This is a helper template for sra-attr.tpl. It is used to recursively display
 attribute values
 *}
 
-{assign var="myParams" value=$Template->getVar('sraAttrParams')}
 {assign var="tplName" value="sra-attr"}
 {assign var="displayCondsParams" value=$params->getTypeSubset('displayConds')}
 {assign var="formatStrParams" value=$Template->getVar('formatStrParams')}
@@ -36,16 +35,16 @@ attribute values
 {assign var="tplParams" value=$Template->getVar('tplParams')}
 {assign var="attrVal" value=$Template->getVar('sraAttrVal')}
 {assign var="maxEnclElems" value=$enclParams->getParam('maxEnclElems', 5)}
-{if $myParams->getParam('useOptionsLabel')}{assign var="options" value=$entity->getOptionsMap($attributeName, 1)}{/if}
+{if $sraAttrParams->getParam('useOptionsLabel')}{assign var="options" value=$entity->getOptionsMap($attributeName, 1)}{/if}
 
 {* value is an array *}
 {if $Template->isArray($attrVal)}
 {assign var=started value=0}
 {foreach from=$attrVal item=arrayVal}
-{if $started && $myParams->getParam('between')}{$myParams->getParam('between')}{/if}
-{if $myParams->getParam('useOptionsLabel') && $options && $options[$arrayVal]}{assign var="arrayVal" value=$options[$arrayVal]}{/if}
-{if $myParams->getParam('convertHtml') || ($Template->defined('SRA_CONVERT_OUTPUT_TO_HTML') && $smarty.const.SRA_CONVERT_OUTPUT_TO_HTML)}{assign var="arrayVal" value=$arrayVal|escape:'html'}{/if}
-{if $myParams->getParam('decimals') || $myParams->getParam('decimals') === '0'}{assign var="arrayVal" value=$Template->numberFormat($arrayVal, $myParams->getParam('decimals'))}{/if}
+{if $started && $sraAttrParams->getParam('between')}{$sraAttrParams->getParam('between')}{/if}
+{if $sraAttrParams->getParam('useOptionsLabel') && $options && $options[$arrayVal]}{assign var="arrayVal" value=$options[$arrayVal]}{/if}
+{if $sraAttrParams->getParam('convertHtml') || ($Template->defined('SRA_CONVERT_OUTPUT_TO_HTML') && $smarty.const.SRA_CONVERT_OUTPUT_TO_HTML)}{assign var="arrayVal" value=$arrayVal|escape:'html'}{/if}
+{if $sraAttrParams->getParam('decimals') || $sraAttrParams->getParam('decimals') === '0'}{assign var="arrayVal" value=$Template->numberFormat($arrayVal, $sraAttrParams->getParam('decimals'))}{/if}
 {* pre array val templates, text/html *}
 {if $preTplParams->getParam('arrayVal')}{include file=$preTplParams->getParam('arrayVal')}{/if}
 {$preParams->getParam('arrayVal')}
@@ -54,7 +53,7 @@ attribute values
 {if $enclIdx eq 0}{assign var="enclIdx" value=""}{/if}
 {assign var="tmp" value="arrayVal"|cat:$enclIdx}
 {assign var="encl" value=$enclParams->getParam($tmp)}
-{if $encl}{$Template->renderOpen($tplName, $encl, $myParams, "arrayVal", 1, $arrayVal)}{/if}
+{if $encl}{$Template->renderOpen($tplName, $encl, $sraAttrParams, "arrayVal", 1, $arrayVal)}{/if}
 {/foreach}
 
 {* property value *}
