@@ -229,7 +229,6 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {assign var="attrTplName" value="sra-attr"}
 {$Template->initTemplate($attrTplName)}
 
-{$Template->assignByRef('sraAttrParams', $attrParams)}
 {assign var="displayCondsParams" value=$params->getTypeSubset('displayConds')}
 {assign var="formatStrParams" value=$params->getTypeSubset('formatStr')}
 {assign var="enclParams" value=$params->getTypeSubset('encl')}
