@@ -2243,7 +2243,7 @@ class SRA_File {
 	 * @access	public static
 	 * @return	boolean
 	 */
-	function mergedFilesCached($files, $obfuscate=FALSE, $removeWhiteSpace) {
+	function mergedFilesCached($files, $obfuscate=FALSE, $removeWhiteSpace=FALSE) {
     if (!is_array($files)) { $files = explode(' ', $files); }
     // create cache file name and determine latest modification time
     $mergeFiles = array();
