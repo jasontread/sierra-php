@@ -225,7 +225,6 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 
 *}
 
-{assign var="attrParams" value=$Template->getVar('params')}
 {assign var="attrTplName" value="sra-attr"}
 {$Template->initTemplate($attrTplName)}
 
@@ -254,7 +253,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {$Template->assignByRef('preTplParams', $preTplParams)}
 {$Template->assignByRef('tplParams', $tplParams)}
 {* add line breaks *}
-{if $params->getParam('addLineBreaks')}{assign var='attribute' value=$Template->lineBreaksToBr($attribute, $attrParams->getParam('addLineBreaksElement', 'br'))}{/if}
+{if $params->getParam('addLineBreaks')}{assign var='attribute' value=$Template->lineBreaksToBr($attribute, $params->getParam('addLineBreaksElement', 'br'))}{/if}
 
 {* pre output templates, text/html *}
 {if $preTplParams->getParam('output')}{$Template->display($preTplParams->getParam('output'))}{/if}
@@ -265,7 +264,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {if $enclIdx eq 0}{assign var="enclIdx" value=""}{/if}
 {assign var="tmp" value="output"|cat:$enclIdx}
 {assign var="encl" value=$enclParams->getParam($tmp)}
-{if $encl}{$Template->renderOpen($attrTplName, $encl, $attrParams, 'output')}{/if}
+{if $encl}{$Template->renderOpen($attrTplName, $encl, $params, 'output')}{/if}
 {/foreach}
 
 
@@ -343,7 +342,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {if $enclIdx eq 0}{assign var="enclIdx" value=""}{/if}
 {assign var="tmp" value=$property|cat:$enclIdx}
 {assign var="encl" value=$enclParams->getParam($tmp)}
-{if $encl}{if !$enclCloseParams->getParam($tmp)}{$Template->renderOpen($attrTplName, $encl, $attrParams, $property, 1, $displayVal)}{else}{$Template->renderOpen($attrTplName, $encl, $attrParams, $property, 0, $displayVal)} />{/if}{/if}
+{if $encl}{if !$enclCloseParams->getParam($tmp)}{$Template->renderOpen($attrTplName, $encl, $params, $property, 1, $displayVal)}{else}{$Template->renderOpen($attrTplName, $encl, $params, $property, 0, $displayVal)} />{/if}{/if}
 {/foreach}
 
 {* property value *}
@@ -362,7 +361,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {if $property eq "value" && ($Template->isObject($displayVal) || $Template->isArray($displayVal))}
 {$Template->assignByRef('sraAttrVal', $displayVal)}
 {$Template->display('model/sra-attr-value.tpl')}
-{else}{if $attrParams->getParam('convertHtml') || ($Template->defined('SRA_CONVERT_OUTPUT_TO_HTML') && $smarty.const.SRA_CONVERT_OUTPUT_TO_HTML)}{assign var="displayVal" value=$displayVal|escape:'html'}{/if}{if $attrParams->getParam('decimals') || $attrParams->getParam('decimals') === '0'}{assign var="displayVal" value=$Template->numberFormat($displayVal, $attrParams->getParam('decimals'))}{/if}{$displayVal}
+{else}{if $params->getParam('convertHtml') || ($Template->defined('SRA_CONVERT_OUTPUT_TO_HTML') && $smarty.const.SRA_CONVERT_OUTPUT_TO_HTML)}{assign var="displayVal" value=$displayVal|escape:'html'}{/if}{if $params->getParam('decimals') || $params->getParam('decimals') === '0'}{assign var="displayVal" value=$Template->numberFormat($displayVal, $params->getParam('decimals'))}{/if}{$displayVal}
 {/if}
 {/if}
 
