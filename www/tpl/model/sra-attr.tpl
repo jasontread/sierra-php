@@ -351,7 +351,7 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {assign var="formatString" value=$formatStrParams->getParam($property)}
 
 {* display using template *}
-{if $tplParams->getParam($property)}{assign var='displayVal' $displayVal}{$Template->display($tplParams->getParam($property))}
+{if $tplParams->getParam($property)}{assign var='displayVal' value=$displayVal}{$Template->display($tplParams->getParam($property))}
 
 {* display using entity parseString call *}
 {elseif $displayedNull eq "0" && $formatString}{$entity->parseString($formatString)}
@@ -394,6 +394,6 @@ useOptionsLabel               (0|1)/0          for array attributes that use opt
 {* post output templates, text/html *}
 {$postParams->getParam('output')}
 {if $postTplParams->getParam('output')}{$Template->display($postTplParams->getParam('output'))}{/if}
-{assign var='fieldNamePre', ''}
-{assign var='fieldNamePost', ''}
+{assign var='fieldNamePre' value=''}
+{assign var='fieldNamePost' value=''}
 {if $outputBuffered}{$Template->stopBuffering(1)}{/if}
