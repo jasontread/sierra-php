@@ -1849,7 +1849,9 @@ class SRA_ApiRouter {
 				foreach(array_keys($headerList) as $i) $headerList[$i] = strtolower($headerList[$i]);
 				foreach($headers as $header => $val) {
           // check if $val is in $_SERVER super global
-          if (isset($_SERVER[$val]) && is_string($_SERVER[$val])) $val = $_SERVER[$val];
+          $pieces = explode('|', $val);
+          if (isset($_SERVER[$pieces[0]]) && is_string($_SERVER[$pieces[0]])) $val = $_SERVER[$pieces[0]];
+          else if (strtoupper($pieces[0]) == $pieces[0] && count($pieces) == 2) $val = $pieces[1];
 				  if ((!$this->_accessControlAllowMethodsSent || strtolower($header) != 'access-control-allow-methods') && !in_array($header, $headerList)) header("${header}: ${val}");
 			  }
 				
