@@ -1388,7 +1388,7 @@ class SRA_ApiRouter {
 		// get params from placeholders
 		if ($method['route']['placeholders']) {
 			$ruri = str_replace('?' . $_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']);
-			if ($placeholders = trim(substr($ruri, strpos($ruri, $method['route']['fixed']) + strlen($method['route']['fixed']) + 1))) {
+			if ($placeholders = trim(substr($ruri, strrpos($ruri, $method['route']['fixed']) + strlen($method['route']['fixed']) + 1))) {
 				if ($placeholders = trim($placeholders) ? explode('/', trim($placeholders)) : NULL) {
 					foreach($method['route']['placeholders'] as $i => $name) {
 						if (isset($placeholders[$i]) && $placeholders[$i]) $args[$name] = urldecode($placeholders[$i]);
