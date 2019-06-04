@@ -120,7 +120,8 @@ class SRA_DaoFactory {
     			if (SRA_XmlParser::isValid($parser =& SRA_XmlParser::getXmlParser($file))) {
       			if ($entity && SRA_XmlParser::isValid($parser) && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
       				require_once($data['file']);
-      				$daos[$app . $entity] = new ${data}['class']($entity);
+              $obj = $data['class'];
+      				$daos[$app . $entity] = new ${obj}($entity);
       				$dao =& $daos[$app . $entity];
       			}
       			else if ($app == $lastApp) {
