@@ -199,7 +199,7 @@ class SRA_ApiRouter {
 	private function &cleanJson(&$json, $beautify=FALSE, $round=2, $retObj=FALSE) {
 	  if (is_string($json)) $json = str_replace('{ "type"', '{ "_type"', $json);
 		$cleaned =& $json;
-		if (is_object($json) || preg_match('/^\s*[\{\[].*[\}\]]$/msU', trim($cleaned))) {
+		if (is_object($json) || preg_match('/^\s*[\{\[].*[\}\]]\s*$/', $cleaned)) {
 			if (is_object($json)) $obj =& $json;
 			else $obj = json_decode($json);
 			
