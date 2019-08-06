@@ -1362,7 +1362,6 @@ class SRA_ApiRouter {
     
     // maintenance response
     if (isset($method['maintenance-file']) && file_exists($method['maintenance-file'])) {
-      if (!isset($method['headers-add'])) $method['headers-add'] = array();
       $method['headers-add']['sierra-api-maintenance'] = 'true';
       $condition = 'null';
       return NULL;
