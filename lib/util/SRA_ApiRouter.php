@@ -1358,6 +1358,14 @@ class SRA_ApiRouter {
 		
 		$condition = 'ok';
 		$method =& $this->_methods[$method];
+    
+    // maintenance response
+    if (isset($method['maintenance-file']) && file_exists($method['maintenance-file'])) {
+      if (!isset($this->_methods[$method]['headers-add'])) $this->_methods[$method]['headers-add'] = array();
+      $this->_methods[$method]['headers-add']['sierra-api-maintenance'] = 'true';
+      $condition = 'null';
+      return NULL;
+    }
 		
 		// max-execution-time and memory-limit
 		if (isset($method['max-execution-time'])) ini_set('max_execution_time', $method['max-execution-time']);
