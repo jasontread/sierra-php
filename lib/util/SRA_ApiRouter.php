@@ -820,6 +820,7 @@ class SRA_ApiRouter {
 				$settings['http_method_nicknames'] = $settings['http-method-nicknames'];
 				$settings['http_method_notes'] = $settings['http-method-notes'];
 				$settings['http_method_summaries'] = $settings['http-method-summaries'];
+				$settings['maintenance-file'] = isset($api['maintenance-file']) ? $api['maintenance-file'] : NULL;
 				$settings['max-execution-time'] = isset($api['max-execution-time']) && is_numeric($api['max-execution-time']) && $api['max-execution-time'] > 0 ? $api['max-execution-time'] : $this->_settings['max-execution-time'];
 				$settings['memory-limit'] = isset($api['memory-limit']) && preg_match('/^[0-9]+[bkmg]$/', $api['memory-limit']) ? $api['memory-limit'] : $this->_settings['memory-limit'];
 				$settings['params'] = array();
@@ -1361,8 +1362,8 @@ class SRA_ApiRouter {
     
     // maintenance response
     if (isset($method['maintenance-file']) && file_exists($method['maintenance-file'])) {
-      if (!isset($this->_methods[$method]['headers-add'])) $this->_methods[$method]['headers-add'] = array();
-      $this->_methods[$method]['headers-add']['sierra-api-maintenance'] = 'true';
+      if (!isset($method['headers-add'])) $method['headers-add'] = array();
+      $method['headers-add']['sierra-api-maintenance'] = 'true';
       $condition = 'null';
       return NULL;
     }
