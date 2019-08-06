@@ -621,7 +621,7 @@ class SRA_ApiRouter {
 			$settings['description'] = isset($api['comment']) ? SRA_ApiRouter::formatDescription($api['comment']) : NULL;
       
       // maintenance-file
-			$settings['maintenance-file'] = isset($api['maintenance-file']) ? $api['maintenance-file'] : NULL;
+			$settings['maintenance-file'] = isset($api['maintenance-file']) && trim($api['maintenance-file']) ? $api['maintenance-file'] : ($method ? $this->_settings['maintenance-file'] : NULL);
 			
 			// headers
 			$settings['headers-add'] = array();
@@ -1361,13 +1361,6 @@ class SRA_ApiRouter {
 		
 		$condition = 'ok';
 		$method =& $this->_methods[$method];
-    
-    // maintenance response
-    if (isset($method['maintenance-file']) && file_exists($method['maintenance-file'])) {
-      $method['headers-add']['sierra-api-maintenance'] = 'true';
-      $condition = 'null';
-      return NULL;
-    }
 		
 		// max-execution-time and memory-limit
 		if (isset($method['max-execution-time'])) ini_set('max_execution_time', $method['max-execution-time']);
@@ -2069,7 +2062,18 @@ class SRA_ApiRouter {
 			      $condition = 'ok';
 			      $response = '';
 		      }
-			    else $response =& $this->method($uri, $invokeMethod, $condition, $csv);
+          else if (isset($this->_methods[$invokeMethod]['maintenance-file']) && 
+                   $this->_methods[$invokeMethod]['maintenance-file'] != 'none' && 
+                   file_exists($this->_methods[$invokeMethod]['maintenance-file'])) {
+            $resources =& $this->getResources();
+            $this->_methods[$invokeMethod]['status-codes']['null'] = array('code' => 503, 'description' => $resources->getString('api.status.503'));
+            $this->_methods[$invokeMethod]['headers-add']['sierra-api-maintenance'] = 'true';
+            $condition = 'null';
+            $response = '';
+          }
+			    else {
+            $response =& $this->method($uri, $invokeMethod, $condition, $csv);
+          }
         }
 		    if ($allowMethods) {
 		      $this->_accessControlAllowMethodsSent = TRUE;
