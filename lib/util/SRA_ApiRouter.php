@@ -1425,7 +1425,10 @@ class SRA_ApiRouter {
 				$invalid = NULL;
 				if (isset($args[$name])) {
 				  foreach(is_array($args[$name]) ? $args[$name] : array($args[$name]) as $i => $val) {
-    				if ($param['options'] && !in_array($val, $param['options'])) $invalid = 'options';
+    				if ($param['options'] && !in_array($val, $param['options'])) {
+              $invalid = 'options';
+              $method['headers-add'][sprintf('sierra-api-valid-%s-options', $name)] = str_replace(' ', '_', implode('-', $param['options']));
+            }
     				else if ($param['regex'] && !preg_match($param['regex'], $val)) $invalid = 'regex';
 				  }
 				}
