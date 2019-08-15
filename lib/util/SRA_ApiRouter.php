@@ -1492,7 +1492,7 @@ class SRA_ApiRouter {
             $pieces = explode(' ', $apiKey);
             $apiKey = trim($pieces[count($pieces) - 1]);
           }
-          if ($apiKey) {
+          if ($apiKey && strtolower($apiKey) != 'undefined') {
             $found = TRUE;
             if ($func($apiKey, $this->_settings['api'], $method['method'], $args)) {
               $condition = 'ok';
