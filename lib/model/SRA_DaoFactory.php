@@ -119,10 +119,23 @@ class SRA_DaoFactory {
 			  if (file_exists($file = SRA_DaoFactory::_getRegisterFile($app))) {
     			if (SRA_XmlParser::isValid($parser =& SRA_XmlParser::getXmlParser($file))) {
       			if ($entity && SRA_XmlParser::isValid($parser) && is_array($data =& $parser->getData(array('dao', $entity, 'attributes')))) {
-      				require_once($data['file']);
-              $obj = $data['class'];
-      				$daos[$app . $entity] = new $obj($entity);
-      				$dao =& $daos[$app . $entity];
+      				if (file_exists($data['file'])) {
+                require_once($data['file']);
+                if (class_exists($obj = $data['class']) || class_exists(strtolower($obj))) {
+          				$daos[$app . $entity] = new $obj($entity);
+          				$dao =& $daos[$app . $entity];
+                }
+                else {
+                  unlink($file);
+          				$msg = "SRA_DaoFactory::getDao: Failed - Invalid class " . $obj;
+          				$dao =& SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel );
+                }
+              }
+              else {
+                unlink($file);
+        				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app DAO cache file " . $data['file'];
+        				$dao =& SRA_Error::logError($msg, __FILE__, __LINE__, $errorLevel );
+              }
       			}
       			else if ($app == $lastApp) {
       				$msg = "SRA_DaoFactory::getDao: Failed - Invalid app ${app}, entity ${entity} or file ${file}";
