@@ -30,11 +30,13 @@ this file is used by the installer as the default locale configuration file
     <country key="es" code3="esp" currency="eur" decimal-separator="," int-group-separator="." date-format="d-m-Y" date-time-format="d-m-Y H.i" time-format="H.i" />
     <country key="gb" code3="gbr" currency="gbp" date-format="d/m/Y" date-time-format="d/m/Y h.i A" time-format="h.i A" />
     <country key="us" code3="usa" currency="usd" date-format="m-d-Y" date-time-format="m-d-Y h:i A" time-format="h:i A" />
+    <country key="cn" code3="chn" currency="cny" date-format="Y-m-d" date-time-format="Y-m-d h:i A" time-format="h:i A" />
   </countries>
   <languages>
     <language key="en" code3="eng" />
     <language key="fr" code3="fre" />
     <language key="de" code3="deu" />
     <language key="es" code3="esl" />
+    <language key="zh" code3="zho" />
   </languages>
 </locales>
