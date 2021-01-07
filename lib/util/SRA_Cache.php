@@ -96,7 +96,9 @@ $_sraCache = array();
  *   value => blob
  * Add an index on name, ttl. Then use the global variable $sracache_db to 
  * designate the name of the database - 'db' and optionally 'table'. If 
- * 'table' is not specified, the table name sra_cache will be assumed
+ * 'table' is not specified, the table name sra_cache will be assumed.
+ * Additionally, if the $sracache_db_skip_ttl is set to TRUE, cacheIsset and
+ * getCache will ignore TTLs
  * @author  Jason Read <jason@idir.org>
  * @package sierra.util
  */
@@ -113,13 +115,14 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function cacheIsset($name, $modtime=FALSE) {
-    global $argc, $memcached, $sracache_db;
+    global $argc, $memcached, $sracache_db, $sracache_db_skip_ttl;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::cacheIsset - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use database cache
     if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
       $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
-      $query = sprintf('SELECT COUNT(1) FROM %s WHERE name=%s AND (ttl IS NULL OR ttl>%d)', $table, $db->convertString($name), time());
+      $qttl = isset($sracache_db_skip_ttl) && $sracache_db_skip_ttl ? '' : sprintf(' AND (ttl IS NULL OR ttl>%d)', time());
+      $query = sprintf('SELECT COUNT(1) FROM %s WHERE name=%s%s', $table, $db->convertString($name), $qttl);
       if (SRA_ResultSet::isValid($results =& $db->fetch($query))) {
         $row =& $results->next();
         return $row[0] > 0;
@@ -208,13 +211,14 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function &getCache($name) {
-    global $argc, $memcached, $sracache_db;
+    global $argc, $memcached, $sracache_db, $sracache_db_skip_ttl;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use database cache
     if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
       $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
-      $query = sprintf('SELECT value FROM %s WHERE name=%s AND (ttl IS NULL OR ttl>%d)', $table, $db->convertString($name), time());
+      $qttl = isset($sracache_db_skip_ttl) && $sracache_db_skip_ttl ? '' : sprintf(' AND (ttl IS NULL OR ttl>%d)', time());
+      $query = sprintf('SELECT value FROM %s WHERE name=%s%s', $table, $db->convertString($name), $qttl);
       if (SRA_ResultSet::isValid($results =& $db->fetch($query))) {
         if ($row =& $results->next()) {
           return unserialize($row[0], TRUE);
