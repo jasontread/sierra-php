@@ -113,7 +113,7 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function cacheIsset($name, $modtime=FALSE) {
-    global $argc, $memcached;
+    global $argc, $memcached, $sracache_db;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::cacheIsset - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use database cache
@@ -161,7 +161,7 @@ class SRA_Cache {
 	 * @return boolean
 	 */
   function deleteCache($name) {
-    global $argc, $memcached;
+    global $argc, $memcached, $sracache_db;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::deleteCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use database cache
@@ -208,7 +208,7 @@ class SRA_Cache {
 	 * @return mixed
 	 */
   function &getCache($name) {
-    global $argc, $memcached;
+    global $argc, $memcached, $sracache_db;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
     // use database cache
@@ -267,7 +267,7 @@ class SRA_Cache {
 	 * @return boolean
 	 */
   function setCache($name, &$val, $ttl=NULL, $maxAttempts=3) {
-    global $argc, $memcached;
+    global $argc, $memcached, $sracache_db;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
     
     // use database cache
@@ -330,7 +330,7 @@ class SRA_Cache {
   function _cleanUpCache($name) {
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::_cleanUpCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
-    global $_sraCache;
+    global $_sraCache, $sracache_db;
     
     $cfile = SRA_Cache::_getCacheFile($name, TRUE);
     
