@@ -217,7 +217,7 @@ class SRA_Cache {
       $query = sprintf('SELECT value FROM %s WHERE name=%s AND (ttl IS NULL OR ttl>%d)', $table, $db->convertString($name), time());
       if (SRA_ResultSet::isValid($results =& $db->fetch($query))) {
         if ($row =& $results->next()) {
-          return json_decode($row[0], TRUE);
+          return unserialize($row[0], TRUE);
         }
         else return ($nl = NULL);
       }
@@ -276,7 +276,7 @@ class SRA_Cache {
       $query = sprintf('REPLACE INTO %s (name, value, ttl) VALUES (%s, %s, %d)', 
                        $table, 
                        $db->convertString($name), 
-                       $db->convertString(json_encode($val)),
+                       $db->convertString(serialize($val)),
                        $ttl ? time() + $ttl : 'NULL');
       if (SRA_ExecuteSet::isValid($results =& $db->execute($query))) {
         return $results->getNumRowsAffected() > 0;
