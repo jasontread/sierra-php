@@ -217,7 +217,7 @@ class SRA_Cache {
       $query = sprintf('SELECT value FROM %s WHERE name=%s AND (ttl IS NULL OR ttl>%d)', $table, $db->convertString($name), time());
       if (SRA_ResultSet::isValid($results =& $db->fetch($query))) {
         if ($row =& $results->next()) {
-          return json_decode($row[0]);
+          return json_decode($row[0], TRUE);
         }
         else return ($nl = NULL);
       }
