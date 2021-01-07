@@ -26,6 +26,12 @@
 // }}}
 
 // {{{ Constants
+
+/**
+ * Default table name when database cache is used
+ */  
+define('SRA_CACHE_DB_TABLE', 'sra_cache');
+
 /**
  * debug flag (debug message are output to error logging)
  * @type boolean
@@ -79,6 +85,18 @@ $_sraCache = array();
  * also manages periodic cache garbage collection. If the PHP apc module is 
  * present, it's caching logic will be used - otherwise, the application's 
  * temp directory will be used
+ * 
+ * To use Memcached instead of APC or local files, instantiate a Memcached 
+ * objects and assign it to the global variable $memcached
+ * 
+ * To use a database for caching - first create a cache table with the 
+ * following columns:
+ *   name => string / primary key
+ *   ttl => int
+ *   value => blob
+ * Add an index on name, ttl. Then use the global variable $sracache_db to 
+ * designate the name of the database - 'db' and optionally 'table'. If 
+ * 'table' is not specified, the table name sra_cache will be assumed
  * @author  Jason Read <jason@idir.org>
  * @package sierra.util
  */
@@ -89,13 +107,24 @@ class SRA_Cache {
 	 * returns TRUE if cache value is present
    * @param string $name the cache name value to check
    * @param boolean $modtime if TRUE and the cache exists, the cache file mod 
-   * time will be returns instead of TRUE
+   * time will be returns instead of TRUE. Does not work with globals $memcache 
+   * or $sracache_db
 	 * @access public
 	 * @return mixed
 	 */
   function cacheIsset($name, $modtime=FALSE) {
     global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::cacheIsset - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use database cache
+    if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
+      $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
+      $query = sprintf('SELECT COUNT(1) FROM %s WHERE name=%s AND (ttl IS NULL OR ttl<=%d)', $table, $db->convertString($name), time());
+      if (SRA_ResultSet::isValid($results =& $db->fetch($query))) {
+        $row =& $results->next();
+        return $row[0] > 0;
+      }
+    }
     
     // use memcached if global variable $memcached exists
     if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') {
@@ -135,6 +164,15 @@ class SRA_Cache {
     global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::deleteCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
+    // use database cache
+    if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
+      $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
+      $query = sprintf('DELETE FROM %s WHERE name=%s', $table, $db->convertString($name));
+      if (SRA_ExecuteSet::isValid($results =& $db->execute($query))) {
+        return $results->getNumRowsAffected() > 0;
+      }
+    }
+    
     // use memcached if global variable $memcached exists
     if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') return $memcached->delete($name);
     
@@ -172,6 +210,18 @@ class SRA_Cache {
   function &getCache($name) {
     global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use database cache
+    if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
+      $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
+      $query = sprintf('SELECT value FROM %s WHERE name=%s AND (ttl IS NULL OR ttl<=%d)', $table, $db->convertString($name), time());
+      if (SRA_ResultSet::isValid($results =& $db->fetch($query))) {
+        if ($row =& $results->next()) {
+          return json_decode($row[0]);
+        }
+        else return ($nl = NULL);
+      }
+    }
     
     // use memcached if global variable $memcached exists
     if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') return $memcached->get($name);
@@ -219,6 +269,19 @@ class SRA_Cache {
   function setCache($name, &$val, $ttl=NULL, $maxAttempts=3) {
     global $argc, $memcached;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
+    
+    // use database cache
+    if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
+      $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
+      $query = sprintf('REPLACE INTO %s (name, value, ttl) VALUES (%s, %s, %d)', 
+                       $table, 
+                       $db->convertString($name), 
+                       $db->convertString(json_encode($val)),
+                       $ttl ? time() + $ttl : 'NULL');
+      if (SRA_ExecuteSet::isValid($results =& $db->execute($query))) {
+        return $results->getNumRowsAffected() > 0;
+      }
+    }
     
     // use memcached if global variable $memcached exists
     if (isset($memcached) && class_exists('Memcached') && get_class($memcached) == 'Memcached') {
@@ -270,6 +333,15 @@ class SRA_Cache {
     global $_sraCache;
     
     $cfile = SRA_Cache::_getCacheFile($name, TRUE);
+    
+    // use database cache
+    if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
+      $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
+      $query = sprintf('DELETE FROM %s WHERE name=%s AND ttl IS NOT NULL AND ttl<=%d', $table, $db->convertString($name), time());
+      if (SRA_ExecuteSet::isValid($results =& $db->execute($query))) {
+        return;
+      }
+    }
     
     // check memory cache
     if (isset($_sraCache[$name]) && (!file_exists($cfile) || (isset($_sraCache[$name]['ttl']) && time() > $_sraCache[$name]['ttl']))) {
