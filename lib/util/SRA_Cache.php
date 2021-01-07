@@ -119,7 +119,7 @@ class SRA_Cache {
     // use database cache
     if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
       $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
-      $query = sprintf('SELECT COUNT(1) FROM %s WHERE name=%s AND (ttl IS NULL OR ttl<=%d)', $table, $db->convertString($name), time());
+      $query = sprintf('SELECT COUNT(1) FROM %s WHERE name=%s AND (ttl IS NULL OR ttl>%d)', $table, $db->convertString($name), time());
       if (SRA_ResultSet::isValid($results =& $db->fetch($query))) {
         $row =& $results->next();
         return $row[0] > 0;
@@ -214,7 +214,7 @@ class SRA_Cache {
     // use database cache
     if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
       $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
-      $query = sprintf('SELECT value FROM %s WHERE name=%s AND (ttl IS NULL OR ttl<=%d)', $table, $db->convertString($name), time());
+      $query = sprintf('SELECT value FROM %s WHERE name=%s AND (ttl IS NULL OR ttl>%d)', $table, $db->convertString($name), time());
       if (SRA_ResultSet::isValid($results =& $db->fetch($query))) {
         if ($row =& $results->next()) {
           return json_decode($row[0]);
