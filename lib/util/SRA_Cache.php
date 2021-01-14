@@ -304,7 +304,9 @@ class SRA_Cache {
     // use opcache
     if ($file = self::_getOpcacheFile($name)) {
       if (($fp1 = fopen($file, 'w')) && ($fp2 = fopen(str_replace('.php', '.ttl', $file), 'w'))) {
-        fwrite($fp1, sprintf("<?php\n\$val = unserialize('%s');\n?>", str_replace("'", "\'", serialize($val))));
+        fwrite($fp1, sprintf("<?php\n\$val = %s('%s');\n?>", 
+                             function_exists('msgpack_pack') ? 'msgpack_unpack' : 'unserialize', 
+                             str_replace("'", "\'", function_exists('msgpack_pack') ? msgpack_pack($val) : serialize($val))));
         fwrite($fp2, is_numeric($ttl) && $ttl > 0 ? time() + $ttl : '0');
         fclose($fp1);
         fclose($fp2);
