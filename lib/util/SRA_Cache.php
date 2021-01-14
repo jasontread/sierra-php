@@ -99,6 +99,12 @@ $_sraCache = array();
  * 'table' is not specified, the table name sra_cache will be assumed.
  * Additionally, if the $sracache_db_skip_ttl is set to TRUE, cacheIsset and
  * getCache will ignore TTLs
+ *
+ * Alternatively, to use opcache, you may set the global variable 
+ * $sracache_opcache_dir to a directory where cache PHP and TTL files should 
+ * be written locally. This directory (or it's parent) must exist and be 
+ * writable. Optionally, to skip TTL checks, set the global variable 
+ * $sracache_opcache_skip_ttl to TRUE
  * @author  Jason Read <jason@idir.org>
  * @package sierra.util
  */
@@ -117,6 +123,9 @@ class SRA_Cache {
   function cacheIsset($name, $modtime=FALSE) {
     global $argc, $memcached, $sracache_db, $sracache_db_skip_ttl;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::cacheIsset - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use opcache
+    if (self::_getOpcacheDir()) return self::_getOpcacheFile($name, FALSE) ? TRUE : FALSE;
     
     // use database cache
     if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
@@ -167,6 +176,15 @@ class SRA_Cache {
     global $argc, $memcached, $sracache_db;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::deleteCache - invoked for "' . $name . '"', __FILE__, __LINE__);
     
+    // use opcache
+    if (self::_getOpcacheDir()) {
+      if ($file = self::_getOpcacheFile($name, FALSE)) {
+        exec(sprintf('rm -f %s %s', $file, str_replace('.php', '.ttl', $file)));
+        return TRUE;
+      }
+      else return FALSE;
+    }
+    
     // use database cache
     if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
       $table = isset($sracache_db['table']) ? $sracache_db['table'] : SRA_CACHE_DB_TABLE;
@@ -213,6 +231,15 @@ class SRA_Cache {
   function &getCache($name) {
     global $argc, $memcached, $sracache_db, $sracache_db_skip_ttl;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::getCache - invoked for "' . $name . '"', __FILE__, __LINE__);
+    
+    // use opcache
+    if (self::_getOpcacheDir()) {
+      if ($file = self::_getOpcacheFile($name, FALSE)) {
+        include($file);
+        return $val;
+      }
+      else return ($nl = NULL);
+    }
     
     // use database cache
     if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
@@ -273,6 +300,18 @@ class SRA_Cache {
   function setCache($name, &$val, $ttl=NULL, $maxAttempts=3) {
     global $argc, $memcached, $sracache_db;
     if (SRA_CACHE_DEBUG) SRA_Error::logError('SRA_Cache::setCache - invoked for "' . $name . '" with value "' . $val . '" ' . ($ttl ? 'and ttl "' . $ttl . '"' : ' and no ttl'), __FILE__, __LINE__);
+    
+    // use opcache
+    if ($file = self::_getOpcacheFile($name)) {
+      if (($fp1 = fopen($file, 'w')) && ($fp2 = fopen($file, 'w'))) {
+        fwrite($fp1, sprintf("<?php\n\$val = %s;\n?>", str_replace('stdClass::__set_state', '(object)', var_export($val, true))));
+        fwrite($fp2, is_numeric($ttl) && $ttl > 0 ? time() + $ttl : '0');
+        fclose($fp1);
+        fclose($fp2);
+        return TRUE;
+      }
+      else return FALSE;
+    }
     
     // use database cache
     if (isset($sracache_db) && isset($sracache_db['db']) && (SRA_Database::isValid($db =& SRA_Controller::getAppDb($sracache_db['db'])))) {
@@ -436,6 +475,61 @@ class SRA_Cache {
     return $cfile;
   }
   // }}}
+  
+  // {{{ _getOpcacheDir
+	/**
+	 * If the global $sracache_opcache_dir variable is set and points to a valid 
+   * writable directory, this method returns the path to that directory. If it 
+   * is set, and the directory does not exist but the parent directory does 
+   * exist (and is writable), then $sracache_opcache_dir will be created and 
+   * returned
+	 * @access private
+	 * @return string
+	 */
+  function _getOpcacheDir() {
+    global $sracache_opcache_dir;
+    if (isset($sracache_opcache_dir) && !is_dir($sracache_opcache_dir) && is_dir(dirname($sracache_opcache_dir)) && is_writable(dirname($sracache_opcache_dir))) {
+      exec(sprintf('mkdir -p %s', $sracache_opcache_dir));
+      exec(sprintf('chmod 777 %s', $sracache_opcache_dir));
+    }
+    return isset($sracache_opcache_dir) && is_dir($sracache_opcache_dir) && is_writable($sracache_opcache_dir) ? $sracache_opcache_dir : NULL;
+  }
+  // }}}
+  
+  // {{{ _getOpcacheDir
+	/**
+	 * Returns the Opcache file path for the cache key $name. Returns NULL if 
+   * opcache is not enabled, or if $evenIfNotExists is FALSE and the file does
+   * not exist, or if $validateTtl is TRUE and the cache file has expired
+   * @param string $name the cache key for the file to return
+   * @param boolean $evenIfNotExists return the file path even if the file does 
+   * not exist
+   * @param boolean $validateTtl whether or not to validate the cache TTL if 
+   * the file does exist. Can be overriden by the setting the global variable
+   * $sracache_opcache_skip_ttl to TRUE
+	 * @access private
+	 * @return string
+	 */
+  function _getOpcacheFile($name, $evenIfNotExists=TRUE, $validateTtl=TRUE) {
+    global $sracache_opcache_skip_ttl;
+    
+    $file = NULL;
+    if ($dir = self::_getOpcacheDir()) {
+      $validateTtl = isset($sracache_opcache_skip_ttl) && $sracache_opcache_skip_ttl ? FALSE : $validateTtl;
+      $file = sprintf('%s/%s.php', $dir, str_replace('.', '-', str_replace(' ', '-', $name)));
+      if (file_exists($file) && $validateTtl) {
+        $ttlFile = str_replace('.php', '.ttl', $file);
+        $ttl = file_exists($ttlFile) ? trim(file_get_contents($ttlFile)) : NULL;
+        if (!is_numeric($ttl) || ($ttl > 0 && $ttl < time())) {
+          exec(sprintf('rm -f %s %s', $file, $ttlFile));
+        }
+      }
+      if (!file_exists($file) && !$evenIfNotExists) $file = NULL;
+    }
+    return NULL;
+  }
+  // }}}
+  
   
 }
 // }}}
