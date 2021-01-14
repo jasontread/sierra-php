@@ -516,7 +516,7 @@ class SRA_Cache {
     $file = NULL;
     if ($dir = self::_getOpcacheDir()) {
       $validateTtl = isset($sracache_opcache_skip_ttl) && $sracache_opcache_skip_ttl ? FALSE : $validateTtl;
-      $file = sprintf('%s/%s.php', $dir, str_replace('.', '-', str_replace(' ', '-', $name)));
+      $file = sprintf('%s/%s.php', $dir, str_replace('--', '-', str_replace('-_', '-', str_replace('_-', '-', str_replace('.', '-', str_replace(' ', '-', strtolower($name)))))));
       if (file_exists($file) && $validateTtl) {
         $ttlFile = str_replace('.php', '.ttl', $file);
         $ttl = file_exists($ttlFile) ? trim(file_get_contents($ttlFile)) : NULL;
