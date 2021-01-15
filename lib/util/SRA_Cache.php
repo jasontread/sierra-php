@@ -304,10 +304,19 @@ class SRA_Cache {
     // use opcache
     if ($file = self::_getOpcacheFile($name)) {
       if (($fp1 = fopen($file, 'w')) && ($fp2 = fopen(str_replace('.php', '.ttl', $file), 'w'))) {
-        fwrite($fp1, sprintf("<?php\n\$val = unserialize(<<<'EOD'\n%s\nEOD);\n?>", serialize($val)));
+        $serialized = FALSE;
+        try {
+          $exported = var_export($val, TRUE);
+          if (preg_match('/__set_state/', $exported)) eval($exported);
+          fwrite($fp1, sprintf("<?php\n\$val = %s;\n?>", $exported));
+        }
+        catch (ParseError $e) {
+          fwrite($fp1, sprintf("<?php\n\$val = unserialize(<<<'EOD'\n%s\nEOD);\n?>", serialize($val)));
+        }
         fwrite($fp2, is_numeric($ttl) && $ttl > 0 ? time() + $ttl : '0');
         fclose($fp1);
         fclose($fp2);
+        
         return TRUE;
       }
       else return FALSE;
