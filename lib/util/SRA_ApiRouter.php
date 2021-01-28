@@ -48,7 +48,7 @@ define('SRA_API_ROUTER_CACHE_PREFIX', 'sra_api_cache_');
 /**
  * Cache TTL for API initialization details
  */
-define('SRA_API_ROUTER_INIT_CACHE_TTL', 86400);
+define('SRA_API_ROUTER_INIT_CACHE_TTL', 3600);
 
 
 /**
@@ -99,6 +99,11 @@ class SRA_ApiRouter {
 	 * @type array
 	 */
 	var $_methods = array();
+  
+  /**
+   * Do not use any caching
+   */
+  var $_noCache = FALSE;
 	
 	/**
 	 * the controller settings
@@ -1203,6 +1208,7 @@ class SRA_ApiRouter {
 	 * @return boolean
 	 */
 	private function initController($debug=FALSE, $noCache=FALSE) {
+    if ($noCache) $this->purgeCache();
     $ckey = md5(sprintf('%s%s', SRA_API_ROUTER_CACHE_PREFIX, $this->_source));
     // check for cached API initialization details
     if ($this->_initialized === NULL && 
@@ -1220,6 +1226,7 @@ class SRA_ApiRouter {
       $this->_initialized = FALSE;
       $this->_class = $cached['class'];
       $this->_settings = $cached['settings'];
+      $this->_noCache = $noCache;
       eval($cached['controller']);
 			if (!is_object($this->_controller)) {
 				$msg = sprintf('SRA_ApiRouter::initController - Error: unable to instantiate controller %s using %s', $this->_class, $cached['controller']);
@@ -1544,7 +1551,7 @@ class SRA_ApiRouter {
       }
 			
 			// response is in cache
-			if (SRA_API_ROUTER_CONTROLLER_USE_CACHE && strtolower($_SERVER['REQUEST_METHOD']) == 'get' && $ckey && SRA_Cache::cacheIsset($ckey)) {
+			if (SRA_API_ROUTER_CONTROLLER_USE_CACHE && strtolower($_SERVER['REQUEST_METHOD']) == 'get' && $ckey && !$this->_noCache && SRA_Cache::cacheIsset($ckey)) {
 				$response =& SRA_Cache::getCache($ckey);
 				if (!in_array($header = 'sierra-api-cached', $method['headers-remove'])) $method['headers-add'][$header] = 'true';
 			}
@@ -1996,7 +2003,7 @@ class SRA_ApiRouter {
 					$response = NULL;
 					if ($doc != 'docs' && SRA_API_ROUTER_CONTROLLER_USE_CACHE && strtolower($_SERVER['REQUEST_METHOD']) == 'get' && is_numeric($this->_settings['cache-ttl-doc']) && $this->_settings['cache-ttl-doc'] > 0) {
 						$ckey = md5(SRA_API_ROUTER_CACHE_PREFIX . SRA_Controller::getAppName() . '_' . $this->_settings['api'] . '_' . $doc);
-						$cacheTime = SRA_Cache::cacheIsset($ckey, TRUE);
+						$cacheTime = $this->_noCache ? NULL : SRA_Cache::cacheIsset($ckey, TRUE);
 						if ($cacheTime && $cacheTime > filemtime($this->_source) && $cacheTime > filemtime(__FILE__)) {
 							$response =& SRA_Cache::getCache($ckey);
 							$cached = TRUE;
@@ -2148,9 +2155,10 @@ class SRA_ApiRouter {
 	 * @param int $fail the http status code to trigger if $controller is invalid
 	 * set to NULL to skip triggering of the status code
 	 * @param boolean $debug whether or not to enable debug output
+   * @param boolean $noCache do not cache api initialization data
 	 * @return SRA_ApiRouter
 	 */
-	public static function &create($controller=NULL, $fail=500, $debug=FALSE) {
+	public static function &create($controller=NULL, $fail=500, $debug=FALSE, $noCache=FALSE) {
 		static $_routers;
 		if (!is_array($_routers)) $_routers = array();
 		$ckey = $_SERVER['SCRIPT_FILENAME'];
@@ -2166,7 +2174,7 @@ class SRA_ApiRouter {
 			  $_routers[$ckey] = new SRA_ApiRouter($controller);
 				// initialize the controller - this method returns FALSE if the 
 				// controller is invalid
-				if (!$_routers[$ckey]->initController($debug)) {
+				if (!$_routers[$ckey]->initController($debug, $noCache)) {
 					unset($_routers[$ckey]);
 					if ($fail) SRA_ApiRouter::status($fail);
 				}
