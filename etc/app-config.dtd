@@ -156,7 +156,8 @@ lib-dir						Specifies the lib directory for this app.
                   will automatically be included in the include_path environment 
 									variable when the app is initialized, so relative paths 
 									can be used for any classes located in this directory
-                  This value can be retrieved usinig SRA_Controller::getAppLibDir
+                  This value can be retrieved usinig SRA_Controller::getAppLibDir.
+                  Multiple directories may be specified each separated by a :
                   
 license-accept-var if 'license-tpl' is specified, this attribute should be the 
                   "name" of the acceptance checkbox field displayed in that 

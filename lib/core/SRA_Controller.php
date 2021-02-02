@@ -647,6 +647,24 @@ class SRA_Controller {
   }
   // }}}
   
+  // {{{ getAppLibDir2
+  /**
+   * Returns the path to the app lib-dir2 directory if specified
+   * @access public
+   * @return  string
+   */
+  function getAppLibDir2() {
+    global $_sraCurrentAppKey;
+    static $_sraCachedAppLibDir2s = array();
+    
+    if ($_sraCurrentAppKey && !isset($_sraCachedAppLibDir2s[$_sraCurrentAppKey])) {
+      $conf =& SRA_Controller::getAppConf();
+      $_sraCachedAppLibDir2s[$_sraCurrentAppKey] = isset($conf['lib-dir2']) && ($dir = SRA_File::getRelativePath($conf['lib-dir2'])) ? $dir : FALSE;
+    }
+    return $_sraCurrentAppKey && $_sraCachedAppLibDir2s[$_sraCurrentAppKey] ? $_sraCachedAppLibDir2s[$_sraCurrentAppKey] : NULL;
+  }
+  // }}}
+  
   // {{{ getSysLibDir
   /**
    * Returns the path to the system lib directory
@@ -1819,6 +1837,9 @@ class SRA_Controller {
           $basePath .= ($basePath ? SRA_PATH_SEPARATOR : '') . SRA_Controller::getSysLibDir() . SRA_PATH_SEPARATOR . SRA_Controller::getSysTplDir();
         }
         ini_set('include_path', $basePath . SRA_PATH_SEPARATOR . SRA_Controller::getAppLibDir() . SRA_PATH_SEPARATOR . SRA_Controller::getAppTplDir());
+      }
+      if (SRA_Controller::getAppLibDir2() && !strstr($basePath, SRA_Controller::getAppLibDir2())) {
+        ini_set('include_path', ini_get('include_path') . SRA_PATH_SEPARATOR . SRA_Controller::getAppLibDir2());
       }
       
       if (!$_sraInitializedApps[$appKey]) {

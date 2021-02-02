@@ -320,11 +320,16 @@ class SRA_ApiRouter {
 		if (!isset($config[$entity])) {
 			$dao =& SRA_DaoFactory::getDao($entity, FALSE, FALSE, FALSE, SRA_ERROR_OPERATIONAL);
 			$efile = SRA_Controller::getAppLibDir() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php";
+      $efile1 = SRA_Controller::getAppLibDir2() ? SRA_Controller::getAppLibDir2() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php" : NULL;
 			$obj = NULL;
 			
 			if (method_exists($dao, 'newInstance')) $obj =& $dao->newInstance();
 			else if (file_exists($efile)) {
 				require_once($efile);
+				if (class_exists($entity)) $obj = new ${entity}();
+			}
+			else if ($efile1 && file_exists($efile1)) {
+				require_once($efile1);
 				if (class_exists($entity)) $obj = new ${entity}();
 			}
 			
@@ -958,11 +963,16 @@ class SRA_ApiRouter {
 						$entity = $settings['return']['type'];
 						$dao =& SRA_DaoFactory::getDao($entity, FALSE, FALSE, FALSE, SRA_ERROR_OPERATIONAL);
 						$efile = SRA_Controller::getAppLibDir() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php";
+            $efile1 = SRA_Controller::getAppLibDir2() ? SRA_Controller::getAppLibDir2() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php" : NULL;
 						$obj = NULL;
 
 						if (method_exists($dao, 'newInstance')) $obj =& $dao->newInstance();
 						else if (file_exists($efile)) {
 							require_once($efile);
+							if (class_exists($entity)) $obj = new ${entity}();
+						}
+						else if ($efile1 && file_exists($efile1)) {
+							require_once($efile1);
 							if (class_exists($entity)) $obj = new ${entity}();
 						}
 						if (!class_exists($entity) || !is_object($obj) || !count($attributes = $obj->getAttributeNames())) {
@@ -1163,11 +1173,16 @@ class SRA_ApiRouter {
         $entity = $settings['return']['type'];
         $dao =& SRA_DaoFactory::getDao($entity, FALSE, FALSE, FALSE, SRA_ERROR_OPERATIONAL);
 				$efile = SRA_Controller::getAppLibDir() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php";
+        $efile1 = SRA_Controller::getAppLibDir2() ? SRA_Controller::getAppLibDir2() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php" : NULL;
 				$obj = NULL;
 
 				if (method_exists($dao, 'newInstance')) $obj =& $dao->newInstance();
 				else if (file_exists($efile)) {
 					require_once($efile);
+					if (class_exists($entity)) $obj = new ${entity}();
+				}
+				else if ($efile1 && file_exists($efile1)) {
+					require_once($efile1);
 					if (class_exists($entity)) $obj = new ${entity}();
 				}
         if (is_object($obj) && count($attrs = $obj->getAttributeNames())) {
@@ -1545,9 +1560,13 @@ class SRA_ApiRouter {
         $entity = $method['return']['type'];
         $dao =& SRA_DaoFactory::getDao($entity, FALSE, FALSE, FALSE, SRA_ERROR_OPERATIONAL);
         $efile = SRA_Controller::getAppLibDir() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php";
+        $efile1 = SRA_Controller::getAppLibDir2() ? SRA_Controller::getAppLibDir2() . '/' . basename(SRA_ENTITY_MODELER_DEFAULT_GENERATE_DIR) . "/${entity}.php" : NULL;
         if (!class_exists($entity) && file_exists($efile)) {
           require_once($efile);
-        } 
+        }
+        else if (!class_exists($entity) && $efile1 && file_exists($efile1)) {
+          require_once($efile1);
+        }
       }
 			
 			// response is in cache
