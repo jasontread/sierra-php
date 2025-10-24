@@ -7,7 +7,7 @@ choices for greenfield projects.
 
 ## Links
 * [API Docs](http://api.sierra-php.org)
-* [PHP Architect Magazine Article - June 2009](http://doc.sierra-php.org/php-architect-overview-article-june-2009.pdf)
+* [PHP Architect Magazine Article - June 2009](https://github.com/jasontread/sierra-php/blob/master/doc/php-architect-overview-article-june-2009.pdf)
 * [Prior Hosting - Google Code](http://code.google.com/p/sierra-php)
 
 ## Description
